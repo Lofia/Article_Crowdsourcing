@@ -5,8 +5,7 @@
 - [**2018 Ding**](2018Ding-Zhou_Article_CrowdsourcingWithUnsureOption.pdf): theoretical study of **cost-saving** effect of crowdsourcing tasks **with unsure option**  
 - [*2019 Jiao*](2019Jiao_thesis.pdf): theoretical study of dynamic budget allocation problem in crowdsourced ranking
 - [**2019 Han**](2019Han_Article_MillionaireAHint-guidedApproac.pdf): adding **hint** stage for crowdsourcing (allocating budget/quality control/guideline)
-
-19T 4
+- [**2019 Tao**](2019Tao_Domain-Weighted_Majority_Voting_for_Crowdsourcing.pdf): `QC-weight` an domain-weighted majority voting algorithm for crowdsourcing
 
 20L-thesis 4
 
