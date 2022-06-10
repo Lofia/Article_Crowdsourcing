@@ -3,6 +3,8 @@
 - [**2017Li**](2017Li_Multi-Object_Classification_via_Crowdsourcing_With_a_Reject_Option.pdf): `weight` theoretical study of crowdsourcing classification tasks
 - ([**2020Geng**](2020Geng_Prospect_Theory_Based_Crowdsourcing_for_Classification_in_the_Presence_of_Spammers.pdf): asdf)
 
+<span style="color:red">some **This is Red Bold.** text</span>
+
 18D 5
 
 18G 3
