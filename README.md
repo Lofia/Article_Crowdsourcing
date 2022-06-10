@@ -25,12 +25,7 @@
 
 20C 5
 
------
-
-reviewed indexed?
-
-qc
-
-latent factor
+---
+reviewed/indexed?
 
 crowdsourcing for contests (solving  certain problems) MR3918557 MR3926868 MR4027210
