@@ -1,6 +1,6 @@
 # references_expansion
-- [**2017Justo**](2017Justo_Chapter_MeasuringTheQualityOfAnnotatio.pdf): an algorithm of detecting and removing low quality annotations (weird time use/influence/same responses
-- [**2017Li**](2017Li_Multi-Object_Classification_via_Crowdsourcing_With_a_Reject_Option.pdf):asdf
+- [**2017Justo**](2017Justo_Chapter_MeasuringTheQualityOfAnnotatio.pdf): an algorithm of detecting and removing low quality annotations (weird time use/influence/same responses)
+- [**2017Li**](2017Li_Multi-Object_Classification_via_Crowdsourcing_With_a_Reject_Option.pdf): 
 - ([**2020Geng**](2020Geng_Prospect_Theory_Based_Crowdsourcing_for_Classification_in_the_Presence_of_Spammers.pdf): asdf)
 
 18D 5
