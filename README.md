@@ -1,5 +1,5 @@
 # references_expansion
-\textbf{17 J}: an algorithm of detecting and removing low quality annotations (weird time use/influence/same responses)  
+- **17 J**: an algorithm of detecting and removing low quality annotations (weird time use/influence/same responses)\
 17L 2 20G
 
 18D 5
