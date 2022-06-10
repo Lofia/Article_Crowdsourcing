@@ -1,5 +1,5 @@
 # references_expansion
-- **17 J**: an algorithm of detecting and removing low quality annotations (weird time use/influence/same responses)\
+- [**17 J**](2017Justo_Chapter_MeasuringTheQualityOfAnnotatio.pdf): an algorithm of detecting and removing low quality annotations (weird time use/influence/same responses)\
 17L 2 20G
 
 18D 5
