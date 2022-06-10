@@ -1,6 +1,6 @@
 # references_expansion
-- [**17 J**](2017Justo_Chapter_MeasuringTheQualityOfAnnotatio.pdf): an algorithm of detecting and removing low quality annotations (weird time use/influence/same responses)\
-17L 2 20G
+- [**2017Justo**](2017Justo_Chapter_MeasuringTheQualityOfAnnotatio.pdf): an algorithm of detecting and removing low quality annotations (weird time use/influence/same responses)\
+- [**2017Li**](2017Li_Multi-Object_Classification_via_Crowdsourcing_With_a_Reject_Option.pdf):asdf\
 
 18D 5
 
