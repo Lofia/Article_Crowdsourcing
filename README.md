@@ -2,15 +2,9 @@
 - [**2017 Justo**](2017Justo_Chapter_MeasuringTheQualityOfAnnotatio.pdf): `QC-threshold` an algorithm of detecting and removing low quality annotations (weird time use/**influence**/same responses)
 - [**2017 Li**](2017Li_Multi-Object_Classification_via_Crowdsourcing_With_a_Reject_Option.pdf): `QC-weight` theoretical study of crowdsourcing classification tasks **with reject option**  
   [**2020 Geng**](2020Geng_Prospect_Theory_Based_Crowdsourcing_for_Classification_in_the_Presence_of_Spammers.pdf): continuous the above
-- [**2018 Ding**](2018Ding-Zhou_Article_CrowdsourcingWithUnsureOption.pdf): theoretical study of cost-saving effect of crowdsourcing tasks **with unsure option**  
-
-
-
-18G 3
-
-19J 4
-
-19H 5
+- [**2018 Ding**](2018Ding-Zhou_Article_CrowdsourcingWithUnsureOption.pdf): theoretical study of **cost-saving** effect of crowdsourcing tasks **with unsure option**  
+- [*2019 Jiao*](2019Jiao_thesis.pdf): theoretical study of dynamic budget allocation problem in crowdsourced ranking
+- [**2019 Han**](2019Han_Article_MillionaireAHint-guidedApproac.pdf): adding **hint** stage for crowdsourcing (allocating budget/quality control/guideline)
 
 19T 4
 
