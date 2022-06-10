@@ -1,4 +1,4 @@
-# references_expansion
+# references expansion for qc-crowdsourcing
 - [**2017 Justo**](2017Justo_Chapter_MeasuringTheQualityOfAnnotatio.pdf): `QC-threshold` an algorithm of detecting and removing low quality annotations (weird time use/**influence**/same responses)
 - [**2017 Li**](2017Li_Multi-Object_Classification_via_Crowdsourcing_With_a_Reject_Option.pdf): `QC-weight` theoretical study of crowdsourcing classification tasks **with reject option**  
   [**2020 Geng**](2020Geng_Prospect_Theory_Based_Crowdsourcing_for_Classification_in_the_Presence_of_Spammers.pdf): continuous the above
