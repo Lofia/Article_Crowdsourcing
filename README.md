@@ -6,8 +6,7 @@
 - [*2019 Jiao*](2019Jiao_thesis.pdf): theoretical study of dynamic budget allocation problem in crowdsourced ranking
 - [**2019 Han**](2019Han_Article_MillionaireAHint-guidedApproac.pdf): adding **hint** stage for crowdsourcing (allocating budget/quality control/guideline)
 - [**2019 Tao**](2019Tao_Domain-Weighted_Majority_Voting_for_Crowdsourcing.pdf): `QC-weight` an domain-weighted majority voting algorithm for crowdsourcing
-
-20L-thesis 4
+- [*2020 Luo*](2020Luo_thesis.pdf): a Bayesian model for multi-lable crowdsourcing tasks
 
 20W 4
 
