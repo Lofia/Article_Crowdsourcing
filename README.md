@@ -13,7 +13,7 @@
 - [**2020 Luo**](2020Luo_ADifferentialPrivacyMechanismthatAccountsforNetworkEffectsforCrowdsourcingSystems.pdf): "a user enjoys greater privacy protection when he aligns his participation behaviour with that of other users"
 - [**2020 Shah**](2020Shah_ApprovalVotingandIncentivesinCrowdsourcing.pdf): proper incentive soring rules for **approval voting** tasks
 - [**2020 Checco**](2020Checo_AdversarialAttacksonCrowdsourcingQualityControl.pdf): analysis of **system attacks** on **"gold question"** quality control rule
-- [**2020 Jin**](2020Jin_Atechnicalsurveyonstatisticalmodelling.pdf): !taxonomies of quality control in crowdsourcing!
+- [**2020 Jin**](2020Jin_Atechnicalsurveyonstatisticalmodelling.pdf): **taxonomies of quality control in crowdsourcing**
 
 ---
 reviewed/indexed?
