@@ -7,8 +7,8 @@
 - [**2019 Han**](2019Han_Article_MillionaireAHint-guidedApproac.pdf): adding **hint** stage for crowdsourcing (allocating budget/quality control/guideline)
 - [**2019 Tao**](2019Tao_Domain-Weighted_Majority_Voting_for_Crowdsourcing.pdf): `QC-weight` an domain-weighted majority voting algorithm for crowdsourcing
 - [*2020 Luo*](2020Luo_thesis.pdf): a Bayesian model for multi-lable crowdsourcing tasks
-
-20W 4
+- [**2020 Wang_Ana**](2020Wang_Article_MaximizingUserTypeDiversityFor.pdf): maximize **user type** diversity subject to limited users
+- [**2020 Wang_Shaofei**](2020Wang_Incentuive-Mechanism-For-The-Listing-Item-Task-In-Crowdsourcing.pdf): 
 
 20Lin 5 privacy
 
@@ -17,8 +17,6 @@
 20Luo 5 privacy
 
 20S 5
-
-20W 4
 
 20J 6
 
