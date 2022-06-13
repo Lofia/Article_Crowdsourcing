@@ -12,12 +12,8 @@
 - [**2020 Lin**](2020Lin_Article_SecBCSASecureAndPrivacy-preser.pdf): **secure and privacy-preserving** crowdsourcing system
 - [**2020 Luo**](2020Luo_ADifferentialPrivacyMechanismthatAccountsforNetworkEffectsforCrowdsourcingSystems.pdf): "a user enjoys greater privacy protection when he aligns his participation behaviour with that of other users"
 - [**2020 Shah**](2020Shah_ApprovalVotingandIncentivesinCrowdsourcing.pdf): proper incentive soring rules for **approval voting** tasks
-
-20S 5
-
-20J 6
-
-20C 5
+- [**2020 Checco**](2020Checo_Adversarial Attacks on Crowdsourcing Quality Control.pdf): analysis of **system attacks** on **"gold question"** quality control rule
+- [**2020 Jin**]()
 
 ---
 reviewed/indexed?
