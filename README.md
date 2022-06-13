@@ -7,12 +7,11 @@
 - [**2019 Han**](2019Han_Article_MillionaireAHint-guidedApproac.pdf): adding **hint** stage for crowdsourcing (allocating budget/quality control/guideline)
 - [**2019 Tao**](2019Tao_Domain-Weighted_Majority_Voting_for_Crowdsourcing.pdf): `QC-weight` an domain-weighted majority voting algorithm for crowdsourcing
 - [*2020 Luo*](2020Luo_thesis.pdf): a Bayesian model for multi-lable crowdsourcing tasks
-- [**2020 Wang_Ana**](2020Wang_Article_MaximizingUserTypeDiversityFor.pdf): maximize **user type** diversity subject to limited users
-- [**2020 Wang_Shaofei**](2020Wang_Incentuive-Mechanism-For-The-Listing-Item-Task-In-Crowdsourcing.pdf): 
-
+- [**2020 Wang_Ana**](2020Wang_Article_MaximizingUserTypeDiversityFor.pdf): `QC-threshold` maximize **user type** diversity subject to limited users
+- [**2020 Wang_Shaofei**](2020Wang_Incentuive-Mechanism-For-The-Listing-Item-Task-In-Crowdsourcing.pdf): **incentive mechanism** for **listing item tasks**
+- [**2020 Xu**](2020Xu_Quantum_Analysis_on_Task_Allocation_and_Quality_Control_for_Crowdsourcing_With_Homogeneous_Workers.pdf):
+- 
 20Lin 5 privacy
-
-20Xu 5
 
 20Luo 5 privacy
 
@@ -26,3 +25,5 @@
 reviewed/indexed?
 
 crowdsourcing for contests (solving  certain problems) MR3918557 MR3926868 MR4027210
+
+2020 wang ana / 2019 tao
