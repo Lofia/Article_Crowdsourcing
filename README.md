@@ -10,7 +10,7 @@
 - [**2020 Wang_Ana**](2020Wang_Article_MaximizingUserTypeDiversityFor.pdf): `QC-threshold` maximize **user type** diversity subject to limited users
 - [**2020 Wang_Shaofei**](2020Wang_Incentuive-Mechanism-For-The-Listing-Item-Task-In-Crowdsourcing.pdf): **incentive mechanism** for **listing item tasks**
 - [**2020 Lin**](2020Lin_Article_SecBCSASecureAndPrivacy-preser.pdf): **secure and privacy-preserving** crowdsourcing system
-- [**2020 Luo**](2020Luo_A Differential Privacy Mechanism that Accounts forNetwork Effects for Crowdsourcing Systems.pdf): "a user enjoys greater privacy protection when he aligns his participation behaviour with that of other users"
+- [**2020 Luo**](2020Luo_ADifferentialPrivacyMechanismthatAccountsforNetworkEffectsforCrowdsourcingSystems.pdf): "a user enjoys greater privacy protection when he aligns his participation behaviour with that of other users"
 - [**2020 Luo**]
 
 20S 5
