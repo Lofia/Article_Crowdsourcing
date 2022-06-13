@@ -11,7 +11,7 @@
 - [**2020 Wang_Shaofei**](2020Wang_Incentuive-Mechanism-For-The-Listing-Item-Task-In-Crowdsourcing.pdf): **incentive mechanism** for **listing item tasks**
 - [**2020 Lin**](2020Lin_Article_SecBCSASecureAndPrivacy-preser.pdf): **secure and privacy-preserving** crowdsourcing system
 - [**2020 Luo**](2020Luo_ADifferentialPrivacyMechanismthatAccountsforNetworkEffectsforCrowdsourcingSystems.pdf): "a user enjoys greater privacy protection when he aligns his participation behaviour with that of other users"
-- [**2020 Luo**]
+- [**2020 Shah**](2020Shah_Approval Voting and Incentives in Crowdsourcing.pdf): `QC-threshold/weight` proper incentive soring rules for **approval voting** tasks
 
 20S 5
 
