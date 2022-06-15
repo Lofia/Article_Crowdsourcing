@@ -15,10 +15,10 @@
 - [**2020 Checco**](2020Checo_AdversarialAttacksonCrowdsourcingQualityControl.pdf): analysis of **system attacks** on **"gold question"** quality control rule
 - [**2020 Jin**](2020Jin_Atechnicalsurveyonstatisticalmodelling.pdf): **taxonomies of quality control in crowdsourcing**
 
-- [**2022 Liu**](2022Liu_Doubly_Robust_Crowdsourcing.pdf):
 - [**2022 Loynes**](2022Loynes_Article_TheDetectionAndLocationEstimat.pdf): application of crowdsourcing in dectecting disasters via Twitter
 - [**2022 Santini**](2022Santini_TheProbabilisticTravellingSalesmanProblemwithCrowdsourcing.pdf): application of crowdsourcing in travelling salesman problem
 - [**2022 Jung**](2022jung_statistically_principled_crowdsourcing_method_for_sports_highlight_selection.pdf): application of crowdsourcing in sports highlight selection
+ 
 ---
 reviewed/indexed?
 
