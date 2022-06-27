@@ -1,4 +1,5 @@
 # possible references for qc-crowdsourcing
+## 2017-2020
 - [**2017 Justo**](2017Justo_Chapter_MeasuringTheQualityOfAnnotatio.pdf): `QC-threshold` an algorithm of detecting and removing low quality annotations (weird time use/**influence**/same responses)
 - [**2017 Li**](2017Li_Multi-Object_Classification_via_Crowdsourcing_With_a_Reject_Option.pdf): `QC-weight` theoretical study of crowdsourcing classification tasks **with reject option**  
   [**2020 Geng**](2020Geng_Prospect_Theory_Based_Crowdsourcing_for_Classification_in_the_Presence_of_Spammers.pdf): continuous the above
@@ -15,15 +16,15 @@
 - [**2020 Checco**](2020Checo_AdversarialAttacksonCrowdsourcingQualityControl.pdf): analysis of **system attacks** on **"gold question"** quality control rule
 - [**2020 Jin**](2020Jin_Atechnicalsurveyonstatisticalmodelling.pdf): **taxonomies of quality control in crowdsourcing**
 ---
-- [**2021 Li**](2021Li_A_unified_task_recommendation_strategy_for_realistic_mobile.pdf): asdf
+## 2021-2022
 - [**2022 Loynes**](2022Loynes_Article_TheDetectionAndLocationEstimat.pdf): application of crowdsourcing in dectecting disasters via Twitter
 - [**2022 Santini**](2022Santini_TheProbabilisticTravellingSalesmanProblemwithCrowdsourcing.pdf): application of crowdsourcing in travelling salesman problem
 - [**2022 Jung**](2022jung_statistically_principled_crowdsourcing_method_for_sports_highlight_selection.pdf): application of crowdsourcing in sports highlight selection
 ---
 ## crowdsourcing & epidemiology
 - [**2018 Wazny**](epidemiology/2018Wazny_Applications_of_crowdsourcing_in_health.pdf): review of all the articles regarding "crowdsourcing" & "health" (**but nothing about "epidemiology"**)
-- [**2020 Wang**](epidemiology/2020Wang_Crowdsourcing_in_health_and_medical.pdf): systematic review of crowdsourcing in health and medical research, emphasizing the important future of crowdsourcing in those areas (most relevant part: identifying diseases). **Mentioning: "given that crowdsourcing is an emergent approach to health problems, there were many potential search terms to identify crowdsourcing".**
-- [**2020 Sun**](epidemiology/2020Sun_Early_epidemiological_analysis_of_the_coronavirus_disease.pdf): application of crowdsourcing in analysing COVID-19 ourbreak
-- [**2020 Neto**](epidemiology/2020Neto_Participatory_Surveillance_Based_on_Crowdsourcing.pdf): application of crowdsourcing in participatory surveillance of symptoms and syndromes during Rio 2016 Olympics (volunteers on a mobile platform)
+- [**2020 Wang**](epidemiology/2020Wang_Crowdsourcing_in_health_and_medical.pdf): systematic review of crowdsourcing in **health and medical** research, emphasizing the important future of crowdsourcing in those areas (most relevant part: identifying diseases). **Mentioning: "given that crowdsourcing is an emergent approach to health problems, there were many potential search terms to identify crowdsourcing".**
+- [**2020 Sun**](epidemiology/2020Sun_Early_epidemiological_analysis_of_the_coronavirus_disease.pdf): application of crowdsourcing in analysing **COVID-19** ourbreak
+- [**2020 Neto**](epidemiology/2020Neto_Participatory_Surveillance_Based_on_Crowdsourcing.pdf): application of crowdsourcing in **participatory surveillance** of **symptoms and syndromes** during Rio 2016 Olympics (volunteers on a **mobile platform**)
 ---
 crowdsourcing for contests (solving  certain problems) MR3918557 MR3926868 MR4027210
