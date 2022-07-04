@@ -29,5 +29,8 @@
 ---
 - [**2013 Chunara**](2013Chunara_Article_WhyWeNeedCrowdsourcedDataInInf.pdf): advantages and the importance of applying crowdsourcing to epidemiology
 - [**2020 Henry**](https://www.medrxiv.org/content/10.1101/2020.03.01.20029884v2.full): application of crowdsourcing in analysing **COVID-19** ourbreak (an early analysis for children and adolescents)
+- ---
+## crowdsourcing & covid-19
+- [**2022 Ulitin**](2022Ulitin_Youth_social_innovation_during_the.pdf): using crowdsourcing to get ideas from people for future society
 ---
 crowdsourcing for contests (solving  certain problems) MR3918557 MR3926868 MR4027210
