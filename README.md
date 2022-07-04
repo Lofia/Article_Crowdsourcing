@@ -27,4 +27,7 @@
 - [**2020 Sun**](epidemiology/2020Sun_Early_epidemiological_analysis_of_the_coronavirus_disease.pdf): application of crowdsourcing in analysing **COVID-19** ourbreak
 - [**2020 Neto**](epidemiology/2020Neto_Participatory_Surveillance_Based_on_Crowdsourcing.pdf): application of crowdsourcing in **participatory surveillance** of **symptoms and syndromes** during Rio 2016 Olympics (volunteers on a **mobile platform**)
 ---
+- [**2013 Chunara**](2013Chunara_Article_WhyWeNeedCrowdsourcedDataInInf.pdf): advantages and the importance of applying crowdsourcing to epidemiology
+- [**2020 Henry**](https://www.medrxiv.org/content/10.1101/2020.03.01.20029884v2.full): asdf
+---
 crowdsourcing for contests (solving  certain problems) MR3918557 MR3926868 MR4027210
