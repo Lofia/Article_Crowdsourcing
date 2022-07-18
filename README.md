@@ -35,4 +35,5 @@
 - ...[*a bunch of similar articles*](https://scholar.google.com/scholar?as_ylo=2022&q=crowdsourcing+covid&hl=en&as_sdt=0,47)...
 ---
 crowdsourcing for contests (solving  certain problems) MR3918557 MR3926868 MR4027210
-# Add the commentary on the need for mitigation. Cite as: Due to lack of standards, the quality of crowdsourced data varies, as noted in the commentary by XYZ.
+
+### Add the commentary on the need for mitigation. Cite as: Due to lack of standards, the quality of crowdsourced data varies, as noted in the commentary by XYZ.
