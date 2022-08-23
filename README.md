@@ -34,10 +34,9 @@
 - [**2022 Ulitin**](2022Ulitin_Youth_social_innovation_during_the.pdf): using crowdsourcing to get ideas from people for future society
 - ...[*a bunch of similar articles*](https://scholar.google.com/scholar?as_ylo=2022&q=crowdsourcing+covid&hl=en&as_sdt=0,47)...
 ---
-crowdsourcing for contests (solving  certain problems) MR3918557 MR3926868 MR4027210
-
+## crowdsourcing for contests (solving  certain problems) 
+-MR3918557 MR3926868 MR4027210
 ---
-
 ### Todos
 1. Add the commentary to these articles (e.g., XYZ, XYZ2) as shown in the examples below.  Example 1: Due to lack of standards, the quality of crowdsourced data varies, as noted in the commentary by XYZ. Example 2: Recent applications can be found in XYZ2 on ..... 
 
