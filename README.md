@@ -46,6 +46,6 @@
 - Microsoft Academic Graph: https://www.microsoft.com/en-us/research/project/open-academic-graph/ (A well-known project but not sure if it is helpful to you)
  
 Also some papers which have collected similar datasets and you may check whether their tools are open-source:
-- https://blender.cs.illinois.edu/paper/COVIDKG.pdf (might be useful for converting xml files)
-- **https://aclanthology.org/2021.acl-srw.30.pdf**
+- https://blender.cs.illinois.edu/paper/COVIDKG.pdf
+- **https://aclanthology.org/2021.acl-srw.30.pdf** (might be useful for converting xml files)
 - https://arxiv.org/pdf/2102.00176.pdf
