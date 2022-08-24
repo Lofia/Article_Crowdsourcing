@@ -7,4 +7,4 @@
 
 ---
 
-Used [**BioC API**](https://www.ncbi.nlm.nih.gov/research/bionlp/APIs/BioC-PMC/) to extract .xml format files from PubMed Central Open Access database.
+Used [**BioC API**](https://www.ncbi.nlm.nih.gov/research/bionlp/APIs/BioC-PMC/) (with [code](pubmed_xml_crawler.R))to extract .xml format files from PubMed Central Open Access database.
