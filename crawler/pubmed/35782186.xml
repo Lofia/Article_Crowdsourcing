@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE collection SYSTEM "BioC.dtd">
+<collection><source>PMC</source><date>20220706</date><key>pmc.key</key><document><id>8768981</id><infon key="license">NO-CC CODE</infon><passage><infon key="article-id_doi">10.1109/JIOT.2020.3049024</infon><infon key="article-id_pmc">8768981</infon><infon key="article-id_pmid">35782186</infon><infon key="fpage">15863</infon><infon key="issue">21</infon><infon key="kwd">Contact tracing COVID-19 incentive algorithm Nash equilibrium pandemic diseases utility maximization</infon><infon key="license">This article is free to access and download, along with rights for full text and data mining, re-use and analysis.</infon><infon key="lpage">15874</infon><infon key="name_0">surname:Wang;given-names:Pengfei</infon><infon key="name_1">surname:Wang;given-names:Pengfei</infon><infon key="name_10">surname:Zhang;given-names:Qiang</infon><infon key="name_11">surname:Zhang;given-names:Qiang</infon><infon key="name_2">surname:Lin;given-names:Chi</infon><infon key="name_3">surname:Lin;given-names:Chi</infon><infon key="name_4">surname:Obaidat;given-names:Mohammad S.</infon><infon key="name_5">surname:Obaidat;given-names:Mohammad S.</infon><infon key="name_6">surname:Yu;given-names:Zhen</infon><infon key="name_7">surname:Yu;given-names:Zhen</infon><infon key="name_8">surname:Wei;given-names:Ziqi</infon><infon key="name_9">surname:Wei;given-names:Ziqi</infon><infon key="section_type">TITLE</infon><infon key="type">front</infon><infon key="volume">8</infon><infon key="year">2021</infon><offset>0</offset><text>Contact Tracing Incentive for COVID-19 and Other Pandemic Diseases From a Crowdsourcing Perspective</text></passage><passage><infon key="section_type">ABSTRACT</infon><infon key="type">abstract</infon><offset>100</offset><text>Governments of the world have invested a lot of manpower and material resources to combat COVID-19 this year. At this moment, the most efficient way that could stop the epidemic is to leverage the contact tracing system to monitor people’s daily contact information and isolate the close contacts of COVID-19. However, the contact tracing data usually contains people’s sensitive information that they do not want to share with the contact tracing system and government. Conversely, the contact tracing system could perform better when it obtains more detailed contact tracing data. In this article, we treat the process of collecting contact tracing data from a crowdsourcing perspective in order to motivate users to contribute more contact tracing data and propose the incentive algorithm named CovidCrowd. Different from previous works where they ask users to contribute their data voluntarily, the government offers some reward to users who upload their contact tracing data to reimburse the privacy and data processing cost. We formulate the problem as a Stackelberg game and show there exists a Nash equilibrium for any user given the fixed reward value. Then, CovidCrowd computes the optimal reward value which could maximize the utility of the system. Finally, we conduct a large-scale simulation with thousands of users and evaluation with real-world data set. Both results show that CovidCrowd outperforms the benchmarks, e.g., the user participating level is improved by at least 13.2% for all evaluation scenarios.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">title_1</infon><offset>1632</offset><text>Introduction</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>1645</offset><text>The pandemic of COVID-19 has brought serious social and healthy problems to people in this year. To decrease its negative influence, a large amount of contact tracing systems and applications have been devised and implemented by governments of the world rapidly. For example, Singapore released a Bluetooth-based contact tracing system to monitor people’s daily contact information, China leveraged the health QR code system to record people’s identities and daily activities and Israel adopted a location-based tracing system to track people’s movement, Korea posted the private tracing data of the infectors to the public. Meanwhile, there are also many novel contact tracing systems proposed by academia recently.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>2368</offset><text>Nevertheless, the privacy concern from the public is still the most important barrier that prevents people adopting the contact tracing system, although many new techniques, which ensure the user privacy, are induced to the system, e.g., blockchain-based techniques, data encryption techniques, etc. It is mainly because the nature of contact tracing system which leverages the precise contact tracing information to stop the virus infection. Generally speaking, the performance of contact tracing system will be decreased when the system does not get enough precising contact information, and this is also an irreconcilable contradiction between the privacy protection and precising contact tracing.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>3069</offset><text>To combat with COVID-19, current contact tracing systems require participants to devote their contact tracing data voluntarily, and all users sacrifice their privacy with no reimbursement. The current process really demotivates users to adopt such systems. On the one hand, the system asks users to give up their privacy and contribute their contact tracing information. On the other hand, users also need other resources (e.g., communication, storage, power, etc.) to fulfill the contact tracing task.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>3572</offset><text>Essentially, the process of collecting contact tracing data in the contact tracing system is quite similar to that in crowdsensing which requires large amounts of participants (e.g., normal smartphone users) to sense the surrounding environment via rich built-in sensors of mobile devices, and uploads these data to the system. In practice, crowdsensing also brings the privacy challenges to participants since they are also required to provide the sensitive information (e.g., location information, surrounding sensing information, etc.). To overcome the difficulties, the incentive frameworks and algorithms are usually devised to stimulate participants to provide these information to the system.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>4272</offset><text>Inspired by crowdsensing, we devise the incentive framework, named CovidCrowd, for contact tracing system in this article. As far as we know, this is the first paper which treats the whole process of collecting contact tracing information from the prospect of crowdsourcing. In CovidCrowd, the system (i.e., data consumer) buys the contact tracing data from the public instead of asking them to provide them voluntarily. To achieve it, the government first chooses a total reward to motivate all users. Then, all users will select their own response strategies. The goal of CovidCrowd is to compute the optimal total reward value to maximize the system utility.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>4934</offset><text>We devise CovidCrowd—an incentive framework for the contact tracing system to stimulate users to upload their contact tracing data. Creatively, we treat the privacy leakage as a kind of cost for users. As far as we know, this is the first paper that addresses the contact tracing problem with the incentive method (Section III).</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>5265</offset><text>The incentive problem of the contact tracing system is formulated as a Stackelberg game with two stages where the government first posts a total reward and users choose their response strategies (Section IV-A).</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>5476</offset><text>We show that the Nash equilibrium of participating users (Section IV-B), and CovidCrowd is also leveraged to find the optimal reward value which could maximize the system utility (Section IV-C).</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>5671</offset><text>To evaluate the effectiveness of CovidCrowd, we conduct a large-scale simulation and a real-world data set evaluation (Section V). Both results show that CovidCrowd outperforms the other two benchmarks. Specifically, the user participating level is improved by at least 13.2% under all scenarios.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>5968</offset><text>Toward a comprehensive solution for contact tracing incentive of COVID-19 and other pandemic diseases, we make the following contributions. </text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>6109</offset><text>The remainder of this article is organized as follows. Section II discusses the related work first. We introduce the system model from the crowdsourcing perspective and formulate the problem in Section III. Section IV presents the definition of CovidCrowd and detail of the whole game process. Evaluation settings and numerical results are presented in Section V, and we conclude this article finally in Section VI.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">title_1</infon><offset>6525</offset><text>Related Work</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>6538</offset><text>In this section, we first investigate the related work on contact tracing of COVID-19. Then, the crowdsensing systems are introduced. We also elaborate on game theory-based incentive frameworks and algorithms for crowdsensing since our work is to devise an incentive framework for contact tracing system.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>6843</offset><text>In order to prevent the spread of COVID-19, a number of contact tracing systems are designed by governments and companies. For example, Apple Google collaboration, Singapore’s TraceTogether, European PEPP-PT, and MIT’s PrivateKit leverage the Bluetooth technique to get the contact information from users. In Israel, the government is allowed to obtain the private data of suspected infected persons and directly store the location information of people in a central database. The health code system is widely used in China, and it is an epidemic prevention measure based on mobile phones, 3-D face recognition and population management in multiple occasions.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>7507</offset><text>In addition, researchers from academia also devise and propose many different contact tracing systems by taking different factors into considerations. Here, we introduce some recent work on it. Gupa et al.  proposed a method of contact tracing by collecting WiFi data and design a complete system through passively collected WiFi data to accurately identify users within the range of activities of confirmed patients. Altuwaiyan et al.  developed an EPIC system based on wireless communication between smartphones, server and wireless short-range devices to check whether the user has contact with infected person. Wang et al.  proposed to use big data analysis technology to classify infection risks of residents and generate real-time alerts.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>8252</offset><text>Actually, directly collecting or even publishing personal private data is intrusive, potentially violates individual privacy rights, and is often subject to regulations and laws. Therefore, many privacy preserving oriented work are also conducted recently. For example, Reicherts et al.  leveraged the secure multiparty computation technology in classical cryptography to transmit tracing data. Gupta et al.  adopted the method of encrypting and transmitting the collected WiFi tracing data to ensure user privacy and data security. Torky and Hassanien begin to explore the use of decentralized feature in blockchain technology to protect user privacy data. Lv et al.  proposed the use of blockchain combined with zero knowledge proof methods to achieve privacy protection. However, all these works assume that the central servers or the third parts are trustful, but both the disclosure of private key and attacks may lead to privacy exposure in practice. Thus, we utilize the idea of crowdsourcing to buy the contact tracing data in this article.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>9301</offset><text>Crowdsourcing is an idea of using the power of ordinary people to solve complex problems and a distributed problem-solving and business production model. Crowdsourcing has received extensive attention in various fields, including human–computer interaction, machine learning, computer theory, information retrieval, databases, etc. Crowdsensing is a kind of crowdsourcing-based system which leverages the power of the crowds to sense the surrounding areas, and many crowdsensing systems have solved a lot of realistic problems in real-world scenario. For example, FlierMeet is mainly for the public information reporting and sharing, CrowdMonitor is adopted to assess physical and digital activities of citizens, and the system named third eye could monitor the air quality, etc.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>10083</offset><text>Incentive algorithms could help crowdsensing systems motivate users to contribute more sensing data, and the game theory is a very important method. Game theory -based incentive frameworks and algorithms are well studied in recent years. Among them, the incentive algorithms based on game theory mainly contain Stackelberg game, SPE-based game, and Bargaining game.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>10449</offset><text>Stackelberg game is widely used in the design of incentive mechanisms, and it is basic model includes a leader and several followers. The leader first takes action, and then the followers adjust their strategies according to the leader’s actions to maximize their own utility. Duan et al.  used Stackelberg game to design a threshold revenue model, and show that if service providers can know the cost of users in advance and it can choose the users who participate and only need to provide a small amount of rewards. Luo et al.  adopted Stackelberg game to maximize user utility for user-centric incentive model, and show that contribution-dependent reward system perform better than optimal constant reward system. Xiao et al.  proposed a Stackelberg game incentive model to prevent forged sensing attacks, and using deep learning and reinforcement learning to obtain the optimal crowdsensing strategy.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>11356</offset><text>Inspired by the above work from the contact tracing system and crowdsensing, we propose CovidCrowd which is the first incentive framework for COVID-19 and other pandemic diseases to motivate users to provide their private contact tracing data.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">title_1</infon><offset>11600</offset><text>System Model</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>11613</offset><text>In this section, we devise the contact tracing system from the perspective of crowdsourcing and describe its basic components and workflow.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>11753</offset><text>Generally speaking, the performance of contact tracing system could be more accurate if users provide more contact tracing data during their daily life. However, it is impossible for rational users to contribute their data when their utilities are negative according to the game theory. Therefore, we adopt the concept of crowdsourcing to stimulate users to contribute more private data in this article.</text></passage><passage><infon key="file">wang1-3049024.jpg</infon><infon key="id">fig1</infon><infon key="section_type">FIG</infon><infon key="type">fig_caption</infon><offset>12157</offset><text>Framework of contact tracing system from a crowdsourcing perspective.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>12227</offset><text>Fig. 1 is leveraged to aid our description of the contact tracing system from a crowdsourcing perspective, and we treat the contact tracing data collection as a task. To be specific, different from the general contact tracing system where participants contribute their tracing data voluntarily, the government (i.e., data consumer) buys these data from participating users with the total reward within a specific time period (e.g., one day, etc.). Then, users choose their participating levels/strategies (i.e., how long to participate) when using contact tracing system during the daily life. The user will choose to cooperate only when the received reward could cover his/her cost in both privacy leakage and data processing. Finally, the user could get the corresponding reward based on the participating levels of all users and the total reward of the system. </text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>13092</offset><text>In essence, this is a Stackelberg game, including two stages where the government is the leader and the users are followers. In the first stage, the government first determines the total reward to motivate users. In the second stage, each user chooses a response strategy (i.e., participating level) to maximize his/her own utility based on the observed total reward given by the government.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">title_1</infon><offset>13484</offset><text>CovidCrowd</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>13495</offset><text>We elaborate on the details of the incentive framework (i.e., CovidCrowd) for the contact tracing system in this section. To achieve the goal, CovidCrowd first formulates the contact tracing incentive problem as a Stackelberg game. Then, we analyze the user response strategy based on the user utility function and show there exists a Nash equilibrium for any users with any reward value. Based on the above analysis, the Nash equilibrium of the contact tracing system is studied. Finally, CovidCrowd computes the optimal reward value to maximize the system utility and motivate users.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">title_2</infon><offset>14081</offset><text>Problem Formulation</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>14101</offset><text>The contact tracing system contains one task during the daily life, i.e., collecting contact tracing data from users, and the government could monitor the close contacts of COVID-19 with the detailed contact tracing data. Specifically, the government offers a total reward  to attract users to upload their contact tracing data. At the same time, users also choose their participating levels (i.e., how long to devote the contact tracing data), and they will get the corresponding reward based on the total reward  and participating levels (strategies) of other users.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>14670</offset><text>Therefore, we can compute the utility of user  (i.e., ) by where  is the user set,  denotes the unit cost of user , and  represents the participating level (e.g., the participating time period, the uploading tracking data quality, etc.) of user . In addition,  is the reward that user  will receive after joining the task with participating level . It should be noticed that a rational user will not cooperate when the utility is negative. In other words, user  will do nothing (i.e., ) if . Therefore, We could rewrite (1) as follows:</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>15206</offset><text>Differing from the general crowdsensing system where the total participating cost of a user is closely related with the data size and user ability, we also creatively treat the user privacy as a kind of cost in the contact tracing system. Next, we define the unit cost function of user  (i.e., ) in the contact tracing system by  where  represents the unit privacy cost for user , the unit data processing cost (including generating, communication cost, etc.) for user  is denoted by , and  is the average data size generated by user  (e.g., the average contact tracing data size generated by user  every hour). In addition, it is assumed that  and  usually follow the Gaussian distribution, which is a very common assumption. Obviously, it is not hard to get that the partial derivatives of function  should satisfy the following equations:</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>16048</offset><text>The unit cost will be higher when they have a greater unit privacy cost, data processing cost, or larger unit generated contact tracing data. Besides, the unit cost function  is usually related with the system attributes. We give a concrete  for the simulation in Section V.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>16323</offset><text>Next, we define some essential variables for CovidCrowd to compute the system utility. Equation (2) depicts that users would like to choose the same strategy to maximize their utility if their unit costs are same. Furthermore, the unit cost interval  is defined where  is the maximum unit cost for users in the contact tracing system, and it is easy to conclude that  for any user . It is assumed that the unit cost set of all users is  in the contact tracing system, and it has the following constraints .</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>16830</offset><text>Moreover, the expected participating level for specific unit cost  is denoted by , and we also give the expected participating level set  correspondingly. In addition, the number of users whose unit costs are same is represented as , and the set of the number of users for  is denoted by . According to the above definitions, the utility function of contact tracing system can be computed as  where  represents the valuating function of participating levels of all users in the contact tracing system. It is also assumed that the utility function of contact tracing system is a strictly concave function in variables  for any fixed , and it is increasing monotonically for every  of user . This is a general assumption in many other related papers. Each user  decides its strategy (i.e., ) to maximize (2) with a given reward value .</text></passage><passage><infon key="file">table1.xml</infon><infon key="id">table1</infon><infon key="section_type">TABLE</infon><infon key="type">table_title_caption</infon><offset>17664</offset><text>Major Notations Employed in This Article</text></passage><passage><infon key="file">table1.xml</infon><infon key="id">table1</infon><infon key="section_type">TABLE</infon><infon key="type">table</infon><infon key="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;table frame=&quot;box&quot; rules=&quot;all&quot; cellpadding=&quot;5&quot;&gt;&lt;colgroup span=&quot;1&quot;&gt;&lt;col span=&quot;2&quot;/&gt;&lt;/colgroup&gt;&lt;thead&gt;&lt;tr&gt;&lt;th colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;Notation&lt;/th&gt;&lt;th colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;Explanation&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;&lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M56&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$R$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;total reward of the contact tracing system&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;&lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M57&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$R^{*}$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;optimal reward value&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;&lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M58&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$R_{\mathrm{ others}}$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;other feasible reward values&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;&lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M59&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$U$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;user set&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;&lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M60&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$U_{-i} $
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;user set except user &lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M61&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$i$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;&lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M62&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$u_{i}$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;utility function of user &lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M63&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$i$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;&lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M64&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$u_{0}$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;utility function of the contact tracing system&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;&lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M65&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$n$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;number of users&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;&lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M66&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$t_{-i}$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;strategy profile of all users except user &lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M67&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$i$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;&lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M68&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$t^{ne}_{-i}$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;strategy profile of all users except user &lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M69&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$i$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt; in Nash equilibrium&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;&lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M70&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$t_{i}$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;participating level (strategy) of user &lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M71&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$i$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;&lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M72&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$t^{ne}_{i}$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;participating level (strategy) of user &lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M73&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$i$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt; in Nash equilibrium&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;&lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M74&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$c_{i}$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;unit cost of user &lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M75&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$i$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;&lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M76&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$c_{\max }$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;maximum unit cost&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;&lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M77&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$S$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;unit cost level set&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;&lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M78&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$X$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;number of unit cost levels&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;&lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M79&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$s_{x}$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;&lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M80&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$x$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;th unit cost level&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;&lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M81&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$\hat {T}$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;expected participating time duration set&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;&lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M82&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$\hat {t}_{x}$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;expected participating time duration for &lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M83&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$s_{x}$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;&lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M84&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$N$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;set of the user number at different unit cost levels&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;&lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M85&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$n_{x}$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;number of users whose unit costs are same&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;&lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M86&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$B_{i}$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;best response strategy of user &lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M87&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$i$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;&lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M88&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$\alpha _{i}$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;unit privacy cost of user &lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M89&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$i$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;&lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M90&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$\beta _{i}$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;unit data processing cost of user &lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M91&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$i$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;&lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M92&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$\gamma _{\max }$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;maximum encounter times of all users&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;&lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M93&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$\gamma _{i}$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;td colspan=&quot;1&quot; rowspan=&quot;1&quot;&gt;encounter times of user &lt;inline-formula&gt;
+&lt;tex-math notation=&quot;LaTeX&quot; id=&quot;M94&quot;&gt;\documentclass[12pt]{minimal}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsbsy}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\setlength{\oddsidemargin}{-69pt}
+\begin{document}
+}{}$i$
+\end{document}&lt;/tex-math&gt;&lt;/inline-formula&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+</infon><offset>17705</offset><text>Notation	Explanation	 		total reward of the contact tracing system	 		optimal reward value	 		other feasible reward values	 		user set	 		user set except user 	 		utility function of user 	 		utility function of the contact tracing system	 		number of users	 		strategy profile of all users except user 	 		strategy profile of all users except user  in Nash equilibrium	 		participating level (strategy) of user 	 		participating level (strategy) of user  in Nash equilibrium	 		unit cost of user 	 		maximum unit cost	 		unit cost level set	 		number of unit cost levels	 		th unit cost level	 		expected participating time duration set	 		expected participating time duration for 	 		set of the user number at different unit cost levels	 		number of users whose unit costs are same	 		best response strategy of user 	 		unit privacy cost of user 	 		unit data processing cost of user 	 		maximum encounter times of all users	 		encounter times of user 	 	</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>18663</offset><text>The goal of CovidCrowd is to compute the optimal reward value (i.e., ) which maximizes the system utility [i.e., (5)], and this is also the Nash equilibrium status of the contact tracing system. To achieve the goal, we first analyze the Nash equilibrium of users (i.e., response strategies), then elaborate on how to get the optimal reward value of the contact tracing system in the next. Moreover, detailed explanations of employed notations in this article are also concluded in Table I.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">title_2</infon><offset>19153</offset><text>User Nash Equilibrium</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>19175</offset><text>Given a reward  from the government, user  would like to choose the best response strategy to maximize its utility [i.e., (2)]. Therefore, a user would like to play its best response strategy in the Nash equilibrium.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>19392</offset><text>To study the user response strategy, we first define the Nash equilibrium of user  as below:</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>19485</offset><text>A strategy set  is a Nash equilibrium when any user  satisfies (20) where  denotes the utility that user  adopts the strategy , and  is the user utility that user  adopts the other strategy . Then, the best response strategy of user  is also defined as following.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>19749</offset><text>Strategy  for user , denoted by , is the best response strategy if it maximizes  over all .</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>19841</offset><text>To further study the best response strategy of user , we compute the first- and second-derivatives of utility function  with respect to  as depicted in the following equation:</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>20017</offset><text>It is obvious that the utility function of user  is a strictly concave function since the second-order derivative . To compute the best response strategy of user  for his/her Nash equilibrium, we can have (9) by setting the first-order derivative </text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>20265</offset><text>We can get (10) by sorting out (9)</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>20300</offset><text>Any user  will not cooperate when the utility is lower than 0. Thus, the best response strategy of user  can be summarized as in </text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>20430</offset><text>The above analysis shows that any user  has its best response strategy  for any given reward  and strategy profile  of other users. Adding up (9) over all users in the contact tracing system, we can obtain </text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>20637</offset><text>Furthermore, we could obtain </text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>20667</offset><text>To calculate  for user , (9) can also be rewritten as </text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">title_2</infon><offset>20722</offset><text>Computing the User Best Response Strategy in Nash Equilibrium</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>20784</offset><text>Require: Reward , user set .</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>20813</offset><text>Ensure: Nash equilibrium strategy set for all users </text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>20866</offset><text>;</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>20868</offset><text>for  to  do</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>20880</offset><text>;</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>20882</offset><text>if  then</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>20891</offset><text>;</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>20893</offset><text>else</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>20898</offset><text>;</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>20900</offset><text>end if</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>20907</offset><text>;</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>20909</offset><text>end for</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>20917</offset><text>return ;</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>20926</offset><text>Substituting (13) into (14), we can calculate the best response strategy for user  as  According to (15), we can compute the Nash equilibrium of users, and Algorithm 1 depicts the details.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>21115</offset><text>So far, we have known how to calculate the Nash equilibrium of any user  with any given reward value  in the contact tracing system. In the next section, we will elaborate on how to choose the optimal reward value  to maximize the contact tracing system’s utility.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">title_2</infon><offset>21382</offset><text>Maximizing the Utility of Contact Tracing System</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>21431</offset><text>Obviously, the contact tracing system, and leader of the Stackelberg game, can know the existing user Nash equilibrium based on the above analysis. In this case, the contact tracing system can select the optimal reward value  to maximize its utility based on the following: where </text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>21712</offset><text>For each , we have  where  is a strictly concave function,  could be obtained by Algorithm 1, and  could be calculated according to the previous statistics by analyzing the historical data.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>21902</offset><text>Next, we define the Nash equilibrium of contact tracing system as follows.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>21977</offset><text>The chosen reward value  is the Nash equilibrium of contact tracing system if it can maximize the system utility.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>22091</offset><text>Besides, the best response strategy of contact tracing system is defined as follows.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>22176</offset><text>The optimal reward value  is the best response strategy with the given user Nash equilibrium strategy set , and  meets </text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>22296</offset><text>In summary, it can be concluded that the Nash equilibrium exists in this Stackelberg game, and the optimal reward  can maximize the utility function  in (16) over ). To calculate , many efficient methods could be leveraged, such as Newton’s method, etc.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">title_1</infon><offset>22552</offset><text>Performance Evaluation</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>22575</offset><text>To evaluate the performance of CovidCrowd, two experiments, including a large-scale simulation with thousands of users and an evaluation with the real-world data set, are conducted in this section. Next, we first introduce the default evaluation settings of both two experiments.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">title_2</infon><offset>22855</offset><text>Default Evaluation Settings</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">title_3</infon><offset>22883</offset><text>Utility Functions:</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>22902</offset><text>In the contact tracing system, the unit cost function is set to (22) where  and  represent the encounter times of user  and the maximum encounter times of all users, respectively. Both of  and  follow the Gaussian distribution with mean 5 and variance 1 in the interval , and this is because the privacy and communication costs of most users are concentrated in one area.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>23274</offset><text>In terms of the utility function of contact tracing system, we set the valuating function to  where  and  is a system parameter, since  represents the contact tracing system’s diminishing return on the work of a user with unit cost , and  denotes the contact tracing system’s diminishing return on the number of participating users.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">title_3</infon><offset>23611</offset><text>Compared Strategies:</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>23632</offset><text>In order to evaluate the performance of CovidCrowd, we adopt two compared strategies (benchmarks)—best effort strategy and random strategy. User  is always trying his best to upload the tracing data (i.e., ) if one can obtain the profit (i.e., the utility of user  larger than zero) from the contact tracing system when adopting the best effort strategy. In addition, we can get the value of  by computing the maximum  of all users. Random algorithm is a strategy that allows user  to select  based on his/her own preferences at random. User  can choose the random participating level value in .</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">title_3</infon><offset>24230</offset><text>Metrics:</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>24239</offset><text>Four metrics are leveraged to measure the effectiveness of CovidCrowd, including the system utility, total participating level, average participating level, and the number of participants during the whole Stackelberg game process. Specifically, the system utility  has been introduced in Section III, and it is the key metric to measure the algorithm performance; the total participating level is defined as the sum of user ; the average participating level can be computed by the total participating level divides the number of users; and the number of participants is the number of users whose  during the game process.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">title_2</infon><offset>24861</offset><text>Simulation</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>24872</offset><text>In this section, we conduct the simulation with thousands of users. We first show the basic scenario settings, then validate CovidCrowd by varying the number of users and the maximum unit cost of users.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">title_3</infon><offset>25075</offset><text>Simulation Settings:</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>25096</offset><text>The default values of simulation settings are defined as below. It is assumed that the contact tracing system is applied in a 10 km  10 km region (i.e., 100 km2). The default number of users, who participate the tracing task and upload their tracing data to improve tracing capacity of system with a given reward value , is 1000. All users are randomly distributed in the area, and they are stationary or moving in all directions at a speed of 1 m/s. A distance of 1.5 m between users is a relatively safe distance, and a distance within 1.5 m is counted as mutual contact. Notice that, we use a day as the unit time of evaluation. Unless otherwise specified, we use the default values to conduct the following simulations.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">title_3</infon><offset>25820</offset><text>Performance With Different Numbers of Users:</text></passage><passage><infon key="file">wang2abcd-3049024.jpg</infon><infon key="id">fig2</infon><infon key="section_type">FIG</infon><infon key="type">fig_caption</infon><offset>25865</offset><text>Performance with different numbers of users. (a) System utility. (b) Total participating level. (c) Average participating level. (d) Number of participants.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>26022</offset><text>By changing the number of users, we show the performance of CovidCrowd and the other two benchmarks. In particular, the number of users is changed from 1000 to 6000 with the increment of 1000 users, and the results are depicted in Fig. 2. </text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>26262</offset><text>Fig. 2(a) depicts the system utility performance with different numbers of users. CovidCrowd is 2.92% higher than best effort and 35.5% higher than random by on average, respectively. System utility of CovidCrowd is increased with the number of users going up, and the reason here is that the tracing performance of CovidCrowd system could be improved when more users upload their tracing data. Notice that, CovidCrowd has the highest system utility contrasting with the other algorithms, and this is our key goal to design CovidCrowd which chooses the best response strategy to maximize the system utility.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>26870</offset><text>Fig. 2(b) describes the total participating level result with different numbers of users. On average, the total participating level of CovidCrowd is 16.3% better than best effort and 81.4%better than random. As it is expected, CovidCrowd is better than best effort and random algorithm in total participating level, and it is more obvious with the increase of the number of users. This results in that CovidCrowd can use the best strategy to get more user’s participating level.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>27351</offset><text>In terms of average participating level depicted in Fig. 2(c), CovidCrowd has an improvement of 17.1% compared with best effort and 75.4% compared with random. Both CovidCrowd and best effort algorithm reach to a stable state. In contrast, the average participating level of random algorithm varies as the number of users increases, and this is mainly because users randomly choose how to cooperate (e.g., whether participate or not, how to participate, etc.). In addition, the random algorithm is still the worst case among three algorithms.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>27894</offset><text>Fig. 2(d) depicts the number of participants performance with different numbers of users. Similar to the result of system utility, the number of participants for CovidCrowd also achieves the highest as the number of users increasing. On average, the number of participants of CovidCrowd is 131% higher than best effort and 71.7% higher than random, respectively. The main reason is that CovidCrowd is a Nash equilibrium status and user will cooperate only if it can obtain profits from CovidCrowd.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">title_3</infon><offset>28392</offset><text>Performance With Different Maximum Costs of Users:</text></passage><passage><infon key="file">wang3abcd-3049024.jpg</infon><infon key="id">fig3</infon><infon key="section_type">FIG</infon><infon key="type">fig_caption</infon><offset>28443</offset><text>Performance with different maximum unit costs. (a) System utility. (b) Total participating level. (c) Average participating level. (d) Number of participants.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>28602</offset><text>Then, we evaluate all three algorithms with different number of user’s maximum unit cost. In particular, the maximum unit cost value is varied from 8 to 13 with the increment of 1, and Fig. 3 depicts the final results. </text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>28824</offset><text>From the perspective of system utility [i.e., Fig. 3(a)], CovidCrowd still outperforms the other algorithms since it is the Stackelberg Nash equilibrium status. Specifically, we can conclude that CovidCrowd outperforms both best effort (4.3% improvement on average) and random (51.4% improvement on average) in all scenarios. Furthermore, the best effort algorithm is better than the random algorithm in system utility with different maximum costs, and this is mainly because that users with best effort algorithm are always doing their best to provide tracing data.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>29391</offset><text>The participating level [i.e., Fig. 3(b) and Fig. 3(c)] of three algorithms shows the same trends that CovidCrowd is 20.7% better than best effort and 95.2% better than random on average. In addition, both total participating level and average participating level of CovidCrowd and best effort could become lower when the number of maximum costs increases. This is due to that the increase in the maximum costs improves the unit cost of user, which leads to a decrease in user’s participating level.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>29893</offset><text>The number of participants is depicted in Fig. 3(d). On average, the number of participants of CovidCrowd is 131.5% higher than best effort algorithm and 61.9% higher than random algorithm. It is concluded that CovidCrowd also can stimulate more users to participate in providing extra tracing data under different maximum costs of users. Specifically, CovidCrowd can reach to a Stackelberg Nash equilibrium where all participated users cannot obtain more extra profits if its derivatives are from current algorithm.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>30410</offset><text>To summarize, we can see that CovidCrowd has the highest system utility, participating level and the number of participants comparing with the other two benchmarks. Although the system utility of best effort is close to CovidCrowd, it is difficult to reach since users are rational (selfish) in practice. Thus, CovidCrowd outperforms the other algorithms with the increase of the number of users and maximum unit cost.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">title_2</infon><offset>30829</offset><text>Real-World Data Set Evaluation</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">title_3</infon><offset>30860</offset><text>Data Set Description:</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>30882</offset><text>We also conduct the simulation with a real-world trace data set to evaluate the performance of CovidCrowd. The contact tracing application sample data set is leveraged, and it is the latest data set that records contact tracing information in August 2020. Data set includes basic information of users and their corresponding contact information from August 1st to August 31st. To be specific, user’s basic information includes name, birthday, gender, phone number and infection information (i.e., whether the user is infected and if so his or her infection date), etc., and contact information includes contact users (i.e., the user who reported the contact and the users who had contact with him) and contact start and end time.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">title_3</infon><offset>31614</offset><text>Simulation Settings:</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>31635</offset><text>The default value of  is 10, and we still adopt one day as the unit time period for the evaluation. We use a day as the unit time for evaluation, and choose to show the results of one week (i.e., 7 evaluations in 7 days) from the data set. This is mainly because that the result trends of other days are similar after we conduct the evaluation, and one week is representative enough. Other default function settings are the same as Section V-A.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">title_3</infon><offset>32080</offset><text>Performance With Different Days:</text></passage><passage><infon key="file">wang4abcd-3049024.jpg</infon><infon key="id">fig4</infon><infon key="section_type">FIG</infon><infon key="type">fig_caption</infon><offset>32113</offset><text>Performance at different time. (a) System utility. (b) Total participating level. (c) Average participating level. (d) Number of participants.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>32256</offset><text>We conduct a total of one-week evaluation in days (i.e., from Monday to Sunday), and the final results are depicted in Fig. 4. From the Figure, we can get that the broken lines fluctuate without significant changes and the performance of CovidCrowd is always better than the best effort and random as the days changes. </text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>32576</offset><text>To be concrete, In terms of system utility [i.e., Fig. 4(a)], CovidCrowd outperforms both best effort (7.1% improvement on average) and random (61.6% improvement on average). CovidCrowd also achieves the highest participating level compared to best effort (13.2% improvement on average) and random (114% improvement on average) from Fig. 4(b) and (c). In addition, the number of participants depicted in Fig. 4(d) shares CovidCrowd has 133% more participating users than best effort and 79.5% more than random.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">title_3</infon><offset>33087</offset><text>Performance With Different Maximum Unit Costs:</text></passage><passage><infon key="file">wang5abcd-3049024.jpg</infon><infon key="id">fig5</infon><infon key="section_type">FIG</infon><infon key="type">fig_caption</infon><offset>33134</offset><text>Performance with different maximum unit costs. (a) System utility. (b) Total participating level. (c) Average participating level. (d) Number of participants.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>33293</offset><text>In this section, we only show the result of one day’s evaluation due to the page limits, and the trend of metrics is quite similar in different days. The maximum unit cost of users is varied from 8 to 13, and the result is shown in Fig. 5. </text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>33536</offset><text>Similarly with the simulation, the real-world use case shows that CovidCrowd could stimulate more users to upload their tracing data with higher participating level and improve system utility for contact tracing system comparing with the other two benchmarks. On average, CovidCrowd outperforms both best effort (6.9% improvement for system utility, 19.2% improvement for participating level, and 134% improvement for number of participants) and random (44.8% improvement for system utility, 97% improvement for participating level, and 81.7% improvement for number of participants) in all scenarios.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">title_3</infon><offset>34137</offset><text>Performance of Random Users:</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>34166</offset><text>In this section, we randomly select four users from participating users (i.e., ) to analyze the user participating level. To be specific, We stand from the perspective of users to analyze their participating strategy under different algorithms, so we leverage participating level to evaluate the participating strategy of users with changing time.</text></passage><passage><infon key="file">wang6abcd-3049024.jpg</infon><infon key="id">fig6</infon><infon key="section_type">FIG</infon><infon key="type">fig_caption</infon><offset>34514</offset><text>Participating level with random selected users. (a) Random user A. (b) Random user B. (c) Random user C. (d) Random user D.</text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>34638</offset><text>The result of participating level with different time is depicted in Fig. 6. The most obvious finding here is that the user utility of best effort algorithm is the highest and the random algorithm is the lowest in most cases. The main reason here is that the best effort strategy is always trying best to fulfill the task, however, the participating level of CovidCrowd is better than best effort when we consider all users in the contact tracing system. In addition, the system utility will not reach to the maximum, even though the participating level of single participating users is high. This is mainly because that the best effort strategy is not the Nash equilibrium of users, and the goal of CovidCrowd is to encourage more users joining the system and share their contact tracing information instead of fewer ones. </text></passage><passage><infon key="section_type">INTRO</infon><infon key="type">paragraph</infon><offset>35463</offset><text>In real-world tracing data set, CovidCrowd can achieve the highest system utility, participating level and the number of participants, the three key metrics of this article, contrasting with the other two benchmarks under various settings based on realistic scenario. Although best effort algorithm requires all users to try their best to do the task, this is not a Nash equilibrium status in practice and users are usually rational. CovidCrowd performs better than other algorithms, the main reason is that CovidCrowd use Nash equilibrium of Stackelberg game to choose the best response strategy for both contact tracing system and users.</text></passage><passage><infon key="section_type">CONCL</infon><infon key="type">title_1</infon><offset>36103</offset><text>Conclusion</text></passage><passage><infon key="section_type">CONCL</infon><infon key="type">paragraph</infon><offset>36114</offset><text>In this article, we studied the process of collecting contact tracing data for COVID-19 and other pandemic diseases from a crowdsourcing perspective. Motivating users to contribute more contact tracing data, the contact tracing system reimburses users’ privacy and data processing cost with the total reward value, and users will choose their response strategies based on it. We formulate the problem as a Stackelberg game and show there exists the Nash equilibrium for any user given any fixed reward value. Then, CovidCrowd computes the optimal reward value which could maximize the utility of the system. Finally, we conduct a large-scale simulation and real-word data set evaluations. Both results show that CovidCrowd outperform the benchmarks in maximizing the system utility and improving the total participating levels.</text></passage><passage><infon key="section_type">REF</infon><infon key="type">title</infon><offset>36944</offset><text>References</text></passage><passage><infon key="fpage">1</infon><infon key="lpage">6</infon><infon key="section_type">REF</infon><infon key="source">Proc. IEEE Int. Conf. Commun. (ICC)</infon><infon key="type">ref</infon><offset>36955</offset><text>EPIC: Efficient privacy-preserving contact tracing for infection detection</text></passage><passage><infon key="fpage">1341</infon><infon key="issue">14</infon><infon key="lpage">1342</infon><infon key="section_type">REF</infon><infon key="source">JAMA Netw.</infon><infon key="type">ref</infon><infon key="volume">323</infon><infon key="year">2020</infon><offset>37030</offset><text>Response to COVID-19 in Taiwan: Big data analytics, new technology, and proactive testing</text></passage><passage><infon key="section_type">REF</infon><infon key="source">Quest: Practical and oblivious mitigation strategies for COVID-19 using WiFi datasets</infon><infon key="type">ref</infon><infon key="year">2020</infon><offset>37120</offset></passage><passage><infon key="section_type">REF</infon><infon key="source">Future smart connected communities to fight COVID-19 outbreak</infon><infon key="type">ref</infon><infon key="year">2020</infon><offset>37121</offset></passage><passage><infon key="section_type">REF</infon><infon key="source">COVID-19 blockchain framework: Innovative approach</infon><infon key="type">ref</infon><infon key="year">2020</infon><offset>37122</offset></passage><passage><infon key="section_type">REF</infon><infon key="source">BeepTrace: Blockchain-enabled privacy-preserving contact tracing for COVID-19 pandemic and beyond</infon><infon key="type">ref</infon><infon key="year">2020</infon><offset>37123</offset></passage><passage><infon key="section_type">REF</infon><infon key="type">ref</infon><infon key="year">2020</infon><offset>37124</offset><text>Privacy-preserving contact tracing of COVID-19 patients</text></passage><passage><infon key="section_type">REF</infon><infon key="type">ref</infon><infon key="year">2020</infon><offset>37180</offset><text>Decentralized contact tracing using a DHT and blind signatures</text></passage><passage><infon key="fpage">32</infon><infon key="issue">11</infon><infon key="lpage">39</infon><infon key="section_type">REF</infon><infon key="source">IEEE Commun. Mag.</infon><infon key="type">ref</infon><infon key="volume">49</infon><infon key="year">2011</infon><offset>37243</offset><text>Mobile crowdsensing: Current state and future challenges</text></passage><passage><infon key="fpage">54</infon><infon key="issue">1</infon><infon key="lpage">67</infon><infon key="section_type">REF</infon><infon key="source">IEEE Commun. Surveys Tuts.</infon><infon key="type">ref</infon><infon key="volume">18</infon><infon key="year">2016</infon><offset>37300</offset><text>Incentives for mobile crowd sensing: A survey</text></passage><passage><infon key="section_type">REF</infon><infon key="source">Privacy-Preserving Contact Tracing</infon><infon key="type">ref</infon><infon key="year">2020</infon><offset>37346</offset></passage><passage><infon key="section_type">REF</infon><infon key="type">ref</infon><infon key="year">2020</infon><offset>37347</offset><text>BlueTrace: A privacy-preserving protocol for community-driven contact tracing across borders</text></passage><passage><infon key="section_type">REF</infon><infon key="source">Pan-European Privacy-Preserving Proximity Tracing</infon><infon key="type">ref</infon><infon key="year">2020</infon><offset>37440</offset></passage><passage><infon key="section_type">REF</infon><infon key="source">Apps gone rogue: Maintaining personal privacy in an epidemic</infon><infon key="type">ref</infon><infon key="year">2020</infon><offset>37441</offset></passage><passage><infon key="section_type">REF</infon><infon key="source">Coronavirus: Israel Enables Emergency Spy Powers</infon><infon key="type">ref</infon><infon key="year">2020</infon><offset>37442</offset></passage><passage><infon key="section_type">REF</infon><infon key="source">In Coronavirus Fight, China Gives Citizens A Color Code, With Red Flags</infon><infon key="type">ref</infon><infon key="volume">1</infon><infon key="year">2020</infon><offset>37443</offset></passage><passage><infon key="section_type">REF</infon><infon key="source">Decentralized blockchain for privacy-preserving large-scale contact tracing</infon><infon key="type">ref</infon><infon key="year">2020</infon><offset>37444</offset></passage><passage><infon key="fpage">1</infon><infon key="issue">6</infon><infon key="lpage">4</infon><infon key="section_type">REF</infon><infon key="source">Wired Mag.</infon><infon key="type">ref</infon><infon key="volume">14</infon><infon key="year">2006</infon><offset>37445</offset><text>The rise of crowdsourcing</text></passage><passage><infon key="pub-id_doi">10.1109/TMC.2020.3012509</infon><infon key="section_type">REF</infon><infon key="source">IEEE Trans. Mobile Comput.</infon><infon key="type">ref</infon><infon key="year">2020</infon><offset>37471</offset><text>Imitation learning enabled task scheduling for online vehicular edge computing</text></passage><passage><infon key="fpage">800</infon><infon key="issue">3</infon><infon key="pub-id_pmid">21437749</infon><infon key="section_type">REF</infon><infon key="source">Behav. Res. Methods</infon><infon key="type">ref</infon><infon key="volume">43</infon><infon key="year">2011</infon><offset>37550</offset><text>The viability of crowdsourcing for survey research</text></passage><passage><infon key="fpage">1</infon><infon key="lpage">12</infon><infon key="section_type">REF</infon><infon key="source">Proc. 24th Annu. ACM Symp. User Interface Softw. Technol.</infon><infon key="type">ref</infon><offset>37601</offset><text>Platemate: Crowdsourcing nutritional analysis from food photographs</text></passage><passage><infon key="fpage">2334</infon><infon key="lpage">2346</infon><infon key="section_type">REF</infon><infon key="source">Proc. CHI Conf. Hum. Factors Comput. Syst.</infon><infon key="type">ref</infon><offset>37669</offset><text>Revolt: Collaborative crowdsourcing for labeling machine learning datasets</text></passage><passage><infon key="fpage">80</infon><infon key="lpage">96</infon><infon key="section_type">REF</infon><infon key="source">Games Econ. Behav.</infon><infon key="type">ref</infon><infon key="volume">113</infon><infon key="year">2019</infon><offset>37744</offset><text>Optimal crowdsourcing contests</text></passage><passage><infon key="fpage">1</infon><infon key="issue">3</infon><infon key="lpage">32</infon><infon key="section_type">REF</infon><infon key="source">ACM Trans. Inf. Syst.</infon><infon key="type">ref</infon><infon key="volume">35</infon><infon key="year">2017</infon><offset>37775</offset><text>On crowdsourcing relevance magnitudes for information retrieval evaluation</text></passage><passage><infon key="fpage">2052</infon><infon key="lpage">2055</infon><infon key="section_type">REF</infon><infon key="source">Proc. IEEE 35th Int. Conf. Data Eng. (ICDE)</infon><infon key="type">ref</infon><offset>37850</offset><text>Crowdsourcing database systems: Overview and challenges</text></passage><passage><infon key="fpage">1</infon><infon key="issue">3</infon><infon key="lpage">26</infon><infon key="section_type">REF</infon><infon key="source">ACM Trans. Cyber Phys. Syst.</infon><infon key="type">ref</infon><infon key="volume">2</infon><infon key="year">2018</infon><offset>37906</offset><text>A survey of mobile crowdsensing techniques: A critical component for the Internet of Things</text></passage><passage><infon key="pub-id_doi">10.1109/TITS.2020.2997832</infon><infon key="section_type">REF</infon><infon key="source">IEEE Trans. Intell. Transp. Syst.</infon><infon key="type">ref</infon><infon key="year">2020</infon><offset>37998</offset><text>Intelligent edge computing in Internet of vehicles: A joint computation offloading and caching solution</text></passage><passage><infon key="fpage">1</infon><infon key="issue">4</infon><infon key="lpage">43</infon><infon key="section_type">REF</infon><infon key="source">ACM Trans. Sens. Netw.</infon><infon key="type">ref</infon><infon key="volume">13</infon><infon key="year">2017</infon><offset>38102</offset><text>Quality of information in mobile crowdsensing: Survey and research challenges</text></passage><passage><infon key="fpage">2020</infon><infon key="issue">10</infon><infon key="lpage">2033</infon><infon key="section_type">REF</infon><infon key="source">IEEE Trans. Mobile Comput.</infon><infon key="type">ref</infon><infon key="volume">14</infon><infon key="year">2015</infon><offset>38180</offset><text>FlierMeet: A mobile crowdsensing system for cross-space public information reposting, tagging, and sharing</text></passage><passage><infon key="fpage">4083</infon><infon key="lpage">4092</infon><infon key="section_type">REF</infon><infon key="source">Proc. 33rd Annu. ACM Conf. Hum. Factors Comput. Syst.</infon><infon key="type">ref</infon><offset>38287</offset><text>CrowdMonitor: Mobile crowd sensing for assessing physical and digital activities of citizens during emergencies</text></passage><passage><infon key="fpage">1</infon><infon key="issue">1</infon><infon key="lpage">26</infon><infon key="section_type">REF</infon><infon key="source">Proc. ACM Interact. Mobile Wearable Ubiquitous Technol.</infon><infon key="type">ref</infon><infon key="volume">2</infon><infon key="year">2018</infon><offset>38399</offset><text>Third-eye: A mobilephone-enabled crowdsensing system for air quality monitoring</text></passage><passage><infon key="fpage">1</infon><infon key="lpage">9</infon><infon key="section_type">REF</infon><infon key="source">Proc. 6th Annu. IEEE Commun. Soc. Conf. Sens. Mesh Ad Hoc Commun. Netw.</infon><infon key="type">ref</infon><offset>38479</offset><text>Bargain-based stimulation mechanism for selfish mobile nodes in participatory sensing network</text></passage><passage><infon key="pub-id_doi">10.1109/JSAC.2020.3020645</infon><infon key="section_type">REF</infon><infon key="source">IEEE J. Sel. Areas Commun.</infon><infon key="type">ref</infon><infon key="year">2020</infon><offset>38573</offset><text>Mobile edge computing enabled 5G health monitoring for Internet of medical things: A decentralized game theoretic approach</text></passage><passage><infon key="fpage">68</infon><infon key="issue">3</infon><infon key="lpage">74</infon><infon key="section_type">REF</infon><infon key="source">IEEE Commun. Mag.</infon><infon key="type">ref</infon><infon key="volume">55</infon><infon key="year">2017</infon><offset>38696</offset><text>Sustainable incentives for mobile crowdsensing: Auctions, lotteries, and trust and reputation systems</text></passage><passage><infon key="pub-id_doi">10.1109/TMC.2020.3025116</infon><infon key="section_type">REF</infon><infon key="source">IEEE Trans. Mobile Comput.</infon><infon key="type">ref</infon><infon key="year">2020</infon><offset>38798</offset><text>Partial computation offloading and adaptive task scheduling for 5G-enabled vehicular networks</text></passage><passage><infon key="fpage">724</infon><infon key="issue">1</infon><infon key="lpage">738</infon><infon key="section_type">REF</infon><infon key="source">IEEE Trans. Wireless Commun.</infon><infon key="type">ref</infon><infon key="volume">18</infon><infon key="year">2019</infon><offset>38892</offset><text>A Stackelberg game approach toward socially-aware incentive mechanisms for mobile crowdsensing</text></passage><passage><infon key="fpage">1701</infon><infon key="lpage">1709</infon><infon key="section_type">REF</infon><infon key="source">Proc. IEEE INFOCOM</infon><infon key="type">ref</infon><offset>38987</offset><text>Incentive mechanisms for smartphone collaboration in data acquisition and distributed computing</text></passage><passage><infon key="fpage">127</infon><infon key="lpage">135</infon><infon key="section_type">REF</infon><infon key="source">Proc. IEEE INFOCOM Conf. Comput. Commun.</infon><infon key="type">ref</infon><offset>39083</offset><text>Profit-maximizing incentive for participatory sensing</text></passage><passage><infon key="fpage">35</infon><infon key="lpage">47</infon><infon key="section_type">REF</infon><infon key="source">IEEE Trans. Inf. Forensics Security</infon><infon key="type">ref</infon><infon key="volume">13</infon><infon key="year">2018</infon><offset>39137</offset><text>A secure mobile crowdsensing game with deep reinforcement learning</text></passage><passage><infon key="fpage">1641</infon><infon key="issue">10</infon><infon key="lpage">1653</infon><infon key="section_type">REF</infon><infon key="source">Acta Crystallographica Sect. D, Biol. Crystallogr.</infon><infon key="type">ref</infon><infon key="volume">55</infon><infon key="year">1999</infon><offset>39204</offset><text>Cool data: Quantity and quality</text></passage><passage><infon key="section_type">REF</infon><infon key="source">A Course in Game Theory</infon><infon key="type">ref</infon><infon key="year">1994</infon><offset>39236</offset></passage><passage><infon key="fpage">1075</infon><infon key="lpage">1086</infon><infon key="section_type">REF</infon><infon key="source">Proc. ACM Conf. Pervasive Ubiquitous Comput. Adjunct Publ.</infon><infon key="type">ref</infon><offset>39237</offset><text>effSense: Energy-efficient and cost-effective data uploading in mobile crowdsensing</text></passage><passage><infon key="fpage">177</infon><infon key="lpage">186</infon><infon key="section_type">REF</infon><infon key="source">Proc. 16th ACM Int. Symp. Mobile Ad Hoc Netw. Comput.</infon><infon key="type">ref</infon><offset>39321</offset><text>Pay as how well you do: A quality based incentive mechanism for crowdsensing</text></passage><passage><infon key="fpage">167</infon><infon key="lpage">176</infon><infon key="section_type">REF</infon><infon key="source">Proc. 16th ACM Int. Symp. Mobile Ad Hoc Netw. Comput.</infon><infon key="type">ref</infon><offset>39398</offset><text>Quality of information aware incentive mechanisms for mobile crowd sensing systems</text></passage><passage><infon key="fpage">183</infon><infon key="issue">3</infon><infon key="lpage">186</infon><infon key="section_type">REF</infon><infon key="source">IEEE Signal Process. Mag.</infon><infon key="type">ref</infon><infon key="volume">30</infon><infon key="year">2013</infon><offset>39481</offset><text>Gaussian assumption: The least favorable but the most useful [lecture notes]</text></passage><passage><infon key="fpage">647</infon><infon key="issue">2</infon><infon key="lpage">661</infon><infon key="section_type">REF</infon><infon key="source">IEEE/ACM Trans. Netw.</infon><infon key="type">ref</infon><infon key="volume">22</infon><infon key="year">2014</infon><offset>39558</offset><text>Incentive mechanisms for Internet congestion management: Fixed-budget rebate versus time-of-day pricing</text></passage><passage><infon key="section_type">REF</infon><infon key="source">Convex Optimization</infon><infon key="type">ref</infon><infon key="year">2004</infon><offset>39662</offset></passage><passage><infon key="fpage">2932</infon><infon key="issue">8</infon><infon key="section_type">REF</infon><infon key="source">Int. J. Environ. Res. Public Health</infon><infon key="type">ref</infon><infon key="volume">17</infon><infon key="year">2020</infon><offset>39663</offset><text>Airborne transmission route of COVID-19: Why 2 meters/6 feet of inter-personal distance could not be enough</text></passage><passage><infon key="section_type">REF</infon><infon key="source">Contact Tracing Application Sample Dataset</infon><infon key="type">ref</infon><infon key="year">2020</infon><offset>39771</offset></passage></document></collection>
