@@ -4,3 +4,7 @@
 ---
 
 [link to potential cs co-workers](https://gmuedu-my.sharepoint.com/:w:/g/personal/zxu27_gmu_edu/EaXsDAZUecdKpsOM8p5fVywBfUYG_nrvpDEFhynHqcWArA?e=8yTc4z)
+
+---
+
+Used [**BioC API**](https://www.ncbi.nlm.nih.gov/research/bionlp/APIs/BioC-PMC/) to extract .xml format files from PubMed Central Open Access database.
