@@ -1,0 +1,485 @@
+                                                AAAI Technical Report SS-12-06
+                                                     Wisdom of the Crowd
+
+
+
+
+
+
+      Tracking Epidemics with Natural Language Processing and Crowdsourcing
+
+
+    Robert Munro       ▯   Lucky Gunasekara        ▯   Stephanie Nevins     ▯   Lalith Polepeddi     ▯   Evan Rosen     ▯
+                                              ▯
+                                               Stanford University, Stanford, CA
+                                               ▯EpidemicIQ, San Francisco, CA
+                                              frmunro,emrosoeng@stanford.edu
+                                          flucky,steph,lpolepeddig@epidemiciq.com
+
+
+
+
+                          Abstract                                2. Existing systems have made erroneous conclusions about
+                                                                     the correct machine-learning techniques to employ, pri-
+      The ﬁrst indication of a new outbreak is often in un-
+      structured data (natural language) and reported openly         marily due to lack of training data, and that crowdsourc-
+      in traditional or social media as a new ‘ﬂu-like’ or           ing is one way to overcome this.
+
+      ‘malaria-like’ illness weeks or months before the new       3. Crowdsourcing is also suitable for scalable annotation
+      pathogen is eventually isolated. We present a system for       in active learning systems that need to quickly adapt to
+      tracking these early signals globally, using natural lan-
+      guage processing and crowdsourcing. By comparison,             changing information at large volumes, in scenarios like
+      search-log-based approaches, while innovative and in-          when a new disease starts spreading through a new region.
+      expensive, are often a trailing signal that follow open
+      reports in plain language. Concentrating on discovering        Discovering outbreak-related information from among all
+
+      outbreak-related reports in big open data, we show how       the world’s available data is a daunting task. 80% of the
+      crowdsourced workers can create near-real-time train-        world’s data is ‘unstructured’, or in other words, in plain
+      ing data for adaptive active-learning models, addressing     language. While the remaining 20% may be structured data,
+      the lack of broad coverage training data for tracking epi-   there are often earlier signals in the 80%. This is true
+      demics. This is well-suited to an outbreak information-
+      ﬂow context, where sudden bursts of information about        for outbreaks: while agencies like the US Center for Dis-
+      new diseases/locations need to be manually processed         ease Control (CDC), the European Center for Disease Con-
+      quickly at short notice.                                     trol (ECDC), ProMed, and the World Health Organization
+                                                                   (WHO) publish structured data about outbreaks, it often fol-
+
+                                                                   lows reports about the same outbreak in plain language, from
+                      Introduction                                 the organizations themselves or from traditional and social
+                                                                   media.
+ The world’s greatest loss of life is due to infectious diseases,
+ and yet people are often surprised to learn that no one is          Natural language is more difﬁcult to parse than struc-
+ tracking all the world’s outbreaks. We report on one of the       tured data, especially in situations like disease outbreaks
+ broadest investigations so far, utilizing crowdsourcing and       when the ﬁrst report can be in any one of hundreds of lan-
+                                                                   guages. The system presented uses natural language pro-
+ natural language processing to discover and structure infor-
+ mation about outbreaks globally (about 1 billion data points      cessing to seek outbreak-related information in hundreds of
+ per day).                                                         thousands of sources in hundreds of languages, separating
+   There are many components to tracking outbreak reports:         relevant from irrelevant reports and creating structured data.
+                                                                   It passes low-conﬁdence items (reports that are not clearly
+ ﬁltering relevant from irrelevant information, structuring the
+ details of each report (eg: case counts), tracking any geo-       outbreak-related, but not clearly irrelevant) to crowdsourced
+ graphic movements, resolving duplicate or conﬂicting re-          workers for veriﬁcation. The manually corrected annotations
+ ports, and, of course, coordinating the response. This pa-        are then added to the system and also to the training data in
+                                                                   order to create a near-real-time active learning loop. A small
+ per primarily focuses only on the ﬁrst and (in terms of data)
+ largest: ﬁltering the relevant information from the irrelevant    number of reports, including persistent ambiguities, are an-
+ information, We make three main arguments:                        notated by in-house analysts. The in-house annotated exam-
+                                                                   ples also contribute to gold examples for the crowdsourced
+1. Search-log-based detection methods like Google Flu              workers, ensuring quality control.
+   Trends, while innovative and inexpensive, are a often trail-
+   ing signal that follow other reports that open to ﬁnd (but        We draw our data from epidemicIQ, an outbreak tracking
+                                                                   system that has been running since May of 2011, investi-
+   difﬁcult to parse), but are still unsurpassed in the fully au-  gating a number of language processing strategies. This is
+   tomated early prediction of seasonal epidemics.
+                                                                   a snapshot of one strategy, with the core machine-learning
+ Copyright  2012, Association for the Advancement of Artiﬁcial    utilizing only the open Stanford NLP natural language pro-
+ Intelligence (www.aaai.org). All rights reserved.                 cessing software to ensure replicability of results.
+
+
+
+
+                                                              52
+            Background and evaluation                              assume that they report subset of all the other systems re-
+For H5N1 (Bird Flu), the ﬁrst reports of a new ‘ﬂu-like ill-       ported here. However, one output of the work described here
+                                                                   could be to populate systems like these, either automated or
+ness’ were weeks before it was identiﬁed as a new virus and        by providing high-conﬁdence candidate reports for review
+isolated by virologists/epidemiologists. For H1N1 (Swine           by their inhouse analysts.
+Flu), it was months, with many early reports containing the
+key signatures of a new and potentially deadly virus (for             All the methods above have one thing in common – they
+example, being especially virulent among the young and             are trailing signals. There is important information about po-
+                                                                   tential outbreaks in open media well before it is manually
+healthy). If these reports could have been put in front of the     processed by aggregators (or aggregators of aggregators).
+right virologists or epidemiologists earlier, then we could
+have halted the outbreak sooner. But even when these reports          An innovative alternative for detecting outbreaks was dis-
+appear in open social and traditional media, there is still the    covered by engineers at Google.org. By using econometrics
+needle-in-the-haystack problem in that most information in         and a white-list of ﬂu-related symptoms, they were able to
+                                                                   correlate people searching for those symptoms with later ac-
+the world is not about outbreaks.                                  tivity of ﬂu-like illness in the same region (Ginsberg et al.
+   Large-scale surveillance is common for many potential
+threats. NASA is tracking thousands of potentially danger-         2009). In some cases, they were able to ﬁnd signiﬁcant pre-
+ous near-Earth objects (NASA 2011) while national secu-            dictors for ﬂu-activity several weeks in advance of the CDC
+                                                                   published data. It was ingenious in its simplicity: with access
+rity agencies are tracking tens of thousands of suspected ter-     to the search logs, a simple list of symptoms and some stan-
+rorists daily (Chertoff 2008). A deadly microbe is far more        dard econometrics, they were able to establish a new method
+likely to sneak onto a plane undetected.
+                                                                   for tracking diseases.
+                                                                      However, we will suggest search-logs-based economet-
+Related work                                                       rics do not detect the earliest signals and that the complex
+There is very little prior work in using large scale natural       social dynamics that determine when a person searches for
+
+language processing for tracking outbreak-related informa-         a given symptom may only produce a reliable signal in sea-
+tion (often called ‘biosurveillance’).                             sonal epidemics.
+   The largest organization that currently tracks outbreak-
+related information is called ARGUS, with a primary report-        Evaluation
+
+ing role to the US Government. They recently report using          We evaluate three dimensions of the problem of identify-
+Naive Bayes models to suggest candidate outbreak-related           ing outbreak-related content in open intelligence: search-
+articles for their in-house analysts (Torii et al. 2011). With     log-based systems as an early signal; training-data size, with
+just 298 data points, they found no signiﬁcant difference be-      a focus in how it relates to model selection; and active-
+tween Naive Bayes and linear-kernel Support Vector Ma-
+                                                                   learning with a focus on the robustness of crowdsourcing
+chine models (a result we conﬁrmed by analyzing similar            under high volume bursts.
+sized models with our own data). As the largest organization
+with the most recent published work, it is the main system             Reinterpreting search-based approaches
+to which we compare ours here.
+                                                                   Search-log-based approaches like Google Flu Trends are a
+   To our best knowledge, ARGUS is the only organization           form of crowdsourced epidemiology in themselves: large
+using natural language processing in combination with pro-         numbers of individuals self-selecting to search for disease-
+fessional analysts to process outbreak-related information at
+a global scale. However, there are several other organiza-         related terms online.
+tions that use rule-based approaches to keyword extraction,           However, one of CNN’s weather anchor can identify out-
+                                                                   breaks earlier than the combined forces of the CDC and
+often in combination with search engine APIs. A typical ap-        Google Flu Trends:
+proach would be to use a search engine’s API and/or crawl
+the web to ﬁnd new news articles/reports with phrases like            “I’m Jacqui Jeras with today’s cold and ﬂu report ...
+“outbreak of ebola”. An example is HealthMap, who take                across the mid-Atlantic states, a little bit of an increase
+                                                                      here”, January 4, (Jeras 2008)
+outbreak-information from outbreak-related feeds and com-
+bine it with information found by using search APIs (Brown-           The ﬂagship example for Google Flu Trends shows the
+stein, Freifeld, and Madoff 2009).                                 early prediction for ﬂu-like activity in the mid-Atlantic
+   At the least (technically) sophisticated end of the spec-             1
+trum are simple aggregators. There are a number of orga-           states. Google Flu Trends identiﬁed an increase in ﬂu ac-
+                                                                   tivity on the 28th of January, a full two weeks ahead of the
+nizations, like the World Health Organization (WHO) and            CDC, but this was ﬁrst noted on CNN more than three weeks
+ProMed, that publish RSS feeds with content speciﬁcally re-        earlier than either (See Figure 1).
+lating to outbreaks, and some organizations simply combine            This particular example is selected because it was the ex-
+information from these feeds. While a large amount of data
+                                                                   ample singled out by Google Flu Trends and because CNN
+can be collected this way, these systems give the appearance       are the largest traditional media outlet – there may well
+of being more automated than they really are: every article in     have been earlier reports in more local and/or social media
+the outbreak-related feeds of the WHO and ProMed has been
+manually added by a person. They are, therefore, a trailing           1See http://www.google.org/ﬂutrends/about/how.html, and the
+signal. We don’t compare these systems directly to ours and        video embedded within.
+
+
+
+
+                                                               53
+Figure 1: The timeline for when different organizations ﬁrst publicized their knowledge about the increase in Flu in the mid-
+Atlantic US states in 2008. This particular case, Google Flu Trends precedes the CDC’s conﬁrmed trends by two weeks, but it
+is three weeks after the increase was ﬁrst noted on CNN. This pattern – a earlier plain language signal in open media – is found
+for every Google Flu Trend prediction that we have investigated to-date. However, unlike search-log-based approaches, we can
+not yet fully automate the accurate prediction of case counts from natural language processing.
+
+
+
+
+sources. With bounded resources we have not been able to               This also gives a more detailed explanation for why
+conﬁrm this pattern for every possible outbreak predicted by        Google Flu Trends did not as accurately model the recent
+search-log-based techniques, but we are yet to ﬁnd an ex-           Swine Flu outbreak. The creators point out that there were
+ception. We therefore leave a comprehensive comparison of           few cases of Swine Flu in the US and that Google Flu Trends
+search-based and media-based epidemiology as future work.           was designed for large-scale trends (Cohen ). The substantial
+
+   With this new information, it looks like a common order          media coverage was said to explain the increase in searches
+of events for search-log-based approaches is something like         in the phrase ‘Swine Flu’ in this context. But this does not
+this:                                                               explain the increase in phrases like ‘fever’. Perhaps Step 5.,
+                                                                    above, might be the cause: people who were observing ﬂu-
+1. A ﬂu-strain starts spreading through a region.                   like symptoms in the US (but not from Swine ﬂu) were more
+2. The increase is noticed ﬁrst by people who observe large
+parts of the community (eg teachers) and health care profes-        likely to worried as a result of the increased media coverage
+sionals.                                                            and in turn more likely search for information about their
+3. Information about the increase is spread informally              symptoms.
+                                                                       Therefore, we conclude that search-log-based approaches
+through traditional and social media, and more formally             are best suited to large-scale seasonal epidemics where the
+through ofﬁcial reporting channels.
+4. People are more worried as a result of knowing that the          baseline of civil concern is fairly constant. We do not rule
+ﬂu is spreading.                                                    out the potential for early signals in search-logs from unan-
+                                                                    ticipated new outbreaks, but detecting these will require
+5. When early cold or ﬂu symptoms appear, those more-               technology that is more like the needle-in-the-haystack ap-
+worried people are more likely to search for their symptoms         proach that is the main focus of this paper.
+for fear that it is the worse of the two.
+6. A signal appears via search-logs.                                   The high-proﬁle Nature publication has lead a very large
+                                                                    number of researchers to focus on search data – and only on
+If this is the case – and it is our best explanation we have to-    search data – as a targeted means of discovering outbreak-
+date – then the ﬁrst signal will typically be in plain language     related information on the web (Wilson and Brownstein
+with search-logs later reﬂecting the existing knowledge and
+concerns of the population. For the creators of Google Flu          2009; Brownstein, Freifeld, and Madoff 2009). One exam-
+                                                                    ple is ‘Dengue Trends’ (Chan et al. 2011). Unlike Ginsberg
+Trends this is actually a more complex and interesting in-          et al. (2009) this work did not look for people searching
+teraction of social and technological systems than they ﬁrst        for symptoms, but simply for the word ‘dengue’. The re-
+theorized, but an inherently delayed one.                           searchers found a correlation, but did not compare it to other
+   As Ginsberg et al. note, “the CDC publishes national and
+regional data from these surveillance systems on a weekly           signal types like open reports in local media. We suggest that
+                                                                    if people start searching for ‘dengue’ in a given region, then
+basis, typically with a 1-2-week reporting lag.” (Ginsberg          the outbreak is already known.
+et al. 2009) The lag is from virological and clinical data,
+including inﬂuenza-like illness (ILI) physician visits. To be
+more precise, the delay in publication is from when the CDC               Training-data size and model selection
+                                                                    We can treat the problem of ﬁnding outbreak-related infor-
+receives the information from these other parties (Step 3.
+above). This is in addition to the time taken to get feedback       mation as a document classiﬁcation task. Given a set of doc-
+from virological and clinical data and ILI physician visits.        uments we need to separate those that are outbreak-related
+Given the chain of events we suggest above, there will be           from those that are not.
+contexts where an outbreak produces a signal in an organi-             This is a needle-in-the-haystack scenario, where we have
+
+zation like the CDC before it does in search-query logs.            billions of new reports every day but with much less than
+
+
+
+                                                               54
+0.01% actually related to outbreaks. As with a typical clas-         Italian, Japanese, Korean, German) with an outbreak-
+siﬁcation task, building a supervised learning model requires        relevant/not-relevant ratio of 20:1. We evaluated with 10%
+labeled training data. Torii et al. (2011) note that acquiring       hold-out evaluation data. We increased in increments along
+training data for outbreak-related information is expensive,         a base 10 log scale in order to examine the change in training
+
+and to compensate they explored methods for bootstrapping            set size at small numbers with ﬁner granularity.
+training models with very little initial data: “In a real-life          The results are in Figure 2. At 298 training items the
+setting, it is expensive to prepare a training data set ... classi-  model in (Torii et al. 2011) is indeed the more accurate. This
+ﬁers were trained on 149 relevant and 149 or more randomly           is primarily the result of using Naive Bayes. It is less likely
+sampled unlabeled articles.” (Torii et al. 2011)                     to overﬁt the data with most of the prediction weights com-
+
+   298 labeled items is very small training set. They use a          ing from the prior probability (analysis of the feature vec-
+random selection of unlabeled articles which they reason-            tors conﬁrms this). However, at just a little over 1% of the
+ably assume will be mostly non-outbreak-related. It is a             training data – about 1,000 training items – the three mod-
+reasonable assumption from a model perspective, too. Su-             els converge. By the time all 90,000 training items are in-
+
+pervised learning can be an exception to the ‘garbage-in-            cluded, the MaxEnt model has reached F1=0.862 while the
+garbage-out’ rule, provided that any ‘garbage-in’ is truly           Bayesian model is at only 0.129. The (simulated) optimal
+randomly distrubuted with respect to the target problem and          human system is much more accurate, but still lags with a
+in a high enough volume to avoid over-ﬁtting.                        ﬁnal accuracy is F1=0.709 – a ﬁgure achieved by our model
+                                                  2
+   We compare their system to our approach. The data                 with just 8% of the training data.
+comes from a 5-month period from May to September 2011,                 There is certainly a gain in the Bayesian system: from
+with 100,000 reports labeled by both crowdsourced work-              F=0.094 to F=0.102 at 1% of the data, to F=1.06 at 10% and
+ers and in-house analysts. The actual number of reports pro-         F=1.29 with all training data (note the log scale on the x-axis
+                                                                     ﬂattens out the growth – a linear scale would show a more
+cessed is in the millions, and 100,000 articles are processed
+in anywhere between a few seconds and a few minutes de-              distinct increase). But relative to the learning rate of our sys-
+pending on volume.                                                   tem, it clearly underperforms. It is surprise that a generative
+   To ensure replicable results, we limit the information to         learning algorithm is not as accurate as a discriminative al-
+                                                                     gorithm for a classiﬁcation task, but note that this was not
+only open data sources. For the same reasons, we will con-
+strain our own models to a Maximum Entropy (MaxEnt)                  the conclusion of Torii et al., which found no difference be-
+learning algorithm and features derived directly from the            tween generative and discriminative learning algorithms on
+text (no dictionaries, medical lexicons, machine-translation         a set of 298 labeled items (Torii et al. 2011).
+engines, etc).                                                          We conclude that while the while Torii et al. (2011) cor-
+
+   As many current biosurveillance organizations rely on             rectly interpreted their data, the results should not be extrap-
+human-coded rules, we also simulated a scenario over the             olated to a more realistic high-volume context.
+data by seeking an optimal rule-based system. For a best es-
+timate, we ran L1 regularization on a linear model to select                              Active learning
+
+the 1,000 best words/sequences. The result is a set of fea-          We report here on the extentions to the system to semi-
+tures that correspond to rules like “if phrase = ‘ﬂu outbreak’       supervised active learning – a necessary step unless ev-
+than conﬁdence = 0.95”. The L1 regularization gives us the           ery potential document is manually labeled. In addition to
+optimal 1,000 and the optimal weights for each rule. It is           fast annotation, the main advantage of using crowdsourced
+
+unlikely that any humans could actually be so precise in ei-         workers is the scalability.
+ther the weights or in ﬁnding the set of most optimal rules.            There are many patterns of outbreak and reporting, but
+Dispensing with the time-cost of human annotation, we also           one commom one is a sudden increase in reporting from
+assume that the humans have inﬁnite time at each increase            an outbreak-affected area, with bias towards whichever lan-
+
+in training set size. While this is also not-realistic, it means     guages happen to be spoke in the affected region(s). This
+that we can treat these results as a theoretical upper-bound         presents a problem for NLP-based approaches. Natural lan-
+for this type of human performance.                                  guage processing, and machine-learning more generally, is
+   We collected a stratiﬁed balance of articles across the lan-      optimal over known data – it will work best over seasonal
+
+guages for which we have labels (English, Spanish, Por-              variation in endemic outbreaks, not unpredictable new out-
+tuguese, Chinese, Arabic, Russian, French, Hindu, Urdu,              liers. Therefore, the outbreaks that we want to know the most
+                                                                     about are those that are the least likely to be conﬁdently
+   2Without knowing exactly which variation of Naive Bayes was       identiﬁed by a fully automated system. It is vital to have a
+used we tested both Multinomial and Bernoulli Naive Bayes, which     human-in-the-loop, for quality control over the information
+produced near-identical results. We report Bernoulli Naive Bayes
+here, for no particular reason other than Bernoulli’s nephew hap-    and to provide conﬁdently labeled data that will allow the
+                                                                     machine-learning algorithms to quickly adapt.
+pens to be the very ﬁrst person to apply mathematical models to         First, we created a semi-supervised learning scenario
+disease outbreaks (Bernoulli 1766). While Bernoulli is generally     where only the most conﬁdently labeled items are added to
+known to be less accurate for text classiﬁciation, primarily because
+it is insensitive to term frequency, we model the ‘title’ and ‘descrip-e training data, iterating until we had a prediction for every
+tion’ ﬁelds separately and pressume that modeling the (high value)   candidate report.
+repetition of terms across the two ﬁelds compensated for the loss       Second, capped the number of unlabeled items that could
+of repeated values within each ﬁeld.                                 receive a manual label in the supervised system after the ﬁrst
+
+
+
+
+                                                                55
+Figure 2: The increase in F1 accuracy as a greater percent of training items are added, up to 100,000 training items. Note that
+the system reported in (Torii et al. 2011) has 298 data points, putting it at around 0.22% of the data here – this makes it the most
+
+accurate at this point of measurement, but it clearly falls short of the other models as more labeled items are added.
+
+
+
+1% of the data. Dividing the data into time-sequences, we         ports, a team of 5 analysts collated time-aligned case-counts
+simulated the situation where only 5 analysts were work-          for everything that they conﬁrmed was outbreak-related.
+ing full-time to correctly annotate the most ambiguous items         We compare our case counts to those that were subse-
+from the machine learning algorithm. (The selection of ex-        quently found the European Center for Disease Control
+
+actly ‘5’ workers here is simply because it is the average        (ECDC). As Figure 3 shows, the system here is able to ﬁlter
+number of analysts at epidemicIQ during this period.) With        information that is almost identical to the ECDC’s, but with
+a ﬁxed workforce, this approach could not label more items        the crucial early ﬁgures discovered much sooner.
+during bursty periods.                                               Our analysis of the results, and of our own processes, re-
+  In both cases, the accuracy was evaluated over the same
+                                                                  vealed a number of strengths and weaknesses that we share
+leave-out 10% of the data. The results are, of course, sen-       below:
+sitive to assumptions about thresholds for inclusion in the          The potential to track the outbreak earlier than the ECDC
+semi-supervised case, and through-put in the capped-worker        (or to help them track the outbreak earlier) is a big advan-
+case, but the model with the capped number of workers was
+always signiﬁcantly below the model that could expand the         tage. The ECDC relies on data from a number of member
+                                                                  countries in a number of languages, so the cross-linguistic
+number of manual annotations through crowdsourcing.               processing might be especially relevant.
+  Both th supervised and capped models outperformed the              The reduction in the number of articles that the in-house
+semi-supervised model, but even the semi-supervised model
+outperforming the fully-supervised Naive Bayes model by           analysts had to read was probably the biggest advantage.
+F > 20 with only 1% of initial annotation. This indicates         While the 99.9% that we discarded would likely contain
+                                                                  some false negatives, it is comforting that the remaining
+that the strategy proposed by Torii et al. (2011), if not the     articles contained enough information to closely match the
+speciﬁc implementation, was a viable method for leveraging        ECDC’s eventual results.
+small amounts of training data to large-scale tasks.
+                                                                     The reduction in the number of articles was also a weak-
+                                                                  ness. We looked at everything that the machine-learning al-
+           Case-study: European E Coli.                           gorithm thought had a 1% chance of being an outbreak (the
+Finally, we present the results a brief study of our system’s     ﬁnal machine decision was simply the gestault 50% conﬁ-
+ability to track the recent E Coli. outbreak that centered on
+                                                                  dence) and found many articles at relatively low conﬁdence.
+Germany.                                                          It is still a substantial improvement that more than 99.9%
+  Of the millions of articles we parsed, we discarded             of articles could be fairly safely discarded as being beneath
+most of them (more than 99.9%) as being conﬁdently non-           the 1% low conﬁdence threshold, and analysis of precision-
+outbreak-related according to the machine-learning algo-          recall curves show that improvements can be made by shift-
+
+rithm or crowdsourced workers. Among the remaining re-            ing the conﬁdence threshold. More data and algorithm se-
+
+
+
+                                                              56
+Figure 3: Tracking the 2011 E Coli outbreak in Europe: a comparison of the system presented here to the later ﬁgures of the
+
+European Center for Disease Control (ECDC). The upper and lower bounds of the EpidemicIQ ﬁgures represent the range
+of case counts reported by different sources. The results show that the system here is able to ﬁlter information that is almost
+identical to the ECDC’s, but with the crucial early ﬁgures discovered much sooner. It is worth emphasizing though, that unlike
+search-log-based approaches this is not a fully automaated process, as the ﬁgures include (human) annotations from crowd-
+sourced workers with the ﬁnal numbers compiled by small number of inhouse analysts. It is likely that this is a realistic future
+
+scenario – biosurveillance performed by a mixture of cloud-based machine and human processing, supporting a small number
+of domain experts.
+
+
+
+lection would also help.                                          reliable. It is interesting to imagine European citizens com-
+                                                                  pleting task within a (virtual) farming game in order to help-
+                                                                  ing track the (real) E Coli outbreak outside their doors. The
+                       Discussion
+The system produced a few interesting surprises. For a            potential range of scalable workforces is large and not nec-
+                                                                  essarily restricted to unknown individuals.
+Dengue outbreak in the Phillipines, the system identiﬁed the
+name of their Health Minister as a conﬁdent predictor for                               Conclusions
+outbreak-related information, which turned out to be a good
+indicator of relevant reports. It is unlikely that a purely hu-   We have introduced a new way of tracking outbreaks that
+man system would have thought to use this person’s name           leverages natural language processing and crowdsourcing to
+                                                                  detect some of the earliest reports. While natural language
+as a seed for searching relevant information.                     processing allows us to scan open intelligence at a scale that
+  For an Ebola outbreak in Uganda the ﬁrst report we know
+of in open media was from India (we are not entirely sure         simply isn’t possible with people alone, crowdsourcing com-
+why). As far as we can tell it also preceded the knowledge        pliments this by allowing the system to adapt to new types
+of major health organizations, often by several days. How         of information quickly, in a manner that is robust over sud-
+                                                                  den spikes in information. It is early days yet, and it is not
+many people would think to scan Indian media for reports          clear that the methods we explore can (or should) completely
+about African outbreaks?
+  Both these examples are anecdotal but part of a trend de-       replace domain experts, but the results are a positive step
+serving further investigation. We can conclude that machine-      towards streamlining the often time-consuming and time-
+learning predictions are very different to their human            critical ﬁltering and discovery tasks.
+                                                                     In the last century, we have only eradicated one deadly
+counter-parts in their patterns of discovery and error. This      pathogen, smallpox. During the same time period, we have
+may lead to novel discoveries, but also a less intuitive
+human-computer interaction experience.                            built many more planes. Every transmission is a possibility
+  We also explored the crowdsourcing aspects of the system        for a new mutation or for two viruses to combine into a new
+                                                                  deadly form, and so identifying outbreaks as quickly as pos-
+along a number of dimensions. In some tasks, like identifyng      sible is vital.
+case-counts, location names and quotes from ofﬁcials, the
+quality of the crowdsourcing results were excellent. In oth-
+ers, like estimating citizen unrest and instability, the quality                    Acknowledgments
+was poor and it may be that these kind of tasks are more          With thanks to the entire epidemicIQ team at Global Viral
+                                                                  Forecasting, especially Eethar Al-Hassan, Autumn Albers,
+suited to trained analysts.
+  Both the machine and crowdsourced systems showed er-            George Chamales, Pooja Desai, Dan Lipsitt, Brady Page,
+rors separating reports about an outbreak from reports only       Victoria Sahakian, Nathan Wolfe and Lu Zhang, and to ev-
+about diseases. Most of the errors here were in plain media,      ery microtasking worker helping to track epidemics.
+not technical reports, so we assume that this might be ap-
+                                                                                         References
+propriate for non-expert crowdsourced workers, but requires
+careful task design.                                              Bernoulli, D. 1766. Essai d’une nouvelle analyse de la
+  Looking across workforces (we used the CrowdFlower              mortalite cause e par la petite ve role, et des avantages de
+system that allows access to different work platforms) it         l’inoculation pour la pre venir, hist. Acad. Roy. Sci., Anne e
+
+seemed like people from within online games were the most         MDCCLX, Me moires 1–45.
+
+
+
+                                                              57
+Brownstein, J.; Freifeld, C.; and Madoff, L.        2009.
+Digital disease detection: harnessing the web for public
+health surveillance.  New England Journal of Medicine
+360(21):2153–2157.
+
+Chan, E.; Sahai, V.; Conrad, C.; and Brownstein, J. 2011.
+Using web search query data to monitor dengue epidemics:
+A new model for neglected tropical disease surveillance.
+PLoS Neglected Tropical Diseases 5(5):e1206.
+
+Chertoff, M. 2008. Press conference. United States Depart-
+ment of Homeland Security.
+
+Cohen, N. The hunt for insights in the online chatter about
+Swine Flu.
+Ginsberg, J.; Mohebbi, M. H.; Patel, R. S.; Brammer, L.;
+
+Smolinski, M. S.; and Brilliant, L. 2009. Detecting in-
+ﬂuenza epidemics using search engine query data. Nature
+457(7232):1012–4.
+
+Jeras,  J.     2008.      CNN Newsroom        Transcripts.
+http://transcripts.cnn.com/TRANSCRIPTS/0801/04/cnr.02.html
+(accessed 6 Oct 2011).
+NASA.     2011.   Near-Earth asteroid discovery statistics.
+
+http://neo.jpl.nasa.gov/stats/ (accessed 6 Oct 2011).
+Torii, M.; Yin, L.; Nguyen, T.; Mazumdar, C.; Liu, H.; Hart-
+ley, D.; and Nelson, N. 2011. An exploratory study of a
+
+text classiﬁcation framework for internet-based surveillance
+of emerging epidemics. International Journal of Medical
+Informatics 80(1):56–66.
+
+Wilson, K., and Brownstein, J. 2009. Early detection of
+disease outbreaks using the internet. Canadian Medical As-
+sociation Journal 180(8):829.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                            58

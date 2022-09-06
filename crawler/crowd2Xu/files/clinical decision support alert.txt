@@ -1,0 +1,682 @@
+The Ochsner Journal 14:195–202, 2014
+Ó Academic Division of Ochsner Clinic Foundation
+
+
+
+
+          Clinical Decision Support Alert Appropriateness:
+
+                  A Review and Proposal for Improvement
+
+
+
+ Allison B. McCoy, PhD,        1,2 Eric J. Thomas, MD, MPH,          3,4 Marie Krousel-Wood, MD, MSPH,               2,5,6,7
+
+                                                Dean F. Sittig, PhD      4,8
+
+     1
+     Department of Biostatistics and Bioinformatics, Tulane University School of Public Health and Tropical Medicine,
+                                                     New Orleans, LA
+                         2
+              3          Center for Health Research, Ochsner Clinic Foundation, New Orleans, LA
+               Department of Internal Medicine, University of Texas Medical School at Houston, Houston, TX
+     4The University of Texas at Houston-Memorial Hermann Center for Healthcare Quality and Safety, Houston, TX
+                     5
+     6                Department of Medicine, Tulane University School of Medicine, New Orleans, LA
+      Department of Epidemiology, Tulane University School of Public Health and Tropical Medicine, New Orleans, LA
+               7The University of Queensland School of Medicine, Ochsner Clinical School, New Orleans, LA
+                    8
+                     The University of Texas School of Biomedical Informatics at Houston, Houston, TX
+
+
+                                                                involved in manual chart reviews to determine alert and
+
+ABSTRACT                                                        response appropriateness. Further, most studies have solely
+Background: Many healthcare providers are adopting clinical     evaluated alert overrides that are appropriate or justifiable. Our
+
+decision support (CDS) systems to improve patient safety and    proposal expands the use of web-based monitoring tools with
+meet meaningful use requirements. Computerized alerts that      an interactive dashboard for evaluating CDS alert and response
+                                                                appropriateness that incorporates the predictive models. The
+prompt clinicians about drug-allergy, drug-drug, and drug-
+disease warnings or provide dosing guidance are most            dashboard provides 2 views, an alert detail view and a patient
+commonly implemented. Alert overrides, which occur when         detail view, to provide a full history of alerts and help put the
+
+clinicians do not follow the guidance presented by the alert,   patient’s events in context.
+can hinder improved patient outcomes.                           Conclusion:   The proposed research introduces several
+                                                                innovations to address the challenges and gaps in alert
+Methods: We present a review of CDS alerts and describe a
+proposal to develop novel methods for evaluating and            evaluations. This research can transform alert evaluation
+improving CDS alerts that builds upon traditional informatics   processes across healthcare settings, leading to improved
+
+approaches. Our proposal incorporates previously described      CDS, reduced alert fatigue, and increased patient safety.
+models for predicting alert overrides that utilize retrospective
+chart review to determine which alerts are clinically relevant
+
+and which overrides are justifiable.
+Results: Despite increasing implementations of CDS alerts,      INTRODUCTION
+
+detailed evaluations rarely occur because of the extensive labor    Many healthcare providers are adopting electronic
+                                                                health records (EHRs) that incorporate clinical deci-
+                                                                sion support (CDS) to improve patient safety and
+Address correspondence to
+                                                                meet Medicare and Medicaid Stage 1 meaningful use
+AsillonB.McCoy,PhD                                              requirements.   1,2 Computerized alerts that prompt
+Department of Biostatistics and Bioinformatics
+Tulane University School of Public Health and Tropical Medicine clinicians about drug-allergy, drug-drug, and drug-
+                                                                disease warnings or provide dosing guidance are
+1440 Canal St., Suite 2001                                      most common.      3,4 Initial research reported that ad-
+New Orleans, LA 70112
+                                                                verse drug events (ADEs) were potentially prevent-
+Tel: (504) 988-6641                                             able by alerts and other CDS systems.       5Despite such
+Email: amccoy1@tulane.edu
+                                                                promise, CDS implementations in diverse settings
+Keywords: Decision support system s–clinical, electronic health have not consistently improved patient outcomes.          6-9
+                                                                Alert overrides occur when clinicians do not follow the
+records, medical order entry systems, medication errors,
+prevention and control, reminder systems                        guidance presented by the alert. For example, an alert
+                                                                may appear when a clinician orders amoxicillin,
+
+The authors have no financial or proprietary interest in the subjecting that the patient is allergic to penicillin-class
+matter of this article .                                        medications. The clinician may accept the alert and
+
+
+Volume 14, Number 2, Summer 2014                                                                                        195
+Clinical Decision Support Alert Appropriateness
+
+
+
+
+cancel the order. Or the clinician may override the        occurs for 49%-96% of alerts and is a potential barrier
+                                                                              10,24-33
+alert and order amoxicillin, either because he or she      to such success.           Although the CDS system
+failed to read the alert or because the benefit to the     may be designed to improve patient safety, it cannot
+
+patient outweighs the risk. In most organizations, the     be effective if the alerts are poorly implemented or the
+majority of daily alerts displayed to providers during     clinicians do not change their behavior in response to
+the ordering process are overridden, and such              relevant alerts. Excess alerts, those that are repeated
+
+overrides may be a barrier to improved patient and         (eg, for each refill of a long-term medication) or not
+process outcomes.   10 Both justifiable and nonjustifi-    relevant, cause alert fatigue and contribute to alert
+                                                                     10
+able overrides occur, and detailed evaluation of the       overrides.   Studies examining overrides have used
+alerts and provider responses is necessary to              chart review or user feedback to conclude that many
+determine appropriateness.  11,12However, these eval-      overrides are clinically justifiable because of the
+
+uation methods are labor intensive and difficult to        clinical irrelevance of an alert, known patient tolerance
+replicate for every alert implemented at individual        for a drug, or documented clinician intention to
+
+institutions. More efficient approaches to effectively     monitor the patient, indicating a need fo24,25,27,29,32-36
+evaluate alert appropriateness are necessary for           to evaluate alerts to prevent alert fatigue.
+optimizing patient safety. This article reviews CDS        Researchers have used statistical modeling to evalu-
+
+alerts and proposes novel methods for evaluating and       ate possible predictors of alert overrides, including
+improving CDS alerts that build upon traditional           human factors (eg, workflow integration, prioritiza-
+
+informatics approaches.                                    tion), patient and clinician characteristics, triggering
+                                                           substance, alert frequency, response type required,
+CLINICAL DECISION SUPPORT ALERTS                           and perceived severity and value.  37,38Many of these
+
+    Early reports of ADEs among hospitalized patients      factors significantly contributed to the alert accep-
+indicating that about 28% of ADEs were preventable         tance rate in multivariable analysis, indicating that the
+have elicited substantial research into the use of CDS
+                         5                                 modeling approach may be a viable alternative to
+to prevent patient harm.   Studies have since shown        extensive chart reviews. However, existing predictive
+that medication errors, which occur in 4%-6% of            models have not yet been shown to distinguish
+
+orders, can be prevented by computerized provider          between inappropriate and justifiable overrides.
+order entry (CPOE) and CDS.    5,13-1In one study, the
+use of CPOE and CDS decreased the rate of
+                              18                           Alert and Response Appropriateness
+medication errors by 81%.         Although improved            Although alert overrides by providers have been
+patient safety is a leading motivation for CDS             the focus of many evaluations, some overrides are
+
+adoption, financial incentives also exist, as CDS has      justifiable because of clinical irrelevance, patient
+reportedly contributed to substantial savings. 19Final-    tolerance, or the provider’s documented intention to
+ly, Stage 1 of meaningful use requires institutions to                           11,12
+                                                           monitor the patient.       Likewise, some alerts are
+implement drug-drug and drug-allergy interaction           inappropriate, and adhering to the alert advice could
+checks, implement 1 high-priority condition CDS rule,      cause harm to the patient.  12 Detailed evaluations of
+                             1
+and track CDS compliance.     Multiple CDS approach-       alert appropriateness are necessary to identify such
+es exist, including alerts, simple guided-dosing           undesirable, unintended consequences and to insti-
+algorithms, order sets, and complex ordering advi-                                                    39-41
+     20,21                                                 tute efforts to mitigate resulting errors.    42 In the
+sors.      Alerts are implemented in 61%-78% of            evaluation framework from Ong and Coiera,        signal
+hospitals and included in all major commercial EHRs        detection theory is applied, classifying alerts as hits,
+
+to notify clinicians of intera3,4,21,22hanging laboratory  misses, false alarms, and true negatives. In another
+values, or other information.         On average, as       report, Ancker et al described ‘‘The Triangle Model,’’
+reported in 1 study, clinicians received 56 alerts per
+                                                           emphasizing simultaneous, interconnected evaluation
+day and spent 49 minutes per day processing them,          of the patient, technology, and organization in
+making the alerts a substantial component of the daily     conjunction with evaluation of providers’ interac-
+               23                                                11
+care workflow.                                             tions.  A more relevant framework categorizes alerts
+                                                           as successes, justifiable overrides, provider non-
+EVALUATION OF CLINICAL DECISION
+                                                           adherence, and unintended adverse consequences
+SUPPORT ALERTS                                             through retrospective chart review based on alert and
+Alert Overrides                                            response appropriateness.   12This approach is advan-
+
+    Despite initial reports of CDS success, evaluations    tageous because it accounts for inappropriate alerts
+of CDS systems have not always demonstrated                that result in justifiable overrides (ie, the clinician
+                             6-9
+improved patient outcomes.       Nonadherence to the       correctly disregards the alert advice) or unintended
+alerts by clinicians, also referred to as alert overrides, adverse consequences (ie, the clinician follows the
+
+
+196                                                                                              The Ochsner Journal
+                                                                                                         McCoy, AB
+
+
+
+
+Table 1. Alert Evaluation Framework                         Table 2. Multivariable Alert Evaluation Covariates
+
+
+                   Provider Response Appropriate?                                      Sample Variables
+Alert Display
+Appropriate?         Yes                   No               Alert           Alert type, number of previous alerts,
+                                                                              duplicates, encounter type, priority,
+  Yes         Successful alerts  Provider nonadherence
+  No          Justifiable overrides Unintended consequences                   severity, timing, workflow
+                                                            Patient         Demographics, medications, comorbidities,
+                                                                              insurance type, admit service
+
+                                                            Clinician       Demographics, specialty, role, site, prior
+alert advice and potentially harms the patient).                              alerts, consult status, years in practice
+Although these evaluation methods are necessary             Medication      Ordered medication, drug class, refill
+for determining the true effectiveness of alerts, they
+                                                                              number, interaction severity
+are labor intensive and difficult to replicate for every    Laboratory      Result type, severity
+alert implemented at individual institutions. More            Result
+efficient, semiautomated evaluation approaches are
+
+necessary to understand alert responses and over-
+rides and ultimately to improve patient safety.             ized ratio values following administration of warfarin,
+
+                                                            which may be acceptable for mechanical valve
+Surveillance Tools for Alert Evaluation                     recipients) should also be suppressed. No consistent
+    To facilitate alert evaluations, institutions have      method exists to avoid false positive alerts (which
+
+implemented CDS surveillance systems. Zimmerman             divert clinician time and attention) and false negative
+et al 43 displayed retrospective CDS data in a              alerts (which silently leave patients at risk) that is
+spreadsheet-based dashboard, and Reynolds et al       44
+                                                            generalizable across systems and clinical domains.
+developed a web-based, graphic dashboard to allow
+monitoring of order and alert volume by patient             A PROPOSAL TO EVALUATE AND IMPROVE
+
+location, prescriber type, and alert type. In previous      THE APPROPRIATENESS OF ALERTS
+work by McCoy et al, review by an alerts committee or       Predicting Inappropriate Alerts and Responses
+physician-led informatics group provided opportuni-            To better evaluate and improve CDS alert appro-
+
+ties to identify poorly performing alerts and make          priateness, we first propose the use of the alert
+system improvements. A real-time surveillance dash-         evaluation framework developed and evaluated in
+board displayed lists of patients receiving high-risk
+                                                            prior research that utilizes retrospective chart review
+medications, CDS interactions, and detailed patient         to determine which alerts are clinically relevant and
+views to clinical pharmacists to augment decision           which overrides are justifiable.   12 The framework
+making. 45 The tool allowed informatics personnel to
+                                                            classifies alert and clinician response appropriate-
+identify and correct inappropriate triggering criteria in   ness, identifying successes, justifiable overrides,
+existing alerts through aggregate evaluation of the         provider nonadherence, and unintended conse-
+appropriateness of responses by pharmacists during
+                                                            quences (Table 1). This approach aims first to identify
+routine clinical duties.                                    predictors of alert and response inappropriateness to
+    These studies indicate that web-based surveil-          eliminate the need for manual reviews, and second to
+
+lance tools can be increasingly useful in the evalua-       validate our findings in both ambulatory and commu-
+tion and improvement of alerts. The surveillance tools      nity hospital settings.
+may also be beneficial to clinicians, allowing them to         Multivariable binary logistic regression has been
+
+review their alert and response histories and empow-        applied in several studies to evaluate the association
+ering them to change their behavior if necessary.           between various clinician, patient, and alert charac-
+                                                            teristics and overrides.24,30,37,38,51,High-level char-
+
+Methods for Improving Alerts                                acteristics frequently included as covariates in prior
+    Several projects have attempted to improve CDS          studies are listed in Table 2; other studies have
+
+alerts and reduce override ra46-49y turning off       50    evaluated provider-entered override reasons, but
+frequently overridden alerts.     Duke and Bolchini         these explanations are not routinely collected across
+developed a model for creating context-aware drug-          institutions. However, as demonstrated in the previ-
+
+drug interaction alerts that allowed tailoring alert        ously described evaluation framework, effective alert
+displays based on relevant patient-specific informa-        evaluations should assess alert and response appro-
+tion, resulting in improved acceptance of the alerts.       priateness, not merely alert overrides. By identifying
+
+However, alerts deemed inappropriate in some                factors that predict inappropriate alerts and respons-
+clinical scenarios (eg, increased international normal-     es, informatics personnel can improve alert logic to
+
+
+Volume 14, Number 2, Summer 2014                                                                                197
+Clinical Decision Support Alert Appropriateness
+
+
+
+
+account for these factors, increasing the specificity of   sures.59 This method can be applied to alert override
+
+the alerts. As a result of the improved specificity,       evaluations: a clinician’s response to a specific alert is
+clinicians may experience less alert fatigue, override     compared to other clinicians’ responses to the same
+fewer alerts, and provide better care for patients with    alert, given a similar patient scenario. By considering
+
+conditions that warrant serious alerts.                    clinicians as users and alert responses as user-
+    Through independent chart review by 3 different        generated content, alert evaluators may adopt similar
+clinicians (eg, physicians, pharmacists) using explicit    reputation metrics to identify inappropriate alerts that
+
+and implicit review criteria and assessing inter-rater     can be used in the previously developed predictive
+reliability using Cohen’s kappa statistic, we plan to      models.
+develop a gold standard for the appropriateness of
+                                                12
+each alert and clinician response (Table 1).        For    Designing and Implementing an Interactive
+each alert type (eg, drug-drug, drug-allergy), we then     Alert Evaluation Dashboard
+
+will assess its predictive power to identify inappropri-       During previous research, we developed a condi-
+ate alerts and responses for each characteristic           tion-specific, web-based surveillance tool that allowed
+identified through literature review (Table 2), investi-
+                                                           clinical pharmacists, informatics personnel, and clini-
+gator experience, and collaboration with a human-          cians to review CDS alert responses in the context of
+factors expert. We will explore the use of different       patients at high risk for ADEs.5,60Figure 1 depicts the
+predictive models with variable selection, including
+                                                           surveillance workflow that is designed to improve
+multinomial logistic regression, using 10-fold cross-      patient safety. Although a randomized, controlled trial
+validation to split the data into training and test sets.  in which clinical pharmacists used the tool did not
+
+                                                           reduce ADEs in patients with acute kidney injury, the
+Novel Metrics for Predicting Inappropriate                 technology assisted informatics personnel in refining
+Alerts and Responses                                       logic to improve the specificity of the CDS alerts.45
+
+    Although variables traditionally included in the           We propose to develop and implement InSPECt
+evaluation of alerts have been significantly associated    (Interactive Surveillance Portal for Evaluating Clinical
+
+with alert overrides, additional predictors of alert       decision support), an open-source, EHR-independent
+responses may improve the models. Substantial              dashboard that will incorporate the medication indi-
+evidence demonstrates that integrating clinical con-       cation and reputation metrics developed in the first
+
+text can increase 10,50 appropriateness and improve        phase of the project and will permit further assess-
+alert acceptance.       The first variable that we will    ment of the use of surveillance in evaluating CDS
+incorporate into the models is the indication of an        implementations. InSPECt will consist of 2 view types:
+
+alerted medication, whether entered manually by the        the alert detail and the patient detail. The alert detail
+clinician during e-prescribing or inferred from a          view displays all logged alert instances and allows
+medication indication knowledge base developed in          reviewers to identify inappropriate alerts at risk of
+                 53-55
+our prior work.       The algorithms and back-end          harm, showing details such as alert time; triggering
+knowledge required to drive such integration or allow      medication(s), laboratory value, or allergy; patient
+exceptions in simple rule-based logic are difficult to     demographics; and clinician name and service. The
+
+develop and maintain. We have previously explored          display can be filtered or sorted on any column. This
+and validated several complementary methods for            view will also display a graph of alert rates over time,
+
+deve53-57g this knowledge for use in patient summa-        including total and overridden alerts, and will report
+ries.     Additional variables derived from these          the estimated rate of inappropriate alerts using the
+knowledge bases will be included in the predictive         metrics developed in the first phase of the project.
+
+models to determine if additional data improve             Also within the alert detail view, users will be able to
+detection of inappropriate alerts.                         select alternate triggering criteria for the alerts,
+    Prior work also has de scribed methods for             resulting in updated estimates for alert display,
+
+determining the reputation of users generating con-        override, appropriateness, and response appropriate-
+tent, most often in the setting of e-commerce ratings,     ness rates. Figure 2 depicts a mockup of the alert
+in which the reputation is computed as the proportion      detail view.
+
+of ratings from a specific user that are the same as           A mockup of the patient detail view is shown in
+ratings submitted by other users.  58In previous work,     Figure 3. This view displays a graph of events, such
+
+we developed a clinician reputation metric to evaluate     as relevant laboratory values and medications, and a
+crowdsourced knowledge about links between pre-            detailed timeline for a patient in reverse chronological
+scribed medications and indicated problems that we         order to provide context for the alerts. The timeline will
+
+found to have a specificity of 99.5% and an improved       include all orders, problems, laboratory results, and
+sensitivity (66.3%) compa red to alternative mea-          alert interactions documented in the patient’s EHR
+
+
+198                                                                                              The Ochsner Journal
+                                                                                                      McCoy, AB
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              Figure 1. Surveillance workflow for improving patient safety. CPOE, computerized provider order
+              entry; EHR, electronic health record.
+
+
+and can be sorted on any column. Reviewers can use        CONCLUSION
+the patient detail view to understand clinician actions
+                                                              Despite increasing implementations of CDS alerts,
+and patient condition changes occurring in conjunc-       detailed evaluations rarely occur because of the
+tion with alert overrides without having to search a      extensive labor involved in manual chart reviews to
+patient’s EHR independently.
+                                                          determine alert and response appropriateness. Fur-
+    After development and validation of InSPECt are       ther, most studies have solely evaluated alert overrides
+complete, we will collaborate with CDS managers and       that are appropriate or justifiable. Prior work is also
+clinicians at study sites to review alerts. We will take
+                                                          limited by evaluations from single institutions with
+advantage of the InSPECt interactivity to identify        locally developed systems that restrict generalizability.
+poorly performing alerts    and evaluate alternate-       Our proposed research introduces several innovations
+triggering criteria that may improve the rate of
+                                                          to address the challenges and gaps in alert evalua-
+appropriateness and potentially reduce the rates of       tions; it builds upon the alert appropriateness frame-
+overrides and inappropriate responses. We will then       work developed previously, adopting predictive
+work with other information technology staff, clinician   models and introducing metrics novel to the biomed-
+
+leaders, and informatics investigators to design an       ical informatics domain that have proven successful in
+intervention to improve the alerts and evaluate the       other domains. Expanding prior surveillance methods,
+effect of the improved alerts on patient, provider, and   we also aim to develop an EHR-independent applica-
+
+process outcomes.                                         tion that is deployable by any institution using open-
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 2. Alert detail view mockup.
+
+
+Volume 14, Number 2, Summer 2014                                                                             199
+Clinical Decision Support Alert Appropriateness
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                Figure 3. Patient detail view mockup.
+
+
+source, readily available technologies, validating the              5.  Bates DW, Cullen DJ, Laird N, et al. Incidence of adverse drug
+                                                                        events and potential adverse drug events. Implications for
+results in both ambulatory and community hospital
+settings utilizing commercial EHRs. Combined, this                      prevention. ADE Prevention Study Group. JAMA. 1995 Jul 5;
+                                                                        274(1):29-34.
+research can transform alert evaluation processes                   6.  Gurwitz JH, Field TS, Rochon P, et al. Effect of computerized
+across healthcare settings, leading to improved CDS,
+reduced alert fatigue, and increased patient safety.                    provider order entry with clinical decision support on adverse
+                                                                        drug events in the long-term care setting. J Am Geriatr Soc. 2008
+                                                                        Dec;56(12):2225-2233.
+ACKNOWLEDGMENT
+                                                                    7.  Strom BL, Schinnar R, Bilker W, Hennessy S, Leonard CE, Pifer E.
+    This project was supported in part by NLM Grant                     Randomized clinical trial of a customized electronic alert requiring
+1K22LM011430-01A1, a UTHealth Young Clinical and                        an affirmative response compared to a control group receiving a
+
+Translational Sciences Investigator Award (KL2 TR                       commercial passive CPOE alert: NSAID—warfarin co-prescribing
+000370-06A1), Contract No. 10510592 for Patient-                        as a test case. J Am Med Inform Assoc. 2010 Jul-Aug;17(4):
+                                                                        411-415.
+Centered Cognitive Support under the Strategic Health
+IT Advanced Research Projects Program (SHARP)                       8.  Tamblyn R, Reidel K, Huang A, et al. Increasing the detection and
+                                                                        response to adherence problems with cardiovascular medication
+from the Office of the National Coordinator for Health                  in primary care through computerized drug management
+Information Technology, and NCRR Grant
+3UL1RR024148.                                                           systems: a randomized controlled trial. Med Decis Making. 2010
+                                                                        Mar-Apr;30(2):176-188. Epub 2009 Aug 12.
+                                                                    9.  Strom BL, Schinnar R, Aberra F, et al. Unintended effects of a
+REFERENCES                                                              computerized physician order entry nearly hard-stop alert to
+
+1.  Blumenthal D, Tavenner M. The ‘‘meaningful use’’ regulation for     prevent a drug interaction: a randomized controlled trial. Arch
+    electronic health records. N Engl J Med. 2010 Aug 5;363(6):         Intern Med. 2010 Sep 27;170(17):1578-1583.
+    501-504. Epub 2010 Jul 13.                                      10. van der Sijs H, Aarts J, Vulto A, Berg M. Overriding of drug safety
+
+2.  Bates DW, O’Neil AC, Boyle D, et al. Potential identifiability and  alerts in computerized physician order entry. J Am Med Inform
+    preventability of adverse events using information systems. JAm     Assoc. 2006 Mar-Apr;13(2):138-147. Epub 2005 Dec 15.
+    Med Inform Assoc. 1994 Sep-Oct;1(5):404-411.                    11. Ancker JS, Kern LM, Abramson E, Kaushal R. The Triangle Model
+
+3.  Jha AK, DesRoches CM, Campbell EG, et al. Use of electronic         for evaluating the effect of health information technology on
+    health records in U.S. hospitals. N Engl J Med. 2009 Apr 16;        healthcare quality and safety. J Am Med Inform Assoc. 2012
+    360(16):1628-1638. Epub 2009 Mar 25.                                Jan-Feb;19(1):61-65. Epub 2011 Aug 20.
+
+4.  Kuperman GJ, Bobb A, Payne TH, et al. Medication-related        12. McCoy AB, Waitman LR, Lewis JB, et al. A framework for
+    clinical decision support in computerized provider order entry      evaluating the appropriateness of clinical decision support alerts
+    systems: a review. J Am Med Inform Assoc. 2007 Jan-Feb;14(1):       and responses. J Am Med Inform Assoc. 2012 May-Jun;19(3):
+
+    29-40. Epub 2006 Oct 26.                                            346-352. Epub 2011 Aug 17.
+
+200                                                                                                            The Ochsner Journal
+                                                                                                                                 McCoy, AB
+
+
+
+
+13. Lesar TS, Briceland L, Stein DS. Factors related to errors in        29. Ko Y, Abarca J, Malone DC, et al. Practitioners’ views on
+    medication prescribing. JAMA. 1997 Jan 22-29;277(4):312-317.              computerized drug-drug interaction alerts in the VA system. JAm
+
+14. Bobb A, Gleason K, Husch M, Feinglass J, Yarnold PR, Noskin               Med Inform Assoc. 2007 Jan-Feb;14(1):56-64. Epub 2006 Oct
+    GA. The epidemiology of prescribing errors: the potential impact          26.
+    of computerized prescriber order entry. Arch Intern Med. 2004        30. Isaac T, Weissman JS, Davis RB, et al. Overrides of medication
+
+    Apr 12;164(7):785-792.                                                    alerts in ambulatory care. Arch Intern Med. 2009 Feb 9;169(3):
+15. Reckmann MH, Westbrook JI, Koh Y, Lo C, Day RO. Does                      305-311.
+    computerized provider order entry reduce prescribing errors for
+                                                                         31. Shah NR, Seger AC, Seger DL, et al. Improving acceptance of
+    hospital inpatients? A systematic review. J Am Med Inform                 computerized prescribing alerts in ambulatory care. J Am Med
+    Assoc. 2009 Sep-Oct;16(5):613-623. Epub 2009 Jun 30.                      Inform Assoc. 2006 Jan-Feb;13(1):5-11. Epub 2005 Oct 12.
+16. Ammenwerth E, Schnell-Inderst P, Machan C, Siebert U. The
+                                                                         32. Swiderski SM, Pedersen CA, Schneider PJ, Miller AS. A study of
+    effect of electronic prescribing on medication errors and adverse         the frequency and rationale for overriding allergy warnings in a
+    drug events: a systematic review. J Am Med Inform Assoc. 2008             computerized prescriber order entry system. J Patient Saf. 2007
+    Sep-Oct;15(5):585-600. Epub 2008 Jun 25.
+                                                                              Jun;3(2):91-96.
+17. van Rosse F, Maat B, Rademaker CM, van Vught AJ, Egberts AC,         33. Litzelman DK, Tierney WM. Physicians’ reasons for failing to
+    Bollen CW. The effect of computerized physician order entry on            comply with computerized preventive care guidelines. J Gen
+    medication prescription errors and clinical outcome in pediatric
+                                                                              Intern Med. 1996 Aug;11(8):497-499.
+    and intensive care: a systematic review. Pediatrics. 2009 Apr;       34. van der Sijs H, van Gelder T, Vulto A, Berg M, Aarts J.
+    123(4):1184-1190.                                                         Understanding handling of drug safety alerts: a simulation study.
+18. Bates DW, Teich JM, Lee J, et al. The impact of computerized
+                                                                              Int J Med Inform. 2010 May;79(5):361-369. Epub 2010 Feb 19.
+    physician order entry on medication error prevention. J Am Med       35. Sittig DF, Krall MA, Dykstra RH, Russell A, Chin HL. A survey of
+    Inform Assoc. 1999 Jul-Aug;6(4):313-321.
+19. Kaushal R, Jha AK, Franz C, et al; Brigham and Women’s Hospital           factors affecting clinician acceptance of clinical decision support.
+                                                                              BMC Med Inform Decis Mak. 2006 Feb 1;6:6.
+    CPOE Working Group. Return on investment for a computerized          36. Russ AL, Zillich AJ, McManus MS, Doebbeling BN, Saleem JJ.
+    physician order entry system. J Am Med Inform Assoc. 2006
+    May-Jun;13(3):261-266. Epub 2006 Feb 24.                                  Prescribers’ interactions with medication alerts at the point of
+                                                                              prescribing: A multi-method, in situ investigation of the human-
+20. Miller RA, Waitman LR, Chen S, Rosenbloom ST. The anatomy of              computer interaction. Int J Med Inform. 2012 Apr;81(4):232-243.
+    decision support during inpatient care provider order entry
+    (CPOE): empirical observations from a decade of CPOE                      Epub 2012 Jan 31.
+                                                                         37. Seidling HM, Phansalkar S, Seger DL, et al. Factors influencing
+    experience at Vanderbilt. J Biomed Inform. 2005 Dec;38(6):                alert acceptance: a novel approach for predicting the success of
+    469-485. Epub 2005 Oct 21.
+21. Wright A, Sittig DF, Ash JS, et al. Development and evaluation of a       clinical decision support. J Am Med Inform Assoc. 2011 Jul-Aug;
+                                                                              18(4):479-484. Epub 2011 May 12.
+    comprehensive clinical decision support taxonomy: comparison
+    of front-end tools in commercial and internally developed            38. Weingart SN, Seger AC, Feola N, Heffernan J, Schiff G, Isaac T.
+    electronic health record systems. J Am Med Inform Assoc. 2011             Electronic drug interaction alerts in ambulatory care: the value
+                                                                              and acceptance of high-value alerts in US medical practices as
+    May 1;18(3):232-242. Epub 2011 Mar 17.
+22. Wright A, Sittig DF, Ash JS, Sharma S, Pang JE, Middleton B.              assessed by an expert clinical panel. Drug Saf. 2011 Jul 1;34(7):
+    Clinical decision support capabilities of commercially-available          587-593.
+                                                                         39. Ash JS, Sittig DF, Campbell EM, Guappone KP, Dykstra RH. Some
+    clinical information systems. J Am Med Inform Assoc. 2009
+    Sep-Oct;16(5):637-644. Epub 2009 Jun 30.                                  unintended consequences of clinical decision support systems.
+23. Murphy DR, Reis B, Sittig DF, Singh H. Notifications received by          AMIA Annu Symp Proc. 2007 Oct 11:26-30.
+                                                                         40. Koppel R, Metlay JP, Cohen A, et al. Role of computerized
+    primary care practitioners in electronic health records: a
+    taxonomy and time analysis. Am J Med. 2012 Feb;125(2):                    physician order entry systems in facilitating medication errors.
+    209.e1-e7.                                                                JAMA. 2005 Mar 9;293(10):1197-1203.
+                                                                         41. Bloomrosen M, Starren J, Lorenzi NM, Ash JS, Patel VL, Shortliffe
+24. Weingart SN, Toth M, Sands DZ, Aronson MD, Davis RB, Phillips
+    RS. Physicians’ decisions to override computerized drug alerts in         EH. Anticipating and addressing the unintended consequences of
+    primary care. Arch Intern Med. 2003 Nov 24;163(21):                       health IT and policy: a report from the AMIA 2009 Health Policy
+
+    2625-2631.                                                                Meeting. J Am Med Inform Assoc. 2011 Jan-Feb;18(1):82-90.
+25. Hsieh TC, Kuperman GJ, Jaggi T, et al. Characteristics and           42. Ong MS, Coiera E. Evaluating the effectiveness of clinical alerts: a
+    consequences of drug allergy alert overrides in a computerized            signal detection approach. AMIA Annu Symp Proc. 2011;2011:
+
+    physician order entry system. J Am Med Inform Assoc. 2004                 1036-1044. Epub 2011 Oct 22.
+    Nov-Dec;11(6):482-491. Epub 2004 Aug 6.                              43. Zimmerman CR, Jackson A, Chaffee B, O’Reilly M. A dashboard
+26. Persell SD, Dolan NC, Friesema EM, Thompson JA, Kaiser D,                 model for monitoring alert effectiveness and bandwidth. AMIA
+
+    Baker DW. Frequency of inappropriate medical exceptions to                Annu Symp Proc. 2007 Oct 11:1176.
+    quality measures. Ann Intern Med. 2010 Feb 16;152(4):225-231.        44. Reynolds G, Boyer D, Mackey K, Povondra L, Cummings A.
+                                                                              Alerting strategies in computerized physician order entry: a novel
+27. Grizzle AJ, Mahmood MH, Ko Y, et al. Reasons provided by
+    prescribers when overriding drug-drug interaction alerts. Am J            use of a dashboard-style analytics tool in a children’s hospital.
+    Manag Care. 2007 Oct;13(10):573-578.                                      AMIA Annu Symp Proc. 2008 Nov 6:1108.
+                                                                         45. McCoy AB, Cox ZL, Neal EB, et al. Real-time pharmacy
+28. van der Sijs H, Mulder A, van Gelder T, Aarts J, Berg M, Vulto A.
+    Drug safety alert generation and overriding in a large Dutch              surveillance and clinical decision support to reduce adverse drug
+    university medical centre. Pharmacoepidemiol Drug Saf. 2009               events in acute kidney injury: a randomized, controlled trial. Appl
+
+    Oct;18(10):941-947.                                                       Clin Inform. 2012 Jan 1;3(2):221-238. Epub 2012 Jun 13.
+
+Volume 14, Number 2, Summer 2014                                                                                                         201
+Clinical Decision Support Alert Appropriateness
+
+
+
+
+46. van der Sijs H, Aarts J, van Gelder T, Berg M, Vulto A. Turning off 54. McCoy AB, Wright A, Laxmisan A, Singh H, Sittig DF. A prototype
+    frequently overridden drug alerts: limited opportunities for doing it   knowledge base and SMART app to facilitate organization of
+
+    safely. J Am Med Inform Assoc. 2008 Jul-Aug;15(4):439-448.              patient medications by clinical problems. AMIA Annu Symp Proc.
+    Epub 2008 Apr 24.                                                       2011;2011:888-894. Epub 2011 Oct 22.
+47. van der Sijs H, Kowlesar R, Aarts J, Berg M, Vulto A, van Gelder
+                                                                        55. McCoy AB, Wright A, Laxmisan A, et al. Development and
+    T. Unintended consequences of reducing QT-alert overload in a           evaluation of a crowdsourcing methodology for knowledge base
+    computerized physician order entry system. Eur J Clin                   construction: identifying relationships between clinical problems
+    Pharmacol. 2009 Sep;65(9):919-925. Epub 2009 May 5.
+                                                                            and medications. J Am Med Inform Assoc. 2012 Sep-Oct;19(5):
+48. Beccaro MA, Villanueva R, Knudson KM, Harvey EM, Langle JM,             713-718. Epub 2012 May 12.
+    Paul W. Decision Support Alerts for Medication Ordering in a
+    Computerized Provider Order Entry (CPOE) System: A systematic       56. McCoy AB, Sittig DF, Wright A. Comparison of Association Rule
+    approach to decrease alerts. Appl Clin Inform. 2010 Sep 29;1(3):        Mining and Crowdsourcing for Automated Generation of a
+                                                                            Problem-Medication Knowledge Base. In: 2012 IEEE Second
+    346-362.
+49. Lee EK, Mejia AF, Senior T, Jose J. Improving patient safety            International Conference on Healthcare Informatics, Imaging and
+    through medical alert management: An automated decision tool to         Systems Biology (HISB). Sept 2012:125.
+
+    reduce alert fatigue. AMIA Annu Symp Proc. 2010 Nov 13;2010:        57. Wright A, McCoy A, Henkin S, Flaherty M, Sittig D. Validation of
+    417-421.                                                                an association rule mining-based method to infer associations
+50. Duke JD, Bolchini D. A successful model and visual design for
+                                                                            between medications and problems. Appl Clin Inform. 2013 Mar
+    creating context-aware drug-drug interaction alerts. AMIA Annu          6;4(1):100-109.
+    Symp Proc. 2011;2011:339-348. Epub 2011 Oct 22.                     58. Miller N, Resnick P, Zeckhauser R. Eliciting informative feedback:
+51. Tamblyn R, Huang A, Taylor L, et al. A randomized trial of the
+                                                                            The peer-prediction method. Manag Sci. 2005 Sep;51(9):
+    effectiveness of on-demand versus computer-triggered drug               1359-1373.
+    decision support in primary care. J Am Med Inform Assoc. 2008
+    Jul-Aug;15(4):430-438. Epub 2008 Apr 24.                            59. McCoy AB, Wright A, Rogith D, Fathiamini S, Ottenbacher AJ,
+                                                                            Sittig DF. Development of a clinician reputation metric to identify
+52. Galanter WL, Didomenico RJ, Polikaitis A. A trial of automated          appropriate problem-medication pairs in a crowdsourced
+    decision support alerts for contraindicated medications using
+    computerized physician order entry. J Am Med Inform Assoc.              knowledge base. J Biomed Inform. 2013 Dec 7. [Epub ahead of
+                                                                            print].
+    2005 May-Jun;12(3):269-274. Epub 2005 Jan 31.
+53. Wright A, Chen ES, Maloney FL. An automated technique for           60. Waitman LR, Phillips IE, McCoy AB, et al. Adopting real-time
+    identifying associations between medications, laboratory results        surveillance dashboards as a component of an enterprisewide
+                                                                            medication safety strategy. Jt Comm J Qual Patient Saf. 2011
+    and problems. J Biomed Inform. 2010 Dec;43(6):891-901. Epub
+    2010 Sep 25.                                                            Jul;37(7):326-332.
+
+
+
+
+
+    This article meets the Accreditation Council for Graduate Medical Education and the American Board of
+    Medical Specialties Maintenance of Certification competencies for Patient Care, Medical Knowledge, and
+
+    Systems-Based Practice.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+202                                                                                                                   The Ochsner Journal

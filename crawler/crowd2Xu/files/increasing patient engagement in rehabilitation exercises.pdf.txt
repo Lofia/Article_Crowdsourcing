@@ -1,0 +1,1386 @@
+                                            RESEARCH ARTICLE
+
+
+                                            Increasing Patient Engagement in
+
+
+                                            Rehabilitation Exercises Using
+
+
+                                            Computer-Based Citizen Science
+
+                                                          1,2                     3            4                   1,2
+                                            Jeffrey Laut     , Francesco Cappa , Oded Nov , Maurizio Porfiri         *
+
+                                            1 Department of Mechanical and Aerospace Engineering, New York University Polytechnic School of
+                                            Engineering, Six MetroTech Center, Brooklyn, NY, United States of America, 2 Department of Mechanical
+                                            and Aerospace Engineering, Sapienza University of Rome, Via Eudossiana 18, Rome 00185, Italy
+
+                                            3 Department of Business and Management, LUISS Guido Carli University, Viale Pola 12, Rome 00198, Italy
+                                            4 Department of Technology Management and Innovation, New York University Polytechnic School of
+                                            Engineering, Five MetroTech Center, Brooklyn, NY, United States of America
+
+     a11111                                 * mporfiri@nyu.edu
+
+
+
+
+                                            Abstract
+
+
+                                            Patient motivation is an important factor to consider when developing rehabilitation pro-
+
+   OPEN ACCESS                              grams. Here, we explore the effectiveness of active participation in web-based citizen sci-
+                                            ence activities as a means of increasing participant engagement in rehabilitation exercises,
+Citation: Laut J, Cappa F, Nov O, Porfiri M (2015)
+Increasing Patient Engagement in Rehabilitationough the use of a low-cost haptic joystick interfaced with a laptop computer. Using the
+Exercises Using Computer-Based Citizen Science.
+                                            joystick, patients navigate a virtual environment representing the site of a citizen science
+PLoS ONE 10(3): e0117013. doi:10.1371/journaproject situated in a polluted canal. Participants are tasked with following a path on a laptop
+pone.0117013
+                                            screen representing the canal. The experiment consists of two conditions: in one condition,
+Academic Editor: David Neil Bonter, Cornell
+University, UNITED STATES                   a citizen science component where participants classify images from the canal is included;
+                                            and in the other, the citizen science component is absent. Both conditions are tested on a
+Received: October 3, 2014
+                                            group of young patients undergoing rehabilitation treatments and a group of healthy sub-
+Accepted: December 16, 2014
+                                            jects. A survey administered at the end of both tasks reveals that participants prefer per-
+Published: March 20, 2015                   forming the scientific task, and are more likely to choose to repeat it, even at the cost of
+
+Copyright: © 2015 Laut et al. This is an open accessng the time of their rehabilitation exercise. Furthermore, performance indices based
+
+article distributed under the terms of the Creative collected from the joystick indicate significant differences in the trajectories created
+Commons Attribution License, which permits  by patients and healthy subjects, suggesting that the low-cost device can be used in a reha-
+unrestricted use, distribution, and reproduction in any
+                                            bilitation setting for gauging patient recovery.
+medium, provided the original author and source are
+credited.
+
+Data Availability Statement: All relevant data are
+within the paper and its Supporting Information files.
+
+Funding: This research was supported by the
+
+National Science Foundation under Grant # BCIntroduction
+1124795 and through a scholarship to J. Laut from
+COOPERLINK. The funders had no role in studyRehabilitation is the structured process undertaken toward adapting to unforeseen changes re-
+
+design, data collection and analysis, decisisulting from trauma or disease [1]. For individuals with severe motor dysfunction, it is a neces-
+publish, or preparation of the manuscript.  sary step to recover self-reliance [2]. In this context, repetitive exercises have been shown to
+
+Competing Interests: The authors have declaredfer effective rehabilitation treatments in stroke patients [3–7], but often at the cost of a large
+that no competing interests exist.          time-commitment from both the physical therapist and patient.
+
+
+
+
+
+PLOS ONE | DOI:10.1371/journal.pone.0117013     March 20, 2015                                                                               1/17
+                                                                                                                  Citizen Science and Rehabilitation
+
+
+
+                                               Robotic devices have beenidentified as an effective means to administer [8–10]orcomple-
+                                            ment these therapeutic treatments [11], and neuroprosthetics [12, 13] may directly enhance
+                                            motor function. By shifting to robotics-based treatments, physical therapists may be able to si-
+
+                                            multaneously treat a greater number of patients and obtain performance measures from the data
+                                            gathered through the robotic device’ssensors[    14], which has been demonstrated to be usefulin
+                                            assessing motor performance[15, 16]. Within these treatments, measurement of a patient’s
+
+                                            movement is typically of interest, as it allows for gauging recovery through the comparison of
+                                            these pathological movements with normal movements [17]. For instance, sensors on robotic de-
+                                            vices can collect the duration of completing a task, the smoothness of patients’ movements, and
+
+                                            the jerkiness of the resulting trajectories, all of which have been shown to be valid indicators of
+                                            recovery [18, 19] that are often useful to physical therapists for assessing patients’ progress [20].
+                                               Although robotic devices have been successfully implemented in therapeutic settings, the
+
+                                            patient must ultimately be willing to conform to the prescribed medical advice for the treat-
+                                            ment to be effective [21]. Indeed, a central issue in the effectiveness of rehabilitation is patient
+                                            adherence to prescribed regimens, which is often associated with both improved outcomes of
+
+                                            the treatment [22] in addition to increased patient’s satisfaction [23]. In a physical therapy set-
+                                            ting, patients tend to be more compliant in performing exercises when they are with a physical
+                                            therapist than when they are alone [24]. Lack of motivation has been identified as one of the
+
+                                            factors causing this noncompliance in physical therapy [25–27] and physical activity [28]. Lack
+                                            of motivation has also been attributed to non-compliance in elderly patients to perform exer-
+                                            cises after discharge from the hospital [29]. Combining motivational enhancement treatment
+
+                                            with conventional physical therapy has been shown to bring about increases in compliance
+                                            with exercises [30]. Resting on these findings, we posit that including additional motivational
+                                            elements can be a feasible means to increase compliance in rehabilitation regimens.
+
+                                               Many avenues have been investigated for enhancing motivation levels in rehabilitation set-
+                                            tings. Simply providing patients with a sensor-based rehabilitation system may intrinsically
+                                            motivate patients to perform exercises [31]. The use of computer-based activities has further
+
+                                            been identified as a promising means to administer therapeutic exercises for children with sen-
+                                            sorimotor disorders [32]. Toward increasing the accessibility of robotics-based devices in
+                                            home settings, the use of an off-the-shelf gaming system has been proposed in [33], whereby
+
+                                            the participant interacts with a virtual environment and experiences haptic feedback through
+                                            the system’s controller. Beyond reducing the cost of rehabilitation, off-the-shelf gaming sys-
+                                            tems have the potential of enhancing patient engagement and motivation levels in performing
+
+                                            exercises [34]. However, as most commercially available video games are designed for enter-
+                                            tainment purposes, they may be too fast-paced for the sensorimotor-impaired in a rehabilita-
+                                            tion setting [35]. Serious and social games, not aimed primarily at entertainment [36, 37], are
+
+                                            more likely to be effective as they can be specifically tailored for rehabilitation settings [38].
+                                               An approach alternative to gaming, based on science learning, has been proposed in [39].
+                                            Therein, participants navigate a virtual representation of a zoo using a haptic joystick where
+
+                                            the presentation of relevant scientific content and force feedback schemes are varied in four
+                                            different experiments. The system capitalizes on participants’ interest in science, and results
+                                            show that higher levels of satisfaction are attained when performing exercises that contained
+                                            the presentation of scientific content. Extending the findings of [39], here we seek to assess if
+
+                                            patient motivation to perform rehabilitation exercises is strengthened by shifting from passive
+                                            scientific learning to active performance of scientific tasks in a citizen science project.
+                                               Thousands of non-scientists are actively volunteering time and effort towards scientific
+
+                                            tasks in the context of citizen science. In these types of projects, members of the public make
+                                            contributions to scientific research projects typically by collecting or processing data [40, 41],
+                                            but may also take on collaborative roles with the scientists leading the project [42]. The task
+
+
+
+
+PLOS ONE | DOI:10.1371/journal.pone.0117013     March 20, 2015                                                                              2/17
+                                                                                                              Citizen Science and Rehabilitation
+
+
+
+                                           difficulty in citizen science varies in the amount of effort required from the participants. In
+                                           “Galaxy Zoo,” for example, citizen scientists view images of galaxies collected by astronomers,
+                                           and classify the type of galaxy in the photo [43].
+                                              The idea of enhancing motivation by substituting science learning with scientific tasks
+
+                                           stems from the motivational factors associated with each of these activities. Indeed, while moti-
+                                           vation for learning is mainly intrinsic (i.e., users exhibit a personal interest) [44], citizen scien-
+                                           tists are also motivated by collective factors (i.e., users are motivated by advancing science)
+
+                                           [45]. The users of Galaxy Zoo, for example, have been found to be motivated by both their indi-
+                                           vidual interest in the subject of Astronomy, as well as the excitement that they experience in
+                                           contributing to the scientific project [46]. Based on the effectiveness of including science learn-
+
+                                           ing in exercises demonstrated in [39], citizen science is expected to also be a feasible means to
+                                           enhance participant motivation in rehabilitation.
+                                              Herein, we present the development of a robotics-based system that allows for assessing the
+
+                                           efficacy of scientific tasks for enhancing participant motivation and willingness to repeat thera-
+                                           peutic exercises. The hardware components of [39], namely a low-cost haptic joystick and a
+                                           laptop computer, are repurposed and elements of an existing citizen science project developed
+
+                                           by our group, “Brooklyn Atlantis” [47], are included for participants to contribute to a research
+                                           project. Brooklyn Atlantis (www.BrooklynAtlantis.org) is an environmental monitoring proj-
+                                           ect that is focused on the Gowanus Canal in Brooklyn, NY. Data from the canal are captured
+                                           by an aquatic mobile robot equipped with water quality sensors and cameras and uploaded to a
+
+                                           website. Citizen scientists can contribute through the website by analyzing the image data and
+                                           adding tags, which describe anything that the participant may deem noteworthy in the scene,
+                                           for example, an animal or a piece of debris.
+
+                                              Through the use of the robotics-based setup coupled with an interactive environment for
+                                           scientific contribution, the hypothesis that citizen science can provide a motivational incentive
+                                           for performing rehabilitation exercises is tested. Using an off-the-shelf haptic joystick (Novint
+
+                                           Falcon), participants maneuver a cursor about a two-dimensional virtual representation of the
+                                           Gowanus Canal in two distinct tasks—one with a scientific task, and one without. Furthermore,
+                                           we investigate the efficacy of the setup to produce data useful for assessing motor performance
+
+                                           in the context of rehabilitation.
+
+                                           Materials and Methods
+
+                                           Experimental setup
+
+                                           The system consists of a laptop computer and the Novint Falcon device (see Fig. 1), making it
+                                           both low-cost and easily transportable. The Novint Falcon is a delta robot [48], meaning that
+                                           the end-effector (manipulandum) is unable to rotate, but may translate in all three dimensions.
+
+                                           While the Cartesian x, y, and z positions are controlled by moving the manipulandum, four
+                                           buttons located where the hand grasps the joystick provide additional input from the user. The
+                                           available workspace provided by the Novint Falcon is similar to those offered by devices used
+
+                                           in robot-mediated therapy focused on the elbow and wrist [49, 50]. The laptop computer re-
+                                           ceives position data from the haptic device and sends force commands to deliver an interactive
+                                           experience to the user. The system in [39] utilizes Matlab for the program execution, however,
+
+                                           the software for this system is written in C++ using the open-source library libnifalcon, offering
+                                           benefits of lower overall system cost, as well as a significantly faster sampling rate of 1000 Hz.
+
+
+                                           Experimental conditions
+                                           This study is comprised of two experimental conditions, specifically, task T and task NT. In
+
+                                           task T, a set of images captured by the aquatic robot as part of the Brooklyn Atlantis project are
+
+
+
+PLOS ONE | DOI:10.1371/journal.pone.0117013   March 20, 2015                                                                            3/17
+                                                                                                                  Citizen Science and Rehabilitation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fig 1. The experimental setup, consisting of a laptop computer and a Novint Falcon haptic device.
+
+doi:10.1371/journal.pone.0117013.g001
+
+                                            presented to each participant at predetermined locations along the canal along with a pop-up
+
+                                            keyboard. The participants select a region of interest within each image, and classify, or tag,
+                                            what they see. In task NT, the participants navigate about the same virtual environment with
+                                            no images presented.
+
+                                                Upon program execution, the task to be performed is specified as either task T or task NT.
+                                            Task T presents the participant with a virtual representation of the Gowanus Canal, where the
+                                            water is highlighted in blue as a path to be followed using joystick input (see Fig. 2). Users are
+
+                                            instructed to sequentially hit a series of six waypoints, shown as red dots. Only a single way-
+                                            point is displayed at a time in the predetermined order of left to right, thus demanding that
+
+                                            each participant follows a similar path. The participant’s current position is displayed by a dot
+                                            that changes color from green to red as the deviation from the path increases.
+                                                While in such “map mode,” the motion of the manipulandum is restricted to a plane, so
+
+                                            that the left-right motion of the joystick corresponds to a change in the x position of the cursor
+                                            (along the width of the image), and up-down motion corresponds to change in the y position
+                                            of the cursor (along the height of the image). The force-feedback capabilities of the joystick are
+
+                                            utilized to provide another level of interactiveness, whereby a total force consisting of a damp-
+                                            ing term and a nominal force based on the participant’s distance from the path is given in map
+
+                                            mode. More specifically, the nominal force administered is diverging [39], meaning that as the
+                                            participant’s deviation from the path increases, it becomes more difficult to return the cursor
+                                            to the path. Indeed, while both assistive and error-amplifying feedback strategies are encoun-
+
+                                            tered in rehabilitation, regimens that administer error-amplifying strategies may be more
+                                            effective [51].
+
+                                                The nominal force for each point on the map is calculated offline and stored as a look-up
+                                            table to save computation time during program execution. As some sharp changes in the force
+
+
+
+
+PLOS ONE | DOI:10.1371/journal.pone.0117013     March 20, 2015                                                                               4/17
+                                                                                                                  Citizen Science and Rehabilitation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fig 2. Path displayed to users in map mode, with overlaid dots displaying waypoints (red) and cursor start position (green). The image presented to
+the participants was superimposed on an aerial photo of the Gowanus Canal.
+doi:10.1371/journal.pone.0117013.g002
+
+
+
+
+                                            arise due to sharp corners in the canal, the look-up table is smoothened with a Gaussian filter
+
+                                            to deliver a smooth and continuous feeling to the participant. When the trial begins, the cursor
+                                            is centered on the map, and the participant must move the cursor along the map to the first
+
+                                            waypoint, located on the left-most part of the path.
+                                                When a waypoint is reached in task T, one of the images captured by the Brooklyn Atlantis
+                                            robot in the Gowanus Canal is presented with a virtual keyboard in the so-called “tagging
+
+                                            mode,” see Fig. 3. The manipulandum of the Novint Falcon in this mode controls the location
+                                            and size of a box that the participant must position in order to tag an item of interest within
+
+                                            the image. Moving the manipulandum left, right, up, and down controls the Cartesian x and y
+                                            location of the box within the image, while pushing the manipulandum in or pulling it out con-
+                                            trols the size of the box. Clicking the center button sets the position and size of the box in the
+
+                                            image, and allows the user to type what the box contains on the virtual keyboard. A red cursor
+                                            indicates the position of the manipulandum, and a letter is selected by hovering over it and
+                                            clicking the center button. Once the “enter” key is selected, the image tag is recorded and the
+
+                                            user is returned to the route map. To avoid any discontinuities due to the location of the cursor
+                                            upon exiting tagging mode, the cursor and joystick are automatically repositioned to the cur-
+
+                                            rent waypoint on the map. Thus, the so-called “waiting mode” is entered, where a wait screen
+                                            is displayed and the joystick is locked in place for 2 seconds.
+                                                For task NT, a trial begins also in map mode and users navigate from the center of the map
+
+                                            to each waypoint in sequence. However, unlike task T, reaching the waypoint in task NT sim-
+                                            ply prohibits the joystick motion for 2 seconds during waiting mode without presenting an
+                                            image to be tagged.
+
+                                                In both tasks, before continuing to the next waypoint, the participant must “escape” from
+                                            the current waypoint by exerting a force on the manipulandum greater than a predefined
+
+                                            threshold. This is a low valued threshold that simply serves to allow for identifying a deliberate
+                                            re-entry into route traversal, thereby allowing a direct and sound comparison with the path fol-
+                                            lowing performance in both task T and NT. After reaching all six waypoints, and, in the case of
+
+                                            task T, tagging all images, the task is complete.
+
+
+
+
+PLOS ONE | DOI:10.1371/journal.pone.0117013     March 20, 2015                                                                               5/17
+                                                                                                                Citizen Science and Rehabilitation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fig 3. Example of image displayed during tagging mode with on-screen keyboard.
+
+doi:10.1371/journal.pone.0117013.g003
+
+
+
+                                            Post-experiment survey
+
+                                            Following each participant’s completion of both tasks, a nine-question survey is administered.
+
+                                            The survey is designed to assess the participant’s preference between the tasks and their per-
+                                            ceived difficulty. The first two questions gather basic information about the participant, where
+
+                                            question 1 (Q1) asks about the subject’s age and gender, and Q2 asks about the arm used for
+
+
+
+
+
+PLOS ONE | DOI:10.1371/journal.pone.0117013    March 20, 2015                                                                              6/17
+                                                                                                             Citizen Science and Rehabilitation
+
+
+
+                                           the exercise. Questions 3–5 ask, respectively, “which task did you like more?,”“ which task was
+                                           more difficult?,” and “if you had to repeat one of the tasks, which would you choose?,” users
+                                           can respond with either an answer of task T or task NT. Q6 and Q7 are answered by choosing a
+                                           smiling face, neutral face, or sad face, for the prompts “circle the letter under the face that de-
+
+                                           scribes how identifying objects and animals made you feel” and “circle the letter under the face
+                                           that describes how moving the cursor without identifying animals and objects made you feel.”
+                                           The response choices to Q8 and Q9 are green, yellow, and red rectangle with “easy,”“medium,”
+
+                                           and “difficult” respectively written under each rectangle, and the questions ask the user to rank
+                                           how easy or difficult identifying objects and animals is and to rank how easy only moving the
+                                           cursor without identifying objects and animals is.
+
+
+                                           Ethics statement
+
+                                           The ethics and medical board of the Children’s Hospital “Bambino Gesù,” (Rome, Italy) ap-
+                                           proves the experimental protocol and consent procedure. Each participant and one or both of
+
+                                           their parents are explained the details of the experiment, and oral informed consent is obtained
+                                           prior to the experiment execution, while written consent from parents is obtained by hospital
+                                           staff and securely stored at the Children’s Hospital “Bambino Gesù.”
+
+
+                                           Participants
+
+                                           To demonstrate the capability of the proposed setup to deliver meaningful performance indices
+                                           for rehabilitation purposes, the experiment is carried out on two groups of individuals, that is,
+                                           a group of 30 patients (age 12.1 ± 4.2 years) enrolled in physical rehabilitation regimens pri-
+
+                                           marily for the upper limb, and a group of 30 healthy individuals (age 10.3 ± 2.8 years).
+                                              The inclusion criteria for all participants is a lack of prior experience with the Novint Falcon
+                                           haptic device or the Brooklyn Atlantis project. In addition, patients are selected by a physical
+
+                                           therapist based on their age and the severity of their physical impairments, which are primarily
+                                           a result of stroke or cerebral palsy. The experimental setup requires a high degree of fine motor
+                                           skills, as participants must maneuver about a path within a small workspace and be able to se-
+
+                                           lect individual letters for tagging purposes. Therefore, patients use whichever arm is more ca-
+                                           pable of completing the exercises. All of the trials for both patients and healthy subjects are
+                                           performed at the Children’s Hospital “Bambino Gesù,” in Rome, Italy.
+
+
+                                           Experimental protocol
+
+                                           Participants from both the group of healthy subjects and the group of patients are subject to
+                                           the same protocol. The experimental platform is placed on a desk, and the participant is asked
+
+                                           to sit comfortably on a chair in front of the desk. Depending on the hand being used, the
+                                           Novint Falcon is placed either on the right or on the left of the laptop computer. Prior to begin-
+                                           ning the experiment, the participant is given an overview of the Brooklyn Atlantis citizen sci-
+                                           ence project through a video. The order of execution of tasks T and NT are alternated such that
+
+                                           an equal number of participants perform task T first as those who perform task NT first within
+                                           each group.
+
+
+                                           Data treatment
+
+                                           As each task is being executed, all data pertinent to the user’s input and state of the program,
+                                           such as cursor position, force feedback commanded, elapsed time, and operating mode of the
+                                           program are logged to a datafile. This comprehensive collection of data allows for the assess-
+
+                                           ment of each participant’s performance.
+
+
+
+PLOS ONE | DOI:10.1371/journal.pone.0117013   March 20, 2015                                                                           7/17
+                                                                                                               Citizen Science and Rehabilitation
+
+
+
+                                              All of the post-processing of the logged data is performed in Matlab, where a script imports
+                                           the datafile and extracts the relevant data. To filter the position data, a sixth-order butterworth
+                                           filter with an 11 Hz cutoff frequency is implemented following [52]. The data are partitioned
+
+                                           based on the program operating mode (e.g., map mode, waiting mode, or tagging mode), and
+                                           for both tasks, only the data corresponding to map mode is investigated. Furthermore, since
+                                           the escape motion of leaving a waypoint often induces a large acceleration, a half-second of
+
+                                           data following the escape from each waypoint is also excluded. Partitioning the data in this
+                                           manner that only includes path following allows for accurate performance comparisons both
+
+                                           between groups and between tasks.
+
+
+                                           Performance indices
+                                           Through the use of the high-resolution sensor data provided in robot mediated therapy, a set
+
+                                           of performance indices based on the trajectory created by a participant may be used to quickly
+                                           quantify their performance. The following metrics, which have been previously used and vali-
+                                           dated in upper-limb robot-mediated therapy [18, 52, 53], are scored: (i) the normalized path
+
+                                           length, which is the length of the path taken by the user divided by the length of the path to be
+                                           followed [53]; (ii) the mean of the jerk, found by averaging the jerk exhibited at velocities above
+                                           a minimum velocity threshold v         [52]; (iii) the speed metric, measured as the mean velocity
+                                                                            thresh
+                                           above v threshivided by the peak velocity [18]; and (iv) the mean arrest period ratio, which is
+                                           the proportion of time spent moving at a velocity above v   thresh18]. In addition to these met-
+                                           rics, the total time spent moving on the path, or path duration, and the total time spent on the
+
+                                           task, or task duration, are scored.
+
+
+                                           Statistical analysis
+                                           For all questions, a Mann-Whitney U-test is used to assess differences between the responses
+
+                                           of the two groups, consisting of 30 patients and 30 healthy subjects [54]. To study within group
+                                           preference, the neutral response is omitted from the analysis of questions Q6–Q9, and for all
+
+                                           questions we test the hypothesis that positive and negative responses are equally likely using a
+                                           chi-square test [55].
+                                              For survey questions Q3–Q5, a “positive” response is one that coincides with expectations,
+
+                                           while a negative response does not. Specifically, for Q3, which asks which task is preferred, the
+                                           choice of task T is considered positive. For Q4, which asks to identify the more difficult task,
+                                           task T is also considered positive, and for Q5, which asks to identify which task the participant
+
+                                           would like to repeat, task T is again taken as positive. For Q6 and Q7, the answer choices are a
+                                           smiling face (positive response), neutral face (neutral response), or sad face (negative re-
+                                           sponse), and for Q8 and Q9, the answer choices are “easy” (positive), “medium” (neutral), and
+
+                                           “hard” (negative).
+                                              Considering the performance metrics, differences between the two groups are assessed
+                                           using the non-parametric variant of ANOVA, the Kruskal-Wallis test [54], while within groups
+
+                                           and between tasks, the Wilcoxon signed rank test is used [54].
+                                              All statistical analyses are performed in Matlab with the significance level set at p < 0.05.
+
+
+                                           Results
+
+                                           Delivery of scientific tasks influences individual
+                                           preference (Fig. 4)Q3 –Q5
+
+                                           The results support the hypothesis that individuals prefer the scientific task. When asked to in-
+                                           dicate their preferred task (Q3), the responses between the groups are not significantly different
+
+
+
+
+PLOS ONE | DOI:10.1371/journal.pone.0117013    March 20, 2015                                                                            8/17
+                                                                                                             Citizen Science and Rehabilitation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fig 4. Bar plot of survey results for questions Q3–Q9 (see Table 1). Gray bars indicate the proportion of positive responses from patients, while
+black bars refer to healthy subjects (for Q6–Q9, neutral responses are omitted). An asterisk above the bar indicates a significant difference from chance. For
+Q6–Q9, the fraction of neutral responses is: 0.17, 0.57, 0.43, and 0.50 for healthy subjects, respectively, and 0.33, 0.63, 0.37, and 0.27 for patients.
+
+doi:10.1371/journal.pone.0117013.g004
+
+
+
+
+
+                                           Table 1. List of survey questions administered to all participants after the completion of both tasks.
+
+                                           Q3   which task did you like more?
+                                           Q4   which task was more difﬁcult?
+
+                                           Q5   if you had to repeat one of the tasks, which would you choose?
+                                           Q6   circle the letter under the face that describes how identifying objects and animals made you feel.
+
+                                           Q7   circle the letter under the face that describes how moving the cursor without identifying animals and
+                                                objects made you feel.
+                                           Q8   rank how easy or difﬁcult identifying objects and animals is.
+
+                                           Q9   rank how easy only moving the cursor without identifying objects and animals is.
+
+                                           doi:10.1371/journal.pone.0117013.t001
+
+
+
+                                           (p = 0.5517), and both healthy subjects and patients indicate a robust preference for the scien-
+
+                                           tific task (p = 0.0010 for patients and p = 0.0106 for healthy subjects). Further, the survey re-
+                                           sponses suggest that neither healthy subjects (p = 0.4652) nor patients (p = 0.0679) perceive
+
+                                           one task to be more difficult than the other (Q4), and their responses fail to reach a significant
+                                           difference (p = 0.0730). Consistent with task preference, results also support the expectation
+
+                                           that, given a choice to repeat one of the tasks, both groups choose the scientific task (Q5). In
+
+                                           fact, both healthy subjects (p = 0.0106) and patients (p = 0.0010) indicate that they would prefer
+                                           to repeat task T over task NT, and such responses are not significantly different (p = 0.5517).
+
+
+
+                                           Dissecting the elements contributing to individual
+
+                                           preference (Fig. 4)Q6 –Q9
+
+                                           Both patients (p < 0.0001) and healthy subjects (p < 0.0001) associate a positive feeling with
+                                           tagging images (Q6). Both groups (p < 0.0001) consider moving the cursor to be positive (Q7),
+
+                                           and the responses between the groups do not significantly differ (p = 0.6073). The responses of
+                                           healthy subjects and patients regarding the difficulty of image classification (Q8) are indistin-
+
+                                           guishable (p = 0.9061), with both healthy subjects’ and patients’ (p < 0.0001) concurring on
+
+
+
+
+
+PLOS ONE | DOI:10.1371/journal.pone.0117013   March 20, 2015                                                                           9/17
+                                                                                                                    Citizen Science and Rehabilitation
+
+
+
+                                             the assessment that such a task is not difficult. The two group’s responses are not statistically
+
+                                             different when ranking the difficulty of moving the cursor (Q9) (p = 0.3570), with the re-
+                                             sponses of healthy subjects (p < 0.0001) and patients (p = 0.0019) indicating it to be
+                                             not difficult.
+
+
+
+                                             Individual performance in path following (Fig. 5)
+                                             Consistent for each task, the healthy group of participants score significantly better for normal-
+
+                                             ized path length and mean arrest period ratio, in addition to path duration (p = 0.0076, p =
+                                             0.0033, and p = 0.0076 for normalized path length, mean arrest period ratio, and path duration
+
+                                             in task T, respectively, and p = 0.0054, p = 0.0062, and p = 0.0444 in task NT).
+                                                Between the two groups for each task, the mean of jerk is not significantly different (p =
+                                             0.4918 and p = 0.4965 for tasks T and NT, respectively). However the other indicator of move-
+
+                                             ment smoothness, the speed metric, is significantly better in the healthy population for task NT
+                                             (p = 0.0166), but not significantly different between the two groups for task T (p = 0.1580).
+
+                                                Some significant differences in performance metrics are found within groups and between
+                                             tasks. Considering patients, the normalized path length for task T of 2.91 is significantly greater
+                                             than that of 2.39 for task NT (p = 0.0014). Task NT for patients also has a significantly lower
+
+                                             mean of jerk (p = 0.0098). Similarly, healthy subjects generate trajectories with significantly
+                                             smaller normalized path length and mean of jerk for task NT (p = 0.0117 and p = 0.0002, re-
+
+                                             spectively), indicating that both groups performed better on task NT. Additionally, healthy
+                                             subjects have a significantly higher mean arrest period ratio for task NT (p = 0.0407).
+
+                                                Counting the time from the beginning to the end of each task (the task duration), Task T
+                                             requires significantly more time (about four times as much) than task NT for both patients
+                                             (p < 0.0001) and healthy subjects (p < 0.0001).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fig 5. Speed metric (SM), normalized path length (NPL), mean of jerk (MJ), mean arrest period ratio (MAPR), path duration (PD), and task duration
+(TD) for both groups and both tasks, where P_T, P_NT, H_T, and H_NT denote respectively patients task T, patients task NT, healthy subjects task
+T, and healthy subjects task NT. Results are given as box plots, where the red line is the median, edges are the 25th and 75th percentiles, and whiskers
+extend to the extremes of the data. Whiskers not sharing a common letter are statistically different.
+
+doi:10.1371/journal.pone.0117013.g005
+
+
+
+
+PLOS ONE | DOI:10.1371/journal.pone.0117013      March 20, 2015                                                                               10 / 17
+                                                                                                             Citizen Science and Rehabilitation
+
+
+
+                                           Discussion
+                                           In this study, we show that including a web-based citizen-science participation module in a ro-
+
+                                           botics-based low-cost rehabilitation platform is a viable means to engage individuals in thera-
+                                           peutic exercises. The platform consists of an off-the-shelf haptic joystick and laptop computer.
+                                           Individuals use the joystick to participate in a citizen science project wherein the performance
+
+                                           of scientific tasks is varied in two scenarios. The setup allows for administering repetitive exer-
+                                           cises often characteristic of rehabilitation treatments [3], while also capturing sensor data suffi-
+                                           cient for constructing a set of performance metrics that can be used for rehabilitation
+
+                                           assessment [18, 52, 53].
+
+
+                                           Including citizen science tasks increases participants’ engagement in
+                                           rehabilitation tasks
+
+                                           An important finding of this study lies in the use of citizen-science in rehabilitation exercises.
+                                           Specifically, our results show that including scientific tasks increases preference for rehabilita-
+
+                                           tion. A key issue in rehabilitation regimens is the willingness of patients to perform the pre-
+                                           scribed exercises [22], where motivation has been identified as a significant factor in following
+                                           the prescribed regimen [25–27]. As such, emphasis has been placed on providing avenues for
+                                           motivating patients. The use of video games is widely explored in this context, however motiva-
+
+                                           tion for gaming is shown to vary with both age [56] and gender [57]. Building on the work pre-
+                                           sented in [39], we have here presented an interactive rehabilitation system that acts on multiple
+                                           motivational drivers. While [39] leverages science learning that targets intrinsic motivation
+
+                                           [44], active science participation through citizen science considered herein addresses a wider
+                                           spectrum of motivations. Indeed, by performing science tasks users are motivated both by per-
+                                           sonal interest and by contributing to science [45].
+
+                                              Interestingly, in choosing to repeat the citizen science task, participants are electing to per-
+                                           form the task that takes significantly more time. This is particularly telling when considering
+                                           that increasing the time spent performing exercises may be beneficial to the rehabilitation pro-
+
+                                           cess [58]. In this context, the work reported here shows that not only does the inclusion of citi-
+                                           zen science tasks increase preference for exercises and willingness to repeat them, but it also
+                                           motivates individuals to perform exercises that require more time than those without. While
+
+                                           this study was based on a virtual environment unfamiliar to the participants, we expect motiva-
+                                           tion to further increase by providing virtual environments that are more relevant to the partici-
+                                           pants, since involvement in community-based online activities such as mapping has been
+                                           found to originate primarily from the geographic region where the project takes place [59].
+
+                                              The result that the difficulty of the exercise as experienced by participants is similar across
+                                           both conditions (with and without the citizen science task) and groups is also an important
+                                           finding. The act of typing words using the joystick to tag the images requires precise position-
+
+                                           ing of the joystick to select each letter, which is expected to be perceived as a difficult task for
+                                           motorically impaired participants, who generally have difficulties in using computer peripher-
+                                           als, such as a mouse and keyboard [60]. The excitement of contributing to science may com-
+
+                                           pensate for this perceived difficulty, and thereby allow participants to enjoy performing
+                                           additional tasks.
+
+
+                                           The low-cost setup provides useful data for quantifying sensorimotor
+
+                                           performance
+                                           Accurately quantifying an individual’s sensorimotor performance is an important factor in
+
+                                           judging the severity of their impairment and tracking their progress in the recovery of motor
+
+
+
+PLOS ONE | DOI:10.1371/journal.pone.0117013   March 20, 2015                                                                          11 / 17
+                                                                                                                 Citizen Science and Rehabilitation
+
+
+
+                                            function. For the proposed low-cost setup to be a feasible method for performing rehabilitation
+                                            exercises in the absence of a physical therapist, the device must be able to collect sufficient data
+                                            for detecting the different levels of performance of healthy subjects and patients.
+                                               Further interpreting the findings that healthy subjects in general score better on normalized
+
+                                            path length, mean arrest period ratio, and path duration, we evince that not only do healthy
+                                            subjects perform path following in a quicker time and with fewer pauses, but they also do it
+                                            more accurately than patients. While an apparent increase in performance of the healthy group
+
+                                            when compared to the group of patients may be ascribed to the age difference between the two
+                                            groups, motor performance typically increases with age [61]. Given that the mean age of the
+                                            patients is greater than that of the healthy subjects, we propose that deficiencies in patients’
+
+                                            performance with respect to the healthy subjects are likely due to their pathology, and not their
+                                            age. The better performance on the speed metric for healthy subjects supports the expectation
+                                            that healthy subjects have smoother movements than patients [18]. Similarly, a high mean of
+
+                                            jerk in patients was expected due to less smooth movements [18], but the mean of jerk was
+                                            found to not be significantly different between two groups. This may be explained by the signif-
+                                            icantly lower path duration. Given that the healthy subjects cover the same path in a shorter
+
+                                            amount of time, it may be reasonable to expect higher levels of jerk. In other words, if the par-
+                                            ticipants were told to take a specific amount of time to travel the path, a difference in the mean
+                                            of the jerk of the trajectories between patients and healthy subjects may arise.
+                                               Both patients and healthy subjects score better on normalized path length and mean of jerk
+
+                                            in task NT. The decrease in path-following performance associated with task T for both groups
+                                            may be due to the shift in attention required in task T from following a path to tagging an
+                                            image, and back to following a path, while in task NT the participant is focused only on follow-
+
+                                            ing the path for the duration of the trial. Furthermore, task T has a longer break between path
+                                            following segments due to the time required for tagging. Such a break may negatively impact
+                                            the participants’ retention of their learned path following ability, thereby degrading perfor-
+
+                                            mance [62]. Additionally, while in task NT the primary (and sole) objective is to follow the
+                                            path, and the additional objective in task T of tagging images may take precedence and be
+                                            more engaging in the eyes of the participant. In other words, in task T, the participant may sac-
+
+                                            rifice the accuracy of path following to reach the additional goal of tagging an image, where ac-
+                                            curacy of movements has been shown to be affected by focus [63]. The finding that both
+                                            groups score better on speed metric in task NT is consistent with the results reported in [39],
+
+                                            where healthy subjects exhibited a significantly better speed metric in a path following task in
+                                            the absence of science learning.
+
+
+                                            Citizen science projects and rehabilitation may benefit from each other
+
+                                            The present study demonstrates that an interactive system, which provides a context for images
+                                            to be tagged within a game-like environment, is enjoyable for both healthy subjects and pa-
+
+                                            tients, who take part in an authentic research project. Participants indeed contribute to Brook-
+                                            lyn Atlantis by gathering useful data in the form of image tags. In this specific empirical study,
+                                            the participants’ contribution to citizen science is limited to the identification of canoes, birds,
+
+                                            and trees in a predefined set of six images. In future studies, we will enable web-based capabili-
+                                            ties of the platform, to engage each participant in the analysis of a wider variety of images,
+                                            thereby increasing the overall citizen science contribution.
+
+                                               While rehabilitation has pursued videogame integration with the aim of increasing compli-
+                                            ance [64–66], citizen science has seldom also leveraged game-like components to increase par-
+                                            ticipation [67]. In Foldit, for example, citizen scientists compete and collaborate in a game-like
+
+                                            environment for identifying protein structures [68], and the ESP game utilizes a gaming
+
+
+
+PLOS ONE | DOI:10.1371/journal.pone.0117013    March 20, 2015                                                                             12 / 17
+                                                                                                              Citizen Science and Rehabilitation
+
+
+
+                                           environment to motivate a pair of users to label images online [69]. Targeting additional moti-
+                                           vation drivers related to gaming, such as exploring a map through a haptic device as we pro-
+                                           pose here, may prove successful in enhancing participation in citizen science projects, which
+                                           are often limited to a relatively small number of active volunteers [70].
+
+                                              Without background information on the project, the act of tagging a series of images may
+                                           be perceived as extraneous work. Thus, providing participants with context for their task, such
+                                           as navigating a virtual environment, offers an added degree of meaning for their contribution,
+
+                                           which may be important for fostering commitment [71]. Future work will further elucidate this
+                                           hypothesis by considering additional experimental conditions, in which image tagging is not
+                                           associated with a citizen science project.
+
+
+                                           Conclusions
+
+                                           In conclusion, this study indicates that citizen science is an effective means to engage patients
+                                           in rehabilitation exercises. The system utilized in this study, consisting of a low-cost haptic joy-
+
+                                           stick and laptop computer, is also able to sufficiently quantify performance, enabling its use in
+                                           a rehabilitation setting. The results show that groups of healthy subjects and patients undergo-
+                                           ing rehabilitation treatments prefer performing an exercise with a citizen science component,
+
+                                           and would choose to repeat it. The data gathered from the low-cost haptic device permits an in-
+                                           dividual’s trajectory to be quantified in terms of a set of performance metrics. Comparing the
+                                           performance metrics of patients with those of healthy subjects, significant differences in the
+
+                                           trajectories are observed, where healthy subjects generally score better. These findings suggest
+                                           that this low-cost system can effectively provide useful data for evaluating a patient’s level of re-
+                                           covery, where the performance metrics of patients are expected to approach those of healthy
+
+                                           subjects as they recover.
+                                              This study involved only children as participants. We expect some of the findings to vary
+                                           with increasing age, as age-related differences have been demonstrated in videogame play, for
+                                           example, where adolescents were found to play videogames less often as age increases, but for
+
+                                           longer time periods [72]. In future studies, the role of age on engagement in the proposed exer-
+                                           cises, as well as means for tailoring the system to various age groups, will be investigated.
+                                              Ultimately, we anticipate this system to find application as a low-cost platform for telereh-
+
+                                           abilitation [73] for at-home treatments following hospital discharge. As patients perform their
+                                           prescribed exercises while contributing to a science project, the trajectory data from each trial
+                                           can be automatically sent to a physical therapist, who may also remotely set the level of
+
+                                           intensity of the force feedback.
+
+
+                                           Supporting Information
+                                           S1 Dataset. Raw trajectory data collected by the haptic device, set 1.
+
+                                           (ZIP)
+
+                                           S2 Dataset. Raw trajectory data collected by the haptic device, set 2.
+                                           (ZIP)
+
+                                           S3 Dataset. Raw trajectory data collected by the haptic device, set 3.
+                                           (ZIP)
+
+                                           S4 Dataset. Raw trajectory data collected by the haptic device, set 4.
+                                           (ZIP)
+
+                                           S5 Dataset. Raw trajectory data collected by the haptic device, set 5.
+
+                                           (ZIP)
+
+
+
+PLOS ONE | DOI:10.1371/journal.pone.0117013   March 20, 2015                                                                           13 / 17
+                                                                                                                    Citizen Science and Rehabilitation
+
+
+
+
+                                             S6 Dataset. Raw trajectory data collected by the haptic device, set 6.
+
+                                             (ZIP)
+
+                                             S1 Table. Participant survey responses.
+
+                                             (XLS)
+
+
+
+
+                                             Acknowledgments
+
+                                             We gratefully thank Dr. M. Petrarca and Dr. A Colazza for assistance with selecting and pro-
+
+                                             viding patients for the study: We also acknowledge Prof. P. Cappa for the accommodation at
+                                             Sapienza University of Rome Movement Analysis and Robotics Laboratory, and the guidance
+
+                                             and assistance with the conceptualization and design of the experiment.
+
+
+
+                                             Author Contributions
+
+                                             Conceived and designed the experiments: JL ON MP. Performed the experiments: JL FC. Ana-
+
+                                             lyzed the data: JL FC ON MP. Contributed reagents/materials/analysis tools: JL ON MP. Wrote
+
+                                             the paper: JL ON MP. Developed the experimental setup: JL.
+
+
+
+                                             References
+
+                                              1.   Gunasekera WSL, Bendall J (2005) Rehabilitation of neurologically injured patients. In: Neurosurgery,
+                                                   London: Springer. pp. 407–421.
+
+                                              2.   de NAP Shelton F, Volpe BT, Reding M (2001) Motor impairment as a predictor of functional recovery
+                                                   and guide to rehabilitation treatment after stroke. Neurorehabilitation and Neural Repair 15: 229–237.
+                                                   doi: 10.1177/154596830101500311 PMID: 11944745
+
+                                              3.   Bütefisch C, Hummelsheim H, Denzler P, Mauritz KH (1995) Repetitive training of isolated movements
+                                                   improves the outcome of motor rehabilitation of the centrally paretic hand. Journal of the Neurological
+                                                   Sciences 130: 59–68. doi: 10.1016/0022-510X(95)00003-K PMID: 7650532
+
+                                              4.   Harris JE, Eng JJ, Miller WC, Dawson AS (2009) A self-administered graded repetitive arm supplemen-
+                                                   tary program (grasp) improves arm function during inpatient stroke rehabilitation a multi-site random-
+                                                   ized controlled trial. Stroke 40: 2123–2128. doi: 10.1161/STROKEAHA.108.544585 PMID: 19359633
+
+                                              5.   Whitall J, Waller SM, Silver KH, Macko RF (2000) Repetitive bilateral arm training with rhythmic audito-
+                                                   ry cueing improves motor function in chronic hemiparetic stroke. Stroke 31: 2390–2395. doi: 10.1161/
+                                                   01.STR.31.10.2390 PMID: 11022069
+
+                                              6.   Liepert J, Bauder H, Miltner WH, Taub E, Weiller C (2000) Treatment-induced cortical reorganization
+                                                   after stroke in humans. Stroke 31: 1210–1216. doi: 10.1161/01.STR.31.6.1210 PMID: 10835434
+
+                                              7.   Luft AR, McCombe-Waller S, Whitall J, Forrester LW, Macko R, et al. (2004) Repetitive bilateral arm
+                                                   training and motor cortex activation in chronic stroke: a randomized controlled trial. Journal of the Amer-
+                                                   ican Medical Association 292: 1853–1861. doi: 10.1001/jama.292.15.1853 PMID: 15494583
+
+                                              8.   Lum PS, Burgar CG, Shor PC, Majmundar M, Van der Loos M (2002) Robot-assisted movement train-
+                                                   ing compared with conventional therapy techniques for the rehabilitation of upper-limb motor function
+
+                                                   after stroke. Archives of Physical Medicine and Rehabilitation 83: 952–959. doi: 10.1053/apmr.2001.
+                                                   33101 PMID: 12098155
+
+                                              9.   Fasoli SE, Krebs HI, Stein J, Frontera WR, Hogan N (2003) Effects of robotic therapy on motor im-
+                                                   pairment and recovery in chronic stroke. Archives of Physical Medicine and Rehabilitation 84: 477–
+                                                   482. doi: 10.1053/apmr.2003.50110 PMID: 12690583
+
+                                             10.   Mazzoleni S, Puzzolante L, Zollo L, Dario P, Posteraro F (2014) Mechanisms of motor recovery in
+                                                   chronic and subacute stroke patients following a robot-aided training. IEEE Transactions on Haptics 7:
+                                                   175–180. doi: 10.1109/TOH.2013.73 PMID: 24968381
+
+                                             11.   Masiero S, Celia A, Rosati G, Armani M (2007) Robotic-assisted rehabilitation of the upper limb after
+                                                   acute stroke. Archives of Physical Medicine and Rehabilitation 88: 142–149. doi: 10.1016/j.apmr.2006.
+                                                   10.032 PMID: 17270510
+
+                                             12.   Jaramillo P, Shoemaker A, Leonessa A, Grange RW (2012) Skeletal muscle contraction in feedback
+                                                   control. In: Dynamic Systems and Control Conference. American Society of Mechanical
+                                                   Engineers, pp. 483–492. doi: 10.1115/DSCC2012-MOVIC2012-8592
+
+
+
+
+
+PLOS ONE | DOI:10.1371/journal.pone.0117013      March 20, 2015                                                                               14 / 17
+                                                                                                                        Citizen Science and Rehabilitation
+
+
+
+
+                                               13.   Ravichandran R, Sundarrajan S, Venugopal JR, Mukherjee S, Ramakrishna S (2010) Applications of
+                                                     conducting polymers and their issues in biomedical engineering. Journal of the Royal Society Interface:
+
+                                                     rsif20100120 doi: 10.1098/rsif.2010.0120.focus PMID: 20610422
+                                               14.   Riener R, Nef T, Colombo G (2005) Robot-aided neurorehabilitation of the upper extremities. Medical
+
+                                                     and Biological Engineering and Computing 43: 2–10. doi: 10.1007/BF02345116 PMID: 15742713
+
+                                               15.   Zollo L, Rossini L, Bravi M, Magrone G, Sterzi S, et al. (2011) Quantitative evaluation of upper-limb
+                                                     motor control in robot-aided rehabilitation. Medical & Biological Engineering & Computing 49: 1131–
+                                                     1144. doi: 10.1007/s11517-011-0808-1 PMID: 21792622
+
+                                               16.   Lee H, Ho P, Rastgaar M, Krebs HI, Hogan N (2014) Multivariable static ankle mechanical impedance
+
+                                                     with active muscles. IEEE Transactions on Neural Systems and Rehabilitation Engineering 22: 44–52.
+                                                     doi: 10.1109/TNSRE.2013.2262689 PMID: 24107970
+
+                                               17.   Wong WY, Wong MS, Lo KH (2007) Clinical applications of sensors for human posture and movement
+                                                     analysis: a review. Prosthetics and Orthotics International 31: 62–75. doi: 10.1080/
+                                                     03093640600983949 PMID: 17365886
+
+                                               18.   Rohrer B, Fasoli S, Krebs HI, Hughes R, Volpe B, et al. (2002) Movement smoothness changes during
+
+                                                     stroke recovery. The Journal of Neuroscience 22: 8297–8304. PMID: 12223584
+
+                                               19.   Carpinella I, Cattaneo D, Abuarqub S, Ferrarin M (2009) Robot-based rehabilitation of the upper limbs
+                                                     in multiple sclerosis: feasibility and preliminary results. Journal of Rehabilitation Medicine 41: 966–970.
+                                                     doi: 10.2340/16501977-0401 PMID: 19841825
+
+                                               20.   Hidler J, Nichols D, Pelliccio M, Brady K, et al. (2005) Advances in the understanding and treatment of
+                                                     stroke impairment using robotic devices. Topics in Stroke Rehabilitation 12: 22–35. doi: 10.1310/
+
+                                                     RYT5-62N4-CTVX-8JTE PMID: 15940582
+
+                                               21.   Jay S, Litt IF, Durant RH (1984) Compliance with therapeutic regimens. Journal of Adolescent Health
+                                                     Care 5: 124–136. doi: 10.1016/S0197-0070(84)80012-1 PMID: 6368505
+
+                                               22.   Duncan PW, Horner RD, Reker DM, Samsa GP, Hoenig H, et al. (2002) Adherence to postacute reha-
+                                                     bilitation guidelines is associated with functional recovery in stroke. Stroke 33: 167–178. doi: 10.1161/
+
+                                                     hs0102.101014 PMID: 11779907
+                                               23.   Reker DM, Duncan PW, Horner RD, Hoenig H, Samsa GP, et al. (2002) Postacute stroke guideline
+
+                                                     compliance is associated with greater patient satisfaction. Archives of Physical Medicine and Rehabili-
+                                                     tation 83: 750–756. doi: 10.1053/apmr.2002.99736 PMID: 12048651
+
+                                               24.   Campbell R, Evans M, Tucker M, Quilty B, Dieppe P, et al. (2001) Why don’t patients do their exer-
+                                                     cises? understanding non-compliance with physiotherapy in patients with osteoarthritis of the knee.
+
+                                                     Journal of Epidemiology and Community Health 55. doi: 10.1136/jech.55.2.132 PMID: 11154253
+
+                                               25.   Sluijs EM, Kok GJ, van der Zee J (1993) Correlates of exercise compliance in physical therapy. Physi-
+                                                     cal Therapy 73: 771–782. PMID: 8234458
+
+                                               26.   Ice R (1985) Long-term compliance. Physical Therapy 65: 1832–1839. PMID: 3906687
+
+                                               27.   Dishman RK, Ickes W (1981) Self-motivation and adherence to therapeutic exercise. Journal of Behav-
+                                                     ioral Medicine 4: 421–438. doi: 10.1007/BF00846151 PMID: 7338896
+
+                                               28.   Dishman RK, Ickes W, Morgan WP (1980) Self-motivation and adherence to habitual physical activity.
+                                                     Journal of Applied Social Psychology 10: 115–132. doi: 10.1111/j.1559-1816.1980.tb00697.x
+
+                                               29.   Hill AM, Hoffmann T, McPhail S, Beer C, Hill KD, et al. (2011) Factors associated with older patients’
+                                                     engagement in exercise after hospital discharge. Archives of Physical Medicine and Rehabilitation 92:
+
+                                                     1395–1403. doi: 10.1016/j.apmr.2011.04.009 PMID: 21878210
+
+                                               30.   Vong SK, Cheing GL, Chan F, So EM, Chan CC (2011) Motivational enhancement therapy in addition
+                                                     to physical therapy improves motivational factors and treatment outcomes in people with low back pain:
+                                                     a randomized controlled trial. Archives of Physical Medicine and Rehabilitation 92: 176–183. doi: 10.
+
+                                                     1016/j.apmr.2010.10.016 PMID: 21272712
+
+                                               31.   Timmermans AA, Seelen HA, Geers RP, Saini PK, Winter S, et al. (2010) Sensor-based arm skill train-
+                                                     ing in chronic stroke patients: results on treatment outcome, patient motivation, and system usability.
+                                                     IEEE Transactions on Neural Systems and Rehabilitation Engineering 18: 284–292. doi: 10.1109/
+
+                                                     TNSRE.2010.2047608 PMID: 20388603
+                                               32.   Sandlund M, McDonough S, Häger-ross C (2009) Interactive computer play in rehabilitation of children
+
+                                                     with sensorimotor disorders: a systematic review. Developmental Medicine & Child Neurology 51:
+                                                     173–179. doi: 10.1111/j.1469-8749.2008.03184.x PMID: 19191834
+
+                                               33.   Deutsch JE, Borbely M, Filler J, Huhn K, Guarrera-Bowlby P (2008) Use of a low-cost, commercially
+                                                     available gaming console (Wii) for rehabilitation of an adolescent with cerebral palsy. Physical Therapy
+
+                                                     88: 1196–1207. doi: 10.2522/ptj.20080062 PMID: 18689607
+
+
+
+
+
+
+
+
+
+PLOS ONE | DOI:10.1371/journal.pone.0117013        March 20, 2015                                                                                   15 / 17
+                                                                                                                        Citizen Science and Rehabilitation
+
+
+
+
+                                               34.   Betker AL, Szturm T, Moussavi ZK, Nett C (2006) Video game—based exercises for balance rehabilita-
+                                                     tion: a single-subject design. Archives of Physical Medicine and Rehabilitation 87: 1141–1149. doi: 10.
+
+                                                     1016/j.apmr.2006.04.010 PMID: 16876562
+                                               35.   Burke JW, McNeill M, Charles D, Morrow PJ, Crosbie J, et al. (2009) Serious games for upper limb re-
+
+                                                     habilitation following stroke. In: Conference in Games and Virtual Worlds for Serious Applications.
+                                                     IEEE, pp. 103–110. doi: 10.1109/VS-GAMES.2009.17
+
+                                               36.   Zyda M (2005) From visual simulation to virtual reality to games. Computer 38: 25–32. doi: 10.1109/
+                                                     MC.2005.297
+
+                                               37.   De Weyer T, Robert K, Hariandja JRO, Alders G, Coninx K (2012) The social maze: A collaborative
+
+                                                     game to motivate ms patients for upper limb training. In: Entertainment Computing-ICEC 2012.
+                                                     ICEC, pp. 476–479. doi: 10.1007/978-3-642-33542-6_57
+
+                                               38.   Burke JW, McNeill M, Charles DK, Morrow PJ, Crosbie JH, et al. (2009) Optimising engagement for
+                                                     stroke rehabilitation using serious games. The Visual Computer 25: 1085–1099. doi: 10.1007/s00371-
+                                                     009-0387-4
+
+                                               39.   Cappa P, Clerico A, Nov O, Porfiri M (2013) Can force feedback and science learning enhance the ef-
+
+                                                     fectiveness of neurorehabilitation? an experimental study on using a low-cost 3D joystick and a virtual
+                                                     visit to a zoo. Plos ONE 8: e77589. doi: 10.1371/journal.pone.0083945 PMID: 24349562
+
+                                               40.   Silvertown J (2009) A new dawn for citizen science. Trends in Ecology & Evolution 24: 467–471. doi:
+                                                     10.1016/j.tree.2009.03.017 PMID: 19586682
+
+                                               41.   Nov O, Anderson D, Arazy O (2010) Volunteer computing: a model of the factors determining contribu-
+                                                     tion to community-based scientific research. In: Proceedings of the 19th international conference on
+
+                                                     World wide web. ACM, pp. 741–750. doi: 10.1145/1772690.1772766
+
+                                               42.   Haklay M (2013) Citizen science and volunteered geographic information: Overview and typology of
+                                                     participation. In: Crowdsourcing Geographic Knowledge, London: Springer. pp. 105–122. doi: 10.
+                                                     1007/978-94-007-4587-2_7
+
+                                               43.   Lintott CJ, Schawinski K, Slosar A, Land K, Bamford S, et al. (2008) Galaxy zoo: morphologies derived
+
+                                                     from visual inspection of galaxies from the sloan digital sky survey. Monthly Notices of the Royal Astro-
+                                                     nomical Society 389: 1179–1189. doi: 10.1111/j.1365-2966.2008.13689.x
+
+                                               44.   Cordova DI, Lepper MR (1996) Intrinsic motivation and the process of learning: Beneficial effects of
+                                                     contextualization, personalization, and choice. Journal of Educational Psychology 88: 715. doi: 10.
+
+                                                     1037/0022-0663.88.4.715
+                                               45.   Nov O, Arazy O, Anderson D (2014) Scientists@ home: what drives the quantity and quality of online
+
+                                                     citizen science participation? Plos ONE 9: e90375. doi: 10.1371/journal.pone.0090375 PMID:
+                                                     24690612
+
+                                               46.   Raddick MJ, Bracey G, Gay PL, Lintott CJ, Murray P, et al. (2010) Galaxy zoo: Exploring the motiva-
+                                                     tions of citizen science volunteers. Astronomy Education Review 9: 010103. doi: 10.3847/
+
+                                                     AER2009036
+
+                                               47.   Laut J, Henry E, Nov O, Porfiri M (2014) Development of a mechatronics-based citizen science platform
+                                                     for aquatic environmental monitoring. IEEE/ASME Transactions on Mechatronics 19: 1541–1551. doi:
+                                                     10.1109/TMECH.2013.2287705
+
+                                               48.   Vischer P, Clavel R (1998) Kinematic calibration of the parallel delta robot. Robotica 16: 207–218. doi:
+                                                     10.1017/S0263574798000538
+
+                                               49.   Colombo R, Pisano F, Micera S, Mazzone A, Delconte C, et al. (2005) Robotic techniques for upper
+
+                                                     limb evaluation and rehabilitation of stroke patients. IEEE Transactions on Neural Systems and Reha-
+                                                     bilitation Engineering 13: 311–324. doi: 10.1109/TNSRE.2005.848352 PMID: 16200755
+
+                                               50.   Charles SK, Krebs HI, Volpe BT, Lynch D, Hogan N (2005) Wrist rehabilitation following stroke: initial
+                                                     clinical results. In: 9th International Conference on Rehabilitation Robotics. IEEE, pp. 13–16.
+
+                                               51.   Patton JL, Stoykov ME, Kovic M, Mussa-Ivaldi FA (2006) Evaluation of robotic training forces that either
+                                                     enhance or reduce error in chronic hemiparetic stroke survivors. Experimental Brain Research 168:
+
+                                                     368–383. doi: 10.1007/s00221-005-0097-8 PMID: 16249912
+
+                                               52.   Frascarelli F, Masia L, Di Rosa G, Petrarca M, Cappa P, et al. (2009) Robot-mediated and clinical
+                                                     scales evaluation after upper limb botulinum toxin type a injection in children with hemiplegia. Journal
+                                                     of Rehabilitation Medicine 41: 988–994. doi: 10.2340/16501977-0412 PMID: 19841830
+
+                                               53.   Colombo R, Pisano F, Mazzone A, Delconte C, Micera S, et al. (2007) Design strategies to improve pa-
+
+                                                     tient motivation during robot-aide rehabilitation. Journal of NeuroEngineering and Rehabilitation 4.
+                                                     PMID: 17309790
+
+                                               54.   Dodge Y (2008) The concise encyclopedia of statistics. London: Springer.
+
+                                               55.   Casella G, Berger RL (1990) Statistical inference. Belmont, CA: Duxbury Press.
+
+
+
+
+
+
+
+PLOS ONE | DOI:10.1371/journal.pone.0117013        March 20, 2015                                                                                   16 / 17
+                                                                                                                        Citizen Science and Rehabilitation
+
+
+
+
+                                               56.   Greenberg BS, Sherry J, Lachlan K, Lucas K, Holmstrom A (2010) Orientations to video games among
+                                                     gender and age groups. Simulation & Gaming 41: 238–259. doi: 10.1177/1046878108319930
+
+                                               57.   Kafai YB (1998) From Barbie to Mortal Kombat: Gender and Computer Games, Cambridge, MA: The
+                                                     MIT Press, chapter 4. pp. 90–114.
+
+                                               58.   Kwakkel G, van Peppen R, Wagenaar RC, Dauphinee SW, Richards C, et al. (2004) Effects of aug-
+
+                                                     mented exercise therapy time after stroke a meta-analysis. Stroke 35: 2529–2539. doi: 10.1161/01.
+                                                     STR.0000143153.76460.7d PMID: 15472114
+
+                                               59.   Ellul C, Francis L, Haklay M (2011) Engaging with local communities: a review of three years of commu-
+                                                     nity mapping. Urban and Regional Data Management.
+
+                                               60.   Trewin S, Pain H (1999) Keyboard and mouse errors due to motor disabilities. International Journal of
+                                                     Human-Computer Studies 50: 109–144. doi: 10.1006/ijhc.1998.0238
+
+                                               61.   Leversen JS, Haga M, Sigmundsson H (2012) From children to adults: motor performance across the
+
+                                                     life-span. Plos ONE 7: e38830. doi: 10.1371/journal.pone.0038830 PMID: 22719958
+
+                                               62.   Globerson S, Levin N, Shtub A (1989) The impact of breaks on forgetting when performing a repetitive
+                                                     task. IIE Transactions 21: 376–381. doi: 10.1080/07408178908966244
+
+                                               63.   Förster J, Higgins ET, Bianco AT (2003) Speed/accuracy decisions in task performance: Built-in trade-
+                                                     off or separate strategic concerns? Organizational Behavior and Human Decision Processes 90: 148–
+                                                     164. doi: 10.1016/S0749-5978(02)00509-5
+
+                                               64.   Rand D, Kizony R, Weiss PTL (2008) The Sony PlayStation II EyeToy: low-cost virtual reality for use in
+
+                                                     rehabilitation. Journal of Neurologic Physical Therapy 32: 155–163. doi: 10.1097/NPT.
+                                                     0b013e31818ee779 PMID: 19265756
+
+                                               65.   Lange B, Flynn S, Rizzo A (2009) Initial usability assessment of off-the-shelf video game consoles for
+                                                     clinical game-based motor rehabilitation. Physical Therapy Reviews 14: 355–363. doi: 10.1179/
+
+                                                     108331909X12488667117258
+                                               66.   Sandlund M, Lindh Waterworth E, Häger C (2011) Using motion interactive games to promote physical
+
+                                                     activity and enhance motor performance in children with cerebral palsy. Developmental Neurorehabil-
+                                                     itation 14: 15–21. doi: 10.3109/17518423.2010.533329 PMID: 21241174
+
+                                               67.   Prestopnik NR, Crowston K (2011) Gaming for (citizen) science: exploring motivation and data quality
+                                                     in the context of crowdsourced science through the design and evaluation of a social-computational
+
+                                                     system. In: International Conference on e-Science Workshops. IEEE, pp. 28–33. doi: 10.1109/
+                                                     eScienceW.2011.14
+
+                                               68.   Cooper S, Khatib F, Treuille A, Barbero J, Lee J, et al. (2010) Predicting protein structures with a multi-
+                                                     player online game. Nature 466. doi: 10.1038/nature09304 PMID: 20686574
+
+                                               69.   Von Ahn L, Dabbish L (2004) Labeling images with a computer game. In: Proceedings of the Special In-
+                                                     terest Group on Human-Computer Interaction Conference on Human factors in Computing Systems.
+
+                                                     ACM, pp. 319–326. doi: 10.1145/985692.985733
+
+                                               70.   Nov O, Arazy O, Anderson D (2011) Dusting for science: motivation and participation of digital citizen
+                                                     science volunteers. In: Proceedings of the 2011 iConference. ACM, pp. 68–74. doi: 10.1145/1940761.
+                                                     1940771
+
+                                               71.   Thomas KW, Velthouse BA (1990) Cognitive elements of empowerment: An interpretive model of intrin-
+
+                                                     sic task motivation. Academy of Management Review 15: 666–681. doi: 10.5465/AMR.1990.4310926
+                                               72.   Gentile D (2009) Pathological video-game use among youth ages 8 to 18: A national study. Psychologi-
+
+                                                     cal Science 20: 594–602. doi: 10.1111/j.1467-9280.2009.02340.x PMID: 19476590
+
+                                               73.   Reinkensmeyer DJ, Pang CT, Nessler JA, Painter CC (2002) Web-based telerehabilitation for the
+                                                     upper extremity after stroke. IEEE Transactions on Neural Systems and Rehabilitation Engineering 10:
+                                                     102–108. doi: 10.1109/TNSRE.2002.1031978 PMID: 12236447
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PLOS ONE | DOI:10.1371/journal.pone.0117013       March 20, 2015                                                                                   17 / 17

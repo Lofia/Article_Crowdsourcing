@@ -1,0 +1,487 @@
+         Introduction toSocialRadio Case Studies and
+
+                                   Perspectives
+
+                         Amosse Edouard, Nhan Le-Thanh
+
+
+
+
+  To cite this version:
+
+ Amosse Edouard, Nhan Le-Thanh. Introduction toSocialRadio Case Studies and Perspectives.
+
+ e-PSP 2014 : Colloque e-Plateforme de Sant▯e de Proximite 2014, Nov 2014, Sophia-Antipolis,
+ France. <http://epsp-2014.sciencesconf.org/>. <hal-01086182>
+
+
+
+
+
+
+                              HAL Id: hal-01086182
+
+                       https://hal.inria.fr/hal-01086182
+
+                                 Submitted on 11 Dec 2014
+
+
+
+
+
+
+
+   HAL is a multi-disciplinary open access       L’archive ouverte pluridisciplinaire HAL, est
+
+archive for the deposit and dissemination of sci- dee au depot eta la di▯usion de documents
+enti▯c research documents, whether they are pub- scienti▯ques de niveau recherchees ou non,
+lished or not.The documents may come from ▯   emanant des etablissements d’enseignement et de
+teaching and research institutions in France or recherche fcais ouetrangers, des laboratoires
+abroad, or from public or private research centers. publicses. priv▯
+                                       Introduction toSocialRadio
+
+                                         Case Studies and Perspectives
+
+
+
+
+
+                 Amosse EDOUARD                                                 Nhan LE-THANH
+   WIMMICS - The I3S Laboratory - CNRS - INRIA                   WIMMICS - The I3S Laboratory - CNRS - INRIA
+          University of Nice Sophia Antipolis
+                                                                         University of Nice Sophia Antipolis
+               Sophia Antipolis, France                                       Sophia Antipolis, France
+              Amosse.Edouard@unice.fr                                         nhan.le-thanh@unice.fr
+
+
+Abstract— In this paper, we introduce a Social Radio         Activities on the web are quite similar toa radio
+platform designed to support contextual communication        becauseinformation    is  constantly   shared   between
+between communities. Radio communication was no longer       producers and consumers. The main differences between
+used   for   information    broadcast   using   different    the web and a radio come from the organisation of the
+communication channels. The same concept is used in this
+                                                             information.     Numerous     online  services   provide
+work but for different purposes. We set up a microblogging   multidisciplinary information at large scale to an open
+community channel to report, comment or simply vote some     audience. Finding relevant information is an important
+events. In order to understand the concept we detail a       challenge for consumers.
+scenario in the epidemic field.
+
+Keywords:social networks, online communities, social radio,  Data analysis in online social networks or microblogging
+short messages.                                              platform is largely explored since the past decade in many
+                                                             domains [1,4,5,7,13,14,15]. Lots of studieshave focused
+                                                             on motivation [14], member’s activities and behaviours
+  I.    NTRODUCTION                                          [19,20], data filtering and enrichment [15,21]. In [31], the
+
+Since people moved an important part of their time on        goal was to extract common thematic used in Twitter posts
+Internet [8], microblogs such as Twitter or social networks  based   on   an   n-dimensional   analysis  taking  into
+such Facebook, Google+ become more and more popular          accounttheme, space and time. The authors in [32]
+and   can   be   considered   as  important   tools   for    proposed an approach for event detection from social text
+                                                             stream by exploring the content as well as temporal and
+communication among people, sharing expertise and
+knowledge enrichment. It is important to note that people    social dimension. F. Abel has proposed in [15] an
+have different motivations in using these tools. Some are    approach to enrich status messages from Twitter based on
+interested in sharing observations while others are          external links referred in the messages.In [21], the authors
+                                                             used hash tags and linked data to enrich post from twitter.
+concerned with consuming information. Peoples’ needs
+depend on whether they are consumers or producers.
+While information are more and more available, finding       In this paper we study the topology of the social radio, a
+the relevant information among all those context-            platform for information synthesis within an online
+                                                             community. We analyse the main needs that can make the
+dependant   observations   is an   important  issue   for    platform generic.   By generic we mean, anyone can
+consumers and also a challenge for researchers or service
+providers. For example, a candidate can be interested in     configure it according to his need        with multiple
+what people think of his candidacy for the next election.    information sources such as online social networks,
+                                                             microblogging, websites etc.
+
+Handlinglarge quantities of comments from all users on a
+given topic can be difficult or even impossible without      The rest of this paper is organized as follows; Section 2
+appropriate tools. Such tools must be able to retrieve the   presents background about online communities and
+                                                             microblog   messages;Section    3  introducesa   generic
+common trends or the main idea among a set of                platform   for  broadcasting   information   in   online
+observations.In this work we tackle this problem by
+introducing the social radio, a platform enabling users to   communities, which we call the social radio. We then
+extract the common trends on a specific subject (theme)      detail a use case for the social radio in Section 4. Finally,
+                                                             we discuss future work and make conclusions in Section
+by analysing reported observations within an online
+community.                                                   5.
+
+The term radio is commonly used for information               II.   BACKGROUND
+
+broadcasting using radio waves or frequencies.    In this       A.  Online communities, structures and objectives
+study, we use the same concept but for different purposes.   In an "online community", members do not necessarily
+The   main   parts  of   a  radio  are:  frequency   (its    meet and communicate with each other face-to-face.
+identity),information sources, a redaction service and an
+audience (people interested in this radio). Information      Online community can be built in two ways: implicitly
+                                                             from user behaviour (e.g. linking users who have the same
+sources can be employees (journalist, reporters), music      hobbies or who took similar actions an a website) or
+producers (for a music radio) etc.
+explicitly (e.g. users link themselves to others: friends or itrepresentsrich  social  connections    (between    the
+co-workers).                                                 information senders/authors and recipients/reviewers);
+According to [17], online communities can be broken          and (2) the content is strongly context sensitive. That is,
+
+down into overlapping classes as shown in       Figure 1.    not only within the text piece content, the meaning of
+Generally, members of online communities can be split        words   is   dependent   from    the  context   of   the
+into two categories [12]:                                    communication as well as relationships among social
+
+    -    Active   Participants  (Posters):  Users   who      actors.
+         participate actively in the community by posting    In a communication process between humans, the
+                                                             interlocutors know the context.That's why they can
+         messages                                            understand the meaning even when a message is very
+    -    Inactive  Participants (Consumers): Members
+                                                             short. As an example "This traffic jam bothers me"has a
+         who are interested in the information shared        meaning for the recipientbecause he has the context (e.g.
+         within the community.                               who the sender is, where the sender is, why he's there, his
+                                                             relationship with the    sender).  Inferring context  is
+
+                                                             essentialwhen processing such messages.Hence, in our
+                                                             work, we willprocess messages based on both the
+                                                             thematic content and on the community in which the
+
+                                                             message was produced.
+
+
+                                                              III.  TYPOLOGY OF THE SOCIAL RADIO AND
+
+                                                             D EFINITION
+
+                                                             This section defines terms and concept of the studied
+                                                             platform.
+                                                             In other to define the Social Radio for information
+                                                             broadcasting within online communities, we consider the
+
+                                                             following concepts according to member’sbehaviours and
+                                                             needs:
+Figure 1: Different Online Communities Profiles (extracted from [1-]).A    themedefines   the   context   of   shared
+A community can be at the intersection of one or                      information.
+more classes.                                                     -   A   communityis    composed     ofposters   and
+
+                                                                      consumers.
+As pointed out by J. Nielsen [33], user participation             -   Information processing mechanisms definehow
+follows more or less a 90-9-1 rule. That is, 90% of users             to       structure      information       based
+read/observe but don't contribute; 9% contribute from                 onconsumers'needs and information privacy.
+time to time; and most contributions come from just 1%
+
+of the users, who participate frequently.                    Definition III.1 Informationtheme
+How information is used depends onwhether a participant      The theme of information is what that defines the context
+is active or inactive.For instance, onan e-commerce          0of the information being shared. s the main part of a
+platformusers (customers) comment or rate products           message, that what which defines the context of the
+
+independently of other users while buyerslurk for most       information being shared. Because of the brevity of post
+rated products to buy. Users post information regarding      in online social platforms, the theme is an important key
+their observations or personal opinions on fact they         for context grasping. Context inferring is widely explored
+
+observe. While many users can report observations on the     in computer science [1,34]and semantic web [15].
+same fact, event or theme;how to present the relevant        Information context is the first step for information
+information to consumers is an important challenge.          processing within online communities.
+
+   B.   Short messages                                       Definition III.1 Posters and Consumers
+
+Microblogging    and   social   networks    differ  from     Sincemembers of a community have different information
+blogsandgeneralweb sites becausethey enable anyone to        needs and behaviours; information processing       it is
+sharetheir thoughts online to an open audience. This         important to we deliberately splitthe members who form a
+freedom of the crowd distributes a large amount of data on   radio's community intoposters and consumers [12]. Posters
+                                                             are those who post messages on the radio while consumers
+social platforms. Microblogginghas also been successful
+in  corporate   environments   in  facilitating informal     are those who consume information.This approach allows
+communication,    learning  and   knowledge    exchange      us to define how information should be presented to users
+(almost   real-time)  and   fast  propagation   of  new      according to their profiles.
+
+information.                                                 Definition III.3 Information synthesis
+However,     data   frommicroblogs     is   substantially
+differentfrom other that found in other information          When seeking for information, to begin with, users are
+                                                             interested in anoverview instead of details [33].    For
+systems such as theenterprise web site.In particular, (1)    example, the most important part of a meeting is the
+summary of points that have been discussed and decisions                  B.    Characteristics of the social radio
+that have been taken. Details can come up if users ask for            In a survey on Twitter in [14], Java et al. found that
+them. A radio social shall be able to summarize
+                                                                      members' activity can group as:1) Daily Chatter (what a
+information in other to present the most relevant                     user is actually doing), 2) Conversations (direct exchange
+information to the user.
+                                                                      between members), 3) Sharing Information and 4)
+                                                                      Reporting News. In [34], Kate et al. extend those
+                                                                      categories    into:status,   provide     information,    forward
+    A.    Types of radio
+Consideringcommunity          structures,     behaviour      and      information, ask question direct post anddirect question.
+                                                                      Although those studies are on the Twitter platform, the
+expectations [12], information is processingfrom two                  categories describe the main user activities within online
+perspectives:posters      (who     post     information)     and
+consumers (who seek andconsume information). For                      communities. In the radio social, more than the categories
+                                                                      defined in [14, 34], we attempt to capture main types of
+posting and consuming there are three possibilities: public
+access, private access and hybrid access. A radio with                user's activities within online communities: reporting,
+public access for posting or consuming enable any users to            evaluation, and opinion.In Table 2 we summarize our
+                                                                      codingactivitiessupported by examples.
+access information on the radio; a radio with private access
+restrict access to some members of the radio; and radio
+with   hybrid    access    manage     access    to  information              Category                        Example
+                                                                             Reporting: Users report news    Trafic jam on a road:
+according to privacy and type of information. Considering                    or event based on observation   The is any personal
+the three possibilities for consuming and posting, the Table                 in their environment. Mostly    appreciation    when
+1 summarizes the different types of radio including                          such actions are objective;     reporting traffic jam,
+appropriate examples.                                                        users report what they observe  the user observes that
+
+                                                                             in the universe. There is no    this event exist right
+Posters      Consumers       Example                                         personal   appreciation    or   now in this place.
+Public       Public          Traffic   event   report:Anyone   is            interpretation of the fact that
+                             allowed   to   report  or   consume             the user is being described.    @BLTEDI:        "This
+                             information within the community                In twitter, when reporting an   #traffic bothers me".
+Public       Private         Customer satisfaction survey:Anyone             event users use hash tag to     This means(somewhere
+                             is allowed to post information while            highlight the most important    in the world) a traffic
+                             only employees of the service providers         word in the post, in most cases jam exists.
+                             are allowed to consume reported                 those  keywords   define  the
+                                                                             context of the post [1, 15].
+                             information.
+Public       Hybrid          E-Commerce platform: Anyone is                  Opinion: The post describes     Descriptive Opinion:
+                             allowed to buy and comment on                   the user's appreciation on the  "#enjoying  #holidays
+                             product they have bought, rating and            given subject.Activities such aswith    family   and
+                             comments    are   visible to   other            evaluation,   notation   and    friends."
+                             customers while information on a                comment    fall  into  user's
+                             customer such as address or phone               opinion.    An    opinion  is   Qualitative
+                             number is accessible only by employees          subjective and strongly depends Opinion:@MATITA:
+                             of the company.                                 on the user point of view. More "#S5 like this phone"
+Private      Public          An online blog: Only manager (s) can            generally,  opinion   groups
+                             publish information on a blog while
+                             anyone   is   granted  to   consume             appreciation and evaluation of
+                             published information.                          facts, services  and  events.
+Private      Private         Instant Messaging: Only member can              Opinion can be qualitative (the
+                             post information that can be consumed           set of value is finite; e.g. like vs.
+                                                                             dislike) or descriptive (the set of
+                             only by other members                           value that a user can use is
+Private      Hybrid          Twitter: Only account owners can                indefinite).
+                             twitt; some information is available for
+                             public access while other is available
+                             for (some) followers.
+Hybrid       Public          TODO:                                           Questioning: Posts that are     @BKFD:       "Anyone
+Hybrid       Private         Air pollution survey: in an air                 looking for feedback. The user  knows how to import
+                             pollution survey, although anyone can           looks for a response within the data from a #RDBMS
+                             report observations but only authorized         community.                      to #RDF?"
+                             members can access the reported            Tableau 2. User activities and examples. Examples are extracted
+                             information                                       from Twitter; usernames are removed for privacy;
+Hybrid       Hybrid          Epidemic survey: This community
+                              allows anyone to report epidemic
+                                                                          C.    Discussion
+                              symptoms, but information reported by   In the previous section, we have definedtypes and
+                              a health worker is more reliable than
+                              one reported by an unknown user. In     characteristics of information in online social services; in
+                              the output only confirmed epidemics     this section we discuss the needs for the social radio to be
+                              are reported with public access.
+                              Information such as unverifiedcases is  a generic service for information broadcasting within
+                              granted  to  some   members   (e.g.     online communities.
+                              doctors).                               Consistent to previous research, the social radio shall take
+
+              Tableau 1. Type of radio and examples.                  in consideration type of communities [5] as information
+                                                                      theme depends on the group in which it is sharing [20].
+
+                                                                      On the other hand, information processing shall consider
+                                                                      consumers need. As pointed out in [7], in a community
+members     have   different  expectations:  1)   content     In this application we are facing two constraints:a) time
+presentation,  2)Interactive  Realism,  3)   privacy,  4)     constraint since event reporting is not the primary part of
+                                                              health workers' activity and b) medical confidentialities.
+leadership and 5) decision making. Consequently, withina
+community information can be processed differently
+according to the consumers needs (e.g. service providers          a)  Medical confidentialities
+and customers in a E-commerce platform).                      Patient information is not required for the system; posters
+                                                              report  symptoms    without  any   personal  information
+According to E. José et al.,a way to reduce the gap
+between real and virtual communities is through a proper      regarding the patient.
+intervention by one or various person in charge of the
+                                                                  b)  Dealing with time constraint
+community. We can adopt this management approach to           In order to make the application less time consuming,
+allow users define the structure of a social radio.           interfaces shall be user friendly and intuitive.  In this
+
+Information theme can exploit semantic web technics [1,       scenario, information theme is well known; members of
+                                                              the  community    exchange    information  on   epidemic
+15] to define characteristics of shared data on the radio.    symptom and diseases.
+Indeed, web semantic and ontologies enable definition of      Unfortunately,  existing  medical   ontologies  did   not
+concept and relation among concepts in an information-
+                                                              applicable in our case because they are domain-related.
+sharing environment. Defining a vocabulary will benefit       Diseases or symptoms are treated differently from a
+for the radio in this it defines clearly the radio thematic   medical domain to another.     Pathology of diseases or
+and his relation to other thematic on the web as well as      symptoms are not relevantto our system, we do not need a
+dependant concept and entities.                               complete ontology. For that, we have built anontology to
+
+                                                              that defines a shared vocabulary for the actors of the
+Information   sources   are  the  sources   that  provide     system.  The ontology has two concepts:Epidemic and
+information to the radio. A radio can define external as      Symptoms and a set of properties as shown in Figure 4.
+                                                              Instances  of  the  ontology   are  created   using  and
+well as internal information sources according to the user
+needs. Internal sources can be dedicated applications that    administrative interface (Figure 5).
+providedata directly to the radio (e.g. users with smart      A message is a quintuplet θ =< 𝑃,𝑂,𝑆,𝐼,𝐴 >. [4]
+devices, sensors etc.). Existing social services platform      a) P is the phenomenon (e.g. influenza) an instance of
+                                                                   the ontology;
+expose their data in API such external application can use     b) O is the observer (e.g. a doctor);
+them. Based on its thematic a radio can connect to an
+external source and gather information shared within the       c) S is the location of the observation;
+                                                               d) I the time (instant) of the observation and
+community.    Because of the brevity of information in         e) A content of the observation (e.g. cough, headache)
+microblogs and social networks, data retrieved from                instance of the ontology related to the phenomenon.
+external sources must be enriched in other to grasp their
+context.  Enrichment mechanism can rely on previous           To reportan epidemic a user pick an instance of epidemic
+                                                              in the vocabulary and the system retrieves automatically
+research in the field [1, 15, 21].                            symptoms related; the user chooses one or many
+                                                              symptoms.
+The main part of the social radio is automatic processing     Space and timeare inherent to epidemiology [9]. Asking
+
+of information according to user needs, types of              the user to provide those properties will overload the user
+information and characteristics. According to that a radio    actions. Hopefully, smart devices enable to retrieve user
+shall  provide   generic   algorithms   for   information     location, current time and information about the user.We
+processing and enable a user to configure them according      consider a "broadcast delay" that consists in postponing the
+                                                              message over a short period while we enrich the message.
+to his needs.
+
+                                                              There exist two main approaches for spatial representation:
+                                                              a quantitative approach that represents spatial entities
+ IV.   R ASE "R  ADIO  S OCIAL FOR    EPIDEMIOLOGY   ", A     using numerical values (e.g. longitude, latitude, geometric
+
+CASE STUDY                                                    form); and a qualitative approach that represents spatial
+In this section, the focused use case is illustrated by an    entities using lexical term close to the human perception of
+                                                              spatial notions [22]. The main advantage of the qualitative
+application developed with health workers in Biot to report   approach on the quantitative approach is the ability to deal
+epidemic symptom based on the social radio concept.           with incomplete information. Because the user location is
+The system is composed of two parts:an administrative
+part that enables management and configuration settings       not always available (e.g. GPS disabled) and the system
+                                                              does not require fine-grained location; spatial entities are
+and the client part that enable users to interact the system. represented qualitatively.   For example, when a user
+Interaction can be report new epidemic symptom or             reports and epidemic case, we associate the nearest locality
+consume information that has been shared within the
+community.    In the current version only health workers      to the message he reports.   Spatial1settings are defined
+(e.g. doctors, nurses, pharmacists etc.)are allowed to        according to the Geonames ontology in which geographic
+                                                              spatial entities are grouped in a subsumption relationship.
+postwhile other users can consume shared information.         We have restricted ourselves to five levels in the ontology
+The Figure 2 presents a use case of the application.
+
+                                                                1
+                                                                 http://www.w3.org/2005/Incubator/geo/XGR-geo-ont-20071023/
+as presented in table 3. To retrieve spatial entities, we have make structured information publicly available on the
+used the Google Reverse Geocoding API to map the user          Web.    It links resources from Wikipedia with other
+location with named spatial entities.   Mapping between        datasets and enables asking complex queries using
+Google spatial entities and Geonames are resumed in            SPARQL, a query language for the semantic Web. The
+
+Table 3.                                                       following request to the DBpedia SPARQL endpoint
+                                                               retrieves the population of the region S. Note we assume S
+Google parameters          Geonames            Name            is Nice in the request.
+                           Properties
+country                    A                   Country         SELECT ?q{
+                                                               SERVICE <http://dbpedia.org/sparql> {
+administrative_area_level_1ADM1                Region          <http://dbpedia.org/resource/Nice>
+administrative_area_level_2ADM2                County          <http://dbpedia.org/property/population>          ?q. }}
+administrative_area_level_3ADM3                City
+locality                   ADM4                Locality          Request 1: Request to the DBpedia SPARQL endpoint retrieving the
+   Tableau 3 Mapping Google reverse geocoding attributes and                    population of the city of Nice
+                     Geonames ontology
+                                                               From the previous SPARQL request we have the
+
+Data processing                                                population of the region as:
+Because an epidemiologic symptom is reported in a region       𝜂𝑆= 𝑞 (Where q is the response obtained from DBpedia)
+does not mean that an epidemic exists. To detect the           Then the incidence for a region is:
+                                                                                             Δ
+emergence of an epidemic in a region, we have defined                                   𝜅𝑠=    𝑠
+analgorithmthat process periodically information based on                                    𝜂 𝑆
+their spatiotemporal properties. At this stage, we cannot      According to the INSERM vector scale, we have
+confirm automatically that an epidemic exist but instead       associated a colour to each region regarding the position of
+
+weraise a notification when the incidence of an epidemic       the incidence in the scale. If the incidence is greater than
+exceeds a given threshold. For each period, the algorithm      the threshold we raise an alert to the system managers.
+computes the number of cases reported in each distinct
+
+region and determines a ratio according to the population.     Conclusion
+If for a region the incidence is greater than the              We have presented the RaSE platform an application built
+threshold,the  system raises an alert      to  notify the      on the concept of the social radio.      This application
+
+administrators.                                                provided tools and interfaces that enable health workers to
+                                                               exchange information on epidemic symptoms in a
+Given T a time interval defined by𝑇 = [𝑡 ,𝑡𝑖]𝑗The set of       distributed environment. Data reported by health workers
+                                                               are   processed     periodically   according    to    their
+observations in this interval is 𝛺 = {θ1,θ2,θ 3......,θ 𝑛,
+where θ 𝑖s a message.                                          spatiotemporal properties and displayed on base map in
+                                                               other to make them available for consumers.
+                                                               In France, there exist the "Sentinels Network " that provide
+
+                                                               information about epidemic incidence on the territory.
+                                                               However in their approach “sentinels” using paper and
+                                                               phone calls to report information.Furthermore "sentinels"
+                                                               are dedicated users that journey over the country to report
+
+                                                               information. In our approach, data are real-time reported
+                                                               and can be reported by several health workers such as
+                                                               (doctors, pharmacists, nurses etc.). Moreover, “sentinel”
+
+                                                               can use the platform to report information to the "Sentinels
+                                                               Network".
+
+                                                                V.    C ONCLUSION     &P  ERSPECTIVES
+
+                                                               In this paper we have introduced the concept of "Social
+
+                                                               Radio", a platform for information broadcasting in online
+                                                               communities.      Online   communities'   members     have
+                                                               different expectations and we have found that information
+
+                                                               cannot process in the same way for all members in a
+                                                               community.     The social radio aims to provide tools
+            Figure 2: A use case’s scenario of RASE            enabling members of online communities building their
+                                                               own "radio" according to their needs. We have defined the
+Let S be a set of unique location in the dataset 𝑆 =
+                                                               types and characteristics for a social to be generic.
+{𝑠1,𝑠2,...,𝑠𝑚/ 𝑚 ≤ 𝑛}. For each region in S the number         To prove the concept we have presented RaSE an
+of reported observations is determined by:                     application  that  enables   health   workers   to  report
+                 𝑖=𝑐𝑎𝑟𝑑 𝛺 1 if θ ∈ 𝛺 𝑎𝑛𝑑 θ S = s
+        Δ𝑠=                    𝑖          𝑖                    epidemiologic symptoms. Data reported on the platform
+                 𝑖=1      0 else                               are automatically processed and enrich before sharing
+The incidence is a probabilistic value given by:𝑠𝜅 =           them to consumers.
+Δ𝑠where 𝜂𝑆is the population of the region.
+𝜂𝑆                                                             The following points resumed the direction for future
+The dataset do not contain information about the               works:
+population of a region. DBpedia is a crowd-source effort to
+  -   Data enrichment: Short messages are widely used in                 [16] M. S. Ackerman, "The Intellectual Challenge of CSCW: The Gap
+      online communities and can be from several                               Between Social Requirements and Technical Feasibility"
+                                                                         [17] S. Seufert "Design and Management of Online Learning
+      sources,in future works we will define an approach                       Communities"
+      for data enrichment and reconciliation. We believe
+      that spatiotemporal properties are a good alternative              [18] C. Mounia, A. Martin, B. B. Yaghlane "Estimation de la fiabilité
+                                                                               des sources des bases de données évidentielles"
+      for data enrichment.                                               [19] M. Stankovic, P. Laublet, A. Passant "Directing Status Messages to
+  -   Information processing: We have identified in the                        their Audience in Online Communities"
+      Section III.C that algorithm for data processing can
+                                                                         [20] T. Schoberth, J. Preece, A. Heinzl " Online Communities: A
+      be: 1) probabilistic, 2) statistical and 3) evidential.                  Longitudinal Analysis of Communication Activities"
+                                                                         [21] A. Passant, P.Laublet, "Meaning Of A Tag: A Collaborative
+                                                                               Approach to Bridge the Gap Between Tagging and Linked Data"
+R EFERENCES
+                                                                         [22] J. Renz : "Qualitative spatial reasoning using constraint calculi",
+[1]  A. Passant, T. Hastrup, U. Bojars, and J. Breslin “Microblogging:         Australian National University
+     A Semantic and Distributed Approach”                                [23] M. J. Franklin, D. Kossmann, T. Kraska, S. Ramesh, and R. Xin.
+                                                                               "Crowddb: answering queries with crowdsourcing." In SIGMOD,
+[2]  M. C. Kindsmuller, J. Milz, and J. Schimdt, "Instant Online               2011.
+     Communities as a Means to Foster Conferences".
+[3]  G. Marsh, "The Community of Circoumstance - A tale of three         [24] A. Marcus, E. Wu, D. Karger, S. Madden, and R. Miller.
+     cities: community participation in St Kilda, Knox, and Lewisham".         "Crowdsourced databases: Query processing with people." In
+                                                                               CIDR, 2011.
+[4]  N. Le-Thanh “Introduction à l'Univers des BRIEFS”                   [25] A. Parameswaran and N. Polyzotis. "Answering queries using
+[5]  E.J   da   Silva,  and   S.  Sallaume    "Online   Communities
+     Administration: Defining Tools for Different Profiles"                    humans, algorithms and databases." In CIDR, 2011.
+                                                                         [26] A. Parameswaran et al. " CrowdScreen: Algorithms for Filtering
+[6]  S. Seufert, "Design and Management of Online Learning                     Data with Humans"
+     Communities", In: 2nd Annual Conference on Innovative Research      [27] M. Germain, J. Boucher, G. B. Béniéet É. Beaudry, "Fusion
+     in management.
+[7]  E. J. da Silva, C. S. de Souza, R. O. Prates, and A. M. Nicolaci-da-      évidentielle multisource baséesurune nouvelle
+     Costa "What they want and what they get: A study of light-weight          approchestatistiqueﬂous".
+     technologies for online communities"                                [28] Dempster, A. P. (1968) A generalisation of Bayesian inference,
+                                                                               Journal of the Royal Statistical Society, p. 205-247.
+[8]  L. Backstrom, E. Sun, C; Marlow, "Find Me If You Can:
+     Improving Geographical Prediction with Social and Spatial           [29] Shafer, G. (1976) A Mathematical "Theory of Evidence", vol.
+     proximity"                                                                Princeton, NJ.
+                                                                         [30] D. Deng, G. Mai, T. Chuang, R. Lemmens and K. Shao, "Social
+[9]  G. Camara, "Un système de veilleépidémiologique à base                    Web Meets Sensor Web: From User-Generated Content to Linked
+     d’ontologie", pp. 44-54                                                   Crowdsourced Observation Data"
+[10] "Epidemiology Key to Prevention", chapter 1, pp 1-9
+[11] "Epidemiology Key to Prevention", chapter 2, pp 28-56               [31] M. Nagarajan, K. Gomadam, A. P. Sheth, A. Ranabahu, R.
+                                                                               Mutharaju, A. Jadhav "Spatio-Temporal-Thematic Analysis of
+[12] B.Nonnecke, D. Andrews, J. Preece, "Non-public and public online          Citizen Sensor Data: Challenges and Experiences"
+     community participation: Needs, attitudes and behavior"             [32] Q. Zhao,P. Mitra, B. Chen "Temporal and Information Flow Based
+[13] M. Naaman, J. Boase, C. Lai, "Is it Really About Me? Message              Event Detection From Social Text Streams"
+     Content in Social Awareness Streams"
+                                                                         [33] J. Nielsen, "Participation Inequality: Encouraging More Users to
+[14] A. Java, T. Finin, X. Song, B. Tseng "Why We Twitter:                     Contribute" [online] accessed on April, 17th 2014
+     Understanding Microblogging Usage and Communities"                  [34] K. Ehrlich, N. S. Shami, "Microblogging Inside and Outside the
+[15] F. Abel, Q. Gao, G. Houben, and K. Tao, "Semantic Enrichment of           Workplace"
+     Twitter Posts for UserProfile Construction on the Social Web".

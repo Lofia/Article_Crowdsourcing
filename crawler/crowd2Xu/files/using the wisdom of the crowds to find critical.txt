@@ -1,0 +1,551 @@
+
+ Research and applications
+ 
+
+to reason about drugs and the classes to which they belong.          METHODS
+
+Representing this relationship is key when a computer alerts a       We devised a method for scalable ontology veriﬁcation that inte-
+physician about possible drug interactions, given a set of patient   grates several approaches from crowdsourcing research into a
+prescriptions. In fact, the US Government is mandating the use       uniﬁed framework (ﬁgure 1). We applied this method as part of
+of such systems through Meaningful Use criteria.  13 These stan-     a prospective study wherein the crowd veriﬁed relationships
+
+dards require that healthcare providers use electronic healthcare    between entities in SNOMED CT, a large clinical ontology man-
+records in meaningful ways. One criterion requires use of stan-      dated by the US Department of Health and Human Services for
+dardized vocabularies and ontologies including the ICDs,             Meaningful Use of electronic health records. In addition, we
+SNOMED CT, RxNorm, and LOINC (Logical Observation
+                                                                     compared the crowd with a panel of ﬁve clinical experts who
+Identiﬁers Names and Codes). Thus, ontologies are a critical         performed the same task, thereby providing a peer-review stand-
+component of healthcare and its technology.                          ard against which to compare the crowd. A description of each
+  The construction of any ontology is a labor-intensive task that    step in the methodology and prospective study follows.
+
+requires the involvement of domain experts. In addition, as
+ontologies become larger and more complex, the challenge of
+their development increases, as does the likelihood that they        Materials
+contain errors. Many biomedical ontologies contain hundreds          To begin, we selected a portion of the January 2013 version of
+                                                                     SNOMED CT upon which to perform the veriﬁcation. In par-
+of thousands of concepts and relationships among those con-          ticular, we performed a basic ﬁltering process (ﬁgure 2) to select
+cepts. At such scale, no single expert can understand the state of
+an entire ontology or perform quality assurance adequately in        a random subset of 200 previously unveriﬁed, complex, fre-
+                                                                     quently used, entailed hierarchical relationships (eg, ‘pneumonia
+an unaided manner. As a result, many large biomedical ontolo-  14    is a kind of disease of the lung’). Hierarchical relationships are
+gies, such as the National Cancer Institute Thesaurus (NCIt)         the dominant type of relationship in biomedical ontologies; thus
+and SNOMED CT,      15 have been shown to contain substantial                                                                    18
+errors in their previous versions. In addition, large ontologies     we only consider hierarchical relationships in this study.     In
+                                                                     addition, Rector et al15 have demonstrated previously that such
+typically use simpliﬁed logic, which makes them computation-         relationships are particularly prone to error.
+ally tractable, but increases the risk that they contain errors that
+cannot be detected computationally. Thus, ﬁnding such errors is         Speciﬁcally, we began with the SNOMED CT CORE Problem
+an arduous process requiring not only considerable human             List   Subset    (http://www.nlm.nih.gov/research/umls/Snomed/
+                                                                     core_subset.html), a subset of SNOMED CT. The CORE subset
+effort but also a bit of serendipity. Current methods attempt to     is a selection of the most frequently used terms and concepts
+detect these errors indirectly and automatically focus on ﬁnding
+inconsistencies in ontology syntax and structure. 16 17The gold      across mul19ple large US healthcare providers. Next, we used
+                                                                     Snorocket    to ﬁnd all hierarchical entailments in that subset
+standard for ﬁnding errors in semantics still requires some form     with the following characteristics:
+of human peer review.                                                ▸ non-asserted (ie, not directly stated in the ontology);
+
+Crowdsourcing                                                        ▸ non-trivial (ie, every justiﬁcation has at least two axioms);
+                                                                     ▸ direct (as described in the OWL API) ; 20
+As the internet has grown, crowdsourcing, the process of ‘taking     ▸ both the parent and child of the entailment is directly listed
+a job traditionally performed by a designated agent and outsour-
+cing it to an undeﬁned large group of people’, has emerged.   12        in the CORE.
+With vast numbers of workers available online, crowdsourcing            To create a manageable study size for the experts, we ran-
+                                                                     domly sampled 200 relationships from the ﬁnal ﬁltered subset.
+now empowers the scientiﬁc community to complete tasks that             The second component necessary for veriﬁcation is context.
+before were too large, too costly, or too difﬁcult computation-
+ally. To crowdsource a problem in practice, a requester decom-       In previous work, we showed that the crowd performs best
+                                                                     when provided with additional domain information related to
+poses a problem into small subtasks, referred to as micro-tasks,     the relationship.21 In this task, we provided users with context
+and submits each task to an online community or marketplace,
+offering compensation or reward (eg, money, enjoyment, or rec-       by offering English language deﬁnitions for each concept (eg,
+ognition). Multiple workers then complete the task and, in           ‘pneumonia’) in the relationships of interest. Because SNOMED
+                                                                     CT did not have deﬁnitions available for the concepts in the
+aggregate, produce a ﬁnal result. This process has enabled the       ﬁnal relationship set, we selected deﬁnitions from either (1) the
+success of popular websites such as Wikipedia, Kickstarter, and
+reddit. Researchers are now using crowdsourcing as an essential      Medical Subject Headings (MeSH) or (2) the National Cancer
+                                    3                                Institute Thesaurus (NCIt), both found in the Uniﬁed Medical
+tool. For example, in GalaxyZoo, citizen scientists from the         Language System (UMLS). If neither source contained a deﬁn-
+crowd help astronomers to identify and classify galaxies in hun-     ition, we did not provide one.
+dreds of thousands of images; in Foldit, online gamers perform
+three-dimensional protein folding for fun. The success of these
+
+efforts clearly shows the power of crowdsourcing in advancing        Experiment
+research.                                                            We then devised a micro-task with which to perform veriﬁca-
+  Crowdsourcing typically solves only tasks that are intuitive       tion. We presented each worker (either the crowd or expert)
+(eg, image identiﬁcation) or that have easily veriﬁable solutions    with concept deﬁnitions and an English language statement of a
+
+(eg, a protein conformation that satisﬁes predeﬁned constraints).    relationship (ﬁgure 3). In previous work, we determined the
+Crowdsourcing is generally not applied to tasks that require a       optimal fashion in which to present this task to a worker.21 The
+trained expert to use domain-speciﬁc knowledge. We hypothe-          worker then indicated whether the statement was correct or
+
+sized that crowdsourcing can indeed solve such less intuitive        incorrect, thereby verifying the ontological relationship. We
+problems, and therefore we applied the approach to ontology          recruited a crowd workforce through CrowdFlower, an online
+engineering. Speciﬁcally, we focused on the important, challen-      meta-platform with access to a large online labor force. We did
+ging task of identifying errors in biomedical ontologies             not select workers by prespecifying any deﬁning features; thus
+
+(ie, ontology veriﬁcation).                                          our workforce represented reasonable worker diversity. In
+
+2                                                             Mortensen JM, et al. J Am Med Inform Assoc 2014;0:1–7. doi:10.1136/amiajnl-2014-002901
+                                                                                                       Research and applications
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 1 Overview of the method. We devised a standard workﬂow with which to perform crowdsourcing tasks. We then adapted this workﬂow
+to the task of ontology veriﬁcation, shown above. To note, in this work we combine ‘Optimization Algorithm’ and ‘Spam Removal & Filtering’ in the
+‘Response Aggregation’ step. However, we still highlight them because they are integral components in the generalized crowdsourcing workﬂow.
+Speciﬁc details of each item in the workﬂow are discussed after the overview section of the Methods.
+
+
+
+practice, for US$0.02/relationship, workers ﬁlled out a basic            deﬁnitions were available, and asked whether the sentence was
+web form (ﬁgure 3) that selected a SNOMED CTrelationship at              ‘True’ or ‘False’. Twenty-ﬁve workers veriﬁed each individual
+random, reformulated the relationship as an English sentence,            relationship for a total cost of US$0.50/relationship.
+
+provided deﬁnitions of the SNOMED CT entities when such                    Asking 25 separate workers to complete a single task may
+                                                                         seem gratuitous; however, the power of the crowd lies in its
+                                                                         composite response. We aggregated worker responses using a
+                                                                         Bayesian method developed by Simpson et al,     22 which considers
+
+                                                                         each worker as an imperfect classiﬁer. The method predicts the
+                                                                         difﬁculty of each veriﬁcation task, the consistency of each
+                                                                         worker, and the posterior probability of a relationship being
+                                                                         correct or incorrect. Of note, this method performs better than
+
+                                                                         simple majority voting and mitigates the effect of spamming, a
+                                                                         common phenomenon in paid online crowdsourcing.
+                                                                           Concurre,weaskedapanelofﬁ           ve experts (MJ, EPM, MAM,
+                                                                         ALR, and TES) in both medicine and ontology to perform the same
+
+                                                                         veriﬁcation task that the crowd performed. These experts are repre-
+                                                                         sentative of domain experts who assist with the development and
+                                                                         maintenance of biomedical ontologies. The experts completed a
+                                                                         randomly ordered online survey presented in a fashion identical
+
+                                                                         with the survey that we administered to the crowd, but through a
+                                                                         Qualtrics online survey. For purposes of the study, experts also
+Figure 2 Filtering steps to select relationships for veriﬁcation.        answered questions about the relevancy of the dﬁenitions of the
+The process of selecting a set of relationships follows a basic ﬁltering terms in the relationship and they provided jusﬁ  tications for their
+strategy. First, we created a syntactic ontology module for the SNOMED
+                                             19                          entries. After the experts complteed the tasks, we used the Del23i
+CT CORE Problem List. Next, we used Snorocket   to ﬁnd all               method to assist experts in arriving at a singleﬁnal judgment. In
+entailments from the CORE subset. From the entire set of entailments,    Delphi, we presented each expert with an anonymized summary of
+we then removed all asserted axioms and any trivial entailments (those   expert responses, including ex  pert-entered comments, and asked
+where the entailment’s justiﬁcation contains only one axiom). From this
+set, we removed all entailments that were indirect as deﬁned in the      the subjects to update their responses, if necessary.
+OWL API. 20Finally, we required that both the parent and child of a
+relationship be contained in CORE, as some entailments contain
+concepts that are not in CORE but are necessary for the syntactic        Analysis
+                                                                         We evaluated the votes from the experts and from the crowd in
+module. To create a manageable study size for the experts, we
+subsampled this ﬁltered dataset to 200 relationships.                    three ways: (1) inter-rater agreement, (2) consensus standard,
+
+Mortensen JM, et al. J Am Med Inform Assoc 2014;0:1–7. doi:10.1136/amiajnl-2014-002901                                                      3
+  Research and applications
+
+
+
+Figure 3 Online web form for
+ontology veriﬁcation. Online workers
+
+visited an HTML webpage provided by
+CrowdFlower (a portion of which is
+
+shown here). We required workers to
+select ‘True’ or ‘False’ or explain why
+they did not know. For each response,
+
+we paid a worker US$0.02. Each
+worker saw the questions in a
+different, random order. Experts
+
+viewed a similar page but with
+additional ﬁelds for comments.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Table 1      Listing of errors found by both the crowd and experts in a subset of SNOMED CT
+
+  Child                                                                                                                           Parent
+
+  Anterior shin splints (disorder)                                                                                                Disorder of bone (disorder)
+
+  Short-sleeper (disorder)                                                                                                        Disorder of brain (disorder)
+  Frontal headache (finding)                                                                                                      Pain in face (finding)
+
+  Local infection of wound (disorder)                                                                                             Wound (disorder)
+  Anal and rectal polyp (disorder)                                                                                                Rectal polyp (disorder)
+
+  Malignant neoplasm of brain (disorder)                                                                                          Malignant tumor of head and/or neck (disorder)
+  Diabetic autonomic neuropathy associated with type 1 diabetes mellitus (disorder)                                               Diabetic peripheral neuropathy (disorder)
+
+  Placental abruption (disorder)                                                                                                  Bleeding (finding)
+  Impairment level: blindness one eye—low vision other eye (disorder)                                                             Disorder of eye proper (disorder)
+
+  Gastroenteritis (disorder)                                                                                                      Disorder of intestine (disorder)
+  Microcephalus (disorder)                                                                                                        Disorder of brain (disorder)
+
+  Thrombotic thrombocytopenic purpura (disorder)                                                                                  Disorder of hematopoietic structure (disorder)
+  Fibromyositis (disorder)                                                                                                        Myositis (disorder)
+
+  Lumbar radiculopathy (disorder)                                                                                                 Spinal cord disorder (disorder)
+  Vascular dementia (disorder)                                                                                                    Cerebral infarction (disorder)
+
+  Chronic tophaceous gout (disorder)                                                                                              Tophus (disorder)
+  Full thickness rotator cuff tear (disorder)                                                                                     Arthropathy (disorder)
+
+  Disorder of joint of shoulder region (disorder)                                                                                 Arthropathy (disorder)
+  Injury of ulnar nerve (disorder)                                                                                                Injury of brachial plexus (disorder)
+
+  Basal cell carcinoma of ear (disorder)                                                                                          Basal cell carcinoma of face (disorder)
+  Bronchiolitis (disorder)                                                                                                        Bronchitis (disorder)
+
+  Migraine variants (disorder)                                                                                                    Disorder of brain (disorder)
+  Gingivitis (disorder)                                                                                                           Inflammatory disorder of jaw (disorder)
+
+  Septic shock (disorder)                                                                                                         Soft tissue infection (disorder)
+  Cellulitis of external ear (disorder)                                                                                           Otitis externa (disorder)
+
+  Inguinal pain (finding)                                                                                                         Pain in pelvis (finding)
+  Disorder of tendon of biceps (disorder)                                                                                         Disorder of tendon of shoulder region (disorder)
+
+  Pain of breast (finding)                                                                                                        Chest pain (finding)
+  Injury of ulnar nerve (disorder)                                                                                                Ulnar neuropathy (disorder)
+
+  Injury of back (disorder)                                                                                                       Traumatic injury (disorder)
+  Achalasia of esophagus (disorder)                                                                                               Disorder of stomach (disorder)
+
+  Pneumonia due to respiratory syncytial virus (disorder)                                                                         Interstitial lung disease (disorder)
+  Sensory hearing loss (disorder)                                                                                                 Labyrinthine disorder (disorder)
+
+  Degeneration of intervertebral disc (disorder)                                                                                  Osteoarthritis (disorder)
+  Disorder of sacrum (disorder)                                                                                                   Disorder of bone (disorder)
+
+  Peptic ulcer without hemorrhage, without perforation AND without obstruction (disorder)                                         Gastric ulcer (disorder)
+  Diabetic autonomic neuropathy (disorder)                                                                                        Peripheral nerve disease (disorder)
+
+  Cyst and pseudocyst of pancreas (disorder)                                                                                      Cyst of pancreas (disorder)
+  Calculus of kidney and ureter (disorder)                                                                                        Ureteric stone (disorder)
+
+    MeSH, Medical Subject Headings; NCIt, National Cancer Institute Thesaurus; SNOMED CT, Systematized Nomenclature of Medicine Clinical Terms.
+
+
+
+4                                                                                   Mortensen JM, et al. J Am Med Inform Assoc 2014;0:1–7. doi:10.1136/amiajnl-2014-002901
+                                                                                                        Research and applications
+
+
+and (3) cost. For inter-rater agreement, we selected the free mar-
+        24                                                                 Table 2    Mean free marginal κ between experts themselves and
+ginal κ.   The free marginal κ does not assume a ﬁxed number               the crowd
+of labels for each rater (expert/crowd) to assign, as is the case
+for this study––a priori, we do not know the correct labeling              Relationship set               Crowd κ            Expert κ
+
+nor how many labels there are. Next, we created a consensus                All (n=187)                    0.58 (0.55, 0.61)   0.57 (0.49, 0.66)
+standard from the expert majority vote and the result of the
+Delphi session. Speciﬁcally, we included only those relationships          Easy (n=105)                    0.9 (0.9, 0.9)        1 (1, 1)
+                                                                           Delphi–Agreement (n=48)        0.15 (0.08, 0.29)   0.07 (−0.12, 0.25)
+in the consensus standard upon which experts reached super-                Delphi–Near Agreement (n=34)   0.19 (0.12, 0.29)  −0.05 (−0.35, 0.24)
+majority (4:1 or 5:0) agreement after Delphi. We then com-
+pared the crowd and individual experts against the consensus                 With the expert votes obtained, we determined the mean free marginal κ between
+standard using sensitivity and speciﬁcity. In particular, because            experts (ie, the average agreement of an expert with another expert). On correct
+                                                                             relationships, expert κ was ∼0.7 before Delphi, and ∼0.9 after. On incorrect
+of the relatively small sample size, we bootstrapped the samples             relationships, expert κ was ∼0.0 before Delphi, and ∼0.69 after. We then calculated
+(relationships) to obtain a mean area under the receiver operat-             the mean free marginal κ between the final crowd response and each expert (ie, the
+ing characteristic (ROC) curve. By bootstrapping, we were able               average agreement of the crowd with each expert). Note that the mean crowd
+                                                                             0.66). Finally, we stratified by subsets of relationships. Again, note that, on each49,
+to estimate how our method would perform, on average, when                   subset, the mean crowd inter-rater agreement falls well within the range of the
+verifying other relationships not in the experiment. To evaluate             experts. Terminology: ’Easy’—relationships for which experts reached immediate
+whether our method performs better than random, we used per-                 consensus; ’All’—entire set of relationships; ’Delphi–Agreement’—relationships for
+                                                                             which experts reached complete agreement after Delphi; ’Delphi–Near Agreement’—
+mutation testing to comp25e the null distribution with the boot-             relationships upon which only a supermajority of experts reached agreement after
+strapped distribution.      In addition, we bootstrapped the                 Delphi.
+workers to estimate how well our method would perform, on
+
+average, when other workers performed the same veriﬁcation
+task. Finally, we measured the cost of verifying relationships. To        bootstrapping the performance of the workers, the crowd per-
+do so, we tracked the number of crowd workers required to
+complete the task and multiplied by the ﬁxed remuneration of              formed with a mean AUC of 0.78 (p<2e−16). Note that this
+                                                                          result provides a lower bound estimate of how other workers
+US$0.02/worker/relationship. Likewise, we asked experts to                may have generally performed on the same task. However, the
+track their time in completing the task. Then, using the mean
+expert time to completion, we arrived at the approximate cost             workers are not independently distributed and therefore the
+                                                                          bootstrapped result should only serve as a guide. A real-world
+per relationship using the average hourly salary of a medical             replication would likely have a higher AUC. Finally, in compari-
+expert in California (Bureau of Labor Statistics, http://www.bls.
+gov/oes/current/oes291069.htm).                                           son with cost of the crowd at US$0.50/relationship, experts cost
+                                                                          ∼US$2.00/relationship, based on average task completion time
+                                                                          (4.5 h) and average salary of a general practice physician in
+RESULTS
+Together, the crowd and experts identiﬁed 39 critical errors in           California (∼US$182 580).
+200 SNOMED CTrelationships (table 1). For instance, the rela-
+
+tionship ‘short-sleeper is a kind of brain disorder’ is not true in
+all cases, and therefore incorrect. Likewise, ‘septic shock is a
+kind of soft-tissue infection’ mistakes causality with taxonomy.
+
+Septic shock may be caused by a soft-tissue infection but itself is
+not an infection. Generally, these errors are the result of subtly
+incorrect logical deﬁnitions that have unintended effects on
+
+computed     logical   conclusions.    We    have   contacted    the
+International Health Terminology Standards Development
+Organization (IHTSDO), which develops SNOMED CT, and
+provided them with the errors and expert justiﬁcations. We
+
+anticipate that these errors will be corrected in future versions
+of SNOMED CT. We used results of the Delphi round to
+produce a consensus standard among the experts against which
+
+to compare each individual expert and the crowd. After the
+Delphi round, the experts reached supermajority agreement (ie,
+4:1 or 5:0) on the truth value of 187 of the 200 relationships
+
+from SNOMED CT that we studied. We used these 187 rela-
+tionships as a consensus standard set of relationships. For the
+remaining 13 relationships, deﬁnitions were unavailable in both
+
+MeSH and NCIt, explaining why the experts may not have                    Figure 4   Comparison of the crowd and experts. We compared the
+been able to reach agreement.                                             crowd performance against the expert consensus standard by receiver
+   We then compared the responses of the crowd with the initial           operating characteristic (ROC) curves (solid lines). In addition, we
+expert responses in three ways: inter-rater agreement within              compared each individual expert against that same consensus standard
+                                                                          (square points). In general, the experts performed better than the
+groups, performance on the consensus standard, and estimated              crowd (above the ROC curve), but not by a marked margin. Note that
+cost. The average pairwise free marginal κ of the crowd fell
+within the range of that of the experts (table 2). Furthermore,           the key also includes the area under the ROC (AUC). Terminology:
+                                                                          ‘Easy’—relationships for which experts reached immediate consensus;
+the crowd identiﬁed errors with a bootstrapped mean −16a                  ‘All’—entire set of relationships; ‘Delphi–Agreement’—relationships for
+under the ROC curve (AUC) of 0.83 (p<2×10               ). Generally,     which experts reached complete agreement after Delphi; ‘Delphi–Near
+each individual expert performed marginally better than the               Agreement’—relationships upon which only a supermajority of experts
+
+crowd at various points on the ROC curve (ﬁgure 4). When                  reached agreement after Delphi.
+
+Mortensen JM, et al. J Am Med Inform Assoc 2014;0:1–7. doi:10.1136/amiajnl-2014-002901                                                        5
+ Research and applications
+
+
+DISCUSSION                                                           veriﬁcation standard is available outside of peer review. Because
+In this work, we used both experts and crowdsourcing to              ontologies reﬂect a shared (expert) consensus about a domain,
+
+perform quality assurance on a 200-relationship subset of            an absolute truth about what is right or wrong cannot exist.
+SNOMED CT. We found that the crowd is nearly indistinguish-          Instead, we view an error as a statement in the ontology with
+able from any single expert in the ability to identify errors in a   which domain experts do not agree (ie, the statement contra-
+random sample of SNOMED CTrelationships. This subset con-            dicts expert understanding of the domain). In light of this situ-
+                                                                     ation, single-expert veriﬁcation is the most common method to
+tained terms used frequently in many hospitals (as the terms were
+derived from the SNOMED CT CORE Subset). Moreover, this              identify an error and to determine if an error is ‘real’. In our
+random sample is representative of SNOMED CT and of many             work, we use a multi-expert consensus to serve as the approxi-
+other large complex ontologies in its logical structure. Of note,    mation of ground truth. One should not consider our results
+nearly 20% of the relationships were in error as judged by the       (either performance metrics or actual errors) as truth but instead
+
+experts. While this error rate is likely higher than the overall     ar ﬂection of how well the crowd compares with experts in
+error rate among relationships in SNOMED CT, it still indicates      what they interpret to be an error.
+that further quality assurance of SNOMED CT is essential. The
+presence of such errors, although not unexpected based on the        Crowd-assisted ontology engineering
+          14–17
+literature,     is concerning and elicits some open questions        The cost of ontology engineering and maintenance is considerable
+about SNOMED CTand about biomedical ontologies in general.           —for example, hiring a single physician to perform engineering
+▸ At what rate would experts identify errors in all biomedical       and veriﬁcation costs of the order of US$200 000/year. It is
+   ontologies or of those ontologies required in electronic          unlikely that a single physician working full time could properly
+                                                                     verify the entirety of SNOMED CT, let alone have deep, extensive
+   health records?
+▸ What is the impact of ontology errors on downstream                knowledge about all its varied topics. Indeed, the cost to build
+   methods? (For example, could a clinical decision support          large artifacts such as SNOMED CT and the ICDs is orders of
+   system misclassify a patient because of ontology errors?)         magnitude greater than that of hiring a single physician. Given
+▸ What incorrect analytical conclusions could be made because        these high costs, it is encouraging to see the crowd perform so well
+
+   of ontology errors? (For example, might Gene Ontology26           at identifying errors at a lower cost. We found that the crowd costs
+   enrichment analysis mischaracterize microarray data?)             about a quarter of that of an expert, yet performed comparably.
+▸ What are the most important kinds of errors to detect and          These results suggest that the crowd can function as a scalable
+   eliminate?                                                        assistant to ontology engineers. Our crowd-based method is espe-
+
+▸ What is the best approach to reduce or avoid such errors (eg,      cially appropriate in situations where an expert is unavailable,
+   crowdsourcing,    experts,   automated     algorithms,   best     budget is limited, or an ontology is too large for manual error
+   practices)?                                                       checking. While this study focused on one particular type of rela-
+                                                                     tionship, our methodology is general and thus could be applied
+
+Potential impact of an ontology error                                readily to other ontology-veriﬁcation or ontology-engineering
+The errors the crowd identiﬁed are particularly interesting          tasks, thereby reducing costs even further. In practice, an ontology-
+                                                                     development environment would integrate this crowdsourcing
+because they involve concepts in the SNOMED CT CORE                  functionality directly, seamlessly allowing crowd-based ontology
+Subset, indicating (1) that these concepts are used very frequently  error checking and engineering with the click of a button.
+across many hospitals, and (2) that these concepts and relation-
+ships will likely play a role in the clinical decision support
+                                                                     Crowdsourcing expert-level tasks
+systems required by Meaningful Use. To illustrate the signiﬁcance    Previous work with crowdsourcing has focused primarily on
+of the errors identiﬁed, we describe two hypothetical situations     intuitive, pattern-recognition tasks.–4 For instance, common
+focused on ‘short-sleeper is a kind of brain disorder.’
+A. A clinical decision support system suggests the immobilization    sense tasks such image object recognition or text sentiment ana-
+                                                                     lysis are readily solved with crowdsourcing. Encouragingly, our
+    of all persons with a brain disorder. Using the error above, the results suggest that crowdsourcing can also solve more complex,
+    system would improperly recommend the immobilization of          expert-level tasks. This result is especially relevant for situations
+    those who experience shortened sleep. This incorrect recom-
+    mendation would certainly cost practitioner time and trust and   where experts are unavailable, expensive, or unable to complete
+    may even cause an unwarranted procedure.                         a large task. We identiﬁed two factors to consider when one is
+                                                                     developing a crowdsourcing solution to knowledge-intensive
+B. When querying 27tient data to extra cohorts (eg, with tools       tasks. First, it is non-trivial to reformulate an expert-level task as
+    such as i2b2),  to query results on persons with brain disor-    one suitable for the crowd. We found that rapid, iterative task
+    ders would entirely mischaracterize the population, classify-
+    ing short sleepers into the ‘cases’ instead of the ‘controls’.   design was essential for arriving at a task formulation that the
+                                                                     crowd could complete. The second factor is knowledge type.
+    This misclassiﬁcation could lead to incorrect hypotheses         Tasks that require synthesis of knowledge, or that require back-
+    about the population or even an extremely biased retro-          ground knowledge that cannot be provided directly to workers,
+    spective study result.
+  These two situations show how the errors the crowd identi-         may not be appropriate. It is likely that tasks that are self-
+                                                                     contained (ie, all the necessary information is immediately
+ﬁed could affect healthcare today and how the errors are espe-       available) are most appropriate for the crowd. For example, in
+cially important to identify as we move forward with                 the ontology-veriﬁcation task, deﬁnitions provided all the neces-
+ontology-based health information technology.
+                                                                     sary information with which to complete the task. We cannot
+                                                                     exclude the possibility that crowd workers ﬁrst accessed web-
+Ontology and ground truth                                            based resources such as Wikipedia before responding to our
+Evaluating ontology veriﬁcation methods remains a challenge—         online questions, however. There are many expert-level tasks that
+
+there is no ground truth or absolute truth against which to          are similarly ‘self-contained’, and thus we are excited about the
+compare     methods.    No    common      biomedical   ontology      possibility of crowdsourcing other knowledge-intensive tasks.
+
+6                                                            Mortensen JM, et al. J Am Med Inform Assoc 2014;0:1–7. doi:10.1136/amiajnl-2014-002901
+                                                                                                                        Research and applications
+
+
+
+CONCLUSION                                                                             4   Cooper S, Khatib F, Treuille A, et al. Predicting protein structures with a multiplayer
+Ontologies, which deﬁne for both people and computers the                                  online game. Nature 2010;466:756–60.
+                                                                                       5   Staab S, Studer R. Handbook on ontologies. 2nd edn. Springer-Verlag New York
+entities that exist in a domain and the relationships between                              Inc, 2009.
+them, support many data-intensive tasks throughout biomedi-                            6   Bodenreider O, Stevens R. Bio-ontologies: current trends and future directions. Brief
+
+cine and healthcare. The biomedical community, however, faces                              Bioinform 2006;7:256–74.
+a challenge in engineering ontologies in a scalable, high-quality                      7   Rubin DL, Shah NH, Noy NF. Biomedical ontologies: a functional perspective. Brief
+                                                                                           Bioinform 2008;9:75–90.
+fashion, particularly when mature ontologies may include many                          8   Hunter L, Lu Z, Firby J, et al. OpenDMAP: an open source, ontology-driven concept
+thousands of concepts and relationships. We have shown that
+                                                                                           analysis engine, with applications to capturing knowledge regarding protein
+crowdsourcing, which researchers use to provide solutions to                               transport, protein interactions and cell-type-speciﬁc gene expression. BMC
+intuitive tasks in a scalable way, can address this engineering                            Bioinformatics 2008;9:78.
+                                                                                       9   Hoehndorf R, Dumontier M, Gennari JH, et al. Integrating systems biology models
+challenge. We used crowdsourcing methods to solve the difﬁcult
+task of identifying errors in SNOMED CT, an important, large                               and biomedical ontologies. BMC Syst Biol 2011;5:124.
+                                                                                     10    Segal E, Shapira M, Regev A, et al. Module networks: identifying regulatory
+biomedical ontology. We then compared results from the crowd                               modules and their condition-speciﬁc regulators from gene expression data. Nat
+with those offered by medical experts who performed the same                               Genet 2003;34:166–76.
+
+task, and we found that errors that the two groups identiﬁed                         11    LePendu P, Iyer S V, Bauer-Mehren A, et al. Pharmacovigilance using clinical notes.
+were concordant. The results suggest that crowdsourcing may                                Clin Pharmacol Ther 2013;93:547–55.
+                                                                                     12    Whetzel PL, Noy NF, Shah NH, et al. BioPortal: enhanced functionality via new web
+offer mechanisms to solve problems that require considerable                               services from the National Center for Biomedical Ontology to access and use
+biomedical expertise.                                                                      ontologies in software applications. Nucleic Acids Res 2011;39:W541–5.
+
+                                                                                     13    Blumenthal D, Tavenner M. The “meaningful use” regulation for electronic health
+Author afﬁliations                                                                         records. N Engl J Med 2010;363:501–4.
+1Stanford Center for Biomedical Informatics Research, Stanford University, Stanford, 14    Ceusters W, Smith B, Goldberg L. A terminological and ontological analysis of the
+                                                                                           NCI Thesaurus. Methods Inf Med 2005;44:498.
+2alifornia, USA
+ Biomedical Informatics Training Program, Stanford University, Stanford, California, 15    Rector AL, Brandt S, Schneider T. Getting the foot out of the pelvis: modeling
+USA                                                                                        problems affecting use of SNOMED CT hierarchies in practical applications. JAm
+3Faculty of Medicine, University of Calgary, Calgary, Canada                               Med Informatics Assoc 2011;18:432–40.
+4                                                                                    16    Zhu X, Fan JW, Baorto DM, et al. A review of auditing methods applied to the
+5School of Computer Science, University of Manchester, Manchester, UK
+ Google Inc., Mountain View, California, USA                                               content of controlled biomedical terminologies. J Biomed Inform 2009;42:413–25.
+                                                                                     17    Ochs C, Perl Y, Geller J, et al. Scalability of abstraction-network-based quality
+Acknowledgements Special thanks to E Simpson for statistics-related advice on              assurance to large SNOMED hierarchies. AMIA Annu Symp Proc
+                                                                                           2013;2013:1071–80.
+how to use and implement Variational Bayes.
+Contributors JMM, MAM, and NFN developed and executed the study. They also           18    Noy NF, Mortensen JM, Alexander PR, et al. Mechanical Turk as an ontology
+                                                                                           engineer? Using microtasks as a component of an ontology engineering workﬂow.
+wrote and revised the manuscript. JMM is guarantor. TES, EPM, ALR, MJ, and MAM             Web Science, 2013.
+served as domain experts.                                                            19    Lawley MJ, Bousquet C. Fast classiﬁcation in Protégé: Snorocket as an OWL 2 EL
+                                                                                           reasoner. Proceedings of the 6th Australasian Ontology Workshop (IAOA’10).
+Funding This work was supported by the National Institute of General Medical
+Sciences grant number GM086587, by the National Center for Biomedical Ontology,            Conferences in Research and Practice in Information Technology 2010;45–9.
+supported by the National Human Genome Research Institute, the National Heart,       20    Horridge M, Bechhofer S. The OWL API: a Java API for working with OWL 2
+Lung, and Blood Institute, and the National Institutes of Health Common Fund grant         ontologies. OWLED 2009;11–21.
+                                                                                     21    Mortensen JM, Noy NF, Musen MA, et al. Crowdsourcing ontology veriﬁcation.
+number HG004028, and by the National Library of Medicine Informatics Training
+grant number LM007033.                                                                     International Conference on Biomedical Ontologies. 2013.
+                                                                                     22    Simpson E, Roberts S, Psorakis I, et al. Dynamic Bayesian combination of multiple
+Competing interests None.                                                                  imperfect classiﬁers, 2012. http://arxiv.org/abs/1206.1831
+Provenance and peer review Not commissioned; externally peer reviewed.               23    Linstone HA, Turoff M. The Delphi method: techniques and applications.
+
+                                                                                           Addison-Wesley, 1975.
+                                                                                     24    Randolph JJ. Free-marginal multirater kappa (multirater κfree): an alternative to
+REFERENCES                                                                                 Fleiss’ ﬁxed-marginal multirater kappa. Joensuu learning and instruction symposium,
+ 1   Howe J. The rise of crowdsourcing. Wired Mag 2006;14:1–4.                             2005.
+
+ 2   Quinn AJ, Bederson BB. Human computation: a survey and taxonomy of a growing    25    Efron B. The Jackknife, the Bootstrap and other resampling plans. SIAM, 1982.
+     ﬁeld. Proceedings of the 2011 annual conference on Human factors in computing   26    Khatri P, Druaghici S. Ontological analysis of gene expression data: current tools,
+     systems—CHI’11. Vancouver, BC: ACM, 2011:1403–12.                                     limitations, and open problems. Bioinformatics 2005;21:3587–95.
+ 3   Lintott CJ, Schawinski K, Slosar A, et al. Galaxy Zoo: morphologies derived from27    Murphy SN, Weber G, Mendis M, et al. Serving the enterprise and beyond with
+     visual inspection of galaxies from the Sloan Digital Sky Survey. Mon Not R Astron     informatics for integrating biology and the bedside (i2b2). J Am Med Informatics
+
+     Soc 2008;389:1179–89.                                                                 Assoc 2010;17:124–30.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Mortensen JM, et al. J Am Med Inform Assoc 2014;0:1–7. doi:10.1136/amiajnl-2014-002901                                                                              7

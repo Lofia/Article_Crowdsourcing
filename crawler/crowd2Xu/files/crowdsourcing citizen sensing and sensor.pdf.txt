@@ -1,0 +1,2372 @@
+Kamel Boulos et al. International Journal of Health Geographics 2011, 10:67
+http://www.ij-healthgeographics.com/content/10/1/67                                INTERNATIONAL JOURNAL
+                                                                                   OF HEALTH GEOGRAPHICS
+
+
+
+
+ REVIEW                                                                                         Open Access
+
+
+
+Crowdsourcing, citizen sensing and sensor web
+
+
+technologies for public and environmental health
+
+
+surveillance and crisis management: trends, OGC
+
+standards and application examples
+
+                       1,2*             3,4                 5,6               5,6             7,8            9
+Maged N Kamel Boulos , Bernd Resch , David N Crowley , John G Breslin , Gunho Sohn , Russ Burtner,
+William A Pike9, Eduardo Jezierski and Kuo-Yu Slayer Chuang    11
+
+
+
+
+  Abstract
+  ’Wikification of GIS by the masses’ is a phrase-term first coined by Kamel Boulos in 2005, two years earlier than
+  Goodchild’s term ‘Volunteered Geographic Information’. Six years later (2005-2011), OpenStreetMap and Google
+
+  Earth (GE) are now full-fledged, crowdsourced ‘Wikipedias of the Earth’ par excellence, with millions of users
+  contributing their own layers to GE, attaching photos, videos, notes and even 3-D (three dimensional) models to
+  locations in GE. From using Twitter in participatory sensing and bicycle-mounted sensors in pervasive
+
+  environmental sensing, to creating a 100,000-sensor geo-mashup using Semantic Web technology, to the 3-D
+  visualisation of indoor and outdoor surveillance data in real-time and the development of next-generation,
+  collaborative natural user interfaces that will power the spatially-enabled public health and emergency situation
+  rooms of the future, where sensor data and citizen reports can be triaged and acted upon in real-time by
+
+  distributed teams of professionals, this paper offers a comprehensive state-of-the-art review of the overlapping
+  domains of the Sensor Web, citizen sensing and ‘human-in-the-loop sensing’ in the era of the Mobile and Social
+  Web, and the roles these domains can play in environmental and public health surveillance and crisis/disaster
+  informatics. We provide an in-depth review of the key issues and trends in these areas, the challenges faced when
+
+  reasoning and making decisions with real-time crowdsourced data (such as issues of information overload, “noise”,
+  misinformation, bias and trust), the core technologies and Open Geospatial Consortium (OGC) standards involved
+  (Sensor Web Enablement and Open GeoSMS), as well as a few outstanding project implementation examples from
+
+  around the world.
+  Keywords: Citizen Sensing, Sensors, Social Web Crowdsourcing, Twitter, Geo-mashups, Semantic Web, OGC Sensor
+
+  Web Enablement, OGC Open GeoSMS, 3-D Visualisation, Natural User Interfaces, Public and Environmental Health,
+  Crisis Informatics
+
+
+
+State-of-the-art review                                    Earth’ par excellence, with millions of users contributing
+’Wikification of GIS (Geographic Information Systems)      their own content to it, attaching photos, videos, notes
+by the masses ’ is a phrase-term first coined by Kamel     and even 3-D (three dimensional) models to locations in
+Boulos in 2005 [1], two years earlier than Goodchild ’s    GE.
+
+term ‘Volunteered Geograph ic Information (VGI) ’ [2].       GPS (Global Positioning System) traces received from
+Six years later (2005-2011), Google Earth (GE) [3] is      commuters via their Internet-enabled mobile devices
+now a full-fledged, crowdsourced     ‘Wikipedia of the     can be used to generate real- time traffic updates, while
+
+                                                           geo-tagged, street-level audio samples recorded and
+* Correspondence: mnkamelboulos@plymouth.ac.uk             uploaded by pedestrians using their location-aware
+1Faculty of Health, University of Plymouth, Drake Circus, Psmartphones can be aggregated to create citywide noise
+PL4 8AA, UK                                                (pollution) maps for various times of the day and week
+Full list of author information is available at the end of the article
+
+                             © 2011 Kamel Boulos et al; licensee BioMed Central Ltd. This is an Open Access article distributed under the terms of the Creative
+                             reproduction in any medium, provided the original work is properly cited. which permits unrestricted use, distribution, and
+Kamel Boulos et al. International Journal of Health Geographics 2011, 10:67                                 Page 2 of 29
+
+http://www.ij-healthgeographics.com/content/10/1/67
+
+
+
+
+[4]. Such applications are often referred to as   ‘crowd-    influenza outbreaks in real-time from facilities across
+sourcing ’ or ‘participatory sensing ’ applications, since   the country. GeoChat was also deployed during the
+they are capitalising on the power of the masses (or         2010 earthquake relief efforts in Haiti to coordinate field
+
+‘crowds’) and relying on citizen participation to achieve    teams’ activities and provide remote support from out-
+their goals. They are becoming increasingly common           side the earthquake zone [13]. Ushahidi and Crowdmap
+these days, thanks to the rapidly growing affordability,     can be similarly used to crowdsource and map crisis
+
+availability and adoption rates in recent months and         information from multiple data streams in real-time;
+years of Internet-enabled and location-aware mobile          see, for example, Ushahidi ’s crowdsourced map of the
+devices, such as tablets and smartphones [5].                2010 Haitian earthquake [18] and Thailand Flood Crisis
+
+  Geolocation-aware mobile crowdsourcing apps (short         Information Map at [19] (these latter two examples are
+for applications, especia lly those designed to run on       also a good demonstration of Ushahidi’s ‘dynamic time-
+smartphones and tablets), such as Love Clean Streets         line’ feature for tracking crowdsourced reports on the
+
+[6], HealthMap’ s Outbreaks Near Me [7] and Med-             map over time and filtering the data by time). Maps of
+Watcher (drug safety surv    eillance) [8], and the San      this kind provide situational awareness, which is essen-
+Ramon Valley (CA, USA) Fire Department app (a real-          tial in crisis management operations.
+
+time, geo-aware lifesaving app that alerts ‘citizen respon-    Real-time mining of indirectly (i.e., unsolicited, not
+ders’ trained in CPR (CardioPulmonary Resuscitation) as      obtained via a formal reporting form/not originally
+soon as a cardiac arrest has been reported to emergency      meant for posting to a specific crowdsourcing effort)
+                                                             self-reported and sousveilla nce information harvested
+services) [9], are leveraging the power of the Social Web
+(’Web 2.0’) and smartphones to provide unprecedented         from aggregates of Twitter and other social network
+levels of citizen engagement and participation in their      feeds can offer useful data and insights about unfolding
+local and wider communities.                                 trends and emerging crowd behaviours at times of crises
+
+  Crowdsourced mapping examples (some are in real-           [20]. However, such (raw) data obtained from Social
+time) include Sickweather [10], an online social health      Web feeds often contain variable amounts of       “noise”,
+network for sickness (e.g., flu) forecasting and mapping;    misinformation and bias (which can get further “ampli-
+
+the crowdsourced real-time radiation maps [11] that          fied” through  the viral nature of social media) and will
+made the news headlines following Japan ’s Fukushima         usually require some advanced forms of filtering and
+Daiichi nuclear disaster in March 2011; and the ‘Lunch       verification by both machine-based algorithms and
+
+Break’ Web map [12], a poll and map launched by the          human experts before becoming reliable enough for use
+Wimpfheimer-Guggenheim Fund for International                in decision-making tasks. WSARE (What          ’sne
+Exchange in Nutrition, Dietetics and Management that         About Recent Events)-type algorithms [21] and plat-
+
+provides a unique look at lunc htime eating patterns in      forms such as SwiftRiver [22] (open source, provided by
+North America. These apps and maps, freely available to      Ushahidi) can prove helpful in trying to filter the Social
+the public online, are excellent examples of how crowd-      Web “firehose”.
+
+enabled systems are revolutionising the way we tackle          (Twitter can also act as a   ‘publish-subscribe’  infra-
+problems and allowing us to monitor and act upon             structure for non-human sensors and smartphones to
+almost anything, anywhere, in real-time.                     directly post (i.e., automatically push time, date and
+
+  GeoChat [13] and Ushahidi [14] are two open source         location-stamped sensor readings to Twitter) and con-
+platforms that enable the   easy deployment of crowd-        sume (i.e., subscribe to, an d data mine, sensor reading
+sourced interactive mapping applications with Web            tweets) more crisp and objective observations about our
+
+forms/e-mail, SMS (Short Message Service) and Twitter        physical world, using some agreed form of ‘sensor tweet-
+[15] support. They can be freely downloaded and              ing standard ’ [23] or ‘Twitter Annotations ’ (tweet
+deployed on one’s own server by anyone with the appro-       metadata).)
+
+priate technical expertise or used as online services          Besides human-triggered and/or generated input, more
+hosted by their respective platform providers (e.g.,         and more medical and other specialised sensor devices
+Crowdmap [16] is the hosted version of Ushahidi).            such as environmental and weather sensors, either fixed
+
+Mobile apps are available for accessing Ushahidi on          (e.g., at home, in buildings/rooftops or street furniture)
+smartphones and tablets, e.g., for the Android platform      or mobile (e.g., vehicle-mounted as in [24] or held/worn
+[17].                                                        by commuting user), are being equipped these days with
+
+  In Cambodia, the Ministry of Health uses GeoChat for       M2M (Machine-to-Machine) SIM (Subscriber Identity
+disease reporting and to send staff alerts and rapidly       Module) cards or with Bluetooth or some other form of
+escalate response to potential outbreaks, while in Thai-     wireless communication with a suitable in-range relaying
+
+land, more than 900 facilitie s within the Hospital Net-     device, e.g., a user-held smartphone, to enable these sen-
+work exchange information and get alerts to monitor          sors to send additional forms of non-human input to a
+Kamel Boulos et al. International Journal of Health Geographics 2011, 10:67                                   Page 3 of 29
+
+http://www.ij-healthgeographics.com/content/10/1/67
+
+
+
+
+remote aggregator service. These specialised sensor             Another OGC standard, Open GeoSMS, enables the
+devices, usually operating within a network (or more          interoperable communicatio n of location coordinates
+than one network) of other distributed sensors, can           and content between differe nt location-aware devices
+
+automatically (or autonomously, depending on setup)           and applications using the extended Short Message Ser-
+gather and relay location (and/or person)-specific obser-     vice (SMS), while maintaining human readability of the
+vations at intervals (scheduled or when required) or          content [33]. Open GeoSMS has been implemented in
+
+continuously, in real-time, to remote stations or   ‘situa-   Ushahidi and in the open source Sahana Disaster Man-
+tion rooms ’. There (in the latter remote centres) data       agement System [34] and has proven very useful in
+from multiple device sensors and/or human observers,          emergency and crisis management situations.
+
+covering one or more than one place, are collated, ana-         Following on from this condensed, bird’s eye review of
+lysed, contextualised/trian gulated (including with other     the field, the remaining sections of the paper will now
+non-sensor data) and summarised/visualised in different       shed some additional light on a select number of key
+
+ways as appropriate, in real-t ime, near-real-time and/or     issues, core standards and technologies, as well as a few
+for past points in time, e.g., DERI   ’s live sensor geo-     outstanding project implementation examples related to
+mashup [25,26] (Figure 1), to support monitoring, sur-        the subject.
+
+veillance and decision-making tasks of various kinds.
+  While the 2-D (two-dimensional) user interface of           A closer look at citizen sensing (participatory sensing)
+DERI’s live sensor geo-mashup (based on Google Maps)          and ‘human-in-the-loop sensing’ in the era of the Mobile
+
+is very functional for      ‘situation room ’ purposes,       and Social Web
+improvements can still be made to realise the full vision     In 1999, before the advent of Foursquare [35], mobile
+of emergency/public health virtual situation rooms            Twitter clients or GPS and sensor-enabled phones, a
+described in [27]. For example, the ‘3D Town’ project at      somewhat prescient Neil Gross in Bloomberg Business
+
+York University, Canada, is working to bring real-time        Week said:
+sensing, tracking and surveillance of moving vehicles
+and people in outdoor and indoor city environments to             “In the next century, planet earth will don an electro-
+
+static 3-D city models and 3-D virtual globes, thus mak-          nic skin. It will use the Internet as a scaffold to sup-
+ing the latter truly dynamic by visualising live data on          port and transmit its sensations. These will probe
+them [28], while colleagues at Pacific Northwest                  and monitor cities and endangered species, the atmo-
+
+National Laboratory, USA, are developing future spa-              sphere, our ships, highways and fleets of trucks, our
+tially-enabled work enviro nments for emergency man-              conversations, our bodies-even our dreams [36].”
+agement, which they call        ‘Precision Information
+
+Environments’ (or PIEs) [29]. PIEs aim at providing tai-        This view of sensors as ubiquitous and being
+lored access (i) to information from multiple data            embedded into our everyday environment can be seen
+streams/sensors, and (ii) to analysis, simulation, decision   as an accurate description of human-sensor interaction
+
+support, and collaboration/co mmunication capabilities.       today with the advancements in wireless sensor net-
+PIEs achieve this through novel interactions that adapt       works and with the huge growth in the use of mobile
+to the varying users (e.g., first responders, policy makers   devices which contain multiple sensors. The unprece-
+
+and the public) and phases of emergency management            dented 96% growth in smartphone sales (in Q3 2010)
+(from planning to response, recovery and mitigation) in       [5,37] displays the availability and prevalence of these
+distributed situation room and field settings (see con-       relatively cheap mobile sensing devices that enable
+
+cept video at [30]).                                          Internet users to become sensing devices.
+  The Open Geospatial Consortium’        s(OGC)Sensor           In the past ten years, we have seen the growth of
+Web Enablement (SWE) standards allow developers to            online social networks and an explosion in user-gener-
+
+make all types of sensors, transducers and sensor data        ated content on the Web published from mobile devices
+repositories discoverable, accessible and useable (for        to social platforms such as Twitter. Twitter is a micro-
+tasking, eventing and alert ig)i theWebbiigfn                 blogging platform founded in 2006, which by September
+
+service interfaces that enable an interoperable usage of      2011 had 100 million active monthly users and 400 mil-
+sensor resources. A Sensor Web based on SWE services          lion monthly visitors [38]. As of June 2011, Twitter pro-
+and standardised interfaces hides the heterogeneity of its    cessed 200 million posts (or    ‘tweets’) per day [39]. In
+
+underlying sensor network, as well as the complexity of       parallel with this growth of social networks, there has
+its communication details and various hardware compo-         been a surge in sensor networks, many of which are also
+nents, from the applications that are built on top of it,     connected to the Internet, e.g., [40]. These usually con-
+
+thus making the development and deployment of such            sist of multiple static or inert sensors that capture cer-
+applications a much easier task [31,32].                      tain readings from their environment whenever they are
+Kamel Boulos et al. International Journal of Health Geographics 2011, 10:67                                        Page 4 of 29
+http://www.ij-healthgeographics.com/content/10/1/67
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Figure 1 Screenshot of DERI ’s LSM (Linked Sensor Middleware) live sensor geo-mashup . Screenshot of the interface available at [21]
+  showing near-real-time data obtained from a ‘traffic sensor’ in London, UK.
+
+
+programmed to do so. In addition, many people are now            of ubiquitous computing, which he sees as the         “avail-
+
+carrying some form of sensor-laden device - a mobile             ability of computers throughout the physical environ-
+phone, a tablet, a fitness device - from which sensor            ment, virtually, if not effectively, invisible to the user  “
+readings can also be retrieved. This is sometimes called         [42,43]. Cuff et al. describe mobile devices as “passive
+
+‘human-in-the-loop sensing’, but cars, animals and other         sensors that can silently collect, exchange, and process
+moving entities can also incorporate sensors.                    information all day long“ [41]. This style of sensing is
+
+  Cuff et al. propose that pervasive computing has               called ‘urban sensing ’ due to its suitability for large
+moved from the laboratory into the natural environment           urban areas with high popula tion density, but could be
+[41], laying the foundations for Mark Weiser ’sconcept           implemented in any environment. Campbell et al. view
+Kamel Boulos et al. International Journal of Health Geographics 2011, 10:67                                    Page 5 of 29
+http://www.ij-healthgeographics.com/content/10/1/67
+
+
+
+
+“urban sensing as a departure from existing thinking on       properties in the SSN ontology. The ontology represen-
+sensor networks because people are no longer just consu-      tation of a sensor links together what it measures (the
+mers of sensed data about some natural phenomenon or          domain), the physical sensor (the grounding), and its
+
+ecological process. Rather data about people are now          functions and processing (the models). The SSN ontol-
+sensed and collected such that the sets of producers and      ogy does not try and describe every sensor and scenario
+consumers of sensed data now overlap; people are ‘in the      but instead develops a general representation of sensors
+
+loop’ and may participate in both roles [44].”                and a domain description; it relies on upper-level ontol-
+  Cuff and colleagues raise two issues with urban sen-        ogies to define the domain and on an operation model
+sing (which affect all human-in-the-loop sensing gener-       that describes how the measurement is implemented
+
+ally): bad data processing and the ‘observer effect ’ [41].   [49].
+Eradicating these issues or lessening their effect by veri-      Burke et al. assert that “participatory sensing will task
+
+fication of data with other sensor nodes/human input           deployed mobile devices to form interactive, participatory
+data can be accomplished but depends on the density of         sensor networks that enable public and professional users
+the network and existence of other related data. Chatzi-       to gather, analyse and share local knowledge“ [50]. They
+
+giannakis et al. discuss technical challenges to pervasive     envisage mobile devices eq uipped with cameras, GPS,
+applications in urban sensing, which include multiple          and microphones acting as sensor nodes or as location-
+data streams of varying data types, different skill/knowl-     aware collection instruments. This idea of a mobile
+
+edge levels of users, and privacy and security of user         device wireless sensor network removes many of the
+data [45]. Some of these challenges can be overcome by         barriers to implementing urban sensor networks. Bar-
+using standardised sensor descriptions and models; the         riers and challenges exist such as (i) initial cost of the
+
+Semantic Sensor Network ontology (SSN) is an example           nodes, (ii) the need to position/distribute the sensors
+of this and creates a domain-independent and full              appropriately, and (iii) implementing a network dense
+model for sensing applications by merging sensor-              enough to build in redundancy if individual sensor
+
+focused (e.g., SensorML [46], part of OGC SWE), obser-         nodes fail. Welsh examines issues with implementing
+vation focused (e.g., Observations and Measurements            wireless sensor networks such as random positioning
+[47], part of OGC SWE), and system-focused models              (redundant in scientific experiments, as location is often
+
+[48]. Figure 2 presents an overview of the classes and         a requirement and due to cost of nodes), the cost and
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Figure 2 SSN (Semantic Sensor Network) ontology.
+Kamel Boulos et al. International Journal of Health Geographics 2011, 10:67                                     Page 6 of 29
+
+http://www.ij-healthgeographics.com/content/10/1/67
+
+
+
+
+size of nodes, and creating dense networks [51]. Density       people who actively observe, report, collect, analyse, and
+raises issues in other ways through redundancy and net-        disseminate information via text, audio or video mes-
+work capabilities - redundancy is beneficial, but network      sages“ [55]. It is this ‘human-in-the-loop sensing ’ com-
+
+capabilities may be limited, so redundancy might not be        bined with Social Web services and mobile computing
+possible to implement. Mobile cellular networks also           that leads to the creation of citizen sensors and differ-
+suffer from this density challenge when a large amount         entiates it from urban or participatory sensing. Sheth
+
+of users using bandwidth can cause a flooding of the           lists the advantages of ‘human-in-the-loop sensing’ as:
+network. This network flooding can often occur during             Machines are good at symbolic processing but poor
+ti esiiassee3Jl 21i Mumb,i                                     at perception;
+
+India, where after three explosions mobile networks               Machines are good at continuous, long-term sensing
+were unusable by government officials and the general          but humans can contextualise, discriminate and filter;
+populace [52,53].                                              and
+
+  Burke et al. discuss the core network services in a par-        Learning, adapting, background knowledge, common
+ticipatory application, which include the concept of net-      sense and experience [55].
+work-attested location and time, physical context using          Humans continuously subconsciously and consciously
+
+sensors (accelerometer, compass to work out direction          sense, process, and induce inferences from events
+device is facing), distance between devices/nodes, and         around them in real-time. Sense in this context is
+context resolution control which controls the level of         defined as one of the methods for a living being to
+                                                               gather data about the world: sight, smell hearing, touch,
+information shared by any one user or sensor. They
+foresee different applied areas for the research field in      and taste [56]. Humans also leverage past experiences,
+public health, urban planning, cultural identity (images       background knowledge, and reasoning to extract mean-
+with location, time, and context), and natural resource        ing from often confusing or new experiences. Srivastava
+
+management, and state the goal of these services as pla-       and colleagues define the following different participa-
+cing “users in the loop of the sensing process and aiming      tion roles of human-centric (or      ‘human-in-the-loop ’)
+to maximise the credibility of data they collect    “.They     sensing:
+
+see these applications as an aid to researchers, policy-          (Humans as) information source;
+makers and the public that “use data to understand and            Measurement collection;
+persuade; higher quality data tend to generate more sig-          Sensor data processing;
+
+nificant action and better understa nding which leads to          Information sharing; and
+better planning, and policy decisions “ [50]. Citizen sen-        Information   fusion and analysis [57].
+sing and “slogging” (sensor logging) [54] concepts then          These roles show that the human sensors perform
+
+emerge from this participatory sensing research where          processing and analysis of the collected data [57]. This
+citizen sensors embedded in their environments report/         pre-processing/processing of sensory data from experi-
+analyse their surroundings.                                    ence/background knowledge is what differentiates our
+
+  Sheth describes users of the Internet or Web-enabled         sensing capabilities from hardware sensors. Sensing can
+social community as citizens, and the ability to interact      be defined as an operation of a sensor, the detection of
+with Social Web (’Web 2.0’) services can augment these         a physical presence and the conversion of that data into
+
+citizens into citizen sensors, “that is, humans as citizens    a signal that can be read by an observer or an instru-
+on the ubiquitous Web, acting as sensors and sharing           ment [58]. In citizen sensing, a sensor is not necessarily
+their observations and views using mobile devices and          a hardware sensor but can be a virtual sensor or a
+
+Web 2.0 services“ [55]. Goodchild discusses citizen sen-       human interpreting sensory data. Sheth also envisages
+sing in the field of Volunteered Geographic Information        that microblogging platforms (where users can post
+(VGI) and sees citizens as a network of human sensors          short textual messages, Internet links, attached videos,
+
+with over “6 billion components, each an intelligent           and pictures) as low-effort publishing services are of
+synthesiser and interpreter of local information. One can      particular interest to citizen sensing due to the large
+see VGI as an effective use of this network, enabled by        scale of users on platforms such as Twitter, which
+
+Web 2.0 and the technology of broadband communica-             enables the user to post from mobile devices with mini-
+tion“ [2]. He sees each human sensor node as being             mum effort through mobile applications [55]. As micro-
+“equipped with some working subset of the five senses          blogging lends itself to instantaneous updates, creation
+
+and with the intelligence to compile and interpret what        ofdatltedtoeventsarl ipostedr
+they sense, and each free to roam around the surface of        before it can be reported on by more traditional media
+the planet“ [2]. Events, online social networks, or net-       methods or even by blog or blog-like services. He uses
+
+works created more spontaneously by events can create          the example of Twitter posts during the Mumbai terror-
+citizen sensor networks - “an interconnected network of        ist attacks in November 2008, when Twitter updates
+Kamel Boulos et al. International Journal of Health Geographics 2011, 10:67                                    Page 7 of 29
+
+http://www.ij-healthgeographics.com/content/10/1/67
+
+
+
+
+and Flickr [59] feeds by citizens using mobile devices         Twitter’s search API (Application Programming Inter-
+reported observations of these events in almost real-          face) [69] is used with extraction of hashtags. The
+time [60].                                                     retrieved hashtags phrases are then used as seed key-
+
+  These events are spatially, temporally, and thematically     words and seed keywords are generated by using Google
+(STT)-linked; Sheth describes related events as situa-         Insights for Search [70]. This works on the presumption
+tions. These events and series of related events can           that high volume search terms describe events and are
+
+rapidly create networks of users posting information,          of high interest to users [68]. In this work hyperlinks to
+but currently it can be difficult to track and collate all     external content were ignored and only textual content
+this information and make sense of all related posts.          was studied (hyperlink analysis was added in Twitris 2.0
+
+These events can be used to describe a model where,            [71]).
+according to Westermann, events are “the basic unit for          At present, GPS adds location to the data of the post
+organising data and for user interaction      “ [61]. Jain     made, but in the field of multi-sensor context awareness,
+
+dfieieveienmodelasa                      “human-centred        researchers are always examining ways to augment
+computing system that will give users a compelling             devices with awareness of their situation and environ-
+experience by combining quality content, carefully             ment to add contextual understanding. As Gellersen       et
+
+planned data organisation and access mechanisms“ [62].         al. assert “position is a static environment and does not
+These events can lead to ad-hoc spontaneous networks           capture dynamic aspects of a situation “ [72]. This idea
+that are not necessarily socially interlinked but are          can be applied to most single sensor data, but with
+                                                               multi-sensor context awareness, the diverse sensor read-
+event-connected, where such events are described in
+spatial, thematic, and temporal terms. These events as         ings are combined and then with processing, situational
+viewed by multiple citizen sensors can have different          context can be derived. Mobile phones and tablet-style
+perspectives taken from the citizen ’s own assessment of       devices come equipped with an array of sensors and are
+
+the event, which can also influence the reporting. Kwak        positioned ideally to be the ubiquitous computing and
+et al. discuss the role of Twitter as a social network or      communications devices in the near future. These sen-
+as a news media; their research shows that a retweet           sors enable mobile phone sensing application domains
+
+(where a retweet or ‘RT’ on Twitter describes an email-        such as healthcare and envir onmental monitoring [73]
+like forwarding mechanism practised by Twitter users to        and can be utilised within the citizen sensing field.
+show the origin of the post/tweet) reaches an average of
+
+1,000 users and this reach value is independent of the         Bringing together the best of experts, crowds, and
+number of followers of the original poster [63]. Retweet       machines
+trees show the spread of news and other interest pieces        One needs to adopt concurrently a set of three practices
+
+on Twitter and show the usefulness of Twitter as an            for rapid analysis of large volumes of information:
+event tracking mechanism and as a ‘citizen journalism ’        expert analysis, crowdsourcing (especially engaging net-
+platform. Sheth [64] describes how semantic annotation         works of professionals in the health system, who have
+
+(using Resource Description Framework - in - attri-            local knowledge and can do contributions from their
+butes–RDFa [65]) of sensor data and then citizen sensor        perspectives, not only ‘public crowds of citizens ’)and
+data [55] can aid metadata already embedded within             machine learning. Each of these three items provides
+
+user posts on Twitter and Flickr. This semantic annota-        useful data by itself, but used together, they are able to
+tion would assist thematic analysis and aid in dissemi-        counter-balance each other ’s strengths and weaknesses,
+nating information from informal SMS-style language.           as shown in Figure 3.
+
+The building of semantic domain models about specific            Experts make decisions based on understanding data
+event types but in a generalised event model to describe,      sources and the mechanics behind health events (e.g.,
+for example, natural disasters instead of specific types,      transmission modes of diseases, time lags (incubation
+
+and models to describe geographical locations would            period) between infection and (onset of) symptoms,
+also aid in the language processing of such informal           knowledge of the typical behaviour of patients, etc.).
+text. These general domain models would also remove            These experts can very rapi dly generate a hypothesis
+
+the need to create more formal domain models that              about an unfolding event or validate, confirm or deny a
+require agreement by specialised domain experts.               certain characterisation. They also have in-depth knowl-
+  An example of a citizen sensing application, Twitris         edge about response protocols and sources of specialised
+
+[66] is used to show STT analytics and how the system          data.
+can be deployed to identify events [67]. Nagarajan et al.        Experts, however:
+describe the challenges to developing citizen sensing             Are few in number and their time is precious;
+
+platforms and gathering topically relevant data [68], as          Are increasingly specialised, which allows them to
+Twitter does not categorise users     ’ posts, but instead     make blink decisions correct ly within their domain, but
+Kamel Boulos et al. International Journal of Health Geographics 2011, 10:67                                   Page 8 of 29
+http://www.ij-healthgeographics.com/content/10/1/67
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Figure 3 Integrating experts, crowds, and signal processing algorithms.
+
+
+requires collaboration across other areas of expertise to     opinion mining and sentiment analysis algorithms still
+
+contribute a ‘complete picture’ of a situation; and           have an important place in some Social Web mining
+   May have little local knowledge about local beha-         and surveillance applications [75]);
+viours in an area where there may be an unfolding                Crowds are prone to add opinion to data; which
+
+outbreak.                                                     sometimes sticks more than the credible data them-
+  During the 2009 H1N1 influenza pandemic crisis, it          selves. Separating opinion and credible data through
+was clear that the Internet and open data played a big        expert interpretation and curation, both centralised and
+
+role in capturing a ground truth of how people were           decentralised, is important ( in de-centralised curation,
+reacting to the pandemic. Tamiflu (Oseltamivir, an anti-      specific statements of fact expressed or extracted from
+viral drug) availability, hospital queue lines, and impact    citizen-generated information are validated, refuted, and
+
+on medical care provider stress levels were all exten-        expanded by the citizens themselves in a more distribu-
+sively blogged, tweeted, and shared via listservs and         ted system (cf. concepts of peer reviewing and darwikin-
+other modes of communication. This provided greater           ism [76]); and
+
+quantity and quality of information than was expected.           There are a few agencies (e.g., [77]) that have organi-
+  Information from ‘crowds’ and communities of prac-          sational or procedural channels specifying how to aggre-
+tice can be very useful, with the following considerations    gate and incorporate information emerging on the
+
+in mind:                                                      Internet in decision making.
+   Twitter and other social media can disseminate both         As for algorithms, in the business and finance sector,
+valid and invalid information [74]. Crowdsourced ‘data’       Derwent Capital and Bloomberg (with WiseWindow)
+
+have a tendency to be resistant to nuance and correc-         are said to be already using Twitter mining algorithms
+tion; especially in social media, once a meme snowballs       in making useful stock mar ket predictions with good
+in the ‘echo chamber’, it can be very hard to correct (or     accuracy [78,79]. Machine learning algorithms can be
+
+‘counter-tweet’) and the crowd is sometimes not so fast       used to extract useful information from large amounts
+at changing course;                                           of data. Most machine learning applications in health
+   Crowds often have no immediate way to discern             use supervised learning, a subset of machine learning
+
+truth from falsehood; what gets propagated is the ‘popu-      that uses ‘feedback’ (from humans or other systems) to
+lar’ opinion shaped by the most prominent personalities,      improve its learning over time. Common uses of
+beliefs and agendas of the individuals in the     ‘crowd’.    machine learning include:
+
+Technically-savvy citizens also introduce an interesting         Feature extraction: For example, extracting ICD-9
+skew in the velocity with which their ideas spread and        (International Classification of Diseases) codes and
+get shared; even more if there are political agendas          references to syndromes or diseases from text, as well as
+
+involved. For example, tools to visualise H1N1 spread         interpreting text to infer time, location, people, etc.
+became popular more on the basis of visual appeal than        referred to in it;
+quality of the data or the processes used to generate or         Classification: Being able to classify, group or tag
+
+validate them (but opinions are not all too bad, and          information based on some explicit or unknown criteria;
+Kamel Boulos et al. International Journal of Health Geographics 2011, 10:67                                 Page 9 of 29
+
+http://www.ij-healthgeographics.com/content/10/1/67
+
+
+
+
+   Clustering: Machines can process vast amounts of         semantics and measurement uniformity. Thus, one key
+data and present correlations and proximities that           prerequisite to achieve this vision is the broad usage of
+escape the human eye and brain, sometimes discovering        open sensor standards.
+
+non-obvious correlations between variables; and                The Sensor Web Enablement Initiative (SWE)            by
+   With large amounts of data available, it is not even     the OGC (Open Geospatial Consortium) has recently
+necessary to have a deep understanding of the relation-      gained importance through its maturity and its broad
+
+ships within the data themselves: machines can on their      support from research and industry. SWE seeks to pro-
+own distil the noise from the relevant correlations          vide open standards and protocols for enhanced oper-
+through successive optimisation.                             ability within and between multiple platforms and
+
+  However, machine learnin g has shortcomings of its         vendors. In other words, SWE aims to make sensors dis-
+own, when used in isolation:                                 coverable, query-able, and controllable over the Internet
+   Some algorithms process signals in a way that is         .],teWEalosfno
+
+more specific than sensitive, meaning that important         standards:
+signals may be missed (false negatives). A combination        Sensor Model Language (SensorML)
+of algorithms is important to draw different types of        This is a general schema for describing functional mod-
+
+events and event features from undifferentiated data;        els of the sensor. It provides an Extensible Markup Lan-
+understanding which algorithms, through experience, is       guage (XML) schema for defining the geometric,
+essential;                                                   dynamic and observational properties of a sensor. Thus,
+
+   Algorithms need to be thoroughly validated and           SensorML serves for discovering different types of sen-
+tested; and each new situation may place a new chal-         sors, supporting processing and analysis of the retrieved
+lenge on a given algorithm that may not allow the            data, as well as the geo-location of observed values.
+assessment of the quality of the algorithm in real-time;     Information provided by SensorML includes observation
+
+   Algorithms need data to train and feedback to learn.     and geometry characteristics, as well as a description
+Sometimes this learning phase makes it hard to get           and a documentation of the sensor, and a history of the
+value ‘out of the box’;                                      component ’s creation, modification, inspection or
+
+   Humans have a tendency to become “lazy” over time        deployment.
+and experience with accepted algorithms, where over-           SensorML aims to provide descriptions of sensors and
+dependency and improper cross-checks of an algo-             sensor systems for inventory management, to supply
+
+rithm’s results may result in missed or misinterpreted       sensor and process information in support of resource
+signals;                                                     and observation discovery. Furthermore, SensorML aims
+   Low social acceptance in some cultures of systems        to allow for geo-locating observed values (measured
+
+that do not function in a way that is predictable or         data), to provide performance characteristics (e.g., accu-
+describable by a human; and                                  racy, threshold, etc.) and to offer an explicit description
+   Past misuse of machine learning with little under-       of the process, by which an observation was obtained.
+
+standing of the cognitive science underpinnings of             An important capability of SensorML that has to be
+human communication has led users to fear (and AI            mentioned considering the background of this paper is
+(Artificial Intelligence) experts to boast) that an algo-    the formation of sensor classes, i.e., sensing devices with
+
+rithm could be put on par with a human. State-of-the-        the same properties. In SensorML, a sensor array defines
+art cognitive theories (Winograd, Flores, etc.) show that    a set of devices of the same type at different locations,
+commitments (statements of fact) can only be provided        whereby a sensor group describes several sensors that
+
+by humans; and therefore provide a better framework          operate together to provide one collective observation.
+for understanding where machine learning fits. In sim-        Observations & Measurements (O&M)
+pler terms: - Should an algorithm declare a health emer-     This is the counterpart to SensorML in the field of the
+
+gency? No - because there is no commitment behind it.        actual study of phenomena. That is, it provides a
+Can an algorithm help present data to an expert or           description of sensor observations and measurements in
+authority with ‘suggestions’ and ‘red flags’, and then the   the form of general models and XML encodings. The
+
+authority can declare a health emergency? By all means,      term observation is defined as “an action with a result
+and this is a smarter design.                                which has a value describing some phenomenon “.The
+                                                             O&M standard labels several terms for the measure-
+
+Standardisation enables interoperability: OGC Sensor Web     ments themselves, as well as for the relationship
+Enablement Initiative and Open GeoSMS                        between them, whereby the extent is limited to mea-
+The vision of pervasive sensing through ‘citizens as sen-    surement results, which are     expressed as quantities,
+
+sors’ poses considerable challenges in terms of intero-      categories, temporal or geometrical values, as well as
+perability involving data formats, service interfaces,       arrays or composites of thes e. Naturally, the monitored
+Kamel Boulos et al. International Journal of Health Geographics 2011, 10:67                                    Page 10 of 29
+http://www.ij-healthgeographics.com/content/10/1/67
+
+
+
+
+values normally require a reference system to enable a         Thekidsofdatiedbyasensorandthesensor
+meaningful interpretation and further processing by pro-       types themselves can be fetched from a sensor registry.
+viding a context for the results [81].                         SOS references the O&M specification for encoding sen-
+
+  It shall be stated that despite OGC’s tendency towards       sor observations, and the TransducerML and SensorML
+using the geographical position as the central and con-        specifications for modelling sensors and sensor systems.
+necting element in geospatial standards, the location           Sensor Planning Service (SPS)
+
+parameter is considered a regular measurement within           This component provides a standardised interface for
+O&M. This means that the position is equipollent with          collection assets and aims at automating complex infor-
+other measurands such as time, air temperature or satel-       mation flows in large networks. This requires the sup-
+
+lite images.                                                   port of various capabilities, as well as different request
+ Transducer Model Language (TML)                              processing systems, as described below.
+
+Generally speaking, TML can be understood as O&M ’s              The OGC recommendation defines interfaces for
+pendant or streaming data by providing a method and            requesting information containing the capabilities of a
+message format describing how to interpret raw trans-          SPS, for retrieving the practicability of a sensor planning
+
+ducer data.                                                    request, for determining the status of such a request, as
+ Sensor Observation Service (SOS)                             well as for submitting, updating or cancelling a sensor
+This component provides a service to retrieve measure-         planning request [83].
+
+ment results from a sensor or a sensor network. In               Thus, SPS can be seen as the implementation of a bi-
+other words, the SOS groups a collection of possibly           directional communication between a client and the
+heterogeneous sensors, as illustrated in Figure 4[82],         sensor network. The client can send instructions to the
+
+and provides their measurements via a standardised ser-        network, which can be triggered by different kinds of
+vice interface.                                                events. One possibility is that a system administrator
+  The SOS specification defin es the operations offered        instructs the sensor network to send measurement
+
+by a specific sensor, whereat the minimum collection of        values every five minutes instead of every hour in case a
+methods comprises GetCapab ilites, DescribeSensor and          water level threshold is exc eeded. Another commonly
+GetObservation, which return information about the             used sample functionality is the control of a remote
+
+observations and measurements supported by the SOS.            camera to change orientation or focus.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Figure 4 SOS (Sensor Observation Service) general architecture (adapted from [82]).
+Kamel Boulos et al. International Journal of Health Geographics 2011, 10:67                                 Page 11 of 29
+
+http://www.ij-healthgeographics.com/content/10/1/67
+
+
+
+
+ Sensor Alert Service (SAS)                                    Summarising, SWE aims at enabling the discovery and
+The OGC SAS specifies interfaces (not a service in the        querying of sensor systems, observations, and observa-
+traditional sense) enabling sensors to advertise and pub-     tion procedures over the Internet. This process com-
+
+lish alerts, including according metadata. SAS can be         prises determination of a sensor’     s capabilities and
+used by clients to subscribe for sensor data alerts with      quality of measurements, access to sensor parameters
+some spatial and property-based constraints. Also, sen-       that automatically allow software to process and geo-
+
+sors can be advertised to the SAS allowing clients to         locate observations, retrieval of real-time or time-series
+subscribe for the sensor data via the SAS. SAS, which is      observations and coverages in standard encodings, task-
+currently in its version 0.9.0, is not released as an officialing of sensors to acquire observations of interest, and
+
+OGC standard [84].                                            subscription to, and publishing of, alerts to be issued by
+  In the SAS context, ‘alerts’ are not only understood in     sensors or sensor services based upon pre-defined
+the classic meaning of the word, i.e., an automatic signal    criteria.
+
+or notification indicating that an event has fired (e.g., a     The OGC is developing SWE in tight coordination
+message in case of threshold exceedance), but in a            with other geospatial standards for data representation,
+broader context. Alerts are defined as   ‘data’ sent from     provision and processing. This enables simple integra-
+
+the SAS to the client, which may as well comprise             tion of sensor networks into existing Spatial Data Infra-
+alerts/notifications (e.g., OGC Web Notification Service      structures (SDI) and data analysis systems by providing
+(WNS)) as observational da ta (measurements matching          standardised service interfaces and APIs (Advanced Pro-
+pre-defined criteria).
+                                                              gramming Interfaces). This development is of particular
+  SAS uses the Extensible Messaging and Presence Pro-         importance for achieving the far-reaching vision of ‘citi-
+tocol (XMPP) for the delivery o f sensor notifications.       zens as sensors’ in time-critical scenarios, such as emer-
+Thus, SAS leverages an XMPP server, which can be              gency management and public health monitoring.
+
+embedded directly in the SAS or act as a separate ser-          The OGC Open GeoSMS            is developed by ITRI
+vice. SAS notifications are provided via a Multi User         (Industrial Technology Research Institute, Taiwan) for
+Chat (MUC) for each registered sensor. To receive noti-       exchanging location information via the common mobile
+
+fications, a client has to join the specific MUC.             service, SMS [33,86]. Open GeoSMS can be composed
+ Web Notification Service (WNS)                              with a mobile phone application, by retrieving GPS data
+The last part of the SWE model is the Web Notification        and then embedding the geo-location coordinates in an
+
+Service (WNS), which is a service enabling a client to        SMSmessage.Anl ofanOpenGeoSMSmes-
+perform asynchronous dia       logues, that is message        sage is shown in Figure 5.
+exchanges, with other services. This process is especially      For an SMS notification to be compliant with the
+
+expedient when several services are required to comply        Open GeoSMS specification, the following criteria have
+with a client’s request, or when an according response is     to be fulfilled:
+only possible under considerable delays.                        1. The first line of the SMS has to be a URL (Uniform
+
+  Principally, the service comprises two kinds of com-        Resource Locator)–see top of Figure 5;
+munications, the one-way-communication and the two-             2. This URL has × and y coordinates as the first two
+way-communication. The former, also known as simple           parameters;
+
+WNS, for which users have to be registered, can be rea-         3. This URL ends with ‘&GeoSMS’; and
+lised via the transmission    of messages over e-mail,          4. Optional text can be appended for further descrip-
+HTTP (Hypertext Transfer Protocol), Short Message             tion, e.g., of an (emergency) event at the specified geo-
+
+Service (SMS), instant messaging, telephone, letter or        location and/or sensor readings at that location.
+fax. The latter system, viz extended WNS, is able to            Mobile phones can be classified into three types for
+receive user notification responses [85].                     Open GeoSMS purposes:
+
+  Furthermore, sensor Web registries play an important           A feature phone that allows no application to be
+role in sensor network infrastructures. However, they         installed: Because this is an SMS message, almost every
+are not decidedly part of SWE, as the legacy OGC Cata-        mobile phone can receive Open GeoSMS notifications simi-
+
+logue Service for Web (CSW) is used.                          lar to the one shown in Figure 5. The notifications are also
+  The registry serves to maintain metadata about sensors      readable by humans and users can easily understand that it
+and their observations. In short, it contains information     is a CO2 level alert (to use the same example in Figure 5);
+
+including sensor location, which phenomena they mea-             An online smartphone : In the example presented in
+sure, and whether they are static or mobile. Currently,       Figure 5, the user can simply click on the URL to access
+the OGC is pursuing a harmonisation approach to inte-         Google Maps service. The URL in Open GeoSMS can
+
+grate the existing CSW into S WE by building profiles in      point to any given service provider (i.e., not necessarily
+ebRIM/ebXML (e-business Registry Information Model).          Google Maps), so various kinds of information and
+Kamel Boulos et al. International Journal of Health Geographics 2011, 10:67                                     Page 12 of 29
+http://www.ij-healthgeographics.com/content/10/1/67
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Figure 5 Smartphone displaying details of an Open GeoSMS notification and incident location on Google Maps.
+
+
+
+services can be accessed via this URL. Of course, the           warning or Standard Operation Procedure (SOP), is trig-
+application on the phone can also parse every incoming          gered; and
+
+SMS, and once an Open GeoSMS is detected, coordi-                  An offline smartphone: Because the application on
+nates are retrieved and further action, such as raising a       the phone can parse and get the coordinates in the
+Kamel Boulos et al. International Journal of Health Geographics 2011, 10:67                                Page 13 of 29
+
+http://www.ij-healthgeographics.com/content/10/1/67
+
+
+
+
+Open GeoSMS message, offline maps such as Open-              accounts for different design principles such as Service
+StreetMap [87] can be used to display the sent (inci-        Oriented Architectures - SOA, modular software infra-
+dent) location, for those users who do not or cannot         structures, and component-based development. This
+
+have data (Internet) access.                                 ensures flexibility, reusability and portability of the com-
+  By overlaying the message text (incident details) on       ponents and the overall infrastructure. Figure 7 shows
+the map (Figure 5), Open GeoSMS presents clear infor-        the monitoring architecture and the standardised service
+
+mation to users, including both geo-location and sensor      interfaces that are used to connect the different compo-
+information. Open GeoSMS can prove extremely helpful         nents in the workflow of the Common Scents
+in public health emergency notification and manage-          implementation.
+
+ment operations, since it works on almost any kind of          According to principles of SOA and sustainable infra-
+mobile phone supporting SMS. It is an open standard          structure development, a data collection, processing and
+that aims at enabling interoperability among different       information provision architecture was conceived and
+
+platforms. Figure 6 shows how Open GeoSMS has been           implemented, covering the whole process chain from
+implemented in Ushahidi [14] and in Sahana Disaster          sensor network development via measurement integra-
+Management System [34] for incident reporting in             tion to data analysis and information visualisation, as
+
+emergency and disaster management operations. People         shown in Figure 7. Hence, this infrastructure can poten-
+reporting an incident can (still) make an ordinary phone     tially serve as the architectural bridge between domain-
+call or send a conventional SMS message to the emer-         independent sensor network developments and use case
+
+gency services handling such situations, but with Open       specific requirements for e nd user tailored information
+GeoSMS, geo-tagged SMS reports can significantly             output for public health monitoring.
+shorten the processing time for incident reports (and          The modules of the workflow shown in Figure 7 are
+possibly save more lives by doing so). Open GeoSMS           separated by several interfaces, which are defined using
+
+can also be used for task assigning and dispatching dur-     open standards. These primarily include the Sensor
+ing disaster management operations (see bottom half of       Web Enablement (SWE) initiative that aims to make
+Figure 6).                                                   sensors discoverable, query-able, and controllable over
+
+                                                             the Internet, as described elsewhere in this article.
+Common Scents - mobile pervasive sensing using bicycle-        Real-time air quality analysis using mobile bicycle-
+mounted sensors                                              mounted sensors: One pilot experiment in the Common
+
+The Common Scents project aims at providing fine-            Scents project was conducted in the city of Copenhagen,
+grained air quality data to allow citizens and urban deci-   Denmark. Ten bicycle mounted sensors were deployed
+sion-makers to assess environmental conditions instan-       as a mobile sensor network to collect environmental
+
+taneously and intuitively. The goal is to provide real-      data together with time and the geographic location,
+time information on urban processes to support short-        velocity and acceleration using GPS. In this experiment
+term decisions at multiple levels, from personal to gov-     of ubiquitous mobile sensing, the Sensaris City Senspod
+
+ernmental. To achieve this goal, the SENSEable City          (Figure 8) has been used, a relatively low-cost sensor
+Laboratory at the Massachusetts Institute of Technol-        pod. The deployment in Copenhagen was a combined
+ogy, USA, built up a mobile sensor network of bicycle-       effort of the MIT SENSEable City Laboratory and
+
+mounted environmental sensors to realise the vision of       Københavns Kommune, Denmark.
+‘citizens as sensors’.                                         The Sensaris City Senspod is a sensing device for
+  Within the Common Scents project the term         ‘real-   environmental parameters that is dedicatedly designed
+
+time’ is not defined by a pre-set numerical time infor-      for use in urban environments [89]. It collects CO,
+mation, but layers have to be created in a timely manner     NOx, noise, air temperature and relative humidity,
+to serve application-specific purposes. For instance, an     together with the geographic position and time via GPS.
+
+update on traffic conditions does not have to exceed a       TheCtiySenspodhasproventieforoodcho
+delay of a couple of minutes when this information is        pervasive sensing because of its relatively low price and
+used for navigation instructions, whereas a 30-minute        acceptable measurement accuracy. However, the City
+
+update interval can well be sufficient for short-term trip   Senspod shows a few drawbacks including a minimum
+planning.                                                    operational temperature of 5°C and its communication
+  The Common Scents system architecture is based on          via Bluetooth, which is not the optimum transmission
+
+the Live Geography infrastr ucture [88], which proposes      technology when aiming for maximum energy efficiency
+a portable and open-standards-based monitoring infra-        in the context of pervasive monitoring.
+structure, including components for sensor data provi-         To comply with the standardised infrastructure of
+
+sion, sensor fusion, real-time data analysis, and user-      Common Scents system architecture, several standar-
+tailored information visualisation. The approach             dised services were implemented on top of the sensor
+Kamel Boulos et al. International Journal of Health Geographics 2011, 10:67                                   Page 14 of 29
+http://www.ij-healthgeographics.com/content/10/1/67
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Figure 6 Open GeoSMS is used in Ushahidi and in Sahana Disaster Management System.
+
+
+
+network, in accordance with the Live Geography                 and filter operations. To generate alerts, e.g., in case of
+approach. For data access, a Sensor Observation Service        exceedance of a threshold, an XMPP (Extensible Messa-
+
+(SOS) was developed to supply measurement data in the          ging and Presence Protocol)-based Sensor Alert Service
+standardised O&M format. It builds the O&M XML                 (SAS) was implemented. It is able to detect patterns and
+structure dynamically according to measured parameters         anomalies in the measurement data and generate alerts
+Kamel Boulos et al. International Journal of Health Geographics 2011, 10:67                                      Page 15 of 29
+http://www.ij-healthgeographics.com/content/10/1/67
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Figure 7 Common Scents technical architecture. WFS: Web Feature Service; WMS: Web Map Service; WCS: Web Coverage Service.
+
+
+and trigger appropriate ope ratinssuchasigout                    been initiated by the MIT SENSEable City Lab [24,90].
+
+an email or a text message, or to start a pre-defined GIS        This project was officially p resented in Copenhagen on
+analysis operation.                                              15 December 2009 in the course of the 15      thConference
+  The pilot deployment itself has been carried out in the        of the Parties during the 2009 United Nations Climate
+
+course of the Copenhagen Wheel project, which has                Change Conference meeting. The Copenhagen Wheel is
+                                                                 a specially designed bicycle to capture energy dissipated
+
+                                                                 while cycling and braking, to store it in an in-wheel bat-
+                                                                 tery and support the cyclist on demand through a small
+                                                                 electrical engine.
+
+                                                                   In the Common Scents project, Sensaris City Senspods
+                                                                 have been attached to the bicycles, capturing informa-
+                                                                 tion about carbon monoxide (CO), NOx (NO + NO2),
+
+                                                                 noise, ambient temperature, r elative humidity, in addi-
+                                                                 tion to position, velocity and acceleration. The environ-
+
+                                                                 mental sensors were originally intended to be placed
+                                                                 within the hub of the bicycle wheel; however due to
+                                                                 logistical pressure, they were placed on bicycles ridden
+
+                                                                 by couriers in Copenhagen going about their normal
+                                                                 daily routine. Ten cycles wer e instrumented and tested
+                                                                 over 2 December 2009. It is believed that this was the
+
+                                                                 first time multiple mobile sensors had been used in the
+                                                                 field with such a large variety of environmental sensors
+  Figure 8 Sensaris City Senspod.                                on a city-wide scope.
+Kamel Boulos et al. International Journal of Health Geographics 2011, 10:67                                   Page 16 of 29
+http://www.ij-healthgeographics.com/content/10/1/67
+
+
+
+
+  The analysis component, w hich processes the col-            which are induced by a variety of factors including tem-
+lected data, performs a spatial Inverse Distance Weight-       perature variability, urban topography, time during the
+ing (IDW) interpolation on temperature measurements,           day, the ‘urban canyon ’ effect, traffic emergence or
+
+which will be used in further research efforts for corre-      ‘plant respiration ’ - the fact that plants release major
+lation operations with emission distribution or traffic        amounts of CO2 overnight.
+emergence, and for the detection of urban heat islands.          Future research will include the investigation of direct
+
+It has to be stated that IDW is presumably not an opti-        correlations between pollutants, environmental measure-
+mised algorithm for drawing conclusions from point             ments and traffic emergency. It is well known that CO
+measurements to a city-wide scale. In a future effort, an      is a measure of the efficiency of combustion in vehicles
+
+accurate urban dispersion model will be integrated into        that may be used to reflect changing driving patterns
+the analysis.                                                  and the sensitivity of air quality to larger scale environ-
+
+  In the field trial, the processing module analyses the       mental features such as wind speeds over the city. How-
+CO, NOx, noise temperature and relative humidity dis-          ever, the detailed interplay of these parameters still has
+tributions throughout the city of Copenhagen. The CO           to be investigated in a next step. Especially CO values
+
+map containing the GPS traces, which figuratively re-          measured in the Copenhagen pilot have to be normal-
+draw the urban street network, is shown in Figure 9. A         ised over humidity and temperature to perform further
+first qualitative analysis of the mobile measurements          quantitative (absolute amounts) and qualitative (impact
+
+shows that there are strong correlations between ambi-         on public health) analysis.
+ent temperature, CO and NOx values. Further prelimin-            Concluding, it can be stated that the Copenhagen
+ary outcomes show that both CO and CO2 are                     experiment was an important step toward the realisation
+
+undergoing very high temporal and spatial fluctuations,        of pervasive monitoring by the use of mobile sensors.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Figure 9 Mobile CO measurements in the city of Copenhagen (December 2009).
+Kamel Boulos et al. International Journal of Health Geographics 2011, 10:67                                   Page 17 of 29
+
+http://www.ij-healthgeographics.com/content/10/1/67
+
+
+
+
+Particularly, it has been shown that the vision of    ‘citi-   does its graceful scaling up to process the data in real-
+zens as sensors’ for environmental monitoring and pub-         time. Transforming the sensor data into a standard for-
+lic health is technically and methodologically feasible.       mat such as RDF also allows for standard sensor
+
+                                                               descriptions using the SSN ontology as described earlier.
+LSM (Linked Sensor Middleware) - a geosemantic sensor          Some research in the area of citizen sensing has tried to
+mashup                                                         leverage the power of the SSN ontology to describe sen-
+
+Linked Stream Middleware (LSM) [26], a platform                sors on mobile devices for rur al transportation projects
+developed at the Digital Enterprise Research Institute         [100] and in emergency reporting applications on micro-
+(DERI) at National University of Ireland Galway, Ireland,      blogging platforms [101].
+
+that brings together the live real world sensed data and         Annotating microblog posts with sensor data could
+the Semantic Web [91] in a unified model is an example         add context and remove some of the ambiguity of the
+of a large scale sensor platform that if combined with         short SMS-style languages commonly used on micro-
+
+Social Web data could provide a comprehensive insight          blogging systems and could aid the processing of these
+into the domain of citizen sensor data. A sample LSM           texts for information extraction using natural language
+deployment is available at [25] and currently displays         processing. (The concepts of annotations and machine-
+
+data from over 100,000 sensors around the world (Fig-          readable metadata that    “travel” with a tweet (without
+ure 1). The interface uses a map overlay to query and          using any of the 140 characters that are reserved for the
+display sensor information. Several types of sensor data       tweet text message) were the basis of the not-yet-
+                                                               released (as of Q4 2011) ‘Twitter Annotations ’ feature
+are available, such as flight status, weather, train/bus
+arrival times, street cameras, sea level monitors, etc. The    [102] and related work by Bottlenose [103], and are
+hitoryofthedataproilrsouicesrt                                 similar to the way ‘Twitter Places ’ [104] currently adds
+available and downloadable in Resource Description Fra-        geo-location context to tweets.) Sensor data annotations
+
+mework (RDF) format [92].                                      would add to the semantic annotation described by
+  The LSM architecture, as shown in Figure 10, is              Sheth [64] and aid in analysis and dissemination of
+divided into four layers. The Data Acquisition Layer           information.
+
+provides three wrapper types: Physical Wrappers that
+are designed for collecting sensor data from physical          3D Town Project - three-dimensionalisation of indoor and
+devices; Linked Data (LD) Wrappers that expose rela-           outdoor surveillance networks
+
+tional database sensor data into RDF; and Mediate              In recent years, urban ICT (Information and Communi-
+Wrappers, which allow for collection of data from other        cation Technology), (such a s mobile and wireless com-
+sensor middleware such as Global Sensor Networks               munication technologies and the Internet, ubiquitous
+
+(GSN) [93], Pachube [94], and the sensor gateway/Web           sensing and computing, digital media and urban
+services from National Oceanic and Atmospheric                 screens), has been rapidly modifying city life. The ‘aug-
+Administration (NOAA) [95]. The Linked Data Layer              mented city ’ is a modern definition of urban spaces,
+
+allows access to the Linked Sensor Data created by the         where no discernible boundaries exist between “virtual”
+wrappers but links to the Linking Data cloud (a subset         and “physical” spaces [105]. The “virtual” urban space is
+of the Linking Open Data cloud [96] shown in Figure           a digital environment where the urban ICT is connected
+
+11). The Data Access Layer provides two query proces-         to “physical” urban space. The “virtual” urban space is
+sors, a Linked Data query processor and the Continuous        often represented by three-di mensional (3-D) cityscape
+Query Evaluation over Linked Streams (CQELS) engine           models. These 3-D city models are virtual representa-
+
+[97], and exposes the data for end-users or machine-          tions of the “physical” urban spaces that digitally repro-
+users. The fourth layer, the Application Layer, offers a      duce all the urban objects with a semantically enriched
+SPARQL (SPARQL Protocol and RDF Query Language)               polyhedral world. Human beings ’ physical-digital inter-
+
+[98] endpoint, a mashup [99] composer, linked sensor          section exists through the awareness of their location
+explorer, and streaming channels [92].                        (sense of belonging to place) on the global level, but
+  The LSM system is of interest in the area of citizen        also on a very local scale. This location awareness does
+
+sensing because it implements an architecture that            not only mean having knowledge of ‘where we are’,but
+could be used for large-scale citizen sensing projects. As    also the ability to perceive or to be conscious of objects,
+mentioned before, over 100,000 sources are available to       events and patterns of surro unding environments with
+
+the current running implementation of LSM. Scalability        respect to ‘where we are’.
+and reliability are important factors when designing any         Today’s most representative augmented city examples
+system; but when collecting real-time stream data (i.e.,      are the GeoWeb portals such as Google Earth and
+
+fromTiterandoilmei feedsorfromsen-                            Microsoft Bing Maps [106] that integrate location-based
+sor feeds), uptime of a system becomes critical and so        geographical information with an extremely broad range
+Kamel Boulos et al. International Journal of Health Geographics 2011, 10:67                                  Page 18 of 29
+http://www.ij-healthgeographics.com/content/10/1/67
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Figure 10 Layered architecture of the LSM (Linked Sensor Middleware) platform. ‘RESTful’ refers to conformance to REST (REpresentational
+
+  State Transfer) constraints.
+
+
+of non-spatial information through Web technology.            project is to integrate temporal information such as the
+Three-dimensional city models are a crucial extension         movement of pedestrians and cars obtained using sur-
+
+of the GeoWeb since they provide an enriching, interac-       veillance video with 3-D city models and thus imple-
+tive, and visually appealing user experience that is    “in   ment a location-based awareness and means of
+
+tune” with users’ natural visual-based thinking, imagina-     interacting with 3-D city models through moving
+tion and space perception. Due to their many potential        objects. To achieve this goal, the research team has
+benefits in various domains , there has been a rapidly        implemented a dynamic GeoWeb ( ’D-GeoWeb’)system
+
+increasing demand for Geo Web applications. Today ’s          that enables the management of [107]:
+GeoWeb, however, is only visualising a static virtual            Real-time data acquisition of wireless sensors distrib-
+world, which limits its use in applications where having      uted in indoor environment (sensor layers);
+
+knowledge of object dynamics/real-time motion is                 Data protocols to integrate SensorML, IndoorML
+important. Our cities are dynamic, living environments        [108] and CityGML [109] (protocol layers);
+with various kinds of real-time information and urban            Data management layers to handle indoor and out-
+
+objects (people and vehicles) moving around us every          door 3-D models and associate semantics, real-time sen-
+day. To bring such dynamic information into the Geo-          sor and moving object information (data layers); and
+Web will give users a more immersive context to feel             Dynamic response to and rendering of requests by
+
+and interpret a real dynamic world.                           tracked moving objects (responsive layers).
+  A research team at York University, Canada, has been          A schematic of data flow in D-GeoWeb is shown in
+investigating and developing ‘3D Town’,aresearchpro-          Figure 12. To avoid labour-centric processing bottle-
+
+ject that focuses on the development of an augmented          necks, a new method has been investigated to integrate
+city for sensing, distributing, interpreting and visualising  indoor and outdoor models       using geometric hashing
+
+the real-time dynamics of urban life. A core idea of the      algorithm [110]. The proposed method aims to integrate
+Kamel Boulos et al. International Journal of Health Geographics 2011, 10:67                                  Page 19 of 29
+http://www.ij-healthgeographics.com/content/10/1/67
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Figure 11 ’Linking Open Data’ datasets as of September 2011. Linking Open Data cloud diagram by Richard Cyganiak and Anja Jentzsch. A
+  version of the same diagram with clickable hyperlinks is available at [95].
+
+
+
+2-D floor plans with terrestrial laser scanning data in an    movements detected from sensors and videos with a
+automatic manner. Thus, a fully integrated 3-D building       corresponding 3-D virtual world. Figure 13 demon-
+model was reconstructed to create a seamless outdoor          strates 3D Town ’s capability of tracking people, who
+
+and indoor navigation database. New object detection          walk in a hallway, using surveillance video (upper-right
+and motion tracking algorithms were developed to              inset) and localising them with 3-D sprites in Google
+detect, classify and track p eople and cars using pan/tilt    Earth. A balloon shows a communication (room’s occu-
+
+video sequences [111]. ‘3D Town’ is able to co-register       pancy and temperature information) between the virtual
+indoor and outdoor wireframes with surveillance videos        sprite and Crossbow wireless sensor [116], which pops
+in a combination of vanishing point detection and line        up when the sprite stops at a room. Figure 14 presents
+
+matching between wireframes and line segments                 results of tracking buses and pedestrians using surveil-
+detected from the image frames. In addition, a vision         lance camera under outdoor circumstances, which are
+algorithm was implemented to track and recognise mov-         again localised with 3-D sprites in Google Earth.
+
+ing objects from surveillance videos. Finally, detected
+moving objects were localised and rendered in 3-D             PIEs - Precision Information Environments for emergency
+
+models as a sprite on a real-time basis. A prototype          management                  st
+Web-based system was developed based on Google                The first decade of the 21    century saw a range of dis-
+Earth Plug-in [112] to visualise the dynamic information      asters strike worldwide, including terrorist attacks, hur-
+
+and provide an interface between the users and the            ricanes, tsunamis, wildfires, earthquakes, and a
+dynamic virtual 3-D world (but a WebGL [113] imple-           pandemic. The immediate and far reaching impacts of
+mentation would have been ideal, for plugin-free Web          these disasters highlight the need for rapid and effective
+
+browser access of the dynamic 3-D virtual globe, e.g.,        emergency management. The immense tragedy, uncer-
+[114,115]).                                                   tainty, and fear generated by an emergency underscore
+  The 3D Town research shows promising results and            the necessity for effective regional preparation, response,
+
+demonstrates the feasibility of integrating dynamics and      recovery, and restoration.
+Kamel Boulos et al. International Journal of Health Geographics 2011, 10:67                                                         Page 20 of 29
+http://www.ij-healthgeographics.com/content/10/1/67
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Figure 12 Dynamic GeoWeb server . KML: Keyhole Markup Language; KMZ: zipped KML; PHP: Hypertext Preprocessor (a server-side scripting
+  language); SQL: Structured Query Language.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Figure 13 3D Town indoor tracking and location intelligence: video from surveillance camera (upper-right inset). The results of tracking
+  people are visualised using 3-D sprites. Wireless sensor data are dynamically read as the sprite accesses them.
+Kamel Boulos et al. International Journal of Health Geographics 2011, 10:67                                  Page 21 of 29
+http://www.ij-healthgeographics.com/content/10/1/67
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Figure 14 3D Town outdoor moving object tracking and recognition: video from surveillance camera (bottom-right inset).
+
+
+
+  For emergency management personnel to make accu-            information efficiently and e ffectively. Personnel often
+rate and timely decisions, they must have situational         have difficulties obtaining the information they need for
+awareness, an accurate perception of the situation that       an effective response, and they frequently find that
+
+they are facing and its complex data-scape. Essential to      information is not shared across organisations. With the
+good situational awareness is the ability to provide rele-    addition of social media as another input, there is often
+vant and timely information to decision makers and the        more information available than can be understood at
+
+public. Effective informatio n collection and sharing has     the pace needed (information overload - cf.thenotoin
+long been recognised as a challenge in emergency man-         of the Social Web “firehose”). To address this challenge,
+agement [117].                                                mechanisms must be put in place to assure that person-
+
+  These issues are growing more difficult with the adop-      nel always have awareness of, and trust in, the informa-
+tion of social media as a pervasive way to share and disse-   tion relevant to their current role and activity.
+minate information. The public is rapidly becoming the          Researchers at Pacific Northwest National Laboratory
+
+first reporter in the field to capture and disseminate infor- (PNNL) are developing future work environments
+mation about an event as it occurs. Emergency manage-         (situation rooms) for the em ergency management com-
+ment personnel increasingly need to leverage social media     munity that enable high-volume data feeds, including
+
+for situational awareness and information sharing. How-       social media, to be processed and analysed such that
+ever, the volume, potential for anonymity, and lack of con-   participants in a response activity receive tailored data
+text can make information derived from social media hard      relevant just to their needs and roles. These Precision
+
+to trust, and its intent and origin hard to discover.         Information Environments (or PIEs) provide tailored
+  As a point of reference for data volumes in social          access to information from disparate sources augmented
+media (the ‘problem space’), in just one hour Facebook        with decision support capabilities in a system that is
+
+[118] has 5,553,000+ status    updates, 30,624,000 com-       designed around the multiple user roles, contexts, and
+ments and 8,148,000 photos (statistics as of January          phases of emergency management, planning, and
+2011) [119]. In the same hour, Twitter has about              response. A Precision Info rmation Environment pro-
+
+10,416,000 new tweets (statistics as of October 2011)         vides visual analytic [123] capabilities through novel
+[120], Flickr has 180,000 new photos (statistics as of        interactions that transform the way emergency profes-
+September 2010) [121] and YouTube has another 2880-           sionals - from first responders to policy makers - engage
+
+hour worth of video (statistics as of 2011) [122]. This is    with each other and with information. To develop the
+an information rich society and one where anyone can          requirements for these environments, PNNL adopted a
+publish or broadcast. All of this information can be          user-centred design philosophy in which emergency
+
+leveraged for situational awareness in an emergency, but      management personnel are involved in all aspects of the
+no one user or group can digest it all.                       research from requirements definition, to scenario and
+  The fast pace and critical nature of emergency man-         use case development, constructing a capability vision,
+
+agement requires the ability to access and share              and feature development. The research team performed
+Kamel Boulos et al. International Journal of Health Geographics 2011, 10:67                                   Page 22 of 29
+http://www.ij-healthgeographics.com/content/10/1/67
+
+
+
+
+over fifty interviews, contextual inquiries and ethno-           The global profile system inside a Precision Informa-
+graphic studies to better understand the emergency             tion Environment is applied to emergency management
+management community an d document the gaps and                professionals and PIE content sources such as govern-
+
+opportunities in the space. This work led to a scenario-       ment professionals, nongovernmental organisations, pri-
+driven vision articulated through a research agenda and        vate industry, and citizens. Each type of source is
+video [29,30].                                                 assigned a reputation score that is adapted over time
+
+  This vision video (Figure 15), designed around a wild-       based on the content they create (and how it is used by
+fire scenario 8-10 years into the future has become a          others) and the people they interact with. Emergency
+north star for development, stakeholder outreach and           management professionals and responders may initially
+
+user feedback. The vision for PIEs integrates data mod-        receive the highest reputation score followed by other
+elling and visual analysis, real-time and historical data      government professionals that use or could use the
+
+streams, and novel user interface concepts in an               environment. Other sources of content may initially
+approachable, easy to use collaborative application.           have less trust associated with the data they provide, but
+Information and visual interfaces are tailored to the spe-     their reputation score can increase based on other users’
+
+cific roles and tasks of each user. The goal is real-time      rating of their contributions.
+synthesis, communication, and analysis of dynamically            The system also allows for s ource tracking and mea-
+generated and collected inf ormation, all of which pro-        suring the effectiveness of a message. It can also track a
+
+vides for sound decision making. PIEs allow users to           message as it changes or distorts through the social net-
+engage with each other and leverage their collective           work, allowing emergency management to isolate when
+expertise and experience in an environment combining           a message deteriorates. They can then reinforce the
+
+virtual worlds based on actual physical models, real-          message through the social network by releasing an
+time, multimodal data streams, and sophisticated visuali-      update to answer new questions and theories as they
+sation tools to support actions, assessments, and deci-        arise.
+
+sion-making (cf. vision in [27]).                              Tailored information services and adaptive data triage
+Global profile, dynamic reputation and trust                   At the centre of the Precision Information Environment
+Reputation and trust, both of emergency management             is a profile for each user that defines the user’s informa-
+
+personnel and members of the public that provide data,         tion interests and needs. One ’s role in an emergency
+are equally important. Emergency management person-            event is a core part of this profile, and the PIE system
+nel often form ad hoc teams or networks during an              uses roles defined by the National Incident Management
+
+event in which not all parties or individuals are known        System of the US Federal Emergency Management
+to each other. Emergency managers must also often rely         Agency to provide an initial template for information
+on third party public report ing to assess the situation       interest. Role-driven tailored information services and
+
+before responders are dispatched to the scene. In some         adaptive data triage bring   ‘Precision’ into a Precision
+cases, as in a natural disaster, an event can be so large      Information Environment. They allow an emergency
+and remote that professional assessment is not possible        manager to get exactly the right information at the right
+
+(in a timely manner). In those cases, profile and source       time and avoid information overload by filtering data to
+assessment is just as important as the situation. Is the       only those which are likely to be most relevant to a
+source trustworthy? Is there prior experience to suggest       given user. In this way, the user can stay focused on the
+
+how useful a source’s input is likely to be?                   tasks and activities that matter.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Figure 15 Spatially-enabled elements of the Precisi on Information Environments (PIEs) vision . From left: collaborative modelling and
+  decision making, natural user interactions, and role- and task-driven information and map displays that synthesise large amounts of
+  heterogeneous data about an event into a user-specific display.
+Kamel Boulos et al. International Journal of Health Geographics 2011, 10:67                                   Page 23 of 29
+http://www.ij-healthgeographics.com/content/10/1/67
+
+
+
+
+  PNNL’s approach to information triage relies on a            including data and tasks, are passed through the core
+“signature ” for each user that defines the terms that         PIE relevance engine, so that all information, regardless
+they are interested in and the relative weight of each         of source, can be accessed through a middle layer that
+
+term. As new data arrive from social media and other           performs per-user triage.
+sources, a similar signature is constructed for each new       Collaborative natural user interfaces
+data item. By comparing user and item signatures, we           In addition to data overload, there can be ‘software (user
+
+can determine which items are most relevant to which           interface) overload’ in the emergency management com-
+users. The initial recommendations made by the PIE             munity. Emergency management personnel are inun-
+system are tuneable by the user, so that as the situation      dated with many different applications, each of them
+
+changes so can his or her environment. Data are filtered       potentially specialised to activities that are only exer-
+and sorted based on the relevancy score for each user.         cised during an emergency. As a result, they have to
+
+This makes precision possible and allows the user to           learn or retrain to use the software when an emergency
+focus on content that is personally of interest to him/        occurs, which hinders adoption and use of new technol-
+her based on his/her current activity. As the user works,      ogy. The community is also highly mobile and is fre-
+
+communicates and shares information, he/she can train          quently   marked     by   movement      between    user
+the system about his/her interests by simply ‘voting’ on       environments, such as from the desktop, to a collabora-
+whether or not each object is of interest to him/her           tive setting, to the field. As a result, interfaces to data
+
+(Figure 16). If an object is interesting, then those signa-    analysis and collaboration systems must be consistent
+tures get added to the user       ’efti                        across these platforms to minimise the learning curve.
+increased if already in the profile). If it is not relevant,     A Natural User Interface (NUI) refers to a user inter-
+
+the ranking of the signatures gets diminished and gets a       face that feels invisible, or becomes invisible with suc-
+lower relevancy score.                                         cessive learned interactions, to its users. These
+  PNNL uses a technique called      ‘tailored information      interfaces are “natural” because the interactions they use
+
+services’ to provide relevance-ranked data to every com-       are intuitive in their consistency with actions people
+ponent of a PIE system. In addition to managing data           already use outside of computer interfaces, e.g., touch,
+ingest and triage, PIE tools can support creation and          gesture and voice [124]. PIEs use NUI principles to
+
+tracking of tasks in emergency response. All events,           allow users, especially those unfamiliar with a new
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Figure 16 PIEs user profile and signature ranking system showing term relevance . At the centre of the display is a mapping between
+  prioritised concepts in a user’s profile (right) and concepts aggregated across all users’ profiles (left).
+Kamel Boulos et al. International Journal of Health Geographics 2011, 10:67                                Page 24 of 29
+http://www.ij-healthgeographics.com/content/10/1/67
+
+
+
+
+system, to learn how to extract value from an informa-       aggregates of data generated during patient visits to
+tion display quickly, and to create a desirable and enga-    clinics/hospitals, diagnostic laboratories and pharma-
+ging user experience.                                        cies [127], or using Internet search engine analytics
+
+  PNNL is also actively researching and prototyping new      [128-130] (though the latter method should always be
+video teleconferencing devices that are designed to be       interpreted with a grain of salt, as it might not work
+‘always on’ and support ad hoc meeting and information       equally well for all conditions, the findings might not
+
+discovery among geographically distributed teams. Live-      always be accurate [131], and search engine query
+Wall (Figure 17) is a prototype that supports high-defi-     words and phrases tend to lack a clear and complete
+nition, full-size video o   verlaid with an adaptable        context attached to them and to be less      “expressive ”
+
+transparent information layer that gives the user the        than other forms of textual expression using social
+feeling of looking through a digital glass panel into        media), the real power and uniqueness of crowdsour-
+
+another room. LiveWall uses a multitouch interface to        cing lies in the active participation of intelligent
+allow distributed teams to interact with data and engage     humans in a task assigned to them. People, as social
+in collaborative decision making in a manner very simi-      beings, have always shared information and helped one
+
+lar to how the team would work if it were co-located         another in various situations; social media and crowd-
+and discussing a shared display (such as a printed map)      sourcing capitalise on this fact and enable us to share
+in front of them.                                            and support more (both in quantity and frequency,
+
+                                                             more content, more often), with many more people
+Discussion and conclusions                                   and much more quickly. Kamel Boulos ’ 2005 phrase-
+Increasing numbers of gadgets and appliances, includ-        term ‘wikification of GIS by the masses     ’ [1] conveys
+
+ing medical and hospital diagnostic devices, are now         this meaning by comparing the process to that of col-
+Internet-connected or embedding M2M SIM cards/               laboratively editing a wiki such as Wikipedia [132] by
+GSM (Global System for Mobile Communications/                a distributed network of a large number of intelligent
+
+Groupe Spécial Mobile) modules to allow reporting            human editors, where the power of darwikinism [76]
+data to backend systems for diagnostic, telemetry and        comes into play. Volunteer citizens acting in groups
+control purposes, and to gain useful insights about the      (crowds) and sharing communication horizontally (in
+
+populations using such devices. While it is possible to      addition to vertically ‘up’ and ‘down’, as necessary) are
+track and monitor the behaviour of crowds of people          challenging the notion that rapid information flow
+without even letting them know that they are being           ‘upwards’ provides the optimal configuration. Informa-
+
+watched, e.g., tracking population movements using           tion shared horizontally has been shown to be:
+mobile phone network data (SIM card movements)                  More timely , as there is a peer pressure to help
+during disasters and outbreaks [125,126], analysing          equals;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Figure 17 LiveWall prototype in use during a usability study at PNNL.
+Kamel Boulos et al. International Journal of Health Geographics 2011, 10:67                                     Page 25 of 29
+
+http://www.ij-healthgeographics.com/content/10/1/67
+
+
+
+
+   More complete , as there is transparency in the             messages, e.g., ‘health tips’, especially at times of mass
+reporting;                                                      stress [75], and capitalising on the viral and ubiquitous
+   Higher in quality (in terms of sensitivity),aslcal          natures of mobile and social media to do so (cyberinflu-
+
+populations know what is the baseline behaviour of              ence). Consumers and citize ns might also be willing to
+their own communities; and also as peers sensitise each         pay for useful and individualised information. Services
+other to be on the look for certain ‘signals’ (for example,     that provide health tips can thus be commercially viable
+
+one volunteer reports high numbers of children absent           (if not funded by government /public health authorities
+from schools, prompting others in the network to ask            or similar bodies), in addition to being a direct source
+the same question in their vicinity); and                       of self-reported health information. For example, using
+
+   Higher in quality (in terms of specificity) ,asbeig         tools such as InSTEDD RemindEm [136] (free and open
+local allows to quickly validate, verify information, and       source), pregnant citizens can subscribe to health tips
+dismiss false positives earlier (cross-validation and verifi-   for their current stage of pregnancy by texting in their
+
+cation by peers).                                               LMP (Last Menstrual Period); location-tailored tips for
+  The technologies supporting ‘citizens as sensors’ have        diabetics, pre-operatory or post-operatory guidelines,
+to be:                                                          etc. can also be served using RemindEm. Platforms that
+
+   Horizontal , allowing citizens to share information         offer some crowdreaching value and crowdsharing
+with each other, in addition to vertically with situation       opportunities to citizens rep orting their health condi-
+rooms and similar centres (e.g., Amazon ’sPrc  ieCheck          tions (while adequately protecting users ’ privacy) such
+                                                                as PatientsLikeMe [137] allow the creation of crowd-
+comparison-shopping app [133] allows sharing in-store
+prices vertically with Amazon, as well as horizontally          sourcedaggregatedilhtonfiicctshedg
+with other customers via Twitter, Facebook and text             populatio ns, diseases and geographies with regards to
+messages, in addition to accessing other customers’ pro-        health.
+
+duct reviews);                                                    For cross-border health surveillance, where neighbour-
+   Semi-structured, allowing people to report what they        ing towns/cities and countries affect each other ’shealh
+deem relevant, not restricting them to very tightly struc-      but might be very ‘distant’ in terms of the bureaucratic
+
+tured forms and templates;                                      processes required to share information in a timely
+   Real-time, as information has to flow back and forth        manner (even when all essential data sharing agreements
+in real-time allowing the creation of dialogue;                 are in place [138]), tools are needed that respect each
+
+   Open, whereby members of a group have to feel they          jurisdiction ’s need for controlling access to its crowd-
+can add to the conversation or reporting task other peo-        sourced (expert) reports and data, while providing
+ple who can provide value, thus creating a meritocracy          mechanisms for sharing adequate situational awareness
+
+and allowing the crowdsourced community to grow                 of health events in sentinel border sites. Some of this
+while factoring ‘credentials, reputation and trust ’ into       functionality is available in Veegilo [139], a simple open
+the process;                                                    source tool that aggregates disease indicator numbers
+
+   Geo-aware, noting that local citizens have a high           from national databases into a common space where
+authority on what is nearby t o them; having this piece         incidence and reported deaths of monitored diseases
+of information is essential for the contextualisation and       can be seen and compared across sentinel sites and over
+
+interpretation of data; and                                     time. Its primary use has been for international health
+   Accessible, meaning that the process can also work          networks, but can also be applied at national or provin-
+on even the simplest mobile phone, for example using            cial level to simplify data entry.
+
+SMS text messages (cf. GeoSMS).                                   In this paper, we presented a comprehensive state-of-
+  The presence of multimodal sensors on more                    the-art review of the overlapping domains of the Sensor
+advanced smartphones and tablets carried by citizens is         Web, citizen sensing and ‘human-in-the-loop sensing’ in
+
+also enabling a broad range of possibilities, but the auto-     the era of the Mobile and Social Web, and the roles
+matic collection of detailed sensor data from mobile            these domains can play in environmental and public
+devices may compromise user privacy and this has to be          health surveillance and crisis /disaster informatics. We
+
+adequately addressed in mobile participatory sensing            covered the key issues and trends in these areas, the
+applications relying on such data [134]. In an editorial        challenges faced when reasoning and making decisions
+for a 2008 special issue of GeoJournal on citizen-con-          with real-time crowdsourced data (such as issues of
+
+tributed geographic information, Elwood raises some of          information overload, “noise”, misinformation, bias and
+the more sociological issues regarding crowd-enabled            trust), the core technologies and Open Geospatial Con-
+technologies that are equally worth considering [135].          sortium (OGC) standards involved (Sensor Web Enable-
+
+  The counterpart of crowdsourcing is ‘crowdreaching’,          ment and Open GeoSMS), as well as a few outstanding
+which involves reaching out to people with various              project implementation ex      amples from around the
+Kamel Boulos et al. International Journal of Health Geographics 2011, 10:67                                                                         Page 26 of 29
+http://www.ij-healthgeographics.com/content/10/1/67
+
+
+
+
+
+
+world (Common Scents/the Copenhagen Wheel, Linked                                   11.   Saenz A:Japan’s Nuclear Woes Give Rise to Crowd-Sourced Radiation
+                                                                                         Maps In Asia and US (24 March 2011[h    ).ttp://singularityhub.com/2011/03/
+Sensor Middleware, 3D Town, and Precision Informa-                                       24/japans-nuclear-woes-give-rise-to-crowd-sourced-radiation-maps-in-asia-
+tion Environments).
+                                                                                         and-us/].
+                                                                                    12. PollMap - Lunch Break Edition[.http://nutrition.esri.com/lunchbreak/].
+                                                                                    13. GeoChat by InSTEDD (Innovative Support to Emergencies, Diseases and
+
+Acknowledgements                                                                         Disasters).[http://instedd.org/technologies/geochat/].
+BR would like to thank Rex Britter and Christine Outram, as well as the             14. The Ushahidi Platform.[http://ushahidi.com/products/ushahidi-platform].
+SENSEable City Lab research group. DNC and JGB are funded in part by                15. Twitter.[http://twitter.com/].
+                                                                                    16. Crowdmap.[http://crowdmap.com/].
+Science Foundation Ireland under grant number SFI/08/CE/I1380 (Lion 2)
+and by a CoEI, NUI Galway scholarship.                                              17. Ushahidi - Android Market[.http://market.android.com/details?id=com.
+                                                                                         ushahidi.android.app].
+                                                                                    18. Ushahidi Haiti.[http://haiti.ushahidi.com/].
+1uthor details
+ Faculty of Health, University of Plymouth, Drake Circus, Plymouth, Devon           19. Thailand Flood Crisis Information Map[h   . ttp://de21.digitalasia.chubu.ac.jp/
+PL4 8AA, UK.  2International Society for Photogrammetry and Remote                       floodmap/].
+Sensing, Commission IV - Geodatabases and Digital Mapping, WG IV/4 -                20.   Kamel Boulos MN, Sanfilippo AP, Corley CD, WheelerSSo:cial Web Mining
+
+Virtual Globes and Context-Aware Visualisation/Analysis, ISPRS Headquarters              and Exploitation for Serious Applications: Technosocial Predictive
+(2008-2012), National Geomatics Centre of China, Beijing 100048, PR China.               Analytics and Related Technologies for Public Health, Environmental
+3SENSEable City Lab, Massachusetts Institute of Technology (MIT),                        and National Security SurveillanceC.omputer Methods and Programs in
+                              4                                                          Biomedicine2010, 100(1):16-23[http://dx.doi.org/10.1016/j.cmpb.2010.02.007].
+Cambridge, MA 02139, USA.      Institute for Geoinformatics and Rem5te
+Sensing, University of Osnabrueck, 49076 Osnabrueck, Germany.      School of        21.   Wong WK, Moore A, Cooper G, Wagner M      W: SARE: Whats’ Strange About
+Engineering and Informatics, National University of Ireland Galway, Ireland.             Recent Events?J Urban Health2003, 80(2 Suppl 1):i66-75[http://www.
+6                                                                                        autonlab.org/autonweb/14637/version/4/part/5/data/W   sareJUH-03.pdf].
+ Digital Enterpri7e Research Institute (DERI), National University of Ireland
+Galway, Ireland.  Department of Earth and Space Science and Engineering,            22. Ushahidi - The SwiftRiver Platform[.http://ushahidi.com/products/
+York University, Toronto, ON M3J 1P3, Canada.    8International Society for              swiftriver-platform].
+Photogrammetry and Remote Sensing, Commission III - Photogrammetric                 23.   Demirbas M, Bayir MA, Akcora CG, Yilmaz YS, FerhatosmanogluCHro    : wd-
+                                                                                         sourced sensing and collaboration using TwittePrr.oceedings of the 2010
+Computer Vision and Image Analysis, WG III/4 - Complex scene analysis and
+3D reconstruction, ISPRS Headquarters (2008-2012), National Geomatics                    IEEE International Symposium on a World of Wireless Mobile and Multimedia
+Centre of China, Beijing 100048, PR China.  9Pacific Northwest National                  Networks (WoWMoM): 14-17 June 2010; Montrreal, QC Canad     IEaEE; 2010, 1-9
+                                       10                                                [http://dx.doi.org/10.1109/WOWMOM.2010.5534910].
+Laboratory, Richland, WA 99352, USA.     InSTEDD (Innovative Suppo11 to
+Emergencies, Diseases and Disasters), Palo Alto, CA 94306, USA.     ITRI            24. The Copenhagen Wheel[.http://www.youtube.com/watch?
+(Industrial Technology Research Institute), Hsinchu County 310, Taiwan.                  v=S7y3qIQu3Gc].
+                                                                                    25. DERI LSM deployment.[http://lsm.deri.ie/].
+
+Authors’ contributions                                                              26. DERI-LSM (Linked Sensor Middleware[)h     . ttp://code.google.com/p/deri-
+MNKB conceived and drafted the manuscript with equal (in terms of                        lsm/].
+importance and/or word count) contributions and expert insight from BR,             27.   Kamel Boulos MN:Novel Emergency/Public Health Situation Rooms and
+                                                                                         More Using 4-D GIS.Proceedings of ISPRS WG IV/4 International Workshop
+DNC, JGB, GS, RB, WAP, EJ and K-YSC. MNKB also conducted the core
+literature review, identified and reflected on the main trends in the field,             on Virtual Changing Globe for Visualisation & Analysis (VCGVA2009): 27-28
+located and invited the co-authors on this paper, and edited their                       October 2009; Wuhan University, Wuhan, Hubei, China (ISPRS Archives, Volume
+                                                                                         XXXVIII, Part 4/W10, ISSN No: 1682-1777[)http://healthcybermap.org/
+contributions. All authors read and approved the final manuscript.
+Commercial products and company/brand names mentioned in this paper                      publications/VCGVA2009-MNKB_27-10-2009_slides.zip].
+are trademarks and/or registered trademarks of their respective owners.             28. The Power of Mapping - Going High Tech: Gunho Sohn on 3D Town
+                                                                                         (video, 18 July 2011).[http://vimeo.com/26590802].
+
+Competing interests                                                                 29. Precision Information Environments[.http://precisioninformation.org/].
+The authors declare that they have no competing interests.                          30. Precision Information Environments - Envisioning the future of
+                                                                                         emergency management (video, 30 April 2010[)h.ttp://www.youtube.
+                                                                                         com/watch?v=5tfnmhl-A54].
+Received: 10 December 2011 Accepted: 21 December 2011
+Published: 21 December 2011                                                         31. OGC Sensor Web Enablement (SWE)[h       . ttp://www.opengeospatial.org/ogc/
+                                                                                         markets-technologies/swe].
+                                                                                    32.   Bröring A, Echterhoff J, Jirka S, Simonis I, Everding T, Stasch C, Liang S,
+References
+1.   Kamel Boulos MN:Web GIS in practice III: creating a simple interactive              Lemmens R:New Generation Sensor Web EnablemenSt.ensors2011,
+                                                                                         11(3):2652-2699[http://dx.doi.org/10.3390/s110302652].
+     map of England’s Strategic Health Authorities using Google Maps API,           33. Open GeoSMS for Emergency and Disaster Managemen[h           t.ttp://code.
+     Google Earth KML, and MSN Virtual Earth Map Contro       Inl.t J Health Geogr
+     2005, 4:22[http://dx.doi.org/10.1186/1476-072X-4-22].                               google.com/p/ogs-sdk/downloads/detail?name=Open+GeoSMS+for+EDM.
+                                                                                         pdf].
+2.   Goodchild M:Citizens as sensors: the world of volunteered geography.           34. Sahana Software Foundation[.http://sahanafoundation.org/].
+     GeoJournal2007, 69(4):211-221[http://dx.doi.org/10.1007/s10708-007-9111-y].    35. Foursquare.[http://foursquare.com/].
+3.   Google Earth.[http://earth.google.com/].
+4.   Kanhere SS:Participatory Sensing: Crowdsourcing Data from Mobile               36.   Gross N:The Earth Will Don an Electronic Skin (1999   [h).ttp://www.
+                                                                                         businessweek.com/1999/99_35/b3644024.htm].
+     Smartphones in Urban SpacesP.roceedings of 2011 12th IEEE International        37. Gartner Says Worldwide Mobile Phone Sales Grew 35 Percent in Third
+     Conference on Mobile Data Management (MDM): 6-9 June 2011; Luleå,
+     Sweden2011, 3-6[http://dx.doi.org/10.1109/MDM.2011.16].                             Quarter 2010; Smartphone Sales Increased 96 Percen[h     t.ttp://www.
+                                                                                         gartner.com/it/page.jsp?id=1466313].
+5.   Kamel Boulos MN, Wheeler S, Tavares C, Jones H   R:ow smartphones are          38.   Gannes L:Twitter Finally Discloses How Many Active Users It Has: 100M (8
+     changing the face of mobile and participatory healthcare: an overview,
+     with example from eCAALYXB.iomed Eng Online2011, 10:24[http://dx.doi.               September 2011)[http://allthingsd.com/20110908/twitter-finally-discloses-
+                                                                                         how-many-active-users-it-has-100m/].
+     org/10.1186/1475-925X-10-24].                                                  39. 200 million Tweets per day (30 June 2011[)h. ttp://blog.twitter.com/2011/
+6.   Love Clean Streets.[http://www.lovecleanstreets.org/].                              06/200-million-tweets-per-day.html].
+7.   Outbreaks Near Me.[http://www.healthmap.org/outbreaksnearme/].
+8.   MedWatcher.[http://www.healthmap.org/medwatcher/].                             40. Microsoft Research SenseWeb[.http://research.microsoft.com/en-us/
+                                                                                         projects/senseweb/].
+9.   Fire Department iPhone App 2.0[.http://firedepartment.mobi/].
+10. Sickweather.[http://www.sickweather.com].
+Kamel Boulos et al. International Journal of Health Geographics 2011, 10:67                                                                           Page 27 of 29
+http://www.ij-healthgeographics.com/content/10/1/67
+
+
+
+
+
+41.  Cuff D, Hansen M, Kang JU  : rban sensing: out of the woods.                     67.  Janowicz K:The role of space and time for knowledge organization on
+
+     Communications of the ACM2008, 51(3):24-33[http://dx.doi.org/10.1145/                 the Semantic Web.Semantic Web - Interoperability, Usability, Applicability
+     1325555.1325562].                                                                     2010, 1(1-2):25-32[http://www.semantic-web-journal.net/sites/default/files/
+42.  Weiser M:The computer for the 21    stcentury.Scientific American1991,                swj34_3.pdf].
+
+     265(3):94-104[http://www.ubiq.com/hypertext/weiser/SciAmDraft3.html].            68.  Nagarajan M, Gomadam K, Sheth AP, Ranabahu A, Mutharaju R, Jadhav A:
+43.  Weiser M:Ubiquitous Computing.Computer1993, 26(10):71-72[http://doi.                  Spatio-temporal-thematic analysis of citizen sensor data: Challenges and
+     ieeecomputersociety.org/10.1109/2.237456].                                            experiences.In Proceedings of Web Information Systems Engineering - WISE
+44.  Campbell AT, Eisenman SB, Lane ND, Miluzzo E, Peterson RPAe:ople-                     2009, 10th International Conference: 5-7 October 2009; Poznan, Poland. Lecture
+
+     centric urban sensing.Proceedings of the 2nd annual international                     Notes in Computer Science. Volume 5802E.dited by: Gottfried Vossen, Darrell
+     workshop on Wireless internet, WICON  ‘06 New York, NY, USA: ACM; 2006                DE Long, Jeffrey Xu Yu. Berlin/Heidelberg: Springer; 2009:539-553[http://dx.
+     [http://dx.doi.org/10.1145/1234161.1234179].                                          doi.org/10.1007/978-3-642-04409-0_52].
+
+45.  Chatzigiannakis I, Mylonas G, Vitaletti U:rban pervasive applications:           69. Twitter Search API.[http://dev.twitter.com/docs/api/1/get/search].
+     Challenges, scenarios and case studiesC.omputer Science Review2010,              70. Google Insights for Search[.http://www.google.com/insights/search/].
+     5(1):103-118[http://dx.doi.org/10.1016/j.cosrev.2010.09.003].                    71.  Jadhav A, Purohit H, Kapanipathi P, Ananthram P, Ranabahu A, Nguyen V,
+46. OGC Sensor Model Language (SensorML[)h        . ttp://www.opengeospatial.              Mendes P, Smith A, Cooney M, Sheth AT:witris 2.0: Semantically
+
+     org/standards/sensorml].                                                              Empowered System for Understanding Perceptions from Social Data.
+47. OGC Observations and Measurements[h        . ttp://www.opengeospatial.org/             Proceedings of the Semantic Web Challenge 201[0http://www.cs.vu.nl/
+     standards/om].                                                                        ~pmika/swc/submissions/swc2010_submission_8.pdf].
+48.  Lefort L, Henson C, Taylor K, Barnaghi P, Compton M, Corcho O, Garcia            72.  Gellersen H, Schmidt A, Beigl MM  : ulti-sensor context-awareness in
+
+     Castro R, Graybeal J, Herzog A, Janowicz K, Neuhaus H, Nikolov A, Page K:             mobile devices and smart artifactsM   . obile Networks and Application2s002,
+     Semantic Sensor Network XG Final Report, W3C Incubator Group Report                   7(5):341-351[http://dx.doi.org/10.1023/A:1016587515822].
+     (28 June 2011)[.http://www.w3.org/2005/Incubator/ssn/XGR-ssn/].                  73.  Lane N, Miluzzo E, Lu H, Peebles D, Choudhury T, CampbellAA:survey of
+
+49.  Neuhaus H, Compton MT: he Semantic Sensor Network Ontology: A                         mobile phone sensing.IEEE Communications Magazine2010, 48(9):140-150
+     Generic Language to Describe Sensor AssetP      s.roceedings of AGILE 2009            [http://dx.doi.org/10.1109/MCOM.2010.5560598].
+     Pre-Conference Workshop: Challenges in Geospatial Data Harmonisation             74.  Scanfeld D, Scanfeld V, Larson ELD: issemination of health information
+     [http://www.esdi-humboldt.eu/files/agile2009/                                         through social networks: twitter and antibioticA   s.m J Infect Control2010,
+
+     Neuhaus2009_Semantic_Sensor_Network_Ontology.pdf].                                    38(3):182-8[http://dx.doi.org/10.1016/j.ajic.2009.11.004].
+50.  Burke J, Estrin D, Hansen M, Parker A, Ramanathan N, Reddy S,                    75.  Kamel Boulos MN:BlogBrain Ops: Proposal for a Semi-automatic Social
+     Srivastava MB:Participatory sensingUC Los Angeles: Center for Embedded                Web Mining and Cyberinfluence Decision-support Tool for Info Ops
+     Network Sensing; 2006 [http://escholarship.org/uc/item/19h777qd].                     Teams.Journal of Emerging Technologies in Web Intelligenc2e011,
+
+51.  Welsh M:Sensor networks for the sciencesC.ommunications of the ACM                    3(4):317-322[http://dx.doi.org/10.4304/jetwi.3.4.317-322].
+     2010, 53(11):36[http://dx.doi.org/10.1145/1839676.1839690].                      76. Darwikinism.[http://meta.wikimedia.org/wiki/Darwikinism].
+52.  Ribeiro J:Mumbai Mobile Networks Choked After Blasts (15 July 201[1h)ttp://      77.  Keller L:How The CIA Uses Social Media to Track How People Feel (4
+
+     www.pcworld.com/businesscenter/article/235812/                                        November 2011)[http://www.theatlantic.com/technology/archive/2011/11/
+     mumbai_mobile_networks_choked_after_blasts.html].                                     how-the-cia-uses-social-media-to-track-how-people-feel/247923  /].
+53.  Rahman M:Mumbai bomb blasts kill 21 during ci’tsyrush hour (The                  78.  Burns G:Using Twitter to predict stock market (28 September 201[1h)ttp://
+     Guardian, 14 July 2011[)h . ttp://www.guardian.co.uk/world/2011/jul/13/               www.bizjournals.com/buffalo/blog/the_last_laugh/2011/09/using-twitter-to-
+
+     mumbai-bomb-blasts-india].                                                            predict-stock-market.html].
+54.  Hansen M:Embedded (Keynote).Proceedings of 2005 SIAM International               79.  Bollena J, Maoa H, Zeng XT:witter mood predicts the stock market.
+     Conference on Data Mining: 21-23 April 2005; Newport Beach, CA, U[ShAttp://           Journal of Computational Science2011, 2(1):1-8[http://dx.doi.org/10.1016/j.
+
+     www.siam.org/meetings/sdm05/hansen.htm].                                              jocs.2010.12.007].
+55.  Sheth A:Citizen sensing, social signals, and enriching human experience.         80.   InOGC Sensor Web Enablement: Overview And High Level Architecture -
+     IEEE Internet Computing2009, 13(4):87-92[http://dx.doi.org/10.1109/                   OpenGIS White Paper OGC 07-165, Version 3, 28 December 200E7d.ited by:
+     MIC.2009.77].                                                                         Botts M, Percivall G, Reed C, Davidson J. Open Geospatial Consortium, Inc;
+
+56. Sense (Wiktionary).[http://en.wiktionary.org/w/index.php?                              2007:[http://portal.opengeospatial.org/files/?artifact_id=25562].
+     title=sense&oldid=14120391].                                                     81.   InObservations and Measurements - OpenGIS Implementation Standard OGC
+57.  Srivastava M, Abdelzaher T, Szymansk B   H:uman-centric Sensing.Philos                07-022r1, Version 1.0, 8 December 2007E.dited by: Cox S. Open Geospatial
+     Transact A Math Phys Eng Sc2  i 012, 370(1958):176-97[http://dx.doi.org/              Consortium, Inc; 2007:[http://portal.opengeospatial.org/files/?
+
+     10.1098/rsta.2011.0244].                                                              artifact_id=22466].
+58. Sensing > Sensor operation (Wikipedia[)h    . ttp://en.wikipedia.org/w/index.     82.   InSensor Observation Service - OpenGIS Implementation Standard OGC 06-
+     php?title=Sensing&oldid=333078009].                                                   009r6, Version 1.0, 26 October 2007E.dited by: Na A, Priest M. Open
+
+59. Flickr. [http://www.flickr.com/].                                                      Geospatial Consortium, Inc; 2007:[http://portal.opengeospatial.org/files/?
+60.  Beaumont C:Mumbai attacks: Twitter and Flickr used to break news                      artifact_id=26667].
+     (The Telegraph, 27 November 2008[h     ).ttp://www.telegraph.co.uk/news/         83.   InSensor Planning Service Implementation Standard - OpenGIS
+     worldnews/asia/india/3530640/Mumbai-attacks   -Twitter-and-Flickr-used-to-            Implementation Standard OGC 09-000, Version 2.0, 28 March 201E1d.ited by:
+
+     break-news-Bombay-India.html].                                                        Simonis I, Echterhoff J. Open Geospatial Consortium, Inc; 2011:[http://portal.
+61.  Westermann U:Events in Multimedia Electronic Chronicles (E-Chronicles).               opengeospatial.org/files/?artifact_id=38478].
+     International Journal on Semantic Web and Information System   20s06,            84.   InSensor Alert Service - Candidate OpenGIS Interface Standard OGC 06-028r5,
+
+     2(2):1-23[http://dx.doi.org/10.4018/jswis.2006040101].                                Version 0.9.0, 14 May 2007E. dited by: Simonis I, Echterhoff J. Open
+62.  Jain R:EventWeb: Developing a Human-Centered Computing System.                        Geospatial Consortium, Inc; 2007:[http://portal.opengeospatial.org/files/?
+     Computer2008, 41(2):42-50[http://dx.doi.org/10.1109/MC.2008.49].                      artifact_id=24780].
+63.  Kwak H, Lee C, Park H, Moon SW   : hat is Twitter, a social network or a         85.   InWeb Notification Service - OpenGIS Consortium Discussion Paper OGC 03-
+
+     news media?Proceedings of the 19th International Conference on World                  008r2, Version 0.1.0, 21 April 2003E.dited by: Simonis I, Wytzisk A. Open
+     Wide Web, WWW‘10 New York, NY, USA: ACM; 2010, 591-600[http://dx.doi.                 Geospatial Consortium, Inc; 2003:[http://portal.opengeospatial.org/files/?
+     org/10.1145/1772690.1772751].                                                         artifact_id=1367].
+64.  Sheth A, Henson C, Sahoo SS:emantic Sensor Web.IEEE Internet                     86.   InOpen GeoSMS Standard - Core - OGC Candidate Standard OGC 11-030,
+
+     Computing2008, 12(4):78-83[http://dx.doi.org/10.1109/MIC.2008.87].                    Version 0.7.0, 24 March 2011E. dited by: Chen K-M. Open Geospatial
+65. RDFa Primer - Bridging the Human and Data Webs (W3C Working                            Consortium, Inc; 2011:[http://portal.opengeospatial.org/files?
+     Group Note, 14 October 2008)[.http://www.w3.org/TR/xhtml-rdfa-primer/].               artifact_id=43345].
+
+66. Twitris.[http://twitris.knoesis.org/].                                            87. Offline OpenStreetMap.[http://wiki.openstreetmap.org/wiki/
+                                                                                           Offline_Openstreetmap].
+Kamel Boulos et al. International Journal of Health Geographics 2011, 10:67                                                                      Page 28 of 29
+http://www.ij-healthgeographics.com/content/10/1/67
+
+
+
+
+
+88.  Resch B, Mittlboeck M, Girardin F, Britter R, Ratti LCi:ve Geography -        110. Wang L, Sohn G:Integration of terrestrial laser scanning points and 2D
+
+     Embedded Sensing for Standardised Urban Environmental Monitoring.                  floor plans based on maximum sequential similaritPyr.oceedings of Laser
+     International Journal on Advances in Systems and Measuremen2t0s09,                 Scanning 2011 (ISPRS Workshop): 29-31 August 2011; University of Calgary,
+     2(2&3):156-167[http://www.iariajournals.org/systems_and_measurements/              Alberta, Canada (on CD-ROM[)http://www.ucalgary.ca/laserscanning2011/
+
+     tocv2n23.html].                                                                    files/laserscanning2011/Final%20Program%2015%20august%202011.pdf].
+89. Sensaris City Senspod.[http://www.sensaris.com/environment/].                  111. Persad RA, Armenakis C, Sohn GC:alibration of a PTZ surveillance camera
+90. SENSEable City Lab Copenhagen Wheel Projec[th.ttp://senseable.mit.edu/              using 3D indoor model.Proceedings of Canadian Geomatics Conference
+     copenhagenwheel/].                                                                 2010 and ISPRS Commission I Symposium: 15-18 June 2010; Calgary, Alberta,
+
+91.  Kamel Boulos MN, Roudsari AV, Carson ER   T:owards a semantic medical              Canada[http://www.isprs.org/proceedings/XXXVIII/part1/08/
+     Web: HealthCyberMap   ’s tool for building an RDF metadata base of                 08_04_Paper_176.pdf].
+     health information resources based on the Qualified Dublin Core               112. Google Earth Plug-in.[http://earth.google.com/plugin/].
+
+     Metadata Set.Medical Science Monitor2002, 8(7):MT124-36[http://www.           113. WebGL - OpenGL ES 2.0 for the Web[h    . ttp://www.khronos.org/webgl/].
+     medscimonit.com/fulltxt.php?ICID=510682].                                     114. Step inside the map with Google MapsGL (13 October 2011       [h).ttp://
+92.  Le-Phuoc D, Quoc HNM, Parreira JX, Hauswirth M   T: e Linked Sensor                googleblog.blogspot.com/2011/10/step-inside-map-with-google-mapsgl.
+     Middleware–Connecting the real world and the Semantic Web.                         html].
+
+     Proceedings of the Semantic Web Challeng2e011 [http://www.cs.vu.nl/           115. WebGL Earth.[http://www.webglearth.com/].
+     ~pmika/swc/submissions2011/swc2011_submission_9.pdf].                         116. Crossbow Technology, Inc[.http://www.xbow.com/].
+93. GSN. [http://sourceforge.net/apps/trac/gsn/].                                  117. US Government Accountability OfficeE:mergency Communications:
+94. The Internet of Things Real-Time Web Service and Applications -                     Vulnerabilities Remain and Limited Collaboration and Monitoring Hamper
+
+     Pachube.[http://pachube.com/].                                                     Federal Efforts (GAO-09-604, June 2009). Washington, D2C009 [http://www.
+95. NOAA - National Oceanic and Atmospheric Administratio[n       h.ttp://www.          gao.gov/new.items/d09604.pdf].
+     noaa.gov/].                                                                   118. Facebook Statistics.[https://www.facebook.com/press/info.php?statistics].
+
+96. The Linking Open Data cloud diagram[h     . ttp://lod-cloud.net].              119. Making sense of Facebooks’$50bn valuation (4 January 2011)[.http://
+97.  Le-Phuoc D, Dao-Tran M, Parreira JX, Hauswirth M A:native and adaptive             gloocomms.com/blogs/facebook-statistics/].
+     approach for unified processing of linked streams and linked data.            120. Tsotsis A:Twitter Is At 250 Million Tweets Per Day (17 October 2011).
+     Proceedings of the 10th International Semantic Web Conference-ISWC 2011:           [http://techcrunch.com/2011/10/17/twitter-is-at-250-million-tweets-per-d
+ y/].
+
+     23-27 October 2011; Bonn, Germany[http://iswc2011.semanticweb.org/            121. Sutter JD:5 billionth photo uploaded to Flickr (CNN, 20 September
+     fileadmin/iswc/Papers/Research_Paper/05/70310368.pdf].                             2011).[http://articles.cnn.com/2010-09-20/tech/flickr.5.billion_1_photo-
+98. SPARQL Query Language for RDF - W3C Recommendation 15 January                       sharing-site-flickr-facebook?_s=PM:TECH].
+     2008. [http://www.w3.org/TR/rdf-sparql-query/].                               122. YouTube Frequently Asked Questions[h    . ttp://www.youtube.com/t/faq].
+
+99.  Kamel Boulos MN, Scotch M, Cheung K-H, Burden W     D:eb GIS in practice      123. Kamel Boulos MN, Viangteeravat T, Anyanwu MN, Ra Nagisetty V, Kuscu E:
+     VI: a demo playlist of geo-mashups for public health neogeographers.               Web GIS in practice IX: a demonstration of geospatial visual analytics
+     Int J Health Geogr2008, 7:38[http://dx.doi.org/10.1186/1476-072X-7-38].            using Microsoft Live Labs Pivot technology and WHO mortality daItnat.
+
+100. Corsar D, Edwards P, Velaga N, Nelson J, PanSJh: ort Paper: Addressing             J Health Geogr2011, 10:19[http://dx.doi.org/10.1186/1476-072X-10-19].
+     the Challenges of Semantic Citizen-Sensing   In. Proceedings of the 4th       124. Kamel Boulos MN, Blanchard BJ, Walker C, Montero J, Tripathy A, Gutierrez-
+     International Workshop on Semantic Sensor Networks 2011 (SSN11), a                 Osuna R:Web GIS in practice X: a Microsoft Kinect natural user interface
+     workshop of the 10th International Semantic Web Conference-ISWC 2011: 23-          for Google Earth navigationI.nt J Health Geogr2011, 10:45[http://dx.doi.
+
+     27 October 2011; Bonn, GermanyE.dited by: Kerry Taylor, Arun Ayyagari,             org/10.1186/1476-072X-10-45].
+     David De Roure. Melbourne, Australia: CSIRO; 2011:90-95[http://research.ict.  125. Mobile phones help to target disaster aid, says study (BBC News, 2
+     csiro.au/conferences/ssn/ssn11/semantic_sensor_networks_2011.pdf].                 September 2011).[http://www.bbc.co.uk/news/technology-14761144].
+
+101. Crowley DN, Passant A, Breslin JGS:hort Paper: Annotating Microblog           126. Bengtsson L, Lu X, Thorson A, Garfield R, von SchreebIm J:proved
+     Posts with Sensor Data for Emergency Reporting Application     Ins.                Response to Disasters and Outbreaks by Tracking Population
+     Proceedings of the 4th International Workshop on Semantic Sensor Networks          Movements with Mobile Phone Network Data: A Post-Earthquake
+     2011 (SSN11), a workshop of the 10th International Semantic Web Conference-        Geospatial Study in HaitiP. LoS Med2011, 8(8):e1001083[http://dx.doi.org/
+
+     ISWC 2011: 23-27 October 2011; Bonn, GermanEy.dited by: Kerry Taylor, Arun         10.1371/journal.pmed.1001083].
+     Ayyagari, David De Roure. Melbourne, Australia: CSIRO; 2011:84-89[http://     127. Real-time Outbreak and Disease Surveillance (RODS) Laboratory at the
+     research.ict.csiro.au/conferences/ssn/ssn11/semantic_sensor_networks_2011.         University of Pittsburgh, Department of Biomedical Informatic   [hst.tp://
+     pdf].                                                                              rods.health.pitt.edu/].
+
+102. Siegler M:An Early Look At Twitter Annotations O“rT  , wannotations”.         128. Willard SD, Nguyen MMI:nternet Search Trends Analysis Tools Can
+     2010 [http://techcrunch.com/2010/05/08/twitter-annotations/].                      Provide Real-time Data on Kidney Stone Disease in the United States.
+103. Siegler M:Stealthy Bottlenose Hopes To Fulfill The Unkept Promise Of               Urology2011, http://dx.doi.org/10.1016/j.urology.2011.04.024.
+
+     Twitter Annotations (And More) (5 April 2011   [h).ttp://techcrunch.com/      129. Walcott BP, Nahed BV, Kahle KT, Redjal N, Coumans JD  V: termination of
+     2011/04/05/bottlenose/].                                                           geographic variance in stroke prevalence using Internet search engine
+104. Twitter Places: More Context For Your Tweets2.010 [http://blog.twitter.            analytics.Neurosurg Focus2011, 30(6):E19[http://dx.doi.org/10.3171/2011.2.
+     com/2010/06/twitter-places-more-context-for-your.html].                            FOCUS1124].
+
+105. InAugmented Urban Spaces: Articulating the Physical and Electronic City.      130. Althouse BM, Ng YY, Cummings DAP:rediction of dengue incidence
+     Edited by: Aurigi A, De Cindio F. Aldershot, Hampshire: Ashgate; 2008:, ISBN:      using search query surveillanceP.LoS Negl Trop Dis2011, 5(8):e1258[http://
+     978-0-7546-7149-7.                                                                 dx.doi.org/10.1371/journal.pntd.0001258].
+
+106. Bing Maps. [http://www.bing.com/maps/].                                       131. Ortiz JR, Zhou H, Shay DK, Neuzil KM, Goss CH D:oes Google Influenza
+107. Wang L, Sohn G, Persad R, Chan S, Armenakis T  Co: wards dynamic virtual           Tracking Correlate With Laboratory Tests Positive For InfluenzAam ? J
+     3D world: bringing dynamics into integrated 3D indoor and outdoor                  Respir Crit Care Med2010, 181:A2626[http://ajrccm.atsjournals.org/cgi/
+     virtual world.Proceedings of the joint ISPRS workshop on 3D city modelling &       content/citation/181/1_MeetingAbstracts/A2626].
+
+     applications and the 6th 3D GeoInfo conference: 26-28 June 2011; Wuhan        132. Wikipedia.[http://www.wikipedia.org/].
+     University, PR China (on CD-ROM[)http://www.lmars.whu.edu.cn/                 133. Price Check by Amazon.[http://market.android.com/details?id=com.
+     3DCMA2011/3DCMA2011%20&%20the%206th%20GeoInfo%20Conference%                        amazon.pricecheck].
+     20Program_Final.pdf].                                                         134. Christin D, Reinhardt A, Kanhere SS, Hollick A: survey on privacy in
+
+108. Nagel C, Becker T, Kolbe TH, Indoor ML A: Data Model and Exchange                  mobile participatory sensing applicationsJo. urnal of Systems and Software
+     Format for Indoor Navigation (PowerPoint, 8 December 200[h     9t)t.p://           2011, 84(11):1928-1946[http://dx.doi.org/10.1016/j.jss.2011.06.073].
+     portal.opengeospatial.org/files/?artifact_id=36918].                          135. Elwood S:Volunteered geographic information: key questions, concepts
+              ®
+109. OpenGIS    City Geography Markup Language (CityGML) Encoding                       and methods to guide emerging research and practicG      ee.oJournal2008,
+     Standard.[http://www.opengeospatial.org/standards/citygml].                        72:133-135[http://dx.doi.org/10.1007/s10708-008-9187-z].
+Kamel Boulos et al. International Journal of Health Geographics 2011, 10:67                                                                Page 29 of 29
+http://www.ij-healthgeographics.com/content/10/1/67
+
+
+
+
+
+
+136. RemindEm.[http://remindem.instedd.org/].
+137. PatientsLikeMe.[http://www.patientslikeme.com/].
+
+138. Kamel Boulos MN:Towards evidence-based, GIS-driven national spatial
+     health information infrastructure and surveillance services in the United
+     Kingdom.Int J Health Geogr2004, 3:1[http://dx.doi.org/10.1186/1476-072X-
+
+     3-1].
+139. Veegilo.[http://instedd.org/technologies/veegilo/].
+
+  doi:10.1186/1476-072X-10-67
+
+  Cite this article as: Kamel Boulos et al.: Crowdsourcing, citizen sensing
+  and sensor web technologies for public and environmental health
+  surveillance and crisis management: trends, OGC standards and
+  application examples. International Journal of Health Geographics 2011
+
+  10:67.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                    Submit your next manuscript to BioMed Central
+                                                                                    and take full advantage of:
+
+
+                                                                                    • Convenient online submission
+
+                                                                                    • Thorough peer review
+
+                                                                                    • No space constraints or color ﬁgure charges
+
+                                                                                    • Immediate publication on acceptance
+
+                                                                                    • Inclusion in PubMed, CAS, Scopus and Google Scholar
+
+                                                                                    • Research which is freely available for redistribution
+
+
+                                                                                    Submit your manuscript at
+                                                                                    www.biomedcentral.com/submit

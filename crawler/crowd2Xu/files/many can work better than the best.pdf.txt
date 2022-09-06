@@ -1,0 +1,869 @@
+Entropy 2014, 16, 3866-3877; doi:10.3390/e16073866
+                                                                                   OPEN ACCESS
+
+                                                                             entropy
+
+                                                                                ISSN 1099-4300
+                                                                  www.mdpi.com/journal/entropy
+
+
+Article
+
+
+Many Can Work Better than the Best: Diagnosing with Medical
+
+Images via Crowdsourcing
+
+Xian-Hong Xiang , Xiao-Yu Huang     2;3, Xiao-Ling Zhang , Chun-Fang Cai , 4
+                1;            3
+Jian-Yong Yang    * and Lei Li
+
+1
+ Department of Interventional Radiology, The First Afﬁliated Hospital of Sun Yat-Sen University,
+  Guangzhou 510080, China; E-Mails: med.interventional@163.com (X-H.X.);
+
+  zhangxiaoling_77@163.com (X.-L.Z.)
+2School of Economics and Commerce, South China University of Technology, Guangzhou 510006,
+
+  China; E-Mail: echxy@scut.edu.cn
+3
+ Software Institute, Sun Yat-Sen University, Guangzhou 510275, China;
+  E-Mail: lncsri07@mail.sysu.edu.cn
+4
+ Department of Gynaecology and Obstetrics, Guangzhou Women and Children Medical Center,
+  Guangzhou 510623, China; E-Mail: dmdata@126.com
+
+
+* Author to whom correspondence should be addressed; E-Mail: cjr.yangjianyong@vip.163.com;
+
+  Tel.: +86-20-87755766.
+
+Received: 8 March 2014; in revise form: 22 June 2014 / Accepted: 3 July 2014 /
+
+Published: 14 July 2014
+
+
+
+
+     Abstract: We study a crowdsourcing-based diagnosis algorithm, which is against the fact
+     that currently we do not lack medical staff, but high level experts. Our approach is to make
+
+     use of the general practitioners’ efforts: For every patient whose illness cannot be judged
+     deﬁnitely, we arrange for them to be diagnosed multiple times by different doctors, and we
+
+     collect the all diagnosis results to derive the ﬁnal judgement. Our inference model is based
+     on the statistical consistency of the diagnosis data. To evaluate the proposed model, we
+
+     conduct experiments on both the synthetic and real data; the results show that it outperforms
+
+     the benchmarks.
+
+     Keywords:   medical images based diagnosis; crowdsourcing; entropy; Kullback–Leibler divergence
+Entropy 2014, 16                                                                                  3867
+
+
+
+1. Introduction
+
+   Image based diagnosis has been developed and widely used in medical ﬁelds for decades,
+
+according to some statistics, up until 2010, 5 billion medical imaging studies had been conducted
+worldwide [1]. By analyzing a great deal of information yielded through imaging techniques such
+
+as X-ray Computerized Tomography (CT) and Magnetic Resonance Imaging (MRI), doctors reveal,
+diagnose, or examine disease for patients, examples including strokes [2] and cancers [3].
+
+   However, as well known, accurate analysis and interpretation of a medical image relies heavily on the
+
+knowledge and experience of experts. In cases of images that contain many details, the diagnosis process
+might become tedious and time consuming even for well-trained professionals. For illustration, let us
+
+study some CT images presented in Figure 1, where the ﬁrst row is from some lung cancer patients, and
+the second row is of the pulmonary abscess patients. We see the differences between the two rows of
+
+images are very subtle, so it is not easy to distinguish the two kinds of the patients from each other, even
+for some well educated junior doctors. For example, as mentioned below, we have recruited 13 graduate
+
+students to diagnose 50 patients according to their CT images, we ﬁnd the result is far from optimistic:
+On average, every student only has 19 correct diagnoses.
+
+
+      Figure 1. Some sample medical images, pictures in the ﬁrst row are from the pulmonary
+
+      abscess patients, in the second row are from the lung cancer patients.           (a) Some
+      sample images of the pulmonary abscess patients; (b) Some sample images of the lung
+
+      cancer patients.
+
+
+
+
+
+
+
+
+                                                  (a)
+
+
+
+
+
+
+
+
+                                                  (b)
+
+
+   Meanwhile, a brutal reality is true worldwide: well trained experts are rare. For example, according
+
+to some public reports, in China, until July of 2012, among the 1.3 billion population there were about 2
+million doctors. In other words, the number of doctors per 1000 people was around 1.5. Although this
+
+is greater than 1.25, which is suggested as the lower bound by WHO (World Health Organization), only
+half of the doctor population holds a bachelor or higher degree in medicine. What is more, among the
+
+the total doctor population, the ratio of people with a master or higher degree is below 8%. In addition,
+because of various objective conditions such income and life, almost all the well-trained and experienced
+Entropy 2014, 16                                                                                   3868
+
+
+
+doctors gather in a very few highly developed cities of China, such as Beijing [4], Shanghai [5] and
+Guangzhou [6]. Almost all of the other cities suffer from a severe shortage of high level doctors.
+
+   Because of the unbalanced distribution of the experts, for many hospitals, when they have patients
+who cannot be deﬁnitively diagnosed, they often need to ask for help from outside experts. This
+
+approach, despite the inefﬁciency and the extra cost, does not always work well, because the experts
+are often needed by their own business.
+
+   In the present article, we propose another attempt to approach the shortage of experts with respect to
+the context of medical image based diagnosis. Our basic idea is regarding the observation that what we
+
+lack are the experts, but not the general practitioners, so it is possible to release the experts from endless
+
+requests via making use of the general practitioners’s efforts. Our solution is the crowdsourcing [7]
+scheme, the details of which are presented in Table 1.
+
+
+                 Table 1. The working scheme of the crowdsourcing based diagnosis.
+
+         1.  For every patient who can not be diagnosed deﬁnitely, do:
+
+         2.     Invite some other doctors to diagnose the patient based on her medical images;
+         3.     Summarize the all diagnosis results and make the ﬁnal decision;
+
+         4.  End
+
+
+   At ﬁrst glance, the procedure of Table 1 looks very much like the expert consultation (ES) system.
+
+However, there are some fundamental differences between the two approaches: Firstly, the ES scheme
+
+often requires the participation of experts, while the crowdsourcing scheme only needs the general
+practitioners (but of course, experts are welcome.). Secondly, in the ES scheme, all the experts usually
+
+take part in the diagnosis together and achieve the unique conclusion in the end. In the crowdsourcing
+scheme, every doctor works independently and the ﬁnal judgement is derived by some algorithm that
+
+takes the all doctors’ conclusions as input.
+   Our contribution is three fold, the summarization is as follows:
+
+
+  (1) We propose the crowdsourcing based diagnosis paradigm;
+  (2) We present a statistical consistency based learning algorithm, which ensembles all the doctors’
+
+      diagnosis conclusions and derived the ﬁnal decision;
+  (3) We evaluate the proposed approach with the synthetic and real data.
+
+
+   The remainder of the paper is organized as follows. Section 2 discusses the related works on
+crowdsourcing; Section 3 describes a real medical image based diagnosis results set that is used in
+
+the work; in Section 4, we present our crowdsourcing based diagnosis method; Section 5 is devoted to
+
+the experiments, and Section 6 is the conclusion.
+
+
+2. Crowdsourcing
+
+   To the best of our knowledge, the term crowdsourcing was ﬁrst proposed by Jeff Howe as
+
+the composition of the terms “wisdom of crowds” and “outsourcing” [8,9]. In essence, crowdsourcing
+is one type of Human as a Service (HuaaS), where a group of (not necessary expert) people (or
+Entropy 2014, 16                                                                                       3869
+
+
+
+workers) are asked to do a task of that often needs professional background, such as natural language
+
+processing [10], movie recommendation [11], optical character recognition [12], image classiﬁcation [13,14]
+and dermatology research [15]. One of the most famous crowdsourcing examples is Wikipedia, where
+
+thousands of users contributes the creation of the world’s largest encyclopedia every day. And some
+other well known instances include the Amazon Mechanical Turk platform [16], the the Galaxy Zoo
+
+project [17] and the Click Worker project [18].
+
+   Since most of the crowdsourcing contributors are not domain experts, so their working results
+are often of relatively low quality. Hence, naturally, a central concern of crowdsourcing is How to
+
+combine the individuals’ works to derive high quality results. The approaches, roughly speaking, can
+be categorized into two classes: The ﬁrst category is the data content independent (DCI) method,
+
+where the ensemble algorithm only takes the individuals’ conclusions as input and makes the ﬁnal
+
+judgement. Among all the DCI methods, the most used one is the majority voting algorithm [10], which
+suggests that for every item of the task, the ground truth is the one that is elected by the most workers.
+
+Despite its simplicity, the majority voting algorithm is well recognized as the most stable one among
+
+various crowdsourcing algorithms [7,19,20], and achieves surprising success in many crowdsourcing
+applications. However, for the naive majority voting algorithm and its variations, almost all of them
+
+need every task to be done multiple times by different workers. This requirement, when the actual
+cost is taken into account, is infeasible in many real applications. Addressed to the shortage of the
+
+DCI methods, as the second category algorithm, the data content dependent (DCD) method is proposed.
+
+A typical DCD policy usually consists of two stages: In the ﬁrst stage, it learns the behavior of the
+workers from their working results, i.e., for every worker w , ititreats the items worked by w along i
+
+with the working results as the training data and learns the predictor to simulate the behavior of w ,ithen
+applies the learned model to act as w to make predictions on the other items [21,22]. In the second stage,
+                                      i
+the algorithm ensembles the all working results (both of the workers’ results and the prediction results)
+
+and makes the ﬁnal judgements. To avoid the undertraining problem, the DCD approach often requires
+every worker to have large enough working results.
+
+
+3. Data
+
+
+   The dataset we use is composed of 50 patients’ CT medical images, for every patient there are
+
+300–400 images. Every patient is in one of the four categories: pulmonary tuberculosis, lung cancer,
+pulmonary abscess and pulmonary metastasis, some samples of the images are presented in Figure 2.
+
+   We recruit 13 volunteers to diagnose (or to label) the patients according to their images, all the
+
+volunteers are 2nd or 3rd year graduate students of the medical imaging major. We ask every student to
+make their diagnosis for every patient according to the images independently. The average accuracy of
+
+the volunteers is 39.54%, i.e., on average, every student only has 19 accurate diagnosis. Besides, the best
+volunteer achieved an accuracy of 50%, while the worst one only has a accuracy of 20%.
+Entropy 2014, 16                                                                                         3870
+
+
+
+      Figure 2. Some sample medical images, (a) pulmonary tuberculosis; (b) lung cancer;
+
+      (c) pulmonary abscess; (d) pulmonary metastasis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  (a)                     (b)                     (c)                     (d)
+
+
+
+4. Method
+
+
+   In our problem, every worker only labels 50 patients, while for every patient there are more than
+
+300 high resolution medical images, so it is easy to become trapped into the undertraining dilemma if
+
+we try to learn the worker’s behavior via their working results. As a result, we take the DCI policy to
+make diagnosis judgement.
+
+   Our idea is based on the statistical consistency of the patients’ diagnosis results: Denote the set
+
+of available doctors as fD ;D1;::2;D g, thenset of patients as fP ;P ;:::;1 g2 the setmof possible
+
+illnesses (or, labels) as fI1;I2;:::;I k. Let S ripresent the set of diagnosis results of P (Thriughout
+
+this paper, unlike conventional deﬁnitions, we allow a set to contain duplicate values.). We use D to      i
+represent the distribution on S . Speciﬁcally, we denote S = S [ S [ :::S , and D the distribution
+                                i                             0     1     2        n         0
+on S 0 It is noteworthy that here we do not require the patients to be diagnosed by the all doctors, hence,
+
+the distributions D siare estimated only by the collected diagnosis data. For patient P , to deiermine
+
+which illness she has, our idea is to choose the one from I which leads to the minimal changes to both
+
+the global distribution D 0nd individual distribution D .  i
+
+
+4.1. Preliminaries
+
+
+   Throughout this paper we use upper case letters (e.g., X;Y;Z;:::) to denote the random variables,
+
+and lower cases to represent the instances.
+
+   Our work is mainly based on Information Theory.             Below we introduce some deﬁnitions and
+
+preliminary results used in this paper. Most of them can be found in [23].
+
+   Let P be a distribution with p(X) as the probability density function (p.d.f) for X ▯ P, then entropy
+of X is deﬁned as                                   Z
+
+                                       H(X) = ▯        p(x)lnp(x)dx:
+Entropy 2014, 16                                                                                        3871
+
+
+
+   Given a distribution Q with q(X) as the p.d.f, we employ the Kullback–Leibler divergence to measure
+
+the distance between P and Q, which is deﬁned as
+                                                    Z
+                                                               p(x)
+                                     KL(PjjQ) =        p(x)ln       dx:
+                                                               q(x)
+
+   Our assumption of the proposed algorithm is as follows:
+
+
+Assumption 1. For i 2 f0;1;2;:::;ng, the distribution D is multinominai with probability
+
+fp i;1;i;2;p g.  i;k
+
+                                                                                         P  k
+   For every 0 ▯ i ▯ n, we use n      i;jto denote the number of I injS , lit n    i;0=     l=1n i;le have
+
+the following theorem:
+
+                   ▯    ▯        ▯
+Theorem 1. Let p ;pi;1::i;2      i;kbe the solution to the following problem
+
+                               fp ;p ;:::;p g =▯         argmax        Pr(S )                             (1)
+                                 i;1  i;2      i;k                           i
+                                                      fpi;1pi;2::i;k
+
+then for j = 1;2;:::;k
+                                                        ni;j
+                                                 pi;j=      :                                             (2)
+                                                        ni;0
+
+Proof of Theorem 1 According to Assumption (1),
+
+                                                                  k
+                                                      ni;0       Y    ni;l
+                                    Pr(S )i=                         pi;l                                 (3)
+                                               n i;1!i;2n !   i;k
+                                                                 l=1
+
+Take logarithm on both sides of the equation above, we have
+
+                                                                  X k
+                                                    ni;0
+                             lnPr(S )i= ln                      +     n i;l : i;l                         (4)
+                                             n i;1!i;2n !   i;k    l=1
+
+                             ni;0
+Noting that the term ln  ni;1ni;2::i;kis a constant and
+
+                                                  k
+                                                X
+                                                     pi;l 1:                                              (5)
+
+                                                 l=1
+
+Let
+                                                   Xk                      Xk
+                         T (p ;p ;:::;p ) =            n lnp     + ▯(1 ▯       p ):
+                           i  i;1  i;2      i;k         i;l    i;l              i;l
+                                                   l=1                     l=1
+
+where ▯ > 0 is ﬁxed, then problem of Equation (1) is equivalent to the following:
+
+                          ▯    ▯        ▯
+                       fp i;1;:i;2p g = i;k      argmax        T ip i;1;:i;2p ):  i;k                     (6)
+                                               fpi;1i;2:::i;k
+
+For l = 1;2;:::;k, let
+
+                                        @T ip i;1;:i;2p )   i;k
+                                                                = 0;
+                                                  @pi;l
+
+we have
+                                                 p   =  ni;:                                              (7)
+                                                  i;l    ▯
+
+plug Equation (7) into Equation (5), we achieve ▯ = n , hi;0e we have the proof. ▯
+Entropy 2014, 16                                                                                       3872
+
+
+
+4.2. Diagnosis with Crowdsourcing
+
+
+
+   Given the sets of the diagnosis results S ;S1;::2;S , wenpretend there is an extra oracle doctor
+
+to make the ﬁnal judgement for every patient. Denote the illness of P given byithe oracle as O .           i
+
+For an arbitrary X 2 fI ;I1;:2:;I g, koting that the distribution on S [ fig will always differ from
+                                                        new
+that on S i denote the distribution on S i fXg as D     i  , we assume O isithe one that most consistent
+
+with their existing diagnosis, or, formally,
+
+                                                                     new
+                                   O i      argmin       KL(D jji    i  )                                (8)
+                                         X2fI 1I2;::k;I g
+
+   Denote Pr (▯) as the probability function of D and Pr     new(▯) the function of D new, noting that:
+              i                                     i        i                        i
+                                                            Q
+                              1       Pr(S )i        1         Z2S iPr(Z)
+                                  ln    new     =       ln Q         new                                 (9)
+                             jSij   Pr     (S i    jS i      Z2S iPr     (Z)
+
+                                                     1  X        Pr iZ)
+                                                =            ln    new                                  (10)
+                                                   jS i        Pr  i  (Z)
+                                                        Z2S i
+                                                     1  X X           Pr (Z)
+                                                =                 ln     i                              (11)
+                                                   jS i              Pr new(Z)
+                                                        Ij2SiZ=I j      i
+                                                    X
+                                                        n i;j    Pr iI j
+                                                =            ln    new                                  (12)
+                                                   I 2S n i;0   Pr i  (Ij)
+                                                    j  i
+                                          ni;j
+According to Theorem 1, Pr (I ) i  j         , hence, the last equation above is exactly the divergence
+                                          ni;0
+KL(D jji    iew).
+
+   Now we seek the solution to Equation (8), ﬁrstly, for X = I (1 l l ▯ k), we have
+
+                                                (   ni;j
+                                         new       n  +1   if j6= l;
+                                        pi;j =     ni;j1
+                                                           if j = l:
+                                                   ni;01
+
+Noting that in Equation (10), the term   1  is ﬁxed, so
+                                        jSij
+
+                                          new         Pr (i )i
+                               KL(D jji   i   ) / ln    new                                             (13)
+                                                     Pr i   (Si)
+
+                                               = lnPr (Si) i lnPr     iew(S i                           (14)
+
+
+Since lnPr (i )iis a constant, the target Equation (8) is equivalent to the following:
+
+
+                                    O i     argmax        lnPr  new (Si)                                (15)
+                                          X2fI ;I ;:::;I g      i
+                                               1 2    k
+
+where for X = I , l
+                                                 Xk
+                                     new                                  new
+                                lnPr i   (Si) =     (n i;j I(j = l))lnp   i;j                           (16)
+                                                 j=1
+
+   In addition to Equation (8), it’s noteworthy that the introduction of O will also lead to changes to
+                                                                             i
+the global distribution D , these changes, should be as small as possible, too. Therefore, similar to
+                           0
+Equation (8), we have:
+
+                                   O =     argmin        KL(D jjD    new)                               (17)
+                                     i                          0    0
+                                         X2fI 1I2;::k;I g
+Entropy 2014, 16                                                                                  3873
+
+
+                new
+where we use D  0   to denote the distribution on D0[ fO gi
+                                                               new                       new
+   Denote Pr (0) as the probability function of D and0Pr       0  (▯) the function of D  0  , analog to
+
+the procedure above, we also have:
+
+                                                             new
+                                  O i     argmax        lnPr 0  (S 0                               (18)
+                                        X2fI 1I2;::k;I g
+
+where for X = I ,l
+                                              X k
+                                   new                                 new
+                              lnPr 0   (S0) =     (n0;j+ I(j = l))lnp  0;j                         (19)
+                                               j=1
+
+   With Equations (16) and (19), we have the ﬁnal decision target:
+
+                                      new               new
+           O i     argmax       lnPr  i  (S i + ▯lnPr   0  (S0)                                    (20)
+                 X2fI1;2 ;::k;I g
+                                  k                               k
+                                X                       new      X                       new
+              =    argmax           (ni;j+ I(j = l))lnp i;j + ▯     (n 0;j I(j = l))lnp  0;j       (21)
+                 X2fI1;2 ;::k;I g
+                                 j=1                             j=1
+
+where ▯ > 0 is the tradeoff factor,
+
+
+4.3. Algorithm
+
+
+
+   To ensemble the individuals’ judgements and make the ﬁnal diagnosis for the patients, we adopt the
+
+enumeration policy, i.e., for every patient, we enumerate the all possible illnesses and calculate the target
+
+values respectively. We take the one with the minimum value of Equation (20) as the ﬁnal judgement of
+
+the patient.
+   The details of the algorithm are presented in Algorithm 1, where line 6 is from Equation (21). We
+
+see in the algorithm there nk iterations, besides, in each iteration, to calculate the probability p s
+                                                                                                    i;j
+(0 ▯ i ▯ n; 1 ▯ j ▯ k), we need at most m scans to count the diagnosis given by the m doctors to
+
+the patient, so the time complexity of the algorithm is ▯(nmk).
+
+
+ Algorithm 1: Diagnose via Crowdsourcing.
+
+   Input: Candidate illness set fI1;I2;:::;Ikg, doctor set fD 1D ;2::;D g,mpatient set
+
+          fP 1P ;2::;P g nnd the diagnosis sets S ;S1;:2:;S , initial value of ▯.
+
+   Output: The judgements O ;O 1:::2O , whene O corresionds to P .      i
+
+ 1 for i=1 to n do
+
+ 2     max_val = ▯1;
+
+ 3     O i null;
+
+ 4     for j=1 to k do
+ 5        X = I ;
+                 j P                                  P
+ 6        temp =      k  (n   + I(j = l))lnp new + ▯    k  (n    + I(j = l))lnp new;
+                      j=1  i;j               i;j        j=1   0;j               0;j
+ 7        if temp > max_val then
+
+ 8            max_val = temp;
+
+ 9            O = I ;
+                i    j
+
+10        end
+
+11     end
+
+12 end
+Entropy 2014, 16                                                                                3874
+
+
+
+5. Experiments
+
+
+   We conduct experiments on both of synthetic and real datasets to evaluate the proposed method.
+
+For comparison, we also compare the performance of our method with two other benchmark algorithms,
+including majority voting(MV) and follow the best doctor(FTBD). Where MV is a straightforward
+
+approach, which uses the most common label as the true label. From reported experimental results on
+
+real crowdsourcing data [10], MV performs signiﬁcantly better on average than the individual workers.
+
+FTBD refers to a natural alternative for the patients that when they receive more than one diagnosis from
+
+different doctors, they will tend to follow the best doctors’ diagnosis.
+   The detailed information of the real dataset is in Section 3, as to the constitution of the synthetic
+
+dataset, we adopt a 30 ▯ 30 matrix R to represent the diagnosis results that are given by 30 doctors to
+
+30 patients, where the rows correspond to the patients and columns to the doctors, hence, every entry
+
+R i;js the diagnosis doctor Djgives to patient i . We assume there are in total three illness1s 2 ;I and
+I , where every patient has equal probability to have one of the illnesses, so for each illness there are 10
+ 3
+patients with it. We observe that in real life every doctor often has some special diseases she has a good
+
+knowledge of, hence, for doctor D j1 ▯ j ▯ 30) we draw a random number x ▯ Laplace(0;1), where,
+                              j▯1
+when the patient has the (1+b  10c)th illness, we assume D jakes right the diagnosis with probability
+
+1 ▯ jxj, and makes the wrong diagnosis to conclude that the patient has an arbitrary one of the other two
+illnesses with equal probability (i.e.,x).
+                                      2
+   We summarize the prediction performance in Tables 2–5, where the results on the synthetic data are
+
+presented in Tables 2 and 3, and the results on the real data are in Tables 4 and 5.
+
+
+                Table 2. The prediction accuracy on the synthetic data, higher is better.
+
+                                       Method    Accuracy (%)
+
+
+                                         MV        12(40:0%)
+                                        FTBD       20(66:7%)
+
+                                       CROWD        21(70%)
+
+
+                 Table 3. The confusion matrix of the prediction on the synthetic data.
+
+
+                              MV                  FTBD                CROWD
+
+                        I1    I2     I3      I1     I2    I3       I1    I2    I3
+
+                  I 1  0.80  0.00   0.20    1.00   0.00  0.00     0.90  0.10  0.00
+
+                  I 2  0.60  0.00   0.40    0.00   1.00  0.00     0.50  0.30  0.20
+                  I    0.50  0.10   0.40    0.30   0.70  0.00     0.10  0.00  0.90
+                    3
+
+
+                  Table 4. The prediction accuracy on the real data, higher is better.
+
+                                       Method    Accuracy (%)
+
+
+                                         MV         24(48%)
+                                        FTBD        25(50%)
+
+                                       CROWD        28(56%)
+Entropy 2014, 16                                                                                   3875
+
+
+
+                    Table 5. The confusion matrix of the prediction on the real data.
+
+
+                        MV                         FTBD                        CROWD
+               I1    I 2    I3     I4       I1    I2     I3    I4       I1     I2    I3     I4
+
+
+         I1   0.58   0.25  0.08   0.08     0.58  0.33   0.08  0.00     0.67   0.17  0.08   0.08
+         I2   0.00   0.67  0.00   0.33     0.17  0.67   0.00  0.17     0.00   0.75  0.00   0.25
+
+         I3   0.08   0.67  0.08   0.17     0.08  0.67   0.25  0.00     0.08   0.67  0.17   0.08
+
+         I4   0.14   0.21  0.07   0.57     0.12  0.36   0.00  0.50     0.07   0.21  0.07   0.64
+
+
+
+   Tables 2 and 4 are for the prediction accuracy results, where we see our proposed algorithm
+outperforms the comparison methods on the both datasets. Tables 2 and 4 are the summarization of
+
+the confusion matrix of the results, where, for every algorithm, the (i;j)th entry corresponds to the
+
+percentage value of the patients who are of illness i and diagnosed to be with illness j. For example, in
+
+Table 3, the top left entry 1I 1I ) = 0:80 indicates that 80% of the1I patients are diagnosed correctly by
+the MV algorithm.
+
+   Another issue remained to be discussed is to address the value of ▯. In our experiments, for the ith
+
+patient Pi, we calculate their ▯ value as follows:
+
+
+                      ▯ =  Number      of   diagnosis    to   the  all   patients                   (22)
+                                    Number      of   diagnosis    to   Pi
+
+
+Our intuitation of the deﬁnition is as follow: Denote 1 as the number of diagnosis to the all patients,2▯
+as the Number of diagnosis to P , it’s clear that ▯ ▯ ▯ , so after the introduction of O , the divergence
+                                i                 1     2                               i
+KL(D jji   iew) is always far greater than KL(D 0jD  0ew), for compensation, we deﬁne ▯ as above.
+
+
+
+6. Conclusions
+
+
+   Addressing the high level medical experts shortage problem, we present a crowdsourcing based
+scheme. Unlike the popular expert consultation systems, our approach aims at exploiting the power
+
+of the general practitioners’ efforts. We propose a multiple diagnosis results ensemble policy, which is
+
+based on the statistical consistency w.r.t. the distribution of the results. We evaluate the proposed method
+
+on both the synthetic and real datasets. Results show it outperforms the comparison algorithms.
+
+   It is noteworthy that, although our algorithm yields better performance than the benchmarks in the
+empirical studies, and even the accuracy on the synthetic data is acceptable in practice, the results
+
+on the real data still remain not as high as expected. We think a main reason for this should be
+
+attributed to the limitation of the training data, because, in our experiment, all the volunteers are from
+
+the same department of the same medical school. Therefore, because of the reﬂection of their academic
+background, the diversity of their diagnosis results will be smaller than that of the real situation, or, in
+
+other words, the diagnosis results of different volunteers tends to be identical to each other. So when one
+
+volunteer has misdiagnosed a patient, it is most likely that many other volunteers will make the same
+
+mistake on the same patient, too. As a result, in the extreme case, no matter what the ensemble policy
+is, it is simply identical to the superposition of multiple duplicates. So, in our subsequent work, on the
+
+one side, we will try to introduce some small sample statistical technologies to improve the performance
+Entropy 2014, 16                                                                               3876
+
+
+
+of the algorithm, on the other side, we will keep on collecting more real data from different sources to
+enlarge the ground truth base.
+
+
+Acknowledgments
+
+
+   This work is supported in part by Research Fund for the Doctoral Program of Higher Education
+of China (20120171120086), Educational Commission of Guangdong Province (2013113) and Science
+
+and Technology Planning Project of Guangdong Province (2012B061700078). The authors would like
+to thank Wubin Li for polishing the presentation.
+
+
+Author Contributions
+
+
+   Jian-Yong Yang directed the research. Xian-Hong Xiang and Xiao-Yu Huang contributed equally in
+
+data analysis, algorithm design and paper writing. Xiao-Ling Zhang, Chun-Fang Cai and Lei Li helped
+to recruit the volunteers, collect the data and evaluate the model. All authors have read and approved the
+
+ﬁnal manuscript.
+
+
+Conﬂicts of Interest
+
+   The authors declare no conﬂict of interest.
+
+
+References
+
+
+ 1. Roobottom, C.; Mitchell, G.; Morgan-Hughes, G.         Radiation-reduction Strategies in Cardiac
+     Computed Tomographic Angiography. Clin. Radiol. 2010, 65, 859–867.
+
+ 2. Warach, S.; Gaa, J.; Siewert, B.; Wielopolski, P.; Edelman, R.R. Acute Human Stroke Studied by
+     Whole Brain Echo Planar Diffusion-weighted Magnetic Resonance Imaging. Ann. Neurol. 1995,
+
+     37, 231–241.
+ 3. Behrens, S.; Laue, H.; Althaus, M.; Bˆu   ˝hler, T.; Kuemmerlen, B.; Hahn, H.K.; Peitgen, H.O.
+
+     Computer Assistance for MR Based Diagnosis of Breast Cancer: Present and Future Challenges.
+
+     Comput. Med. Imaging Graph. 2007, 31, 236–247.
+ 4. Beijing. Available online: http://en.wikipedia.org/wiki/Beijing (accessed on 8 March 2014).
+
+ 5. Shanghai. Available online: http://en.wikipedia.org/wiki/Shanghai (accessed on 8 March 2014).
+ 6. Guangzhou.    Available online: http://en.wikipedia.org/wiki/Guangzhou (accessed on 8 March 2.14)
+
+ 7. Muhammadi, J.; Rabiee, H.R. Crowd computing: A survey. 2013, arXiv:1301.2774.
+ 8. Howe, J. The rise of crowdsourcing. Wired Mag. 2006, 14, 1–4.
+
+ 9. Howe, J. Crowdsourcing: How the Power of the Crowd Is Driving the Future of Business; Random
+     House: New York, NY, USA, 2008.
+
+10. Snow, R.; O’Connor, B.; Jurafsky, D.; Ng, A.Y. Cheap and fast—But is it good?: Evaluating
+     non-expert annotations for natural language tasks. In Proceedings of the Conference on Empirical
+
+     Methods in Natural Language Processing, Honolulu, HI, USA, 25–27 October 2008; Association
+
+     for Computational Linguistics: Stroudsburg, PA, USA, 2008; pp. 254–263.
+Entropy 2014, 16                                                                              3877
+
+
+
+11. Bennett, J.; Lanning, S. The Netﬂix Prize. In Proceedings of KDD Cup and Workshop, San Jose,
+     CA, USA, 12 August 2007; Volume 2007, p. 35.
+
+12. Von Ahn, L.; Maurer, B.; McMillen, C.; Abraham, D.; Blum, M. recaptcha: Human-based
+     character recognition via web security measures. Science 2008, 321, 1465–1468.
+
+13. Von Ahn, L.; Dabbish, L. Labeling images with a computer game. In Proceedings of the SIGCHI
+     Conference on Human Factors in Computing Systems, Vienna, Austria, 24–29 April 2004; ACM:
+
+     New York, NY, USA, 2004; pp. 319–326.
+14. Welinder, P.; Perona, P. Online crowdsourcing: Rating annotators and obtaining cost-effective
+
+     labels. In Proceedings of the 2010 IEEE Computer Society Conference on Computer Vision and
+
+     Pattern Recognition Workshops, San Francisco, CA, USA, 13–18 June 2010; pp. 25–32.
+15. King, A.J.; Gehl, R.W.; Grossman, D.; Jensen, J.D. Skin self-examinations and visual identiﬁcation
+
+     of atypical nevi:comparing individual and crowdsourcing approaches. Cancer Epidemiol. 2013,
+     37, 979–984.
+
+16. Amazon Mechanical Turk.       Available online: http://aws.amazon.com/mturk/ (accessed on 8
+     March 2014).
+
+17. Lintott, C.J.; Schawinski, K.; Slosar, A.; Land, K.; Bamford, S.; Thomas, D.; Raddick, M.J.;
+     Nichol, R.C.; Szalay, A.; Andreescu, D.; et al. Galaxy Zoo: Morphologies derived from visual
+
+     inspection of galaxies from the Sloan Digital Sky Survey. Mon. Not. R. Astronom. Soc. 2008,
+
+     389, 1179–1189.
+18. Kanefsky, B.; Barlow, N.G.; Gulick, V.C. Can distributed volunteers accomplish massive data
+
+     analysis tasks. In proceedings of Lunar and Planetary Science, Houston, TX, USA, 12–16 March
+     2001; p. 1272.
+
+19. Parshotam, K. Crowd computing: A literature review and deﬁnition. In Proceedings of the South
+     African Institute for Computer Scientists and Information Technologists Conference, East London,
+
+     South Africa, 7–9 October 2013; ACM: New York, NY, USA, 2013; pp. 121–130.
+20. De, A.; Mossel, E.; Neeman, J. Majority is stablest: Discrete and SoS. In Proceedings of the 45th
+
+     Annual ACM Symposium on Symposium on Theory of Computing, Palo Alto, CA, USA, 2013;
+
+     ACM: New York, NY, USA, 2013; pp. 477–486.
+21. Dekel, O.; Shamir, O. Good learners for evil teachers.      In Proceedings of the 26th Annual
+
+     International Conference on Machine Learning, Montreal, QC, Canada, 14–18 June 2009; ACM:
+     New York, NY, USA, 2009; pp. 233–240.
+
+22. Chen, S.; Zhang, J.; Chen, G.; Zhang, C. What if the irresponsible teachers are dominating? A
+     method of training on samples and clustering on teachers. In Proceedings of the Twenty-Fourth
+
+     AAAI Conference on Artiﬁcial Intelligence, Atlanta, GA, USA, 11–15 July 2010; pp. 419–424.
+23. Cover, T.M.; Thomas, J.A. Elements of Information Theory; Wiley: New York, NY, USA, 2012.
+
+
+ 2014 by the authors; licensee MDPI, Basel, Switzerland. This article is an open access article
+
+distributed under the terms and conditions of the Creative Commons Attribution license
+(http://creativecommons.org/licenses/by/3.0/).

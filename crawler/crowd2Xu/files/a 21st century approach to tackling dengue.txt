@@ -1,0 +1,769 @@
+                                                         Acta Tropica 130 (2014) 100–107
+
+
+
+                                                   Contents lists available at ScienceDirect
+
+
+
+                                                             Acta Tropica
+
+
+
+                                    journal homepage:        www.elsevier.com/locate/actatropica
+
+
+
+
+
+
+A 21st century approach to tackling dengue: Crowdsourced
+
+
+surveillance, predictive mapping and tailored communication
+
+
+May O. Lwin , Santosh Vijaykumar                b,∗, Owen Noel Newton Fernando , Siew Ann Cheong ,                       c
+                                      b                     b                        b                             e
+Vajira Sampath Rathnayake , Gentatsu Lim , Yin-Leng Theng , Subhasis Chaudhuri ,
+                  d
+Schubert Foo
+
+aCenter of Social Media Innovations for Communities (COSMIC), Nanyang Technological University, HSS-06-16D, 14 Nanyang Drive, 637332 Singapore
+bCenter of Social Media Innovations for Communities (COSMIC), Nanyang Technological University, HSS-06-15, 14 Nanyang Drive, 637332 Singapore
+cSchool of Physical and Mathematical Sciences, Nanyang Technological University, SPMS-PA-04-03, 21 Nanyang Link, 637371 Singapore
+d
+ Center of Social Media Innovations for Communities (COSMIC), Nanyang Technological University, HSS-06-16E, 14 Nanyang Drive, 637332 Singapore
+eDepartment of Electrical Engineering, Indian Institute of Technology Bombay, Powai, Mumbai 400076, India
+
+
+
+
+article info                                  abstract
+
+Article history:
+                                             This paper describes a social media system to prevent dengue in Sri Lanka and potentially in the rest
+Received 17 May 2013                         of the South and Southeast Asia regions. The system integrates three concepts of public health preven-
+Received in revised form                     tion that have thus far been implemented only in silos. First, the predictive surveillance component
+21 September 2013
+Accepted 29 September 2013                   uses a computer simulation to forewarn health authorities and the general public about impending dis-
+                                             ease outbreaks. The civic engagement component allows the general public to use social media tools to
+Available online 23 October 2013             interactandengagewithhealthauthoritiesbyaidingtheminsurveillanceeffortsbyreportingsymptoms,
+
+Keywords:                                    mosquitobitesandbreedingsitesusingsmartphonetechnologies.Thehealthcommunicationcomponent
+                                             utilizes citizen data gathered from the ﬁrst two components to disseminate customized health aware-
+Dengue
+Asia                                         ness messages to enhance knowledge and increase preventive behaviors among citizens. The system,
+Social media                                 known as “Mo-Buzz,” will be made available on a host of digital platforms like simple mobile phones,
+mHealth                                      smart phones and a website. We present challenges and lessons learnt including content validation,
+
+Health communication                         stakeholder collaborations and applied trans-disciplinary research.
+                                                                                                         © 2013 Elsevier B.V. All rights reserved.
+
+
+
+
+1. Introduction                                                              The narrative in the mainstream Sri Lanka media highlights
+
+                                                                          how the Sri Lankan public health workforce is straddled by vari-
+   Sri Lanka has borne the brunt of dengue with over 70,000               ous factors that impede their functioning. For one, their ability to
+
+cases in 2009–10 (Bhattacharya et al., 2013), and nearly 44,000 in        execute daily epidemiological tasks (that includes disease report-
+2012 (Ministry of Health, 2013b). The ﬁrst nine months of 2013            ing which informs dengue mapping) is stymied by limited staff
+
+accountedfornearly23,000cases(MinistryofHealth,2013a)witha                and a workload that has increased from one public health inspec-
+majority (57%) emerging from the capital city of Colombo (Ministry        tor (PHI) per 10,000 people to one per 40,000 (Peiris, 2009).
+
+of Defense, 2013), that is increasingly being characterized as the        Proactive surveillance measures (such as identifying and treat-
+nerve center of dengue in the country. Epidemiologists report that        ing breeding sites in advance) are inadequate, as a result of
+
+the threat of dengue continues to grow in Sri Lanka with new clades       which preventive actions implemented after an outbreak accrue
+continuing to emerge from the four dengue serotypes that have             limited beneﬁts (Fazlulhaq, 2012). In addition to these structural
+
+been co-circulating for more than 30 years (Kanakaratne et al.,           issues, public attitudes toward maintaining hygienic surround-
+2009).                                                                    ings and performing health behaviors that will prevent them
+
+                                                                          from dengue, remain far from desirable (Hettiarachchi et al.,
+                                                                          2013).
+
+                                                                             Public health prevention and management of dengue is
+                                                                          challenged by three main limitations: 1) use of traditional epi-
+
+ ∗ Corresponding author. Tel.: +65 6592 3258; fax: +65 6795 5119.         demiological methods leading to reactive, as opposed to proactive,
+   E-mail addresses: tmaylwin@ntu.edu.sg (M.O. Lwin), santoshv@ntu.edu.sg,disease monitoring and surveillance (Hsieh and Ma, 2009), 2) lack
+santoshv@ntu.edu.sg (S. Vijaykumar), ofernando@ntu.edu.sg (O.N.N. Fernando),
+                                                                          of citizen engagement in public health programs leading to low
+cheongsam@ntu.edu.sg (S.A. Cheong), Vajira@ntu.edu.sg (V.S. Rathnayake),
+gtxlim@ntu.edu.sg (G. Lim), tyltheng@ntu.edu.sg (YL. Theng),              exertions among individuals regarding their own health and that
+sc@ee.iitb.ac.in (S. Chaudhuri), sfoo@ntu.edu.sg (S. Foo).                of the public health ecosystem (Gubler and Clark, 1996) and 3)
+
+
+0001-706X/$ – see front matter © 2013 Elsevier B.V. All rights reserved.
+http://dx.doi.org/10.1016/j.actatropica.2013.09.021
+                                                  M.O. Lwin et al. / Acta Tropica 130 (2014) 100–107                                    101
+
+
+lack of effective, interactive health education for citizens leaving    also denotes employing participatory methods – those nestled in,
+awareness untranslated into action (Parks and Lloyd, 2004).             and involving communities – to collect epidemiological data. The
+
+   However, the country faced with a grave dengue situation also        other key principle includes the use of participatory mapping tech-
+boasts of a technological opportunity to help itself. According to      niques in order to inform prevention activities.
+
+the International Telecommunications Union, 2013, mobile cellular          In terms of shaping healthy behaviors through communication,
+signals cover almost all (98%) of the Sri Lankan population, with       mobile phone-based short messaging service (SMS) has been used
+
+prices of cellular services being among the lowest in the world.        to promote smoking cessation behaviors (Rodgers et al., 2005), cre-
+In the past decade, information and communication technologies          ateawarenessaboutsexuallytransmitteddiseases(Limetal.,2008)
+
+(ICTs) – especially mobile phones – have provided the global health     and encourage adherence to antiretroviral treatment (Lester et al.,
+community with some of the most innovative and cost-effective           2010) in both developed and developing countries. At the health
+
+strategies to address similar challenges in dengue and other health     systems level, mobile phones have empowered community health
+areas (Ekeland et al., 2010).                                           workers in developing countries through cost-effective and time-
+
+   Given the lack of an integrated mobile health system that            effective techniques that facilitate data collection, surveillance and
+addresses limitations in dengue prevention by optimizing social         mobile-based telemedicine (Chib et al., 2008; Mechael, 2009). The
+
+media, scientists at Singapore’s Center of Social Media Innovations     advantage of such technologies to the general public is that they
+for Communities (COSMIC) have developed a prototype of an inte-         bring accessible and affordable healthcare to the remotest and
+
+grated social media-based system called Mo-Buzz. The purpose of         impoverished of communities. The use of information and com-
+this paper is to provide a detailed description of the functional-      munication technologies (ICTs) in public health has thus rapidly
+
+ities of Mo-Buzz after discussing existing evidence on ICT-based        proliferated over the last two decades given the deep penetration
+approaches to address the aforementioned limitations. The paper         of the Internet and mobile phones in both developed and develop-
+
+culminates with a discussion of challenges encountered in terms         ing countries. While many developing countries in Asia and Africa
+of validating content, collaborating with institutional stakeholders    are developing robust mechanisms for integrating mobile phones
+
+and functioning as a trans-disciplinary team. We present lessons        into their health systems framework, Sri Lanka has yet to make a
+which will be relevant and valuable to public health researchers        concerted effort in this area.
+
+and practitioners engaged in similar initiatives or interventions.         The above literature review underlines the emerging critical-
+                                                                        ity of ICTs in addressing global health challenges including dengue.
+
+                                                                        However, it also highlights the fact that existing initiatives address
+2. Related literature                                                   the three core needs – predictive surveillance, civic engagement,
+
+                                                                        and health communication – in silos. As a result, the beneﬁt of
+   On the predictive surveillance front, various efforts to develop     each of these components on the other is largely missed, leading
+
+early warning systems for dengue (Lowe et al., 2011; Racloz et al.,     to a disparate contingent of tools that the health workforce and
+2012) and malaria (Hay et al., 2001; Thomson et al., 2005, 2006)        the general public must use. An issue like dengue commands the
+
+have been reported. The mandate of these initiatives is to develop      necessitytointegratethesecomponentsonacommonplatformand
+robust associations between environmental and vector variables          offer it to these two key stakeholders on easily accessible mobile
+
+that can help to predict malaria in advance so as to inform in          devices. In addition, we argue that the capabilities of social media
+advance the efforts of public health and vector control person-         that allow users to participate and share information have thus far
+
+nel (Ebi, 2009). The Malaria Atlas Project (MAP) is one of the          been underutilized in the global health space. There is a need to
+foremost exemplars that attempts to make malaria early warning          optimize social media affordances with an eye on the future, given
+
+systems accessible to the general public through an interactive         that smartphones are becoming an increasingly ubiquitous com-
+website (http://www.map.ox.ac.uk/). Predictive modeling efforts         modity in developing countries because of decreasing costs and
+
+for infectious diseases such as dengue and West Nile virus have         increasing availability.
+been extensively chronicled in public health literature (Degallier
+
+et al., 2010; Estallo et al., 2008; Rochlin et al., 2011) but efforts to
+make these early warning devices available to the general public        3. Mo-Buzz for participatory epidemiology and health
+
+remain scant.                                                           communication
+   ICT-based civic engagement in public health has been driven
+
+mainly on the premise of a virgin concept called participatory             Mo-Buzz is an integrated mobile and desktop-based dengue
+epidemiology (PE). PE denotes the use of local, on-ground intel-        communication system that is built upon PE principles. Mo-
+
+ligence to gather information and track the spread, causes, and         Buzz extends its reach to provide an interface between citizens
+effects of diseases. The PE concept was popularized by Catley and       and health authorities, and sends customized health messages to
+
+Mariner’s work in East Africa where qualitative community-based         enhance preventive behaviors and health awareness.
+approaches were deployed to derive animal health status from               As shown in Fig. 1, Mo-Buzz comprises three main components:
+
+local farmers (Catley, 2006). However, the rapid proliferation of       (1) predictive surveillance; (2) civic engagement and (3) health
+the Internet and mobile phones has transformed the PE landscape         communication.Broadlyspeaking,thepredictivesurveillancecom-
+
+in recent years. As shown by initiatives such as FrontlineSMS and       ponent uses a predictive algorithm and computer simulations
+Ushahidi (Freifeld et al., 2010), disease surveillance, health mon-     (based on weather, vector and human data) to predict dengue out-
+
+itoring, and information sharing can now be digitally integrated        breaks and disseminate such information in the form of hotspot
+and used to link disparate stakeholders such as health authorities,     maps to health ofﬁcials and the general public. The civic engage-
+
+healthprovidersandthegeneralpublic.Chunaraetal.(2012)tested             mentcomponentenablescitizenstousetheirsmartphonesinorder
+an online initiative where respondents reported their experiences       to inform health authorities about breeding sites, symptoms and
+
+with malaria, and concluded that “micro-monitoring and online           mosquito bites using interactive forms and social media such as
+reporting are a rapid way to solicit malaria, and potentially other     Twitter. The crowdsourced information is also reﬂected on the
+
+public health, information”. The Program for Monitoring Emerging        hotspot maps. Using the predictive hotspots and the crowdsourced
+Diseases (http://www.promedmail.org) provides an online report-         information, the intelligent system disseminates health alerts and
+
+ing system and rapid information dissemination related to infec-        tailored messages to individuals or communities living in respec-
+tious disease outbreaks. In this sense, participatory epidemiology      tive geographic zones. The system is designed to enable sharing
+102                                                   M.O. Lwin et al. / Acta Tropica 130 (2014) 100–107
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            Fig. 1. Integration of three dengue prevention components in Mo-Buzz.
+
+
+
+
+of health information with an individual’s social network using              also do not simulate the exposed human subpopulation E          k(t) and
+
+social media tools. In this way, Mo-Buzz integrates the capabili-            the exposed mosquito subpopulation e       k(t), and model their impact
+tiesofpredictivesurveillance,civicengagementandtailoredhealth                by introducing delays into the respective infected subpopulations.
+
+communication to offer a holistic dengue prevention social media             For simplicity, we assume that the total human population N          k in
+suite. This suite is intended to help health authorities manage              each ward does not change with time.
+
+resources more efﬁciently and effectively, and encourage preven-                 In this model, susceptible humans become exposed humans
+
+tive behaviors among the general public by forewarning them of               after being infected by infected mosquitoes at a rate of ˇ per human
+dengueoutbreaks.Mo-Buzzismadeavailableonahostofhandheld                      per mosquito per day. We assume that exposed humans remain
+
+devices including mobiles phones and tablets. Heretofore, the term           symptom-free and un-infective for ▯ days. Thereafter, a fraction ˛
+
+“mobile phone” is used to represent all such handheld devices. We            becomes infected, i.e. infective and showing symptoms (perhaps
+now present detailed descriptions of each of the three components            due to secondary infections), while the remaining (1−˛) becomes
+
+below.                                                                       asymptomatic, i.e. infective but shows no symptoms (perhaps due
+
+                                                                             to primary infections). We then assume both infected and asymp-
+                                                                             tomatic human subpopulations recover at a rate of ␥ per human
+3.1. Predictive surveillance
+                                                                             per day. At the same time, susceptible mosquitoes become exposed
+
+   The purpose of this component is to forewarn public health                mosquitoes after biting infected or asymptomatic humans at a rate
+authorities and the general public about impending dengue out-               of ˇ per mosquito per human per day. These exposed mosquitoes
+                                                                                    ▯
+breaks by disseminating predictive hotspot maps generated by                 take ▯  days to become infected mosquitoes.
+
+a computer simulation. We start by building a spatio-temporal                    We assume that infected mosquitoes never recover. New sus-
+susceptible-exposed-latent-infected-recovered(SELIR)modelcon-                ceptible mosquitoes appear at a rate of ▯         ▯ per mosquito per
+
+sisting of the 47 wards of Colombo. Because Aedes aegypti, the               day from all mosquito subpopulations, assuming there is no ver-
+
+primary vector for dengue transmission in Colombo, bites mostly              tical transmission of the dengue virus from one generation of
+at dawn and at dusk (Jones, 1981), we also discretize time in our            mosquitoes to the next generation. To keep the overall mosquito
+
+model, so that each time step is one day. The model equations                population constant, we also make all mosquito subpopulations
+                                                                             die at a rate of ▯ per mosquito per day. Finally, in contrast to
+are
+                                                                             static humans, mosquitoes can move from ward k to ward l at
+▯S  (t) = S (t + 1) − S (t) =− ˇS (t)i (t)
+   k       k           k           k   k                                     a rate of A kl per mosquito per day. This diffusion of mosquitoes
+                                                                             is simulated explicitly for the susceptible and infected mosquito
+
+▯L k(t) = Lk(t + 1) − Lk(t) =+ ˇ(1 − ˛)S (k − ▯)i (k − ▯) − ▯L (k),          subpopulations. For the exposed mosquito subpopulation, we
+                                                                                                                    ▯
+                                                                             introduce an attenuation factor ı that integrate mosquito dif-
+                                                                             fusion as well as death of exposed mosquitoes over the time
+▯I k(t) = k (t + 1) − k (t) =+ ˇ˛S kt − ▯)i kt − ▯) − ▯Ik(t),
+                                                                             delay ▯ ▯.
+
+                                ▯                   ▯                            For the SELIR model to generate meaningful predictions, it must
+▯s k(t) = sk(t = 1) − sk(t) = ▯  (nk (t) − k (t) − ˇ sk(t)(Lk(t) + k (t)     be calibrated against the real world. Some model parameters, such
+             
+                                                                             as the intrinsic incubation period (IIP), extrinsic incubation period
+          −      Akls kt) − sl(t)),
+                                                                             (EIP), and average infectious period can be ﬁxed to their pub-
+              l                                                              lished values of ▯ =6 days (Chan and Johansson, 2012; Nishiura
+
+                               ▯ ▯       ▯         ▯           ▯         and Halstead, 2007; Salazar et al., 2007) respectively. Other model
+▯i k(t) = ik(t + 1) − k (t) = ˇ ı k  t − ▯    Lk(t − ▯ ) + k (t − ▯ )
+                                                                             parameters,liketheproportionofasymptomaticcases(1−˛)<74%
+              ▯                                                             (Favier et al., 2005), have large uncertainties and we choose tenta-
+          −▯ i (k) −      A kl(k(t) − il(t) ,
+                                                                             tive values to start the simulations (for example, ˛=0.5), but are
+                        l
+                                                                             open to adjusting them to get better ﬁts to data. Finally, there are
+where S (t) is the susceptible human subpopulation, L (t) the                model parameters where no reliable values are reported in the
+         k                                                      k                                                                ▯
+asymptomatic human subpopulation, I (t) thk infected human sub-              literature. For example, the infectivities ˇ and ˇ are strongly inﬂu-
+
+population, s kt) the susceptible mosquito subpopulation, and i (t)  k       enced by human behavioral patterns. Therefore, we leave these
+the infected mosquito subpopulation of ward k on day t. In this pro-         parameters free in the model, to be determined by ﬁtting model
+
+totype model, we do not explicitly simulate the recovered human              simulations to real-world incidences. While the diffusivities A        kl
+                                                                             shouldfundamentallybeproportionaltothelengthoftheboundary
+subpopulationR (t)kasithasnointerestingdynamicsofitsown.We
+                                                  M.O. Lwin et al. / Acta Tropica 130 (2014) 100–107                                     103
+
+
+shared by ward k and ward l, they should also incorporate penalty           Reporting symptoms involves selecting one or more among a
+factors that reduce the mosquito exchange rate between wards             list presented to the user on the symptoms page. The list includes
+
+separated by roads or rivers. The overall proportionality constant       fever, body aches, nausea, vomiting, fever with sore throat, joint
+for these will also be determined by ﬁtting model simulations to         pains, loss of appetite, development of skin rash and an option
+
+real-world incidences.                                                   called “others”, where users can type in any other symptom they
+   Once the model is calibrated, we can utilize it for two purposes.     might be experiencing. The individual can report his/her temper-
+
+The ﬁrst is to use the present distribution of dengue cases as ini-      ature and also report whether he has been diagnosed for dengue.
+tial conditions, and run simulations that look one week to several       Clicking on the “submit” button sends the citizen’s symptom report
+
+weeks ahead of time. These simulations allow us to predict where         to the system.
+and when an epidemic will likely emerge, as well as how ongo-               While reporting mosquito bites, the user may specify whether
+
+ing or future infections will progress in space and in time. These       he experienced the bite indoor or outdoor. He may report visible
+predictions can help healthcare workers better allocate limited          changes in skin and select one or more of “bumps” and “rashes”, or
+
+resources (for example, getting isolation wards ahead of time to         report any other kind of visible change by simply typing into the
+meet the demands from the epidemic peak), and also design inter-         text box. The user may then report the mosquito density visible to
+
+vention measures to respond to the epidemic. The second is to            him by answering a simple question “How many mosquitoes can
+perform scenario analysis. For example, if the City of Colombo has       you see?” and choose between “few” and “many”. It is unrealistic
+
+a ﬁxed amount of funds that they can use to perform citywide             to expect the user to report the exact number of mosquitoes and
+low-intensity, low-frequency chemical fogging all year round, or to      so, this data point is solely intended to offer the health authorities
+
+perform targeted high-intensity, high-frequency chemical fogging         an approximate idea of a possible threat. Lastly, citizens can report
+at the ward level during a dengue outbreak, the natural question         breeding sites that they might come across, so health authorities
+
+would be which would be more effective in the short term and             can plan the required preventive actions. While reporting breeding
+which would be more effective in the long term. As we understand         sites, citizens choose between an “indoor” or “outdoor” site. Then,
+
+how interventions like those described above impact the spatio-          they choose from a list of possible locations which includes indus-
+temporal SELIR model, we can run these scenario simulations, and         trial areas, residential areas, construction sites, ofﬁce premises and
+
+compare their outcomes against the benchmark intervention-free           others. Here too, users can report mosquito density visible to the
+simulation.                                                              naked eye as described earlier.
+
+   This combined forecasting and scenario testing capability rep-           Common to all the three reporting forms is a GPS-based location
+resents the greatest advantage of our dynamic SELIR model have           sensor that automatically captures the geographical coordinates of
+
+over static risk factor models (no forecasting, but possible scenario    the user. The system also automatically captures date and time of
+testing. See for example Koopman et al. (1991)) and time series          the day as the latter is especially critical to dengue diagnosis. Each
+
+models trained on historical data (possible forecasting, but no sce-     of the three reporting components – symptoms, mosquito bites,
+nario testing. See for example, (Luz et al., 2008) and (Althouse et al., and breeding sites – is denoted with a unique icon. As soon as a
+
+2011)). More importantly, the spatio-temporal transmission pat-          user submits the report, it gets stored in a data repository after
+terns predicted by our model can help health authorities prioritize      the necessary checks of authentication and validation are carried
+
+mitigation and intervention efforts, to achieve epidemic manage-         out by the server. Subsequently, the server is engaged in constant
+ment in the most cost-effective way. Besides catering to healthcare      communication with the front-end-client (the mobile application)
+
+policymakers, the SELIR model is also an important component in          so that any new data input in the server is automatically depicted
+the crowd sensing part of the Mo-Buzz project (Kamel Boulos et al.,      in a graphical format on the application’s live map. Thus, the icons
+
+2011). To encourage participatory data collection by Colombo cit-        respective to each of the reports appear on the Mo-Buzz map and
+izens (described in detail in the next sub-section), low-resolution      the map is made visible to health authorities and registered users.
+
+forecastsontheprogressionofthedengueepidemicwillbefedback                Users can choose if they wish to view any one speciﬁc type of
+to Mo-Buzz users (Fig. 2). These crowd users might also report or        reports based upon their selection (Fig. 2).
+
+collect data (like mild symptoms, the time and place of mosquito
+bites, potential breeding spots, etc.) that are difﬁcult or not col-     3.3. Health communication
+
+lected by authorities. While these are generally much less reliable
+than ofﬁcial data, it is still possible to incorporate them into the        Health messages can be alerts, reminders, or any useful infor-
+
+model calibration and validation processes after assigning smaller       mation generated by the system or authorized users depending on
+weights.Finally,weaimforlatenteducationofthemasses.Bysend-               the prediction generated by the system. The proposed system tries
+
+ingsmallsnippetsofdengue-relatedinformationtousersafterthey              to avoid message broadcasting. Instead, personalized messaging is
+submitted a report, in particular evaluation ratings from the model      used to disseminate messages to end users based on their location,
+
+on how useful the data they submitted is, we expect Mo-Buzz users        message priority and other settings of messages and users (such as
+to become more knowledgeable with time, and submit more and              chosen frequency, message type, etc.). Also, the client application
+
+more useful data.                                                        can pull the messages according to its options and user settings.
+                                                                         These messages can be sent to email inboxes, to devices through
+
+3.2. Civic engagement                                                    the Google cloud or as SMSs.
+                                                                            The health communication component consists of three sub-
+
+   The fundamental purpose of this component is to strengthen            components each serving a different function. The ﬁrst pertains
+the surveillance efforts of public health authorities with real-time     to “health alerts” where the system, based on the data from the
+
+information about risk-related incidents occurring among the gen-        surveillance component which predicts hotspots, sends a dengue
+eral public. We crowdsource this task of data collection by enabling     alert to the user based on his geographical location. Along with the
+
+the general public to send information using their mobile phones,        alert, the system also prompts the user to access information on
+as health authorities might ﬁnd such information difﬁcult to detect      the steps needed to protect oneself from dengue. The second sub-
+
+or trace. Speciﬁcally, the public will be empowered to report three      component pertains to tailored health communication. Based on
+kinds of information to health authorities using the “Report” option     the submitted report, the system automatically prompts the user
+
+on Mo-Buzz’s mobile app and website: symptoms, mosquito bites            to access relevant information. For instance, a user who reports
+and breeding sites.                                                      dengue-related symptoms will be prompted for symptom-related
+104                                                M.O. Lwin et al. / Acta Tropica 130 (2014) 100–107
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                        Fig. 2. Screenshots of the Mo-Buzz mobile application (dummy data used).
+
+
+information; in contrast, a user who reports the picture of a breed-     behavior using four main constructs: performance expectancy,
+ing site will be prompted for information on strategies to keep his      effort expectancy, social inﬂuence and facilitating conditions.
+
+surroundings clean and free of mosquitoes.
+   The third sub-component (Fig. 2) refers to an information repos-      3.5. Discussion
+
+itory which both registered and non-registered users can access.
+This informational module is divided into various sections such as          While the conceptual thinking and design of Mo-Buzz offers a
+
+dengue serotypes, risk factors, symptoms, statistics and preventive      novel, holistic approach to dengue prevention and management in
+steps. The interface is designed in such a way that a user initially     the future, the technology development process faced several chal-
+
+gets a brief snippet of information from the section he clicks on,       lenges at different levels. Here, we chronicle three main challenges
+but can access detailed information on that topic by simply click-       – content validation and veriﬁcation, inter-organizational integra-
+
+ing on a link. The user is also able to share the dengue information     tion and trans-disciplinary research – and present strategies used
+with those in his social network by choosing them from his phone’s       to address each of them.
+
+contact list, Facebook, Twitter or through simple SMS.                      Oneofthemajorchallengesofatechnology-drivenparticipatory
+                                                                         health system enterprise is validating the quality of informational
+
+3.4. Current status                                                      inputs from citizens. Previous studies pointed to the dangers of
+                                                                         misinformation spreading swiftly through social media (Scanfeld
+
+   In collaboration with the Colombo Municipal Council (CMC) and         et al., 2010). There are three main challenges in terms of content
+the University of Colombo, the Mo-Buzz system was deployed in            validation: 1) quality of the image in terms of clarity, 2) identifying
+
+July 2013 for the entire cadre of public health inspectors (PHIs) in     the content of the image and ensuring its topical relevance to the
+Colombo, Sri Lanka. This represents the ﬁrst phase of deployment         system and 3) identifying and ﬁltering exact or near-same dupli-
+
+for beta-testing by a chosen group of ﬁve PHIs, engineering mod-         cates. We examine these challenges closely and present our plans
+iﬁcations to the system based on their feedback and conducting           for addressing them.
+
+training of trainers (TOT) sessions before ﬁnal roll-out.                   Clarity of the image is important to enable public health author-
+   Adapting the system for use by the PHIs involves three primary        ities to identify the speciﬁc features of the image report and react
+
+areas of change as they require a different set of functionalities as    accordingly. From a technical standpoint, image clarity becomes
+opposed to the general public. First, we utilize historical dengue-      necessary for the system to be able to detect and extract content
+
+related data from the Colombo Municipal Council to build maps            features and cross-validate for duplicates. Validating the image
+speciﬁc to this region using the model (described in section 3.1).       content and ensuring its propriety to the system is important in
+
+Second, we integrate the paper-based Dengue Investigation Form           order to protect the system from the burden of irrelevant and
+(currentlyusedfordenguereportinginColombo)intoatabletinter-              inaccurate information, especially critical in the context of public
+
+face for use by the PHIs. This is being done to reduce the current lag   health. Identifying duplicates is critical to ensure that the burden of
+time between collection and reporting of dengue and preventive           dengue-relatedriskincidentsisaccuratelycommunicatedtohealth
+
+action taken (7–10 days) as PHIs can instantly submit the inves-         authorities and the general public in a visible form. To illustrate
+tigation form as soon as it is completed. Getting rapid access to        this problem, let us take an example of a breeding site with a cer-
+
+such data will help health authorities to execute preventive steps       tain mosquito density. It is possible that 10 citizens take photos of
+in a quicker, more efﬁcient manner. Third, we digitize existing          the same breeding site from either the same, or slightly different
+
+paper-based dengue educational materials (used by the Colombo            geographical coordinates. In such a case, there is a risk of the visual
+Municipal Council), so they can be embedded in the mobile appli-         interfacedepicting10breedingsiteswhen,infact,thereisonlyone.
+
+cation and used as necessary. From an evaluation standpoint, the            Our strategy to address these problems is based on subjecting
+SriLankaroll-outwillcompriseamixed-methodlongitudinalstudy               the content through two stages: ﬁltering and veriﬁcation. Filter-
+
+that will examine the drivers of technological adoption among the        ing can be achieved using image processing and machine leaning
+entire cadre of PHIs using the Uniﬁed Theory of Acceptance and           techniques. The images will be uploaded to a database on the
+
+Use of Technology (UTAUT) (Venkatesh et al., 2003). The UTAUT            server where they would be classiﬁed using image processing and
+attempts to explain technology-related intention to use and usage        machinelearningalgorithmsintotwoclassesnamely‘breedingsite’
+                                                  M.O. Lwin et al. / Acta Tropica 130 (2014) 100–107                                    105
+
+
+and ‘irrelevant’. The breeding site class may have further subclasses   of mobile phones in transforming the global health landscape has
+such as ‘water body’, ‘tyres’, ‘construction site’ and ‘bushes’ as pos- beenextensivelychronicledbyscholars(Boulosetal.,2011;Curioso
+
+sible sites where mosquito breeding normally takes place. For this      andMechael,2010;Gurmanetal.,2012;Kay,2011;Mechael,2009).
+purpose, a large corpus of images will be collected as the training     As a result, health system stakeholders seem readier than ever to
+
+data and they will be appropriately annotated for machine learn-        consider innovations that they feel might positively inﬂuence pub-
+ing purposes. The ‘irrelevant’ category of images will be removed       lic health outcomes; equally so, corporate entities seem willing to
+
+from the server. Relevant images will be categorized with a “high       partake in such initiatives as involvement in public-private part-
+conﬁdence” or “low conﬁdence” score based on the output of              nerships furthers their corporate social responsibility initiatives.
+
+the machine learning algorithm. The high conﬁdence sites will be           The inherent trans-disciplinary nature of research inquiries in
+given ﬁrst priority of action by the health authorities concerned for   health communication has been previously elucidated (Kreps and
+
+mosquito control followed by manual inspection of images labeled        Maibach, 2008) as the ﬁeld draws upon theoretical ideas from
+as low conﬁdence sites. In the future, a program will be developed      social psychology, communication, public health and others. The
+
+in Java (Android) on the client side to reject the images that are of   nature of designing mHealth interventions such as Mo-Buzz how-
+very low conﬁdence from getting uploaded on the server with sug-        ever propels the intent of the term “trans-disciplinary” in public
+
+gestions prompting the user to submit more appropriate and clear        health research to new levels. For instance, our team comprises
+images. Over reporting of cases from the same geographical loca-        experts from social communication, behavioral science, human
+
+tion can be addressed by performing a clustering of images within       computer interaction for novel interfaces, mathematics, software
+a geographically bounded area so that these images can be treated       engineering, information sciences and psychology. In the absence
+
+as a group for a more accurate veriﬁcation and validation process       of a formalized template to synergize the intellectual energies of
+to be carried out. Once veriﬁed, one representative location can be     these varied specialists, our collaboration is shaped organically but
+
+used to mark the breeding site.                                         efﬁciently. The collaborative process was highlighted by a process
+   The validation process is consistent in keeping with the core        of joint exploration into a new concept, identifying how and where
+
+idea of using participatory media and crowdsourcing technologies.       each member could contribute in the development and research
+In that, we engage people (individuals and health systems per-          process and an implicit understanding of each other’s capabilities.
+
+sonnel) as validation experts for secondary validation. If users are    From a logistical standpoint the challenge, at times, lay in orga-
+self-disciplined to provide only related information, then the sys-     nizing various tasks requiring different skill sets toward achieving
+
+tem can avoid this and there will be no delay or effort needed to       a common objective. The more enriching challenge, however, lay
+verify the information.                                                 in communicating terminologies and concepts to each other, and
+
+   The process of conceptualizing, designing and deploying the          we found, over time, that we could use the power of metaphors to
+Mo-Buzz system demanded concerted exertions to integrate with           accomplish the same. The other organizational implication from
+
+a range of stakeholders at different levels of the public health        our experience in trans-disciplinary research may be construed
+ecosystem: civic agencies, research institutions, telecommunica-        either positively or negatively. At many stages during our system
+
+tions companies and policymakers. Our effort was guided by              development, we observed that many processes (that could have
+Axelsson and Axelsson, 2006 framework with an emphasis on               been arduous) were easily facilitated as the team members trusted
+
+two forms of inter-organizational integration in public health          the respective expertise of the other, thereby not overstepping
+programs: 1) Cooperation, described as being “based on hier-            boundaries. While this worked in our favor, it might also be impor-
+
+archical management, but combined with voluntary agreements             tant to recognize that such a tendency, if pushed further, could
+and mutual adjustments between the organizations involved”              result in an expert’s ideas or inputs being left unchallenged and
+
+(Mintzberg, 1993); and 2) Collaboration, described as being “based      not critically evaluated. As mHealth interventions expand across
+on a willingness to work together and... implemented through            geographic frontiers in the future, it is incumbent upon health
+
+intensive contacts and communications between the different             systems scientists to inquire about and inform the practice of trans-
+organizations” (Alter and Hage, 1993).                                  disciplinary research teams.
+
+   Our process of cooperation and collaboration was characterized
+by a range of facilitators and barriers. First and foremost, we learnt  3.6. Future work
+
+that civic agencies and public health authorities might be under-
+standably cautious about sharing dengue-related data required for          Based on the data gathered and feedback from the ﬁrst phase
+
+building the predictive algorithm. However, the level of data con-      of deployment in Sri Lanka, Mo-Buzz will be reﬁned in terms of
+ﬁdentiality and the type of agencies facilitating data sharing vary     its user interface, predictive ability and educational modules. The
+
+widely between contexts, as does their willingness to consider and      second phase of deployment includes the launch of the mobile
+buy-in to a new public health innovation. Obtaining such data           application for the general public in Colombo. This application will
+
+requires consistent and transparent negotiations with the rele-         compriseallthethreecomponentsdescribedinthepaperleadingto
+vant stakeholders. The key ingredients that catalyzed our success       the establishment of a dynamic communication channel between
+
+with our Sri Lankan collaborators were a) a detailed communica-         the general public and health authorities. The foremost limitation
+tion about our system’s capabilities and beneﬁts, and b) a strong       we foresee is the restricted reach of our application as the current
+
+assurance about our technological ability to ensure the conﬁden-        version is only available on Android smartphones, unaffordable to
+tialityofthedata.Researchersinvolvedinsimilarinnovationsinthe           many in a country like Sri Lanka. However, emerging reports (Daily,
+
+mobile health (mHealth) space might also encounter a resistance to      2013; The Sunday Times, 2011) that suggest a sharp rise in smart-
+change if their innovations require a shift in the daily routine tasks  phone penetration in Sri Lanka provide encouragement about the
+
+of the health systems personnel. In order to address this challenge,    application’s potential in the future.
+an appreciation of the practical micro and macro level challenges          A successful deployment of the system in Sri Lanka will provide
+
+that health workers and health authorities encounter on a day-to-       a natural progression for the system to be contextualized and used
+day basis needs to be complemented by a readiness to incorporate        in other countries facing similar threats of vector-borne infec-
+
+the new system in a stage-wise or staggered manner. The main            tious diseases (including malaria) such as India and Singapore.
+facilitating factors that furthered our efforts were not only the       For instance, dengue has been increasing every year in India
+
+enormity of the dengue problem but the enthusiasm, curiosity and        with nearly 50,000 cases reported in 2012 (Chaudhuri, 2013).
+urgencytoconsidermobilephone-basedinnovations.Thepotential              Singapore–among the most developed countries in the region–is
+106                                                      M.O. Lwin et al. / Acta Tropica 130 (2014) 100–107
+
+
+experiencing its worst dengue outbreak this year with more than                   Axelsson, R., Axelsson, S.B., 2006. Integration and collaboration in public health—a
+                                                                                     conceptual framework. Int. J. Health Plan. Manag. 21, 75–88.
+15,000casesreportedasofSeptember2013(http://dengue.gov.sg).
+This spell arrived after two previous epidemics in 2005 and 2007                  Bhattacharya, M., Maitra, S., Ganguly, A., Bhattacharya, A., Sinha, A., 2013. Dengue: a
+                                                                                     growing menace–a snapshot of recent facts. Fig. Remed. Int. J. Biomed. Sci.: IJBS
+that affected more than 14,000 and 8000 people respectively (Lee                     9, 61.
+                                                                                  Blackbox Research, 2012. Smartphones in Singapore: A Whitepaper Release
+et al., 2010; Ler et al., 2011). The unprecedented surge of smart-
+phones in both these countries is an encouraging sign for our                        Singapore.
+                                                                                  Boulos, M.N.K., Resch, B., Crowley, D.N., Breslin, J.G., Sohn, G., Burtner, R., Pike, W.A.,
+concept. For instance, Singapore boasts more than universal pene-                    Jezierski, E., Chuang, K.-Y.S., 2011. Crowdsourcing, citizen sensing and sensor
+                                                                                     web technologies for public and environmental health surveillance and crisis
+tration of mobile phones with 80% users adopting smartphones and
+150% overall mobile penetration (Blackbox Research, 2012). India                     management: trends, OGC standards and application examples. Int. J. Health
+                                                                                     Geogr. 10, 67.
+is arguably among the world’s largest mobile phone markets with                   Catley,A.,2006.Useofparticipatoryepidemiologytocomparetheclinicalveterinary
+                                                                                     knowledge of pastoralists and veterinarians in East Africa. Trop. Anim. Health
+nearly 770 million mobile connections (Gartner, 2013) among its
+billion-over population.                                                             Prod. 38, 171–184.
+                                                                                  Chan, M., Johansson, M.A., 2012. The incubation periods of dengue viruses. PLoS ONE
+    As the major components of the Mo-Buzz system architecture                       7, e50972.
+are generic in terms of its functionality, it provides an oppor-                  Chaudhuri, M., 2013. What can India do about dengue fever? BMJ, 346.
+
+tunity to adapt and apply the system to other health areas. In                    Chib, A., Lwin, M.O., Ang, J., Lin, H., Santoso, F., 2008. Midwives and mobiles: using
+                                                                                     ICTs to improve healthcare in Aceh Besar, Indonesia 1. Asian J. Commun. 18,
+this regard, the team is collaborating with Singapore-based clin-                    348–364.
+ical and non-clinical organizations to adapt and apply our concept                Chunara, R., Chhaya, V., Bane, S., Mekaru, S.R., Chan, E.H., Freifeld, C.C., Brown-
+
+to inﬂuenza and cardio-respiratory illnesses. In the context of                      stein, J.S., 2012. Online reporting for malaria surveillance using micro-monetary
+                                                                                     incentives, in urban India 2010-2011. Malar. J. 11, 43.
+inﬂuenza, the intention is to empower three main at-risk groups                   Curioso, W.H., Mechael, P.N., 2010. Enhancing ‘M-health’with south-to-south col-
+– school children, health workers and the elderly – with the appli-                  laborations. Health Affairs 29, 264–267.
+
+cation. The purpose is to enable them to report vaccine uptake                    Daily, F.T., 2013. Smartphones: Future of communication.
+                                                                                  Degallier, N., Favier, C., Menkes, C., Lengaigne, M., Ramalho, W.M., Souza, R., Servain,
+behavior, measure vaccine effectiveness and disseminate dynamic                      J.,Boulanger,J.-P.,2010.Towardanearlywarningsystemfordengueprevention:
+health education. For cardio-respiratory illnesses, Mo-Buzz can be                   modeling climate impact on dengue transmission. Clim. Change 98, 581–592.
+
+adapted to create a mobile-based social network of citizens with                  Dengue Torpedo, 2013.
+cardio pulmonary resuscitation (CPR) skills, and use GIS-mapping                  Ebi, K.L., 2009. Malaria early warning systems. In: Biometeorology for Adaptation to
+                                                                                     Climate Variability and Change. Springer, pp. 49–74.
+to create a mobile-based alert and communication system where                     Ekeland, A.G., Bowes, A., Flottorp, S., 2010. Effectiveness of telemedicine: a system-
+
+caretakers can access the nearest deﬁbrillators in case an individual                atic review of reviews. Int. J. Med. Informat. 79, 736–771.
+experiences myocardial infarction.                                                Estallo, E.L., Lamfri, M.A., Scavuzzo, C.M., Almeida, F.F.L., Introini, M.V., Zaidenberg,
+                                                                                     M., Almirón, W.R., 2008. Models for predicting Aedes aegypti larval indices based
+                                                                                     on satellite images and climatic variables. J. Am. Mosquito Contr. Assoc. 24,
+
+                                                                                     368–376.
+4. Conclusion                                                                     Favier, C., Schmit, D., Muller-Graf, C.D., Cazelles, B., Degallier, N., Mondet, B., Dubois,
+                                                                                     M.A.,2005.Inﬂuenceofspatialheterogeneityonanemerginginfectiousdisease:
+                                                                                     the case of dengue epidemics. Proc. Biol. Sci. 272, 1171–1177.
+    Infectious diseases such as dengue pose a formidable challenge
+                                                                                  Fazlulhaq, N., 2012. Dengue may reach epidemic proportions, health ofﬁcials warn.
+to public health authorities and the general public in tropical                      The Sunday Times.
+countries and especially so in South and Southeast Asia. We                       Freifeld, C.C., Chunara, R., Mekaru, S.R., Chan, E.H., Kass-Hout, T., Ayala Iacucci, A.,
+                                                                                     Brownstein, J.S., 2010. Participatory epidemiology: use of mobile phones for
+optimized the deep penetration of mobile phones in this region
+to develop a system that establishes a chain of communication                        community-based health reporting. PLoS Med. 7, e1000376.
+                                                                                  Gartner, 2013. Gartner says Indias mobile services market to reach Rs. 1.2 trillion in
+between health authorities and the public, potentially enhances                      2013.
+                                                                                  Gubler, D.J., Clark, G.G., 1996. Community involvement in the control of Aedes
+trust between these two stakeholders, and engenders a proactive
+give-and-take of health information. While each of the three com-                    aegypti. Acta Trop. 61, 169–179.
+                                                                                  Gurman,T.A.,Rubin,S.E.,Roess,A.A.,2012.EffectivenessofmHealthbehaviorchange
+ponents of our system has been previously conceptualized in silos                    communication interventions in developing countries: a systematic review of
+                                                                                     the literature. J. Health commun. 17, 82–104.
+(Dengue Torpedo, 2013; Malaria Atlas Project, 2013), Mo-Buzz is
+among the ﬁrst to demonstrate an innovative integration of the                    Hay, S.I., Rogers, D.J., Shanks, G.D., Myers, M.F., Snow, R.W., 2001. Malaria early
+                                                                                     warning in Kenya. Trends Parasitol. 17, 95–99.
+three. From an applied standpoint, our effort seeks to enhance                    Hettiarachchi, K., Jeewandara, S., Munasinghe, A., Perera, S., 2013. More dengue vic-
+                                                                                     tims: Staff shortage, ignorance of people, poor garbage management to blame.
+the epidemiological capabilities of health authorities and empow-
+ers citizens to dynamically report to them. From an academic                         The Sunday Times.
+                                                                                  Hsieh, Y.H., Ma, S., 2009. Intervention measures, turning point, and reproduction
+standpoint, our effort initiates a scientiﬁc conversation about how                  number for dengue, Singapore, 2005. Am. J. Trop. Med. Hygiene 80, 66–71.
+mobile phones might potentially transform the ﬁelds of epidemi-                   International Telecommunications Union ITU, 2013. Statistical market overview: Sri
+
+ology and health communication from being complementary to                           Lanka.
+                                                                                  Jones, M.D.R., 1981. The programming of circadian ﬂight-activity in relation to mat-
+synergistic entities.                                                                ing and the gonotrophic cycle in the mosquito Aedes aegypti. Physiol. Entomol.
+                                                                                     6, 307–313.
+
+                                                                                  Kamel Boulos, M.N., Resch, B., Crowley, D.N., Breslin, J.G., Sohn, G., Burtner, R., Pike,
+Acknowledgements                                                                     W.A., Jezierski, E., Chuang, K.Y., 2011. Crowdsourcing, citizen sensing and sensor
+                                                                                     web technologies for public and environmental health surveillance and crisis
+                                                                                     management: trends, OGC standards and application examples. Int. J. Health
+    Center of Social Media Innovations for Communities (COSMIC),
+                                                                                     Geogr. 10, 67.
+Nanyang Technological University. This research is supported by                   Kanakaratne, N., Wahala, W.M., Messer, W.B., Tissera, H.A., Shahani, A., Abeysinghe,
+                                                                                     N., de Silva, A.M., Gunasekera, M., 2009. Severe dengue epidemics in Sri Lanka,
+theSingaporeNationalResearchFoundationunderitsInternational                          2003–2006. Emerg. Infect. Dis. 15, 192.
+Research Center @ Singapore Funding Initiative and administered
+                                                                                  Kay, M., 2011. mHealth: new horizons for health through mobile technologies.
+by the IDM Programme Ofﬁce. We are grateful to our collaborators                     World Health Organization.
+in Sri Lanka, namely the University of Colombo School of Comput-                  Koopman, J.S., Prevots, D.R., Vaca Marin, M.A., Gomez Dantes, H., Zarate Aquino,
+                                                                                     M.L., Longini Jr., I.M., Sepulveda Amor, J., 1991. Determinants and predictors of
+ing, Colombo Municipal Council, and Mobitel for their cooperation.
+                                                                                     dengue infection in Mexico. Am. J. Epidemiol. 133, 1168–1178.
+                                                                                  Kreps, G.L., Maibach, E.W., 2008. Transdisciplinary science: the nexus between com-
+                                                                                     munication and public health. J. Commun. 58, 732–748.
+References                                                                        Lee, K.S., Lai, Y.L., Lo, S., Barkham, T., Aw, P., Ooi, P.L., Tai, J.C., Hibberd, M., Johans-
+
+                                                                                     son, P., Khoo, S.P., 2010. Dengue virus surveillance for early warning Singapore.
+Alter, C., Hage, J., 1993. Organizations Working Together. Sage, London.             Emerg. Infect. Dis. 16, 847.
+Althouse, B.M., Ng, Y.Y., Cummings, D.A., 2011. Prediction of dengue incidence usingr, T.S., Ang, L.W., Yap, G.S.L., Ng, L.C., Tai, J.C., James, L., Goh, K.T., 2011.
+                                                                                     Epidemiological characteristics of the 2005 and 2007 dengue epidemics in
+    search query surveillance. PLoS Negl. Trop. Dis. 5, e1258.
+                                                               M.O. Lwin et al. / Acta Tropica 130 (2014) 100–107                                                           107
+
+
+    Singapore–similarities and distinctions. Western Paciﬁc Surveill. Resp. J. 2,          Peiris, V., 2009. Sri Lanka: dengue epidemic claims scores of lives. World Socialist
+
+    24–29.                                                                                     (Website).
+Lester, R.T., Ritvo, P., Mills, E.J., Kariri, A., Karanja, S., Chung, M.H., Jack, W., Hab- Racloz, V., Ramsey, R., Tong, S., Hu, W., 2012. Surveillance of dengue fever virus: a
+    yarimana, J., Sadatsafavi, M., Najafzadeh, M., 2010. Effects of a mobile phone             review of epidemiological models and early warning systems. PLoS Negl. Trop.
+
+    short message service on antiretroviral treatment adherence in Kenya (WelTel               Dis. 6, e1648.
+    Kenya1): a randomised trial. The Lancet 376, 1838–1845.                                Rochlin, I., Turbow, D., Gomez, F., Ninivaggi, D.V., Campbell, S.R., 2011. Predictive
+Lim, M.S., Hocking, J.S., Hellard, M.E., Aitken, C.K., 2008. SMS STI: a review of the uses     mapping of human risk for West Nile virus (WNV) based on environmental and
+
+    of mobile phone text messaging in sexual health. Int. J. STD AIDS 19, 287–290.             socioeconomic factors. PLoS ONE 6, e23280.
+Lowe, R., Bailey, T.C., Stephenson, D.B., Graham, R.J., Coelho, C.A.S., Sá Carvalho,       Rodgers, A., Corbett, T., Bramley, D., Riddell, T., Wills, M., Lin, R.-B., Jones, M., 2005.
+    M., Barcellos, C., 2011. Spatio-temporal modelling of climate-sensitive disease            Do u smoke after txt? Results of a randomised trial of smoking cessation using
+
+    risk: towards an early warning system for dengue in Brazil. Comp. Geosci. 37,              mobile phone text messaging. Tobacco Contr. 14, 255–261.
+    371–381.                                                                               Salazar, M.I., Richardson, J.H., Sanchez-Vargas, I., Olson, K.E., Beaty, B.J., 2007.
+Luz, P.M., Mendes, B.V., Codeco, C.T., Struchiner, C.J., Galvani, A.P., 2008. Time series      Dengue virus type 2: replication and tropisms in orally infected Aedes aegypti
+
+    analysis of dengue incidence in Rio de Janeiro, Brazil. Am. J. Trop. Med. Hyg. 79,         mosquitoes. BMC Microbiol. 7, 9.
+    933–939.                                                                               Scanfeld, D., Scanfeld, V., Larson, E.L., 2010. Dissemination of health informa-
+Malaria Atlas Project 2013.                                                                    tion through social networks: Twitter and antibiotics. Am. J. Infect. Contr. 38,
+
+Mechael, P.N., 2009. The case for mhealth in developing countries. Innovations:                182–188.
+    technology, governance. Globalization 4, 103–118.                                      The Sunday Times, 2011. Smart phone penetration in Sri Lanka better than other
+Ministry of Defense, 2013. Troops to be deployed for dengue prevention.                        regional markets.
+
+Ministry of Health, 2013a. Dengue update.                                                  Thomson, M., Doblas-Reyes, F., Mason, S., Hagedorn, R., Connor, S., Phindela, T.,
+Ministry of Health, 2013b. Disease surveillance trends.                                        Morse, A., Palmer, T., 2006. Malaria early warnings based on seasonal climate
+Mintzberg, H., 1993. Structure in Fives: Designing Effective Organizations. Prentice           forecasts from multi-model ensembles. Nature 439, 576–579.
+
+    Hall, Englewood Cliffs, NJ.                                                            Thomson, M.C., Mason, S.J., Phindela, T., Connor, S.J., 2005. Use of rainfall and sea
+Nishiura, H., Halstead, S.B., 2007. Natural history of dengue virus (DENV)-1 and               surface temperature monitoring for malaria early warning in Botswana. Am. J.
+    DENV-4 infections: reanalysis of classic studies. J. Infect. Dis. 195, 1007–1013.          Trop. Med. Hyg. 73, 214–221.
+
+Parks, W., Lloyd, L., 2004. Planning social mobilization and communication for             Venkatesh, V., Morris, M.G., Gordon, B.D., Davis, F.D., 2003. User acceptance of infor-
+    dengue fever prevention and control: a step-by-step guide. World Health                    mation technology: toward a uniﬁed view. MIS Quart. 27, 425–478.
+    Organization.

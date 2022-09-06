@@ -1,0 +1,1053 @@
+Open Source Drug Discovery in Practice: A Case Study
+
+
+Christine Ardal *, John-Arne Røttingen              2,3
+
+1Section for Global Health, The Norwegian Knowledge Centre for the Health Services, Oslo, Norway, 2Department of Health Management and Health Economics,
+Institute for Health and Society, University of Oslo, Oslo, Norway, 3Department of Global Health and Population, Harvard School of Public Health, Boston, Massachusetts,
+
+United States of America
+
+
+    Abstract
+
+
+    Background: Open source drug discovery offers potential for developing new and inexpensive drugs to combat diseases
+    that disproportionally affect the poor. The concept borrows two principle aspects from open source computing (i.e.,
+    collaboration and open access) and applies them to pharmaceutical innovation. By opening a project to external
+
+    contributors, its research capacity may increase significantly. To date there are only a handful of open source R&D projects
+    focusing on neglected diseases. We wanted to learn from these first movers, their successes and failures, in order to
+    generate a better understanding of how a much-discussed theoretical concept works in practice and may be implemented.
+
+
+    Methodology/Principal Findings: A descriptive case study was performed, evaluating two specific R&D projects focused on
+    neglected diseases. CSIR Team India Consortium’s Open Source Drug Discovery project (CSIR OSDD) and The Synaptic
+    Leap’s Schistosomiasis project (TSLS). Data were gathered from four sources: interviews of participating members (n=14), a
+    survey of potential members (n=61), an analysis of the websites and a literature review. Both cases have made significant
+
+    achievements; however, they have done so in very different ways. CSIR OSDD encourages international collaboration, but its
+    process facilitates contributions from mostly Indian researchers and students. Its processes are formal with each task being
+    reviewed by a mentor (almost always offline) before a result is made public. TSLS, on the other hand, has attracted
+    contributors internationally, albeit significantly fewer than CSIR OSDD. Both have obtained funding used to pay for access to
+
+    facilities, physical resources and, at times, labor costs. TSLS releases its results into the public domain, whereas CSIR OSDD
+    asserts ownership over its results.
+
+    Conclusions/Significance: Technically TSLS is an open source project, whereas CSIR OSDD is a crowdsourced project.
+
+    However, both have enabled high quality research at low cost. The critical success factors appear to be clearly defined entry
+    points, transparency and funding to cover core material costs.
+
+
+  Citation: Ardal C, Røttingen J-A (2012) Open Source Drug Discovery in Practice: A Case Study. PLoS Negl Trop Dis 6(9): e1827. doi:10.1371/journal.pntd.0001827
+
+  Editor: Timothy G. Geary, McGill University, Canada
+  Received March 27, 2012; Accepted August 8, 2012; Published September 20, 2012
+
+  Copyright: ß 2012 Ardal, Røttingen. This is an open-access article distributed under the terms of the Creative Commons Attribution License, which permits
+  unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
+  Funding: This research was made possible by the generous support of the Norwegian Research Council (www.forskningsradet.no, grant number 192465). The
+  funders had no role in study design, data collection and analysis, decision to publish, or preparation of the manuscript.
+
+  Competing Interests: The authors have declared that no competing interests exist.
+
+  * E-mail: cha@nokc.no
+
+
+
+Introduction                                                             In 2003 a Commission on Intellectual Property Rights,
+                                                                       Innovation and Public Health was established under the auspices
+  The vast majority of drug research and development (R&D)             of WHO in order to apprise appropriate funding and incentive
+performed globally is directed towards the needs of high-income
+                                                                       mechanisms for these neglected diseases. A number of initiatives
+countries [1]. The former Global Forum for Health Research and         have resulted from the Commission’s recommendations including
+the work that led to its establishment asserted that 90% of all        the formation of an expert working group to suggest and evaluate
+health R&D investment is spent on areas that concern only 10%
+                                                                       options to incentivize R&D for these diseases [5]. A large variety of
+of the world’s population [2–4]. High-income countries have the        financing and coordinating mechanisms have been proposed. One
+resources to pay, either publicly or privately, a price which gives    that has received some support is open source drug discovery.
+the innovator a profitable return on investment. The problem, of
+                                                                         Open source drug discovery is a model based upon the open
+course, is that the medical needs of high-income countries are not     source movement within the computer software industry. Basically
+the same as low-income countries. There are a host of diseases         it takes two primary attributes, namely the collaboration of
+
+that are primarily endemic to low-income countries, diseases like      volunteers and free access to the results, and applies them to drug
+dengue fever, malaria and schistosomiasis. Incentivizing R&D           discovery. This should ultimately translate into new drugs entering
+investments by standard incentives like patents simply does not        the market at prices determined by generic competition.
+
+produce the greatly needed, new medicines or diagnostics for             The concept has been discussed within the academic literature
+these diseases (which are often labeled ‘‘neglected’’). These are      for almost a decade. One of the first proposals by Maurer, Rai and
+neglected because the market does not offer sufficient purchasing      Sali [6] laid out the concept and applied it particularly to tropical
+
+power. This market failure is an internationally recognized            diseases. Subsequently, there have been several high-level
+problem and has been a major focus of the World Health                 descriptions of example projects [7,8] and more recently, empirical
+Organization (WHO).                                                    examples [9] of models, methods, processes and tools. However,
+
+
+
+PLOS Neglected Tropical Diseases | www.plosntds.org                 1                      September 2012 | Volume 6 | Issue 9 | e1827
+                                                                                                  Open Source Drug Discovery in Practice
+
+
+
+                                                                      of knowledge. No one owns them; they are public knowledge.
+  Author Summary
+                                                                      These knowledge commons grow when researchers place their
+  Open source drug discovery can be an influential model              data in the public domain. This is most commonly done by
+  for discovering and developing new medicines and                    publishing the data without first patenting it. Knowledge residing
+
+  diagnostics for neglected diseases. It offers the opportu-          in the public domain may not be patented since novelty is required
+  nity to accelerate the discovery progress while keeping             to patent. This means that anyone can use, distribute and further
+  expenditures to a minimum by encouraging incremental                develop the research without paying a royalty to, or even notifying,
+  contributions from volunteer scientists. Publishing raw
+                                                                      the innovator. If all the data necessary to manufacture a new drug
+  data and results in the public domain is positive within the        are placed in the public domain, anyone may undertake the
+  context of neglected diseases since it facilitates open             necessary regulatory steps for approval and begin to manufacture
+  collaboration while obviating the ability to patent any
+  results. In this way it effectively de-links the research and       the drug.
+                                                                         In open source computing it is more common to utilize
+  development costs from the sales price of the end                   specialized licenses rather than the public domain since software
+  product, the new medicine or diagnostic. This case study
+  demonstrates that implementations of the open source                code is most commonly protected by copyright which is awarded
+  model can differ while still achieving the ultimate goal of         automatically. These licenses allow the innovator to maintain
+                                                                      some level of control over the innovation, generally ensuring that
+  obtaining high quality research at reduced costs. However,
+  the importance of clearly defined entry points, transpar-           attribution is given and that the code is freely accessible for anyone
+  ency and funding are shared success factors. These                  to redistribute and modify. Any license in compliance with the
+  findings present the practical challenges of implementing           Open Source Definition [11] is considered open source. These
+                                                                      same aims can also be achieved by pairing a patent with a
+  a theoretical concept and hopefully will assist other
+  scientists in organizing future open source drug discovery          standard license allowing free use of the patent so long as the use
+  projects.                                                           adheres to a set of conditions. Examples include instances where
+                                                                      innovators allow patented medicines to be manufactured by
+
+                                                                      producers in low-income countries for local use only (i.e. equitable
+the literature has not united behind a single, comprehensive          licenses).
+definition of the concept. This combined with the multitude of           Project costs of open source projects are significantly reduced
+
+titles given to the concept (e.g. precompetitive collaboration, data  based upon the percentage of work performed by volunteers as
+sharing, open access R&D, etc.) makes a common understanding          well as the absence of the administrative costs that accompany
+difficult.                                                            contract creation and royalty payment. Since the research is
+
+  Luckily, the non-profit research organization, Results for          placed in the public domain, the price of the manufactured
+Development Institute (‘‘R4D’’), has recently undertaken a high-      product is essentially de-linked from the cost of the R&D.
+level review of open source drug discovery projects aimed at          Manufacturers set a price point based solely upon their own costs
+
+neglected diseases [10]. One of the results of this review is a       and expectations of the market’s willingness to pay. Ideally generic
+straightforward definition. R4D defines a set of attributes that a    competition is introduced immediately.
+project must comply with in order to be considered open source:          Three similar concepts (open access, open innovation and
+
+                                                                      crowdsourcing) are often confused with open source. Open access
+ 1. The project’s data must be open access, meaning that anyone       means that anyone can view, copy or distribute some form of
+   can view the data free-of-charge.                                  content (e.g. an article, book, etc.) free-of-charge; it does not
+ 2. The project must provide a forum for open collaboration
+                                                                      permit changing the content [12].
+   (across organizational and geographical boundaries).                  Open innovation is simply the use of external sources of R&D
+ 3. The project must be governed by a set of rules that mandates      [13]. This may include paying royalties to the innovator and does
+
+   the project’s ‘‘openness’’.                                        not necessitate any type of transparency or commons formation
+                                                                      and is therefore not related to the general ‘‘open definition’’. For
+  If a project adheres to all three requirements, the resulting       example, AstraZeneca recently agreed that a certain set of external
+advantages should be: verified content, collaborative projects, the   scientists could access all of the data related to approximately 20
+
+creation of a commons of knowledge and reduced costs for the          experimental drugs that they have stopped researching. This data
+project (resulting in lower prices for the end product).              is not open to the public. These drugs are under patent, and
+  In an open source project data is made publicly-available for       AstraZeneca will commercially benefit if the scientists manage to
+
+anyone and everyone to verify. In drug discovery this means that      determine a profitable use of these molecules [14]. Open
+all virtual and laboratory results are published with as much of the  innovation offers the potential benefits of collaborative projects
+raw data available as possible. This should include enough data for   and reduced costs of both the project and the end product, but
+
+someone knowledgeable in the topic to review and critique the         does not offer verified content or the creation of a commons of
+data.                                                                 knowledge.
+  Collaboration across organizational and geographical bound-            ‘‘Crowdsourcing’’ is the use of volunteers to perform a specified
+
+aries offers several benefits. If enough researchers can be           task, generally through an open call [15]. For example, the FoldIt
+incentivized to collaborate, even small contributions by many         game has players fold proteins into their most chemically stable
+researchers can significantly progress a project. It also opens a     configuration, introducing new possibilities to the scientists who
+
+project to new external ideas and approaches. It is anticipated that  gather and research the players’ efforts [16]. The contributors do
+the majority of the researchers will contribute on a volunteer basis, not own their output, and crowdsourced outputs may or may not
+thereby reducing the cost of the project.                             be protected by intellectual property rights. Crowdsourcing offers
+
+  A commons of knowledge is knowledge that is owned by the            the same benefits of open innovation - collaborative projects and
+public, meaning that there is no individual owner. All sciences       reduced costs of both the project and the end result, but does not
+contain vast commons of knowledge. For example, in mathemat-          necessarily offer verified content or the creation of a commons of
+
+ics, algebra, geometry and calculus are all a part of the commons     knowledge.
+
+
+PLOS Neglected Tropical Diseases | www.plosntds.org                2                       September 2012 | Volume 6 | Issue 9 | e1827
+                                                                                                 Open Source Drug Discovery in Practice
+
+
+
+  Open source is an important model for neglected diseases R&D       Data Collection
+because it offers the opportunity to accelerate the discovery
+                                                                        Data were gathered from four sources: an analysis of the cases’
+progress while keeping expenditures to a minimum. Patents in         websites, interviews of participating members, a survey of potential
+these instances are neither desired nor justifiable since the cost ofmembers of CSIR OSDD and a literature review. Additionally the
+patenting will likely exceed any potential profits.
+                                                                     project managers of both cases were sent our findings, and their
+  A current gap within the academic literature is detailed profiles  comments have been incorporated into this paper.
+and evaluations of ongoing open source initiatives for neglected-       All websites of the two projects have been reviewed focusing on
+disease research. This is the objective of our case study – to learn aspects of collaboration and progress. The licenses have also been
+from the first movers of open source drug discovery, their successes
+                                                                     reviewed to understand how intellectual property is managed.
+and failures, in order to generate a better understanding of how a      Telephone and written interviews were performed from
+much discussed theoretical concept actually works in practice.       November 2010 to April 2011. Interview content focused on
+After a search for relevant cases, we have studied two cases in
+                                                                     collaboration, intellectual property and progress. An interview
+detail: The Council for Scientific and Industrial Research Team      template was devised and reviewed by two external researchers
+India Consortium’s Open Source Drug Discovery project (CSIR          familiar with open source drug discovery (Annex S1). We posted
+OSDD) and The Synaptic Leap’s Schistosomiasis project (TSLS).
+                                                                     introductions to our case study on both the CSIR OSDD and
+  The objective of the case study is to answer the following         TSLS websites, asking interested individuals to e-mail us if
+research questions:                                                  interested in participating. We also directly e-mailed participants
+                                                                     where we could find contact information (n=99). Fourteen (14)
+ N  How do existing open source drug discovery initiatives attract
+    volunteers, create a collaborative model, achieve progress,      individuals responded, representing both project leaders and active
+                                                                     members. Among the 14, only ten completed all interview topics
+    address the need for physical supplies and manage intellectual   and this was disproportionately members of TSLS project (n=9).
+    property rights?
+    What have these projects accomplished to date?                   The individual completing the interview from the CSIR OSDD
+ N                                                                   project had observed the project but not contributed. However,
+                                                                     four CSIR OSDD project members partially completed the
+  Our results demonstrate that open source drug discovery            interview.
+initiatives can make significant achievements. However, there is
+no one formula for success. Critical success factors are clearly        A survey (Annex S2) of potential members of the CSIR OSDD
+                                                                     project was performed in February and March 2011. The CSIR
+defined entry points, transparency and funding to cover all          OSDD project was selected because they are performing general
+material costs.
+                                                                     tuberculosis drug discovery activities where as the TSLS project is
+                                                                     performing a very specific development task in regards to making a
+Methods                                                              new synthesis of a known molecule, making it more difficult to
+
+  A case study was chosen to research open source drug discovery     identify researchers with similar research interests. PubMed was
+projects in-depth in accordance with pre-defined research            searched on January 31, 2011 for articles published within the last
+questions. Yin [17] recommends a case study approach when            year containing the phrase ‘‘Mycobacterium tuberculosis genome’’. A
+                                                                     second search was performed on February 10, 2011 for articles
+the researcher wants to answer ‘‘how’’ and ‘‘why’’ questions, when
+an experiment is inappropriate or when it is necessary to            published within the last year containing the phrase ‘‘Tuberculosis
+understand the context in greater detail. He categorizes case        drug discovery’’. The searches resulted in 221 and 112 articles
+studies as either explanatory (attempting to find the causality of a respectively. The corresponding author’s e-mail address was
+
+specific case), exploratory (exploring an intervention with no clear retrieved from each of these articles and then duplicates were
+outcome) or descriptive (describing a real-life phenomenon and its   removed. Sixty-one individuals completed the survey (n=46 from
+context). We decided to conduct a descriptive case study to          the genome group and n=15 from the drug discovery group).
+
+examine the real-life phenomenon of open source drug discovery          A literature review was performed to identify any academic
+as it applies to neglected disease R&D.                              articles relevant to our research questions. This was done by
+                                                                     searching Google Scholar on December 6, 2011 with the following
+                                                                     strings, achieving the following results:
+Case Selection
+  We chose open source drug discovery projects targeted towards
+neglected diseases that have had at least one year of continuous data N  ‘‘The Synaptic Leap’’+schistosomiasis (n=15)
+from multiple individuals. We identified twelve potential cases of an N  CSIR India ‘‘open source drug discovery’’ (n=48)
+
+open source approach to drug discovery, mainly through our
+ongoing research of the topic but also through other articles           These articles were read.
+reviewing the topic [8–10]. The potential cases identified along with
+
+their conformance to the selection criteria are given in Table 1.    Ethics Statement
+  Two cases fit our selection requirements: The Council for             We sought approval for our research portfolio (including
+Scientific and Industrial Research Team India Consortium’s           interviews and surveys) from the Norwegian Committees for
+                                                                     Medical and Health Research. The Committee decided that our
+Open Source Drug Discovery project (CSIR OSDD) and The
+Synaptic Leap’s Schistosomiasis Project (TSLS). The other            research did not require their ethical approval since we are
+potential cases were excluded either because the project’s           studying collaboration amongst scientists and not patients. With
+collaboration efforts were not viewable (meaning that data was       that said, all interview participants were informed orally that their
+
+shared but the process of producing the data was not shared or       interview responses would be treated confidentially and that their
+collaboratively performed) or the project was inactive (meaning      participation was completely voluntary. Written consent was
+that a small number of individuals would occasionally make a         deemed unnecessary since interview participants responded
+posting which was most often an interesting article about the        individually to a call for interviews from a website posting. The
+
+topic).                                                              survey data were analyzed anonymously. The interview data were
+
+
+PLOS Neglected Tropical Diseases | www.plosntds.org               3                       September 2012 | Volume 6 | Issue 9 | e1827
+                                                                                                         Open Source Drug Discovery in Practice
+
+
+
+
+  Table 1. Potential Cases for Inclusion.
+
+
+
+  Potential Case                                     Collaboration Efforts Viewable             Project Status           Timeframe of Data
+
+  The Council for Scientific and Industrial Research Yes                                        Active                   2008 – Ongoing
+  Team India Consortium’s Open Source Drug
+
+  Discovery project (CSIR OSDD)
+  Collaborative Drug Discovery                       No                                         Active                   2004 – Ongoing
+
+  Cambia’s Open Innovation                           No                                         Inactive                 2009
+
+  PATH’s Malaria Vaccine Initiative                  No                                         Active                   1999 - Ongoing
+  Structural Genomics Consortium                     No                                         Active                   2003 - Ongoing
+
+  The Pool for Open Innovation against Neglected     No                                         Inactive*                2009–2011
+  Tropical Diseases
+
+  The Synaptic Leap’s Malaria Project                Yes                                        Inactive**               2006–2008
+
+  The Synaptic Leap’s Schistosomiasis Project (TSLS) Yes                                        Active                   2006 - Ongoing
+
+  The Synaptic Leap’s Toxoplasma Project             Yes                                        Inactive                 2006–2007
+  The Synaptic Leap’s Tuberculosis Project           Yes                                        Inactive                 2006–2007
+
+  Tropical Diseases Initiative                       No                                         Active                   2004 - Ongoing
+
+  TDR Targets                                        No***                                      Active                   2007 - Ongoing
+
+  *This project has been transformed to the WIPO Re:Search project.
+  **This project has been restarted in 2012 with a considerable amount of activity.
+
+  ***TDR Targets does share posted lists. However, these are not collaboration efforts towards a designated goal.
+  doi:10.1371/journal.pntd.0001827.t001
+
+
+analyzed in combination with the scientists’ postings on publicly-         Data curation involves establishing and developing long-term
+available websites.                                                        repositories of reference data [20]. The CSIR OSDD project
+
+                                                                           created a data repository for genome-level information regarding
+                                                                           the strain H37Rv, by recruiting volunteers to gather relevant
+Results
+                                                                           research articles, extract the data and transcribe it into a
+   We evaluated the two cases in regards to four aspects:                  standardized format. The aggregation of this process is TBrowse,
+accomplishments, process (including attracting volunteers, collab-
+                                                                           a publicly-available integrative genomics map, http://tbrowse.
+oration and addressing the need for physical supplies), manage-            CSIR OSDD.net/ [21]. The formation of TBrowse demonstrated
+ment of intellectual property, progress and funding. We will
+                                                                           that students could successfully contribute to open source drug
+present the two cases separately.                                          discovery. With this proof of concept performed, CSIR OSDD
+
+                                                                           moved onto a more complex task called Connect to Decode,
+CSIR’s Open Source Drug Discovery Project                                  annotating the tuberculosis genome. Again students collated the
+                                                                           data contained in published articles regarding the approximate
+   The Council for Scientific and Industrial Research Team India
+Consortium’s Open Source Drug Discovery project (CSIR OSDD)                4,000 genes contained in the tuberculosis genome. For those genes
+                                                                           whose function was unknown, participants computationally
+started in 2008 with an initial grant from the Government of India
+of approximately US $35 million (of which US $12 million has been          extrapolated the possible function(s). This work created a
+                                                                           metabolome (a complete set of small molecules involved in
+released to date). Their vision is ‘‘to provide affordable healthcare to the
+developing world by providing a global platform where the best minds can   growth, development and reproduction) and protein-protein
+collaborate & collectively endeavor to solve the complex problems associated withonal network for Mycobacterium tuberculosis that is being used
+
+discovering novel therapies for neglected tropical diseases like Malaria,  to identify potential drug targets. This data is contained on website
+Tuberculosis, Leshmaniasis, etc.’’ Initially they have targeted tubercu-   called Sysborg.
+
+losis as their primary research area (see Table 2).                          Eleven groups have worked independently to develop models
+                                                                           for prediction of anti-tuberculosis activity. Two of these models
+
+Accomplishments                                                            have been published [22] and the other nine are in the process of
+                                                                           being written up. CSIR OSDD has purchased the virtual
+   CSIR OSDD aims to discover novel therapies for tuberculosis.            screening data of 20,000 molecules, where 140 of these molecules
+Its activities are spread throughout every stage of the discovery
+                                                                           have shown promising anti-tubercular properties. CSIR OSDD
+process (from drug target identification to lead optimization). It         has built a new repository [23] (the OSDD Chemical Database) to
+has 54 molecules in process and has initiated discussions with
+                                                                           gather data on these and other promising molecules. As of
+pharmaceutical companies regarding pre-clinical and clinical               February 22, 2012, 304 molecules reside in the virtual repository,
+trials. Its main achievements to date are: the re-annotation of
+                                                                           submitted by 17 individuals. Four molecules have been screened
+the Mycobacterium tuberculosis genome and the generation of 11             against tuberculosis, 14 against malaria.
+models for prediction of anti-tuberculosis activity [18].
+                                                                             To perform these accomplishments, CSIR OSDD has created a
+   The genome of the Mycobacterium tuberculosis strain H37Rv was           significant amount of infrastructure. They utilize several websites
+first published in 1998 [19]. Since publishing, new research has
+                                                                           including:
+been performed in such areas as gene functionality, associated
+proteins, interactions and potential drug targets. Most of this             N  A publicly-available informational website (www.osdd.net) that
+
+research is available electronically but on many different websites.           describes the project in general and gives links to the other
+
+
+
+PLOS Neglected Tropical Diseases | www.plosntds.org                     4                        September 2012 | Volume 6 | Issue 9 | e1827
+                                                                                                     Open Source Drug Discovery in Practice
+
+
+
+  Table 2. CSIR’s Open Source Drug Discovery Project at a glance.
+
+
+
+  Focus:                                            Tuberculosis medicines (all aspects of discovery and development)
+
+  Year started:                                     2008
+  Funding:                                          INR 1.5 billion (,US $35 million), the Government of India
+
+  Number of contributors:                           451
+  License:                                          An original license, ‘‘OSDD Terms and Conditions’’
+
+  Achievements to date:                             (1) Curated a re-annotation of Mycobacterium tuberculosis genome which generated a metabolome and
+                                                    protein-protein functional network to be used to identify potential drug targets (2) Generated 11 models
+                                                    for prediction of anti-tuberculosis activity (3) Created a chemical repository of small molecules
+
+  Number articles publishing the project’s scientifiFive [21,22,38–40]
+  Evaluations/audits:                               None known
+
+
+  doi:10.1371/journal.pntd.0001827.t002
+
+    websites. We will call this the ‘‘CSIR OSDD website’’ from           5. The results are made available on Sysborg for the community
+
+    now forward.                                                           to review. Members provide input on project monitoring and
+    An online collaboration forum (http://sysborg2.osdd.net)               quality control.
+ N
+    requiring a username and password to access any content.             6. An unstated, but practiced, next step is that the results are
+    This includes pages to enter and view ideas, projects,                 published in a peer-reviewed journal.
+    laboratory notebooks and documents. A project management
+                                                                          Step 0 - Logging onto the website.      Before an individual can
+    system allows members to track tasks and progress. A forum
+    tracks all comments. A resources page allows participants to        browse Sysborg, he/she must register and await an automatically
+                                                                        generated password to log on. However, with these details a user
+    request new biological or chemical materials as well as             can only access the social functions of the website, not any of the
+    financing. A community page allows members to group into
+    activity-related communities. Members can check that they           project data. The e-mail states, ‘‘Please note that the team will verify your
+                                                                        details and it takes approximately 2–3 working days to assign you necessary
+    have received due credit on an attribution page. An eLearning       permissions to access the portal content.’’ Once these permissions are
+    page links members to online tutorials to assist them with their
+    contributions. There is also social networking functions –          granted the user may access the majority of functionality within
+                                                                        Sysborg.
+    messaging, linking with friends, blogging and a calendar. We          Step 1 - Posting a project or an idea to Sysborg.          As of
+    will call this website ‘‘Sysborg’’ from now forward. This
+    website replaced a previous wiki-style website in 2010. The         November 30, 2011 there were 52 ideas and 139 projects posted
+                                                                        on Sysborg, although the reporting section of Sysborg states that
+    content from this initial website is no longer accessible/          there are 99 ideas and 523 projects. We are uncertain if this means
+    viewable. Users have expressed that the new Sysborg website is
+    more difficult to navigate and has technical problems. CSIR         that some content is hidden or that the reporting system is in error.
+                                                                          Projects typically include a problem description and work plan.
+    OSDD is working on improving the website based upon the             Most projects (92% as of December 6, 2011) have designated a
+    users’ feedback.
+                                                                        project manager. There are on average two members per project,
+ N  The publicly-available CRDD web portal (http://crdd.osdd.           although 45% of projects have no project members. Projects may
+    net/) provides access to numerous drug discovery computing          be associated with comments, ideas, laboratory notebooks or other
+    tools throughout the phases of drug discovery (including target
+                                                                        projects. There is no status associated with a project so it is unclear
+    identification, virtual screening and drug design) as well as the   if a project is pending, in progress or completed. There is a link
+    OSDD Chemical Database.                                             within each project to a project management system, but this
+
+ N  Several publicly-available forums (http://groups.google.com/        system seems not to be in use.
+    group/osdd-public, http://osddnews.blogspot.com/, http://             Step 2 - Project review.     The second procedural step is that
+    scienceopenscience.blogspot.com/, http://twitter.com/osdd)          the community reviews the project. This appears to happen rarely
+
+    which are used for general (non-task-related) discussions.          on Sysborg (however, the CSIR OSDD project management team
+                                                                        has informed us that many of the existing projects were reviewed
+                                                                        in the previous website but this review has not been migrated to
+
+Process                                                                 Sysborg). Out of 139 projects, 80 (58%) had no comments
+   According to a description of the project [24], the workflow         associated with them. Ten projects (7%) had three or more
+                                                                        comments (with a median of four comments but one project with
+follows a standard process comprised of the following steps:
+                                                                        34 comments).
+ 1. Projects or ideas are posted by any community member on               Step 3 - Secure funding.       The third step is that a project
+                                                                        manager will take responsibility for the project and secure any
+   Sysborg.
+ 2. The community then reviews the project/idea.                        necessary funding from CSIR OSDD. From the CSIR OSDD
+                                                                        website it appears that named institutions have responsibility for
+ 3. A principal investigator (mostly experienced scientists) will take  tasks within the drug discovery process, e.g. National JALMA
+   responsibility for the project/idea and secure any necessary         Institute for Leprosy & Other Mycobacterial Diseases has
+   funding from CSIR OSDD.
+                                                                        responsibility for identifying drug targets through biological
+ 4. The community collaborates on the project and produces              repositories and strains, the Institute of Genomics and Integrative
+   results (typically in the form of laboratory notebooks).             Biology in Delhi has responsibility for identifying drug targets
+
+
+
+PLOS Neglected Tropical Diseases | www.plosntds.org                  5                       September 2012 | Volume 6 | Issue 9 | e1827
+                                                                                                  Open Source Drug Discovery in Practice
+
+
+
+through Mycobacterium tuberculosis annotation, etc., although other   camp were filmed and placed on YouTube [36]. Additionally a
+
+institutions are encouraged to participate [18].                      large amount of training materials have been made available on
+  Before funding may be secured, a project must be peer               Sysborg, in YouTube and a telephone-based help desk has also
+reviewed. After all questions from the peer-review have been          been set up [26].
+
+answered, the project and its budget are reviewed by a committee         Project managers are not only responsible for recruiting
+of three specified individuals. If the committee recommends the       contributors but also creating assignments (sometimes with
+budget, the funds are released [25]. This peer review and approval    deadlines), giving instruction, ensuring that the necessary facilities
+
+process is rarely visible in Sysborg; we found only two examples      and materials are present, performing quality assurance, and
+where all activities were visible [26,27].                            following up that assignments are received [37]. Laboratory
+  There is also an automated resources request process which          notebooks contain the data for all laboratory tasks. There were
+
+includes cash requests among other resources (e.g. genomic DNA        363 laboratory notebooks as of November 30, 2011. These
+materials). This process appears to be rarely used.                   notebooks were largely consolidated to a few projects; five projects
+  Step 4 - Attracting contributors and collaborating.        The      had three or more lab notebooks with one project having 119.
+                                                                      Most projects (n=110 or 79%) had no associated laboratory
+fourth step is that the community collaborates on the project and
+produces results. As mentioned above, CSIR OSDD partners with         notebooks.
+institutions that have specific responsibilities. Eight CSIR India       According to an interviewee, after each activity is completed, a
+                                                                      group meeting is held either face-to-face or via Skype to go
+laboratories and 36 Indian universities and academic institutes
+[28] were selected through a screening process including on-site      through the results and finalize the data. The final results are then
+inspections [29]. Upon selection, it appears that the institutions    posted to Sysborg. This may explain why 95% of all laboratory
+                                                                      notebooks have no associated comments.
+receive funding to cover the costs of equipment, chemicals and
+consumables for CSIR OSDD contributors [30].                            Step 5 - Peer-review of results.     Results posted to Sysborg
+  Researchers from these institutions become project managers,        are to be reviewed by the community as a part of quality control.
+                                                                      The CSIR OSDD website states that all project managers report
+leading and organizing activities. The Project Director contacts
+project managers directly to instigate new activities, or project     directly to the Project Director online, a core team meets monthly
+managers may suggest new activities. Students and other               and the chief mentor reviews the progress of the platform quarterly
+researchers are encouraged to participate through open calls for      along with the board of mentors [34]. We could find no evidence
+
+contributions. Students reported through the interviews hearing       on Sysborg of this review process.
+about CSIR OSDD through direct contact, the Internet and                Step 6 – Publishing.    Lastly, project results may be published
+word-of-mouth. Students also reported through the interviews that     in a peer-reviewed journal. Five articles [21,22,38–40] have been
+                                                                      published to date covering the results of the project’s collaborative
+they were highly motivated to help fellow Indians by finding cures
+for tuberculosis. Learning new skills was also a motivation.          tuberculosis drug discovery activities, four of these in 2011 alone, a
+  CSIR OSDD has published several articles detailing the aims of      significant achievement. CSIR OSDD has also published two
+                                                                      articles describing the CSIR OSDD process [31,32] and one
+the project [31,32], likely to draw attention to the project from
+other tuberculosis researchers. We were curious to know if            regarding tools [9]. The CSIR OSDD website also lists other
+tuberculosis researchers worldwide were aware of the project          scientific publications that have received funding from CSIR
+                                                                      OSDD but are not the result of project collaboration [41–43].
+and if they ever viewed the data. We surveyed the corresponding
+authors (n=298) of all articles contained within PubMed,
+published in the last year focused on either tuberculosis drug        Management of Intellectual Property
+
+discovery or Mycobacterium tuberculosis genome. We received 61           No content may be viewed on Sysborg without first logging on.
+responses (20% response rate). Thirteen authors (or 21%) were         When registering, the user must accept the terms and conditions of
+aware of TBrowse (the publicly-available integrative genomics         the CSIR OSDD license, a non-standard license written
+                                                                      specifically for the project [44]. The license affirms that CSIR
+map) and of those seven had viewed TBrowse.
+  As of February 16, 2012 there were 5,444 users registered in        OSDD owns all content posted to Sysborg (13.1). Therefore,
+Sysborg. Of these, 451 had accrued points (as reported by CSIR        content is not a part of the public domain. All improvements based
+                                                                      upon data within Sysborg must be contributed back to CSIR
+OSDD management). Points are awarded after the completion of
+a specified task [33], however we could not find any data             OSDD under a worldwide royalty-free non-exclusive license
+specifying how the point value is calculated. By accruing points,     (13.5–6). There is no stipulation in the license that CSIR OSDD
+contributors can achieve higher levels of membership which gives      must adopt non-exclusive licensing of the resulting products or any
+
+the contributor greater rights, privileges and responsibilities [34]. stipulations regarding the final price of these products. However,
+In some instances, contributors can receive monetary rewards          the mission states clearly that they aim ‘‘to make available affordable
+[33].                                                                 medicines to every single person of the developing world.’’
+
+  Students may need to apply to contribute to resource-
+constrained activities. For example, in one project students have     Progress
+applied and been selected to utilize grid-based supercomputing           CSIR OSDD has mapped out a process for discovering and
+
+facilities from their desktops. Before students are given access to   developing new tuberculosis medicines. They have 54 molecules in
+this facility, they must complete an application form and affidavit   the pipeline, including two candidates in the hit to lead phase
+stating that ‘‘all activities performed, including raw data and resultwhich are being optimized in collaboration with private partners
+
+be the property of the [CSIR OSDD] community to be shared with the    (which seem to follow the same overall process) [24]. They have
+community and covered under the [CSIR OSDD] License Terms and         instigated talks with pharmaceutical industry to perform the
+conditions of use.’’ [35] This application form is sent via e-mail to preclinical and clinical trials. Their approach to clinical trials is to
+
+CSIR OSDD Technical Committee for approval with a copy sent           build facilities specifically for clinical trials within publicly-funded
+via surface mail. To train the students in using this functionality, ahospitals. These trials would be conducted by CSIR OSDD in
+three-day boot camp was held in Calicut for about 35 participants     combination with the hospital personnel and experts from private
+
+where travel costs were paid for. The presentations from this boot    pharmaceutical companies. All data will be made available
+
+
+PLOS Neglected Tropical Diseases | www.plosntds.org                6                       September 2012 | Volume 6 | Issue 9 | e1827
+                                                                                                     Open Source Drug Discovery in Practice
+
+
+
+(presumably anonymized) [24]. We found no evidence of clinical          the funding of the TSLS project in 2008 by both WHO and the
+trials on Sysborg so we presume that these are planning activities      Australian government. The TSLS project completed this task in
+in anticipation of forthcoming trials.                                  2011.
+
+                                                                          To perform these accomplishments, TSLS has made use of web
+Funding                                                                 tools that were already available such as The Synaptic Leap
+
+   The government of India has committed to grant CSIR OSDD             website and an open source online laboratory notebook [49]. The
+INR 1.5 billion (or about US $35 million) of which US $12 million       laboratory notebook was chosen because it allowed contributors to
+has already been paid out [33]. These funds pay the administrative      enter scientific data more easily than The Synaptic Leap website.
+
+costs of the project including equipment and material costs at the
+partner institutions and the salaries of a few contributors. Most       Process
+
+work is done by unpaid volunteers. However, the project does hire         Dr. Matthew Todd became the leader of the schistosomiasis
+individuals at times to perform specific tasks. For example, 20         project in 2006. He was already working on the problem of the
+female scientists are planned (or have been) hired to work from         production of praziquantel as a single enantiomer but wanted the
+
+their homes for four hours a day [30]. Expert mentors are paid to       project to go faster than typical academic speed. He thought that
+attend meetings [30]. Vacancies are regularly posted on the             open source might be a solution to attract industry participation.
+website for paid positions such as project assistants [45].
+                                                                        The project was first discussed on the TSLS website in January
+                                                                        2006 [50]. However, even though Todd regularly updated the
+The Synaptic Leap’s Schistosomiasis Project                             website, there was little external interest shown in the project.
+
+   The Synaptic Leap website was launched in 2006 with an aim           From 2006 to 2008 there were 35 postings initiated on the website,
+‘‘to provide a network of online research communities that connect and enableonly four of these coming from individuals other than Todd.
+open source biomedical research’’ [46]. It was launched with four pilot   In 2008 the project received their funding (although contracting
+
+disease research areas: malaria, schistosomiasis, toxoplasma and        delays resulted in the laboratory work actually not starting until
+tuberculosis. Each area had a project leader with the responsibility    January 2010). This allowed the project to hire a full-time
+
+of gathering and motivating international researchers to contribute     postdoctoral researcher and cover laboratory expenses for Ph.D.
+to the Synaptic Leap community by sharing results, giving               students, mentored by Todd at the University of Sydney. This
+feedback and possibly undertaking new research tasks. Since             gave the project some needed momentum. From project initiation
+
+launch, the malaria, toxoplasma and tuberculosis communities            in 2006 until project funding in the beginning of 2010, 10% of
+have been relatively silent. However, the schistosomiasis commu-        new postings were initiated from external contributors (those not a
+nity has consistently utilized the website to share findings, discuss   part of Todd’s team at the University of Sydney). After the funding
+
+research results and identify new, necessary research tasks (see        was received 30% of postings were made by external contributors.
+Table 3).                                                               However, comments posted by external contributors did not vary
+                                                                        significantly (increasing only from 50% to 53%). At the time of
+
+Accomplishments                                                         funding, significant external marketing efforts were also undertak-
+   The aim of the TSLS project was a well-defined drug                  en (see below).
+
+development task – to generate the off-patent schistosomiasis             The data from the on-going experiments were regularly posted
+drug, praziquantel, as a single enantiomer. This would remove the       in the online publicly-available laboratory notebook [49] and
+bitter taste of the original drug making it more palatable for          summarized on The Synaptic Leap, without peer review. Todd
+
+children as well as remove some of its side effects. This has been      did not want to slow the speed of sharing the data by
+needed for years but companies would not invest, likely because         implementing an offline peer review process. He expected project
+                                                                        contributors to give the researchers feedback, and this turned out
+the innovation was not suitably lucrative since an inexpensive drug
+already existed. Additionally the patent on praziquantel expired in     to be the case. Key findings have received as many as 14
+the 1990s [47], and the needed change was likely not sufficiently       comments; entries average 1.5 comments each, with 50% of all
+
+novel to warrant a new patent. The optimization of praziquantel         new postings receiving comments. This process has been an
+had long been a high priority of WHO which was affirmed in              adjustment for some of the contributors. There were concerns that
+TDR’s (Special Programme for Research & Training in Tropical            mistakes would be published with name attribution. One
+
+Diseases) Scientific Working Group on Schistosomiasis in 2005           researcher stated that he used more time to check his results
+and repeated in its Business Plan of 2008–2013. [48] This led to        before publishing them online. Ultimately, Todd expected peer
+
+
+  Table 3. The Synaptic Leap’s Schistosomiasis Project at a glance.
+
+
+
+  Focus:                                   Development of a low-cost synthesis of an existing schistosomiasis drug, praziquantel
+
+  Year started:                            2006
+
+  Funding:                                 AUS$315,000 (,US $330,000) Australian government and WHO
+
+  Number of contributors:                  37
+  License:                                 Scientific discoveries in the public domain and copyright according to the Creative Commons Attribution 2.5 License
+
+  Achievements to date:                    Produced the schistosomiasis drug, praziquantel, in enantiopure form
+  Number articles publishing the project’s One [52]
+  scientific findings:
+
+  Evaluations/audits to date:              None known
+
+  doi:10.1371/journal.pntd.0001827.t003
+
+
+
+PLOS Neglected Tropical Diseases | www.plosntds.org                  7                       September 2012 | Volume 6 | Issue 9 | e1827
+                                                                                                  Open Source Drug Discovery in Practice
+
+
+
+review to be done through publishing, and two articles summa-         drug to commercial quantities and any regulatory approvals
+
+rizing the results of this project have been published in September   needed would be performed externally by a pharmaceutical
+and October 2011 (one with a focus on the project results and one     manufacturer in partnership with WHO.
+focused on the process) [51,52].
+
+  In order to make contributions as easy as possible, Todd            Funding
+regularly posted an update on TSLS detailing progress and                Funding was important to the project because it allowed for the
+descriptions of the next tasks needed [53,54]. This minimized the     recruitment of a full-time postdoctoral researcher whose postings
+time that potential contributors needed to sift through backdated
+                                                                      provided fresh, regular content giving the project momentum. The
+postings to come up to speed. It also avoided duplication of efforts. grant money paid the salary of the postdoctoral student, all
+The project did not have an official project plan or deadlines, but   administrative supplies and covered the cost of shipping the
+it was time-constrained by funding parameters (three years).
+                                                                      samples to any interested laboratory. Contributing organizations
+  Even after the postdoctoral researcher was hired to contribute,     did not receive any monies from the project.
+there was a hope that greater external interest could be raised for
+the project. Todd began giving speeches including a Google
+                                                                      Comparative Analysis: CSIR OSDD and TSLS
+TechTalk in April 2010 [55]. After each article, blog and                Firstly, we would like to acknowledge that both cases have made
+presentation, the project experienced significant increases in
+website traffic [51]. It was also decided to reach out to a closed    great accomplishments in meeting their aims. CSIR OSDD has
+chemistry networking forum on LinkedIn. This positively resulted      persuaded a large number of volunteers to contribute and
+                                                                      published four articles in 2011, a significant accomplishment for
+in 20 comments from 11 different scientists, new to the project,
+and four private e-mails [51]. One of the respondents was a Dutch     a group of volunteers. TSLS has gathered contributors from
+contract research organization interested in participating in the     around the globe, both from academia and the private sector and
+                                                                      has managed to fulfill its goal.
+project [51]. This was an important milestone for the project            The two cases operate very differently and differ greatly in
+because the CRO had the equipment and expertise to perform
+some of the necessary tasks very quickly (they completed tasks in     magnitude. CSIR OSDD is a vast project, encouraging interna-
+                                                                      tional collaboration on its website, but in actuality, geared
+weeks as opposed to the months it would probably have otherwise       principally towards Indian researchers and students. The funding
+taken). This industry-academic support enabled the project to
+complete the project before the funding ran out.                      from the Indian government applies only to activities within India
+  Ninety-seven (97) individuals have registered on the Synaptic       [24]. There are many workshops and face-to-face meetings in
+                                                                      India as well as private e-mail correspondence between teacher
+Leap indicating that they are actively participating or are
+interested in participating in research for schistosomiasis. Thirty-  and pupil. This, in essence, translates into an Indian-centric
+seven (37) contributed to the TSLS project. The contributors          project. TSLS, on the other hand, has attracted contributors
+                                                                      internationally, albeit substantially fewer than CSIR OSDD, with
+include six members of Todd’s team, four industry representatives,
+15 academics/researchers, one retiree, two informatics profession-    a variety of motivations. Both have obtained funding used to pay
+als, and 9 of unknown affiliation. Contributors were based in         for access to facilities, physical resources and, at times, labor costs.
+                                                                      TSLS releases its results into the public domain, where as CSIR
+Africa, Europe, Oceania and North America. Only one postdoc-
+toral researcher from the University of Sydney was paid               OSDD asserts ownership over its results.
+specifically to work on the project. Motivations for participation       If we return to R4D’s definition of open source – the application
+included accelerating own research, intellectual stimulation,         of open access, open collaboration and open rules – it is useful to
+
+signaling abilities and a belief in the benefits of open collaboration.nalyze each case’s adherence to the definition in order to
+Their contributions ranged from one-off comments regarding the        understand the impact of this adherence (see Table 4).
+project to substantial postings regarding laboratory results.            CSIR OSDD’s scientific research results are placed on Sysborg
+
+                                                                      which requires a user to log on before any content may be viewed.
+Management of Intellectual Property                                   The content is not searchable through general search engines like
+  TSLS places all scientific discoveries in the public domain,        Google. Technically, the content is open access because a
+
+therefore, obviating the ability to patent them. All of the website   username and password are eventually granted to users allowing
+content is copyright protected according to the Creative Com-         them to view the data free-of-charge. However, we believe that
+mons Attribution 2.5 License unless otherwise stipulated [56]. All    this tight control of the data is actually a barrier to entry. Most
+                                                                      potential contributors will want to browse the website before
+content may be viewed without a username and password. If an
+individual wants to make a posting on the Synaptic Leap website,      contributing, and they may lose interest in the two days or more
+he/she can either leave a comment as a guest or as a registered       that it takes to receive access to the full content. Indeed, a few
+user. A guest must supply a valid e-mail address which is not         TSLS contributors reported through the interviews that they had
+
+viewable with the comment. Registering requires a username and        tried to access CSIR OSDD and had given up in frustration. CSIR
+e-mail address. An automated system sends a log-on password.          OSDD’ process limits contributors to only those who have a strong
+There is no requirement to accept a license at time of registration.  motivation to contribute.
+
+  Intellectual property does not play a major role in this project       CSIR OSDD has assigned certain tasks to partner institutions.
+since a version of praziquantel has been in the public domain for     This is likely a practical solution to achieving progress. These
+almost two decades.                                                   institutions receive funding and have commitments back to CSIR
+
+                                                                      OSDD. They must follow an agreed structure and process. Other
+Progress                                                              institutions or individuals can no doubt assist in any activity.
+  The scope of this project was limited to a specific problem.        However, since much of the process is opaque (through face-to-face
+
+Once they managed to generate a single enantiomer of                  meetings, Skype or private e-mail) and not reported back through
+praziquantel, the expectation was that the project would be           Sysborg, open collaboration is difficult. This opaqueness does not
+complete (although the project continues looking at more elegant      promote cross-organizational or geographical linkages. Until the
+
+solutions to the problem). The next steps of scaling up the modified  processes and decision-making are made more transparent and
+
+
+PLOS Neglected Tropical Diseases | www.plosntds.org                8                       September 2012 | Volume 6 | Issue 9 | e1827
+                                                                                                   Open Source Drug Discovery in Practice
+
+
+
+  Table 4. Are the cases open source?
+
+
+
+                             Open Access                                    Open Collaboration                Open Rules
+
+  CSIR OSDD                  Yes, but only with significant effort          No                                No
+  TSLS                       Yes                                            Yes                               Yes
+
+
+  doi:10.1371/journal.pntd.0001827.t004
+
+
+easier to follow on Sysborg, CSIR OSDD does not fit the definition       TSLS has achieved all of the open source advantages. Its
+for open collaboration.                                                content is transparently verified on the website with the additional
+  CSIR OSDD’s license awards the project ownership over all            peer review of publishing in top-ranked journals. The data forms a
+
+data. Data may not be used by other entities without entering into     knowledge commons. Global collaboration was achieved between
+a contract with CSIR OSDD. The license may also be considered          representatives from both academia and industry. The grant
+viral since all improvements based upon CSIR OSDD data are to          funding and volunteer contributions of industry significantly sped
+
+be granted back to CSIR OSDD (i.e. future generations of               up the progress of the project, achieving cost savings.
+improvements are subject to the CSIR OSDD license if any of the
+original CSIR OSDD data was used). This may make industry shy          Discussion
+
+away from participating in the project. CSIR OSDD has taken a
+very protective approach of its data likely so that it is not            These two cases demonstrate that drug innovation can be
+expropriated and exploited by a third party. This is understand-       performed using an open source approach, albeit in very different
+                                                                       ways and not necessarily in strict adherence to the definition of
+able considering the potential commercial value of new tubercu-
+losis medicines. However, CSIR OSDD’s license does therefore           open source drug discovery. Adherence to the definition is not
+                                                                       necessarily that important. As a crowdsourced project, CSIR
+not mandate ‘‘openness’’. CSIR OSDD states that the project will       OSDD has still achieved great success by persuading volunteers to
+shepherd its new products up through regulatory approval and
+then make them available to the generic drug industry without any      perform high quality research at low cost, which, of course, is the
+                                                                       goal of open source collaboration. The definition is still useful
+exclusivity [24]. It is unclear whether they intend to patent the      though, to evaluate how different projects approach transparency,
+drugs and offer a non-exclusive license to generic manufacturers,
+utilize the public domain or an alternative intellectual property      collaboration and access to results, but not necessary to spur on
+                                                                       high quality, low cost drug discovery. The cases do point to three
+strategy. Perhaps they have not yet decided themselves. The            common critical success factors: clearly defined entry points,
+license language, however, does not mandate openness.
+  We believe that rather than a strictly defined open source           transparency and funding.
+                                                                         Both projects attracted volunteers by publicizing the respective
+project, CSIR OSDD is actually a highly successful crowdsourcing       projects through descriptive articles in academic journals and
+project, using volunteers to perform specified and structured tasks.
+They have achieved most of the advantages of open source               utilizing social media and networks. CSIR OSDD has also
+                                                                       effectively paired up with Indian universities and colleges,
+identified by R4D. The data results are verified (although offline),   incentivizing students to volunteer as parts of classroom assign-
+but the project’s impressive publishing demonstrates that its work
+                                                                       ments or positioning participation as valuable hands-on experi-
+has passed peer review muster. The contributions of 400+               ence. They have also built in an element of patriotism, linking
+volunteers result in a significant cost savings. Undoubtedly, any      finding cures for tuberculosis as an Indian responsibility due to the
+medicines that they develop will enter the market at a low price
+                                                                       high prevalence of tuberculosis in India. This patriotic effect is
+point. They have not, however, succeeded in creating open              reinforced through project marketing efforts, like the project’s
+collaboration or a public commons of knowledge. They have              music video [57]. The entry point into CSIR OSDD is through
+created a proprietary knowledge repository.
+                                                                       the classroom which is likely to limit international participation in
+  TSLS is largely in adherence to the open source drug discovery       the project. Rather TSLS’ entry point is through the website, using
+definition. All of TSLS’ data are publicly-available without a         frequent status updates to pinpoint exactly the tasks currently
+password. Searches within Google for related TSLS content return
+                                                                       needed.
+all of TSLS’ related websites. This makes it easy for potential          The two cases approach collaboration and progress in different
+contributors to firstly find the project and then browse the content   ways. TSLS takes a very transparent approach, posting raw data,
+to get a feeling for the project. However, TSLS’ website could also
+                                                                       containing the discussion to publicly-available websites and
+be improved. Postings are not necessarily in chronological order       placing results in the public domain. CSIR OSDD takes a more
+and there is no easy method to see all postings related to one         cautious approach with a significant amount of work being
+disease area. Thanks to TSLS’ project manager’s continuous
+                                                                       performed through face-to-face or Skype meetings, greater use of
+efforts to summarize the current state of play, these inconveniences   private e-mail exchanges and a license that emphasizes mostly
+are minimized.                                                         trust in the project’s mission rather than legally-binding clauses
+
+  TSLS’ websites allow for open collaboration across organiza-         stipulating open access to the data.
+tional and geographical boundaries. It is stressed that e-mails          Funding was an absolute necessity for both projects. Without it,
+should be avoided. Raw data is placed directly on the website          they would not have been able to access the laboratories and
+
+awaiting virtual peer review. Observers can easily follow the          physical supplies needed for drug innovation, hire the minimum
+threads of the process.                                                number of employees needed to give the projects their initial
+  TSLS uses well known legal concepts with the public domain           momentum, or perform routine administrative functions (such as
+
+and a creative commons license. Both mandate ‘‘openness’’.             website hosting). How much savings each project has achieved
+Results may be utilized by third parties without contracts or          through the use of volunteers is uncertain. The Global Alliance for
+royalties.                                                             TB Drug Development calculated in 2001 that the estimated costs
+
+
+
+PLOS Neglected Tropical Diseases | www.plosntds.org                 9                       September 2012 | Volume 6 | Issue 9 | e1827
+                                                                                                      Open Source Drug Discovery in Practice
+
+
+
+of discovering and developing a new anti-tuberculosis drug               examining the content on the websites including interactions and
+(including the costs of failure) where between US$115 million            self-reported data. We also submitted our results to the project
+
+and US$240 million [58]. CSIR OSDD has about US$35 million               manager of each of the two cases and incorporated their feedback
+at its disposal but they are still in early days, having yet to embark   into the final paper.
+
+upon the most expensive part of the process, clinical trials. Maurer       Are CSIR OSDD and TSLS model cases for open source drug
+[59] in 2005 estimated that lead compound optimization costs             discovery? It is too early to tell. Since there are so few instances of
+between millions to tens of millions of US dollars. The chemists         open source drug discovery, the model is still being developed,
+
+from TSLS achieved their result with about US$330,000.                   most recently with an interesting new joint project between TSL
+However, they were working with a known, effective lead                  and CSIR OSDD with a focus on malaria initiated in 2011 [61].
+
+compound with a specific problem.                                        More modeling is still needed, especially in evaluating the
+   The results of this case study cannot be generalized to all open      potential of hybrid models that combine open source with
+source drug discovery projects since we only examined two,               standard intellectual property mechanisms like data exclusivity
+
+separate efforts. However, we believe that our findings are relevant     and secrecy. Interesting examples (like the public-private partner-
+to other projects interested in the open source model. Firstly, the      ship, the Archipelago to Proof of Clinical Mechanism [62]) are
+
+cases give an indication of the number of participants necessary to      combining these approaches in the areas of neurology and
+achieve different drug discovery tasks. TSLS managed to complete         oncology.
+its task with a relatively modest 37 individuals, with only a few of       The recently released report of WHO’s Consultative Expert
+
+these dedicating large amounts of time to the project. On the other      Working Group on R&D Financing and Coordination [5] has
+hand CSIR OSDD will require hundreds of contributors to                  called for greater use of ‘‘open knowledge innovation’’. This
+
+discover and develop a new tuberculosis medicine.                        concept is more general than open source and groups open source
+   The market realities of the potential drugs may also play a role      drug discovery with equitable licensing, patent pools and prizes (in
+in a project’s adherence to the strict definition of open source.        other words, creating a grouping of the drug discovery and access
+
+CSIR OSDD has reasonable grounds for protecting their data               business models with a primary focus of sharing of open
+through a gated community and a protective license, namely that          knowledge, particularly to meet the needs of low-income
+
+new tuberculosis products offer private companies with a profit          countries). As organizations consider acting on the expert group’s
+potential in both developed and developing countries, especially         recommendations, and possibly funding organizations begin
+lucrative if they have not had to invest in R&D. The public              requiring a certain level of adherence to the open source model,
+
+domain is not actually an intellectual property right but the absence    the model will become more mainstream, giving a new level of
+of one. If a patent were to be granted to others on the knowledge        transparency and access to the data needed to more efficiently
+
+developed by CSIR OSDD, the only way to defend against that              finding cures for neglected diseases.
+claim would be a costly court trial. One can therefore argue that
+CSIR OSDD has utilized a protective license as a negative
+                                                                         Supporting Information
+measure to safeguard others trying to patent the knowledge. In
+contrast the risk that TSLS’ version of praziquantel will be             Annex S1    Interview template.
+                                                                         (DOC)
+expropriated and patented is next to null since schistosomiasis is
+only endemic to developing countries and the generic form of             Annex S2     A survey of potential members of the CSIR OSDD
+praziquantel is already available cheaply.
+                                                                         project.
+   Unfortunately our case study is weakened by a rather low              (DOC)
+interview response rate from the CSIR OSDD project. We
+
+surmise that our timing was unlucky as an article critical of the        Acknowledgments
+project appeared just before we started recruitment [60]. This
+paper criticized the project for not publishing its first results in a   The authors would like to acknowledge the contributions of Annette
+                                                                         Alstadsæter in providing feedback on the drafts of this paper.
+peer-reviewed journal. A few potential interviewees expressed
+skepticism that we did not harbor an ulterior, negative motive. We
+                                                                         Author Contributions
+debated the benefits of offering a cash prize to gather additional
+respondents but decided that this may only fuel the skepticism           Conceived and designed the experiments: CA JAR. Performed the
+
+surrounding our study. We attempted to compensate by closely             experiments: CA. Analyzed the data: CA JAR. Wrote the paper: CA JAR.
+
+
+
+References
+ 1. Trouiller P, Olliaro P, Torreele E, Orbinski J, Laing R, et al. (2002)7. Singh S (2008) India takes an open source approach to drug discovery. Cell 133:
+    development for neglected diseases: a deficient market and a public-health policy
+
+    failure. The Lancet 359: 2188–2194.                                   8. Masum H, Schroeder K, Khan M, Daar A (2011) Open Source Biotechnology
+ 2. Currat LJ, Hyder AA, Nchinda TC, Carey-Bumgarner E (1999) The 10/90      Platforms for Global Health and Development: Two Case Studies. Information
+    report on health research 1999. Global Forum for Health Research. http://Technologies & International Development 7: pp–61.
+    www.isn.ethz.ch/isn/Digital-Library/Publications/Detail/?ots591 = 0c549. Ekins S, Hupcey MAZ, Williams AJ (2011) Collaborative computational
+    1e9c-be1e-2c24-a6a8c7060233&lng =en&id =20437                            technologies for biomedical research. Hoboken: John Wiley & Sons, Inc.
+ 3. The Commission on Health Research for Development (1990) Health Research:548 p.
+    Essential Link to Equity in Development. http://www.hsph.harvard.edu/10. Masum H, Harris R (2011) Open source for neglected diseases: Magic bullet or
+    health-research/files/essentiallinktoequityindevelopment.pdf             mirage. Results for Development Institute. http://healthresearchpolicy.org/
+ 4. World Health Organization (1996) Ad Hoc Committee on Health Research     assessments/open-source-neglected-diseases-magic-bullet-or-mirage
+    Relating to Future Intervention Options, Investing in health research andOpen Source Initiative (2012) The Open Source Definition. http://www.
+                                                                             opensource.org/docs/osd.
+    development.
+ 5. World Health Organization (2012) Consultative Expert Working Group on12. Wikipedia (2012) Open access. http://en.wikipedia.org/wiki/Open_access
+    Research and Development: Financing and Coordination (CEWG). http:// 13. Chesbrough HW (2003) Open innovation: The new imperative for creating and
+    www.who.int/phi/news/cewg_2011/en/index.html.                            profiting from technology. Boston: Harvard Business Press. 272 p.
+ 6. Maurer SM, Rai A, Sali A (2004) Finding cures for tropical diseases: 14. Andrew Jack (2011 December 5) AstraZeneca opens door on research. The
+    source an answer? PLoS Medicine 1: e56.                                  Financial Times.
+
+
+
+PLOS Neglected Tropical Diseases | www.plosntds.org                  10                       September 2012 | Volume 6 | Issue 9 | e1827
+                                                                                                                       Open Source Drug Discovery in Practice
+
+
+
+
+15. Wikipedia (2012) Crowdsourcing         . http://en.wikipedia.org/wiki/           39. Kelkar DS, Kumar D, Kumar P, Balakrishnan L, Muthusamy B, et al. (2011)
+     Crowdsourcing.                                                                       Proteogenomic analysis of Mycobacterium tuberculosis by high resolution mass
+16. The Economist (2010 August 5) Game not over. The Economist.                           spectrometry. Molecular & Cellular Proteomics 10: M111.011627.
+
+17. Yin R (2009) Case Study Research: Design and Methods (Applied Social             40. Singh H, Chauhan JS, Gromiha MM, Raghava GPS (2012) ccPDB: compilation
+     Research Methods). Thousand Oaks: Sage Publications. 240 p.                          and creation of data sets from Protein Data Bank. Nucleic Acids Research 40:
+18. The Open Source Drug Discovery Initiative (2011) Tuberculosis Pipeline. www.
+                                                                                          D486–D489.
+     osdd.net/tb-pipeline (the link is no longer accessible).                        41. Bhat AG, Vashisht R, Chandra N (2010) Modeling metabolic adjustment in
+19. Cole ST, Brosch R, Parkhill J, Garnier T, Churcher C., et al. (1998)                  Mycobacterium tuberculosis upon treatment with isoniazid. Systems and
+     Deciphering the biology of Mycobacterium tuberculosis from the complete
+                                                                                          Synthetic Biology 4: 299–309.
+     genome sequence. Nature 393 (6685): 537–44.                                     42. Mathew R, Kruthiventi AK, Prasad JV, Kumar SP, Srinu G, et al. (2010)
+20. Wikipedia (2012) Digital curation. http://en.wikipedia.org/wiki/Digital_              Inhibition of mycobacterial growth by plumbagin derivatives. Chemical Biology
+     curation.
+                                                                                          & Drug Design 76: 34–42.
+21. Bhardwaj A, Bhartiya D, Kumar N, Scaria V (2009) TBrowse: An integrative         43. Sharma S, Kumar M, Sharma S, Nargotra A, Koul S, et al. (2010) Piperine as
+     genomics map of Mycobacterium tuberculosis. Tuberculosis 89: 386–387.                an inhibitor of Rv1258c, a putative multidrug efflux pump of Mycobacterium
+22. Periwal V, Rajappan JK (2011) Predictive models for anti-tubercular molecules
+                                                                                          tuberculosis. Journal of Antimicrobial Chemotherapy 65: 1694–1701.
+     using machine learning on high-throughput biological screening datasets. BMC    44. The Open Source Drug Discovery Initiative (2012) OSDD License. http://
+     research notes 4: 504.
+23. Arun Sharma, Biju Surya (2012) OSDDChem: An OSDD Chemical Database.                   www.osdd.net/how-osdd-works/osdd-funding-policies/OSDDlicence.pdf.
+     http://crdd.osdd.net/osddchem/.                                                 45. Scaria V (2011) Research Opportunities in Computational Biology at OSDD
+                                                                                          OpenLab, Delhi. Open Source Drug Discovery. http://www.osdd.net/news-
+24. Open Source Drug Discovery Initiative (2011) Open Source Drug Discovery
+     Submission to WHO CEWG. http://www.who.int/phi/news/cewg_                            updates/researchopportunitiesincomputationalbiologyatosddopenlabdelhi (the
+     submission_csir_ind.pdf.                                                             link no longer accessible).
+                                                                                     46. Taylor G (2006) About The Synaptic Leap. The Synaptic Leap. http://www.
+25. The Open Source Drug Discovery Initiative (2012) OSDD Funding Policies.
+     http://www.osdd.net/how-osdd-works/osdd-funding-policies.                            thesynapticleap.org/about.
+26. Lynn A (2011) Scientific Review. Open Source Drug Discovery. http://             47. Reich M (1998) International Strategies for Tropical Disease Treatments -
+                                                                                          Experiences with Praziquantel. EDM Research Series No. 026.
+     sysborg2.osdd.net/group/sysborgtb/forum/-/message_boards/message/
+     149997.                                                                         48. The World Health Organization. TDR Business Plan 2008–2013. www.who.
+27. Choudhary S (2011) Lipid Based Characterization Of MTb Resistant And                  int/tdr/documents/TDR-business-plan-2008.pdf
+
+     Sensitive Strains. Open Source Drug Discovery. http://sysborg2.osdd.net/        49. The Synaptic Leap Schistosomiasis Project (2012) ourExperiment. http://www.
+     group/sysborgtb/forum/-/message_boards/category/70768.                               ourexperiment.org/.
+28. The Open Source Drug Discovery Initiative (2012) Who We Are. http://www.         50. Todd M (2006 January) Schistosomiasis Research Community. http://www.
+
+     osdd.net/who-we-are.                                                                 thesynapticleap.org/schisto/community.
+29. Lynn A (2010) Project Review Discussion. Open Source Drug Discovery.             51. Woelfle M, Olliaro P, Todd MH (2011) Open science is a research accelerator.
+     http://sysborg2.osdd.net/group/sy    sborgtb/forum/-/message_boards/                 Nature Chemistry 3: 745–748.
+
+     message/17611.                                                                  52. Woelfle M, Seerden JP, de Gooijer J, Pouwer K, Olliaro P, Todd MH (2011)
+30. The Open Source Drug Discovery Initiative (2010) Funds from OSDD. http://             Resolution of praziquantel. PLoS Neglected Tropical Diseases 5: e1260.
+     sysborgtb.osdd.net/bin/view/OpenBookmarks/FundsFromOSDD (the link no
+                                                                                     53. Todd M (2011) Praziquantel Update January 25 2011. The Synaptic Leap.
+     longer accessible).                                                                  http://www.thesynapticleap.org/node/338.
+31. Bhardwaj A, Scaria V, Raghava GPS, Lynn AM, Chandra N, et al. (2011) Open        54. Todd M (2010) Praziquantel Update October 20th 2010. The Synaptic Leap.
+     source drug discovery-A new paradigm of collaborative research in tuberculosis
+                                                                                          http://www.thesynapticleap.org/node/331.
+     drug development. Tuberculosis 91 (5): 479–486.                                 55. Todd M (2010) Chemistry on the Web: How Can we Crowdsource Chemistry to
+32. Bhardwaj A, Scaria V, Patra D, Open Source Drug Discovery Consortium                  Solve Important Problems? You Tube. http://www.youtube.com/
+     (2011) Open Source Drug Discovery: A Global Collaborative Drug Discovery
+     Model for Tuberculosis. Science and Culture 1: 22–26.                                watch?v =yWnTJw042OM.
+                                                                                     56. Rai A (2006) Intellectual Property Guidelines. The Synaptic Leap. http://www.
+33. The Open Source Drug Discovery Initiative (2012) FAQ’s. http://www.osdd.
+     net/faq-s.                                                                           thesynapticleap.org/?q =ipguidelines.
+34. The Open Source Drug Discovery Initiative (2011) FAQ’s (older version).          57. The Open Source Drug Discovery Initiative (2012) OSDD Song. You Tube.
+                                                                                          http://www.youtube.com/watch?v =8DOAIiHfsjY.
+     http://www.osdd.net/faqs (the link is no longer accessible).
+35. The Open Source Drug Discovery Initiative (2010) Final list students selected for58. The Global Alliance for TB Drug Development (2001) The Economics of TB
+     cdac garuda supercomputing from chem i. http://sysborg2.osdd.net/group/              Drug Development. TB Alliance.
+                                                                                     59. Maurer S (2005) The right tool (s): designing cost-effective strategies for
+     sysborgtb/forum/-/message_boards/message/74009#_19_message_74009.
+36. The Open Source Drug Discovery Initiative (2011) OSDD, GARUDA Boot Camp               neglected disease research. Report to WHO Commission on Intellectual
+     formal Inauguration. http://www.yotuube.com/watch?v=bFOQwXYozvA.                     Property Rights, Innovation and Public Health.
+                                                                                     60. Jayaraman KS (2010) India’s tuberculosis genome project under fire. Nature
+37. Mukherjee K (2011) Who will do the pending job within two days? (Regarding
+     assignment-1). Open Source Drug Discovery. http://sysborg2.osdd.net/group/           News.
+     sysborgtb/forum/-/message_boards/message/121618.                                61. OpenWetWare (July 5, 2012) OSDDMalaria:GSK Arylpyrrole Series:Story so
+
+38. Anand P, Sankaran S, Mukherjee S, Yeturu K, Laskowski R, et al. (2011)                far. http://openwetware.org/wiki/OSDDMalaria:GSK_Arylpyrrole_
+     Structural Annotation of Mycobacterium tuberculosis Proteome. PLoS One 6:            Series:Story_so_far
+     e27044.                                                                         62. Sage Bionetworks (2012) Arch2POCM. http://sagebase.org/WP/arch/.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PLOS Neglected Tropical Diseases | www.plosntds.org                              11                           September 2012 | Volume 6 | Issue 9 | e1827

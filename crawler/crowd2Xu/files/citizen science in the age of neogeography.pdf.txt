@@ -1,0 +1,1596 @@
+                        Citizen Science in the Age of Neogeography:
+
+                 Utilizing Volunteered Geographic Information for
+
+
+                                              Environmental Monitoring
+
+
+                                               John Patrick Connors, Shufei Lei, and Maggi Kelly               †
+
+                                         School of Geographical Sciences and Urban Planning, Arizona State University
+                               Department of Environmental Sciences, Policy and Management, University of California, Berkeley
+
+
+                      The interface between neogeography and citizen science has great potential for environmental monitoring, but
+                      this nexus has been explored less often than each subject individually. In this article we review the emerging
+                      role of volunteered geographic information in citizen science and present a case study of an integrated tool set
+
+                      that engages multiple types of users (from targeted citizen-based observation networks, expert-driven focused
+                      monitoring, and opportunistic crowdsourcing efforts) in monitoring a forest disease in the western United States.
+                      We ﬁrst introduce the overall challenge of data collection in environmental monitoring projects and then discuss
+
+                      the literature surrounding an emergent integration of citizen science and volunteered geographical information.
+                      We next explore how these methods characterize and underpin knowledge discovery and how multimodal
+                      interaction is supported so that a large spectrum of contributors can be included. These concepts are summarized
+                      in a conceptual model that articulates the important gradients of Web-based environmental monitoring: the
+
+                      users, the interaction between users and data, and the types of information generated. Using this model, we
+                      critically examine OakMapper.org, a Web site created by the authors to collect and distribute spatial information
+                      related to the spread of a forest disease, and discuss many of the core issues and new challenges presented by
+
+                      the intersection of citizen science and volunteered geographic information in the context of environmental
+                      monitoring. We argue that environmental monitoring can beneﬁt from this synergy: The increased emphasis on
+                      adiversityofparticipantsinknowledgeproductionmighthelptoreducethegapsthathaveinthepastdivided
+
+                      the public, researchers, and policymakers in such efforts. Key Words: citizen science, open source, participatory
+                      GIS, sudden oak death, volunteered geographic information, Web GIS.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Downloaded by [University of California, Berkeley] at 11:32 26 November 2013
+
+
+
+
+                      La interfaz situada entre la neogeografıa y la ciencia ciudadana reviste un gran potencial para el monitoreo
+                      ambiental, aunque este nexo ha sido menos frecuentemente explorado de lo que ha sido cada una de aquellas
+                      materias individualmente. En este artıculo hacemos la revision ´el papel emergente que tiene la informacion     ´
+                      geogr´ﬁca voluntaria en la ciencia ciudadana y presentamos un estudio de caso de un conjunto integrado de
+
+                      herramientas que involucra usuarios de diversos tipos (de redes de observacion cen´radas en la ciudadanıa,      ´
+                      monitoreo focal manejado por expertos y esfuerzos oportunistas de diversa procedencia) en el monitoreo de una
+                      enfermedad forestal del oeste de los Estados Unidos. Presentamos primero el reto general de la recoleccion d´
+
+                      datos en proyectos de monitoreo ambiental y luego discutimos la literatura que rodea la integracion ´mergente
+                      de ciencia ciudadana e informacion ´eograﬁca´de voluntariado. Enseguida, exploramos la manera como estos
+                      me´odos caracterizan y sustentan la adquisicio´ de conocimiento y como ´e respalda la interaccion m´ltimodal
+
+
+
+                                 AnnalInitial submission, January 2010; revised submissions, December 2010 and April 2011; ﬁnal acceptance, April 2011
+                                                                  Published by Taylor & Francis, LLC.
+      1268                                          Connors, Lei, and Kelly
+
+
+             para que se pueda incluir un amplio espectro de contribuyentes. Estos conceptos se resumen en un modelo
+             conceptual que articula los gradientes importantes de monitoreo ambiental basado en la Web: los usuarios, la
+             interacc´on entre usuarios y los datos, y los tipos de i´formacion generados. Mediante este modelo, examinamos
+               ´
+             crıticamente al OakMapper.org, un sitio Web construido por los autores para recoger y difundir info´macion
+             espacial relacionada con la disemin´cion de una enfermedad forestal, al tiempo que discutimos muchos de los
+             asuntos medulares y nuevos retos asociados con la int´rseccion de la ciencia ciudadana y l´ infor´acion geograﬁca
+             voluntaria en el contexto del monitoreo ambiental. Sostenemos que el monitoreo ambiental se puede beneﬁciar
+             de esta sinergia:´El enfasis creciente en una diversidad de participantes en ´a produccion de conocimiento podrıa
+             ayudar a reducir las brechas que en el pasado han dividido´al publico, los investigadores y los formuladores de
+
+             polıticas en tales esfuerzos. Palabras clave: ciencia ciudadana, fuente libre, SIG parti´ipante, muerte subita de robles,
+             informac´on geo´raﬁca voluntaria.
+
+
+              he recent proliferation of geospatial tech-         2009). Although there is a long and interesting history
+              nologies, including Web-based mapping tools,        of scientists working with private citizens to gather and
+      T       Global Positioning Systems (GPS), and smart         utilize scientiﬁc data (Holland 1996; Kearns, Kelly, and
+      phones, is transforming the collection, representation,     Tuxen 2003; Jennings, Jarnagin, and Ebert 2004; Evans
+
+      distribution, and use of spatial information. Technolo-     et al. 2006; Parker 2006; Pedersen, Kearns, and Kelly
+      gies such as Google Maps and Open Street Map have           2007), the ability for these communities to interact
+      been embraced by academic geographers but have also         can be impeded by interest levels, technical skills,
+
+      been widely employed by a nonexpert community, of-          information accessibility, data management, communi-
+      ten referred to as neogeographers (Turner 2006; Haklay,     cation barriers, and time requirements. Environmental
+      Singleton, and Parker 2008). This article considers the     data sets that are generated and used by communities
+      emerging roles of volunteered geographic information        have commonly utilized the Web as a medium; in
+
+      (VGI, which is generated by the users of these tech-        this context, geographic location is an intuitive and
+      nologies) and of citizen science in research endeavors,     powerful cataloging structure for many environmental
+      particularly for environmental monitoring. We present       and social data. Such Web-based databases make
+      a hybrid approach to data collection that draws from        geotagged data widely available in a visual, dynamic,
+
+      an array of direct and indirect sources to assemble and     quickly searchable, and interactive format (Goodchild
+      share geographic knowledge from both neogeography           1997; Kearns, Kelly, and Tuxen 2003) that builds
+      and expert science sources. Despite their promise,          on many of the design standards from information
+
+      these data pose social and empirical challenges that        visualization and cognitive and cartographic research
+      can proscribe their application, and we consider the        (Tufte 2001; MacEachren et al. 2004; Heer and
+      utility of VGI and citizen science in this context and      Agrawala 2008; Balram and Dragicevic 2009).
+      in light of these limitations. Nonetheless, we believe         The recent emergence and broad adoption of infor-
+
+      that neogeography and VGI complement both citizen           mation technologies to gather and visualize geographic
+      science and expert science efforts and here explore the     information have increased the feasibility of conduct-
+      potential of their synergy for environmental monitor-       ing large-scale citizen science projects, but these data
+      ing efforts to provide timely detection of large-scale      alsochallengethe traditional relationshipsbetweensci-
+
+Downloaded by [University of California, Berkeley] at 11:32 26 November 2013he public, and data sets. Examples of VGI and
+         Many of the challenging natural resource problems        citizen science have become common in biodiversity
+      that the public (this article refers to the public as the   monitoring and conservation biology (e.g., Danielsen
+
+      nonexpert community of private citizens operating out-      et al. 2005; Lepczyk 2005; Couvet et al. 2008) and early
+      side of the academy and policy agencies), researchers,      disaster response (Longueville et al. 2010; Poser and
+      and policymakers face today span spatial scales and im-     Dransch 2010) but are not as common in environmen-
+      pact diverse public groups. Addressing these challenges     tal monitoring. If used in the service of environmen-
+
+      often requires coordinated monitoring, efﬁcient data        tal monitoring, VGI and citizen science could embrace
+      collection and retrieval, and increased communication       the broader social trend that favors citizen involvement
+      and cooperation between scientists and the public           in decision making and policy implementation across
+      (Kusel et al. 1996; Mason and Dragicevic 2006; Lynam        multiple levels of government (Gouveia and Fonseca
+
+      et al. 2007; Ban, Picard, and Vincent 2008; Fernandez-      2008; Berkes 2009). Although there has been dis-
+      Gimenez, Ballard, and Sturtevant 2008; Jacobson et al.      cussion of the role of these technologies to facilitate
+                                               Citizen Science in the Age of Neogeography                                1269
+
+
+            participatory efforts and to actively recruit data, less at-citizens for scientiﬁc research has grown with the spread
+            tention has been given to data sourcing from extensive      of the Internet, and many projects have begun to use
+
+            VGI networks that are created independently of formal       large-scale public resource computing to distribute
+            citizen science projects, and yet are increasing rapidly    data processing to many volunteers (e.g., SETI@home,
+            in number and scope.                                        folding@home, and others; D. P. Anderson et al. 2002).
+               This article argues that environmental monitoring        This distributed approach that utilizes the human and
+
+            projectscanbeneﬁtfromthefullspectrumofknowledge             technological capital of volunteers can save time
+            producers (from trained scientists to citizen scientists)   and resources as well as increase public knowledge
+            bybringinginthecompleterangeofVGI(fromproject-              and interest in science (Irwin 1995).
+
+            speciﬁcdatatoagglomerativegeotaggedinformationon               Technological advances have facilitated public
+            the Web) and providing a multimodal interaction plat-       participation in expert-guided scientiﬁc research, but it
+            form for its intentional and unintentional participants.    has also opened opportunities for informal knowledge
+            To advance this argument, this article ﬁrst considers       sharing and information access beyond the reach of the
+
+            the importance ofcitizenscienceandVGI, assupported          academy. The production of spatial information in par-
+            by the advancement of information technologies, and         ticular has transformed as geospatial technologies pro-
+            then details the various modes of interaction that these    vide opportunities for private citizens to participate in
+
+            contributors have with locational information. A con-       activities once relegated to the world of “expert” geog-
+            ceptual model that maps out the relationships between       raphers and cartographers. Web mapping services (e.g.,
+            citizen science (users/producers), VGI (data), and en-      Google Maps, Yahoo! Maps) and digital globes (e.g.,
+            vironmental data production (interaction) is presented      Google Earth, NASA World Wind) have increased
+
+            to help summarize and visualize the core arguments of       theseopportunitiesbyprovidingfreeaccesstoextensive
+            this article. Finally, the OakMapper.org case study is      collections of maps and imagery that were previously
+            provided to illustrate how to operationalize this con-      difﬁcult to obtain and view, and Web developers have
+            ceptual model. This article concludes with a critical       respondedbyproducingnumerousapplicationsanddata
+
+            discussion of the implications of VGI and citizen sci-      sets with these tools. A Web-going public has embraced
+            ence for environmental monitoring and lessons learned       these opportunities, creating an emerging landscape on
+            from our experiences with OakMapper.org.                    the Internet that is geographic in structure, often per-
+
+                                                                        sonal, sophisticated, and highly dynamic. As a result,
+                                                                        map making is no longer restricted to the realm of the
+            Citizen Science in the Age of                               trained cartographer and there is diminishing distinc-
+                                                                        tionamongtheproducer,consumer,andcommunicator
+            Neogeography
+                                                                        of spatial information (Goodchild 2009). Neogeog-
+               The concept of using decentralized groups of             raphy, as this informal application of geographical
+            nonprofessionals to gather information, which predates      techniques has been coined (Turner 2006; Haklay,
+                                                                        Singleton, and Parker 2008), is actualizing the concept
+            the Internet and the term crowdsourcing, has long
+            been embraced by citizen science projects. Audubon’s        of citizen science, which “implies a form of science
+            Christmas Bird Count, which has utilized volunteers to      developed and enacted by citizens themselves—the
+            conduct a census of birds in the Western Hemisphere         ‘contextual knowledges,’ which are generated outside
+Downloaded by [University of California, Berkeley] at 11:32 26 November 2013
+            since 1900 (Butcher 1990), is one of the longest            of formal scientiﬁc institutions” (Irwin 1995, xi).
+            running and best known citizen science projects. Other         The more inclusive role of users in the coproduction
+            examples of citizen science have included ﬁsh counts,       of spatial information echoes a broader trend toward
+                                                                        developing a more participatory and social Internet,
+            bird biodiversity, water monitoring, and air quality
+            monitoring (Pattengill-Semmens and Semmens 2003;            which is called Web 2.0 (O’Reilly 2007; Haklay,
+            Lepczyk 2005; McCaffrey 2005; Cooper et al. 2007).          Singleton, and Parker 2008; Hall et al. 2010). Deﬁni-
+            Scientiﬁc data sets are increasingly generated and used     tions of Web 2.0 vary, but O’Reilly (2007) identiﬁed
+
+            by collaborative communities, often virtual, which          common traits that include scalable Web-based
+            can include researchers, decision makers, and private       services, user-enriched data sources, use of collective
+            citizens (Wulf 1993; Kouzes, Meyers, and Wulf 1996;         intelligence, and lightweight user interfaces. Although
+            Cummings and Kiesler 2005; Pedersen, Kearns, and            developers create the infrastructure, this new digital
+
+            Kelly 2007). The possibilities for enlisting private        landscape enlists private citizens as codevelopers
+      1270                                         Connors, Lei, and Kelly
+
+
+      and depends on a broad user community to generate          technologies to develop these tools (Greene et al. 2007;
+      content. Neogeographers are supporting a form of           Gouveia and Fonseca 2008; Hall et al. 2010). Expe-
+
+      crowdsourcing, which utilizes a decentralized network      riences from researchers in participatory GIS (PGIS)
+      of users to provide content (Howe 2009), to develop        show that GIS can have various beneﬁts for different
+      geospatial tools and spatial data sets. In the broadest    phases of the decision-making process (Jankowski and
+      sense, crowdsourcing describes the outsourcing of tasks,   Nyerges 2001), but further exploration is still needed
+
+      which would normally be conducted by an employee,          to understand the role of VGI in research and environ-
+      to a ﬂeet of volunteers but more commonly refers to the    mental monitoring and decision making.
+      useofWeb2.0tofacilitatethiscollaboration.Thisradi-            These examples suggest that with the aid of infor-
+
+      cal shift in the relationship between use and production   mation technologies and Web 2.0 principles, neogeog-
+      of information has led some to refer to participants       raphy has actualized a wider range of citizen science
+      who take on this dual role as produsers (Budhathoki,       opportunities through online Web mapping services
+      Bruce, and Nedovic-Budic 2008). Produsers provide          and applications. The role and agency of citizens in
+
+      content for encyclopedias (wikipedia.com), share           producing environmental data and engaging in envi-
+      videos (youtube.com) and photographs (ﬂickr.com),          ronmental monitoring has been afﬁrmed by an increas-
+      and publish business reviews (yelp.com). Neogeogra-        ing number of citizen science environmental projects.
+
+      phers represent a subset of produsers who speciﬁcally      Byvalidatingtheepistemicpositionofcitizenscientists,
+      interact with VGI. Conceptualizing a subset of the         thevalueofenvironmentaldataproducedbycitizensci-
+      Internet users as produsers is important in this article   entists is afﬁrmed by extension. It addresses some of the
+      because this term accentuates the agency of these users    remaining doubts about this methodology in contrast to
+
+      and distinguishes them from a purely consumptive           the expert-driven knowledge production paradigm. In
+      “mob.”                                                     fact, in a robust citizen science project, the redundancy
+         This increased emphasis on the importance of par-       of data and information can serve as a peer-reviewing,
+      ticipants in knowledge production is one reason that       self-correcting mechanism, thus improving the accu-
+
+      neogeography, enabled by Web mapping services and          racy and reliability of such information. What kinds
+      applications, might help to reduce the gaps that have in   of data and how are such data produced when citizen
+      the past divided the public, researchers, and policymak-   science projects take advantage of VGI and Web 2.0?
+
+      ers(Peluso1995;Baileyetal.2006;MasonandDragice-            As discussed in the next section, knowledge discov-
+      vic2006;Parker2006;Walkeretal.2007).Inproducing            ered within this context can be specialized or general,
+      environmental data, citizen scientists become agents       targeted or distributed, and with intentional or unin-
+      in the decision-making and policymaking process. The       tentional interaction between a user and a project.
+
+      desire to utilize geospatial technology for more inclu-
+      sive environmental decision making and management
+      (Elwood 2006, 2007; Dunn 2007; Dunn et al. 2007)
+      is evidenced in numerous projects, including the ar-       VGI and Knowledge Discovery
+
+      eas of habitat restoration, public health, environmental      Examples of PGIS illustrate the epistemic con-
+      planning, water quality monitoring, and wildland ﬁre       tribution of GIS to participatory models. Many
+      management (Sisk et al. 2006; Driedger et al. 2007;        citizen science projects have also beneﬁted from the
+Downloaded by [University of California, Berkeley] at 11:32 26 November 2013
+      Morehouse and O’Brien 2008; Ghaemi et al. 2009).           collaborative environment facilitated by GIS. The
+      The cited examples seek to use geographic information      realm of VGI shows promise for information gathering
+      systems (GIS) to incorporate the opinions of stakehold-    and consensus building in citizen science by utilizing
+      ers into the decision-making process (Obermeyer 1998;      broader methods of crowdsourcing. Researchers can
+
+      Rinner, Keﬂler, and Andrulis 2008; Simao, Densham,         use VGI to amass the knowledge of the public, who
+      and Haklay 2009), and they illustrate the potential of     are often best positioned to provide information that
+      collaborativetoolstoactivelydevelopconsensus(Drag-         requires indigenous experience, esoteric understanding
+
+      icevic and Balram 2006; Nyerges et al. 2006). Many         of a physical environment, or up-to-date information
+      of these projects have developed mechanisms that al-       about local conditions (Flanagin and Metzger 2008).
+      low data exploration, scenario testing, location-based     The time sensitivity of environmental monitoring
+      commenting, or place-based discussion forums (Peng         efforts often requires rapid action. Local knowledge
+
+      2001; Rinner, Keﬂler, and Andrulis 2008); some have        and crowdsourced skills that manifest in VGI offer
+      also noted the advantages of using free and open source    particular promise for time-sensitive and emergent
+                                               Citizen Science in the Age of Neogeography                               1271
+
+
+            phenomena, such as disaster management (Goodchild           from alternate sources that are not speciﬁc to a
+            2007; Elwood 2010; Longueville et al. 2010; Poser           particular environmental project. A hybrid approach,
+
+            and Dransch 2010). Obtaining timely data can be             which depends on pooled information from multiple
+            difﬁcult in these cases, as spatial information is          sources, could beneﬁt environmental monitoring
+            often limited by weather conditions, return rates of        projects by revealing knowledge in disparate data sets.
+            sensors, and time demands of traditional geographic         The following exploration of the many modes by which
+
+            methods. In contrast, VGI can be supported by               neogeographers interact with locational information
+            a distributed network of humans functioning as              elucidates the different relational structures between
+            technicians and sensors in real time. Acting in this        produsers and a scientiﬁc database, also revealing
+
+            manner, neogeographers can rapidly create data sets for     potential means by which these data can be linked.
+            large areas and develop databases that could support
+            time-sensitive endeavors, such as during disasters (C.
+            C. Miller 2006). Disaster management during recent
+
+            earthquakes in Haiti has demonstrated the efﬁcacy           Multimodal Interaction with Locational
+            of VGI to rapidly gather information and leverage           Information
+            volunteers. Following the earthquakes that struck
+
+            Haiti in January 2010, rescue workers did not have            The increasing access to and complexity of spatial
+            complete or accurate street maps for the area, but neo-     technologies has changed the way in which users in-
+            geographers contributing to OpenStreetMap (OSM),            teract with spatial information, how developers create
+            were able to quickly create road maps of the area           content, and how researchers compile data. The new
+
+            (http://wiki.openstreetmap.org/wiki/WikiProject  Haiti,     modes by which produsers interact with information
+            last accessed 10 April 2011). Similar applications were     poses opportunities for researchers to extend citizen sci-
+            used to communicate information during ﬁres in South-       ence efforts and to reimagine public participation. The
+            ernCaliforniainthesummerof2008.Duringtheseﬁres,             array of intuitive Web mapping tools with which the
+
+            several maps were developed that used collaborative         Web-going public has great familiarity has afforded cit-
+            tools in Google Maps to share information regarding         izen scientists a direct way to produce and contribute
+            locations of ﬁres, road closures, and aid locations         environmental data for speciﬁc projects. Direct map
+
+            (http://googleblog.blogspot.com/2007/10/southern-cali       annotation with points, lines, or areas (in contrast to
+            fornia-ﬁre-maps.html, last accessed 10 April 2011).         spatial data collection via paper, digital forms, or tradi-
+            Examples from disaster management illustrate the            tional geocoding) has sped up VGI considerably (Lee,
+            potential of VGI to coalesce crucial information from a     Quinn, and Duke 2006; Goodchild 2007), particularly
+
+            diverse public across large areas, even during situations   in areas that are not on a street network or that do not
+            that could hinder information ﬂow.                          geocode well. This kind of directed production of data
+               Despite this promise, the role of VGI within             toward a speciﬁc project is common in citizen science
+            research ﬁelds remains narrow, as it mainly focuses on      and can be characterized by produsers’ high intention-
+
+            project-speciﬁc environmental data directly generated       ality. Here, we consider intentionality in terms of a
+            by intentional participants. The prior examples are         produser’s intentions to provide geographic informa-
+            structured and goal oriented, but VGI often also comes      tion for a particular end use. Low-intentionality scenar-
+Downloaded by [University of California, Berkeley] at 11:32 26 November 2013
+            in less organized formats. Although citizen science and     ios are increasingly common as interoperability among
+            environmental monitoring projects often require data        spatial technologies facilitates the transfer and reuse of
+            gathered in the former manner, others might beneﬁt          spatial content among services. Initially, as with many
+            from an exploratory process of geographic knowledge         emerging technologies, the rush to develop Web-based
+
+            discovery (GKD), in which data mining methods are           mapping tools led to an array of programming and ﬁle
+            used to extract information from spatial databases (C.      structures. The Open Geospatial Consortium (OGC)
+            C. Miller 2006). Such methods might help to distin-         formed to address these divergent technologies and to
+
+            guish useful information from noise and generate useful     create interoperable standards. These standardizations
+            data for academic research, including environmental         have allowed data of various formats and from many
+            monitoring. Considering this option, researchers can        different sources to be shared between both proprietary
+            gather VGI in two ways: (1) solicit information for an      and open source software and have created opportuni-
+
+            explicit purpose directly from relevant environmental       ties for the greater distribution of spatial information
+            data produsers or (2) glean the relevant information        (http://www.opengeospatial.org, last accessed 10 April
+      1272                                         Connors, Lei, and Kelly
+
+
+      2011). This increase in interoperability offers great po-  geotagging feature to its service, allowing users to as-
+      tential for sharing and reusing data that might not be     sociate their current locations with their messages, or
+
+      targeted toward a particular project. For example, a       tweets. The mode of interaction is considered to have
+      syndicated, geotagged photo stream from Flickr could       low intentionality because the location information
+      be reused, after ﬁltering the data, for environmental      added to a tweet is simply an extra piece of informa-
+      monitoring purposes without the original user intend-      tion attached to these data and not intended to be used
+
+      ing to contribute to such a project. Thus, a user of one   inaspeciﬁcGISordatabase.Nonetheless,contentfrom
+      technology might be unknowingly supporting content         Twitter and Flickr have been extracted and analyzed to
+      elsewhere. This exchange of spatial information has        explore a range of topics, including public concern sur-
+
+      also been supported by open application programming        roundingH1N1(ChewandEysenbach2010),andplace
+      interfaces (APIs). One of the most prominent exam-         and event semantics (Rattenbury, Good, and Naaman
+      ples of an open API is the Google Maps API released        2007), and notions of place (Dykes et al. 2008).
+      in 2005, which popularized a new trend of Web ap-             These examples display possible applications of LBS
+
+      plications called mashups (C. C. Miller 2006). Google      and VGI for research endeavors, but these approaches
+      Maps mashups display data from other sources within        have yet to be applied extensively in environmental
+      the Google Maps interface and atop Google’s base lay-      monitoring. As this type of locational information
+
+      ers. Although the Google Maps API is only one of           becomes more prevalent, it necessitates new methods
+      the many technologies that have contributed to Web         to mine and ﬁlter relevant and useful information for
+      mapping—others include OpenLayers, MapServer, and          environmental monitoring projects. The locational
+      Yahoo! Maps—it is the most prevalent and is related to     information produced by neogeographers, in spite of
+
+      the increased focus on the spatialization of information   lack of intentionality, is valuable for many applications,
+      (Skupin and Fabrikant 2003; Crandall et al. 2009) and      and it is already being actively mined for marketing
+      the increased familiarity with maps among the public.      purposes to support a growing interest in location-
+         Although these changes in data standards and soft-      based advertising. This commercial interest in spatial
+
+      ware have created new modes of interaction, radical        information is likely to fuel further development and
+      changes in hardware have also supported a growth in        result in a growing pool of information. Thus far,
+      VGI. A growing mode of interaction with location in-       entrepreneurs and technologists have championed
+
+      formation is to use real-time location information via     development of these technologies and the research
+      softwareapplicationsonlocation-awaremobiledevices.         community has been slower to adopt them, despite
+      Software development kits (SDKs) for location-aware        their potential to generate information. The limited
+      mobile devices, speciﬁcally GPS-enabled smart phones,      examples of research-oriented LBS, which include
+
+      have led to a torrent of location-based services (LBSs)    applications for epidemiology (Aanensen, Huntley,
+      and subsequent VGI. Many LBSs, such as Gowalla             and Feil 2009) and ornithology (eBird), demonstrate
+      and Foursquare, are a form of social media that al-        that these tools can be useful in providing powerful
+      low users to communicate locational information to         collaborative tools to researchers and the public.
+
+      friends. Contributions of location information to these    Consideration of these many modes of interaction,
+      services, however, could also be utilized for market-      in the context of intentionality, content types, and
+      ing services, of which produsers are unaware, in which     produser background, can help researchers to realize
+Downloaded by [University of California, Berkeley] at 11:32 26 November 2013
+      case they had low intentionality for this application of   the social and technological promise of neogeography
+      their VGI. The concept of intentionality can be further    for citizen science. In the next section, we present a
+      differentiated between contributions to geographically     conceptual model to link all of these components and
+      explicit projects, which speciﬁcally target geographic     to inform design of environmental monitoring projects.
+
+      content, and geographically implicit projects, which
+      gather geographic information without this being the
+      main focus (Antoniou, Morley, and Haklay 2010). As         A Conceptual Model of Web-Based
+
+      presentedhere,thelowestdegreeofintentionalityisdis-        Environmental Monitoring
+      played when a produser submits a piece of Web content
+      withlocationalinformationtoageographicallyimplicit            To summarize the complex relationships among cit-
+      service, but this locational information is then used      izen science, VGI, and environmental monitoring and
+
+      elsewhere. For example, Twitter, which is a social net-    the various routes of knowledge production and inter-
+      working and microblogging tool, has recently added a       action, and to visualize and explore them with more
+                                                 Citizen Science in the Age of Neogeography                                  1273
+
+
+                                                                          intentionality must be deﬁned in terms of a speciﬁc
+
+                                                                          project.
+                                                                             Afewexamplesfromthespectrumofcitizenscience,
+                                                                          VGI, and environmental monitoring help to illustrate
+
+                                                                          the model. First, consider a commonly cited example
+                                                                          of citizen science in the United States, eBird, which
+                                                                          provides an online community for birders to report ob-
+                                                                          servations (Sullivan et al. 2009). This is a public en-
+
+                                                                          deavor, with high speciﬁcity in terms of data collected
+                                                                          (e.g., speciﬁc bird species) and requiring high inten-
+                                                                          tionality and interaction with the database from the
+
+                                                                          produser. A similar example is provided by the “What’s
+                                                                          Invasive!” project, maintained by the Center for Em-
+                                                                          bedded Networked Sensing, a research unit within the
+
+                                                                          University of California, Los Angeles. This project is
+                                                                          aiiiecmpintltynetina
+                                                                          Android phone help National Park Service rangers ﬁnd
+             Figure 1. Conceptual model of the intersection between volun-
+             teered geographic information, citizen science, and environmentalsiveplantspeciesanywhereinthecountry.Thisisa
+             monitoring.Positionsonthecubeinclude(A)publiccitizenscience  public project, supporting the collection of general data
+             projects withhigh speciﬁcity interms of datacollected and requirings a range of invasive taxa and species), and with
+             high intentionality and interaction with the database from thhigh intentionality. Projects like eBird and “What’s In-
+
+             duser; (B) public citizen science projects that collect genervasive!” are located on Figure 1 in positions (A) and
+             (C) projects that use location-based services on mobile devic(B), respectively, where most traditional citizen science
+             are often anonymous; and (D) expert-driven, targeted environmprojects are situated and differentiated by the speciﬁcity
+             tal monitoring projects not typically broadly accessible outside of
+             their constituent communities.                               of information collected.
+                                                                             These examples can be contrasted to several recent
+                                                                          developments in LBS on mobile devices, which are
+
+             speciﬁcity, we have developed a conceptual framework         largely targeted at individual users but can reveal new
+             (Figure 1), reﬁned from both MacEachren’s visualiza-         information when data are aggregated and analyzed,
+             tion cube (MacEachren et al. 2004) and Dragicevic            often in anonymous form (Ratti et al. 2006; Anto-
+
+             and Balram’s (2006) collaborative GIS cube. Each of          niou,Morley,andHaklay2010;Longuevilleetal.2010;
+             these models articulates gradients that help to reﬁne        Friedland and Choi 2011). For example, Ratti et al.
+             and display the concept in question. The collaborative       (2006) collected sixteen days of geo-located cell phone
+             GIS model focuses on gradients of participation, map         activity in the metropolitan area of Milan, Italy, and
+
+             usage, and technology; for geovisualization, the model       highlighted urban population ﬂow dynamics during a
+             displays gradients of knowledge construction, interac-       holiday fortnight, unbeknownst to the phone users.
+             tion, and users. Our model (Figure 1) of Web-based           Similar examples are seen in the proliferation of geo-
+
+             environmental monitoring concentrates on gradients           tagged information available on Twitter, YouTube,
+Downloaded byof users, information, and interactions. In this model,ber 20Flickr, and Craigslist, which can be easily mapped with-
+             produsers can be general users or specialists: members       out the author’s knowledge through public APIs. These
+
+             of the public, trained and focused volunteers, scientist     creative uses of aggregated geotagged data do have a
+             monitors, or regulatory ofﬁcials. Users’ relative interests  sinister side, highlighted well by Friedland and Choi
+             can vary, and the information they provide ranges from       (2011) and termed cybercasing. These agglomerative
+
+             speciﬁctogeneralforaparticularenvironmentalproject           kinds of activities are located in position (C) on Fig-
+             or issue. Interaction is deﬁned by the degree to which       ure 1.
+             a user intends to contribute to a database for a speci-         Finally, some services are designed exclusively for
+             ﬁed purpose. Intentionality can be very high if the data     researchers providing speciﬁc data to a project. An
+
+             users provide were directed at a speciﬁc database in a       example of this would be the CAIDA (http://www.
+             particular project, or low, if it was directed elsewhere. A  fs.fed.us/r5/spf/fhp/fhm/atlas/index.shtml, last accessed
+             user might simultaneously have high intentionality for       10 April 2011), a database of pest outbreaks across For-
+
+             one purpose but low intentionality for another; thus,        est Service lands, for which the data were provided
+       1274                                           Connors, Lei, and Kelly
+
+
+       by trained samplers.The information is speciﬁc and in-        Table 1. Beneﬁts and challenges raised by the intersection
+
+       tentionality is high. Often, projects of this type are                   of citizen science and neogeography
+       utilized to share information in a research commu-
+       nity, such as the Berkeley Natural History Museum’s           Beneﬁts                                   Challenges
+
+       Specimen    Search    (http://bnhm.berkeley.edu/query/        Support development of early   Data credibility, quality,
+       index.php, last accessed 10 April 2011), which pro-             warning system                 consistency
+                                                                     Ability to leverage volunteers Metadata standards
+       vides researchers with a means to plot and query the          Increased scale of coverage    Unpredictability
+       geographic origins of the museum’s collection. These          More informed public           Bias and motivation
+       kinds of expert-driven, targeted environmental moni-          Increased cooperation          Perceptions of surveillance
+                                                                     Active consensus building      Reinforced authority and
+       toring projects are placed in Figure 1D. These have not
+       typically been made broadly accessible outside of their                                        differential empowerment
+       constituent communities.                                      Community and social networking Access and the digital divide
+                                                                     Support massive data ﬂows      Technical challenges
+         CitizensciencecantakeadvantageofVGIandmerge
+       with expert data collectors, and this synergy will occupy
+       a larger portion of the environmental monitoring space.
+                                                                     the data model cube described earlier to concretize and
+       There are beneﬁts and challenges associated with this         operationalize this conceptual model. Our case study
+       synergy, and we present OakMapper as a case study to          also serves to examine the numerous tensions—the
+       examine and discuss many of the core issues and new
+                                                                     questions of motivation, authority, reliability, and ac-
+       challenges presented by the intersection of citizen sci-      cess (Goodchild 2007; Budhathoki, Nedovic-Budic,´      ´
+       ence and VGI in the context of environmental moni-            and Bruce 2010; Coleman 2010)—that inevitably arise
+       toring. OakMapper is a hybrid geographic information
+                                                                     with VGI and within the context of environmental
+       platform that provides multiple pathways to contribute        monitoring.
+       and to access data about a highly visible invasive for-
+       est disease. The system is built using a range of open
+                                                                     OakMapper 1.0 and Study Area
+       source and proprietary information technologies that
+       aim to increase our user base, access to information,            A newly introduced pathogen Phytophthora ramorum
+       and general awareness of the disease.                         has caused substantial mortality in several tree species
+
+                                                                     along the coast of California and southern Oregon.
+                                                                     The disease, called sudden oak death (SOD), presents
+                                                                     threats to the ecology, wildlife habitat, and aesthetic
+       Case Study: OakMapper
+                                                                     value of thousands of hectares of forest (Rizzo and
+         In this article, we demonstrate a ﬂexible system in         Garbelotto 2003; McPherson et al. 2005). Evergreen
+       an environmental monitoring context that harnesses            and tanoak/redwood forests within the coastal fog belt
+
+       the multiple beneﬁts of citizen science and VGI and           are the primary habitat, with California bay laurel
+       uses pooled information from multiple sources: public,        serving as a vector for disease propagation in wild
+       scientiﬁc, and regulatory. We address the resulting ben-      settings. Infected nursery stock can also inﬂuence
+
+       eﬁts and challenges (Table 1) associated with such an         spread, and susceptible habitat and hosts for the
+       approach. The process of monitoring environmental is-         pathogen exist throughout the conterminous United
+Downloasues in a public context also shares these beneﬁts and6 NovembStates (Kelly et al. 2007).
+
+       challenges, and any framework developed to utilize the           The public remains interested in the disease and,
+       public in a Web-based and science-focused monitoring          early in the infestation, information from active and
+       endeavor requires their consideration. The tool set pre-      interested private citizens played an important part in
+
+       sented here takes advantage of public familiarity with        locating new areas of infestation across the state (Kelly
+       Web mapping and LBS to recruit direct contributions           and Tuxen 2003). In 2000, a statewide task force called
+       from the public, while also gleaning information from         the California Oak Mortality Task Force was formed
+
+       exogenous data sources. Our example, OakMapper.org,           with membership drawn from government agencies,
+       is presented to illustrate a collective public–private or-    university researchers, practitioners, and the public, in
+
+       ganizational structure that might be used for other en-       parttoanswerthenumerousquestionsaboutthedisease
+       vironmental problems that are widespread, visible to          and to coordinate the public and government involve-
+       the public, and spatial in nature. We review the impor-       ment in monitoring the disease. We created the ﬁrst
+
+       tant features of this project by connecting them back to      OakMapper Web site in 2001 as part of this outreach
+                                               Citizen Science in the Age of Neogeography                               1275
+
+
+            strategy and developed a Web GIS to coordinate and          of future development for growth) and sought to em-
+            distribute all SOD spatial data. The earlier OakMap-        ploy practices that addressed these concerns. Above all,
+
+            per was developed using ESRI’s (2008) ArcIMS and            OakMapper was designed to utilize new technologies to
+            provided interactive mapping technology for users to        increase data ﬂow and to enhance produser experience.
+            query data, visualize disease spread, and enter informa-    In the remainder of the article we utilize OakMapper as
+
+            tion on likely spots for SOD using a separate Web form,     almofriinerigngophynd
+            from which volunteered addresses were geocoded indi-        environmental monitoring. First we highlight some of
+            vidually and added to our databases (Kelly and Tuxen        the basic design elements of OakMapper and their in-
+
+            2003). In this early conﬁguration, each element of the      tended beneﬁts for produser experience, then we review
+            Web site (spatial data, mapped products, volunteered        our handling of VGI and the supporting technologies,
+            information) existed independently and required rou-        and ﬁnally we discuss the implications of these tech-
+            tine maintenance to remain up to date. All of these         nologies in the context of critical GIS.
+
+            resources were dependent on a project administrator to
+            manually update their source data and reload the con-       Produser-Centered Design
+            tent to the Web site on a quarterly basis. This method
+
+            was not only time consuming but was also suscepti-            OakMapper 2.0 was designed with a focus on usabil-
+            ble to errors and inconsistencies between resources.        ity and simplicity (Newman et al. 2010), particularly
+            Meanwhile, contributors needed to discover our site         with regard to creating an environment that would ease
+            and were restricted to providing data in a textual for-     the creation of geographic content. The user-centered
+
+            mat, including geographic information in the form of        design approach is critical for citizen science projects
+            latitude–longitude, via an online form. The ﬁrst incar-     because users serve as conduits for data. Therefore, users
+            nation of OakMapper was tightly constrained to the          should be able to navigate through OakMapper without
+
+            upper corners of the data model, as shown in Figures        any stumbling blocks inherent in the design of the sys-
+            1A and 1C.                                                  tem. As such, we sought to develop tools that would ap-
+                                                                        peal to researchers and scientists, neogeographers with
+
+            OakMapper 2.0: Harnessing VGI                               varying degrees of experience with GIS tools, and the
+                                                                        general public. Older generations of Web GIS applica-
+               The new version of OakMapper is intended to fully        tions targeted GIS experts and maintained the appear-
+            capitalize on the emergent culture of VGI as well as the    ance and behaviors of a traditional desktop GIS. More
+
+            advancement in Web and GIS technologies. To fully           recently, Web mapping tools have developed to serve
+            utilize these resources, we ﬁrst considered our target      alyui.AvndG SadW ebGSsf
+            user group, the means of interaction with the system,       ware serve experienced GIS users in advanced mapping
+
+            the data set to be supported, and the state-of-the-art for  and analysis tasks, but they set a high barrier for novice
+            information and geospatial technologies. These objec-       users. Elwood (2006) acknowledged such technological
+            tives all correspond to greater coverage of the model’s     barriersasacontinuingissueofaccess,bypreventinglay
+            three axes. We also made the following assumptions          people from engaging in participatory GIS. To reduce
+
+            about the system from our past experience: (1) a well-      this obstacle to novice users, we designed tools with
+            designed geospatial tool set can serve the needs of and     simple interfaces to easily access and input data, allow-
+Downloaded bfacilitate communication between the research com- November ing them to quickly assume the role of produser. We use
+
+            munity and lay persons; (2) vast amounts of spatial         the term produser in these sections mainly for the ease
+            information are in constant production on the Web,          ofinterchangeabilitywithcommonexpressionsthatuse
+            and some of it is useful for environmental scientists;      the word user (e.g., user experience), but it should be
+            and (3) private citizens are familiar with and interested   noted that our main concern is with the subgroup of
+
+            in mapping tools and will contribute information with       neogeographers.
+            them. Based on these goals and assumptions, we cre-           The OakMapper Web site is centered on an interac-
+            ated a Web site to gather and distribute information        tive map, which serves as a portal to a single spatially
+
+            regarding SOD. From a practical standpoint, we were         enabled relational database (Figure 2). The map serves
+            concerned with the site’s usability (ease of operation by   as a powerful tool for data exchange on the Web, pro-
+            users with varying levels of GIS or Web experience),        viding produser-focused beneﬁts such as visualization
+
+            integrability (ability to interact across multiple applica- and simultaneous access to multiple layers of spatial
+            tions), and scalability (low development cost and ease      data. OakMapper utilizes the Google Maps interface
+      1276                                           Connors, Lei, and Kelly
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      Figure 2. The mapping page of theOakMapper Web siteshowing a close-up of the San Francisco Bay Area: Red dots are ofﬁcial conﬁrmations,
+      yellow dots are locations submitted by the community. (Color ﬁgure available online.)
+
+Downloaded by [University of California, Berkeley] at 11:32 26 November 2013
+      and base layers to offer familiar, but customizable, map      lects speciﬁc data from a range of produsers in a high
+
+      visualization and tool sets to the public. The Google         intentionality environment.
+      Maps Viewer also offers rapid rendering of maps, re-             Participation, a hallmark of Web 2.0, is realized on
+      ducing load times that could discourage participation         OakMapper as contributions of geospatial information
+      and limit content. To the right of the map, a panel           and interaction with map-based content. Integration
+
+      displays data submission forms and location-speciﬁc in-       of our Web site with other services, such as our LBS
+      formation, such as descriptions of the site characteris-      for iPhone, Flickr, and Twitter, allow for produsers to
+      tics, disease symptoms, and comments. Unlike common           choose alternate modes of participation, while taking
+
+      map pop-up bubbles, the side panel can easily display         full advantage of hardware, such as cameras and GPS
+      greater amounts of information without obscuring the          devices that produsers have at their disposal. VGI and
+      map and allowing the produser to remain in constant           mashups challenge traditional concepts of participation
+
+      contact with the map. The Google Maps interface col-          by garnering resources from indirect contributions and
+                                                Citizen Science in the Age of Neogeography                                 1277
+
+
+             allowing integration of additional media. Our design is     contrast, citizen science refers to a practice, as opposed
+             not tailored to the interests of these unknowing con-       to the information itself. All citizen science projects
+
+             tributors, as they are already employing outside tools      involve volunteers and some have applied spatial tools
+             to contribute SOD-related data. Instead, we focus on        (Kearns, Kelly, and Tuxen 2003; Delaney et al. 2008).
+             the compilation of this information for produsers seek-     Many of the current mapping tools for citizen science
+
+             ing SOD-related data from disparate sources in a single     are purely for data display, but citizen science could also
+             location.                                                   beneﬁt from the emergence of VGI for crowdsourcing.
+               OakMapper’s target audience is comprised of distinct      OakMapper seeks to capitalize on the intersection be-
+
+             user groups, including scientiﬁc researchers, agency of-    tween these two realms through application of spatial
+             ﬁcials who provide laboratory-conﬁrmed cases, and the       technologies that are already embraced by neogeogra-
+             general public. Some of the users are known to have         phers and have displayed their capacity for collecting
+             experience with GIS, but the site assumes that most         data and facilitating communication for nontechnical
+
+             have no or limited knowledge of GIS. The majority           applications. This potential also exists for scientiﬁc en-
+             of the features on OakMapper are intended to serve          deavors, which can beneﬁt from spatial tools as inter-
+             all user groups, regardless of background or experience,    faces for data collection and facilitation of discussion
+
+             but some capabilities provide for unique needs of re-       between researchers and the public. One beneﬁt of VGI
+             searchersandgovernmentagents.Wemanagetheneeds               for scientiﬁc research is recognition of different episte-
+             of different user groups by creating permissions levels     mologies through place-based data structures that inte-
+             for individual accounts. Users are asked to create a        grate multimedia data that represent local knowledge
+
+             proﬁle when they submit data to OakMapper and to            through mapping, photography, and writing (Warf and
+             self-categorize their background as public, academic, or    Sui2010).Somesimpleadvancesintechnology,suchas
+             government. The OakMapper administrator can grant           the addition of tools for produsers to create polygons on
+
+             ofﬁcial status to some users, offering all of the features  maps (as opposed to simply points) coupled with com-
+             of community status plus the ability to submit lab-         menting, allow users to express their understanding of
+             conﬁrmed points. This categorization is also used to        space beyond discrete locations.
+             catalog points as either community submitted or                Following the principles of Web 2.0 and citi-
+
+             ofﬁcial-submitted. Discrete separation of data is mainly    zen science, OakMapper gives prominence to user
+             for the research purposes, as some reporting is con-        contributions of various formats from both ofﬁcial and
+             cerned exclusively with lab-conﬁrmed points, and to         public sources. Our interactive map at our Web site and
+
+             address issues of uncertainty in VGI—this topic is dis-     in the iPhone application allows users to input point
+             cussed in greater detail in the ﬁnal section of this        locations and polygons deﬁning locations of suspected
+             article.                                                    occurrences of SOD. Researchers and government
+
+               User categorization provides additional functionali-      ofﬁcials entering data on ofﬁcial conﬁrmations are
+             ties that associate a user’s activities on OakMapper to     distinguished from the general public by their user login
+             his or her personal account.In the My Account section,      and are granted access to an additional form. All users
+             users can modify their proﬁles and edit previous sub-       can report suspected cases of SOD in point or polygon
+
+             missions and comments. These features were added to         format, and researchers and ofﬁcials can submit data
+             allowproduserstodeveloparelationshipwiththeinfor-           usingtheofﬁcialformtoidentifypointsthathavetested
+Downloaded bymation that they are providing and to have a record ofmber 2positive for P. ramorum in a state-certiﬁed laboratory.
+
+             their personal contributions to the site. Finally, because  All of the features from the OakMapper database
+             OakMapper is a live “beta” site, in continual develop-      are displayed atop Google Maps base layers (terrain
+             ment in response to users’ feedback and detection of        or hybrid views) and shown in red or orange circles,
+             application errors, we provide an online form for users     which indicate ofﬁcial conﬁrmations or submissions
+
+             to send comments or questions.                              from the public, respectively. The classiﬁcation of
+                                                                         points allows the public and researchers to consider
+                                                                         authorship and authority when utilizing this data set.
+             VGI Gathering and Sharing
+                                                                         This format emphasizes that only ofﬁcial points are
+               Citizen science and VGI both leverage participation       known to have SOD, whereas other points are only
+             of volunteers to gather information and to foster pub-      suspected to be infected. VGI is prone to inaccuracies
+                                                                         and imprecision, but this distinction between types of
+             lic interest. The ontology of VGI predicates that it is
+             geographic in nature and generated by volunteers; in        points can serve as an indicator of conﬁdence, such
+      1278                                          Connors, Lei, and Kelly
+
+
+      that red points have been validated and there can be         information. OakMapper confronts this challenge by
+      a high degree of conﬁdence in nearby orange points.          using open technologies, which facilitate software in-
+
+         In addition to submitting points or polygons and          terfacing and data centralization. Open technologies
+      information regarding suspected or conﬁrmed cases of         refer to open source software (OSS), open speciﬁca-
+      SOD,userscancommentonpreviouslysubmittedinfor-               tions (OS), and open APIs. The term open source refers
+
+      mation. Only registered users in the system are allowed      to a set of criteria regarding access to and licensing for
+      to make comments, so that all comments are traceable         softwareanditsunderlyingcode.LicensesforOSSallow
+      to their source. We used this design to encourage com-       the general public to view, modify, and freely distribute
+
+      munity building and help foster trust among the com-         the source code and its derived works without including
+      munity members (Shneiderman 2000; Ba 2001; Marsh             restrictions on the use or distribution of software (G.
+      and Dibben 2003). Site-speciﬁc commenting facilitates        Anderson and Moreno-Sanchez 2003; Steiniger and
+      communication between researchers and private citi-          Bocher 2009).
+
+      zens and can be used in error checking to ﬂag suspect           Projects meeting these criteria offer several advan-
+      locations or to afﬁrm the validity of other locations.       tages for developing research tools: (1) developers have
+         OakMapper’s database is populated with informa-           full access to the working code and can customize it, (2)
+
+      tion that is actively collected from neogeographers di-      developers are not restricted to a particular work envi-
+      rectly through the aforementioned tools, as well as VGI      ronment, and (3) free distribution reduces project ex-
+      regarding SOD from exogenous sources. In doing so,           pense.Inaddition,manyopensourcetechnologieshave
+      OakMapper has increased draws from a greater area of         large and passionate followings. Open source software
+
+      the data cube, extending into more general and low-          does present several disadvantages, however, includ-
+      intentionality areas. Currently, we mine all photos that     ing participation and coordination of programmers and
+      have been labeled with the tag “Sudden Oak Death”            quality assurance of code base. If these challenges are
+
+      on Flickr and any Tweets that contain the term “Sud-         not overcome, OSS could be highly susceptible to se-
+      den Oak Death” on Twitter and display all geotagged          curity breach by malicious hackers who can easily study
+      points on a map. OakMapper draws from these sources          the source code. Nonetheless, empirical studies show
+      to increase data ﬂow and also to function as an infor-       that OSS performs better in terms of software security
+
+      mation clearinghouse. The content from these sources         than its closed counterpart (Payne 2002) through the
+      varies greatly but often contains information that could     efforts of communities of open source programmers who
+      be useful to researchers. Recently, photos that we have      audit and maintain the code, as well as online forums
+
+      collectedfromFlickrhaveincludedgeotaggedimagesof             and manuals (Von Krogh, Spaeth, and Lakhani 2003).
+      individual symptomatic trees and larger landscapes sus-      Another potential disadvantage of OSS is the longevity
+      pected to be hosting the disease. Twitter posts are less     of the software and its community, given that OSS is
+
+      commonly geotagged but often contain a geographic            generally created by a small group of unpaid, dedicated
+      dimension, as they often specify locations within the        programmers. To address this issue, the OSS chosen
+      text. For example, shortly after reports of SOD appear-      for this project, such as Apache, PostgreSQL/PostGIS,
+      ing in the United Kingdom, people began to post tweets       CakePHP (a framework for PHP), jQuery (a framework
+
+      regarding this discovery and have since been reporting       for JavaScript), and HTML/CSS, must have been ac-
+      on speciﬁc locations of infection. As discussed earlier,     tively developed, supported, and used for more than
+Downlosuch data are characterized as low intentionality from26 Noveﬁve years. Much OSS is experimental by nature, which
+
+      produsers because its creation was not directed toward       means that the programs might contain bugs. To ac-
+      the OakMapper project. This low intentionality infor-        cess the incremental updates to these software applica-
+      mation is valuable to the OakMapper project because          tions, adopters need to perform periodic maintenance
+      theaggregatesofsuchdatacanrevealapatternofpublic             updates themselves, which is an additional workload to
+
+      interests and can allow for reuse and centralization of      aproject.
+      geotagged photos of SOD on the map.                             Meanwhile, groups such as OGC and the World
+                                                                   Wide Web Consortium (W3C) have created markup
+
+      Supporting Technologies                                      standards to provide guidelines for encoding spatial
+                                                                   data, to increase portability across different applica-
+         Researchers are faced with the challenge of utiliz-       tions and platforms, and to ensure interoperability
+                                                                   between products (Moreno-Sanchez et al. 2007). Rel-
+      ing a wide array of tools to encourage participation and
+      enhance data ﬂow while also organizing this surfeit of       evant geospatial standards include OGC’s Geography
+                                               Citizen Science in the Age of Neogeography                               1279
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            Figure 3. Open source database archi-
+            tecture showing the open source tools.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            Markup Language (GML), GeoRSS, and Google’s Key-           the developers’ control over site stability, however, as
+            hole Markup Language (KML). Speciﬁc OSS used in            all resources are not based on a single server. As such, it
+            OakMapper is detailed in Figure 3 and Table 2.             is advisable to only utilize trusted services with proven
+               DevelopmentofOSS,whencoupledwithopenAPIs,               reliability.
+
+            has led to the rise of the mashup, the creation of a new      OakMapper organizes SOD submissions (from the
+            Web application or service by incorporating and inte-      Web site and iPhone), Flickr photos, and Twitter feeds
+            grating a number of external Web services. Develop-        in a spatial relational database (Figure 4), in which
+
+            ers can save time, cost, and resources by using features   each record can contain locational data in the form
+            from other Web applications and services. For Web          of geographic coordinates and data can be queried and
+            mapping applications, this provides the additional ad-     analyzed spatially. The general structure of a relational
+            vantage that developers do not need to locate and cata-    database allows data to be readily utilized across plat-
+
+            log multiple cartographic layers, as most common base      forms,withorwithoutspatialinformation.Asaresult,a
+            layers are accessible through APIs and are easily in-      spatial relational database is highly portable and inter-
+            tegrated with additional data. This kind of borrowing      operablewithmanydifferentkindsofGISandnon-GIS
+Downloaded by [University of California, Berkeley] at 11:32 26 November 2013
+            is also common for embedded objects such as videos,        applications. Using such databases eliminates the need
+            audio, and Flash objects originating in another Web        to manually populate multiple data repositories (e.g.,
+            application. Although these embedded objects are usu-      shapeﬁles, Excel, Access, MySQL, and KML) and in-
+            ally stand-alone features, they can enrich the presen-     creases data consistency between tools while reducing
+
+            tation of a Web application by providing dynamic and       the time spent on database maintenance—compared
+            interactive content. Researchers can utilize these tools   to maintenance of multiple formats not supported by
+            to tap into other crowdsourced resources and multime-      aommondbe.Arutailbealsw
+
+            dia content to support Web applications. OakMapper         researchers to collect the vast amount of VGI from
+            draws extensively on object embedding to insert ele-       multiple sources in a single location.
+            ments provided by other Web services to our site and          OakMapper has also employed the iPhone SDK to
+
+            to create Google Maps mashups with Flickr images and       create an application that allows users to submit data
+            geotagged tweets. These embedded objects also limit        from the ﬁeld. Within the framework of the SDK,
+       1280                                              Connors, Lei, and Kelly
+
+
+
+                                               Table 2. Technologies discussed in the article
+
+       Software                                     Description                                             Web address
+
+       Web markup and design languages
+
+          GeoRSS                          Geographic Web feed language                       http://www.georss.org
+          CSS                             Cascading Style Sheet                              http://www.w3.org/Style/CSS/
+          HTML                            Web markup language                                http://www.w3.org/TR/html
+
+          JavaScript                      Scripting language                                 https://developer.mozilla.org/en/JavaScript
+          jQuery                          JavaScript library                                 http://jquery.com
+          KML                             Keyhole Markup Language                            http://www.opengeospatial.org/standards/kml
+
+          RSS                             Web feed language                                  http://www.rssboard.org
+          GML                             Geography Markup Language                          http://www.opengeospatial.org/standards/gml
+       Server software
+
+          Apache                          Web server                                         http://www.apache.org
+          CakePHP                         Application software                               http://cakephp.org
+          PHP                             Scripting language                                 http://php.net/index.php
+       Related Web sites and services
+
+          Flickr                          Photography sharing site                           http://www.ﬂickr.com
+          Twitter                         Microblogging service                              http://www.twitter.com
+          Google Maps                     Google online maps service                         http://www.google.com/maps
+
+          Yahoo! Maps                     Yahoo! online maps service                         http://maps.yahoo.com/
+       Database and geographic information system application software
+          PostGIS                         DBMS spatial extension                             http://postgis.refractions.net
+
+          PostgreSQL                      DBMS spatial extension                             http://www.postgresql.org
+          OpenLayers                      JavaScript library for map data                    http://openlayers.org
+          MapServer                       Geographic data rendering engine                   http://mapserver.org
+
+
+       Note: All software last accessed 10 April 2011. DBMS = database management system.
+
+
+
+       developers can access various tools that are built into            database using their current position. This innovation
+       the iPhone, including its GPS, map functionalities, and            haspowerfulimplicationsforcitizenscienceprojectsbe-
+
+       camera. Using the phone’s built-in GPS, the OakMap-                cause it allows participants to utilize their own phones
+       per application allows produsers to add locations to our           as a research instrument.
+
+
+
+
+
+
+
+
+
+
+
+
+
+Downloaded by [University of California, Berkeley] at 11:32 26 November 2013
+
+
+
+
+                                                                                                  Figure 4. The OakMapper data model.
+                                                Citizen Science in the Age of Neogeography                                1281
+
+
+             Current Use                                                 purposes. The OakMapper database and Web site have
+                                                                         been mentioned in a number of recent scholarly arti-
+               Since its launch in December 2008, OakMapper
+                                                                         cles, largely in two areas of research. First, the OakMap-
+             2.0 consistently receives about 200 visitors per month.     per database has been used as inputs to environmental
+             During this period, produsers have given twenty-six         niche models to predict the current and possible range
+             submissions of unofﬁcial points and forty-nine have
+                                                                         of the pathogen P. ramorum (Guo, Kelly, and Graham
+             registered at the site, including four government of-       2005; Kelly et al. 2007; Kluza et al. 2007; Magarey et al.
+             ﬁcials. Among the public participants, seventeen did        2008). Second, the Web site has been used as an exam-
+             not specify a background, seventeen speciﬁed that they
+             are academics, and eleven indicated that they are from      ple of emerging technology in support of participatory
+                                                                         forest management (Kelly, Tuxen, and Kearns 2004;
+             other ﬁelds. Of the registered users, fourteen have sub-    Ward and Johnson 2007).
+             mitted data and three have submitted multiple points.
+             Additional locations were submitted anonymously. In-
+
+             cluding data collected from the previous version of         Future Directions
+             OakMapper,thedatabasecontainsatotalof663uncon-
+             ﬁrmedcommunity-submittedpointsand1,134ofﬁcially               The previous sections highlighted the technical and
+             conﬁrmed points.                                            conceptual underpinnings of OakMapper and intro-
+
+               OakMapperbegandownloadingTwitterfeedstagged               duced some of the critical issues surrounding their
+             with “Sudden Oak Death” in April 2010 and has ac-           implementation. Further development of OakMapper
+             quired 287 Twitter feeds in that short period, including    will focus on increasing the functionality of these tools
+
+             twelve geotagged points. Many of these tweets regard        and increasing their speciﬁc utility for citizen science,
+             reports of the appearance of SOD in the United King-        remaining attentive to issues of access, representa-
+             dom, which the authors of this article ﬁrst learned of      tion, epistemology, and power. The current design of
+
+             from these posts. In the same time, OakMapper has           OakMapper is intended to be ﬂexibile and expandable.
+             downloaded 107 geotagged Flickr photos with the tag         Inapracticalsense,thiswillmeandevelopingnewtools
+             “Sudden Oak Death.” The majority of the Flickr pho-         that are readily accessible to larger portions of the pub-
+             tos are located in Northern California, but many have       lic and making efforts to reduce impacts of information
+
+             also recently appeared in the United Kingdom. Nearly        gleaning.
+             all of the photos depict trees with visible symptoms of       We envision the addition of several other features in
+             sickness, but other photos show restoration efforts and     the future to provide increased access and an improved
+
+             researchers in the ﬁeld. The iPhone app was released        produser experience. Given the diversity of groups in-
+             in October 2009 and has been downloaded ninety-four         terested in SOD, OakMapper would also beneﬁt from
+             times, but few points have been submitted using the         developing new pathways for transmission of data. The
+             application.                                                centralized database is capable of serving and receiving
+
+               These differences in activity from each channel dis-      information from additional platforms, such as other
+             play the possibility for data integration. Even as the      mobiledevicesorArcGIS(ESRI2008).Sinceitsincep-
+             OakMapper site has seen a slower rate of contributions,     tion, OakMapper has provided researchers with shape-
+
+             we have been able to extract information from Flickr        ﬁles of SOD locations. Our new design could enable
+Downloaded byand even greater activity around SOD has occurred November 2researchers to connect directly to our server within Ar-
+             on Twitter. If we treat this information as a potential     cGIS or other GIS packages to obtain the most up-to-
+             data source and combine it with contributions to the        date data sets. To enable a greater number of users to
+
+             OakMapper site, we are able to increase our data set        partake in the LBS side of OakMapper, we could also
+             for understanding the spread of SOD. This information       utilize Short Messaging Service (SMS) to receive data
+             is also valuable to better characterize public interest     and expand access beyond the iPhone to other smart
+
+             and target outreach efforts. Twitter and Flickr users are   phones, such as those with the Android OS, by creat-
+             unknowing contributors to OakMapper but could also          ing applications for these devices or creating mobile-
+             be actively recruited to the OakMapper community to         speciﬁc Web-based applications.
+
+             increase the number of direct contributions.                  Given the often personal nature of photography and
+               Our external data resources have not yet been ap-         blogging, we are exploring means of opting out of data
+             plied for analysis, but the OakMapper Web site and          collection. When data are obtained from an outside
+             the database have been used for a variety of scientiﬁc      source, an automated message could be sent to the
+      1282                                           Connors, Lei, and Kelly
+
+
+      creator to inform them of this reuse. An alert system         potential trade-offs exist between data ﬂow and accu-
+      such as this could also have the added beneﬁt of out-         racy, which must be addressed for individual projects.
+
+      reach; produsers could be introduced to OakMapper                These differences in accuracy are increasingly rec-
+      through this alert, and some might choose to add more         ognized as characteristic of VGI (Girres and Touya
+      content or place relevant tags on more of their content.      2010; Haklay 2010; Haklay et al. 2010). Goodchild
+
+      The statistics on usage for OakMapper indicate that the       (2007) mentioned this in the context of the new map
+      site must make greater outreach efforts to build its user     “patchwork” paradigm, in which the accuracy of each
+      base.                                                         piece of the patchwork, and the frequency with which
+
+                                                                    it is updated, can be determined by local need. Thus,
+                                                                    solutions to issues of quality control will depend on
+                                                                    the needs of a project and the applications of the data
+      Discussion                                                    set and can vary within the project itself, across space
+
+         In this article we have lauded VGI and citizen sci-        or user. For example, OakMapper separates laboratory-
+      ence for their ability to foster participation and in turn    conﬁrmed points, which are held to a higher degree of
+      to generate important data across broad spatial scales        scrutiny, from other points (no matter the user’s status).
+
+      for scientiﬁc endeavors. There are important issues to        In this manner, we can have different quality expecta-
+      consider regarding the data itself, however, such as who      tions for each data set and each can be used for different
+      is involved in its creation and who controls its use. We      purposes. With our current data ﬂow, site administra-
+      discuss these issues in this section to consider limita-      tors can easily monitor for and remove blatant inaccu-
+
+      tions to the use of VGI and to foresee challenges that        racies and keep track of comments that indicate suspect
+      practitioners will face. Within this context, we then         points. Given a critical mass of participants, accuracy
+      consider how issues of access and representation might        assessment could take on a wiki approach, where pro-
+
+      affectthe content captured by VGI and explore the mo-         dusers collaboratively identify and remove inaccurate
+      tivationsof participants.Throughout the discussion,we         information.
+      critically assess the case study.                                For projects that require highly speciﬁc information,
+                                                                    the accuracy of the data might be affected by the expe-
+         Citizen science poses a unique set of challenges re-
+      garding accuracy and uncertainty, particularly when           riences and education levels of the produsers. Delaney
+      data are collected by an untrained public. VGI is partic-     et al. (2008) found a correlation between level of edu-
+      ularly susceptible to error and can result in inaccurate      cation and accuracy of reporting from citizen scientists
+
+      or imprecise spatial information (Flanagin and Met-           identifying an invasive crab species, with 95 percent
+      zger 2008; Goodchild 2008; Seeger 2008). This can be          accuracy from participants with two or more years of
+      due to technology, training, or intention. Neogeogra-         college education. This relationship between education
+
+      phers might accidentally misrepresent information due         and accuracy creates a possible conﬂict of project goals:
+      to lapses in memory or misinterpretation of maps or in-       It is desirable to have university-educated individuals
+      tentionally misrepresent information for personal pur-        participate if they are more likely to provide accurate
+      poses. The accuracy and origins of VGI and underlying         data, but we wish to engage a diverse segment of the
+
+      data can be difﬁcult to discern due to a lack of meta-        public in citizen science, regardless of education levels.
+      data standards common to traditional data sets. Data          Greater recognition of different epistemologies might
+Downloproduced in this environment might also be prone to32 26 Novemhelp us to ﬁnd a compromise between these seemingly
+
+      misregistration due to inaccuracies in the base layers,       conﬂicted interests. Integration of other ways of know-
+      such as a known datum shift in Google Maps (Good-             ing from VGI, such as narrative data and photographs,
+      child 2007). Thus, there is a need to understand the          could reveal broader environmental and social impacts
+      role of data screening and assessment in applying VGI         of SOD. In this manner, citizen science can learn from
+
+      for research purposes. Many of the previously identiﬁed       the efforts of PGIS to create new roles for the public
+      challenges facing PGIS, including the need for evalu-         in gathering spatial information (Weiner and Harris
+      ation and effectiveness (Sieber 2006), are relevant to        2003; Elwood 2006) that extend beyond quantitative
+
+      applications of VGI for citizen science. Nevertheless,        forms of knowledge that are most easily translated into
+      these issues of accuracy are irrelevant without partici-      aGI rtcl9.I igstsit
+      pation, and researchers must actively recruit the pub-        must also consider the goals of the data and continue
+                                                                    to discriminate between data that are suitable for spa-
+      lic’s contributions to ensure consistent data ﬂow (Peng
+      2001). When accessing multiple information channels,          tial modeling, or other quantitative tasks, and other
+                                                Citizen Science in the Age of Neogeography                                1283
+
+
+             types of information, which could broaden the under-        economy (e.g., Goodchild, Fu, and Rich 2007; Cole-
+             standing of a phenomenon. Ultimately, these goals will      man2010;Zooketal.2010).Fewhaveaskedwhatthese
+
+             determinethelevelofspeciﬁcityoftheinformationthat           trends mean in the context of environmental monitor-
+             researchers gather. Speciﬁc information might be easier     ing and questions necessarily arise. What are the bene-
+             to evaluate for accuracy and allow for a higher degree      ﬁts and challenges raised when the role of monitoring
+
+             of scrutiny than general information.                       something like a forest disease devolves from federal
+               Our proposed hybrid approach to data collection           entities to a more distributed VGI model that includes
+             poses issues beyond accuracy, which must be carefully       scientists, regulators, and the public? What are the
+
+             considered. Issues of access, power, and control of in-     necessary checks and controls on data acquisition
+             formation addressed by critical GIS (Harris and Weiner      and distribution in such a framework, and how are
+             1998) have gained new relevance with the growth of          clear monitoring objectives, necessary for any suc-
+             VGI andare particularlyrelevanttothese methods. De-         cessful environmental monitoring program, developed
+
+             spitetheperceiveddemocratizationofinformationwith           in a participatory model? There are few examples in
+             Web 2.0, concerns over access and biased representa-        the United States, other than SOD and OakMap-
+             tion in spatial information persist. Although 70 percent    per, of participatory models for monitoring regional
+
+             of households in the United States have access to the       or continental-scale forest diseases (e.g., bark bee-
+             Internet (Watson et al. 2008), general usership displays    tles, pitch canker, Pierce’s disease, Dutch Elm dis-
+             a heterogeneous pattern with great variations in adop-      ease, etc.), so broad answers to these questions are
+             tion by race and area (Chakraborty and Bosman 2005).        difﬁcult to come by. OakMapper’s ﬂexible VGI-based
+
+             Similar disparities are apparent in the spatial distribu-   environmental monitoring system that incorporates
+             tions of posts on Google Maps, which have revealed          motivated participants, sensing devices, and back-
+             a bias toward high-income locales and tourist destina-      end information infrastructure—what Gouveia and
+
+             tions (Crutcher and Zook 2009). This bias echoes the        Fonseca (2008) called the backbone of participatory
+             arguments in critical GIS that socioeconomic forces         monitoring—providesa starting pointtoexaminethese
+             regulatetheﬂowofspatialinformationevenwheninfor-            questions. In this example, the motivated participants
+             mation control is divested from centralized institutions.   include scientists, regulators, and private citizens with
+
+             The research community must consider these concerns         different inspirations, and the data they generate re-
+             while exploring applications of these methods and ad-       quire different levels of validation and carry different
+             dressing the need for GKD methods (H. J. Miller 2010).      expectations about quality, but there is something to be
+
+             Although VGI offers the promise of democratizing            gained by having them juxtaposed.
+             GIS by engaging large numbers of public contributors,         Neogeographers are challenging traditional roles for
+             issues of access remain relevant. These issues are well-    data creation and circumventing the authority of the
+
+             documented in the Web GIS and participatory GIS lit-        cartographer,yetevenwiththisshift,questionsofpower
+             erature (Sieber 2003; Chakraborty and Bosman 2005),         and motivations persist. Tulloch (2008) offered a de-
+             but they merit mention with regard to emerging mo-          tailed assessment of the relationship between PGIS and
+             bile technologies and in the context of citizen science.    VGI and concluded that contributors to VGI and PGIS
+
+             Smart phones in general represent about 23 percent of       display an interest in participating in a larger project,
+             the mobile market, with iPhones representing about 5        but each realm differs in part because of motivations
+Downloaded bypercent of the entire mobile market (Comscore 2010).vember 2of participants. PGIS focuses on social outcomes and
+
+             Our iPhone application has yet to be implemented on         development of democratic processes, but VGI projects
+             any other devices, posing technological and ﬁnancial        are far more diverse and their motivations will vary
+             barriers to participation. Thus, we might want to ex-       greatly. Similarly, citizen scientists and neogeographers
+             plore SMS as an additional means for cell phone users       are both contributing to a larger effort, but citizen sci-
+
+             to submit data from the ﬁeld. Unequal access is partic-     entists can be distinguished by their intention to con-
+             ularly important for citizen science, as it will also affecttribute to research endeavors. Drawing from literature
+             sampling and ultimately limit the applications of a data    on the motivations of contributors to Wikipedia and
+
+             set.                                                        OSSprojects(e.g.,LakhaniandWolf2005;Cook2008;
+               The phenomenonof corporate control of spatial data        Schroer and Hertel 2009), Coleman, Georgiadou, and
+             acquisition devolving to a more distributed model, ex-      Labonte (2009) create a taxonomy of neogeographers
+             empliﬁed by OpenStreetMap, is discussed at length           and identiﬁed eleven distinct motivations for contribu-
+
+             within arguments about neoliberalism and political          tors to VGI, which operate within four areas of context:
+      1284                                          Connors, Lei, and Kelly
+
+
+      market-driven, social networks, emergency reporting,         reach activities for scientiﬁc projects. Outreach efforts
+      and civic and governmental. OakMapper’s services are         can also be directed speciﬁcally to the produsers who
+
+      intended to attract the full spectrum of users identi-       are reporting on SOD in these forums, to recruit them
+      ﬁed by this taxonomy, from neophytes to expert au-           to OakMapper. Currently, we only extract information
+      thorities, operating within a civic and governmental         from these channels, but feeding information into them
+      context. Meanwhile, our data gleaning efforts are in-        might improve public outreach and attract more partic-
+
+      tended to draw information from interested amateurs          ipants. Any photos submitted directly to OakMapper
+      and expert amateurs who are operating within social          could be automatically uploaded to Flickr and appro-
+      networks. Produsers from the civic and governmental          priately tagged.
+
+      contextarelikelytobemotivatedbyprofessionalorper-               In this article, we show one example of a Web ap-
+      sonal interest, intellectual stimulation, and protection     plication designed in an open source, produser-centric
+      or enhancement of a personal investment (in this case        framework, but tools founded on these elements could
+      oak trees and property). At the same time, there will        take many forms and could borrow from both open
+
+      be produsers who are motivated by agendas (e.g., pre-        source and proprietary software solutions. For example,
+      serving or diminishing real estate values or promoting       at one end of the spectrum, some might prefer to work
+      landscaping services).                                       with in an entirely open source environment, creating
+
+         We can further situate VGI-driven citizen science         maps in OpenLayers and using base layers from Open-
+      projects within the context of a macro–micro partici-        StreetMap and open source Web design frameworks,
+      patory decision strategy (Jankowski and Nyerges 2001).       such as WordPress. Such a reliance on open source
+      According to this framework, participatory decision          technologies might necessitate a certain level of pro-
+
+      making involves three macro phases that include intel-       gramming skill, as the more complex and interoperable
+      ligence about values and objectives, design of options,      designs often require extensive programming. Devel-
+      and choice about recommendations. At each of these           opers are also dependent on a dedicated open source
+      macrolevels, participants ﬁrst gather information, then      user base for documentation and development, making
+
+      organize said information, then select from it, and ﬁ-       it difﬁcult to locate information about some technolo-
+      nally review and assess it to move onto the next phase.      gies. Furthermore, new versions and necessary updates
+      OakMapper has only been involved with the ﬁrst macro         of products might experience infrequent releases. More
+
+      phase and has not yet extended into the design and           popularopensourcetechnologieswithmanyusers,how-
+      choicephasesofenvironmentaldecisionmaking.There              ever, are often supported by extensive documentation
+      is the potential for OakMapper to straddle the ﬁelds of      on the Web and online user forums that quickly answer
+      participatory decision making and citizen science by in-     questions. In utilizing OSS, researchers might also dis-
+
+      voking tools that simultaneously serve data collection       play greater neutrality in their scientiﬁc endeavors, as
+      and decision support.                                        they can divest from corporate interests associated with
+         OakMapper is very different from traditional expert-      commercial software (Curry 1998).
+      driven models of environmental monitoring because
+
+      of its coupling of data from interested publics and op-
+      portunistic utilization of the geocloud. Enhancing our       Conclusions
+      understanding of VGI will open opportunities for re-
+Downloaded by [University of California, Berkeley] at 11:32 26 November 2013
+      searchers to take advantage of this constant ﬂow of             The inclusion of private citizens in large-scale and
+      information, and new Internet tools, such as Google          complex environmental challenges will undoubtedly
+      Fusion Tables, provide greater options for distribution      continue, whether through regulation—such as in the
+      of interactive visualizations. OakMapper is utilizing        National Environmental Protection Agency process
+
+      tweets, which are produced at four times the rate of         that requires public participation in many federal en-
+      our current contributions, although these are not all        vironmental activities—or fed by the spirit of volun-
+      geotagged. The regular contributions of SOD-related          teerism. We argue here that environmental monitoring
+
+      information through outside channels reveals the pub-        canbeneﬁtfromaccessingalargerspectrumofprodusers
+      lic’s continued interest in the topic and shows the po-      and an array of data created with different intentions, as
+      tential of popular media to gather related data, even        illustrated in our conceptual model. Despite the chal-
+      when contributions to a topic-speciﬁc site are low. VGI      lenges, we show that an integrated geospatial tool set
+
+      from outside sources is quite useful as a gauge of public    can provide a logical, ﬂexible, and intuitive framework
+      interest and can also be utilized to time and target out-    for soliciting, storing, analyzing, and visualizing such
+                                                 Citizen Science in the Age of Neogeography                                   1285
+
+
+             volunteered spatial data across information domains.          ciﬁc data on tree infection to the distributed com-
+
+             To support this argument, we provide an example of a          munity that includes submissions from the geocloud
+             user-driven project, supported by open source technol-        and submissions from a focused public. This blended
+             ogy, with a scalable database for environmental mon-          approach to citizen-based environmental monitoring
+
+             itoring. Our example, the OakMapper project, is part          enhances data ﬂow and taps into exogenous data
+             of a long-term and collaborative venture where both           sources. We believe that this model might be bene-
+
+             researchers and private citizens gather and share envi-       ﬁcial and well utilized in other cases of highly vis-
+             ronmental data at multiple geographic scales over time.       ible environmental problems that have an engaged
+             The project is intended to help realize the potential         public, a scientiﬁc framework, and a broad spatial
+
+             of Web mapping and citizen science for environmen-            range.
+             tal monitoring by taking advantage of freely available
+             technologies and robust design principles while paying
+
+             attention to user experience and having an inclusive          References
+             view on data sources. The Web mapping technologies
+             presented in this article can quickly gather and dissemi-     Aanensen, D., D. Huntley, and E. Feil. 2009. EpiCollect:
+                                                                               Linking smartphones to Web applications for epidemiol-
+             nate information from multiple streams in an organized            ogy, ecology and community data collection. PLoS ONE
+             and easily interpreted format.                                    4(9):e6968.
+                The Web site is a hybrid, uniting several char-            Anderson, D. P., J. Cobb, E. Korpela, M. Lebofsky, and
+                                                                               D. Wethimer. 2002. SETI@home: An experiment in
+             acteristic types of VGI and citizen science: targeted             public-resource computing. Communications of the ACM
+             citizen-based observation networks, expert-driven fo-             45:56–61.
+             cused environmental monitoring, and opportunistic             Anderson,G.,andR.Moreno-Sanchez. 2003.BuildingWeb-
+
+             crowdsourcing efforts (Figure 1). The beneﬁts of our              based spatial information solutions around open speci-
+             blended approach to monitoring are clear: OakMap-                 ﬁcations and open source software. Transactions in GIS
+             per is the one place where all ofﬁcial data on the                7:447–66.
+                                                                           Antoniou, V., J. Morley, and M. Haklay. 2010. Web 2.0
+             spread of this disease are available; it has been able to         geotagged photos: Assessing the spatial dimension of the
+             gather spatial information on potential SOD from the              phenomenon. Geomatica 64:99–110.
+             length of California from a diverse community; and we         Ba, S. 2001. Establishing online trust through a com-
+                                                                               munity responsibility system. Decision Support Systems
+             have engaged broadly with an interested public about a            31:323–36.
+             regional-scale environmental problem. The challenges          Bailey, C., I. Convery, M. Mort, and J. Baxter. 2006. Dif-
+             to this approach have also been considerable, and we              ferent public health geographies of the 2001 foot and
+                                                                               mouth disease epidemic: “Citizen” versus “professional”
+             are still working through them. Issues of data qual-
+             ity, differential motivation, surveillance and decision-          epidemiology. Health and Place 12:157–66.
+             making power between parties, all discussed in this           Balram, S., and S. Dragicevic. 2009. Collaborative GIS for
+                                                                               spatial decision support and visualization. Journal of En-
+             article,remainofconcernasweseektoutilizenewtech-                  vironmental Management 90:1963–65.
+             nologies. Such activities can be reviewed in terms of         Ban,N.C.,C.R.Picard,andA.C.J.Vincent.2008.Compar-
+             their balance between “external” and “internal” values.           ing and integrating community-based and science-based
+                                                                               approaches to prioritizing marine areas for protection.
+             External values are those that have usefulness for the            Conservation Biology 23:899–910.
+             public in a speciﬁc decision-making context, whereas          Berkes,F.2009.Evolutionofco-management:Roleofknowl-
+Downloaded byinternal values are those that relate to learning andember 2013   edge generation, bridging organizations and social learn-
+                                                                               ing. Journal of Environmental Management90:1692–1702.
+             personal development; these are subjective and speciﬁc        Budhathoki, N., B. Bruce, and Z. Nedovic-Budic. 2008.
+             to each participant (Lawrence 2010). Often, partici-
+             patory tools are forced to be dichotomous, with either            Reconceptualizing the role of the user of spatial data
+                                                                               infrastructure. GeoJournal 72:149–60.
+             transitional or instrumental objectives, but the ben-         Budhathoki, N. R., Z. Nedovic-Budic, and B. Bruce.
+             eﬁt and utility of such tools are often more mixed,               2010. An interdisciplinary frame for understanding
+             with multiple audiences with myriad responses and                 volunteered geographic information. Geomatica 64:11–
+                                                                               26.
+             values.                                                       Butcher, G. 1990. Audubon Christmas bird counts. Biologi-
+                This argument is also useful in the context of in-             cal report, U.S. Fish and Wildlife Service, Washington
+             formation. The beneﬁt of projects such as OakMap-                 DC.
+                                                                           Chakraborty, J., and M. M. Bosman. 2005. Measuring the
+             per is their hybrid approach to information gathering             digital divide in the United States: Race, income, and
+             that solicits information from a range of users—from              personal computer ownership. The Professional Geogra-
+
+             the regulatory and scientiﬁc users who supply spe-                pher 57:395–410.
+       1286                                             Connors, Lei, and Kelly
+
+
+       Chew, C., and G. Eysenbach. 2010. Pandemics in the age               standing Legionnaires’ disease. Health & Place 13:677–
+           of Twitter: Content analysis of tweets during the 2009           90.
+           H1N1 outbreak. PloS ONE 5:e14118.                            Dykes, J., R. Purves, A. Edwardes, and J. Wood. 2008. Ex-
+       Coleman, D. J. 2010. The potential and early limita-                 ploring volunteered geographic information to describe
+
+           tions of volunteered geographic information. Geomatica           place: Visualization of the “Geograph British Isles” col-
+           64:209–19.                                                       lection. Proceedings of Geographic Information Systems Re-
+       Coleman, D., Y. Georgiadou, and J. Labonte. 2009. Volun-             search UK 2008,256–67.Manchester,UK:Manchester
+           teered geographic information: The nature and moti-              Metropolitan University.
+           vation of produsers. International Journal of Spatial Data   Elwood, S. 2006. Negotiating knowledge production: The
+           Infrastructures Research 4:332–58.                               everyday inclusions, exclusions, and contradictions of
+       Comscore.    2010.  July   2010   U.S.  mobile   subscriber          participatory GIS research. The Professional Geographer
+
+           market share. http://www.comscore.com/Press Events/              58:197–208.
+           Press Releases/2010/9/comScore Reports July 2010             ———. 2007. Grassroots groups as stakeholders in spatial
+           U.S. Mobile Subscriber Market Share (last accessed 26            data infrastructures: Challenges and opportunities for lo-
+           October 2011).                                                   cal data development and sharing. International Journal
+       Cook,S.2008.Thecontributionrevolution.HarvardBusiness                of Geographic Information Science 22:71–90.
+           Review 86:60–69.                                             ———. 2010. Geographic information science: Emerging
+       Cooper,C.B.,J.Dickinson,T.Phillips,andR.Bonney.2007.                 research on the societal implications of the geospatial
+
+           Citizen science as a tool for conservation in residential        web. Progress in Human Geography 34:349–57.
+           ecosystems. Ecology and Society 12:11.                       ESRI (Environmental Systems Resource Institute).2008.Ar-
+       Couvet, D., F. Jiguet, R. Julliard, H. Levrel, and A. Teyssedre.     cGIS 9.3, ArcMIS.Redlands,CA:ESRI.
+           2008. Enhancing citizen contributions to biodiversity        Evans, K., W.deJong, P. Cronkleton, D. Sheil, T. Lymam, T.
+           scienceandpublicpolicy.InterdisciplinaryScienceReviews           Kusumanto, and C. J. P. Colfer. 2006. Guide to participa-
+           33:95–103.                                                       tory tools for forest communities.Bogor,Indonesia:Center
+                                                                            for International Forestry Research.
+       Crandall, D., L. Backstrom, D. Huttenlocher, and J. Klein-
+           berg. 2009. Mapping the world’s photos. In Proceedings       Fernandez-Gimenez, M. E., H. L. Ballard, and V. E. Sturte-
+           of the 18th International Conference on World Wide Web,          vant. 2008. Adaptive management and social learning
+           chairs J. Quemada and G. Leon, 761–770. New York:                in collaborative and community-based monitoring: A
+           ACM.                                                             study of ﬁve community-based forestry organizations in
+       Crutcher,M.,andM.Zook.2009.Placemarksandwaterlines:                  the western USA. Ecology and Society 13 (2): 4.
+           Racializedcyberscapesinpost-KatrinaGoogleEarth.Ge-           Flanagin, A., and M. Metzger. 2008. The credibility of
+
+           oforum 40:523–34.                                                volunteered geographic information. GeoJournal 72:
+       Cummings,J.N.,andS.Kiesler.2005.Collaborativeresearch                137–48.
+           across disciplinary and organizational boundaries. Social    Friedland, G., and J. Choi. 2011. Semantic computing and
+           Studies of Science 35:703–22.                                    privacy: A case study using inferred geo-location. Inter-
+       Curry, M. 1998. Digital places: Living with geographic informa-      national Journal of Semantic Computing 5:79–93.
+           tion technologies.Hove,UK:PsychologyPress.                   Ghaemi, P., J. Swift, C. Sister, J. P. Wilson and J. Wolch.
+       Danielsen, F., A. E. Jensen, P. A. Alviola, D. S. Balete,            2009. Design and implementation of a web-based plat-
+
+           M. Mendoza, A. Tagtag, C. Custodio, and M. Enghoff.              form to support interactive environmental planning.
+           2005. Does monitoring matter? A quantitative assess-             Computers, Environment and Urban Systems 33:482–
+           ment of management decisions from locally-based mon-             91.
+           itoring of protected areas. Biodiversity and Conservation    Girres, J. F., and G. Touya. 2010. Quality assessment of
+           14:2633–52.                                                      the French OpenStreetMap dataset. Transactions in GIS
+       Delaney, D. G., C. D. Sperling, C. S. Adams, and B. Leung.           14:435–59.
+           2008. Marine invasive species: Validation of citizen sci-    Goodchild, M. F. 1997. Towards a geography of geographic
+
+           ence and implications for national monitoring networks.          information in a digital world. Computers, the Environ-
+Downloaded by [University of California, Berkeley] at 11:32 26 November 2013ment, and Urban Systems 21:377–91.
+       Dragicevic, S., and S. Balram. 2006. Collaborative geo-          ———. 2007. Citizens as sensors: The world of volunteered
+           graphic information systems and science: A transdisci-           geography. GeoJournal 69: 211–21.
+           plinary evolution. In Collaborative geographic information   ———. 2008. Commentary: Whither VGI? GeoJounal
+           systems,ed.S.BalramandS.Dragicevic,341–50.Her-                   72:239–44.
+
+           shey, PA: Idea Group.                                        ———. 2009. Assertion and authority: The science of user-
+       Driedger, S., A. Kothari, J. Morrison, M. Sawada, E.                 generated geographic content.SantaBarbara:Universityof
+           Crighton, and I. Graham. 2007. Correction: Using par-            California, Santa Barbara.
+           ticipatorydesigntodevelop(public)healthdecisionsup-          Goodchild, M. F., P. Fu, and P. Rich. 2007. Sharing ge-
+           port systems through GIS. International Journal of Health        ographic information: An assessment of the geospatial
+           Geographics 6:53.                                                one-stop. Annals of the Association of American Geogra-
+       Dunn,C.E.2007.ParticipatoryGIS:Apeople’sGIS?Progress                 phers 97:250–66.
+
+           in Human Geography 31:616–37.                                Gouveia, C., and A. Fonseca. 2008. New approaches to envi-
+       Dunn, C. E., R. S. Bhopal, S. Cockings, D. Walker,                   ronmental monitoring: The use of ICT to explore volun-
+           B. Rowlingson, and P. Diggle. 2007. Advancing in-                teered geographic information. GeoJournal 72:185–97.
+           sights into methods for studying environment–health          Greene, S., T. Minoura, J. Steiner, and G. Pentacost. 2007.
+           relationships: A multidisciplinary approach to under-            WebGRMS: Prototype software for web-based mapping
+                                                    Citizen Science in the Age of Neogeography                                        1287
+
+
+                  of biological collections. Biodiversity and Conservation     Kouzes, R. T., J. D. Meyers, and W. A. Wulf. 1996. Collabo-
+                  16:2611–25.                                                       ratoriesdoingscience ontheInternet.Computer Methods
+              Guo, Q., M. Kelly, and C. H. Graham. 2005. Support vector             and Programs in Biomedicine 29:40–46.
+                  machines for predicting distribution of sudden oak death     Kusel, J., S. C. Doak, S. Carpenter, and V. E. Sturtevant.
+
+                  in California. Ecological Modelling 182:75–90.                    1996. The role of the public in adaptive ecosystem
+              Haklay, M. 2010. How good is volunteered geographical in-             management. In Sierra Nevada Ecosystem Project: Fi-
+                  formation? A comparative study of OpenStreetMap and               nal report to Congress, Vol. II, Assessments and scien-
+                  Ordnance Survey datasets. Environment and Planning B:             tiﬁc basis for management options,–4.D:in-
+                  Planning and Design 37:682–703.                                   ters for Water and Wildland Resources, University of
+              Haklay, M. M., S. Basiouka, V. Antoniou, and A. Ather.                California–Davis.
+                  2010. How many volunteers does it take to map an area        Lakhani,K.R.,andR.Wolf.2005.Whyhackersdowhatthey
+
+                  well?ThevalidityofLinuslawtovolunteeredgeographic                 do: Understanding motivation and effort in free/open
+                  information. The Cartographic Journal 47:315–22.                  source software projects. In Perspectives on free and open
+              Haklay,M.,A.Singleton,andC.Parker.2008.Webmapping                     source software,ed.J.Feller,B.Fitzgerald,S.Hissam,and
+                  2.0: The neogeography of the GeoWeb. Geography Compass            K. Lakhani, 3–21. Cambridge, MA: MIT Press.
+                  22:2011–39.                                                  Lawrence,A.2010.“Nopersonalmotive?”Volunteers,biodi-
+              Hall, G. B., R. Chipeniuk, R. D. Feick, M. G. Leahy, and              versity,andthefalsedichotomiesofparticipation.Ethics,
+                  V. Deparday. 2010. Community-based production of ge-              Place and Environment 9:279–98.
+
+                  ographic information using open source software and          Lee, T., M. Quinn, and D. Duke. 2006. Citizen, science,
+                  Web 2.0. International Journal of Geographical Information        highways, and wildlife: Using a web-based GIS to engage
+                  Science 24:761–81.                                                citizens in collecting wildlife information. Ecology and
+              Harris, T., and D. Weiner. 1998. Empowerment, marginaliza-            Society 11:11.
+                  tion and “community-integrated” GIS. Cartography and         Lepczyk, C. 2005. Integrating published data and citizen sci-
+                  Geographic Information Systems 25:67–76.                          ence to describe bird diversity across a landscape. Ecology
+              Heer, J., and M. Agrawala. 2008. Design considerations for
+                                                                                    42:672–77.
+                  collaborative visual analytics. Information Visualization    Longueville, B. D., G. Luraschi, P. Smits, S. Peedell, and T.
+                  7:49–62.                                                          D. Groeve. 2010. Citizens as sensors for natural haz-
+              Holland, M. M. 1996. Ensuring sustainability of natural re-           ards: A VGI integration workﬂow. Geomatica 64:41–
+                  sources: Focus on institutional arrangements. Canadian            59.
+                  Journal of Fisheries and Aquatic Sciences 53:432–39.         Lynam,T.,W.deJong,D.Sheil,K.Evans,andT.Kusumanto.
+              Howe, J. 2009. Crowdsourcing: Why the power of the crowd is           2007. A review of the tools for incorporating community
+
+                  driving the future of business. Three Rivers Press.               knowledge, preferences, and values into decision making
+              Irwin, A. 1995. Citizen science: A study of people, expertise and     in natural resource management. Ecology and Society 12
+                  sustainable development.London:Burns&Oates.                       (5). http://www.ecologyandsociety.org/vol12/iss1/art5/
+              Jacobson, C., K. F. D. Hughey, W. J. Allen, S. Rixecker,              (last accessed 26 October 2011).
+                  and R. W. Carter. 2009. Toward more reﬂexive use             MacEachren, A. M., M. Gahegan, W. Pike, I. Brewer, G.
+                  of adaptive management. Society and Natural Resources             Cai,andE.Lengerich.2004.Geovisualizationforknowl-
+                  22:484–95.                                                        edge construction and decision support. IEEE Computer
+
+              Jankowski, P., & T. Nyerges. 2001. GIS-supported collabora-           Graphics and Applications 24:13–17.
+                  tive decision making: Results of an experiment. Annals       Magarey, R., G. Fowler, M. Colunga, W. Smith, and R.
+                  of the Association of American Geographers 91:48–70.              Meentemeyer. 2008. Climate-host mapping of Phytoph-
+              Jennings,D.B.,S.T.Jarnagin,andD.W.Ebert.2004.Amod-                    thora ramorum, causal agent of sudden oak death. In
+                  eling approach for estimating watershed impervious sur-           Proceedings of the Sudden Oak Death Third Science Sym-
+                  face area from National Land Cover Data 92. Photogram-            posium,techcoords.S.Jijnas,andJ.T.K
+                  metric Engineering and Remote Sensing 70:1295–1307.               K. M. Palmieri, 269–75. Albany, CA: Paciﬁc Southwest
+
+              Kearns, F. R., M. Kelly, and K. A. Tuxen. 2003. Everything            Research Station, Forest Service, U.S. Department of
+Downloaded by [University of California, Berkeley] at 11:32 26 November 2013        Agriculture.
+                  able natural resource management. Frontiers in Ecology       Marsh, S., and M. R. Dibben. 2003. The role of trust in
+                  and the Environment 1:541–48.                                     information science and technology. Annual Review of
+              Kelly, M., Q. Guo, D. Liu, and D. Shaari. 2007. Modeling the          Information Science and Technology 37:465–98.
+                  riskforanewinvasiveforestdiseaseintheUnitedStates:           Mason, B., and S. Dragicevic. 2006. Web GIS and knowledge
+
+                  Anevaluationofﬁveenvironmentalnichemodels.Com-                    management systems: An integrated design for collabo-
+                  puters, Environment and Urban Systems 31:689–710.                 rative community planning. In Collaborative Geographic
+              Kelly, M., and K. Tuxen. 2003. WebGIS for monitoring “sud-            Information Systems,d..BrlndS.avi,
+                  den oak death” in coastal California. Computers, Envi-            263–84. Hershey, PA: Idea Group Publishing.
+                  ronment and Urban Systems 27:527–47.                         McCaffrey, R. 2005. Using citizen science in urban bird stud-
+              Kelly, M., K. Tuxen, and F. Kearns. 2004. Geospatial infor-           ies. Urban Habitats 3:70–86.
+                  matics for management of a new forest disease: Sudden        McPherson, B. A., S. R. Mori, D. L. Wood, A. J. Storer, P.
+
+                  oak death. Photogrammetric Engineering and Remote Sens-           Svihra, N. M. Kelly, and R. B. Standiford. 2005. Sudden
+                  ing 70: 1001–1004.                                                oak death in California: Disease progression in oaks and
+              Kluza, D., D. Vieglais, J. Andreasen, and A. Peterson. 2007.          tanoaks. Forest Ecology and Management 213:71–89.
+                  Sudden oak death: Geographic risk estimates and pre-         Miller, C. C. 2006. A beast in the ﬁeld: The Google
+                  dictions of origins. Plant Pathology 56:580–87.                   Maps mashup as GIS/2. Cartographica: The International
+       1288                                              Connors, Lei, and Kelly
+
+
+            Journal for Geographic Information and Geovisualization       Rizzo, D. M., and M. Garbelotto. 2003. Sudden oak death:
+            41:187–99.                                                        Endangering California and Oregon forest ecosystems.
+       Miller, H. J. 2010. The data avalanche is here: Shouldn’t we           Frontiers in Ecology and the Environment 1:197–204.
+            be digging? Journal of Regional Science 50:181–201.           Schroer, J., and G. Hertel. 2009. Voluntary engagement in
+
+       Morehouse, B. J., and S. O’Brien. 2008. Facilitating public            an open web-based encyclopedia: Wikipedians and why
+            involvement in strategic planning for wildland ﬁre man-           they do it. Media Psychology 12:96–120.
+            agement. The Professional Geographer 60:495–507.              Seeger, C. 2008. The role of facilitated volunteered geo-
+       Moreno-Sanchez, R., G. Anderson, J. Cruz, and M. Hayden.               graphic information in the landscape planning and site
+            2007. The potential for the use of open source software           design process. GeoJournal 72:199–213.
+            and open speciﬁcations in creating Web-based cross-           Shneiderman, B. 2000. Designing trust into online experi-
+            border health spatial information systems. International          ences. Communications of the ACM 43 (12): 57–59.
+
+            Journal of Geographical Information Science 21:1135–63.       Sieber, R. E. 2003. Public participation geographic infor-
+       Newman, G., D. Zimmerman, A. Crall, M. Laituri, J. Gra-                mation systems across borders. The Canadian Geographer
+            ham, and L. Stapel. 2010. User-friendly web mapping:              47:50–61.
+            Lessons from a citizen science website. International Jour-   ———. 2006. Public participation georgaphic information
+            nal of Geographical Information Science 24:1851–69.               systems: A literature review and framework. Annals of
+       Nyerges, T., P. Jankowski, D. Tuthill, and K. Ramsey. 2006.            the Association of American Geographers 96:491–507.
+            Collaborative water resource decision support: Results of     Simao, A., P. J. Densham, and M. M. Haklay. 2009. Web-
+
+            aﬁeldexperiment.   Annals of the Association of American          based GIS for collaborative planning and public par-
+            Geographers 96:699–725.                                           ticipation: An application to the strategic planning of
+       Obermeyer, N. 1998. PPGIS: The evolution of public par-                wind farm sites. Journal of Environmental Management
+            ticipation GIS. Cartography and Geographic Information            90:2027–40.
+            Systems 25 (2): 65–66.                                        Sisk, T. D., J. W. Prather, H. M. Hampton, E. N. Aumack,
+       O’Reilly,T.2007.WhatisWeb2.0:Designpatternsandbusi-                    Y. Xu, and B. G. Dickson. 2006. Participatory landscape
+            ness models for the next generation of software. Commu-
+                                                                              analysis to guide restoration of ponderosa pine ecosys-
+            nications and Strategies 65:17–37.                                tems in the American Southwest. Landscape and Urban
+       Parker, B. 2006. Constructing community through maps?                  Planning 78:300–10.
+            power and praxis in community mapping. The Profes-            Skupin, A., and S. Fabrikant. 2003. Spatialization methods:
+            sional Geographer 58:470–84.                                      Acartographicresearchagendafornon-geographicin-
+       Pattengill-Semmens, C., and B. Semmens. 2003. Conserva-                formation visualization. Cartography and Geographic In-
+            tion and management applications of the reef volunteer            formation Science 30:99–120.
+
+            ﬁsh monitoring program. Environmental Monitoring and          Steiniger, S., and E. Bocher. 2009. An overview on cur-
+            Assessment 81:43–50.                                              rent free and open source desktop GIS developments.
+       Payne, C. 2002. On the security of open source software.               International Journal of Geographic Information Science
+            Information Systems Journal 12:61–78.                             23:1345–70.
+       Pedersen, B., F. Kearns, and M. Kelly. 2007. Methods for           Sullivan, B., C. Wood, M. Iliff, R. Bonney, D. Fink, and S.
+            facilitatingweb-basedparticipatoryresearchinformatics.            Kelling. 2009. eBird: A citizen-based bird observation
+            Ecological Informatics 2:33–42.                                   network in the biological sciences. Biological Conserva-
+
+       Peluso, N. L. 1995. Whose woods are these? Counter-                    tion 142: 2282–92.
+            mapping forest territories in Kalimantan, Indonesia. An-      Tufte, E. 2001. The visual display of quantitative information.
+            tipode 27:383–406.                                                2nd ed. Cheshire, CT: Graphics Press.
+       Peng, Z. 2001. Internet GIS for public participation. Environ-     Tulloch, David, L. 2008. Is VGI Participation: From vernal
+            ment and Planning B: Planning and Design 28:889–905.              pools to video games. GeoJournal 72:161–71.
+       Pickles, J. 1995. Ground truth: The social implications of geo-    Turner, A. 2006. Introduction to neogeography.S bs,l
+            graphic information systems.NewYork:Guilford.                     CA: O’Reilly Media.
+
+       Poser, K., and D. Dransch. 2010. Volunteered geographic            Von Krogh, G., S. Spaeth, and K. Lakhani. 2003. Com-
+Downloaded by [University of California, Berkeley] at 11:32 26 November 2013  munity, joining, and specialization in open source soft-
+            to rapid ﬂood damage estimation. Geomatica 64:189–98.             ware innovation: A case study. Research Policy 32:1217–
+       Rattenbury, T., N. Good, and M. Naaman. 2007. Towards                  41.
+            automatic extraction of event and place semantics from        Walker, D., J. P. Jones, S. M. Roberts, and O. R. Frohling.
+            ﬂickr tags. In Proceedings of the 30th annual international       2007. When participation meets empowerment: The
+
+            ACM SIGIR conference on research and development in               WWF and the politics of invitation in the Chimalapas,
+            information retrieval,chairsW.KraaijandA.P.deVries,               Mexico.AnnalsoftheAssociationofAmericanGeographers
+            103–10. New York: ACM.                                            97:423–44.
+       Ratti, C., D. Frenchman, R. M. Pulselli, and S. Williams.          Ward, K., and G. Johnson. 2007. Geospatial methods pro-
+            2006. Moblile landscapes: Using location data from cell           videtimelyandcomprehensiveurbanforestinformation.
+            phones for urban analysis. Environment and Planning B:            Urban Forestry and Urban Greening 6:15–22.
+            Planning and Design 33:727–48.                                Warf, B., and D. Sui. 2010. From GIS to neogeography: On-
+
+       Rinner, C., C. Keﬂler, and S. Andrulis. 2008. The use                  tological implications and theories of truth. Annals of
+            of Web 2.0 concepts to support deliberation in spa-               GIS 16:197–209.
+            tial decision-making. Computers, Environment and Urban        Watson, A., A. Bell, J. Kvedar, and R. Grant. 2008. Reeval-
+            Systems 32:386–95.                                                uating the digital divide: Current lack of Internet use
+                                                   Citizen Science in the Age of Neogeography                                       1289
+
+
+                  is not a barrier to adoption of novel health information    Wulf, W. A. 1993. The collaboratory opportunity. Science
+                  technology. Diabetes Care 31:433.                                261:854–55.
+              Weiner, D., and T. Harris. 2003. Community-integrated           Zook, M., M. Graham, T. Shelton, and S. Gorman. 2010.
+
+                  GIS for land reform in South Africa. Journal of the              Volunteered geographic information and crowdsourcing
+                  Urban and Regional Information Systems Association 15:           disaster relief: A case study of the Haitian earthquake.
+                  61.                                                              World Medical and Health Policy 2(2):7–33.
+
+
+              Correspondence: School of Geographical Sciences and Urban Planning, Arizona State University, Tempe, AZ 85287, e-mail:
+              jpconn01@asu.edu (Connors); Department of Environmental Sciences, Policy and Management, University of California, Berkeley, Berkeley,
+              CA 94720, e-mail: shufeilei@gmail.com (Lei); maggi@berkeley.edu (Kelly).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Downloaded by [University of California, Berkeley] at 11:32 26 November 2013

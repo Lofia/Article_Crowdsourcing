@@ -1,0 +1,263 @@
+ Mobile4D: Crowdsourced Disaster Alerting and Reporting
+
+                   Lutz Frommberger                                                  Falko Schmid
+
+            Capacity Lab, University of Bremen                             Capacity Lab, University of Bremen
+                   Enrique-Schmidt-Str. 5                                         Enrique-Schmidt-Str. 5
+                 28359 Bremen, Germany                                           28359 Bremen, Germany
+                  lutz@capacitylab.org                                        schmid@capacitylab.org
+
+
+
+ABSTRACT                                                          However, in developing countries communication infrastructure
+Small and large-scale disasters are a major factor for poverty.   and information flow within governmental administrative units
+When information is sent out at an early stage and directly to    (GAUs) and affected regions is not seamless in many cases: areas
+people affected, impact on environment, people, livestock, crop,  may be remote, information may get lost or delayed,
+                                                                  responsibilities on local level may remain unclear. One solution to
+and belongings can be minimized. We present Mobile4D, an          these problems is to establish direct communication channels
+integrated mobile crowdsourcing-based disaster alerting and       between affected people and GAUs. These channels can be used
+reporting system tested in Lao PDR. With Mobile4D it is possible
+to gather information from affected people, to establish direct   to inform GAUs directly about situations at the local level. In
+communication    channels   between   affected  people   and      return, GAUs can send out warnings, information material and
+administrative units, and to rapidly distribute information to    support directly to the people and places affected.
+regions and people struck by disasters.                           In this work, we report on the design and first experiences with
+                                                                  the Mobile4D disaster alerting and reporting system. Mobile4D
+Categories and Subject Descriptors
+C.4 [Performance of Systems]: Reliability, availability, and      was designed and tested in tight cooperation with the Ministry for
+                                                                  Agriculture and Forestry (MAF) in Laos.
+serviceabilit. H.1.2 [User/Machine Systems]: Human factors.
+H.3.4 [Systems and Software]: Distributed systems. J.1            2. RELATED WORK
+[Administrative Processing]: Government                           Several ICT frameworks and systems related to disasters have
+                                                                  been implemented in the developed world. In developing
+General Terms                                                     countries, specific issues have to be faced. As [14] point out,
+Algorithms, Human Factors                                         effective warning systems require ”not only the use of ICTs, but
+                                                                  also the existence of institutions that allow for the effective
+Keywords                                                          mobilization of their potential”, so the effective inclusion of
+Disaster Alerting, Crowdsourcing, Mobile Systems
+                                                                  administrative units plays a critical role.
+                                                                  Sahana [4] is a complex modular Open Source disaster
+1. INTRODUCTION                                                   management toolkit targeting at large-scale disasters, especially
+It is widely recognized that natural disasters are a main reason ffor organizing and coordinating disaster response. It has been
+poverty, as they “reduce or eliminate equal access to             successfully applied in developing countries. Mobile devices gain
+opportunities, and therefore to development” [1]. Effective
+response  to  disasters requires  taking  quick  actions  by      increasing importance in disaster cases, e.g., systems based on
+administrative units supported by disaster management systems     SMS show a good impact in developing countries [10]. An
+(DMS). DMSs usually deal with large-scale disasters like          Android smartphone based disaster alerting system which focuses
+                                                                  mostly on routing issues in the disaster response phase was
+earthquakes, hurricanes, or floods. Existing DMSs are designed to presented in [5]. For a review on geo-hazard warning systems in
+cope with the large complexity under difficult conditions in such general refer to [2].
+cases. While these disasters are also relevant in emerging
+countries, people there are often faced with problems on a smallerCrowdsourcing is an increasingly popular way to collect data
+scale, e.g., local outbreaks of human, plant or animal diseases.  provided from people at the local level and build larger
+However, these smaller incidents can have severe consequences     information bases. Ushahidi is one of the most popular examples
+for affected individuals and can easily spread and affect others, of the impact of crowdsourcing crisis information [13]. In the
+and thus become a larger scale problem. Therefore it is reasonablecontext of natural disasters, crowdsourcing was used in the 2012
+to design DMSs to be able to cope with local situations to allow  Haiti earthquake to organize help [15]. Especially crowdsourcing of
+                                                                  geographical information can have a strong impact in developing
+responding at early stages.                                       countries, for example for monitoring development [7].
+
+                                                                  3. DESIGN CHALLENGES AND GOALS
+ Permission to make digital or hard copies of part or all of this work for
+ personal or classroom use is granted without fee provided that copies aret on Mobile4D, a mobile crowdsourcing disaster alerting
+ not made or distributed for profit or commercial advantage and thand reporting system for Laos. Mobile4D brings together the
+ copies bear this notice and the full citation on the first page. power of local knowledge about e.g., places, people, livestock, or
+ for third-party components of this work must be honored. For all crop with GAUs responsible for coordination and support. In
+ uses, contact the Owner/Author.                                  contrast to other crowdsourcing based disaster alerting systems,
+ Copyright is held by the owner/author(s).                        Mobile4D enables affected people to directly report disasters to
+ ICTD 2013, Dec 07-10 2013, Cape Town, South Africa               GAUs and enables GAUs to use direct personal communication
+ ACM 978-1-4503-1907-2/13/12.                                     channels to coordinate action and advice. In the following, we
+ http://dx.doi.org/10.1145/2517899.2517925
+                                                                  sum up the requirements for a successful integrated disaster
+
+                                                              29
+    Figure 1: Top-down and bottom-up information flow in Mobile4D: information exchange and communication is flexible and
+                                     can be established from GAUs as well from local individuals.
+
+
+alerting and crowdsourcing system that were the starting points              system must enable people to get in contact with each other,
+for the design of Mobile4D (jointly identified with the Ministry of          to distribute alerts, to share solutions, etc.. Many issues can
+Agriculture and Forestry of Lao PDR):                                        be solved locally without administrative engagement. The
+                                                                             system has to support conventional communication
+Reliable flow of data A reliable flow of information is essential,
+      as all information has to go to the right people: all people           channels such as SMS and voice telephony as those are
+      affected, and all GAUs responsible. Data must not be lost,             often preferred by users.
+      bad connectivity must be considered.
+                                                                       4. MOBILE4D: SYSTEM OVERVIEW
+Fast distribution of alerts Alerts must be spread as soon as they      As Lao PDR has anear complete mobileInternet coverage, Mobile4D
+      are created, ideally in real-time.                               is designed as an Internet and smartphone based system. The costs for
+                                                                       (Android) smartphones drop drastically, and even older devices offer
+Reliable flow of data A reliable flow of information is essential,     the full range of sensors and interaction possibilities necessary. In the
+      as all information has to go to the right people: all people
+      affected, and all GAUs responsible. Data must not be lost,       following we explain how these technologies allow the development
+      bad connectivity must be considered                              of asystemmeeting thelist of requirements.
+
+Ease of use The success of any crowdsourcing effort critically         4.1 System Description
+      depends on how easily the system can be used. Any barrier        Mobile4D basically consists of three components:
+      can lower the success.
+Data quality Quality of volunteered data is a critical issue [8]. Data •     an Android app which allows people in the villages to
+                                                                             report disasters, to receive warnings and make contact with
+      entered by volunteers might not be exact, or partially wrong.          people in GAUs to get help,
+      Credibility of user provided inputs/alerts must be transparent.  •     a web front end which allows the different GAUs to receive
+Exploiting all sensory opportunities The sensors of smartphones
+      are valuable information sources: location is known by                 and manage reports, send out warnings and information
+                                                                             material, and contact people affected,
+      GPS, users can take pictures, which can be a powerful            •     a disaster management server handling the commu¬nication
+      means, e.g., in remote diagnosis [11] of diseases or                   traffic.
+      documentation of impact.
+Cost-effectiveness Cost of communication and infrastructure is
+                                                                       4.2 Information Flow and Sharing
+      always an issue in developing countries. Neither GAUs nor        Mobile4D is designed to be fully integrated in the organization of
+      local stakeholder can afford to pay larger sums for setting      GAUs     and    supports   direct   top-down    and    bottom-up
+      up systems or covering running costs.                            communication to exchange information. Information can be
+Exploiting local knowledge Detailed knowledge about situations         disaster   alerts,  information    material,   media,    ongoing
+                                                                       communication about situations between GAUs and people
+      is available at the local level, but not in GAUs. Also, local    affected. Figure 1 shows how information can flow top-down
+      stakeholders can have solutions available that can be shared
+      with other people affected by similar problems.                  from the ministry level (MAF) directly to specific affected
+Providing tools for analysis and response Local administrators         villages and back. Additionally, information is distributed to the
+                                                                       correct subordinate units on province (PAFO) and district
+      must be able to review and analyze incoming disaster             (DAFO)      level,  and    to   international   nongovernmental
+      warnings and to do administrative work such as combining         organizations (INGO). These direct channels enable to shortcut
+      different alerts, update information, or providing feedback      slow information distribution and make information available
+      and help.                                                        immediately where it is required.
+
+Connecting people In many cases, direct contact between people
+      is much more helpful than administrative response. The
+
+
+                                                                   30
+                                                                            Figure 3: Screenshot of the administrative web interface
+
+                                                                         supports the widespread free Android platform from version 2.1
+  Figure 2: Screens of the Mobile4D Android app. Left:                   on to ensure large availability of compliant new or used low-cost
+intuitive text-free interface for entering the water level in            devices. The web client runs on several years old PCs with up-to-
+a flooding by sliding the water up and down. Right: Map                  date web browsers. It renders functionality with JavaScript, i.e.,
+                 overview of nearby alerts.
+                                                                         all code is loaded from the Internet when the page is first
+Most importantly, our crowdsourcing approach enables information to      accessed. This results in some waiting time at initial startup, but
+flow in the same way bottom-up: when people are affected by              after that, no other network communication is needed than
+disasters, they can report on the situation to GAUs and INGOs.           transmitting the efficiently encoded disaster data. As a result, full
+Mobile4D sends the reports to all GAUs in the hierarchy, but directs     functionality can    be granted also      under weak network
+                                                                         conditions—an important issue since especially district offices
+the information to the GAU responsible to take action (e.g.,             often rely on mobile Internet connections with low bandwidths.
+infrastructural problems can be resolved on district level, while severe
+disease outbreaks are handled on province level). Internal protocols     To minimize bandwidth requirements for the mobile app, all alerts
+ensure that information gets reviewed and questions get answered.        and notifications are sent out as Push messages to ensure reliable real-
+Also, reporters will always be automatically notified when their report  time communication. Mobile4D always focuses on the flow of
+is processed byadministrative staff. Whenever a disaster is reported at  information: all data is buffered and, in case of connectivity loss, (re-
+local level, the information is immediately sent out to all neighboring  )sent as soon as network service is available again. Photo transmission
+
+villages without administrative review. Potentially affected people get  is adaptive to the actual bandwidth, the pictures are automatically
+informed when situations are reported and can prevent potential          transmitted in different resolutions (from low to high) and sent
+threadsto protect health and belongings at a veryearly stage.            accordingto thecurrent bandwidth with lowresolution images first.
+All information can be shared with everybody by forwarding               To assure the quality of data, Mobile4D provides a multi-leveled
+
+received information via SMS or voice calls. Phone numbers of            verification system: Each administrative layer has the opportunity to
+local reporters and GAU staff are always prominently displayed           verify any report, e.g., after checking back via a phone call or
+and can be used for direct communication by everyone. In the             personal visit, thus giving the report an ”official” stamp. However,
+smartphone app, this just invokes one touch action. Furthermore,         single users can also verify the report. That is, the crowd is used for
+Mobile4D supports interfacing with social network platforms such         quality assurance itself, as a large number of user verification is a
+as Twitter, where detailed information about disasters and their         good estimate of its reliability [6]. Furthermore, Mobile4D is fully
+states can be made available.                                            compliant with the Common Alerting Protocol (CAP) [9]; it offers
+
+4.3 Information Generation and Processing                                both import and export functionality.
+
+In contrast to social network based platforms, Mobile4D supports         5. FIRST RESULTS
+structured assembly of information to create specific disaster alerts    In April 2013 we performed a three day field test of Mobile4D in
+(floods, bush fires, infrastructural problems, and diseases of humans,   the province of Luang Prabang, Lao PDR (see Figure 4). The test
+animals, and plants). Both mobile and web client users are guided step   involved two staff members of MAF, two staff members of the
+by step through an intuitive dialogue. Mobile4D tries to avoid textual   province office of Luang Prabang (PAFO), and three district
+interfaces wherever possible (see Fig. 3 for an example) as it is well   officers of the districts of Chompet and Pak-Ou (DAFO). We set
+known that text-free widgetscan usuallybe fullyunderstood [3].
+                                                                         up the system with locally available technical infrastructure, that
+Staff of GAUs has a role-based web browser interface (see Fig. 2) to     is, laptops people used at work, two privately owned and three
+process incoming information of local reporters or other GAUs. They      provided low-cost smartphones. In addition, we used mobile
+can establish direct communication, send out information and support     Internet from three different phone companies. This resulted in a
+to places and peoplein their areaof responsibility. Mobile4Dprovides     highly heterogeneous technical ecosystem.
+
+tools to perform any kind of administrative work related to disasters:   On the first day all staff members received introduction into
+reviewing information, getting in touch with reporters, assigning        functionality of the system and training on how to use the
+issues to other administrative layers, sending out information material, components. The participants were trained according to their role
+updating, merging, resolvingdisasters, etc.                              and responsibilities in their GAU. After initial problems like
+                                                                         understanding workflows or handling smartphones the participants
+4.4 Further Features                                                     learned quickly how Mobile4D works and could use the features
+The design of Mobile4D is completely devoted to low-cost
+technology, real-time communication, and reliability. Mobile4D           without larger problems. During that phase we closely analyzed
+                                                                         noticeable usability issues and provided on-site fixing wherever it
+
+                                                                    31
+was possible. On the second day, we performed a system test            Research (BMBF). We thank the Lao Ministry for Agriculture and
+according to a predefined protocol of events to ensure the technical   Forestry (MAF) for collaboration and support. We also thank our
+reliability of Mobile4D under realistic conditions. During this test   partners at UNU-IIST, Macau, for their help on the project.
+three teams went to the remote districts of Chompet and Pak Ou,
+and provided defined data and communication. Mobile4D                  8. REFERENCES
+performed highly reliable even under most difficult network            [1]   I. Alcántara-Ayala. Geomorphology, natural hazards,
+
+conditions. On the third day of the field test the participants went         vulnerability and prevention of natural disasters in developing
+again into the field to record actual data of current or recent small        countries. Geomorphology, 47(2):107–124, 2002.
+scale disasters by using a large variety of documentation and          [2]   D. Bhattacharya, J. Ghosh, and N. Samadhiya. Review of
+communication options. We collected data of so far unrecognized              geohazard warning systems toward development of a
+impacts of flooding, an early-stage outbreak of an unknown plant
+disease, several cases of bird flu, and a recent Malaria outbreak with       popular usage geohazard warning communication system.
+more than 70 people affected. During the data collection phase the           Natural Hazards Review, 13(4):260–271, 2012.
+                                                                       [3]   B. M. Chaudry, K. H. Connelly, K. A. Siek, and J. L.
+DAFO and PAFO staff in the offices in Luang Prabang                          Welch. Mobile interface design for low-literacy
+administered incoming reports and established direct phone
+communication with affected people in the villages. For both sides           populations. In Proceedings of the 2nd ACM SIGHIT
+this was a noticeably good experience: the affected people could             International Health Informatics Symposium, pages 91–
+directly report their problems, and GAU staff was able to gather yet         100. ACM, 2012.
+unknown information from districts they are responsible for.           [4]   P. Currion, C. d. Silva, and B. Van de Walle. Open source
+
+                                                                             software for disaster management. Communications of the
+                                                                             ACM, 50(3):61–65, 2007.
+                                                                       [5]   J. T. B. Fajardo and C. M. Oppus. A mobile disaster
+                                                                             management system using the android technology. WSEAS
+                                                                             Transactions on Communications, 9(6):343–353, 2010.
+
+                                                                       [6]   C. C. Freifeld, R. Chunara, S. R. Mekaru, E. H. Chan, T.
+                                                                             Kass-Hout, A. A. Iacucci, and J. S. Brownstein.
+                                                                             Participatory epidemiology: use of mobile phones for
+                                                                             community-based health reporting. PLoS medicine, 7(12),
+
+                                                                             2010.
+                                                                       [7]   L. Frommberger, F. Schmid, and C. Cai. Micro-mapping
+                                                                             with smartphones for monitoring agricultural development.
+                                                                             Proceedings of the ACM Symposium on Computing for
+
+                                                                             Development (DEV 2013), Bangalore, India, 2013.
+                                                                       [8]   M. F. Goodchild and L. Li. Assuring the quality of
+                                                                             volunteered geographic information. Spatial statistics,
+  Figure 4: Mobile4D: training and data acquisition in Luang                 1:110–120, 2012.
+                Prabang, Chompet und Pak-Ou
+                                                                       [9]   E. Jones. Common alerting protocol, v. 1. 2, 2005.
+During extensive feedback sessions with all participants we identified
+                                                                       [10] I. Mahmud, J. Akter, and S. Rawshon. SMS based disaster
+points for improvement (mostly in the area of information                    alert system in developing countries: A usability analysis.
+visualization and usability) and ideas for future features (integrating      Internation Journal of Multidisciplinary Management
+more reasoning and forecasting capabilities). All participants pointed       Studies, 2(4), 2012.
+out the efficiency of direct communication channels between affected
+people and GAUs, which allows to take quick actions and provides       [11] A. W. Martinez, S. T. Phillips, E. Carrilho, S. W. Thomas
+important information directlywhereit isneeded.                              III, H. Sindi, and G. M. Whitesides. Simple telemedicine
+                                                                             for developing regions: camera phones and paper-based
+6. CONCLUSIONS                                                               microfluidic devices for real-time, off-site diagnosis.
+                                                                             Analytical Chemistry, 80(10):3699–3707, 2008.
+Mobile4D is a comprehensive disaster alerting and reporting
+system. On the one hand, it is fully integrated into administrative    [12] R. W. M. Narvaez. Crowdsourcing for disaster
+institutions and their workflows, and, on the other hand, it                 preparedness: Realities and opportunities. Master's thesis,
+supports   crowdsourcing    information   gathering.  Mobile4D               Graduate Institute of International and Development
+provides two-way communication from top to bottom level and                  Studies, Geneva, 2012.
+vice versa, i.e., Mobile4D tackles two important challenges
+(missing     institutionalization   and     missing     two-way        [13] O. Okolloh. Ushahidi, or 'testimony': Web 2.0 tools for
+communication) that are found missing in current crowdsourcing               crowdsourcing crisis information. Participatory learning and
+                                                                             action, 59(1):65–70, 2009.
+disaster systems [12]. As a result of the successful field test,
+Mobile4D is planned to be used in a large-scale pilot test covering    [14] R. Samarajiva. Mobilizing information and communications
+all districts of Luang Prabang province.                                     technologies for e ective disaster warning: lessons from the
+                                                                             2004 tsunami. New Media & Society, 7(6):731–747, 2005
+7. ACKNOWLEDGEMENTS                                                    [15] M. Zook, M. Graham, T. Shelton, and S. Gorman.
+This work has been supported by funding granted by the German
+Research Foundation (DFG), Collaborate Research Center                       Volunteered geographic information and crowdsourcing
+"Spatial Cognition", and the German Ministry for Education and               disaster relief: A case study of the Haitian earthquake.
+                                                                             World Medical & Health Policy, 2(2):7–33, 2010. 0.
+
+                                                                  32

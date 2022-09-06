@@ -1,0 +1,944 @@
+                        Note: This copy is for your personal non-commercial use only.To order presentation-ready
+
+                        copies for distribution to your colleagues or clients, contact us at www.rsna.org/rsnarights.
+
+
+
+tions
+                                                 Distributed human intelligence
+
+
+
+                                                 for colonic Polyp classification
+
+
+                                                 in computer-aided Detection for
+
+
+Computer AppliCA                                                                              1
+                                                 cT colonography
+n
+
+    Tan B. Nguyen, BS
+                                                          Purpose:      To assess the diagnostic performance of distributed hu-
+    Shijun Wang, PhD
+    Vishal Anugu, BA                                                    man intelligence for the classification of polyp candidates
+    Natalie Rose                                                        identified with computer-aided detection (CAD) for com-
+                                                                        puted tomographic (CT) colonography.
+Original researchna, BS
+    Nicholas Petrick, PhD
+                                                      Materials and     This study was approved by the institutional Office of Hu-
+    Joseph E. Burns, MD, PhD                              Methods:      man Subjects Research. The requirement for informed
+    Ronald M. Summers, MD, PhD                                          consent was waived for this HIPAA-compliant study. CT
+                                                                        images from 24 patients, each with at least one polyp of
+
+                                                                        6 mm or larger, were analyzed by using CAD software to
+                                                                        identify 268 polyp candidates. Twenty knowledge workers
+                                                                        (KWs) from a crowdsourcing platform labeled each polyp
+                                                                        candidate as a true or false polyp. Two trials involving
+
+                                                                        228 KWs were conducted to assess reproducibility. Per-
+                                                                        formance was assessed by comparing the area under the
+                                                                        receiver operating characteristic curve (AUC) of KWs
+
+                                                                        with the AUC of CAD for polyp classification.
+
+                                                           Results:     The detection-level AUC for KWs was 0.845 6 0.045
+                                                                        (standard error) in trial 1 and 0.855 6 0.044 in trial 2.
+
+                                                                        These were not significantly different from the AUC for
+                                                                        CAD, which was 0.859 6 0.043. When polyp candidates
+                                                                        were stratified by difficulty, KWs performed better than
+                                                                        CAD on easy detections; AUCs were 0.951 6 0.032 in trial
+
+                                                                        1, 0.966 6 0.027 in trial 2, and 0.877 6 0.048 for CAD
+                                                                        (P = .039 for trial 2). KWs who participated in both trials
+     1From the Imaging Biomarkers and Computer-Aided Diag-              showed a significant improvement in performance going
+     nosis Laboratory, Radiology and Imaging Sciences, National         from trial 1 to trial 2; AUCs were 0.759 6 0.052 in trial 1
+     Institutes of Health Clinical Center, 10 Center Dr, Building
+     10, Room 1C224D, MSC 1182, Bethesda, MD 20892-1182                 and 0.839 6 0.046 in trial 2 (P = .041).
+
+     (T.B.N., S.W.,V.A., N.R., M.M., J.E.B., R.M.S.); CeConclusion:     The performance of distributed human intelligence is not
+     Devices and Radiological Health, U.S. Food and Drug
+     Administration, Silver Spring, Md (N.P.); and Department           significantly different from that of CAD for colonic polyp
+     of Radiological Sciences, University of California, Irvine         classification.
+     Medical Center, Orange, Calif (J.E.B.). Received May 11,
+     2011; revision requested June 15; final revision received          qRSNA, 2012
+     July 26; accepted September 13; final version accepted
+     September 26. S.W.,V.A., N.R., M.M., J.E.B., and R.M.S.
+     supported by the Intramural Research Programs of the Na-           Supplemental material: http://radiology.rsna.org/lookup
+     tional Institutes of Health, Clinical Center.T.B.N. supported      /suppl/doi:10.1148/radiol.11110938/-/DC1
+     in part through the Clinical Research Training Program, a
+
+     public-private partnership supported jointly by the National
+     Institutes of Health and Pfizer (via a grant to the Foundation
+     for the National Institutes of Health from Pfizer). Address
+     correspondence to R.M.S. (e-mail: rms@nih.gov).
+
+     The mention of commercial entities, or commercial prod-
+     ucts, their sources, or their use in connection with material
+     reported herein is not to be construed as either an actual
+     or implied endorsement of such entities or products by the
+     Department of Health and Human Services.
+     q
+      RSNA, 2012
+
+    824                                                                                  radiology.rsnaRadiology: Volume 262:Number 3—March 2012
+COMPUTER APPLICATIONS: Distributed Human Intelligence for Colonic Polyp Classification                                   Nguyen et al
+
+
+
+
+
+
+
+
+
+
+
+      olorectal cancer is the second         about these errors and develop strat-        distributed human intelligence for the
+
+      leading cause of cancer death in       egies to reduce them by conducting           classification of polyp candidates iden-
+C     Americans (1). Colorectal cancer       observer performance experiments.            tified with CAD for CT colonography.
+
+is a largely preventable disease because     Unfortunately, observer performance          We show the accuracy, low cost, and
+the removal of colorectal polyps, the        experiments are time consuming and           reproducibility of one strategy and dis-
+precursor to malignancy, is known to be      expensive because of the limited avail-      cuss training issues for accomplishing
+
+curative in most patients. Tests that are    ability and high demand for radiolo-         this task.
+effective at detecting colorectal polyps     gists’ time.
+include colonoscopy and computed to-             CAD systems are ideally trained on
+                                                                                           Materials and Methods
+mographic (CT) colonography (2). Both        large databases of proved cases. Typi-
+colonoscopy and CT colonography are          cal database sizes range from hundreds       This study was approved by the Office
+tests that are performed and interpret-      to thousands of cases. Acquisition and       of Human Subjects Research of the Na-
+
+ed by trained physicians. In the past few    annotation of the data are expensive         tional Institutes of Health, both for the
+years, computer-aided polyp detection        and time-consuming steps in database         retrospective use of the anonymized pa-
+
+software has been developed and has          creation. Alternatives to creating large     tient data sets and for the participation
+been shown to improve the diagnostic         databases would be highly desirable.         of the KWs, in compliance with Health
+performance of CT colonography when              A recent innovation is the avail-        Insurance Portability and Accountabil-
+
+findings are interpreted by radiologists     ability of distributed human in-             ity Act guidelines. The requirement for
+(3–7).                                       telligence, also known as crowd          -   informed consent was waived.
+    Despite their promise, computer-         sourcing. In distributed human
+                                                                                          Case Selection
+aided detection (CAD) systems have           intelligence, embodied by the com-
+yet to achieve their full potential in       mercial system Amazon Mechanical             Twenty-four patients were randomly se-
+clinical practice. In the laboratory,        Turk (MTurk, https://www.mturk               lected from three medical centers from
+
+CAD systems may have high sensitiv-          .com; Amazon.com, Seattle, Wash),            a database of patients originally accrued
+ity (.90%) for detecting polyps in the       large numbers of laypeople (referred         during the study described by Pickhardt
+
+relevant size range (6 mm or larger).        to as knowledge workers [KWs]) can
+Unfortunately, radiologists often ig-        be recruited to perform simple tasks
+nore CAD true-positive polyp find-           distributed to them over the Internet.
+
+ings, leading to relatively low radiol-      Today, the tasks are usually simple
+ogist sensitivity with the assistance of     classification tasks that involve look-      Published online before print
+CAD (3). While the reasons for such          ing at data—for example, an image or         10.1148/radiol.11110938 Content code:
+
+errors are unclear, perceptual errors        text—and then selecting a multiple-          Radiology 2012; 262:824–833
+are suspected (8). We can learn more         choice response that best describes
+                                             the data. Workers are typically paid         Abbreviations:
+                                                                                          AUC = area under the ROC curve
+                                             a small amount of money, on the or-          CAD = computer-aided detection
+  Advances in Knowledge                      der of a few cents, to complete a task.      CI = confidence interval
+                                                                                          HIT = human intelligence task
+  n Distributed human intelligence           Tasks typically take the worker less
+                                             than 1 minute to complete, although          KW = knowledge worker
+    performs accurate classification         more highly paid and time-consuming          ROC = receiver operating characteristic
+    of colonic polyp candidates iden-                                                     SVM = support vector machine
+    tified with computer-aided detec-        tasks can also be accommodated. The
+                                             use of distributed human intelligence        Author contributions:
+    tion (CAD) for CT colonography,          to understand and improve human              Guarantor of integrity of entire study, R.M.S.; study con-
+    with a detection-level area under                                                     cepts/study design or data acquisition or data analysis/in-
+                                             perception of CAD images and per-            terpretation, all authors; manuscript drafting or manuscript
+    the receiver operating character-        haps reduce the need for or cost of
+    istic (ROC) curve of 0.845 6             developing large training databases          revision for important intellectual content, all authors; ap-
+    0.045 (standard error) and 0.855                                                      proval of final version of submitted manuscript, all authors;
+                                             has not yet been explored.                   literature research,T.B.N., S.W.,V.A., N.R., M.M., R.M.S.;
+    6 0.044 (standard error) by                  The purpose of this project was to       experimental studies,T.B.N., S.W.,V.A., N.R., M.M., J.E.B.;
+    using ROC analysis in two sepa-                                                       statistical analysis,T.B.N., S.W., N.R., M.M.; and manuscript
+    rate trials.                             assess the diagnostic performance of         editing,T.B.N., S.W., N.R., M.M., N.P., J.E.B., R.M.S.
+
+  n Distributed human intelligence                                                        Funding:
+    allows rapid observer perfor-              Implication for Patient Care
+                                                                                          This research was supported by the National Institutes of
+    mance assessments, completing              n The use of distributed human             Health.T.B.N., S.W.,V.A., N.R., M.M., J.E.B., and R.M.S. are
+    the classification of 268 polyp              intelligence may lead to improve-        employees of the National Institutes of Health.
+
+    candidates from 24 patients in               ments for the development of             Potential conflicts of interest are listed at the end
+    3.5 days and 3.0 days in two sep-            CAD for CT colonography, as              of this article.
+    arate trials.                                well as for other applications.
+
+
+Radiology: Volume 262:Number 3—Marchradiology.rsna.org                                                                          825
+COMPUTER APPLICATIONS: Distributed Human Intelligence for Colonic Polyp Classification                                           Nguyen et al
+
+
+
+
+
+
+
+
+
+
+
+et al (9). Sample size was chosen on the        Experimental Data Set Selection                  Table 1
+
+basis of a power analysis (for Student t        Forty-seven of the 2374 detections                 Baseline Patient and Polyp
+test with power of 80%, a of 5%, ef-            made by CAD represented a total of                 Characteristics
+fect size of 3%, and data variation of          26 true polyps confirmed with optical
+                                                                                                   Characteristic          Value
+5%) for paired responses that may be            colonoscopy. Two polyps were detected
+correlated. Each patient had at least           on only the supine scan, four polyps                Patient demographics
+
+one polyp of 6 mm or larger that was            were detected on only the prone scan,               Sex
+confirmed with histopathologic eval-            19 polyps were detected once on each                 Men                       15 (62)
+uation following optical colonoscopy,                                                                Women                      9 (38)
+                                                of the supine and prone scans, and one
+and each polyp confirmed with optical           polyp was detected twice on the supine              Mean age (y) 6 standard61 6 5 (53–73)
+colonoscopy was also detected with CT           and once on the prone scans. To create               deviation*
+
+colonography. Among the selected pa-            a manageable data set of polyp candi-               Polyp size
+tients, there were 26 confirmed polyps          dates with the highest probability of be-             6–9 mm                   17 (65)
+                                                                                                      10 mm                    9 (35)
+of 6 mm or larger. Baseline patient             ing true-positive results, an SVM score
+and polyp characteristics are shown in          threshold of 0.6 or greater was chosen              Polyp histopathologic findings
+Table 1.                                        for this study. On the basis of free-                Hyperplastic               5 (19)
+                                                                                                      Tubular adenomatous      14 (54)
+                                                response receiver operating charac-
+Bowel Preparation and CT Scanning               teristic analysis (20,21), this threshold             Tubulovillous adenomatous 4 (15)
+                                                                                                      Other benign              3 (12)
+Patients underwent a standard 24-hour           corresponded to a CAD false-positive                Polyp shape
+colonic preparation (10). Each patient          rate of 10.2 false polyp detections per
+                                                                                                     Sessile                   17 (65)
+was scanned in the supine and prone             patient while still maintaining a sensi-             Pedunculated               8 (31)
+positions during a single breath hold by        tivity of 0.88 for true polyp detection.             Flat                       1 (4)
+using a four- or eight-channel CT scan-         An additional eight detections were dis-
+                                                                                                    Polyp location
+ner (LightSpeed or LightSpeed Ultra;            carded because of inadequate software                Rectum                     3 (12)
+GE Healthcare Technologies, Wauke-              rendering, all of which corresponded
+                                                                                                      Sigmoid colon            11 (42)
+sha, Wis). CT scanning parameters               to false-positive detections from a sin-              Descending colon          2 (8)
+included 1.25- to 2.5-mm section colli-         gle scan. Of the 268 remaining detec-                 Splenic flexure           1 (4)
+mation, 15 mm/sec table speed, 1-mm
+                                                tions, 31 detections represented 23                   Transverse colon          2 (8)
+reconstruction interval, 100 mAs, and           confirmed true polyps. After applying                 Hepatic flexure           1 (4)
+120 kVp (11).                                   the threshold level of 0.6 or greater                 Ascending colon           5 (19)
+
+                                                to the SVM scores, nine polyps were                  Cecum                      1 (4)
+CAD Algorithm                                   detected on only the supine scan, six
+                                                                                                   Note.— Twenty-four patients and 26 polyps were
+CT images were transferred to a com-            polyps were detected on only the prone             included. Numbers in parentheses are percentages,
+puter server and were analyzed by us-           scan, and eight polyps were detected               except where otherwise indicated. Percentages were
+ing a computer-aided polyp detection            once on each of the supine and prone               rounded, and those for polyp location do not add up to
+                                                                                                   100% as a result.
+software package described previously           scans. Each of these detections was la-
+(11–19). Leave-one-patient-out testing          beled a priori as “easy,” “moderate,” or           *Numbers in parentheses are the range.
+
+was used for CAD training to compare            “difficult” by an expert radiologist with
+performance by using a support vec-             more than 10 years of experience with
+tor machine (SVM) committee classi-                                                             not a polyp, on the basis of the refer-
+                                                CT colonography in a research setting
+fier. For each patient treated as the           (R.M.S.) on the basis of perceived dif-         ence standard. Moderate detections
+test case in the leave-one-patient-out          ficulty for a reader to correctly classify      were those of intermediate difficulty.
+
+test paradigm, CAD was trained by               a detection as a true polyp or a false
+using the other 23 cases to create a            polyp. Easy detections were those in            Distributed Human
+                                                                                                Intelligence
+set of polyp detections and their as-           which it was decided that the catego-
+sociated SVM committee classifier               rization of the detection as true- or           We employed the MTurk Web service
+scores for the test case. The SVM               false-positive would be immediately ob-
+                                                                                                to find anonymous workers to perform
+scores range from 0 to 1, with higher           vious at a glance, with limited training.       polyp classification on our data set.
+scores representing higher confidence           Difficult detections were those in which        MTurk is an Internet-based crowdsourc-
+
+that the polyp candidate is a true              the categorization was not immediately          ing platform that allows requesters to
+polyp. This procedure was repeated              obvious and might require additional            easily distribute small computer-based
+for each patient to create a final set
+                                                knowledge or information (eg, addi-             tasks to a large number of untrained
+of 2374 detections among all patients,          tional training or additional viewpoints        KWs. KWs receive a small monetary
+for an average of 99 polyp candidates           such as the alternate supine or prone           reward from the requester for each hu-
+
+per patient, split among supine and             view) or detections in which the finding        man intelligence task (HIT) that they
+prone CT scans.                                 looked like an obvious polyp but was            complete.
+
+
+826                                                                                       radiology.rsnaRadiology: Volume 262:Number 3—March 2012
+COMPUTER APPLICATIONS: Distributed Human Intelligence for Colonic Polyp Classification                              Nguyen et al
+
+
+
+
+
+
+
+
+
+
+
+
+    For this study, we believed that       monetary reward of $0.01 U.S. dollar       Ill) (23). Detections were assumed to
+KWs with minimal training would be         and a maximum of 20 minutes to com-        be independent.
+able to recognize differences in three-    plete each assignment. KWs needed              Several secondary analyses were
+
+dimensional shapes and other features      to have an approval rating of greater      performed. AUCs for KWs and CAD
+of polyp candidates on CT colonograph-     than 95% on the MTurk platform to          were compared for detections stratified
+
+ic images that would allow them to         participate in this study. A KW’s ap-      by difficulty, as described above, and
+perform accurate polyp classification.     proval rating is defined as the ratio      by size of true polyps at optical colo-
+We generated and published one HIT         of assignments approved by MTurk           noscopy. AUCs were also compared for
+
+on the MTurk platform for each CAD         requesters to the total number of as-      KWs who participated in both trial 1
+polyp candidate and asked 20 KWs to        signments submitted by a KW, and           and trial 2 to assess for improvements
+label each HIT as a true polyp or false    it is part of each KW’s MTurk pro-         in performance between the two trials.
+
+polyp. By combining the results from       file. Each KW is identified only by an     Experiment characteristics, patterns
+multiple KWs who each worked on a          identification number assigned by the      of KW behavior, and distributions of
+
+different set of polyp candidates, we      MTurk platform.                            KW scores were described and com-
+were able to create a system of distrib-       This entire experiment was con-        pared for the two trials. Confidence
+uted human intelligence that reflected     ducted twice to assess for reproducibil-   intervals (CIs) for rates were based on
+
+the KWs’ collective judgment.              ity and consistency between trials (22),   a normal approximation to the Poisson
+    For each HIT, KWs were given           with exactly 4 weeks between the start     distribution. Proportions were com-
+some background information about          dates for the two trials. KWs were al-     pared with the Fisher exact test or the
+                                                                                        2
+colonic polyps and were shown a set        lowed to participate in both trials, but   x  test with Yates correction. Means
+of five images of the polyp candidate:     were not explicitly asked to do so, and    were compared with the Student t test.
+
+two three-dimensional reconstructions      could complete a particular HIT once       A difference with P  .05 was consid-
+of the polyp candidate with and with-      for each trial.                            ered significant.
+out a blue CAD mark, and three two-                                                       Bootstrap statistical analysis was
+                                           Statistical Methods
+dimensional CT scan sections from ax-                                                 conducted to simulate the performance
+ial, sagittal, and coronal views, with a   The primary objective was to com-          expected with fewer KWs per polyp
+white square outlining each polyp can-     pare the area under the receiver op-       candidate (24). This analysis was done
+
+didate. The KWs were also shown sets       erating characteristic (ROC) curve         by resampling, with replacement, of
+of example images as part of training      (AUC) of the KWs with the AUC of           between three and 20 KWs for each
+
+prior to evaluating the test cases: five   CAD for polyp classification. The unit     polyp candidate to generate a new set
+labeled examples of true polyps and        of analysis for constructing the ROC       of KW scores, and then calculating an
+six examples of false polyps. Appen-       curves was the CAD polyp candidates        AUC from the resulting empirical ROC
+
+dix E1 (online), along with Figures E1     (detections). Sensitivity was defined      curve. This procedure was repeated
+through E5 (online), shows an exam-        as the fraction of true polyps correctly   10000 times to generate a bootstrap
+ple of a HIT, and Figures E6 through       classified. Specificity was defined as     distribution, which gives a robust
+
+E16 (online) show example images           the fraction of false polyps correctly     estimate of the expected sampling
+for training. Real polyps (Figs E6–E10     classified. Polyp classification for       distribution, for each number of KWs
+
+[online], corresponding to images 1–5      CAD was based on the SVM score for         per polyp candidate.
+in Appendix E1 [online]) are on the        each detection. Polyp classification           All statistical analyses described
+left, and fake polyps (Figs E11–E16        for KWs was based on the combined          above were also applied to a filtered-
+
+[online], corresponding to images 1–6      KW score calculated as the ratio of        response data set that excluded assign-
+in Appendix E1 [online]) are on the        votes for a true polyp to the total        ments completed by KWs who voted
+right. Three-dimensional reconstruc-       number of votes for each detection.        for detections as true polyps more than
+
+tions were generated by using soft-        Higher scores are expected to indicate     99% of the time and who completed at
+ware for virtual colonoscopy (V3D-         higher confidence that the detection       least 40 assignments, since these KWs
+
+Colon; Viatronix, Stony Brook, NY).        represents a true polyp. Empirical         were presumably unreliable.
+KWs were blinded to the proportion         ROC curves were constructed and                All data collection and analyses were
+of polyp candidates that were true-        analyzed. AUCs were calculated as          performed with the Amazon MTurk
+
+positive and true-negative results in      Wilcoxon-Mann-Whitney statistics.          Web interface, a spreadsheet applica-
+the data set.                              AUCs were compared by using a uni-         tion (Microsoft Office Excel 12.0, Mi-
+    Each KW was allowed to complete        variate z-score test statistic for corre-  crosoft, Redmond, Wash), a database
+
+an assignment of labeling a specific       lation of areas from parametric ROC        management system (Microsoft Office
+polyp candidate only once, but there       curves, for paired and unpaired data       Access 12.0; Microsoft), and the ROC
+
+were no restrictions on the number         as appropriate, by using ROC analysis      analysis software (ROCKIT). Numbers
+of assignments that a KW could             software (ROCKIT 0.9.1; Charles E.         are reported as values 6 standard devi-
+complete. The KWs were given a             Metz, University of Chicago, Chicago,      ation unless otherwise specified.
+
+
+Radiology: Volume 262:Number 3—Marradiology.rsna.org                                                                       827
+COMPUTER APPLICATIONS: Distributed Human Intelligence for Colonic Polyp Classification                                                    Nguyen et al
+
+
+
+
+
+
+
+
+
+
+
+
+  Table 2                                                                                             in Table 2. For easy detections, the
+
+    Detection-level AUCs for KWs in Trials 1 and 2 and CAD according to Detection Type                AUCs for KWs were higher than the
+                                                                                                      AUC for CAD, reaching significance in
+                                                               AUC 6 Standard Error*
+                          No. of TrueNo. of False                                                     trial 2. The AUCs for KWs for easy
+    Detection Type        Polyps     Polyps      KW in Trial 1   KW in Trial 2   CAD                  detections were higher than the AUCs
+
+     All                  31         237         0.845 6 0.045   0.855 6 0.044   0.859 6 0.043        for moderate detections, but they did
+                                                                                                      not reach significance. For moderate
+     Stratified by difficulty
+     Easy                 23         141         0.951 6 0.032   0.966 6 0.027†  0.877 6 0.048†       detections, the AUCs for KWs were
+                                                                                                      not significantly different from the
+     Moderate              5          55         0.867 6 0.105   0.882 6 0.101   0.922 6 0.084
+     Difficult             3          41         0.037           0.041           0.598                AUC for CAD. Statistical comparisons
+                       §                                                                              for difficult detections were not cal-
+     Stratified by polyp size
+       6–9 mm             18         189         0.843 6 0.059   0.862 6 0.056   0.892 6 0.051        culated because of the small number
+       10 mm              13          53         0.787 6 0.080   0.779 6 0.081   0.781 6 0.080        of true detections. Corresponding
+
+     Repeat workers|      31         237         0.759 6 0.052#  0.839 6 0.046#| 0.859 6 0.043        ROC curves are shown in Figure E17
+                                                                                                      (online).
+    * Results of statistical comparisons between AUCs for KWs in trial 1, KWs in trial 2, and CAD are all not significant except as
+    noted.
+                                                                                                      Performance Stratified by Polyp Size at
+    †AUC for easy detections for KWs in trial 2 is significantly higher tha▯n AUC for CAD (P = .039).
+    ‡Statistical comparisons for difficult detections were not possible becaus▯e of the small number of true detections, and thus no
+    standard error was indicated.
+                                                                                                      The detection-level AUCs for detections
+    §Stratification was based on size of true polyps, as determined with optical colonoscopy. False pofrom cases with true polyps stratified
+    polyps from the same cases.
+    |Repeat workers (n = 24) are KWs who participated in both trials 1 and 2.                         by size are shown in Table 2. None of
+                                                                                                      the AUC pairings were found to be sig-
+    #AUC for all detections on the basis of votes from repeat workers significantly higher in trial 2 compared with trial 1
+    (P = .041).                                                                                       nificantly different.
+
+
+                                                                                                      Performance for Repeat Workers
+                                                                                                      Repeat workers are KWs who partic-
+               Figure 1
+                                                                                                      ipated in both trial 1 and trial 2. The
+                                                                                                      detection-level AUCs for the repeat
+
+                                                                                                      workers are shown in Table 2. The AUC
+                                                                                                      for repeat workers in trial 2 was sig-
+
+                                                                                                      nificantly higher than the AUC for the
+                                                                                                      same KWs in trial 1. The AUC for the
+
+                                                                                                      repeat workers in trial 2 was not signifi-
+                                                                                                      cantly different from the AUC for CAD.
+
+                                                                                                      Corresponding ROC curves are shown
+                                                                                                      in Figure E18 (online).
+
+                                                                                                           There were 24 repeat workers be-
+                                                                                                      tween trial 1 and trial 2, representing
+
+                                                                                                      16% of the 150 KWs in trial 1 and
+                                                                                                      24% of the 102 KWs in trial 2. Repeat
+
+                                                                                                      workers accounted for 38% (2039 of
+                                                                                                      5360) of assignments completed in
+
+                                                                                                      trial 1 and 39% (2098 of 5360) of as-
+                                                                                                      signments completed in trial 2, repre-
+
+             Figure 1:  Comparison of ROC curves for CAD, KWs in trial 1, and KWs in trial            senting an average of 7.6 assignments
+                                                                                                      per polyp candidate 6         1.2 (standard
+             2.All three classifiers show similar performance, with AUCs of 0.859, 0.845,
+             and 0.855, respectively.                                                                 deviation) for trial 1 and 7.8 assign-
+                                                                                                      ments per polyp candidate 6                0.9
+
+                                                                                                      (standard deviation) for trial 2. On
+                                                   each other. Corresponding ROC curves               average, repeat workers completed
+  Results
+                                                   are shown in Figure 1.                             more assignments per trial, 85.0 as-
+Performance Comparison                                                                                signments 6 101.9 (standard devia-
+                                                   Performance Stratified by Detection
+The detection-level AUCs for KWs in                                                                   tion) for trial 1 and 87.4 assignments
+trial 1, KWs in trial 2, and CAD are               Difficulty                                         6 115.2 (standard deviation) for trial
+
+shown in Table 2. All of these AUCs                The detection-level AUCs for detec-                2, than all KWs combined (P             = .004
+were not significantly different from              tions stratified by difficulty are shown           for trial 1).
+
+
+828                                                                                             radiology.rsna.oRadiology: Volume 262:Number 3—March 2012
+COMPUTER APPLICATIONS: Distributed Human Intelligence for Colonic Polyp Classification                                        Nguyen et al
+
+
+
+
+
+
+
+
+
+
+
+Experiment Characteristics                      Table 3
+
+For trial 1, all HITs were completed              Average KW Scores for True Detections, False Detections, and Detections Stratified
+in 3.5 days. For trial 2, all HITs were           by Difficulty and Polyp Size at Optical Colonoscopy
+
+completed in 3.0 days. The average                                           KW Score 6 Standard Deviation*
+submission rates were 64.0 (95% CI:
+62.3, 65.7) and 73.7 (95% CI: 71.7,               Detection Type           Trial 1          Trial 2         SVM Score 6 Standard Deviation
+
+75.6) assignments per hour for trial 1             False detections (n = 230.655 6 0.177    0.630 6 0.200   0.759 6 0.113
+and trial 2, respectively. The submis-
+                                                     Easy (n = 141)        0.589 6 0.159    0.550 6 0.179   0.750 6 0.108
+sion rates were steady throughout the                Moderate (n = 55)     0.687 6 0.161    0.679 6 0.170   0.737 6 0.108
+experiment, with moderate diurnal                    Difficult (n = 41)    0.839 6 0.103    0.838 6 0.121   0.818 6 0.118
+
+variations.                                        True detections (n = 31)0.874 6 0.120    0.884 6 0.136   0.928 6 0.100
+                                                     Easy (n = 23)         0.902 6 0.089    0.924 6 0.085   0.934 6 0.105
+KW Characteristics                                   Moderate (n = 5)      0.900 6 0.100    0.900 6 0.061   0.937 6 0.063
+
+There were 150 KWs who partici-                      Difficult (n = 3)     0.617 6 0.029    0.550 6 0.050   0.861 6 0.120
+pated in trial 1 and 102 KWs who par-              Size
+                                                     6–9 mm (n = 18)       0.850 6 0.136    0.869 6 0.154   0.936 6 0.089
+ticipated in trial 2. For trial 1, 68%
+(3646 of 5360) of all assignments were               10 mm (n = 13)       0.908 6 0.089    0.904 6 0.107   0.916 6 0.117
+
+labeled as true polyps by KWs, com-               *All P values comparing KW scores for trials 1 and 2 in each row were not significant.
+pared with 66% (3534 of 5360) in trial
+2. The average amount of time spent
+
+on each assignment was 35.5 seconds
+6 53.3 (standard deviation) in trial 1
+                                                                                             How Many KWs Do You Need?
+and 24.1 seconds 6        44.8 (standard       average SVM scores from CAD for true
+deviation) in trial 2. There was no            detections, false detections, and detec-      Bootstrap statistical techniques were
+correlation found between KW accu-             tions stratified by difficulty and by polyp   used to show that 20 KWs per polyp
+                                                                                             candidate are sufficient to provide high-
+racy and time spent on each assign-            size at optical colonoscopy. The average
+ment (R = 0.004). For KWs who com-             KW score for true detections was sig-         quality results (24). Figure 3 shows the
+                                                                                             expected AUC for a simulated range of
+pleted more than 16 assignments, the           nificantly higher than the average KW
+mean sensitivity was 0.89 (standard            score for false detections for trial 1 and    three to 20 KWs per polyp candidate.
+                                                                                             As the number of KWs per polyp can-
+deviation, 0.17; range, 0.33–1.00) and         trial 2 (P , .0001 for both trials).
+mean specificity was 0.36 (standard                When true polyps were strati-             didate increases, the incremental im-
+deviation, 0.27; range, 0–0.80).               fied by difficulty, KW scores for easy        provements in performance with each
+                                                                                             additional KW become progressively
+    On average, each KW completed              and moderate detections were sig-
+35.7 assignments 6       71.5 (standard        nificantly higher than KW scores for          smaller. The AUC for 20 KWs per
+                                                                                             polyp candidate is not significantly dif-
+deviation) in trial 1 and 52.5 assign-         difficult detections for both trials (P
+ments 6 90.6 (standard deviation) in           , .001 for all comparisons). When             ferent from the AUC for 10 KWs per
+trial 2. In trial 1, 57% (86 of 150)           true polyps were stratified by size           polyp candidate (P = .395).
+
+of KWs completed five or fewer as-             at optical colonoscopy, the average
+signments, compared with 53% (54               KW score for detections of 6–9-mm             KW Filtering
+
+of 102) in trial 2. There were 11 and          polyps was not significantly different        When all of the statistical analyses pre-
+15 KWs in trial 1 and trial 2, respec-         from the average KW score for de-             sented above were applied to a filtered
+
+tively, who each completed more than           tections of 10 mm or larger polyps.           data set that excluded unreliable KWs
+200 assignments, representing 52%              When false polyps were stratified by          (eight KWs in trial 1, seven in trial 2),
+(2779 of 5360) of all completed as-            difficulty, the average KW score for          there were no appreciable or significant
+
+signments in trial 1 and 70% (3768 of          easy detections was significantly lower       differences in the results of any of the
+5360) of all completed assignments in          than the average KW score for mod-            analyses when compared with analyses
+
+trial 2. Although the majority of KWs          erate detections (P    , .0001 for both       that included the complete data set;
+completed five or fewer assignments,           trials), which was significantly lower        therefore, all analyses presented above
+
+the KWs who each completed more                than the average KW score for diffi-          are based on the complete data set.
+than 200 assignments represented               cult detections (P    , .0001 for both
+the majority of assignments com-               trials). The KW scores were not sig-
+                                                                                               Discussion
+pleted (Fig E19 [online]).                     nificantly different between trial 1 and
+                                               trial 2 for all strata. Figure 2 shows        In this study, we evaluated the diag-
+KW Scores
+                                               the distribution of KW scores for true        nostic performance and reliability of
+Table 3 shows average KW scores from           polyps and false polyps, stratified by        Internet-based distributed human in-
+distributed human intelligence and             difficulty.                                   telligence compared with CAD, in the
+
+
+Radiology: Volume 262:Number 3—March radiology.rsna.org                                                                              829
+COMPUTER APPLICATIONS: Distributed Human Intelligence for Colonic Polyp Classification                                         Nguyen et al
+
+
+
+
+
+
+
+
+
+
+
+  Figure 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 2: Histogram of detections stratified according to KW score (calculated as ratio of votes for true polyp to total number of votes for each detection) for (a)
+
+true polyps (n = 31) and (b) false polyps (n = 237) in trial 1, illustrating the differences in the distribution of scores between true and false polyps.The detections are
+also stratified according to difficulty, shown as stacked bars, illustrating the shift in score distributions as difficulty changes. Similar histograms were obtained for trial
+2 (Fig E20 [online]).
+
+
+                                                                                              substantially fewer training cases than
+              Figure 3
+                                                                                              CAD. KWs were only shown 11 polyp
+                                                                                              candidates for training, whereas CAD
+                                                                                              was trained by using ground truth data
+
+                                                                                              for 2374 polyp candidates generated
+                                                                                              from 24 patients. A potential benefit is
+
+                                                                                              that the insights gained from the use
+                                                                                              of KWs may enable the development
+                                                                                              of CAD systems by using smaller ref-
+
+                                                                                              erence databases. In addition, the time
+                                                                                              and cost associated with the develop-
+                                                                                              ment of such training databases could
+
+                                                                                              be further reduced by using KWs to la-
+                                                                                              bel these large-scale data. In this study,
+
+                                                                                              we also found that distributed human
+                                                                                              intelligence is reliable and consistent
+                                                                                              because we only observed small, in-
+
+            Figure 3:  Graph of results from bootstrap statistical analysis shows expected    significant differences in performance
+            performance, as an AUC, for a simulated range of three to 20 KWs per polyp        metrics and in measured experimental
+                                                                                              and KW characteristics between the
+            candidate. Expected AUC is shown with standard error bars in black, and
+            95% CI within the shaded region.The AUC increases as the number of KWs            two trials, separated by 4 weeks.
+            per polyp candidate increases, with smaller incremental improvements in                Subgroup analysis at the level of
+
+            performance as it approaches 20 KWs per polyp candidate. CIs also become          the polyp candidate revealed several
+            narrower as the number of KWs per polyp candidate increases. For this             interesting findings. When the polyp
+            analysis, data were used from trial 1. Similar results were obtained for trial 2  candidates were stratified by diffi-
+
+            (Fig E21 [online]).                                                               culty, determined a priori on the ba-
+                                                                                              sis of perceived difficulty for human
+                                                                                              classification, the KWs’ confidence in
+
+classification of colonic polyp candi-         human intelligence and the classifier          their classification, which was based
+dates from CT colonographic data. We           in our CAD algorithm for polyps 6 mm           on how closely the average KW scores
+
+found that there was no significant dif-       or larger. More important, distrib-            approached extremes, correlated well
+ference in performance between min-            uted human intelligence was able to            with this stratification. As expected,
+imally trained KWs from distributed            achieve this level of performance with         easy polyp candidates were associated
+
+
+830                                                                                      radiology.rsnaRadiology: Volume 262:Number 3—March 2012
+COMPUTER APPLICATIONS: Distributed Human Intelligence for Colonic Polyp Classification                                Nguyen et al
+
+
+
+
+
+
+
+
+
+
+
+
+with high KW confidence and difficult       KWs from the two trials represented a       in performance between the two trials.
+polyp candidates were associated with       completely different subset of individ-     Even though the KWs were not given
+low KW confidence. This was the case        uals, there was a surprising amount of      feedback on their performance at any
+
+for true polyp detections, where eas-       consistency between the trials with all     point, they were still able to develop
+ier detections received higher KW           measures, lending it credibility as a re-   an intuition in regard to the features
+
+scores, and for false polyp detections,     producible and predictable system.          associated with true polyps and false
+where easier detections received                At the individual level, however,       polyps. Future studies could focus on
+lower KW scores. Similar but weaker         KWs exhibited highly variable behav-        the mechanisms of cumulative perfor-
+
+trends were observed for SVM scores         ior and, thus, presumably gave differ-      mance improvements in the same sub-
+from CAD.                                   ent qualities of responses. The range       set of KWs.
+    These differences in KW confidence      of sensitivities and specificities was         It is also worthwhile to consider the
+
+translated well into differences in per-    large, and we found no relationship         nature of the task performed. The KWs
+formance. The AUC for classification of     between polyp classification accuracy       in this experiment were presented with
+
+easy polyp candidates was higher than       and amount of time spent per assign-        a relatively simple and narrowly defined
+the AUCs for classification of moderate     ment. It should also be noted that KW       visual task. Researchers in future stud-
+and difficult polyp candidates for both     heterogeneity was not taken into ac-        ies would ideally identify and indepen-
+
+the KWs and CAD. In addition, since         count in the calculation of KW scores.      dently investigate different elementary
+the differences between difficulty strata   Presumably, each KW has a different         components of an overall complex task
+were less pronounced for CAD than for       voting threshold level for selecting true   to identify specific features of an image
+
+the KWs, the AUC for easy polyp can-        polyp or false polyp. A different set of    that would enable a marked improve-
+didates for the KWs was higher than         KWs would be expected to have a dif-        ment in the performance of the KWs.
+
+that for CAD, reaching significance in      ferent distribution of threshold levels.    One potential application would be in
+trial 2. This performance advantage of      Although this factor would be expect-       the development of training programs
+KWs over CAD for easy polyp candi-          ed to have an effect on individual KW       for medical personnel in the reading of
+
+dates suggests that there are certain       scores for each polyp candidate, we         CT colonographic images with the as-
+features associated with easy polyp         have shown experimentally that the          sistance of CAD. Without proper train-
+candidates—possibly related to shape,       overall performance is not affected,        ing, the use of CAD systems can often
+
+geometry, or location in the context of     with consistent results between two tri-    lead to decreases in reader sensitivity
+the local environment—that allow hu-        als. At present, we have not been able      and specificity. Such information from
+
+mans to easily classify the polyp candi-    to identify a reliable method of normal-    distributed human intelligence experi-
+dates. In contrast, the CAD algorithm,      izing KW votes or differentiating high-     ments could also be very valuable for
+which is strongly based on surface cur-     quality KWs from low-quality KWs.           informing the future development and
+
+vature (12), may not have evaluated the         Given the importance of quality         improvement of CAD systems them-
+polyp candidates by using these same        control in these experiments, future        selves. It may be possible to develop
+features, thus making it more difficult     work should focus on developing algo-       CAD systems that utilize unconven-
+
+for CAD to distinguish between true         rithms to identify and properly handle      tional features or combinations of fea-
+and false polyps.                           unreliable and low-quality KWs. Even        tures, require less training data, or per-
+
+    Similar trends were found when the      though the bootstrap analysis indicated     form substantially better.
+polyp candidates were stratified by size,   that the number of KWs per polyp               Web-based crowdsourcing, avail-
+as determined with same-day optical         candidate used in this study was suf-       able since approximately 2005, is a
+
+colonoscopy. For both trials, the KW        ficient to provide high-quality results,    relatively recent phenomenon, with
+confidence was higher for polyps 10         the use of additional KWs may still be      applications thus far being largely con-
+mm or larger than for polyps 6–9 mm.        beneficial to compensate for variability    fined to business and social sciences re-
+
+This study was not sufficiently powered     in the amount of noise from unreliable      search (25,26). As a means of conduct-
+to detect significant differences in KW     responses from low-quality KWs and          ing observer performance assessments,
+
+confidence and AUCs for polyp size          to decrease the effects of heterogene-      crowdsourcing in the form of distrib-
+strata.                                     ity in KW voting threshold levels. In       uted human intelligence is consider-
+    The use of distributed human intelli-   this study, we chose to use the Ama-        ably more rapid and efficient than tra-
+
+gence that is based on anonymous, min-      zon MTurk platform since it already has     ditional recruitment methods that may
+imally trained KWs represents a newer       multiple measures in place to ensure        require substantial financial resources
+approach to colonic polyp classification.   KW quality and prevent common sys-          and physical infrastructure. The useful-
+
+As a whole, distributed human intelli-      tematic abuses.                             ness of crowdsourcing as a tool in the
+gence was robust and efficient, with a          Other aspects of KW behavior are        broader scope of scientific research has
+
+steady assignment completion rate of        also important. In this study, we found     only begun to be explored (27–30).
+one assignment per minute. In addi-         that KWs who participated in both tri-         In this study, distributed human
+tion, despite the fact that most of the     als showed a significant improvement        intelligence composed of minimally
+
+
+Radiology: Volume 262:Number 3—Marcradiology.rsna.org                                                                        831
+COMPUTER APPLICATIONS: Distributed Human Intelligence for Colonic Polyp Classification                                              Nguyen et al
+
+
+
+
+
+
+
+
+
+
+
+
+trained workers, was used as a classi-           Acknowledgments: We thank Perry J. Pick-             er-aided detection software. Radiology
+fier in conjunction with CAD-detected            hardt, MD, J. Richard Choi, ScD, MD, and Wil-        2008;246(2):463–471.
+                                                 liam R. Schindler, DO, for providing CT colo-
+polyp candidates in CT colonography.             nography data, Viatronix for providing Viatronix  5. Hock D, Ouhadi R, Materne R, et al. Vir-
+We have already shown that distributed           V3D-Colon software, Andrew J. Dwyer, MD,             tual dissection CT colonography: evaluation
+
+human intelligence is reliable and is able       for critical review of the manuscript, and Sandy     of learning curves and reading times with
+to perform high-quality colonic polyp            Napel, PhD, and Christopher F. Beaulieu, MD,         and without computer-aided detection. Ra-
+                                                 PhD, for helpful discussions.                        diology 2008;248(3):860–868.
+classification. This study lays important
+groundwork for future improvements                                                                 6. Petrick N, Haider M, Summers RM, et al.
+                                                 Disclosures of Potential Conflicts of Interest:      CT colonography with computer-aided de-
+and expansions on the current exper-             T.B.N. Financial activities related to the pre-
+imental design. Areas of improvement             sent article: received grant through the Clinical    tection as a second reader: observer per-
+                                                 Research Training Program, a public-private          formance study. Radiology 2008;246(1):
+may include implementation of addi-              partnership supported jointly by the National        148–156.
+tional qualification requirements for            Institutes of Health and Pfizer (via a grant to
+                                                                                                   7. Summers RM. Improving the accuracy of
+workers, incentivized rewards systems,           the Foundation for the National Institutes of
+newer visualization methods, optimiza-           Health from Pfizer). Financial activities not re-    CTC interpretation: computer-aided de-
+                                                 lated to the present article: none to disclose.      tection. Gastrointest Endosc Clin N Am
+tion of polyp candidate presentation,            Other relationships: none to disclose. S.W. No       2010;20(2):245–257.
+and expanded nonbinary response op-              potential conflicts of interest to disclose. V.A.
+                                                 No potential conflicts of interest to disclose.   8. Summers RM. How perceptual factors affect
+tions. In addition, since CAD and KWs
+each use different features to classify          N.R. No potential conflicts of interest to dis-      the use and accuracy of CAD for interpre-
+                                                 close. M.M. No potential conflicts of interest       tation of CT images. In: Samei E, Krupinski E,
+the polyp candidates, a fusion classi-           to disclose. N.P. Financial activities related to    eds. The handbook of medical image per-
+fier that incorporates both of these             the present article: none to disclose. Financial     ception and techniques. Cambridge, England:
+                                                 activities not related to the present article: au-
+may yield even better performance and            thor and institution have patent applications        Cambridge University Press, 2009; 311–319.
+may result in measurable reductions in
+                                                 submitted in related areas for the National       9. Pickhardt PJ, Choi JR, Hwang I, et al. Com-
+false-positive rates. A proposed fusion          Institutes of Health and the Food and Drug           puted tomographic virtual colonoscopy to
+classifier that is based on a-integration        Administration. Other relationships: none to         screen for colorectal neoplasia in asymp-
+                                                 disclose. J.E.B. No potential conflicts of inter-    tomatic adults. N Engl J Med 2003;349(23):
+has been used on the data from this              est to disclose. R.M.S. Financial activities re-
+experiment and has shown promising               lated to the present article: none to disclose.      2191–2200.
+
+results (31).                                    Financial activities not related to the present  10. Pickhardt PJ, Choi JH. Electronic cleansing
+    In summary, we have shown that               article: received grant from iCAD Medical; au-       and stool tagging in CT colonography: ad-
+                                                 thor and institution receive royalties for a pat-    vantages and pitfalls with primary three-di-
+the performance of distributed human             ent license from iCAD Medical and software li-       mensional evaluation. AJR Am J Roentgenol
+intelligence is not significantly differ-        cense from Translational Sciences Corporation
+                                                 and have patents issued and pending in related       2003;181(3):799–805.
+ent from that of CAD for colonic polyp
+classification, and the use of distrib-          areas. Other relationships: Viatronix provided   11. Summers RM, Yao J, Pickhardt PJ, et al.
+                                                 the V3D-Colon software free of charge to au-         Computed tomographic virtual colonos-
+uted human intelligence may provide              thor’s laboratory, and software was used in          copy computer-aided polyp detection in
+insights that guide future CAD develop-          the submitted work; author’s laboratory is
+                                                 supported in part by a Cooperative Research          a screening population. Gastroenterology
+ment. We demonstrated the reliability            and Development Agreement with iCAD; is a            2005;129(6):1832–1844.
+of distributed human intelligence in
+                                                 stockholder of Johnson & Johnson.                12. Summers RM, Beaulieu CF, Pusanik LM,
+two separate trials. We showed that                                                                   et al. Automated polyp detector for CT
+there are differences in performance                                                                  colonography: feasibility study. Radiology
+
+between subgroups, and we have il-               References                                           2000;216(1):284–290.
+lustrated areas where distributed hu-                                                             13. Summers RM, Johnson CD, Pusanik LM,
+                                                  1. Jemal A, Siegel R, Xu J, Ward E. Can-
+man intelligence is able to outperform               cer statistics, 2010. CA Cancer J Clin           Malley JD, Youssef AM, Reed JE. Auto-
+CAD. These results are promising and                 2010;60(5):277–300.                              mated polyp detection at CT colonography:
+                                                                                                      feasibility assessment in a human popula-
+lay the foundation for future work that           2. Smith RA, Cokkinides V, Brooks D, Saslow
+will improve on these methods. With                                                                   tion. Radiology 2001;219(1):51–59.
+                                                     D, Brawley OW. Cancer screening in the
+additional KW training and other im-                 United States, 2010: a review of current     14. Summers RM, Jerebko AK, Franaszek M,
+provements in experimental design, we                American Cancer Society guidelines and is-       Malley JD, Johnson CD. Colonic polyps:
+believe distributed human intelligence                                                                complementary role of computer-aided
+                                                     sues in cancer screening. CA Cancer J Clin       detection in CT colonography. Radiology
+may perform better than CAD in more                  2010;60(2):99–119.
+general circumstances and will be use-                                                                2002;225(2):391–399.
+                                                  3. Dachman AH, Obuchowski NA, Hoffmeister
+ful for decreasing CAD training require-             JW, et al. Effect of computer-aided detec-   15. Jerebko AK, Malley JD, Franaszek M,
+ments, allowing rapid observer perfor-               tion for CT colonography in a multireader,       Summers RM. Computer-aided polyp detec-
+                                                                                                      tion in CT colonography using an ensemble
+mance assessments, providing insights                multicase trial. Radiology 2010;256(3):          of support vector machines. In: Lemke HU,
+into reader perception, reducing false-              827–835.
+                                                                                                      Vannier MW, Inamura K, Farman AG, Doi
+positive rates, and enabling improve-             4. Taylor SA, Charman SC, Lefere P, et al.          K, Reiber JHC, eds. CARS 2003. Computer
+ments in CAD for CT colonography, as                 CT colonography: investigation of the op-        Assisted Radiology and Surgery. Proceedings
+                                                     timum reader paradigm by using comput-
+well as for other CAD applications.                                                                   of the 17th International Congress and Exhi-
+
+
+832                                                                                         radiology.rsna.Radiology: Volume 262:Number 3—March 2012
+COMPUTER APPLICATIONS: Distributed Human Intelligence for Colonic Polyp Classification                                                   Nguyen et al
+
+
+
+
+
+
+
+
+
+
+
+
+
+    bition. London, England: Elsevier, 2003;1019–  20. Bunch PC, Hamilton JF, Sanderson GK,           26. Paolacci G, Chandler J, Ipeirotis PG. Run-
+    1024.                                              Simmons AH. A free-response approach to            ning experiments on Amazon Mechanical
+                                                       the measurement and characterization of            Turk. Judgm Decis Mak 2010;5(5):411–419.
+16. Malley JD, Jerebko AK, Miller MT,
+    Summers RM. Variance reduction for error           radiographic-observer performance. J Appl      27. Brabham DC. Crowdsourcing as a model for
+                                                       Photogr Eng 1978;4(4):166–171.
+    estimation when classifying colon polyps                                                              problem solving: an introduction and cases.
+    from CT colonography. In: Clough AV, Amini     21. Chakraborty DP. Validation and statistical         Convergence 2008;14(1):75–90.
+    AA, eds. SPIE medical imaging. San Diego,          power comparison of methods for analyzing
+                                                                                                      28. Oprea TI, Bologa CG, Boyer S, et al. A
+    Calif: SPIE, 2003; 570–578.                        free-response observer performance stud-
+                                                       ies. Acad Radiol 2008;15(12):1554–1566.            crowdsourcing evaluation of the NIH chemi-
+17. Yao J, Summers RM. 3D colonic polyp seg-                                                              cal probes. Nat Chem Biol 2009;5(7):441–
+    mentation using dynamic deformable sur-        22. Li Q, Doi K. Reduction of bias and variance        447.
+    faces. In: Amini AA, Manduca A, eds. SPIE          for evaluation of computer-aided diagnostic
+                                                                                                      29. Johnston SC, Hauser SL. Crowdsourcing
+    medical imaging. San Diego, Calif: SPIE,           schemes. Med Phys 2006;33(4):868–875.              scientific innovation. Ann Neurol 2009;
+    2004; 280–289.
+                                                   23. Metz CE, Herman BA, Shen JH. Maximum               65(6):A7–A8.
+18. Iordanescu G, Pickhardt PJ, Choi JR,               likelihood estimation of receiver operating
+    Summers RM. Automated seed place-                  characteristic (ROC) curves from continuously- 30. Raykar VC, Yu S, Zhao LH, et al. Learn-
+                                                                                                          ing from crowds. J Mach Learn Res 2010;
+    ment for colon segmentation in computed            distributed data. Stat Med 1998;17(9):             11:1297–1322.
+    tomography colonography. Acad Radiol               1033–1053.
+    2005;12(2):182–190.                                                                               31. Wang S, Anugu V, Nguyen TB, et al. Fu-
+                                                   24. Shalizi C. The bootstrap. Am Sci 2010;
+                                                       98:186–190.                                        sion of machine intelligence and human in-
+19. Summers RM, Franaszek M, Miller MT,                                                                   telligence for colonic polyp detection in CT
+    Pickhardt PJ, Choi JR, Schindler WR. Com-                                                             colonography. In: Biomedical imaging: from
+    puter-aided detection of polyps on oral con-   25. Howe J. The rise of crowdsourcing. Wired
+                                                       2006; 14(6). http://www.wired.com/wired            nano to macro, 2011 IEEE International
+    trast-enhanced CT colonography. AJR Am J           /archive/14.06/crowds.html. Accessed No-           Symposium on. Chicago, Ill: IEEE, 2011;
+    Roentgenol 2005;184(1):105–108.                                                                       160–164.
+                                                       vember 23, 2010.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Radiology: Volume 262:Number 3—March 201radiology.rsna.org                                                                                        833

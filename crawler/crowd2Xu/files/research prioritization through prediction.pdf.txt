@@ -1,0 +1,1213 @@
+                                                                  Score Rank
+
+
+                                                    RPredicted
+                                                    Impact on
+                                                   Future Science            Score Rank
+
+                                                     Re-rank
+                                                   by Confidence
+                                                                  Score Rank
+
+                                                     Re-rank
+                                                   by Resource
+                                                   Ror Reagents
+                                                    Availability
+
+                                                           Inference Analytics:
+                                                 A Necessary Next step to Big Data Analytics
+                                                               in Biology
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Research prioritization through prediction of
+
+
+future impact on biomedical science: a position
+
+
+paper on inference-analytics
+
+
+Ganapathiraju and Orii
+
+
+
+                                                                                        Ganapathiraju and OriiGigaScience2013, 2:11
+
+                                                                                   http://www.gigasciencejournal.com/content/2/1/11
+Ganapathiraju and Orii GigaScience 2013, 2:11
+http://www.gigasciencejournal.com/content/2/1/11
+
+
+
+
+ RESEARCH                                                                                         Open Access
+
+
+
+Research prioritization through prediction of
+
+
+future impact on biomedical science: a position
+
+paper on inference-analytics
+
+                         1,2*              1,2
+Madhavi K Ganapathiraju and Naoki Orii
+
+
+  Abstract
+
+  Background: Advances in biotechnology have created “big-data” situations in molecular and cellular biology.
+  Several sophisticated algorithms have been developed that process big data to generate hundreds of biomedical
+
+  hypotheses (or predictions). The bottleneck to translating this large number of biological hypotheses is that each of
+  them needs to be studied by experimentation for interpreting its functional significance. Even when the predictions
+  are estimated to be very accurate, from a biologist’s perspective, the choice of which of these predictions is to be
+  studied further is made based on factors like availability of reagents and resources and the possibility of formulating
+  some reasonable hypothesis about its biological relevance. When viewed from a global perspective, say from that
+
+  of a federal funding agency, ideally the choice of which prediction should be studied would be made based on
+  which of them can make the most translational impact.
+  Results: We propose that algorithms be developed to identify which of the computationally generated hypotheses
+  have potential for high translational impact; this way, funding agencies and scientific community can invest
+
+  resources and drive the research based on a global view of biomedical impact without being deterred by local
+  view of feasibility. In short, data-analytic algorithms analyze big-data and generate hypotheses; in contrast, the
+  proposed inference-analytic algorithms analyze these hypotheses and rank them by predicted biological impact. We
+  demonstrate this through the development of an algorithm to predict biomedical impact of protein-protein
+  interactions (PPIs) which is estimated by the number of future publications that cite the paper which originally
+
+  reported the PPI.
+  Conclusions: This position paper describes a new computational problem that is relevant in the era of big-data
+  and discusses the challenges that exist in studying this problem, highlighting the need for the scientific community
+
+  to engage in this line of research. The proposed class of algorithms, namely inference-analytic algorithms, is
+  necessary to ensure that resources are invested in translating those computational outcomes that promise
+  maximum biological impact. Application of this concept to predict biomedical impact of PPIs illustrates not only
+  the concept, but also the challenges in designing these algorithms.
+
+  Keywords: Impact prediction, Data analytics, Inference analytics, Protein-protein interaction prediction, Big-data
+
+
+
+
+
+
+
+
+
+1 Correspondence: madhavi@pitt.edu
+ Department of Biomedical Informatics, School of Medicine, University of
+2ittsburgh, Pittsburgh, PA 15206, USA
+Mellon University, Pittsburgh, PA 15213, USAComputer Science, Carnegie
+
+                              © 2013 Ganapathiraju and Orii; licensee BioMed Central Ltd. This is an Open Access article distributed under the terms of the
+                              Creative Commons Attribution License (http://creativecommons.org/licenses/by/2.0), which permits unrestricted use,
+                              distribution, and reproduction in any medium, provided the original work is properly cited.
+Ganapathiraju and Orii GigaScience 2013, 2:11                                                                  Page 2 of 13
+
+http://www.gigasciencejournal.com/content/2/1/11
+
+
+
+
+Background                                                     Inference analytics for research prioritization
+Big data is everywhere today, be it data from publications In domains such as biology where hypothesis verification
+(newspapers, journals, internet pages or tweets), or be it     and interpretation are resource-intensive, the large num-
+
+cosmological, climatic, or ecological data. This trend is ber of inferences drawn by data-analytic algorithms would
+facilitated primarily by the exponential increases in the      have to be reanalyzed by various criteria such as availabil-
+capabilities of computing, storage and communication ity of resources (budget, reagents or scientific expertise).
+
+technologies. In biology, advances in biotechnology have       We call such algorithms which re-analyze data analytic in-
+resulted in the creation of big data of many types: genomic,   ferences as inference analytic algorithms (Figure 1); an in-
+proteomic, trascriptomic, epigenomic and metabolomic ference analytic algorithm that is essential in the field of
+
+characterizations of several species and their populations.    biology is that of predicting the future impact of an infer-
+  Large-scale data analytics can aid in discovering pat-       ence on biomedicine.
+terns in these data to gain new scientific insights; how-
+
+ever, the domain of biology is very different from most        Predicting future impact of inferences is necessary in
+other domains in this aspect. Validating a computa-            biology and biomedicine
+tional result is cheap in domains like language trans-         Just as grant proposals are evaluated for their “difference
+
+lation, and can be carried ou t by any average individual;     making capability” to determine priority of funding, the
+when the number of results is in hundreds or thou-             inferences drawn at a large scale may be evaluated by their
+sands, it is possible to crowdsource the validations           potential for biomedical impact before investing resources
+
+using Amazon MechanicalTurk [1] or the like. Manual            to experimentally study them (Figure 1). Impact predic-
+validators can often correct mistakes of the algorithm,        tion, or ranking the computational inferences based on fu-
+and these corrections may in turn be used to improve           ture impact is distinct from other methods of re-ranking
+
+the algorithm in future. Secondly, the computational           computational outcomes, such as ranking by confidence
+results are often ready for direct use or interpretation.      of prediction. Here, we assume that all computational out-
+For example, outcomes of algorithms for machine                comes are equally accurate, and propose to re-rank them
+
+translation from one langua ge to another, information         by their predicted impact on future science. Impact pre-
+retrieval, weather prediction, etc. may be directly de-        diction is also distinct from task prioritization, a well-
+ployed for use in real life.                                   studied area in computer science. Task prioritization
+
+  Compared to these domains, there are four fundamen-          assumes that priorities and costs are known for the tasks,
+tal differences in large-scale data analytics for molecular    and it optimizes allocation of resources to tasks to achieve
+and cellular biology:                                          maximum yield. Here, our goal is to predict the biomed-
+
+                                                               ical impact (a type of priority) so that resource allocation
+  (i) Conclusions drawn by algorithms cannot be                (e.g., by a funding agency) can be carried out based on
+      validated manually, and often require carrying out       these priorities.
+
+      experiments.
+  (ii) Even when the computational inferences are              Citation count can be used as a surrogate measure for
+      accurate and do not require further validation,          biomedical impact
+
+      converting the inferences to meaningful insights         The focus of this work is on estimating the biological
+      requires experimentation.                                importance of a specific PPI (i.e., how central is a PPI to-
+  (iii)Experimental methods require resources that are         wards understanding other biological or disease related
+
+      expensive (material and financial resources) or even     factors). How do we measure this importance? Consider
+      unavailable (suitable antibodies).                       the publications that report each of these PPIs; then
+  (iv)Validation and interpretation of inferences requires     consider the publications that cite these original publica-
+
+      scientific expertise which may be scarce (for            tions. In this narrow domain of publications reporting or
+      example, there may not be any scientist with             citing PPIs, we estimate that each article typically con-
+      expertise in studying some of the proteins).             tains one primary result; we measure the importance of
+
+                                                               a PPI in terms of how many papers cite the original pub-
+  For these reasons validating or interpreting all the hun-    lication reporting that PPI. For example, the PPI of
+dreds of computational inferences of data-analytic algo-       EGFR with Actin was central in advancing our know-
+
+rithms is expensive and is not amenable to crowdsourcing.      ledge of several other biological concepts discovered
+  In this position paper, we introduce the concept called      based on this PPI. For this reason, the paper reporting
+inference-analytics, and a sp ecific inference-analytics       this PPI [2] has been cited by 35 articles in PubMed.
+
+problem called impact prediction. We use the terms             The impact of EGFR-Actin is therefore estimated to be
+predictions, computational inferences or hypotheses to         at 35 “biomedical results”. Thus, we approximate impact
+refer to the outcomes of data-analytic algorithms.            prediction with citation count prediction.
+Ganapathiraju and Orii GigaScience 2013, 2:11                                                                            Page 3 of 13
+http://www.gigasciencejournal.com/content/2/1/11
+
+
+
+
+
+
+
+                                        Data
+                    (A)               Analytics                                                           Use
+
+
+                                                            Inferences         Crowdsourcing
+                                                                                for Validation
+
+                                                   Inferences
+
+
+                    (B)                 Data                                                          Experiments
+                                      Analytics
+
+                                                           Inference Analytics:  Score Rank
+
+                                                                  Re-rank by
+                                                                   Predicted
+                                                                 Future Science             Score Rank
+
+
+                                                                   Re-rank
+                                                                 by Confidence
+                                                                                 Score Rank
+
+                                                                   Re-rank
+                                                                 Requirements
+                                                                  or Reagent
+                                                                  Availability
+
+
+  Figure 1 Inference analytics. (A) Data analytics typically analyze large datasets to draw inferences; these inferences are usually used directly; the
+  inferences may be evaluated with relatively small investment of resources or through crowdsourcing. (B) In areas such as biology, it is desirable
+  that data analytics is followed by inference analytics; these algorithms would analyze the large number of data analytic inferences and re-ranking
+
+  them by various criteria to aid the users in selecting which inference to pursue. The work presented here corresponds to inference analytics for
+  “scientific impact prediction” criterion.
+
+
+
+
+Citation count prediction for scientific impact is different        Predicting impact of protein-protein interactions
+from citation count prediction based on metadata                    We demonstrate the idea of inference analytics by deve-
+
+Several researchers have investigated predicting the ci-            loping an algorithm for impact prediction in the domain
+tation counts for scientific papers [3-5]. However, in these        of PPIs. We propose to predict the impact of each of the
+
+methods only metadata about the publication (number of              PPIs, so that experiments may be prioritized to study
+past articles and past citations of the first author), and con-     the most impactful PPIs.
+
+tent (article title, abstract and MeSH terms) have been                Although PPIs form the basis of many biological phe-
+used. Our work differs from such work in that we do not             nomena, 90% of the estimated number of PPIs are
+
+consider citation impact based on reputation of the journal         currently unknown [7-9]. Extensive research is being
+or that of the author, but we focus on the biomedical infor-        carried out both with high-throughput biotechnology
+
+mation of the published scientific result that is receiving         and computational methods to discover PPIs [10-14].
+the citations. Here, citation counts are used as a surrogate        Both these approaches provide hundreds or thousands
+
+measure of the impact of a scientific result. Of course,            of hypothesized PPIs. The PPI network incorporating
+many factors influence the citing behavior of a given paper:        these thousands of newly discovered PPIs is useful to
+
+year of its publication, the journal containing the publica-        directly carry out systems biology studies [15-19]. How-
+tion, its availability and accessibility, and more [6]. We be-      ever, to advance the biology surrounding each PPI (i.e.,
+
+lieve that the original publication would be published in           to translate the inference into biomedical knowledge),
+
+the journal it deserves (e.g., the fact that a paper reporting      many detailed experiments need to be performed (simi-
+an interaction was accepted to be published in a high im-           lar to the experiments that reported the importance of
+
+pact journal is in itself an indicator that the interaction         EGFR-Actin interaction). These experiments are expen-
+may be of high biomedical significance); therefore, the bias        sive and time-consuming and most importantly require
+
+introduced by the journal of publication is not an un-              valuable time of scientists. Selecting a PPI for experi-
+wanted bias in calculating the biomedical impact. Other             mental study is usually based on the feasibility (availabi-
+
+factors influencing citation counts, namely the year of pub-        lity of budget, reagents, time and technical manpower),
+lication and years since publication are addressed to some          possibility of formulating a hypothesis of its functional
+
+extent in this work. We employ citation counts as indica-           significance, and most importantly, the perceived impact
+tors of “future impact” of a reported biological result.            of its validation on advancement of science based on the
+Ganapathiraju and Orii GigaScience 2013, 2:11                                                                       Page 4 of 13
+http://www.gigasciencejournal.com/content/2/1/11
+
+
+
+
+domain knowledge of the scientist. With this in mind, it         results show that even by using only the topological fea-
+
+is infeasible to study every hypothesized interaction me-        tures of PPIs, some of the high-impact PPIs can be
+ticulously with detailed experiments due to the sheer            identified.
+
+number of the inferred interactions.                                Identifying the most important nodes in a large com-
+  When viewed from a global perspective, say by a                plex network has been well-studied in various fields. In
+funding agency that has the capacity to drive the science        the field of sociology, various centrality measures have
+
+in a direction that is important, the selection of PPIs for      been proposed to rank the nodes in a complex network
+experimentation has to be made based on their relative           [23]. In the field of biology, these centrality measures are
+
+expected impact. There should be a mechanism of iden-            believed to determine characteristics of protein function
+tifying what the top 100, say, PPIs are that are most ur-        [24], such as the essentiality of the gene for the organ-
+gent because of their potential impact on biology and            ism’s survival [25-28]. In this work, instead of identifying
+
+biomedicine. Existing algorithms generate thousands of           the most important nodes in a network, we consider
+predictions and possibly rank them by confidence, but            identifying the most impactful edges in a network.
+
+none currently rank them by the impact that they are                Figure 2 shows the flow diagram of this work which
+predicted to make in the future                                  includes dataset creation, construction of pair-wise fea-
+                                                                 tures of proteins, development and evaluation of the
+
+Data description                                                 proposed model, and the application of the model to
+Binary biophysical PPIs in human were collected from             predict impact of all PPIs in the human interactome.
+
+HPRD [20] and BioGRID [21]. HPRD gives PPIs as a list
+of “binary protein-protein interactions”, and BioGRID            Methods
+gives them marked with the identifier “MI:0407”. These
+                                                                 Feature representation
+databases present PPIs that are curated from publications,       We computed network centrality measures shown in
+and for each PPI they also give links to the original publi-
+                                                                 Table 1 as features, and trained a random forest model to
+cation(s) that reported the interaction. The Entrez Pro-         predict high-impact PPIs. Calculation of the node centrali-
+gramming Utilities [22] was used to retrieve citation            ties was carried out using the Stanford Network Analysis
+information. There were 129,227 references to the 7,581
+                                                                 Library [32], and of the edge centrality using the
+papers that had one-to-one relationship with interactions.       NetworkX library [33]. As there are 8 node centrality fea-
+17,985 of them were self-references (13.92%). We built the
+                                                                 tures and 1 edge centrality feature, each interaction is rep-
+interactome network from the PPIs, and computed the              resented by a vector of 17 features, with the first 16
+centrality measures of PPIs (edges) and the participant
+                                                                 corresponding to the node centralities of the two proteins
+proteins (nodes). The resulting network consists of 10,492       and the 17th corresponding to the edge centrality. Let
+nodes and 48,419 edges. A subset of PPIs that have a one-        D =[X ,X ,…,X ] represent the n training samples and
+to-one relation with PubMed articles (i.e., those PPIs that            h i 2     n
+                                                                 X i ¼ x ;1 ;…2x ;y   17Þ i   represent the i-th sample with
+are reported by only one publication and where that publi-
+cation does not report any other PPI) is retrieved to be         features x (iand class label yiAs PPIs are undirected by na-
+                                                                 ture, and node centralities are features that pertain to nodes
+considered as labeled data for training and test sets.
+                                                                 (proteins), special care must be taken to treat each inter-
+Analyses                                                         action as an unordered pair. T    hat is, if we represent an
+
+We propose a computational approach to find the most             interaction between proteinsa and b by an ordered pair
+promising PPIs, and we measure the impact of a PPI in            (a, b), we do not wish to discriminate betweena      (, b)dn
+                                                                                                       (i)                ðiÞ
+terms of how many papers cite the publication that ori-          (b, a). While constructing featuresx , we let featuresx  1  to
+ginally reported the PPI.                                          ðiÞ
+  Our focus is on estimating the biological importance           x 8 be the larger values of the two node centralities, and let
+                                                                 featuresx  ðito xðiÞbe the smaller value of the two, in order
+of a PPI; and we therefore base our predictions on the                      9     16
+topological features of the PPIs with respect to the entire      to symmetrize the feature vectors fora   (, b)and( b, a).
+
+interactome. We frame the questions as follows: Is there
+a detectable trend in the network topology of highly             Models
+cited interactions or are they placed randomly on the            Whether an interaction is labeled positive (high-impact)
+
+interactome? Do interactions with high biomedical im-            or negative (non high-impact), is defined by a threshold
+pact have unique, quantifiable network characteristics           on the number of citations. For a given threshold t,a
+
+that distinguish them from other interactions? If we are         positive label (yi= 1) means that the paper reporting the
+able to uncover these latent characteristics, naturally, we      i-th PPI received at least t citations within the 5-year
+have strong reason to believe that we should study inter-        window following the publication, while a negative label
+
+actions in the order of their predicted importance. The          (yi= 0) denotes that it did not (for details on the choice
+Ganapathiraju and Orii GigaScience 2013, 2:11                                                                                Page 5 of 13
+http://www.gigasciencejournal.com/content/2/1/11
+
+
+
+
+
+
+                    1. Assemble human interactome      2. Compute network topological
+                    network (from HPRD and BioGRID)    features for each of the PPIs
+                    with source publication(s) and their
+                    citation counts from NCBI
+
+
+
+                                                                3. Choose interactions that
+                                                                 have 1-to-1 relationship
+                                                                    with a publication
+
+
+
+
+
+
+
+
+
+
+
+
+                      6. Predict impact of all PPIs in the                                  4. Develop and evaluate
+                       interactome by evaluating them            5. Develop new             classification model with
+                        with the model that has been           classification model          training & testing data
+                                                                using all this data         created with these edges
+                                 developed
+  Figure 2 PPI data. From the human interactome, those PPIs (edges) are selected that have 1–1 relation with a publication; that is, the
+
+  publication reports only one interaction, and that interaction is not reported by any other publication. The classification model is trained and
+  evaluated using this 1–1 dataset. After evaluating the approach thus, all of the 1–1 dataset is used to train a new model which is then used to
+  classify each of all of the edges in the interactome to identify high-impact edges. PPI network diagram was created with Cytoscape [29-31].
+
+
+of the 5-year window, see Results and Discussion). The                Evaluation
+
+threshold was set to 5, 10, 30 and 50 in this study.                  Prior works in citation prediction have often used the
+Table 2 lists the number of positive and negative in-                 Receiver Operating Characteristic (ROC) [4] or accuracy
+
+stances under the different threshold settings. Note that             [5] to evaluate their methods. However, ROC curves can
+
+we are unable to use interactions reported in papers                  present an overly optimistic view of an algorithm’sp          r
+published less than 5 years prior to this study in the                formance if there is a large skew in the class distribution
+
+training or test data because we are considering the                  [41]. The same holds for accuracy measure. For our task,
+citation count of a paper within a 5-year window follo-               because there are much more negative instances than
+
+wing the publication.                                                 positive instances, we use precision and recall, and the
+  Random Forest from the Scikit-Learn machine lear-                   area under the precision-recall curve (AUPR) to compare
+
+ning library was used for classification [37-39]. Random              methods. For our prediction task, we are mainly interested
+Forest has a high prediction accuracy for many types of               in conditions where the false positive rate is low. Thus, we
+
+data achieved by using bagging on samples, random sub-                also use R50, a partial AUPR score that measures the area
+sets of features, and a majority voting scheme, and has               under the precision-recall curve until reaching 50 negative
+
+been successfully applied to various problems in compu-               predictions. We perform a 10-fold cross-validation in 20
+tational biology [40]. Random forest also allows the esti-            randomly repeated runs to obtain average values. We re-
+
+mation of feature importance [38].                                    peat cross-validation runs since noise exists in both fea-
+                                                                      tures and labels; as we shall explain later, our features are
+
+Table 1 Calculated centrality measures                                calculated from a sampled sub-network and thus inhe-
+                                                                      rently contain noise. The averaged performance scores are
+Feature type                       Feature
+                                   Degree centrality                  used for comparison. We compare the random forest
+
+                                   Closeness centrality
+                                                                      Table 2 The number of positive/negative instances and
+                                   Betweenness centrality [34]        their ratio under the different threshold settings in our
+
+                                   Eigenvector centrality             dataset
+Node centrality                    Network constraint
+                                                                      Threshold          Positive         Negative         n positivetotal
+                                   Clustering coefficient             5                    3,393            3,474               0.494
+
+                                   PageRank [35]                      10                   1,686            5,181               0.246
+
+                                   Hub centrality (authority centralit30                   267              6,880               0.039
+
+Edge centrality                    Brandes’ betweeness-centrality [36]50                    93              6,774               0.014
+Ganapathiraju and Orii GigaScience 2013, 2:11                                                                   Page 6 of 13
+http://www.gigasciencejournal.com/content/2/1/11
+
+
+
+
+model against a random method, in which we assign ran-         journals, authors and funding agencies which started a
+dom probability sampled from a continuous uniform dis-         couple of years prior to 2010, giving the time for other re-
+
+tribution from the interval (0, 1) to each interaction.        searchers to access the papers and cite them in their work.
+                                                                 Table 3 shows the results of the model in comparison
+Application to all PPIs in the human interactome               to random baseline. The random forest model with node
+
+After evaluation of the approach, a new model is trained       and edge centrality features consistently outperforms ran-
+using all the PPIs with one-to-one relation (i.e., com-        dom assignment at all threshold levels with a significance
+bined training and testing datasets previously used for        of P < 0.01 by the Wilcoxon signed-rank test. Figure 5
+
+evaluation). This model is employed to each PPI in the         compares the average precision-recall curves of the ran-
+human interactome to predict whether it is likely to have      dom forest model and random assignment for the diffe-
+high impact (Figure 2).                                        rent threshold settings.
+
+                                                                 Weseethatnodeandedgecentr        ality of an interaction do
+Discussion                                                     indeed correlate with how much impact an interaction can
+Figures 3 and 4 show the distribution of how many PPIs         make on furthering biomedical science. We assess feature
+
+are reported in a paper, and the distribution of how many      importance based on the Gini index of the random forest
+papers report a PPI, respectively. Most papers report a few    classifier. The result is shown in Figures 6 and 7. All of the
+interactions, but there are some cases where a single paper    topology based features are moderately informative, but
+
+reports multiple PPIs. This is due to the fact that HPRD       there are no distinctively dom inant features. Prior research
+and BioGRID capture all interactions in a paper, even if       has often connected a node’s degree centrality with its es-
+they are not the main focus of an experiment. We ex-           sentiality; however, when considering future biomedical im-
+
+cluded the manuscripts that report a large number of PPIs      pact, we see that degree centrality is the least indicative
+from training and test data as we do not know which PPIs       feature out of all other topology based features.
+contributed to the citation counts; the publication may
+
+even have been cited for the methodology (such as yeast        High-impact edges in the human interactome
+2-hybrid or an algorithm). Similarly, we excluded PPIs and     After carrying out the evaluations described earlier, the
+corresponding manuscripts where a specific PPI has been        method was applied to identify high impact edges from
+
+reported by multiple manuscripts. This leaves 7,581 inter-     amongst all the PPIs in the human interactome. A final
+actions among 5,182 unique proteins for training and tes-      model was trained with all available interactions that have
+
+ting the model. Note that the centrality measures are          a one-to-one relationship with a paper (i.e., including
+computed by considering the entire set of PPIs and not         those that were originally left out for evaluation purposes).
+just this subset.                                              The model was then applied to identify high-impact PPIs
+
+  We studied the trends of citation of the papers that re- from amongst all the PPIs in the interactome. Note here,
+port PPIs and investigated whether there is any inherent that the model was applied on all the PPIs without
+pattern that underlies the citation behavior for papers that restricting to those that have one-to-one relationship with
+
+report interactions. Figure 5 shows the temporal citation publications; such a dataset is required only for training
+pattern for the 7,581 papers, separated by the publication the model accurately and to evaluate the model reliably,
+year. Regardless of the publication year, most papers tend whereas, the final prediction of whether a PPI is of high
+
+to have a citation peak within the first 5 years after its pub- impact is carried out based on its network features alone
+lication. Interestingly, there is a second peak after the 5- without dependence on the number of times it has been
+year window, which corresponds to citations from 2010 to reported. Table 4 lists the top 10 PPIs that are predicted to
+
+2012. It is unclear what the reason for this citation peak is. be of high impact. As can be seen, most of them indeed
+It may be due to the Open Access policy adopted by many        resulted in high impact on biomedical science, resulting in
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Figure 3 Precision-recall curve. Average precision-recall curves are shown for the two methods at thresholds of 5, 10, 30 and 50. The blue solid
+  line corresponds to the random forest model. The red dashed line corresponds to the random probability assignment.
+Ganapathiraju and Orii GigaScience 2013, 2:11                                                                     Page 7 of 13
+http://www.gigasciencejournal.com/content/2/1/11
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Figure 4 Distribution of the number of PPIs reported in a paper.
+
+
+up to 413 citations. The top 100 most-impactful edges of        the top 50 high-impact interactions has been computed
+human interactome predicted by this model are given in          using the BiNGO plugin for Cytoscape [43]. This analysis
+
+Additional file 1. While these PPIs are predicted to be of      revealed enrichment in 80 biological processes, 16 molecu-
+high impact, the actual impact achieved by each of these        lar functions, and 25 cellular component terms at a statis-
+PPIs may be seen on Wiki-Pi web server, which shows up-         tical significance ofP < 0.05 (see Additional files 2, 3 and 4
+
+to-date information on the number of citations received         respectively in text format, and Additional files 5, 6 and 7
+by the publication which reports the PPI [42].                  respectively in Cytoscape format). For example, cell cycle,
+
+                                                                negative regulation of biological process, and initiation of
+Functional enrichment of high-impact interactions               DNA-dependent transcription are highly enriched bio-
+We analyzed the statistical enrichment of annotations of        logical process terms, while pr  otein-binding transcription
+
+the interactions that are predicted to be high-impact. The      factor activity and transcription-factor binding are the
+Gene Ontology term enrichment for proteins involved in          highly represented molecular function terms, and nuclear
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Figure 5 Distribution of the number of papers that report a PPI.
+Ganapathiraju and Orii GigaScience 2013, 2:11                                                                       Page 8 of 13
+http://www.gigasciencejournal.com/content/2/1/11
+
+
+
+
+
+Table 3 Results on the dataset                                   674 traits or diseases. We investigated whether any high-
+                                                                 impact interactions belong to those that are associated with
+Threshold          Method                AUPR            R50
+5                  Random forest         0.5718         0.1450   diseases (as identified by GWAS; henceforth referred to as
+                                                                 GWAS-genes) [46]. Retinal vascular caliber, type 2 dia-
+                   Random                0.4975         0.0661
+                                                                 betes, and glioma are some of the diseases associated with
+10                 Random forest         0.3204         0.0762   the genes in the top 100 high-impact interactions. Of the
+                   Random                0.2510         0.0272
+                                                                 top 50 high-impact interactions, those in which one or
+30                 Random forest         0.0868         0.0426   both proteins are among the GWAS-genes are shown in
+
+                   Random                0.0600         0.0197   Table 5 and a larger list is available in Additional file 8.
+
+50                 Random forest         0.1115         0.0792
+                   Random                0.0734         0.0283   Open challenges
+                                                                 Inferring biological conclusions from topology of a
+Table shows area under the precision recall curve (AUPR) and R50 that
+measures the area under the precision-recall curve until reaching 50tially-known network will be influenced by the sam-
+negative predictions.                                            pling biases that can alter the underlying structure of the
+
+                                                                 network in unpredictable ways [47]. As mentioned earlier,
+part, membrane-enclosed lumen, and macromolecular                only 10% of the human interactome is currently known.
+
+complex are the top most significant cellular components.        The fact that we are dealing with a sub-network, rather
+                                                                 than a complete network presents an inherent challenge
+
+High impact interactions of GWAS genes                           to this study. The first issue concerns the accuracy of the
+Genome-wide association studies (GWAS) provide a map-            centrality measures: under-studied sub-regions of the net-
+
+ping between genetic factors and diseases by drawing com-        work may have superficially low centrality measures, while
+parisons in the genotype of variants between disease cases       well-studied sub-regions of the network may have seem-
+
+and controls. These studies are unbiased by current scien-       ingly high centrality measures. The second issue involves
+tific knowledge about individual genes (i.e., they do not        bias in the citation behavior: well-studied sub-regions, by
+
+have literature-bias), and identify genome regions with pre-     definition, are more avidly studied. Thus, it may be the
+viously unknown biological relevance and provide replic-         case that well-studied sub-regions will contain highly-
+able results [44]. They often uncover several genes of           cited interactions due to study bias. In order to address
+
+unknown functions possibly participating in hitherto un-         this inaccuracy in centrality measures and sociological bias
+known biological pathways [44]. We collected the catalog         in the citation counts, constructing a network from sys-
+
+of GWAS studies which is maintained by National Human            tematic, unbiased high-throughput experiments (biotech-
+Genome Research Institute (NHGRI) [45,46]. This catalog          nological or computational methods) is one area of future
+
+contains 1,309 publications reporting GWAS results on            research.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Figure 6 Temporal citation patterns.
+Ganapathiraju and Orii GigaScience 2013, 2:11                                                                              Page 9 of 13
+http://www.gigasciencejournal.com/content/2/1/11
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Figure 7 Random Forest Gini importance measures for each feature.
+
+
+
+
+  Impact prediction in any biological domain in general,             analytic algorithms is necessary to make advances in the
+
+has unique challenges. Unlik    e in other computational do-         most impactful direction.
+
+mains, such as human language translation, it is difficult to
+estimate the translational impact in biology in a particular         Potential implications
+
+study because it is time consuming and requires investment High-throughput biotechnolo                gy and computational predic-
+
+of expensive resources and scientific skills making the de- tion algorithms generate a plethora of hypothesized bio-
+sign of such algorithms challeng    ing. Despite its difficulties,   logical inferences. Meanwhile    , high-resolution bench work
+
+the proposed direction of research of developing inference- experiments in biology are often carried out by formulating
+
+
+
+
+Table 4 The top 10 interactions that are predicted to be of high impact
+
+PPI information                                                                                         Publication information
+Rank by Gene symbols         Protein A name                    Protein B name                    Pubmed      Number of       Year of
+
+impact                                                                                              ID      citations so far publication
+1        ADIPOQ - ADIPOR2 adiponectin, C1Q and collagen        adiponectin receptor 2            12802337        160           2003
+
+                             domain containing
+
+2        NMB - NMBR          neuromedin B                      neuromedin B receptor              8392057         8            1993
+3        NUP93 - TMEM48      nucleoporin 93 k Da               transmembrane protein 48          12928435         37           2006
+
+4        DAO - DAOA          D-amino-acid oxidase              D-amino acid oxidase activator    12364586         72           2002
+
+5        PCM1 - TIC8         pericentriolar material 1         tetratricopeptide repeat domain 8 14520415         99           2003
+
+6         PCM1 - KIAA0368    pericentriolar material 1         KIAA0368                          16189514        413           2005
+
+7        BBS4 - PCM1         Bardet-Biedl syndrome 4           pericentriolar material 1         15107855         55           2004
+
+8        SRC - YWHAG         v-src sarcoma (Schmidt-Ruppin A-2)tyrosine 3-monooxygenase/tryptophan 8702721        21           1996
+                             viral oncogene homolog (avian)    5-monooxygenase activation protein,
+                                                               gamma polypeptide
+
+9        GRB2 - SRC          growth factor receptor-bound      v-src sarcoma (Schmidt-Ruppin A-2)11964172         2            2002
+
+                             protein 2                         viral oncogene homolog (avian)
+10       HCN2 - HCN4         hyperpolarization activated cyclichyperpolarization activated cyclic12928435         26           2003
+
+                             nucleotide-gated potassium        nucleotide-gated potassium channel 4
+                             channel 2
+
+Note that for each interaction, we only show the publication that has the highest citation count among those that report the said interaction.
+Ganapathiraju and Orii GigaScience 2013, 2:11                                                                                         Page 10 of 13
+http://www.gigasciencejournal.com/content/2/1/11
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                           Retinal vacocarroustedeeirasacnledrosis                                                    IgE levels        Typceoitlsauelrp,oslscrtis,Primary
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                       Ventricular coHnuctioleyeiodaeptyndple,e,Retinal vasVceunalibrecronduction,HeeigthtseMultiple sclerosis
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                 adiponectnineruepteodn B receptoradiponectin levelsa(rltiltee-pmloprttefnctor recT-cceac,iy/trnltnrpia,dgrlnasinacpteltioeotridenip573receptorCoronarVyentrrtulaisre,Ausn
+
+
+
+
+
+
+
+
+
+
+
+
+
+                 adicpoaontni,iogmaenindBino-a3ihoclvtacrogtneAh-isarloge,naecapetsotrro1gen receptor 1               intgrmukia 2 receptor,rlimase2rr,eacleor,ta
+
+
+
+
+
+                 ADIPOR2 NMBR  TMEMDA48OA YWHAG        SRC       TP53           GRB2                                  IL4R   TP53   TP53IL7R
+
+
+
+
+
+                 ADIPOQ        NUP93                   PRKCA     ESR1           ESR1            GATA4    PRKCAFATC4   YWHAGATSMAbiDnprotein kinase C, alphaear ftyrosine 3-monooxygenase
+
+
+
+
+          Pub year     Symbol 1     Symbol 2     Name 1                       Name 2                            GWAS diseases/traits of 1         GWAS diseases/traits of 2
+
+
+
+
+             count
+
+
+
+
+      Publication information           Information about genes involved in the PPI
+
+
+
+  Table 5 Rank ge1PMIDn t12202337te8392057801028003870212199320291294NMB728066611576 198515173021600 8 951771240041043138554 28266076 19914905454826199374520035IL2RG1993          IL2RG
+Ganapathiraju and Orii GigaScience 2013, 2:11                                                                                            Page 11 of 13
+http://www.gigasciencejournal.com/content/2/1/11
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       Multiple sclerosis                                             MultipleBoHlergutArneyeorlitp(ri()taos)iastteanceirght,Body
+
+
+
+
+
+
+
+
+
+
+                                                                                                           dies (GWAS) are shown. GWAS associated genes are shown
+
+
+
+
+                    BonHeegumtAleyeaGliomaMRcIhatpeCtertyaessrretltnirlhtnericalelsattdnctiolnaeletctounts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       tyr/otnptn3-tx-n,5-aryrm)ac(eproteindikDs,lsgpe,il)hoa-sgrAarvrnl)anScenendetRoutodopgroteintparoiogioddalaoarpnortnin B
+
+
+
+
+
+
+
+
+
+  (Continued)
+
+
+       tumor proteinestr5o3gen receptofactoArTP-befdoirlyr1s(netr1,),engeboehndarcptrrece2ptor-eigmpmkaa2rrepitx,ca, saIDilRitybeta 3
+
+
+
+
+
+       YWHAG        SRC                    DLG3             SRC       MAPK1  ESR1            SHB    POMC
+
+
+
+
+
+                    ESR1            EGFR   ABCA1 PRKCA  GATAAR3pidermSATB1owth    GATA binding protein 3        SATB homeobox 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Tabl e8 5 GW  15S231e6nes 1514087 34o0p1736287812161932827139 1705177166021468992470382006280204 151997001274072GRB200 E7P23200001995 IL2RG HLA-DRB3se in which one or both genes are found to be associated with a disease or trait by genome-wide association stu
+Ganapathiraju and Orii GigaScience 2013, 2:11                                                                                               Page 12 of 13
+
+http://www.gigasciencejournal.com/content/2/1/11
+
+
+
+
+
+the hypothesis with a local view of a molecule rather than a                    Competing interests
+                                                                                The authors declare that they have no competing interests.
+systemic view. In this era of scalable data-analytic algo-
+rithms which process large data, producing hundreds of in-
+                                                                                Authors’ contributions
+ferences, there needs to be a systematic way of determining                     The concept and the design were developed by MKG. The implementation
+                                                                                was carried out by NO. The analyses were carried out by MKG and NO. The
+which of these hundreds of inferences are to be further
+studied. In this position paper, we propose a new class of al-                  manuscript is written by MKG with inputs from NO. Both authors read and
+                                                                                approved the final manuscript.
+gorithms called inference-analytic algorithms that carry out
+such systematic analysis to prioritize the computational in-                    Authors’ information
+
+ferences for further study; the concept has been demon-                         Madhavi K. Ganapathiraju has Ph.D. from the Language Technologies Institute,
+                                                                                Carnegie Mellon University School of Computer Science, and Ma’ssrrien
+strated in the context of protein-protein interactions (PPIs).                  Electrical Communications Engineering from the Indian Institute Science. She is
+   The algorithm is designed to provide a roadmap for the                       Faculty in Biomedical Informatics and Intelligent Systems at University of Pittsburgh,
+                                                                                where she is applying computational methods to discover hitherto unknown
+order in which PPIs should be studied further, in the hope
+that this will prioritize the investment of small-scale ex-                     protein-protein interactions in the human interactome. Naoki Orii was graduate
+                                                                                student at the Language Technologies Institute, Carnegie Mellon University School
+periments and reap maximum benefit for the field of bio-                        of Computer Science when he carried out this work. Subsequent to obtaining his
+                                                                                Master’s degree in May 2013, he moved to the data-analytics industry.
+medicine as a whole. It has the potential to identify both
+existing PPIs with untapped impact and also newly pre-
+                                                                                Acknowledgements
+dicted PPIs with potential for impact. Factors such as                          This work has been funded by the Biobehavioral Research Awards for
+                                                                                Innovative New Scientists (BRAINS) grant R01-MH094564 awarded to MG by
+disease-associations and drug-binding also determine
+which proteins are to be studied further for biomedical                         the National Institute of Mental Health of National Institutes of Health
+                                                                                (NIMH/NIH) of USA. Authors thank Dr. Tanja Bekhuis for providing valuable
+impact. On the other hand, factors such as unavailability                       comments on the manuscript.
+of reagents may restrict the study of some of these pro-
+                                                                                Received: 9 March 2013 Accepted: 31 July 2013
+teins. Future algorithmic prediction of impactful PPIs
+                                                                                Published: 30 August 2013
+needs to incorporate these preferences and constraints.
+   Identifying high-impact PPIs brings the focus of the                         References
+                                                                                1.  Amazon mechanical turkw . ww.mturk.com.
+scientific community onto these proteins and fuels the
+development of necessary skills, reagents, and so forth.                        2.   Den Hartigh JC, Van Bergen En Henegouwen PM, Verkleij AJ, Boonstah:e
+                                                                                    EGF receptor is an actin-binding proteiJ.eilBo 1992,119:349–355.
+                                                                                3.   Gehrke J, Ginsparg P, Kleinberg JO: verview of the 2003 KDD Cup.
+                                                                                    SIGKDD Explor Newsl2003,5:149–151.
+
+Availability of supporting data                                                 4.   Fu LD, Aliferi: odels for predicting and explaining citation count of
+                                                                                    biomedical articles.AMIA Annual Symposium proceedings / AMIA Symposium
+Supporting data are made available on BiomedCentral                                 AMIA Symposium; 2008:22– 2226.
+website as described under Additional files section.                            5.   Ibanez A, Larranaga P, Bielza CP:redicting citation count of Bioinformatics
+                                                                                    papers within four years of publicationB.ioinformatics2009,25:3303–3309.
+
+                                                                                6.   Bornmann L, Daniel HDW: hat do citation counts measure? A review of
+                                                                                    studies on citing behaviorJ. Doc2008,64:45–80.
+Additional files                                                                7.   Stumpf MP, Thorne T, de Silva E, Stewart R, An HJ, Lappe M, Wiuf C:
+                                                                                    Estimating the size of the human interactome  Pr.oc Natl Acad Sci USA
+                                                                                    2008,105:6959–6964.
+  Additional file 1: 100 most-impactful interactions as predicted by
+  the model, as well as predicted impact scores for all interactions            8.   Venkatesan K, Rual JF, Vazquez A, Stelzl U, Lemmens I, Hirozane-Kishikawa T,
+  sorted in descending order by predicted impact.                                   Hao T, Zenkner M, Xin X, Goh KIe,t al: An empirical framework for binary
+                                                                                    interactome mapping.Nat Methods2009,6:83–90.
+  Additional file 2: Enriched Gene Ontology terms (biological                   9.  RamírezF,SchlickerA,AssenovY,LengauerT,AlbrechtM:  Computational
+  process) for the top 50 high-impact interactions.
+  Additional file 3: Enriched Gene Ontology terms (molecular                        analysis of human protein interaction netwoPrkrost.eomics2007,7:2541–2552.
+                                                                                10.  Shoemaker BA, Panchenko A DRe:ciphering protein-protein interactions. Part I.
+  function) for the top 50 high-impact interactions.                                Experimental techniques and databaP  sLs.S computational biol2y007,3:e42.
+  Additional file 4: Enriched Gene Ontology terms (cellular                     11.  Shoemaker BA, Panchenko ARD: eciphering protein-protein interactions.
+  component) for the top 50 high-impact interactions.                               Part II. Computational methods to predict protein and domain
+
+  Additional file 5: Cytoscape session file showing enriched Gene                   interaction partners.PLoS computational biology2007,3:e43.
+  Ontology biological process terms, output by BiNGO.                           12.  Qi Y, Dhiman HK, Bhola N, Budyak I, Kar S, Man D, Dutta A, Tirupula K, Carr BI,
+                                                                                    Grandis J,et al: Systematic prediction of human membrane receptor
+  Additional file 6: Cytoscape session file showing enriched Gene                   interactions.Proteomics2009,9:5243–5255.
+  Ontology molecular function terms, output by BiNGO.                           13.  Scott MS, Barton GJ:Probabilistic prediction and ranking of human
+
+  Additional file 7: Cytoscape session file showing enriched Gene                   protein-protein interactionsB.MC Bioinforma2007,8:239.
+  Ontology cellular component terms, output by BiNGO.                           14.  Ananthasubramanian S, Metri R, Khetan A, Gupta A, Handen A, Chandra N,
+                                                                                    Ganapathiraju M:Mycobacterium tuberculosis and Clostridium difficille
+  Additional file 8: Of the top 50 high-impact interactions, those in               interactomes: demonstration of rapid development of computational
+  which one or both proteins are among the GWAS-genes are shown.
+                                                                                    system for bacterial interactome predictionM.icrobial informatics and
+                                                                                    experimentation2012,2:4.
+                                                                                15.  Ma X, Gao L:Biological network analysis: insights into structure and
+Abbreviations                                                                       functions.Briefings in functional genomics2012,11:434–442.
+PPI: Protein-protein interaction; MeSH: Medical subject heading;                16.  Bultinck J, Lievens S, Tavernier JP:rotein-protein interactions: network
+
+ROC: Receiver operating characteristics; AUPR: Area under the precision-recall      analysis and applications in drug discoveryC.urrent pharmaceutical design
+curve; GWAS: Genome-wide association studies.                                       2012,18:4619–4629.
+Ganapathiraju and Orii GigaScience 2013, 2:11                                                                                                       Page 13 of 13
+http://www.gigasciencejournal.com/content/2/1/11
+
+
+
+
+
+
+17.  Cui T, Zhang L, Wang X, He ZGU: ncovering new signaling proteins and           46.   Hindorff LA, Sethupathy P, Junkins HA, Ramos EM, Mehta JP,
+     potential drug targets through the interactome analysis of                          Collins FS, Manolio TAP: otential etiologic and functional implications of
+     Mycobacterium tuberculosisB.MC Genomics2009,10:118.                                 genome-wide association loci for human diseases and traiP      t. c Natl
+
+18.   Azmi AS, Wang Z, Philip PA, Mohammad RM, SarkaP   r rFoHo:f of concept:            Acad Sci USA2009,106:9362–9367.
+     network and systems biology appcro   hes aid in the discovery of potent        47.   Hakes L, Pinney JW, Robertson DL, Lovell Cr:otein-protein interaction
+     anticancer drug combinationM   s.olecular cancer therapeuti2c0s10,9:3137–3144.      networks and biology  –what’s the connection?Nat Biotechnol2008,26:69–72.
+
+19.  Barabasi AL, Gulbahce N, Loscalzo N J:etwork medicine: a network-based
+     approach to human diseaseN    . ature reviews Genetics2011,12:56–68.             doi:10.1186/2047-217X-2-11
+20.  Prasad TSK, Goel R, Kandasamy K, Keerthikumar S, Kumar S, Mathivanan S,          Cite this article as: Ganapathiraju and Orii: Research prioritization
+
+     Telikicherla D, Raju R, Shafreen B, Venugopaet, al: Human protein reference      through prediction of future impact on biomedical science: a position
+     database-2009 updateN  . ucleic acids research2009,37:D767–D772.                 paper on inference-analytics. GigaScience 2013 2:11.
+21.  Stark C, Breitkreutz BJ, Chatr-Aryamontri A, Boucher L, Oughtred R, Livstone MS,
+
+     Nixon J, Van Auken K, Wang X, Shi Xe,t al: The BioGRID interaction database:
+     2011 update.Nucleic acids research2011,39:D698–D704.
+22. The Entrez programming utilitihestt.p://www.ncbi.nlm.ihov/books/NBK25501/.
+
+23.  Wasserman S, Faust KS:ocial network analysis : methods and applications.
+     Cambridge, New York: Cambridge University Press; 1994.
+24.  Barabasi AL, Oltvai ZNN: etwork biology: understanding the ce’sll
+     functional organizationN . ature reviews Genetics2004,5:101–113.
+
+25.  Mason O, Verwoerd MG   : raph theory and networks in biologyIE.T systems
+     biology2007,1:89–119.
+26.  Yu H, Greenbaum D, Xin Lu H, Zhu X, Gerstein M Ge: nomic analysis of
+
+     essentiality within protein networksT.rends in genetics : TIG2004,20:227–231.
+27.  Jeong H, Mason SP, Barabasi AL, Oltvai ZN Le: thality and centrality in
+     protein networks.Nature2001,411:41–42.
+
+28.  Goh KI, Cusick ME, Valle D, Childs B, Vidal M, Barabasi ATLh:e human
+     disease network.Proc Natl Acad Sci USA2007,104:8685–8690.
+29.  Smoot ME, Ono K, Ruscheinski J, Wang PL, IdekerCTy:toscape 2.8: new
+
+     features for data integration and network visualizatioBni.oinformatics2011,
+     27:431–432.
+30.  Shannon P, Markiel A, Ozier O, Baliga NS, Wang JT, Ramage D, Amin N,
+
+     Schwikowski B, Ideker TC: ytoscape: a software environment for
+     integrated models of biomolecular interaction networkGse.nome Res
+     2003,13:2498–2504.
+31.  Kohl M, Wiese S, Warscheid BC:ytoscape: software for visualization and
+
+     analysis of biological networksM . ethods Mol Biol2011,696:291–303.
+32. Stanford network analysis libraryh.ttp://snap.stanford.edu/snap/.
+33.  Hagberg A, Schult D, Swart PE:xploring network structure, dynamics, and
+
+     function using NetworkXS. ciPy 2008: Proceedings of the 7th Python in
+     Science Conference; 2008:1– 115.
+34.  Freeman L:A Set of measures of centrality based on betweenness.
+
+     Sociometry1977,40:35–41.
+35.  Page L, Brin S, Motwani R, Winograd T T:he PageRank citation ranking:
+     bringing order to the WebS. tanford InfoLab: Technical Report; 1998.
+
+36.  Brandes U:On variants of shortest-path betweenness centrality and their
+     generic computation.Soc Networks2008,30:136–145.
+37.  Pedregosa F, Varoquaux G, Gramfort A, Michel V, Thirion B, Grisel O, Blondel M,
+
+     Prettenhofer P, Weiss R, Dubourg Ve,t al: Scikit-learn: machine learning in
+     python.J Mach Learn Res2011,12:2825–2830.
+38.  Breiman L:Random forests.Mach Learn2001,45:5–32.
+39.  Kingsford C, Salzberg SLW: hat are decision trees?Nat Biotechnol2008,
+
+     26:1011–1013.
+40.  Chen XW, Liu M:Prediction of protein-protein interactions using random
+     decision forest frameworkB  . ioinformatics2005,21:4394–4400.
+
+41.  Davis J, Goadrich MT: he relationship between precision-recall and ROC curves.
+     Pittsburgh, Pennsylvania: Proceedings of the 23rd international conference
+     on Machine learning; 2006:23–3240. 1143874: ACM.
+                                                                                          Submit your next manuscript to BioMed Central
+42.  Orii N, Ganapathiraju MKW: iki-pi: a web-server of annotated human
+     protein-protein interactions to aid in discovery of protein function.                and take full advantage of:
+     PloS one2012,7:e49029.
+
+43.  Maere S, Heymans K, Kuiper MB:iNGO: a Cytoscape plugin to assess                     • Convenient online submission
+     overrepresentation of gene ontology categories in biological networks.
+     Bioinformatics2005,21:3448–3449.                                                     • Thorough peer review
+                                                                                          • No space constraints or color ﬁgure charges
+44.  Hirschhorn JN:Genomewide association studie–silluminating biologic
+     pathways.N Engl J Med2009,360:1699–1701.                                             • Immediate publication on acceptance
+45. A catalog of published genome-wide association studiew  s.ww.genome.gov/
+     gwastudies July 17th, 2012.                                                          • Inclusion in PubMed, CAS, Scopus and Google Scholar
+
+                                                                                          • Research which is freely available for redistribution
+
+
+                                                                                          Submit your manuscript at
+                                                                                          www.biomedcentral.com/submit

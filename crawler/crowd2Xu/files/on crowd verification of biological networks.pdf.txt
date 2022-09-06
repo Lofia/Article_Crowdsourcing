@@ -1,0 +1,1403 @@
+Bioinformatics and Biology Insights
+
+
+
+
+
+                                                                                                   Open Access
+
+                                                                                             Full open access to this and
+                                                                                             thousands of other papers at
+OrI g INAL       re S e A rCh                                                                  http://www.la-press.com.
+
+
+
+On Crowd-verification of Biological Networks
+
+
+
+The sbv ImprOver project team (in alphabetical order): Sam Ansari , Jean Binder ,     1                 1
+                    1                        5                   4                1                    1
+Stephanie Boue , Anselmo Di Fabio , William hayes , Julia hoeng , Anita Iskandar ,
+robin Kleiman , raquel Norel , Bruce O’Neel , manuel C. peitsch , Carine poussin ,1                     1
+               3                          2                         1                         2                       1
+Dexter pratt , Kahn rhrissorrakrai , Walter K. Schlage ,gustavo Stolovitzky and marja Talikka
+1                                                                                    2
+ phillip morris products SA, research and Development, Neuchâtel, Switzerland. IBm Computational Biology Center,
+Yorktown heights, NY, USA. University of California San Diego, School of medicine, Departments of medicine and
+                                     4                                  5
+Bioengineering, La Jolla, CA, USA. Selventa, Cambridge, mA, USA. Applied Dynamic Solutions, LLC., NJ, USA.
+Corresponding author email: julia.hoeng@pmi.com
+
+
+
+
+
+
+
+
+
+
+Abstract: Biological networks with a structured syntax are a powerful way of representing biological information generated from
+
+high density data; however, they can become unwieldy to manage as their size and complexity increase. This article presents a crowd-
+verification approach for the visualization and expansion of biological networks.
+Web-based graphical interfaces allow visualization of causal and correlative biological relationships represented using Biological
+
+Expression Language (BEL). Crowdsourcing principles enable participants to communally annotate these relationships based on lit-
+erature evidences. Gamification principles are incorporated to further engage domain experts throughout biology to gather robust peer-
+
+reviewed information from which relationships can be identified and verified.
+The resulting network models will represent the current status of biological knowledge within the defined boundaries, here processes
+related to human lung disease.These models are amenable to computational analysis. For some period following conclusion of the chal-
+
+lenge, the published models will remain available for continuous use and expansion by the scientific community.
+
+Keywords: community curation, biological network models, reputation system, Biolo▯gical Expression Language
+
+
+
+
+
+
+
+
+
+
+
+Bioinformatics and Biology Insights 2013:7 307–325
+
+
+doi: 10.4137/BBI.S12932
+
+This article is available from http://www.la-press.com.
+
+
+© the author(s), publisher and licensee Libertas Academica Ltd.
+
+
+This is an open access article published under the Creative Commons CC-B▯Y-NC 3.0 license.
+
+
+Bioinformatics and Biology Insights 2013:7                                                                                307
+The sbv ImprOver project
+
+
+From Crowdsourcing                                          biology can potentially complement the classical peer
+                                                            review process, by enabling a practical assessment of
+to Crowd-verification
+For nearly 20 years, crowdsourcing initiatives have         robustness for complex methodologies.
+been used to draw upon and focus the expertise of a            Crowdsourcing challenges aimed at verifying
+                                                            methodologies require the organizers to have a solu-
+broad,heterogeneousscientificcommunitytoaddress             tion (“gold standard”) against which the predictions
+specific biological questions framed as ‘challenges’.
+These challenges have addressed topics as diverse           are assessed and that is available to participants after
+and labor-intensive as knowledge discovery and              the challenge is closed. Obtaining a “gold standard”
+                         1                                  is difficult in the area of systems biology or when the
+data mining (KDD cup, see www.kdd.org/kddcup/),
+microarrayandnext-generationsequencing(MAQC,          2     challenge is focused on scientific content rather than
+see www.fda.gov/MicroArrayQC/), and protein-                the method, as is the case for the construction of rep-
+folding (FoldIt, 3  see www.fold.it). Crowd-based           resentative biological networks. In this instance, the
+                                                            knowledge must be updated continuously to reflect
+approaches have enabled the collection of scientific                                      12
+knowledge in common repositories such as BioCarta           the current state of the field. To verify and e12–15e
+(see www.biocarta.com/) and WikiPathways (see   4           previously built biological network models,         the
+www.wikipathways.org). Challenge-based verifica-            sbv IMPROVER Network Verification Challenge
+                                                            (NVC)-to be held between October 2013 and March
+tion processes may offer a unique way to leverage the
+explosive growth of scientific data and publications.       2014-will use a proven social networking approach to
+Sophisticated computational methods that are used to        generate high-quality curation results. This crowd-
+                                                            verification process is designed to assemble the
+analyzecomplexdataarenoteasilyevaluat5dthrough              knowledge of domain experts and focus the critical
+the classical peer review process. Crowdsourcing
+initiatives with the aim to solve a particular chal-        mindsofbiologistsfromacrossmultiplefieldsofbiol-
+lenge are used to reach a better understanding of the       ogy to effectively and efficiently review the evidence
+                                                            available in the literature to improve biological net-
+strengths and weaknesses of methods that are used to        work annotations, similar to other community-driven
+handle “big data”. Such evaluation enables progress                                               4              17
+in their respective disciplines. sbv IMPROVER (see          curation efforts like WikiPathways and TBCAP.
+www.sbvimprover.com) is a challenge-based verifi-           The additions to and modifications of the provided
+                                                            biological networks will be evaluated using an online
+cation process with a specific focus on the validation
+of industrial research processes related to systems         verification process (see Fig. 1) and an in-person sci-
+biology by decomposing a research workflow into             entific ‘jamboree’ session to resolve the final repre-
+individual components, termed building blocks, that         sentation of the networks.
+                                                  5
+can be independently verified via crowdsourcing.
+   The first sbv IMPROVER initiative, the Diag-             Network Models: From the Bigger
+nostic Signature Challenge (DSC), was designed to           Picture to Detailed Biological
+determine which computational approaches and types          Mechanisms
+
+of transcriptomic data could be used for phenotype          Over the last 10–20 years, the development of inno-
+prediction. The second initiative, the Species Trans-       vative tools for biological research has enabled
+lation Challenge (STC), was designed to address             the acquisition of high density data in a systems-wide
+
+whether or not biological events observed in rodents        approach. This has enabled the evaluation of gene
+were“translatable”tohumans(seewww.sbvimprover.              expression changes in various settings to generate
+com).EachsbvIMPROVERchallengewasdeveloped                   new hypotheses. Consequently, the size and number
+under the hypothesis that “crowdsourcing . . . may be       of datasets being reposited into databases are growing
+
+a fruitful strategy for assessing the qualit5 of analyses   exponentially, as are the number of scientific articles
+and predictions from high-throughput data” and each         being published. Despite the advantages brought by
+was built on the lessons from other challenge-based         the rising number of online-accessible repositories,
+processes such as CASP, CAPRI, BioCREATIVE,          10     researchers could easily drown in this deluge of data
+              11
+and DREAM. Crowdsourcing initiatives in systems             and lose biological focus. For this reason, top-down
+
+
+
+308                                                                                Bioinformatics and Biology Insights 2013:7
+                                                                                                On crowd-verification of biological networks
+
+
+
+
+           Network model                   Online crowd-verification                   Jamboree        Network       Network dissemination
+            construction                                                              preparation     jamboree      continuous improvement
+
+                                    Reputation
+             Boundary                system                      Web-based
+             definition                                           platform                              Scientific     Further
+                 +                                                                                      seminars     enhancements
+                                                                                                                                   General
+               Nature                                                                                                              access to
+              JBC Science                         Leaderboard                                                                      networks
+                  PNAS
+                                                                                     Scoring
+
+                                BEL                                       Early
+                 +              editor                                  access to       Analysis                         Public use of
+                                                                        networks
+                                                                                                                         scientifically
+                                                                                      Prioritization                       accepted
+                 +                                 Webinars,                                                               networks
+                                                   training
+                                                                                     Evidence summary
+                 =
+                                                                                                         Face
+                                                                                                         to face     Web-based
+                                                                                                        meeting       platform
+                                      Moderation                 Online
+                                      by experts                 Forum
+                                                                                                                                  Publications
+           CausalBioNet
+
+                                     Graduate students
+                                                            Academia                               Network building teamsearchers Students
+                            Postdocs        Lung disease community       Pharma
+                                                                                                       Experts       Teachers       Pharma
+                                Systems biologists        University students                       Best contributors     Toxicologists
+
+                                                 Biologists
+
+
+             Publications                                                                            Consensus
+
+
+
+
+Figure 1. Outline of the crowd-verification verification process that will be used in the Network Verification Challenge (NVC).
+The NvC consists of five phases. In the first phase, network models are constructed based on the literature and data-driven hypothesis validation. The
+models are imported into a Web-based platform (CausalBioNet) for the second phase (online Crowd-verification). In phase 2, experts and biology students
+and researchers are encouraged to access and verify/enhance the network models directly on the platform. This process is set up as a reputation-based
+collaborative competition, where actions on the network are given points that are recorded in a leaderboard. After this online phase is closed, in phase 3,
+
+the results and actions are analyzed, and the organizers select a number of edges that appeared to be the most controversial for discussion in a jamboree
+(phase 4) that will gather together scientific experts and the best contributors in the online phase. After a wrap up of the conclusions and actions on the
+network discussed during the jamboree, in phase 5, verified versions of the networks will be released for the scientific community at large to use.
+
+
+
+approaches that first look at the bigger picture before                        The curated network models can be encoded in the
+
+investigatingsinglepathwaysorgenechangesandthe                                 Biological Expression Language (BEL)                       19,20  (see
+
+combination of approaches (supervised and unsuper-                             www.openbel.org). BEL is a structured language that
+
+vised)canprovideabroadframeworkforaresearcher                                  represents scientific findings by capturing causal and
+
+to delve more effectively and efficiently into the vast                        correlative relationships between biological entities
+
+amount of available data. Pathway signaling and                                in computable statements that are composed by func-
+network biology enable these types of approaches,                              tions and entity definitions expressed with a defined
+
+contributing to a variety of research applications,                            ontology (eg, HGNC, see www.genenames.org).
+
+including drug discovery, personalized medicine, and                           ABELStatement (see Fig. 3) is designed as a seman-
+                                                   18
+toxicological risk assessment (Fig. 2).                                        tic triple (subject, predicate, object) to represent dis-
+
+    Biological network models that represent an up-                            crete scientific findings and their relevant contextual
+
+to-date summary of known biology within defined                                information as qualitative causal relationships.
+boundaries (eg, species, tissue, and disease) offer a                              The main strength of BELis that it is easily human-
+
+readily human-understandable metaphor for biologi-                             readable and machine-computable, making it an ideal
+
+cal relationships and are amenable to computational                            language to capture literature evidences from manual
+
+analysis when encoded in the appropriate format.                               curation as well as text mining pipelines. It also allows
+
+
+
+
+
+Bioinformatics and Biology Insights 2013:7                                                                                                       309
+The sbv ImprOver project
+
+
+
+
+
+                                                   Biological
+                                                    insight                 Biomarker
+                                                                             discovery
+
+
+                                  Personalized
+                                    medicine                  Network
+                                                            perturbation                  Toxicity
+                                                             amplitude                     testing
+
+
+                                             Context
+                              Disease        filtering                        Visualization
+                             subsetting                                                       Scientific
+                                                                                              evidences
+                                                           CausalBioNet                       repository
+
+
+
+                                Patient      Pathway                          Topological
+                              stratification  tools                             analysis
+                                                                                           Hypothesis
+                                                                                           generation
+
+                                                              Network
+                                                             refinement
+                                    Pharmacalogical
+                                      assessment                                   MOA
+                                                                                identification
+
+                                                           Targeted
+                                                         experimental
+                                                            design
+
+
+Figure 2. potential applications of CausalBionet.
+The networks provided in the NvC are potentially at the center of very diverse applications. They provide the ability to extract mechanistic insights from
+large datasets in toxicity or pharmacological testing. The networks will also provide teachers and students with a centralized repository of lung-related
+biology-relevant genes and pathways. Their usefulness in patient stratification, personalized medicine, and other areas of research is accomplished
+through a functional layer of available tools for visualization, refinement, and diverse types of quantitative and qualitative analyses.
+
+
+
+literature evidence to be displayed in the context of                models starts with a careful selection of model
+network visualization. Additionally, the OpenBEL                     boundaries, i.e., the selection of appropriate tissue/
+
+communityiscontinuouslydevelopingandassembling                       cell context and biological processes to be included
+tools in an emerging open-platform technology named                  in the model. Then, the relevant scientific literature
+                                                   21
+the BEL framework. In contrast, BioPAX, another                      is reviewed to extract causal relationships that com-
+languagefrequentlyusedtomodelknowledge,focuses                       prise the nodes and edges in backbone of the litera-
+
+on the integration and data exchange of biological                   ture model. The network is subsequently augmented
+pathway information across a large array of existing                 based on gene expression data using reverse causal
+                                                                                 23
+pathway resources. With its unique representation of                 reasoning. Multiple data sets are used to verify the
+specific relationships between entities and their respe-     c       network content, ideally from experiments where
+
+tive biological contexts, BEL was adopted as the syn         -       the biological mechanisms captured by the network
+tactical structure of the network models in the NVC.                 model under construction are perturbed.
+
+   Sets of network models have been generated to                        These models can be used in combination with an
+score high-throughput data sets.       12–15 The basics of           algorithm that can predict the activity of a backbone
+
+the model building are shown in Figure 4. Network                    node based on gene expression changes attributable
+model construction is a multi-step, iterative process,               to a perturbation of the biological process. Proof-of-
+
+which has been described in detail in previous publi-                principle verification of possible applications of net-
+cations. 12–15,2Briefly, the construction of the network             work models has been published previously. In this  25
+
+
+
+310                                                                                           Bioinformatics and Biology Insights 2013:7
+                                                                                     On crowd-verification of biological networks
+
+
+               A
+                                 BEL functions                Namespace identifiers       Relationships
+
+                                   Abundances                     CHEBI                      Causal
+                                   eg, rna abundance, protein abunPHFce                      eg, increases, decreases
+                                   Modifications                  HGNC                       Correlative
+                                   eg, phosphorylation            MGI                        eg, negative correlation
+                                                                  EGID (Entrez gene id)
+                                   eg, catalytic activity, kinase activity                   eg, directly increases (physical relationship)
+
+                                   Processes                                                 Genomic
+                                   eg, biological process, pathologyity definitions          eg, analogous to
+                                   Transformations               Biological entity in the    Other
+                                   eg, translocation, degradation defined namespace          eg, sub process of, has componenst
+
+               B
+
+                   Semantic              Subject                     Predicate                     Object
+                      triple
+                                    p(HGNC:CCND1)                   Increases                kin(p(HGNC:CDK4))
+
+
+                                  BEL              Entity                                   BEL               Entity
+                       +         functionidentifierefinition         Relationship          functionidentifierefinition
+
+
+                    Context        Species
+                                   Tissue/cell type
+
+                                   Disease
+                                   PMID
+
+
+                       =                                         BEL statement
+
+
+
+Figure 3. BeL elements and an example of a BeL Statement.
+(A) In a BEL statement, functions and entity definitions are expressed with a defined ontology (namespace) and the relationships as causal or cor-
+relative (B) A BEL Statement is designed as a semantic triple (subject, predicate, object) to represent discrete scientific findings and their relevant
+contextual information as qualitative causal relationships. Functions and entity definitions are expressed with a defined ontology (namespace). For
+example p(hgNC:CCND1) =. kin(p(hgNC:CDK4) is a statement equivalent to “Increased abundance of the protein designated by ‘CCND1’ in the hgNC
+namespace directly increases the kinase activity of the abundance of the protein designated by ‘CDK4’ in the hgNC namespace”. The rest of the BeL
+Statement consists of fields pertaining to the context of the statement: the literature reference from which the statement was derived, the tissue, cell line,
+organism, and disease context of the statement.
+
+
+
+study, human bronchial epithelial (NHBE) cells were                   traditional and non-traditional incentives to promote
+treated with TNF and the transcriptomic response                      user activity. The reputation gained by participat-
+
+was analyzed in the context of the TNF-NFkB sig-                      ing in a game of skills becomes part of the reward,
+
+naling pathway. Dynamic changes were detected                         as opposed to (or in addition to) material incentives
+in the amplitude of network perturbation following                    such as financial awards, ie, traditional incentives.
+
+TNF treatment. Importantly, the measured changes in                   Reputation is measured by the points or badges
+network perturbation amplitude corresponded to the                    accrued from different actions. Participants’ motiva-
+
+direct experimental measurement of NFkB nuclear                       tion can be further increased when their reputation is
+translocation following TNF treatment. This result                    made visible to others on a leaderboard, instead of
+
+illustrates how the network models contained in                       being provided solely at the conclusion. To comple-
+
+CausalBioNet (or similar networks) can identify and                   ment the individual leaderboards, the NVC will also
+quantitate chemically induced biological changes.          26         have team/institution leaderboards to encourage col-
+
+                                                                      laborative competition.
+A Challenge of Skills and Incentives                                     Beyond the reputation points, reputation badges,
+
+Astructured crowdsourcing initiative requires a large                 and leaderboard system, the NVC will offer a number
+
+number of highly engaged participants to gather sci-                  of professional and scientific incentives to stimulate
+entific information from which new relationships                      participation and engagement. Participating research-
+
+can be. To this end, the NVC has incorporated both                    ers will have an early access to curated network
+
+
+Bioinformatics and Biology Insights 2013:7                                                                                     311
+The sbv ImprOver project
+
+
+
+                                             Literature curated knowledge base
+                                                  of causal relationships
+
+
+                                                         A       B
+                                                         B       C
+
+                                                         A       r(X)
+                                                         A       r(Y)
+
+
+
+
+
+
+                               Causal network                      Causal relationships between the
+                              model backbone                     backbone nodes and gene expression
+
+
+                          Reference  D                                           D
+                          node
+                             A       B       C                           A       B       C
+
+
+
+
+
+
+
+                                               Causal network model with a
+                                             backbone and a measurable layer
+
+
+
+
+
+
+
+
+
+Figure 4. Building of CausalBioNet network model sets. The cause and effect relationships that are curated from the scientific literature form a knowledge-
+base. This information can then be used to build the model backbone as well as the downstream measurable layer, which together form the computable
+causal network model.
+
+
+
+models of signaling pathways. Participants who per-              because it encourages users to engage with academic
+formed a certain number of actions will also be able             peers to drive the approval or disapproval of network
+
+to download the networks. Because these models                   actions. It offers the users the opportunity not only
+
+summarize biological knowledge and relationships                 to gain reputation but also to assign changes to the
+that may have been very dispersed in the literature,             network that represents validated information from
+
+they are likely to help scientists generate new hypoth-          which new insights can be drawn. The push towards
+eses for their own research. Additionally, users will            greater interaction naturally increases an individual
+
+gain early expertise in BEL, which is becoming more              user’s personal network, which is traditionally an
+widely adopted as a biological syntax conducive for              important component of a scientific career.
+
+computational manipulation.                                         Furthermore, a user’s visibility can be increased
+   Scientists will also be incented to contribute                greatly should they rise to the top of a particular net-
+
+activelytothenetworksofinterestandtodevelopnew                   work’s leaderboard or gain prominence as a pathway
+understanding through discourse with other domain                expert, disease expert, or curation expert by partici-
+
+experts. Communication between participants will                 pating in the challenge. Notably, top participants and
+be made possible via the commenting system, which                performers in the NVC will be awarded a travel bur-
+
+allowsuserstoprovideremarksandresponsesspecific                  sary and invited to a ‘jamboree’ session. The session
+toindividualnodesandedgesthroughoutthenetwork.                   allows participants to share knowledge, grow per-
+
+This social aspect of the NVC is an important feature            sonal networks, strengthen the decisions made in the
+
+
+
+312                                                                                      Bioinformatics and Biology Insights 2013:7
+                                                                       On crowd-verification of biological networks
+
+open online verification phase, and discuss items that    verification, and extension features with a reputation
+
+arose as being of popular interest but lacked consen-     system to aid in moderation of the network verifi -
+sus from the crowd.                                       cation process. The site goes further by developing
+                                                          a framework where, in the future, new biological
+Crowd-verification Process                                networks can be created de novo. It has been sug -
+The crowd-verification of biological network models       gested that intuitive interfaces for biological network
+will be performed through the following steps:            visualization and interaction may “one day replace
+
+1. Develop a high-performance platform for crowd-         printed biology textbooks as the primary 21source
+   verification of biological network models and          for knowledge about cellular processes”.   The plat-
+   import created biological network models onto the      form and its components described below provide
+                                                          the research community with a high-performance
+   platform;                                              environment for the crowd-verification of biological
+2. Start the crowd-verification period by making the      network models.
+   platform accessible to the research community,
+   with associated incentives to stimulate online veri-
+   fication of nodes and edges supported by scientific    Database of networks encoded
+   findings;                                              in BeL (CausalBioNet)
+                                                          The CausalBioNet networks presented in the sbv
+3. Interpret the results after a previously set period in IMPROVER project for verification and enhance-
+   order to select questionable edges (eg, edges that     ment are expressed in BEL and represent qualitative
+   did not obtain a consensus from the community);
+4. Organize a ‘jamboree’ session where commu-             biology in a scale-free representation. The nodes are
+   nity members that contributed significantly to the     BEL terms and are identified using biological data-
+   online verification can meet recognized experts        bases such as SwissProt (www.uniprot.org), Entrez-
+                                                          Gene (www.ncbi.nlm.nih.gov/gene), Rat Genome
+   and analyze scientific evidence for selected ques-     Database(rgd.mcw.edu),andChEBI(www.ebi.ac.uk/
+   tionable edges. Publish the verified and extended      chebi/). The network edges are BEL Statements that
+   networks;
+5. Assess the resulting networks and determine to         connect two nodes, maintain the computability of the
+   what extent the biological mechanisms were fur-        network,andaresupportedbyevidencefromthepub-
+   ther expanded, revised or invalidated. Disseminate     lished and peer-reviewed scientific literature. Both
+                                                          the network structure and the supporting evidence are
+   the networks for public use.                           stored in a MongoDB database (www.mongodb.org).
+   These five steps are summarized in Figure 1 and
+                                                          Website to facilitate visualization
+are described below in more detail.
+                                                          and the review process
+Network Verification Platform                             The NVC website will display an overview of the
+Though biological networks are a powerful way of          CausalBioNet network representing the connections
+representing complex information, they can easily         and relationships between several networks and pro-
+become unwieldy to navigate and manage as their           vide the functionality to select one of these networks
+size,complexityanddensityincreaseswithadditional          for review (Fig. 6). It will also be possible to see a
+
+data. Crowd-verification of networks can mitigate         list of the available networks for selection or to use
+some of these difficulties because many individu -        a search function that will search across the network
+als can work in parallel to manage large networks;        title, summary, individual nodes, and gene or protein
+however, currently, the tools required to collabora -     synonyms. The website will support the full set of
+tively build, share, and maintain these networks are      actions allowed in curating a network. For instance,
+lacking. The NVC website (Fig. 5) will provide a          participants will be able to add and remove edges or
+
+collaborative, crowd-sourced, network building and        nodes as well as add and remove evidence supporting
+verification application that is self-managing through    the network edges. However, all of these actions will
+the use of a social reputation engine. This applica -     be labeled as suggested changes that will need to be
+tion will offer network building, knowledge capture,      ratified by other participants through voting.
+
+
+Bioinformatics and Biology Insights 2013:7                                                                313
+The sbv ImprOver project
+
+
+
+
+
+                          Network
+                         publishing                                                 Visualization
+
+
+
+
+
+
+
+                                                                                     Reputation
+                                                                                   (leaderboard)
+                       Translational
+                         biomarker
+                         discovery
+
+                                                   Edges
+
+                                                   Nodes
+                                                                                      Curation
+                                                   Nano-publications
+
+
+                         Systems
+                         toxicology
+                        approaches
+
+                                                                                      Search
+
+
+
+
+
+
+                        Mechanism-
+                                                                                    Collaboration
+                       based toxicity
+
+
+
+
+Figure 5. Outline of the Network Verification Challenge (NVC) website at the interface between the scientific community and systems biology.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 6. Screenshot of the mock-up of a network as visualized on the NvC website.
+
+
+
+314                                                                                   Bioinformatics and Biology Insights 2013:7
+                                                                        On crowd-verification of biological networks
+
+                                                           Curation system moderated
+Network visualization engine
+The CausalBioNet networks will be visualized using         by a reputation system
+a web-based network visualization engine powered           Another important aspect of the website will be the
+by D3.js (www.d3js.org). The network viewer will           reputation engine that will provide self-management
+allow participants to add and delete edges through         of curation tasks. Reputation engines have been
+                                                           used in other initiatives that involve game of skills
+the addition or deletion of evidence supporting those
+edges. Additional features such as adding comments         principles, such as StackOverflow (stackoverflow.
+to a network and providing different visualization         com), that reward “submitters” and “voters”. In
+filters for the networks will be made available. The       the NVC, “Submitters” are participants who pro-
+filters will include the visualization of the original     pose an action on the network website and “voters”
+                                                           are participants who vote to approve or disapprove
+network, the current network updated with all recom-
+mended changes, or the original network with the rec-      an action. Depending on the type of action and the
+ommended changes presented as layers on top of the         effort required to propose an action, a corresponding
+original network.                                          number of reputation points will be awarded to the
+                                                           submitter. Voters also gain reputation points. Once an
+BeL web-based statement editor                             action has obtained a minimum number of votes, the
+All network edges are represented by BEL State -           action is ‘locked’ to further voting. If a consensus is
+
+ments (see Fig. 2), which must be supported by at          reached,additionalpoints are given to the submitterif
+least one published literature reference. The BEL          the action is approved or, if the action is disapproved,
+web-based statement editor supports several fea -          thepointsoriginallyawardedpointsfortheactionwill
+tures that provide guidance to the participants on the     be removed. Voters are awarded bonus points only if
+functional syntax of the BEL Statement. An auto -          the action reaches a consensus and their vote aligns
+
+complete terminology service provides support in           with the consensus.
+entering protein names, chemical compound names,              Reputation badges will also be awarded as users
+Gene Ontology terms, and other biological entities         complete a pre-defined set of tasks. For example, a
+used in a BEL Statement. The editor will also sug -        user may be given a badge if they create 10 approved
+gest which statement functions and types of entities       network edges. Though these badges do not affect a
+are allowed at the cursor position as the BEL State -      user’s point total or leaderboard position, they are an
+
+ment is being created.                                     important acknowledgment of their contributions to
+   At a later stage, it is also envisioned that model-     the network and the NVC.
+building efforts will be fuelled by advances in text          To mitigate attempts to obtain reputation points
+mining that can make possible the semi-automated           not based on skilled scientific actions, several quality
+assembly of BEL encoded knowledge bases. Text              review checks will be introduced into the system. For
+
+mining is the technology that is us28 to support the       example, the system will measure the co-occurrence
+targeted retrieval of relevant terms and bring them        ofsubmissionandvotingactivitybetweenparticipants.
+into a structured relationship. Historically, the con-     If an abnormal amount of activity is measured
+version of prior knowledge into BEL Statement has          between participants who seem to be supporting each
+largely been a manual process that required many           other’s submissions, their activities will be reviewed
+curators with expertise in the related fields and their    by the site moderators to confirm the scientific ratio-
+
+full commitment to the curation task. The OpenBEL          nale underpinning the actions. In addition, the system
+community envisions technologies that will use state-      will allow only a limited number of actions per hour,
+of-the-art algorithms that are specifically designed to    to avoid automated scripts being used to create a high
+extract biological facts from scientific literature and    number of actions.
+assemble them into BEL Statements based on their              A leaderboard (see Fig. 7) will be generated to
+context and meaning. Text mining pipelines of this         show participants and their reputation points. Users
+
+kind could provide potential BEL Statements for            with the highest reputation points are likely to be
+review and incorporation either into the current net-      those who were highly engaged, had strong biolog-i
+works or into a biological knowledge base.                 cal knowledge, and gained the most experienced in
+
+
+Bioinformatics and Biology Insights 2013:7                                                                  315
+The sbv ImprOver project
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 7. Leaderboard page as part of the NvC curation system.
+
+
+biological knowledge representation. The NVC will           to, the collection of signaling pathways and networks
+                                                                                                               12,15
+help to determine the future role of crowd-sourced          already available to the scientific community
+network creation and management in network biology.         (see Supplementary Table 1). Repositories such as
+The highest-scoring participants overall and within the     STRING or HPRD try to create a genome-wide
+subnetworks will be invited to a ‘jamboree’ session         picture of protein-protein interactions in an almost
+
+(described below) to review or curate the networks that     context-free setting. Other signaling pathway reposi-
+were created during the crowd-verification challenge.       tories, such as KEGG and BioCarta (www.biocarta.
+                                                            com), employ manual curation of the literature but
+Properties of the CausalBioNet                              still do not offer significant biological context. The
+
+Networks                                                    aim of the NVC is to provide curated networks con-
+The CausalBioNet networks that will be the subjects         structed within precisely defined contextual boundar-
+of NVC possess a unique set of features that distin-        ies for associated literature. The literature context for
+
+guishes them from, and makes them complementary             the networks is primarily human, although mouse and
+
+
+316                                                                               Bioinformatics and Biology Insights 2013:7
+                                                                         On crowd-verification of biological networks
+
+
+rat evidence was included when supporting literature        shortness of breath. COPD is a major and increasing
+from human context was not available. Most of the           global health problem. It is predicted by the World
+evidence is derived from non-diseased respiratory           Health Organization to become the third most com-
+tissue biology augmented with chronic obstructive           mon cause of death and the fifth most common cause
+                                                                                                33
+respiratory disease biology (i.e., excluding, for exam-     of disability in the world by 2020. The main risk
+ple, lung cancer context). The current CausalBioNet         factor for emphysema/COPD in the developed world
+networksencodetheexactrelationshipsbetweenenti-             is exposure to tobacco smoke. 34
+ties at the highest level of granularity possible, and        The non-disease networks described above were
+provide the associated literature evidence as captured      augmented with chronic obstructive pulmonary dis-
+
+in BEL. Hence, a wide range of biological informa-          ease (COPD) pathophysiology-relevant connections
+tion is represented in these networks, including pro-       to yield the CausalBioNet collection of networks. In
+teins, DNA variants, coding and non-coding RNA,             addition, four networks were either built exclusively
+phenotypic or clinical observations, chemicals, lip-        or modified extensively to suit the COPD context.
+
+ids, methylation states, and other modifications (e.g.,     B-cell Activation and T-cell Recruitment and Acti-
+phosphorylation).Additionally, because the networks         vation subnetworks were built to represent these
+are encoded in BEL, they reflect the causal nature of       immune processes and their role in COPD, and extra-
+relationships between nodes, allowing the biologi-          cellular matrix (ECM) Degradation and Efferocytosis
+cal intent of the network model to be easily digested       subnetworks were constructed by strongly modify-
+
+by a scientist, and enabling inference and computa-         ing non diseased models to specifically comprise
+tion using the network as a whole (See Fig. 7). While       COPD-relevantmechanisms.Thesetofnetworksthat
+most of the known biology is represented in the vis-        describe the biological elements related to the COPD
+ible backbone of the networks, network computations         process in humans (Fig. 8) will be made available for
+can be performed using a downstream (hidden) layer          the NVC.
+
+of RNAabundance of genes regulated by the nodes in            Crowd-verification within the scope of crowd
+the backbone. Future development of the CausalBio-          curation of biological networks and the online veri-
+Net networks may accommodate other -omics data-             fication of this curation, the NVC has implemented
+sets,suchasproteomics,metabolomics,orlipidomics.            a submission, approval, and commenting system
+
+Thegeneexpressiondatathatunderliethesenetworks              designed to encourage scientists to critically evalu-
+greatly facilitates the biological interpretation of the    ate evidence supporting various network relation-
+complex datasets in the search for explanations of the      ships (Fig. 9). When verifying edges and nodes, users
+observations. Another important feature of the net-         are required to use controlled syntax in the form of
+works, as implemented on the NVC website, is that           a BEL Statement and must generally support their
+
+they are dynamic: they can be modified to represent         action with a reference to one or more peer-reviewed
+specific species and/or tissue contexts by the applica-     publications. The use of the BEL Statement with ref-
+tion of appropriate boundaries and can be updated as        erences ensures structural and logical correctness and
+new knowledge becomes available.                            addresses an important concern regarding knowledge
+                                                            curationplatforms:consistencychecking. BELState-
+
+Lung physiology and                                         ments enforce consistent input structures that allow
+pathophysiology networks                                    evidence evaluation algorithmically or manually. The
+The above approach was used to build a set of net-          requirement for references allows other participants
+works representing important biological processes           to judge the applicability and logical soundness of the
+
+implicatedinhumanlungphysiology.Thesenetworks               comment or modification to the network, species, tis-
+have been published previously as separate entities:        sue, or process being verified.
+cell proliferation, cellular stress, DNAdamage and            The NVC further stipulates that for any network
+cell fates, pulmonary inflammation, tissue repair           action (such as creating or removing edges or evi-
+and angiogenesis. 14                                        dences) to be approved or disapproved there must
+
+   COPD is a common inflammatory lung disease               be a consensus among users as measured by their
+in which the airways become narrowed, causing               votes, here referred to as approvals and disapprovals.
+
+
+Bioinformatics and Biology Insights 2013:7                                                                   317
+The sbv ImprOver project
+
+
+
+
+                                                             Endoplasmic
+                                                              reticulum   metabolism
+                                                                stress     response
+
+
+                            Treg signaling                                                          Autophagy
+                                                       Oxidative           NFE2L2
+                                                         stress           signaling
+
+                                         Th1 signaling                                                       Apoptosis
+                                                                                       Mechanisms
+                  Th2 signaling                             Osmotic stress              of cellular
+                              B-cell signaling                          Response       senescence
+                                                                                                     Transcriptional
+                                                  activation              to DNA                    regulation of the
+            Dendritic                                                                                   SASP          Regulation by
+               cell                    Neutrophil            Hypoxic     damage                                          tumor
+            signaling      Th17 signalingignaling            stress                                                   suppressors
+                                                                                Necroptosis
+                                                                                              Regulation of
+                                                   macrophage                                  CDKN2A
+                                                    signaling                                 expression       Cell
+         Cytotoxic T-cell             Epithelial
+           signaling     NK signaling   innate                                                                cycle          PGE2
+                                       immune                                      Mapk
+                                      activation Megakaryocyte                                   Cell
+                                                 differentiation                              interaction
+           Endothelial      Immune                                                                               Jak stat
+                           regulation
+              innate       of tissue                                          Growth                                        Hox
+             immune                     Wound                                  factor
+            activation       repair     healing     degradation                                         Calcium
+                                                                                              Notch
+
+                                                                                                                    Nuclear receptors
+                                Tissue damage                                       mTor
+                                              Epithelial
+             Angiogenesis                      mucus                                                      Wnt
+                                           hypersecretion
+
+                                                                                              Clock              Hedgehog
+
+                                 Fibrosis
+
+                                                                                                        Epigenetics
+
+
+
+Figure 8. Biological networks included in CausalBioNet. each node is labeled with the network name and the size of the node shows the sum of nodes in
+each network. We have split the 50 networks submitted for crowd-verification in five different tracks, namely cell fate (blue nodes), cell proliferation (pink),
+response to cell stress (green), immune response (yellow), and tissue response (orange). The separation is biologically not always as clear, so the shape
+of the nodes also reflects common areas. For example, the immune regulation of tissue repair is both an immune and a tissue response.
+
+
+
+
+Users are awarded a baseline set of points when                           of participants, the NVC places greater emphasis and
+
+they create an action in the system. Bonus points are                     importance on high-quality curation and discour-
+awarded following a specific reputation action being                      ages indiscriminate actions. Furthermore, the system
+
+locked to further approvals or disapprovals, and the                      requires voters to offer evidence to support actions;
+
+modificationbeingapprovedordisapproved(Table1).                           thereby,thesystemdiscouragesmaliciousorarbitrary
+An action will be locked once a minimum number of                         down-voting of other participants. However, if the
+
+approvals or disapprovals have been cast. The action                      disapproval is appropriate and the action to which it
+
+will then be approved or disapproved if there is a clear                  is applied is subsequently disapproved, the voter will
+
+consensus, as indicated by a pre-determined threshold                     be awarded a bonus point to reward removal of incor-
+ratio of approvals to disapprovals. If this threshold                     rect actions. This system can be implemented with
+
+is not met, no bonus points will be awarded, and the                      minimal moderator oversight, and in such a form, it
+
+action will remain as ambiguous and be prioritized for                    becomes a nearly real-time online crowd-verification
+further study at the ‘jamboree’session.                                   system for curation of biological networks.
+
+    By implementing a system that rewards network                            Prior to the locking of an action, any user can
+
+modifications that are agreed upon by the wider set                       view the votes or comments on that action but the
+
+
+
+318                                                                                                  Bioinformatics and Biology Insights 2013:7
+                                                                          On crowd-verification of biological networks
+
+
+
+                        A                                     Propose new edge
+                            Propose new evidence          incl. new node and evidence
+
+                                    +1 1           Node 2
+
+                                       Edge 1–2        Evidences
+                                                   add
+                         Node 1                 context           Vote
+                                               Edge 2–3   4       on an                     Comment
+                                                                  evidence
+                               Propose new
+                             edge incl. evidence
+
+                                                     Node 3
+
+
+                        B
+                  Start          Evidence 1          Evidence 2          Evidence 3           Evidence4
+          Crowd
+        verification
+
+
+
+
+
+
+                  End
+
+         Jamboree
+                                                      Discussed
+                  Final       Verified/accepted    Verified/rejected   Verified/rejected      Not verified
+
+
+Figure 9. Outline of the crowd-verification process showing the actions available in the NVC online phase and verification outcomes.
+(A) Actions that will be available for verification of the networks. The “starting” network is shown as pink nodes and black edges. Each edge is supported
+by a number of evidences or BeL statements. The weight close to the edge shows the number of evidences available for each edge (ie, the weight of
+the evidences for that edge). participants can vote for (approve/reject) evidences. If the evidence is for a new edge, that edge will then be added to the
+network. (B) Examples of possible verification outcomes. A limited number of votes will be allowed on each evidence after which the evidence will be
+and locked from further voting. Conversely, if the majority finds the evidence inappropriate, then it can be rejected. In cases where no clear consensus
+emerges, the evidence will be locked and considered for discussion in the jamboree. Evidences that do not accumulate a sufficient number of votes will
+be considered as not verified.
+
+
+
+usernames are kept anonymous to prevent unin-                high-quality scientific contributions and the develop-
+tended personal influence. However, after an action          ment of a consensus network model. Users will be
+
+is locked, all usernames of submitters and voters will       able to accrue reputation points and reputation badges
+be viewable. Such transparency can be useful in gen-         as well as interact with the larger network of partici-
+erating a greater, persistent scientific dialog that may     pants through a leaderboard system and commenting
+
+be carried over to other areas of the network, to the        structure. Of particular importance, the sources of
+‘jamboree’ session, and to areas outside the scope of        points and positive rewards are primarily conferred
+
+the NVC.At the close of the open challenge, all edges        based on contributions of verified, biological knowl-
+that have been locked without clear consensus will be        edge, as opposed to more purely action-based reward
+evaluated, sorted, and selected from for further anal-       systems like Foldit. By placing the emphasis on the
+
+ysis in the ‘jamboree’ session (Fig. 9). Criteria for        scientific information provided, the NVC is more
+edges selected for analysis at the ‘jamboree’ session        analogoustocrowdsourcingeffortsthataimtoconfine
+
+will be determined by the total number of approvals          gamification elements principally to leaderboard sys-
+and disapprovals.                                            tems to drive friendly competition and engagement,
+   For the NVC, crowd-verification will be medi-             as exemplified by DREAM, the Netflix Challenge,      38
+
+ated using a reputation point system that encourages         and the challenges hosted by Kaggle (www.kaggle.
+
+
+Bioinformatics and Biology Insights 2013:7                                                                     319
+The sbv ImprOver project
+
+
+
+Table 1. points system used to rank participants based on their contributions to t▯he NvC.
+Reputations actions        Points awarded       Final score after community responses to the actions
+                           initial/approval/
+                                                4 votes        4 votes            5 total votes,      Less than 5
+                           rejection            approving      disapproving       but fewer than      total votes and
+                                                                                  4 for/against       fewer than
+                                                                                                      4 for/against
+                                                                                                        †
+Network edge creation      5/100/0              100            0                  5                   5
+evidence creation          5/50/0               50             0*                 5†                  5 †
+
+peer approval              1–3/11–13 /0         11–13 ‡        0*                 1–3 †,‡             1–3 †,‡
+                               ‡      ‡                              ‡                †,‡                 †,‡
+peer disapproval           1–3 /11–13 /0        0*             11–13              1–3                 1–5
+Notes: *Loss of initial points; Keep initial points; Depending on how many fields were completed.
+
+
+
+com). The NVC point and badge system also has ele-            infrastructure will be maintained and available to the
+
+ments of the reputation systems seen in Q&A sites             community for further action after the official close
+like StackOverflow (www.stackoverflow.com), where             of the challenge.
+answers to questions are up-and down-voted by users,
+                                                              ‘Jamboree’ Session and Publication
+and participants who submit answers are rewarded
+with points attributed in relation to the crowd approval      of Results
+or disapproval of their answer.                               The analysis performed following the open phase of
+
+   The NVC will also implement a leaderboard sys -            network verification/enhancement should pinpoint a
+tem to offer participants an understanding of their           number of edges and nodes that are ambiguous. The
+relative performance in the overall challenge and             decision to include or exclude these edges or nodes
+
+in each specific subnetwork. The leaderboard sys -            from the finalized consensus network would ben-
+tem will be designed to encourage friendly com -              efit greatly from discussions between subject matter
+petition and greater engagement within each of the            experts, the team of scientists who first generated the
+                                                              networks, and the “best” participants in the NVC.
+networks. Leaderboards will indicate username,
+rank as determined by the total number of reputa -            Though the web platform used during the open phase
+tion points, and specific metrics such as quantity            is built to facilitate interactions within the scientific
+                                                              community, face-to-face meetings and the efficiency
+of edges created/rejected. These leaderboards will
+operate at a global level, including activity across          of experts sitting together to discuss predefined top-
+all subnetworks, and will also run for each indi -            ics are irreplaceable.Therefore, the NVC will include
+vidual subnetwork. Importantly, to promote com -              a 2–4 day ‘jamboree’ network verification meeting
+
+petition and continued engagement while avoiding              that will conclude the open phase of the challenge.
+discouragement because of large differences in                Concepts surrounding the value of jamboree meet-
+point totals, users will be able to see only the ranks        ings in science have emerged only recently (see
+
+and points of the five participants above and below           Fig. 10). In a scientific context, they may be defined
+their rank within the global and specific subnetwork          as “focused events at which domain experts apply
+leaderboards. In addition, to reward top contributors         their knowledge to refine and consolidate biochemi-
+
+without discouraging other participants, the top five         calknowledgefromexistingreconstructionsandpub-
+usernames for all leaderboards will be shown, but             lished literature”.9
+without their point totals.                                      Community-based jamborees are commonly used
+                                                                                                    34,40
+   Users may participate in the NVC as individu-              ingenome-basedannotationprojects         andtheyhave
+als or as a team. Although users will ultimately be           beenshowntobevaluablefor(i)definingthestandards
+evaluated as individuals, self-identification with oth-       that should be used, (ii) annotating, and (iii) resolving
+
+ers as a team may encourage participation within and          discrepancies. The ‘jamboree’ session constitutes an
+competition between groups. In addition, the NVC              integral part of the network verification process, and
+
+
+320                                                                                  Bioinformatics and Biology Insights 2013:7
+                                                                                          On crowd-verification of biological networks
+
+
+
+                      90
+
+
+
+                      80                                                                             Network
+                                                                                                  reconstruction
+                                                                                                    jamborees
+                      70
+
+
+                      60                                                                          Genome
+                                                                                                 annotation
+                                                                                                 jamborees
+
+                      50
+                                                                                               Undergrad
+
+                                                                                               jamboree
+                      40
+                                                                                          Gene finding
+                                                                                            jamboree
+                      30
+                                                                            Rock’n roll
+                                                                             jamboree
+                                                                   Technical
+                      20                                           jamborees
+
+                    Number of publications addressing “jamboree”
+                      10       Scouts
+                              jamborees
+
+
+                       01920     1930      1940     1950      1960     1970      1980     1990      2000     2010      2020
+
+
+Figure 10. Numbers of publications that mention the word “jamboree”.
+The merriam-Webster definitions of “jamboree” are “a large festive gathering” or “a national or international camping assembly of boy Scouts”. The con-
+cept of “jamboree” meetings in the context of science has emerged only recently. One of its first appearances in the scientific literature was in a report
+about the outcome of a scientific jamboree for undergraduate students. The jamboree was held to conclude their summer work of trying to construct small
+biological devices. The jamboree allowed students to share data, experiences, and most importantly to realize how their contribution had been valuable.
+It also showed that coordinated efforts can lead to better results than the sum of individual efforts. Similarly, endeavors such as network reconstruction or
+genome annotation projects, which entail countless efforts that are best distributed among many teams, also benefit from jamboree sessions where results
+can be homogenized and validated. The reconstruction of a consensus yeast metabolic network project set the ground for the type of scientific ventures
+that benefit greatly from jamboree meetings. The goals set for the yeast jamboree meeting were threefold: (i) define the standards that should be used,
+
+(ii) annotate, and (iii) re4olve discrepancies. What a reconstruction annotation jamboree entails and how it should be organized was later summarized very
+nicely by Thiele5and palsson. Jamborees have also been used in other 1rojects, namely a community-based effort to construct a model of Salm40ella
+typhimurium LT2, and the reconstruction of the human metabolic network. Another successful jamboree was held for the Little Skate genome project.
+The goal of these jamboree sessions was not only to provide a floor for discussion, but also to deliver training in various fields related to genome annota-
+tion and analysis, and to coordinate the efforts.
+
+
+
+scientists will be invited to give their opinion on the                   revised or invalidated by the challenge. To address
+
+online verification phase and outcome as well as to                       thesequestions,wewillthoroughlyreviewthechanges
+
+adjudicate ambiguous edges and evidences.                                 to the network and the transactions performed by the
+
+    After the ‘jamboree’ session, the discussions                         participants based on defined metrics such as.
+and decisions will be summarized and an updated                              Number of statements supporting each edge,
+
+version of the network models will be generated                           before and after the NVC.
+
+incorporating the feedback from the session. These                           The specificity of contextual annotations for each
+updated network models, which will represent what                         statement relative to the network’s intended context,
+
+is expected to be the most relevant knowledge on                          before and after the NVC.
+
+human lung biology, will be made available to the                            Ratio of positive and negative reviews of each evi-
+
+scientific community through the bionet.sbvim -                           dence prior to locking.
+prover.com website.                                                          Number of editing events for each remaining
+
+                                                                          edge.
+
+Interpretation of Results                                                    Number of evidence deletion events and number
+In the last phase of the NVC, the results of the chal-                    of edges removed when all supporting evidence is
+
+lenge will be evaluated to determine to what extent                       removed.
+
+the biological mechanisms were further expanded,                             Number of locked vs. unlocked evidences.
+
+
+
+Bioinformatics and Biology Insights 2013:7                                                                                             321
+The sbv ImprOver project
+
+   Finally, we will review the transactions and the       will aim to leverage the wisdom of crowds to develop
+
+resulting network to make sure that all unproductive      methodologies for predicting the prognostic impact
+activitieswereflaggedandremovedbymoderators.If            of different compounds and substances on COPD.
+there are any unusual patterns of success by individ -    The network information verified by the NVC will
+uals or groups, the science of the resulting statements   be included as one of the inputs for the Grand Chal-
+and edges will be reviewed to determine whether the       lenge. Thus, early involvement in the curation and
+scientific content of the final network was in any way    validation of these data may offer opportunities for
+
+compromised for the sake of competition.                  significant insights into the data that could enhance
+                                                          the methods developed for the Grand Challenge.
+Outlook
+The NVC aims to encourage continual user participa-       Acknowledgements
+tion;therefore,thenetworkwillcontinuallyberefined         The authors express their gratitude to Vincenzo
+and expanded as new evidence is added throughout
+the challenge and after the close of the official chal-   Belcastro, Mark Ciapka, and Ryan Todd for their
+                                                          invaluable input while discussing the challenge and
+lenge time. In this way, the challenge is more than a     for the design of the website, Filipe Bonjour and Syl-
+simple verification, but is a curation and refinement     vain Gubian for their assistance in technical matters,
+process that looks to expand and maintain up-to-date      and Tim Kilchenmann for his assistance in the chal-
+biological knowledge as well as facilitate the infer-     lenge preparation.
+ence of new relationships.
+   Challenges such as the NVC are expected to bring
+                                                          Funding
+benefits to the scientific community that engages in      The work presented here was funded by Philip
+the crowd-verification process. The benefits might        Morris.
+include:
+
+•	 providing an accelerated mechanism for the dis-        Author Contributions
+   semination and validation of knowledge;                Developed overarching strategy and conceived the
+•	 providing better maps of disease and a forum for       project: JH, MCP. Developed technical design and
+   reproducible and re-usable data and analyses;          implementation: JB, SB, KR, DP, RK, RN, AI, CP,
+•	 providing a platform that links model generators
+                                                          WKS, GS, WH, JH, MCP, ADF, BO. Wrote the first
+   with researchers and clinicians who together are       draft of the manuscript: JB, SB, KR, DP, WH, JH.
+   poised to validate modeling hypotheses and incor-      Contributed to the writing of the second draft man-
+   porate modeling results into research directed at      uscript: RK, RN, AI, GS, MCP, MT. Made critical
+   understanding physiological or disease states, and     revisions: JB, SB, KR, RK, MT, JH, SA. All authors
+   therapeutic development efforts;                       reviewed and approved of the final manuscript.
+•	 sharing and working as a social network of dis-
+   tributed teams with the needs and opportunities
+                                                          Competing Interests
+   created by the genomics revolution and the desire      MD, JH, WH, ADF and MT have a patent pend-
+   to translate public and private investment into
+   demonstrable human benefit;                            ingonareputationsystemfornetworkverification.GS
+•	 supporting the scientific community through a          has a patent pending on evaluation of predictions in
+   combination of the network model and analytics 25      the absence of a known ground truth. DP holds shares
+   in the endeavors to identify biomarkers of lung        and has received consulting fees from Selventa, Inc,
+                                                          andholdspatentsasfolows:onamethodfor quantify-
+   disease as well as biomarkers rele41nt to environ-     ing amplitude of a response of a biological network;
+   mental or tobacco smoke exposure.
+                                                          on a system, method and apparatus for causal impli-
+   Finally, researchers who choose to participate will    cation analysis in biological networks; on a system,
+gain early insights into the data and relationships that  method and apparatus for assembling and mining life
+willbeevaluatedinthesbvIMPROVER’sGrandChal-               science data; and on a method, system and apparatus
+lenge that will follow the NVC.The Grand Challenge        for assembling and using biological knowledge.
+
+
+322                                                                            Bioinformatics and Biology Insights 2013:7
+                                                                                                  On crowd-verification of biological networks
+
+
+
+Disclosures and Ethics                                                          18. Hoeng J, Deehan R, Pratt D, et al. A network-based approach to quanti-
+                                                                                    fying the impact of biologically active substances. Drug Discov Today.
+As a requirement of publication the authors have pro-                               May 2012;17(9–10):413–8.
+vided signed confirmation of their compliance with                              19. Clark T, Ciccarese PN, Goble CA. Micropublications: a semantic
+                                                                                    model for claims, evidence, arguments and annotations in biomedical
+ethical and legal obligations including but not limited                             communications. arXiv preprint arXiv:1305.3506. 2013.
+
+to compliance with ICMJE authorship and competing                               20. Vercruysse S, Kuiper M. Jointly creating digital abstracts: dealing with syn-
+interests guidelines, that the article is neither under                             onymy and polysemy. BMC Research Notes. 2012;5(1):601.
+                                                                                21. Demir E, Cary MP, Paley S, et al. The BioPAX community standard for
+considerationforpublicationnorpublishedelsewhere,                                   pathway data sharing. Nat Biotechnol. Sep 2010;28(9):935–42.
+                                                                                22. Westra JW, Schlage WK, Frushour BP, et al. Construction of a computable
+of their compliance with legal and ethical guidelines
+concerninghumanandanimalresearchparticipants(if                                     cell proliferation network focused on non-diseased lung cells. BMC Syst
+                                                                                    Biol. 2011;5:105.
+applicable), and that permission has been obtained for                          23. Selventa. Reverse Causal Reasoning Methods Whitepaper. 2011.
+                                                                                24. Martin F, Thomson TM, SewerA, et al.Assessment of network perturbation
+reproduction of any copyrighted material. This article                              amplitude by applying high-throughput data to causal biological networks.
+was subject to blind, independent, expert peer review.                              BMC Syst Biol. May 31, 2012;6(1):54.
+
+The reviewers reported no competing interests.                                  25. Belcastro V, Poussin C, Gebel S, Mathis C, Schlage WK, Lichtner RB, et al.
+                                                                                    Systematic Verification of Upstream Regulators of a Computable Cellular
+                                                                                    Proliferation Network Model on Non-Diseased Lung Cells Using a Dedi-
+References                                                                          cated Dataset. Bioinformatics and Biology Insights. 2013;7:217.
+ 1. Kohavi R, Brodley CE, Frasca B, Mason L, Zheng Z. KDD-Cup 2000              26. Krewski D, Acosta D Jr., Andersen M, et al. Toxicity testing in the
+    organizers’ report: peeling the onion. ACM SIGKDD Explorations                  21st century: a vision and a strategy. J Toxicol Environ Health B Crit Rev.
+
+    Newsletter. 2000;2(2):86–93.                                                    Feb 2010;13(2–4):51–138.
+ 2. Shi L, Campbell G, Jones WD, et al. The Microarray Quality Control          27. Ashburner M, Ball CA, Blake JA, et al. Gene ontology: tool for the uni-
+    (MAQC)-II study of common practices for the development and validation          fication of biology. The Gene Ontology Consortium. Nature Genetics.
+    of microarray-based predictive models (EI). 2010.                               May 2000;25(1):25–9.
+ 3. Good BM, Su AI. Games with a scientific purpose. Genome Biology. 2011;      28. Nédellec C, Bossy R, Kim JD, et al. Overview of BioNLP Shared Task
+
+    12(12):135.                                                                     2013. Paper presented at: BioNLP132013; Sofia, Bulgaria.
+ 4. PicoAR,KelderT,vanIerselMP,HanspersK,ConklinBR,EveloC.WikiPa-th             29. Fluck J, Klenner A, Madan S, et al. BEL Networks Derived from Qualita-
+    ways: pathway editing for the peo. LoS biology. Jul 22, 2008;6(7):e184.         tive Translations of BioNLP Shared Task Annotations. Paper presented at:
+ 5. Meyer P, Alexopoulos LG, Bonk T, et al. Verification of systems biol-           BioNLP132013; Sofia, Bulgaria.
+    ogy research in the age of collaborative competition. Nat Biotechnol.       30. Franceschini A, Szklarczyk D, Frankild S, et al. STRING v9.1: protein-
+    Sep 2011;29(9):811–5.                                                           protein interaction networks, with increased coverage and integration.
+
+ 6. Meyer P, Hoeng J, Rice JJ, et al. Industrial methodology for process veri-      Nucleic Acids Research. Jan 2013;41(Database issue):D808–15.
+    fication in research (IMPROVER): toward systems biology verification.       31. Keshava Prasad TS, Goel R, Kandasamy K, et al. Human Protein Reference
+    Bioinformatics. 2012;28(9):1193–201.                                            Database—2009 update. Nucleic Acids Research. Jan 2009;37(Database
+ 7. Tarca AL, Lauria M, Unger M, et al. Strengths and limitations of                issue):D767–72.
+    microarray-based phenotype prediction: Lessons learned from the             32. Kanehisa M, Goto S, Sato Y, Furumichi M, Tanabe M. KEGG for integra-
+    IMPROVER Diagnostic Signature ChallengeB . ioinformatics.Aug 20, 2013.          tion and interpretation of large-scale molecular data sets. Nucleic Acids
+
+ 8. Moult J, Pedersen JT, Judson R, Fidelis K. A large-scale experiment to          Research. Jan 2012;40(Database issue):D109–14.
+    assess protein structure prediction methods. Proteins. Nov 1995;23(3):ii–v. 33. LopezAD, Murray CC.The global burden of disease, 1990–2020. Nat Med.
+ 9. Janin J, Henrick K, Moult J, et al. CAPRI: A Critical Assessment of             Nov 1998;4(11):1241–3.
+    PRedicted Interactions. Proteins. Jul 1, 2003;52(1):2–9.                    34. Pauwels RA, Buist AS, Calverley PM, Jenkins CR, Hurd SS. Global strat-
+10. Hirschman L, Yeh A, Blaschke C, Valencia A. Overview of BioCre-                 egy for the diagnosis, management, and prevention of chronic obstructive
+
+    AtIvE: critical assessment of information extraction for biology. BMC           pulmonary disease. NHLBI/WHO Global Initiative for Chronic Obstructive
+    bioinformatics. 2005;6 Suppl 1:S1.                                              Lung Disease (GOLD) Workshop summary. Am J Respir Crit Care Med.
+11. Stolovitzky G, Monroe D, Califano A. Dialogue on reverse-engineering            Apr 2001;163(5):1256–76.
+    assessmentandmethods:theDREAMofhigh-throughputpathwayinference.             35. Groza T, Tudorache T, Dumontier M. State of the art and open challenges in
+    Annals of the New York Academy of Sciences. Dec 2007;1115:1–22.                 community-driven knowledge curation. Journal of Biomedical Informatics.
+12. Gebel S, Lichtner RB, Frushour B, et al. Construction of a computable           Feb 2013;46(1):1–4.
+
+    network model for DNA damage, autophagy, cell death, and senescence.        36. Cooper S, Khatib F, Treuille A, et al. Predicting protein structures with a
+    Bioinformatics and biology insights. 2013;7:97–117.                             multiplayer online game. Nature.Aug 5, 2010;466(7307):756–60.
+13. Westra JW, Schlage WK, Hengstermann A, et al. A modular cell-type           37. Margolin AA, Bilal E, Huang E, et al. Systematic analysis of challenge-
+    focused inflammatory process network model for non-diseased pulmonary           driven improvements in molecular prognostic models for breast cancer.
+    tissue. Bioinformatics and Biology Insights. 2013;7:1–26.                       Science Translational Medicine.Apr 17, 2013;5(181):181re181.
+14. Park JS, Schlage WK, Frushour BP, et al. Construction of a computable       38. Bennet JL, S. The Netflix Prize. Proceedings of KDD Cup and Workshop
+
+    network model of tissue repair and angiogenesis in the lung. Clinical           2007. 8/12/2007 2007.
+    Toxicology. 2013:S12.                                                       39. Thiele I, Swainston N, Fleming RM, et al. A community-driven global
+15. Schlage WK, Westra JW, Gebel S, et al. A computable cellular stress             reconstruction of human metabolism. Nat Biotechnol. Mar 3, 2013.
+    network model for non-diseased pulmonary and cardiovascular tissue. BMC     40. Wang Q, Arighi CN, King BL, et al. Community annotation and bioinfor-
+    Syst Biol. 2011;5:168.                                                          maticsworkforcedevelopmentinconcert—LittleSkateGenomeAnnotation
+16. Mamykina L, Manoim B, Mittal M, Hripcsak G, Hartmann B. Design lessons          Workshops and Jamborees. Database: The Journal of Biological Databases
+
+    from the fastest q&a site in the west. Proceedings of the SIGCHI Conference     and Curation. 2012;2012:bar064.
+    on Human Factors in Computing Systems; 2011; Vancouver, BC, Canada.         41. Wang H, Mattes WB, Richter P, Mendrick DL. An omics strategy for dis-
+17. Mazumder R, Natale DA, Julio JA,Yeh LS,Wu CH. Community annotation              covering pulmonary biomarkers potentially relevant to the evaluation of
+    in biology. Biology Direct. 2010;5:12.                                          tobacco products. Biomarkers. 2012;6(6):849–60.
+
+
+
+Bioinformatics and Biology Insights 2013:7                                                                                                         323
+The sbv ImprOver project
+
+
+Supplementary Table
+
+
+
+Table S1
+                            CausalBioNet            KeGG (kyoto               Reactome           BioCarta
+
+                                                    encyclopedia of
+                                                    genes and genomes)
+Species human (hs);         hs, mm, rn              .20 species               hs (curated)       hs, mm
+mouse (mm); rat (rn)                                                          +20 species
+
+                                                                              (inferred)
+Literature support shown    At edge-level           At pathway-level          At pathway         At pathway
+                                                                              level              level
+
+Defined biological          Species                 Species                   Biological         Species
+boundaries                  Tissue                  Disease context (hs)      pathways           Biological
+                            Disease context         Biological pathways                          pathways
+                            Biological pathways
+manual curation             Yes                     Yes                       Yes                Yes
+
+Data-driven                 Yes                     No?                       No?                No
+enhancement
+Crowd curation              Yes                     No                        No                 partial
+                                                                                                 (comments)
+Causal                      Yes                     No                        No                 No
+Directional edges           Yes                     Yes                       partial            Yes
+multiple types of           Yes                     No                        Yes                No
+gene-centric entities
+Interactive visualization   Yes                     No                        Yes                Yes
+
+Computable                  Yes                     Yes/no                    Yes (pathway       No
+                                                                              enrichment)
+
+
+Size                        .30 networks            .400 signaling            1402               .350
+                                                    modules                   pathways (hs)      pathways
+
+
+Available for download      Yes                     Yes                       Yes                No
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+324                                                                          Bioinformatics and Biology Insights 2013:7
+Table S1
+                                                          30
+                            CausalBioNet            KeGG (kyoto               Reactome           BioCarta
+                                                    encyclopedia of
+                                                    genes and genomes)
+
+Species human (hs);         hs, mm, rn              .20 species               hs (curated)       hs, mm
+mouse (mm); rat (rn)                                                          +20 species
+                                                                              (inferred)
+Literature support shown    At edge-level           At pathway-level          At pathway         At pathway
+                                                                              level              level
+
+Defined biological          Species                 Species                   Biological         Species
+boundaries                  Tissue                  Disease context (hs)      pathways           Biological
+
+                            Disease context         Biological pathways                          pathways
+                            Biological pathways
+manual curation             Yes                     Yes                       Yes                Yes
+Data-driven                 Yes                     No?                       No?                No
+enhancement
+Crowd curation              Yes                     No                        No                 partial
+                                                                                                 (comments)
+Causal                      Yes                     No                        No                 No
+
+Directional edges           Yes                     Yes                       partial            Yes
+multiple types of           Yes                     No                        Yes                No
+gene-centric entities
+Interactive visualization   Yes                     No                        Yes                Yes
+Computable                  Yes                     Yes/no                    Yes (pathway       No
+                                                                              enrichment)
+
+
+
+Size                        .30 networks            .400 signaling            1402               .350
+                                                    modules                   pathways (hs)      pathways
+
+
+Available for download      Yes                     Yes                       Yes                No

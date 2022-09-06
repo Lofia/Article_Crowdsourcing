@@ -1,0 +1,522 @@
+                    2014IEEENinthInternationalConferenceonIntelligentSensors,SensorNetworksandInformationProcessing(ISSNIP)
+                    SymposiumonParticipatorySensingandCrowdsourcing
+                    Singapore,21–24April2014
+
+
+    Personalising Pollution Exposure Estimates Using
+
+
+                                Wearable Activity Sensors
+
+
+
+
+
+                          Ke Hu , Yan Wang , Ashfaqur Rahman            †3 and Vijay Sivaraman   ∗4
+       ∗School of Electrical Engineering and Telecommunications, University of New South Wales, Sydney, Australia
+                            †
+                             Intelligent Sensing and Systems Laboratory, CSIRO, Hobart, Australia
+
+          1                            2                            3                           4
+           ke.hu@student.unsw.edu.au, oscarwang1205@gmail.com, ashfaqur.rahman@csiro.au, vijay@unsw.edu.au
+
+   Abstract—In recent years several research groups, including   As an example, consider two individuals who are both in the
+ours, have demonstrated participatory systems that use wearable  same place at the same time, but one is driving while the other
+or vehicle-mounted portable units coupled with smartphones to    is jogging. They will experience the impact of air pollution
+crowdsource urban air pollution data from lay users. These sys-
+                                                                 in different ways since they will inhale different amounts
+tems have shown remarkable improvement in spatial granularity    due to their different breathing rates, and may additionally
+over government-operated monitoring systems, leading to better   have different medical predispositions to the exposure. When
+mapping and understanding of urban air pollution, at relatively  these differences are accumulated over a long period, they
+low cost. In this paper we extend the paradigm to personalize
+the consumption of data by individuals. Speciﬁcally, we combine  can become signiﬁcant, leading to different health outcomes.
+the pollution concentrations obtained from participatory systems In this study therefore we combine ambient pollution levels
+with the individual’s on-body activity monitors to estimate the  (taken from our participatory system) with an individual’s
+personal inhalation dosage of air pollution. We show that the    activity levels to estimate the personal inhalation dosage, which
+individual’s activity, such as jogging, cycling, or driving, impacts
+                                                                 can then be used to make further medical inferences for that
+their dosage, and develop an app that gives theis personalised   individual. Our speciﬁc contributions are:
+information. Our system is a step towards enabling medical
+inferencing of the impact of air pollution on individual health.    1)    We develop a system for estimating personal air
+                                                                          pollution inhalation dosage. Our system comprises
+   Keywords—pollution sensor; activity monitor; mobile apps               a mobile app that interfaces with wearable personal
+
+                                                                          activity sensors to determine breathing rate, and com-
+                    I.  INTRODUCTION                                      bines it with ambient pollution concentration deter-
+                                                                          mined from our participatory pollution monitoring
+   Air pollution imposes a heavy burden on human health.                  system.
+The World Health Organisation (WHO) estimates [1] that every
+year several million people world-wide die prematurely from         2)    We conduct ﬁeld trails with our system in Syd-
+                                                                          ney, and obtain real-time pollution inhalation dosage
+air pollution induced diseases such as chronic obstructive respi-         estimates showing that different levels of activity
+ratory disease (COPD). Therefore, monitoring and controlling              (driving, cycling, and jogging) entail very different
+ambient air pollution is high on the public consciousness in
+both developing and developed countries.                                  levels of exposure. The improved estimates from
+                                                                          our system compared to earlier systems that do not
+   Several medical studies [2]–[7] have shown that air pol-               include personal activity information allow for more
+                                                                          accurate medical inferencing.
+lution has adverse impact on human health. However, these
+studies consider aggregates of populations, and use coarse data     The rest of this paper is organized as follows: Section II
+on pollution levels, often at the city or suburb level, taken from
+traditional ﬁxed monitoring sites operated by governments.       discusses prior work relevant to this paper. In Section III we
+The poor spatial resolution of such data often ignores the       describe our system and methods used in our study. In Section
+                                                                 IV we present results from trials in Sydney, and the paper
+variations in air pollution levels across a neighbourhood (e.g.  concludes in Section V.
+due to different land use and roads), and does not therefore
+lend itself to inferences at the individual level. In recent years,
+with the rapid growth of portable sensors, several studies have                     II.  R ELATED  W  ORK
+
+tried to use participatory sensing and crowdsourcing systems        Several projects have emerged over the past few years that
+to get ﬁne-gained urban air pollution data [8]–[12], including
+the system we have developed and operate as described in [13]    attempt to crowdsource data from low-cost portable mobile
+(we note that data quality assessment mechanisms such as the     sensors to obtain air pollution estimates of high spatial gran-
+                                                                 ularity. Notable ones include the MESSAGE (Mobile Envi-
+one we developed in [14] are improving the reliability of the    ronmental Sensing System Across Grid Environments) project
+data collected from such systems).                               [15] in the UK, the MAQUMON project [16] from Vanderbilt
+
+   In this paper, we leverage the increased spatial granularity  University, the CommonSense project [17] supported by Intel,
+of air pollution data obtained from participatory systems, and   and the OpenSense project [18] ongoing at EPFL Switzerland.
+try to personalise the information for an individual so that     Our group also operates a system that we call “HazeWatch”
+better medical inferences can be made at the individual level.   [13] that monitors and maps Sydney air pollution in real time
+
+
+                                                             1
+
+                                           978-1-4799-2843-9/14/$31.00 © 2014 IEEE
+                                      Smart phone
+         Arm Sensor
+
+                              Chest Sensor                                  Internet
+
+         Wrist Sensor
+
+
+
+                                          Pad
+
+
+
+
+
+
+                           1.Wireless sensor network                        2.Data Centre             3.User interface
+
+
+Fig. 1.System Architecture
+
+
+via vehicle-mounted pollution sensors using both custom-built        Parallel to our work, authors in [24] discussed how to
+and off-the-shelf hardware. To the best of our knowledge, these  combine individual time-activity patterns and air pollution
+systems focus on gathering the pollution data, and not so much   concentrations, and gave a model to integrate the data. In
+
+on consumption of data by individuals in a personalised way.     [25], the author designed a system called ExposureSense which
+                                                                 can combine smart phone accelerometer, external air quality
+   There also exist studies in the literature that try to associadata and pluggable sensors for personal pollution exposure
+human activity levels with pollution exposure concentrations.    estimation. In these two papers, only personal location and
+For example, the studies in [19], [20] use physical activity
+times to estimate personal exposure, and its effect on Ischemic  acceleration information were considered as activity data,
+                                                                 which can estimate the ambient air pollution concentrations,
+Heart Disease Mortality. However, these studies only use the     instead of personal real-time inhaled dose.
+user’s home location to estimate their exposure, without regard
+to the mobility pattern of the individual. In [21] the authors
+develop a tool called CalFit that records the individual’s               III. S YSTEM   C OMPONENTS AND     M  ETHODS
+                                                                 A. System architecture
+location and activity information. However, their study did
+not use participatory sensor networks, and instead relied on         We demonstrate a novel system consisting of various
+historical data from ﬁxed monitor sites and derived exposure     wearable sensors, mobile applications and data center, which
+estimates based on an Atmospheric Dispersion Modelling
+                                                                 can allow real-time feedback of user’s exposure dose. Such
+System (ADMS). As we will show in the paper, using data          a system can be used in personal exposure estimation, and
+with such low spatial density can lead to incorrect exposure     estimation of impact of air pollution on human health. As
+estimates and hence biased medical inferences.                   shown in Fig. 1, the system is based on a horizontal structure
+
+   Several studies have involved volunteers carrying portable    with 3 levels.
+pollution monitors. For example, the authors of [22] designed        1) Level 1:Wireless sensor network: integrates sensors and
+a study to ﬁnd out the impact of time-activity patterns on
+                                                                 applications to collect and upload data. It can be divided into
+personal exposure. They followed sixteen participants, obtain-   two parts: sensors and applications.
+ing their temporal-spatial information with a PDA, and black
+carbon concentrations with a potable monitor. Their results          Sensors: Various wearable sensors integrate different kinds
+showed that transportation contributed the highest black carbon  of potable air pollution, activity and medical sensors to sample
+                                                                 physiological and environment data. For air pollution sensing,
+concentrations. Nevertheless, their study ignored the human      we use the NODE wireless sensor platform which supports
+activity levels and only estimated the pollution concentration
+around the participants rather than their personal inhaled       connection to iOS and Android smart phones. As shown
+dosage.                                                          in Fig. 2(a), the NODE sensor platform is designed with
+                                                                 plug-in modules mode. It comprises body platform part and
+   A research group in Barcelona, Spain designed a survey        interchangeable OXA gas sensor header part. With changing
+
+that tried to compare the exposures with different travel modes  the OXA headers, Carbon Monoxide (CO), Nitric Oxide (NO),
+in [23] which is very much aligned with our objectives. They     Nitrogen Dioxide (NO2) and other three pollutants can be
+asked commuters to use different transport modes going along     monitored. We only monitor Carbon Monoxide (CO) in this
+the same route to ﬁnd out their relative inhalation dose. The    study, as CO is one of the most important pollutants all over
+inhalation rate algorithm they used was developed by other       the world, and it may cause many diseases, like arteriosclerosis
+
+researchers, which assumed that inhalation rate ratio between    and lung disease. Smart phones can connect to the body
+different travel modes were constants. We believe that their     platform with bluetooth 4.0 up to 250 feet away. The cost
+referenced inhaled dose were hence neither real-time nor         of NODE device is about $150 for body platform and $150
+sufﬁciently accurate.                                            for one OAX header each.
+
+
+                                                              2
+       (a) NODE sensor [26]       (b) Wahoo heart rate monitor      (c) NODE sensor on a bike          (d) NODE sensor in a car
+
+                                  [27]
+
+Fig. 2.(a)NODE platform body and header modules (b)Sample of how to wear Wahoo heart rate monitor (c)Attached NODE on a bike and (d)in a car
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          (a) iPhone upload application              (b) iPhone user application                     (c) Trip route
+
+Fig. 3.(a)Trip route monitored for 3 activity modes (b)Application to upload pollution and heart rate data (c)Application showing personal inhaled dose
+
+
+
+    As inhaled dose refers to respiratory rate, which is related       Also, the app will track the location data of users. All
+to heart rate, we use Wahoo heart rate monitor to get heart rate    GPS data collection rely on mobile phones. For example, Fig.
+readings. Wahoo heart rate monitor can track user’s heart rate      3(a) shows a screen-shot of our application interface. Upon
+
+data in real-time with wearing it around chest which is shown       connecting with the selected sensors, it will constantly sample,
+in Fig.2(b). It supports bluetooth 4.0 to connect to iOS smart      upload and display the information as current location on a
+phones and Pad.The cost of one Wahoo heart rate monitor is          map, the GPS information, CO concentration and heart rate
+$80.                                                                after starting recording. Recording time will also be displayed
+
+    Applications: We developed an iPhone app to connect             on the screen.
+
+with both NODE sensors and Wahoo heart rate sensors using              2) Level 2:Data center: is the server of whole system.I  t
+published APIs. It allows user to pair their iPhone with sensors    stores and processes the data.
+over bluetooth and get real-time data. For NODE sensors, we
+                                                                       This is the central repository, to which our data contributor
+can get raw air pollution data from the API. PPM values can         users automatically upload air pollution and heart rate data
+be calculated by the following equation:                            into a MySQL database. For protection of privacy, the system
+
+             Raw    Reading − CO Base Line              9           will not share heart rate information with other users. Since no
+  PPM =                                            × 10  , (1)      system can measure pollution in all time and spatial levels, we
+            0.37736 × (CO Gain × CO Ratio)                          use two interpolation model to estimate the CO concentrations
+                                                                    all over Sydney, one being inverse distance weighting (IDW)
+
+    where CO    Base Line denotes calibration base line and         and the other being ordinary kriging.
+can be calculated by NODE ofﬁcial iPhone app. After being
+calibrated, the CO    Base    Line value can be written in the         3) Level 3:User interface: this empowers the user with the
+                                                                    tools to obtain their personal exposure and health data.
+server, and the app can update calibration value for a regular
+time. CO    Gain and CO     Ratio are constants and the values         We developed an iPhone application for users to can track
+are 35000 and 39 respectively.                                      their heart rate and ambient environment exposure, and thereby
+
+
+                                                                3
+                                                 TABLE I.     EXPERIMENT  A TTRIBUTES
+
+                      Heart rate(bpm)Real - time RMV (Lmin)   Constant RMV (Lmin)      CO concentration(ppm)   Duration(min)
+
+                                                                                    Government    Participatory
+                                                                                    ﬁxed-site (FS)system (PS)
+
+             Jogging   153.2(75-172)      46.4(22.7-52.1)             12            0.19          4.0(1.1-8.4)      64
+            Bicycling   123(76-146)        30.7(19-36.5)              12            0.19          6.1(1.3-18)       41
+             Driving    84.9(77-93)       14.1(12.8-15.5)             12            0.19          6.9(1.7-34.7)     28
+
+
+
+determine their inhaled dose. This personalization is for users       The inhaled dose of pollutant is then calculated as follows:
+
+who wear an activity (heart rate) monitor; carrying an air
+pollution sensor is optional, as the latter can be obtained                 Inhaled dose = Respiratory minute volume                (2)
+from data contributed by others in our participatory monitoring                                ×CO concentration × time
+
+system. For example, in Fig. 3(b) we show a screen-shot                                        ×conversion factor,
+of the dosage graph, showing that how the CO inhalation
+dose varied over time while the user was jogging between              where the CO concentration unit is ppm and conversion factor
+                                                                      for carbon monoxide is 1.145μg/L.
+approximately 2pm to 3pm. The graph also shows the user with
+CO concentrations around him/her and how his/her exposure
+comparing with a long-term healthy guide line which is guided                       IV.   R ESULTS AND    D ISCUSSION
+
+by WHO via a orange line.
+                                                                         Table I shows the attributes of the experimental study,
+                                                                      including the measures heart rates of the participants, the
+                                                                      respiratory minute volume (RMV), CO pollution concentra-
+B. Experiments
+                                                                      tions, and the experiment duration. In Table II we summarize
+    An initial personal exposure measurements took place in           the inhaled dose estimation results of our experiments, while
+                                                                      Fig. 4 shows the details for the three different activity modes
+Sydney in August 2013. Three participants were asked to
+carry heart rate sensors and air pollution sensors and take           considered in this study.
+three different activity modes (jagging, bicycling and driving)
+
+along a certain route as shown in Fig.3(c). The route starts at       A. CO concentrations
+Jessie Street Gardens, travels through Hyde Park going along
+Macquarie Street, and ends at the main gate of the University            CO concentration data from the ﬁxed monitoring site (FS),
+                                                                      as shown in Table I, is constant and very low. The poor spatial
+of New South Wales, comprising a total distance of 7.6 km.            resolution of such data implies that the distance fromm oni-
+This route has a bike lane parallel to the roads, and encounters
+varying trafﬁc conditions along the road including frequent           toring sites to our route in this experiment is very far; indeed
+                                                                      the two closest monitoring sites are Chullora and Rozelle,
+trafﬁc jams.                                                          respectively 15km and 20km from our route. Furthermore,
+
+                                                                      the other four sites range 30 - 50km far from our route. The
+                                                                      mean CO concentrations obtained from ﬁxed-sites is 0.19ppm
+C. Carbon monoxide measurements                                       irrespective of the activity mode.
+
+    CO concentrations data are from two different sources.
+                                                                         On the other hand, ambient CO concentration data from our
+One is from our Hazewatch participatory sensing system (for           participatory system show signiﬁcant variation, with pollution
+brevity, referred to henceforth as PS) [13]. Fig. 2(c) and            peaking along the trafﬁc jam section, and reaching a high
+Fig. 2(d) show how we attach the NODE sensors in a car and
+                                                                      level (jogging = 8.4; bicycling = 18; driving = 34.7ppm). The
+on a bike. All NODE sensors were calibrated by its ofﬁcial            mean CO concentrations for three different activity modes is
+software 3 days before the study. To compare with the ﬁxed-           (jogging = 4.0; bicycling = 6.1; driving = 6.9), from which
+site (for brevity, referred to henceforth as FS) air pollution
+                                                                      we observe that CO concentrations are signiﬁcantly higher
+data, we also include six ﬁxed monitoring sites data published        for driving compared to jogging and bicycling, since CO
+by the Ofﬁce of Environment and Heritage in NSW, Australia.           concentrations drop as one moves away from the centre of the
+Inverse Distance weighting(IDW) interpolation model is used
+                                                                      road. For example, in the same location, the CO concentrations
+to calculate CO concentrations along the survey route.                is 8.2(ppm) in the center of the road, and with 6.1(pp   m)  and
+                                                                      3.4(ppm) along the cycleways and sidewalk. This is consistent
+
+                                                                      with our expectation that on-road drivers will experience
+D. Inhalation dose measurements                                       higher pollution concentrations that off-road bicyclists and
+                                                                      joggers.
+    Respiratory minute volume (RMV) refers to the inhaled
+
+volume of air into a person’s lung per minute. In this experi-        B. Respiratory Minute Volume (RMV)
+ment, real-time RMV is calculated from heart rate with a ran-
+dom population based algorithm developed in [28], whereby                From Table I, we see that joggers have higher mean heart-
+
+the ratio heart-rate (beats per    minute)  : RMV (L/min) in          rate (153.2 bpm) than bicyclists (123 bpm), who in turn have
+[jogging, bicycling, driving] = [3.3 : 1, 4 : 1, 6 : 1]. For baseline higher heart-rate than drivers (84.9 bpm). Consequently, the
+comparisons in which activity levels are not available, we use        RMV is higher for joggers (46.4) compared with bicyclists
+
+a typical RMV of 12 (L/min) based on prior research [29].             (30.7) and drivers (14.1).
+
+
+                                                                  4
+                                         TABLE II.      INHALATION DOSAGE FOR DIFFERENT ACTIVITY MODES
+
+                                                          −1
+                                        Inhaled dose(μg min )                                          Total inhaled dose(μg)
+
+                     FS CO data +    FS  CO   data  PS CO data +    PS  CO   data   FS CO data +   FS  CO   data   PS CO data +   PS  CO   data
+                     constant RMV    +    real-time constant RMV    +    real-time  constant RMV   +    real-time  constant RMV   +    real-time
+
+                                     RMV                            RMV                            RMV                            RMV
+           Jogging   2.6(2.5-2.6)    10.0(4.9-11.4) 55.3(25.3-      215.5(77.3-     165.7          642.2           3540.2         15037.8
+                                                    115.1)          479.5)
+
+          Bicycling  2.6(2.5-2.6)    6.6(4.1-8.0)   84.4(17.3-      220.3(36.8-     106.2          272.2           3459.2         9031.5
+                                                    247.2)          690.1)
+
+           Driving   2.6(2.5-2.6)    3.1(2.7-3.4)   94.3    (22.9-  114(25.1-       72.5           85.5            2640.7         3767.1
+                                                    477.2)          563.3)
+
+                        Inhaled Cabon Monoxide (Jogging)                                           Inhaled Cabon Monoxide (Bicycling)
+
+                FS CO data+ constant RMV
+                                                                                            FS CO data+ constant RMV
+                FS CO data + real−time RMV                                                  FS CO data + real−time RMV
+        80      PS CO data + constant RMV                                                   PS CO data + constant RMV
+                PS CO data + real−time RMV                                         120      PS CO data + real−time RMV
+       g)                                                                         g)
+       μ                                                                          μ100
+        60
+
+                                                                                    80
+
+
+        40                                                                          60
+
+       Inhalation dose(                                                           In40lation dose(
+
+        20
+                                                                                    20
+
+
+         0                                                                           0
+                2:10pm    2:20pm    2:30pm    2:40pm    2:50pm    3:00pm                   2:06pm    2:12pm    2:18pm    2:24pm    2:30pm    2:36pm
+                                       Time                                                                       Time
+
+                                     (a)                                                                        (b)
+
+                         Inhaled Cabon Monoxide (Driving)
+                                                                                                  Total inhaled dose during the survey
+                                                                                   16
+                 FS CO data+ constant RMV                                                                                FS CO data+ constant RMV
+                 FS CO data + real−time RMV                                                                              FS CO data + real−time RMV
+                 PS CO data + constant RMV                                         14
+        100      PS CO data + real−time RMV                                                                              PS CO data + constant RMV
+       g)                                                                          12                                    PS CO data + real−time RMV
+       μ
+         80
+                                                                                   10
+
+         60                                                                         8
+
+
+         40                                                                         6
+       Inhalation dose(
+                                                                                  Inhalation dose(mg)
+                                                                                    4
+         20
+                                                                                    2
+
+          0      2:04pm    2:08pm   2:12pm    2:16pm    2:20pm    2:24pm
+                                       Time                                         0
+                                                                                            Jogging              Bicycling            Driving
+
+                                     (c)                                                                        (d)
+
+Fig. 4.  Carbon monoxide inhalation dosage
+
+
+
+C. Inhaled dose                                                                time RMV into consideration along with pollution from our PS
+
+                                                                               system, the situation reverses – the jogger’s inhaled dose per
+    The aggregate inhaled dose quantities are shown in Table II,               minute increases to 215.5 (μg min        −1  ), while driving is lower
+                                                                                                 −1
+while the detailed time-series are shown in Figs. 4(a), 4(b) and               at 114 (μg min       ). This illustrates that while jogging off-road
+
+4(a). The table compares how using real-time RMV improves                      reduces the pollution concentration, the pollution intake dosage
+the estimate compared to assuming a constant RMV. We see                       is actually higher due to increased breathing rate, compared to
+
+that with ﬁxed-site (FS) CO concentrations and constant RMV,                   driving. Interestingly, bicycling turns out to be even worse than
+                                            −1
+inhaled dose is very low (2.6μg min            ) and ﬂat for different         jogging, probably because it happens closer to the road than
+activity modes. When we use real-time RMV along with                           jogging, while having a high heart-rate. In Fig. 4(d), we show
+
+ﬁxed-site CO concentrations, jogging inhaled dose increases                    total dosage for making the trip using the three activity modes,
+                  −1
+to 10 (μg min         ). Moving further in the table, when CO                  from which we can conclude that jogging entails the highest
+concentrations from our participatory system (PS) are used                     inhaled dose (15037.8μg), followed by bicycling (9031.5μg),
+
+assuming a constant RMV, the inhaled dose per minute signiﬁ-                   and driving the least (3767.1μg). This is not surprising, since
+
+cantly increases, and shows that driving incurs highest inhaled                bicyclists and joggers get exposed for longer duration while
+dose (94.3μg min      −1 ), more than bicycling (84.4μg min           −1 )     traversing teh same distance, compared to drivers.
+
+or jogging (55.3μg min       −1 ). However, while taking the real-
+
+
+
+                                                                           5
+            V.    C ONCLUSION AND         FUTURE    W  ORK                          for monitoring urban air quality in low-cost, high-density networks,”
+                                                                                    Atmospheric Environment, vol. 70, pp. 186 – 203, 2013.
+    In this paper we have presented a novel system for esti-
+                                                                              [12]  S. Devarakonda, P. Sevusu, H. Liu, R. Liu, L. Iftode, and B. Nath, “Real-
+mating personal air pollution inhalation dosage. The system                         time air quality monitoring through mobile sensing in metropolitan ar-
+incorporates portable air pollution sensors, wearable human                         eas,” in Proceedings of the 2Nd ACM SIGKDD International Workshop
+                                                                                    on Urban Computing, New York, NY, USA, 2013.
+activity sensors, data center storage, and mobile applications.
+Our initial ﬁeld trials in Sydney indicate that our system can                [13]  V. Sivaraman, J. Carrapetta, K. Hu, and B. Gallego Luxan, “Hazewatch:
+                                                                                    A participatory sensor system for monitoring air pollution in sydney,”
+more accurately estimate individual air pollution inhalation                        in IEEE SenseApp (co-located with IEEE LCN), Sydney, Australia, Oct.
+dosage. Earlier studies had either ignored activity levels, or
+                                                                                    2013.
+concluded that jogging or bicycling entail lower exposure, but                [14]  A. Rahman, D. Smith, and G. Timms, “Multiple classiﬁer system for
+our study shows that this need not always be the case.                              automated quality assessment of marine sensor data,” in Intelligent
+
+                                                                                    Sensors, Sensor Networks and Information Processing, 2013 IEEE
+    In this article, air pollution data is only collected by our                    Eighth International Conference on, 2013.
+participants who also wear the activity sensors. Future work                  [15]  M. Mead, O. Popoola, G. Stewart, P. Landshoff, M. Calleja, M. Hayesb,
+
+will consider individuals wearing activity sensors who will                         J. Baldovi, M. McLeod, T. Hodgson, J. Dicks, A. Lewis, J. Cohen,
+beneﬁt from the ﬁne-gained air pollution data collected by                          R. Baron, J. Saffell, and R. Jones, “The Use of Electrochemical
+                                                                                    Sensors for Monitoring Urban Air Quality in Low-Cost, High-Density
+other participants. For example, a relatively small of users                        Networks,” Atmospheric Environment, vol. 70, pp. 186–203, May 2013.
+may carry air pollution sensors and contribute air pollution
+                                                                              [16]  P. Vlgyesi, A. Ndas, X. Koutsoukos, and . Ldeczi, “Air Quality
+data, while other participants who only wear activity sensors                       Monitoring with SensorMap,” in Proc. Intl. Conf. Information
+can beneﬁt from the data, and be empowered by our apps                              Processing in Sensor Networks (IPSN), St. Louis, MO, USA, Apr 2008.
+                                                                                    [Online]. Available: http://www.isis.vanderbilt.edu/projects/maqumon
+to manage their real inhaled dose. We hope to conduct more
+extensive experiments with our system in the coming months                    [17]  P. Dutta, P. Aoki, N. Kumar, A. Mainwaring, C. Myers, W. Willett,
+to quantify the personalised impact of air pollution exposure                       and A. Woodruff, “Common Sense: Participatory Urban Sensing Using
+                                                                                    a Network of Handheld Air Quality Monitors,” in Proc. SenSys
+and aid in making better medical inferences.
+                                                                                    Demonstration, Berkeley, CA, USA, Nov 2009. [Online]. Available:
+                                                                                    http://www.communitysensing.org/
+                            R EFERENCES                                       [18]  K. Aberer, S. Sathe, D. Chakraborty, A. Martinoli, G. Barrenetxea,
+
+                                                                                    B. Faltings, and L. Thiele, “OpenSense: Open Community Driven
+ [1]  World-Health-Organization,  “Air   Pollution.” [Online].  Available:          Sensing of Environment,” in Proc. ACM SIGSPATIAL Intl. Workshop
+      http://www.who.int/topics/airollution/en/                                     on GeoStreaming (IWGS), San Jose, CA, USA, Nov 2010, p. Nov.
+ [2]  I. Beverland, C. Robertson, C. Yap, M. Heal, G. Cohen, D. Henderson,          [Online]. Available: http://opensense.epﬂ.ch
+
+      C. Hart, and R. Agius, “Comparison of models for estimation of          [19]  S. Hankey, J. D. Marshall, and M. Brauer, “Health impacts of the built
+      long-term exposure to air pollution in cohort studies,” Atmospheric           environment: within-urban variability in physical inactivity, air pollu-
+      Environment, vol. 62, pp. 530 – 539, 2012.                                    tion, and ischemic heart disease mortality,” Environ Health Perspect,
+
+ [3]  L. M. McKenzie, R. Z. Witter, L. S. Newman, and J. L. Adgate, “Human          vol. 120, pp. 247 – 53, 2012.
+      health risk assessment of air emissions from development of unconven-   [20]  O. Raaschou-Nielsen and et al, “Air pollution and lung cancer incidence
+      tional natural gas resources,” Science of The Total Environment, vol.         in 17 european cohorts: prospective analyses from the european study
+      424, pp. 79 – 87, 2012.
+                                                                                    of cohorts for air pollution effects (escape),” The Lancet Oncology,
+ [4]  R. Allen, E. Gombojav, B. Barkhasragchaa, T. Byambaa, O. Lkhasuren,           vol. 14, pp. 813–822, 2013.
+      O. Amram, T. Takaro, and C. Janes, “An assessment of air pollution      [21]  A. de Nazelle, E. Seto, D. Donaire-Gonzalez, M. Mendez, J. Matamala,
+      and its attributable mortality in ulaanbaatar, mongolia,” Air Quality,
+                                                                                    M. J. Nieuwenhuijsen, and M. Jerrett, “Improving estimates of air pollu-
+      Atmosphere and Health, vol. 6, pp. 137 – 150, 2013.                           tion exposure through ubiquitous sensing technologies,” Environmental
+ [5]  G. Hoek, S. Pattenden, S. Willers, T. Antova, E. Fabianova, C. Braun-         Pollution, vol. 176, pp. 92 – 99, 2013.
+      Fahrlnder et al.,“P m10, and children’s respiratory symptoms and lung
+                                                                              [22]  E. Dons, L. I. Panis, M. V. Poppel, J. Theunis, H. Willems, R. Torfs, and
+      function in the paty study,” European Respiratory Journal, vol. 40, pp.       G. Wets, “Impact of timeactivity patterns on personal exposure to black
+      538 – 47, 2012.                                                               carbon,” Atmospheric Environment, vol. 45, pp. 3594 – 3602, 2011.
+ [6]  M. Franklin, H. Vora, E. Avol, R. McConnell, F. Lurmann, F. Liu,
+                                                                              [23]  A. de Nazelle, S. Fruin, D. Westerdahl, D. Martinez, A. Ripoll,
+      B. Penfold, K. Berhane, F. Gilliland, and W. J. Gauderman, “Predictors        N. Kubesch, and M. Nieuwenhuijsen, “A travel mode comparison of
+      of intra-community variation in air quality,” Journal of Exposure             commuters’ exposures to air pollutants in barcelona,” Atmospheric
+      Science and Environmental Epidemiology, vol. 22, pp. 135 – 47, 2012.          Environment, vol. 59, pp. 151 – 159, 2012.
+
+ [7]  J. Heinrich, E. Thiering, P. Rzehak, U. Krmer, M. Hochadel, K. M.       [24]  S. Steinle, S. Reis, and C. E. Sabel, “Quantifying human exposure to air
+      Rauchfuss, U. Gehring, and H.-E. Wichmann, “Long-term exposure to             pollutionmoving from static monitoring to spatio-temporally resolved
+      no2 and pm10 and all-cause and cause-speciﬁc mortality in a prospec-          personal exposure assessment,” Science of The Total Environment, vol.
+      tive cohort of women,” Occupational and Environmental Medicine,
+      vol. 70, pp. 179 – 86, 2013.                                                  443, pp. 184 – 193, 2013.
+                                                                              [25]  B. Predic, Z. Yan, J. Eberle, D. Stojanovic, and K. Aberer, “Exposure-
+ [8]  S. Kanhere, “Participatory sensing: Crowdsourcing data fromm obile            sense: Integrating daily activities with air quality using mobile participa-
+      smartphones in urban spaces,” in Distributed Computing and Internet
+                                                                                    tory sensing,” in Pervasive Computing and Communications Workshops
+      Technology, ser. Lecture Notes in Computer Science, 2013, vol. 7753.          (PERCOM Workshops), 2013 IEEE International Conference on, 2013.
+ [9]  Z. Yan, J. Eberle, and K. Aberer, “Optimos: Optimal sensing for         [26]  (2013)      Variable      technologies.     [Online].     Available:
+      mobile sensors,” in Proceedings of the 2012 IEEE 13th International
+                                                                                    http://www.variabletech.com/
+      Conference on Mobile Data Management (Mdm 2012), Washington,            [27]  (2013)        Wahoo         ﬁtness.       [Online].       Available:
+      DC, USA, 2012.                                                                http://www.wahooﬁtness.com/
+[10]  A. Kadri, E. Yaacoub, M. Mushtaha, and A. Abu-Dayya, “Wireless
+                                                                              [28]  V. et al, “Minute ventilation and heart rate relationship for estimation
+      sensor network for real-time air pollution monitoring,” in Communi-           of the ventilatory compensation point at high altitude: a pilot study,”
+      cations, Signal Processing, and their Applications (ICCSPA), 2013 1st         Extreme Physiology and Medicine, no. 2:7, 2013.
+      International Conference on, 2013.
+                                                                              [29]  P. Young, J. Pilcher, M. Patel, L. Cameron, I. Braithwaite, M. Weather-
+[11]  M. Mead, O. Popoola, G. Stewart, P. Landshoff, M. Calleja, M. Hayes,          all, and R. Beasley, “Delivery of titrated oxygen via a self-inﬂating
+      J. Baldovi, M. McLeod, T. Hodgson, J. Dicks, A. Lewis, J. Cohen,              resuscitation bag,” Resuscitation, vol. 84, pp. 391 – 394, 2013.
+      R. Baron, J. Saffell, and R. Jones, “The use of electrochemical sensors
+
+
+
+                                                                          6

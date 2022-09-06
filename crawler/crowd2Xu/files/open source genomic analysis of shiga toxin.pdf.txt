@@ -1,0 +1,591 @@
+                                                   Thenew england journal           of medicine
+
+
+
+
+                                                                 Brief Report
+
+
+
+                                              Open-Source Genomic Analysis
+
+                                    of Shiga-Toxin–Producingg                        E. coli O104:H4
+
+ 
+                                    Holger Rohde, M.D., Junjie Qin, Ph.D., Yujun Cui, Ph.D., Dongfang Li, M.E.,
+                                    Nicholas J. Loman, M.B., B.S., Moritz Hentschke, M.D., Wentong Chen, B.S.,
+                                           Fei Pu, B.S., Yangqing Peng, B.S., Junhua Li, B.E., Feng Xi, B.E.,
+
+                                        Shenghui Li, B.S., Yin Li, B.S., Zhaoxi Zhang, B.S., Xianwei Yang, B.S.,
+                                     Meiru Zhao, M.S., Peng Wang, B.M., Yuanlin Guan, B.E., Zhong Cen, M.E.,
+                                          Xiangna Zhao, B.S., Martin Christner, M.D., Robin Kobbe, M.D.,
+                                               Sebastian Loos, M.D., Jun Oh, M.D., Liang Yang, Ph.D.,
+
+                                         Antoine Danchin, Ph.D., George F. Gao, Ph.D., Yajun Song, Ph.D.,
+                                             Yingrui Li, B.S., Huanming Yang, Ph.D., Jian Wang, Ph.D.,
+                                       Jianguo Xu, M.D., Ph.D., Mark J. Pallen, M.D., Ph.D., Jun Wang, Ph.D.,
+                                                Martin Aepfelbacher, M.D., Ruifu Yang, M.D., Ph.D.,
+
+                                      and the E. coli O104:H4 Genome Analysis Crowd-Sourcing Consortium*
+
+
+
+
+                                                                    Summary
+
+The authors’ affiliations are listAn outbreak caused by Shiga-toxin–producing Escherichia coli O104:H4 occurred in
+Appendix. Address reprint requests to Dr.
+Pallen at the Centre for Systems Biology, in May and June of 2011, with more than 3000 persons infected. Here, we
+UniversityofBirmingham,B152TT,Unitedport a cluster of cases associated with a single family and describe an open-source
+Kingdom, or at m.pallen@bham.ac.ukgenomic analysis of an isolate from one member of the family. This analysis involved
+or to Dr. Yang at BGI-Shenzhen, Shthe use of rapid, bench-top DNA sequencing technology, open-source data release, and
+zhen 518083, China, or at the Beijing In-
+stitute of Microbiology and Epidemiology,crowd-sourced analyses. In less than a week, these studies revealed that the
+20 Dongda St., Beijing 100071, Chioutbreak strain belonged to an enteroaggregative E.coli lineage that had acquired genes
+at yangruifu@genomics.org.cn.     for Shiga toxin 2 and for antibiotic resistance.
+
+The following two groups of authors con-
+tributed equally to this article: Drs. Rohde,
+Qin,Cui,D.Li,andLoman;andDrs.Pallen,
+J. Wang, Aepfelbacher, and R. Yang.    scherichia coli is a widespread commensal of the mammalian gut
+*Members of the E. coli O104:H4 Genome and a versatile pathogen.,2Enterovirulent strains of E.coli are classified into a
+ Analysis Crowd-Sourcing Consortium arenumberofoverlappingpathotypes,whichincludeShiga-toxin–producing, entero-
+ listed in the Supplementary Appenhemorrhagic, and enteroaggregative varieties. Enteroaggregative E. coli strains have
+ available at NEJM.org.
+                                  been associated with sporadic and epidemic diarrhea and, in the laboratory, show
+Thisarticle(10.1056/NEJMoa1107643)wasistinctive pattern of adherence to Hep-2 cells (termed aggregative, or “stacked
+published on July 27, 2011, at NEJbrick”). In Shiga-toxin–producing E. coli, the toxin is encoded on a prophage and
+                                  inhibits protein synthesis within susceptible eukaryotic cells. Strains of enterohemor-
+N Engl J Med 2011;365:718-24.
+Copyright © 2011 Massachusetts Medical Society. produce Shiga toxin and a specific protein secretion system (called a type
+                                  III secretion system) that is encoded by the locus of enterocyte effacement (LEE)
+                                  and that is responsible for attachment to the intestine. Shiga-toxin–producing and
+                                  enterohemorrhagicE.colistrainsarecommonlyassociatedwiththehemolytic–uremic
+
+                                  syndrome, a combination of renal impairment, thrombocytopenia, and hemolytic
+                                  anemia that is often accompanied by neurologic and myocardial damage.
+
+
+
+
+
+718                                            n engl j med 365;nejm.org august 25, 2011
+
+                                              The New England Journal of Medicine
+                 Downloaded from nejm.org at UEM on March 26, 2012. For personal use only. No other uses without permission.
+                                  Copyright © 2011 Massachusetts Medical Society. All rights reserved.
+                                           Brief Report
+
+
+   More than 3000 cases of infection with an        platelets per cubic millimeter), and hemolytic ane-
+
+unusual strain of Shiga-toxin–producing E. coli     mia (hemoglobin, 11.6 g per deciliter; bilirubin,
+O104:H4 were reported to the Robert Koch Insti-     2.8 mg per deciliter [49 μmol per liter]; and lactate
+tute in Berlin during a nationwide outbreak in      dehydrogenase, 2297 U per liter). His hemoglobin
+Germany in May and June of 2011. This outbreak      levelfellto8.4gperdeciliterwithin48hoursafter
+
+resulted in more than 40 deaths, and associated     admission, thereby fulfilling the case definition
+cases were reported in more than a dozen coun-      of the hemolytic–uremic syndrome.
+tries in Europe and North America (mostly in           Thechildren,theirparents,andateenagefriend
+travelers returning from Germany). Household        had eaten a meal together a week earlier. The meal
+
+transmission was described in the Netherlands,      included a freshly prepared salad containing bean
+and life-threatening colonic ischemia was reported  sprouts. The children’s mother had no symptoms,
+as a complication in addition to the hemolytic–ure- and no Shiga-toxin–producing E.coli was isolated
+mic syndrome and bloody diarrhea.   5,6Epidemio-    from her stool. However, the hemolytic–uremic
+
+logic and microbiologic evidence indicated that the syndrome developed in the father, and his stool
+O104:H4 strain was distributed throughout Ger-      sample was culture-positive for Shiga-toxin–pro-
+many on bean sprouts.   7                           ducing E.coli. The teenage friend had diarrhea but
+   The outbreak was characterized by several un-    was not admitted to the medical center.
+usual features: a high incidence in adults (espe-      Stool samples from the siblings were plated
+
+cially women), a greatly increased incidence of     on Sorbitol–MacConkey agar and incubated in a
+the hemolytic–uremic syndrome (in approximate-      liquid enrichment culture. The next day, super-
+ly 25% of patients, as compared with 1 to 15%       natants from the liquid cultures tested positive for
+in previous outbreaks of Shiga-toxin–producing      Shiga toxin on enzyme-linked immunosorbent
+
+E.coli), a predominance of female patients among    assay. Uniformly sorbitol-positive colonies were
+cases of the hemolytic–uremic syndrome, and a       identified as E.coli on MALDI-TOF (matrix-assisted
+rare serotype of Shiga-toxin–producing E.coli that  laser desorption ionization–time of flight) mass
+had been linked to only two sporadic cases of the spectrometry. Several single colonies were positive
+
+hemolytic–uremic syndrome (one in Germany and for the stx2 gene and negative for the stx1 and eae
+the other in South Korea). 4,8,Recognition of in- genes on polymerase-chain-reaction (PCR) assay.
+fection during the outbreak was hampered by a None of the isolates agglutinated with polyvalent
+laboratory approach that targeted phenotypes as- serum samples directed against the serotypes that
+
+sociated with the most common lineage of entero- are most frequently associated with Shiga-toxin–
+hemorrhagic E. coli (the non–sorbitol-fermenting producing E.coli. Subsequent analyses showed that
+O157:H7 serotype) rather than one aimed at find- the strain belonged to the rare serotype O104:H4
+ing all strains of Shiga-toxin–producing E. coli.0  harboring an extended-spectrum beta-lactamase
+
+Here, we report a local cluster of cases associated (ESBL) gene of the CTX-M-15 class.
+with a family from northern Germany and de-            Although our 16-year-old patient had a mild
+scribe an open-source genomic analysis of an course of disease without the hemolytic–uremic
+isolate from the family cluster.                    syndrome and was discharged from the hospital
+                                                    on the same day, the clinical picture for her broth-
+
+               Case Reports                         er was much less benign. The boy’s renal function,
+                                                    hemoglobin level, and thrombocytopenia im-
+On May 17, 2011, a 16-year-old girl was admitted proved after 9 days of peritoneal dialysis, but severe
+to the pediatric emergency ward at the University neurologic symptoms, including somnolence, vi-
+
+MedicalCenterHamburg–Eppendorfwithbloody sual impairment, speech disturbances, hemiplegia,
+diarrheaandabdominalpain.Herlaboratoryvalues and incontinence, developed. He underwent four
+werenormal.Lateronthesameday,her12-year-old cycles of plasmapheresis and therapy with the
+brother was admitted with a 2-day history of mal- anti–C5-antibody eculizumab. After this treat-
+
+aise and headache and a 1-day historyofvomiting ment, his clinical condition improved, and he was
+and nonbloody diarrhea. The boy presented with discharged after 24 days with serum creatinine
+acute renal failure (serum creatinine level, 4.1 mg levels just above the normal range. However, he
+per deciliter [362 μmol per liter]; and potassium was left with neurologic sequelae and required
+
+level,6mmolperliter),thrombocytopenia(22,000 rehabilitation.
+
+
+                               n engl j med 365;nejm.org  august 25, 2011                                          719
+
+                                        The New England Journal of Medicine
+         Downloaded from nejm.org at UEM on March 26, 2012. For personal use only. No other uses without permission.
+                           Copyright © 2011 Massachusetts Medical Society. All rights reserved.
+                                            The new england journal            of medicine
+
+
+
+                           Methods and Results                        sion numbers SRA037315 for Ion Torrent reads and
+                                                                      SRA039136 for Illumina platform reads.
+                  Open-Source Genomics
+                  To investigate the evolutionary origins and patho-  Phylogenetic Analysis
+
+                  genic potential of the outbreak strain, we set in The assembled Ion Torrent data provided gene se-
+                  motion an open-source genomics program of re- quences that could be analyzed with an existing
+                  search that incorporated new high-throughput se- multilocus-sequence-typing scheme for E.coli that
+                  quencing approaches, public data release, and ra- relied on sequence comparisons for seven con-
+
+                  pidoutsourcingofanalysestobioinformaticians served housekeeping genes (adk, fumC, gyrB, mdh,
+                  worldwide (crowd-sourcing) (Fig. 1). Initially, we purA,recA, and icd). This analysis revealed a close
+                  sequenced the genome of the isolate from the relationship to a strain, 01-09591, which was iso-
+
+                  16-year-oldgirl(TY2482),usingtheIonTorrentPer- lated in Germany in 2001 and which fell into se-
+                  sonal Genome Machine (PGM), and obtained an quence type ST678. The TY2482 sequences differed
+                  initial draft of the genome 3 days after receipt of from the profile of the 2001 strain by a single base
+                  the DNA sample. Three DNA libraries were pre- pair in theadkgeneandasingle-basedifferencein
+
+                  pared and seven sequencing runs performed, fol- a homopolymeric sequence in the recA gene. (We
+                  lowing the protocols of the manufacturer (Life subsequently discovered that the latter difference
+                  Technologies), to generate 79 Mb of sequence data, was a sequencing error generated by the PGM.) The
+                  with an average read length of 101 bp. (For details 2001 strain, which produced Shiga toxin and was
+
+                  regardingthesequencingprocedures,seetheSup- associated with the hemolytic–uremic syndrome,
+                  plementary Appendix, available with the full text fell into the O104:H4 serotype but did not have the
+                  of this article at NEJM.org.)                       genes associated with type III secretion in typical
+                                                                                                13,14
+                     We released these data into the public domain    enterohemorrhagic E.coli.      Additional scrutiny
+                  under a Creative Commons 0 license, which elic- of the multilocus-sequence-typing database re-
+                  ited a burst of crowd-sourced, curiosity-driven vealed that strains with the broad O104 serotype
+                  analyses carried out by bioinformaticians on four were scattered across several sequence types,
+                            11
+                  continents.  Twenty-four hours after the release of whereas strains with the narrower O104:H4 sero-
+                  the genome, it had been assembled; 2 days after type appeared to be limited to ST678.      10
+                  its dissemination, it had been assigned to an ex-      Comparisons of the TY2482 genome with all
+                  isting sequence type. Five days after the release of previously sequenced complete genomes of E.coli
+
+                  the sequence data, we had designed and released isolates revealed a very close relationship to E.coli
+                  strain-specific diagnostic primer sequences, and strain 55989, with an average nucleotide identity
+                  within a week, two dozen reports had been filed of 99.8% (see the Supplementary Appendix). This
+                  on an open-source wiki (a Web site that facilitates strain was isolated in the Central African Repub-
+
+                  collaborative effort) dedicated to analysis of the lic from a stool sample obtained from an adult
+                  strain. These analyses provided timely information with human immunodeficiency virus infection
+                  on the strain’s virulence and resistance genes, in who had persistent watery diarrhea. It has been
+
+                  addition to its phylogenetic lineage.               classified as an enteroaggregative E.coli, but unlike
+                     We also performed sequencing on the Illumina TY2482, it does not have Shiga toxin genes. How-5
+                  HiSeq platform in accordance with the manufac- ever, it is worth noting that Mossoro et al., who15
+                  turer’s instructions. An initial single-end run was first described E.coli strain 55989, also described
+
+                  used to correct errors in the Ion Torrent sequence, strains of enteroaggregative E.coli with Shiga toxin
+                  principally in homopolymeric tracts. We later per- genes in the same human population.      15
+                  formed paired-end and mate-pair sequencing on
+                  this platform, exploiting libraries with insert sizesomparison of the Chromosomes of TY2482
+                                                                      and 55989
+                  of 470 bp, 2 kb, and 6 kb, and generated enough
+                  data (1 Gb, 576 Mb, and 576 Mb from each library, Isolates from the German outbreak were initially
+                  respectively) to create a high-quality draft genome described as enterohemorrhagic E.coli. However,
+
+                  sequence within 2 weeks after receipt of the DNA the close relationship between TY2482 and 55989
+                  samples. (Additional details are provided in the led us to consider the likelihood that TY2482 is an
+                  Supplementary Appendix.) The reads were depos- enteroaggregative E.coli. Our analysis of the gene
+                  ited in GenBank’s Short Read Archive with acces- content of TY2482 showed that it, like 01-09591,
+
+
+
+720                                              n engl j med 365;nejm.org  august 25, 2011
+
+                                                The New England Journal of Medicine
+                 Downloaded from nejm.org at UEM on March 26, 2012. For personal use only. No other uses without permission.
+                                   Copyright © 2011 Massachusetts Medical Society. All rights reserved.
+                                                Brief Report
+
+
+
+
+
+                May May 28My 2ay 3031nJeunJeunJenJeunJeunJenJeunJeunJeunJen0JenJeunJen3JenJeune 16
+
+
+      Third GS        PGM
+
+
+     Second GS        500P‹ Œibrary     Single end     Pair end
+                                 2‡…b and 6‡…b Mate‡plair library
+
+
+       First GS                                                                PCR validation
+
+                     Dra€t genome                       ‚ine mapƒ                          †ear‡complete map
+                     Multilocus sequence                version 1„0                        ˆngoing analysis anld
+                       typing                                        ‚ine mapƒ version 2l„0  genome €inis‰ing
+                     P‰ylogeny constructilon            Annotation   Šdenti€ication o€
+                     Gene identi€icationl    Diagnostic …it            insertion o€ stx2‡
+                                                                       bearing p‰age
+
+                          Sample received        Sequencing          Assembly and analysisl
+
+
+  Figure 1. Timeline of the Open-Source Genomics Program.
+
+  After receiving the first batch of DNA samples on May 28, 2011, sequencing runs with the use of the Ion Torrent
+  Personal Genome Machine (PGM) and Illumina (small-insert library) were initiated simultaneously. On May 31, the
+  second batch of DNA was received and used for Illumina large-insert sequencing. An assembly of the Ion Torrent
+  reads was released on June 2, which enabled subsequent analyses (multilocus sequence typing, phylogenetic analysis,
+  and genome comparisons). Errors in the Ion Torrent data were corrected with the use of later Illumina data, and a
+
+  high-quality draft genome sequence was created. GS denotes generation of sequencing technology. The symbols at
+  May 28 and May 31 in the timeline indicate the arrival of DNA samples.
+
+
+
+lacked the LEE and genes encoding effectors as- in the genomes of O157:H7 strains EDL933 and
+sociatedwithtypeIIIsecretion. Instead,wefound Sakai, is inserted into the wrbA locus. The stx2
+
+that the TY2482 genome encodes virulence factors genes differ by only one single-nucleotide polymor-
+that are typical of enteroaggregative E.coli. Other phism from the stx2 allele seen in O157 enterohe-
+investigators working on the outbreak strain have morrhagic E. coli strain EDL933.
+
+also observed genes typically found in enteroag-
+gregative strains on PCR assay and have noted a          TY2482 Plasmids
+
+behavioral phenotype that is characteristic of this From our de novo assembly (i.e., assembly without
+pathotype on cell-adherence assay.    17                 the use of a reference genome), we concluded that
+   To identify strain-specific genes, we performed the TY2482 genome contains two large conjuga-
+
+a detailed comparison of the chromosomes of tive plasmids, pESBL TY2482 and pAA TY2482,
+TY2482 and enteroaggregative E.coli strain 55989. andasmallplasmid,pG2011TY2482(Fig.2).From
+
+First, we aligned the TY2482 assembly against the scrutinyofcopynumbersofsequencereads, it was
+55989 chromosome (for details, see the Supple- clear that the two large plasmids were replicating
+mentary Appendix). We then adopted the gene at an approximate ratio of 1:1 with the chromo-
+
+predictions and annotation from the 55989 ge- some, whereas the small plasmid was maintained
+nome for these conserved sequences. Next, we at a copy number at least nine times that of the
+
+identified several isolate-specific regions of differ- other replicons. No phenotype could be ascribed
+ence (i.e., regions present in the TY2482 chromo- to the small plasmid.
+some and absent from the 55989 genome or vice                The largest plasmid, pESBL TY2482, was an IncI
+
+versa) that were more than 5 kb (Table 1 and Fig. plasmid similar to pEC_Bactec, which was found
+2, and the Supplementary Appendix). TY2482- in an E. coli strain isolated from the joint of a
+                                                                                 18
+specific regions of difference included prophage horse with arthritis.              The pESBL TY2482 plas-
+remnants or apparently intact prophages, such as mid encodes a CTX-M-15 ESBL, as well as a beta-
+the stx2 prophage, which, like its close relatives lactamase from the TEM class. The second large
+
+
+
+                                  n engl j med 365;8 nejm.org   august 25, 2011                                                721
+
+                                            The New England Journal of Medicine
+          Downloaded from nejm.org at UEM on March 26, 2012. For personal use only. No other uses without permission.
+
+                              Copyright © 2011 Massachusetts Medical Society. All rights reserved.
+                                              The new england journal             ofmedicine
+
+
+
+                    Table 1. Genetic Elements in Strain TY2482 of Shiga-Toxin–ProducicngEscherichia coli O104:H4.
+
+                    Genetic Element                  Notable Features or Functions            Size or 55989 Coordinates*
+
+                    Plasmid
+                    pESBL TY2482            IncI1 plasmid, homologous to pEC_Bactec carrying            88 kb
+                                                              bla CTX-M-15
+
+                    pAA TY2482              Plasmid encoding aggregative adherence fimbriae I           76 kb
+                    pG2011 TY2482                 Plasmid with no obvious phenotype                    1.5 kb
+
+                    Region of difference
+
+                    I-ROD1                               Degenerate prophage                      296227 (tRNA-Thr)
+                    I-ROD2                             Stx2-encoding prophage                      1176265 (wrbA)
+
+                    I-ROD3                 Microcin gene cluster; tellurite resistance gene clust1207704 (tRNA-Ser)
+                    I-ROD4                                    Prophage                             1811905 (ynfG)
+
+                    I-ROD5                                    Prophage                             2102453 (yecE)
+
+                    I-ROD6                       Molybdate metabolism regulator; yehL               2426442 (IS1)
+                    I-ROD7                   Multidrug-resistantY gene cluster (dfA7, suII, suIII4211244 (tRNA-Sec)
+                                                    strA, strB, tetA); mercury resistance
+
+                    D-ROD1                                    Prophage                            1094587–1140306
+
+                    D-ROD2                                    Prophage                            1413924–1446834
+                    D-ROD3                                    Prophage                            1754689–1800354
+
+                    D-ROD4                                    Prophage                            2688656–2701228
+                    D-ROD5                              Type VI secretion genes                   3401720–3427357
+
+                    D-ROD6                                    Prophage                            4944269–5004333
+
+                  * Coordinates from the genome of E. coli strain 55989 are given for predicted boundaries of regions of difference, with
+                    the gene carrying the insertion site shown in parentheses for a region of difference involving an insertion into 55989
+
+                    (I-ROD). D-ROD denotes a region of difference involving a deletion.
+
+
+                  plasmid, pAA TY2482, resembled a plasmid from lated potential progenitor strains have been re-
+
+                  strain 55989 but carried a gene cluster encoding a ported from three continents. The appearance of
+                  rare type of aggregative adherence fimbria (AAF/I) an O104:H4 strain associated with the hemolytic–
+                  instead of the more common type (AAF/III) en- uremic syndrome in Korea in 2005 is unexplained,
+                                                                                                                            9
+                  coded by genes in the 55989 plasmid. We ex- and its link to the German outbreak is unclear.
+                  ploited this AAF/I cluster as a target for strain- Also, the O104:H4 strain 01-09591 that was iso-
+                  specific PCR primers as part of a suite of primers lated in Germany in 2001 urgently requires further
+
+                  to identify the outbreak isolate.                      investigation. Both strains should undergo ge-
+                                                                         nome sequencing and comparison with TY2482.
+
+                                    Discussion                           The link to strain 55989, which was isolated in
+                                                                         the Central African Republic in the late 1990s, is
+                  Our genomic analyses suggest that the German also intriguing. Genome sequencing of additional
+
+                  outbreak strain evolved from a progenitor that Central African isolates from the study that yielded
+                  belonged to the enteroaggregative pathotype and 55989 is likely to illuminate the evolution of this
+
+                  resembled strain 55989. The emergence of the lineage and of enterovirulent E.coli in general (see
+                  outbreak strain depended on the acquisition of a the article by Rasko et al. elsewhere in this issue
+                  stx2 prophage and of a plasmid encoding a CTX- of the Journal ).    19
+
+                  M-15 ESBL. Sometime during this process, the              Although the genome sequence alone cannot
+                  strain also appears to have lost one gene cluster, provide a full explanation for the high degree of
+
+                  encoding AAF/III fimbriae, and gained another, virulence of this strain, it prompts a reassessment
+                  encoding the rarer AAF/I fimbriae.                     of our assumptions and provides a framework for
+                     Although this outbreak strain has surprised future hypothesis-driven research. Both commen-
+
+                  the general public and public health officials, re- sal and pathogenic varieties of E.coli have to survive
+
+722                                                n engl j med 365;8nejm.org  august 25, 2011
+
+                                                  The New England Journal of Medicine
+                  Downloaded from nejm.org at UEM on March 26, 2012. For personal use only. No other uses without permission.
+
+                                     Copyright © 2011 Massachusetts Medical Society. All rights reserved.
+                                                    Brief Report
+
+
+
+
+
+                                                                       I-ROD1 prophage redmnant
+
+
+
+
+                                            D-ROD6
+
+
+           I-ROD7 drug
+            resistance                              5000
+                                                     kb
+                                             4500               kb0                        I-ROD2 stx2 phage
+                                              kb
+                                                                                 D-ROD1
+                                                                    1kb0
+                                          4000     TY2482 versus
+                                          kb    55989 chromosome
+                                                                                             I-ROD3 Tell-R
+                                                                     1kb0        D-ROD2     and microcidins
+                                           kb00
+
+                                                 3000           2kb0
+                             D-ROD5               kb     2kb0                D-ROD3
+
+
+
+                                                                                        I-ROD4 prophage
+                                                    D-ROD4
+
+
+                                                                              I-ROD5 prophage
+
+
+                                                                 I-ROD6 molybdate
+                                                                metabolism regulatodr
+
+
+  Figure 2. Comparison of the TY2482 and 55989 Genomes.
+  The outer circle depicts the Escherichia coli 55989 chromosome. The inner circle represents the TY2482 assembly
+
+  mapped against the 55989 chromosome. Regions of difference (ROD) that are present in 55989 but not TY2482
+  (D-RODs) are shown as gaps in the inner circle. The positions of RODs that were found in TY2482 but not 55989
+  (I-RODs) are shown as wedges on the outer circle at positions corresponding to the predicted insertion sites. Tell-R
+
+  denotes tellurite resistance.
+
+
+
+in the gut. However, mere survival, even if twinned           large sprout-associated outbreaks before, including
+with the production of Shiga toxin, is probably               one outbreak   21 that affected more than 2000 per-
+
+not enough to cause the hemolytic–uremic syn- sons in Japan in 1993. Thus, there is clearly an
+drome or bloody diarrhea. For that, the bacteria urgent need to understand how the German out-
+
+would probably need to adhere to the gut mucosa. break strain and other strains of enteroaggregative
+
+In the past, much research has been concentrated E.coli adhere to and colonize seeds and seedlings.
+on the adhesion systems of typical enterohemor-                  Our rapid open-source analysis of an outbreak-
+
+rhagic E.coli, particularly the LEE-encoded type III associated bacterial pathogen was characterized
+secretion system.   16,20This German outbreak strain          by a propitious confluence of high-throughput
+
+shows us that Shiga-toxin–producing E. coli can genomics, crowd-sourced analyses, and a liberal
+exploit alternative adhesion mechanisms, very like- approach to data release. Although phenotypic or
+
+ly including aggregative adherence fimbriae, to the molecular analyses that exploit known virulence,
+same end. This strain also shows that pathotypes resistance, or epidemiologic targets are useful in
+
+of E. coli can overlap and that they evolve rather diagnostic and public health microbiology, ge-
+
+than stand as fixed archetypes.                               nome sequencing offers the advantages of open-
+    It remains unclear why this strain has proved to endedness(revealingthe“unknownunknowns”),
+
+be so virulent. As noted, a novel suite of adhesins universal applicability, and the ultimate in reso-
+might provide an explanation. Alternatively, per- lution. Our study shows how benchtop sequenc-
+
+haps this strain exploits more efficient mecha- ing platforms can generate data with sufficient
+nisms for toxin release. It is worth remembering speed to have an important effect on clinical and
+
+that strains of enteroaggregative E.coli have caused epidemiologic problems.
+
+
+                                     n engl j med 365;8  nejm.org    august 25, 2011                                                     723
+
+                                               The New England Journal of Medicine
+           Downloaded from nejm.org at UEM on March 26, 2012. For personal use only. No other uses without permission.
+                                Copyright © 2011 Massachusetts Medical Society. All rights reserved.
+                                                                             Brief Report
+
+
+
+
+                         Supported by grants from the State Key Development Program     cal Faculty of the University Medical Center Hamburg–Eppendorf,
+                      for Basic Research of China (2009CB522600), the National Key      and the British Biotechnology and Biological Sciences Research
+                      Program for Infectious Diseases of China (2008ZX10004-009),       Council (BB/E011179/1).
+                      Shenzhen Biological Industry Development Special Foundation–         Disclosure forms provided by the authors are available with
+
+                      Basic Research Key Projects (JC201005250088A), Key Laboratory     the full text of this article at NEJM.org.
+                      Project Supported by Shenzhen City (ZD200806180054A), the Euro-      We thank David Vallenet, Claudine Médigue, Xiaoning Wang,
+                      pean Union Microme Program (FP7-KBBE-2007-3-2-08-222886), the     and Jennifer Gardy for their helpful discussions.
+                      Alexander von Humboldt Foundation (to Dr. L. Yang), the Medi-
+
+
+
+                                                                                  Appendix
+
+                      The authors’ affiliations are as follows: the Institute of Medical Microbiology, Virology and Hygiene (H.R., M.H., M.C., L.Y., M.A.) and
+                      the Department of Pediatrics (R.K., S. Loos, J.O.), University Medical Center Hamburg–Eppendorf, Hamburg, Germany; BGI-Shenzhen,
+                      Shenzhen, China (J.Q., Y.C., D.L., W.C., F.P., Y.P., J.L., F.X., S. Li, Yin Li, Z.Z., X.Y., M.Z., P.W., Y.G., Z.C., Yingrui Li, H.Y., Jian Wang,
+
+                      Jun Wang, R.Y.), and the School of Bioscience and Biotechnology, South China University of Technology, Guangzhou, China (J.L.); the
+                      State Key Laboratory of Pathogen and Biosecurity, Beijing Institute of Microbiology and Epidemiology (Y.C., X.Z., Y.S., R.Y.), CAS Key
+                      Laboratory of Pathogenic Microbiology and Immunology, Institute of Microbiology, Chinese Academy of Science (G.F.G.), and the State
+                      Key Laboratory for Infectious Disease Prevention and Control and National Institute for Communicable Diseases Control and Preven-
+
+                      tion, Chinese Center for Disease Control and Prevention (G.F.G., J.X.) — all in Beijing; the Centre for Systems Biology, University of
+                      Birmingham, Birmingham, United Kingdom (N.J.L. M.J.P.); and AMAbiotics, Evry, France (A.D.).
+
+
+                      References
+
+                      1. Hobman JL, Penn CW, Pallen MJ. Lab-      aggregative Shiga toxin/verotoxin-producing adults infected with human immunodefi-
+                      oratory strains of Escherichia coli: model  Escherichia coli O104:H4 strain causing     ciency virus in Bangui, Central African
+
+                      citizens or deceitful delinquents growing   the outbreak of haemolytic uraemic syn-     Republic. J Clin Microbiol 2002;40:3086-8.
+                      old disgracefully? Mol Microbiol 2007;      drome in Germany, May to June 2011.         16. Tobe T, Beatson SA, Taniguchi H, et
+                      64:881-5.                                   Euro Surveill 2011;16:pii:19889.            al. An extensive repertoire of type III se-
+
+                      2. Kaper JB, Nataro JP, Mobley HL.          9. Bae WK, Lee YK, Cho MS, et al. A case    cretion effectors in Escherichia coli O157
+                      Pathogenic Escherichia coli. Nat Rev Mi-    of hemolytic uremic syndrome caused by      and the role of lambdoid phages in their
+                      crobiol 2004;2:123-40.                      Escherichia coli O104:H4. Yonsei Med J      dissemination. Proc Natl Acad Sci U S A
+                      3. Weintraub A. Enteroaggregative Esch-     2006;47:437-9.                              2006;103:14941-6.
+
+                      erichia coli: epidemiology, virulence and   10. Chattaway MA, Dallman T, Okeke IN,      17. Bielaszewska M, Mellmann A, Zhang
+                      detection. J Med Microbiol 2007;56:4-8.     Wain J. Enteroaggregative E. coli O104      W, et al. Characterisation of the Esche-
+                      4. Frank C, Werber D, Cramer JP, et al.     from an outbreak of HUS in Germany          richia coli strain associated with an out-
+                      Epidemic profile of Shiga-toxin–produc-     2011, could it happen again? J Infect Dev   break of haemolytic uraemic syndrome in
+
+                      ing Escherichia coli O104:H4 outbreak in    Ctries 2011;5:425-36.                       Germany, 2011: a microbiological study.
+                      Germany — preliminary report. N Engl J      11. GitHub. E. coli O104:H4 genome anal-    Lancet Infect Dis 2011 June 22 (Epub
+                      Med 2011. DOI: 10.1056/NEJMoa1106483.       ysis crowd sourcing, 2011. (https://github  ahead of print).
+
+                      5. Kuijper E, Soonawala D, Vermont C,       .com/ehec-outbreak-crowdsourced/            18. Smet A, Van Nieuwerburgh FV, Vande-
+                      van Dissel J. Household transmission of     BGI-data-analysis/wiki.)                    kerckhove TTM, et al. Complete nucleo-
+                      haemolytic uraemic syndrome associated      12. University College Cork. Escherichiacolitide sequence of CTX-M-15-plasmids from
+                      with Escherichia coli O104:H4 in the        MLST Database, 2011. (http://mlst.ucc.ie/   clinical Escherichia coli isolates: inser-
+
+                      Netherlands. Euro Surveill 2011;16:pii:     mlst/dbs/Ecoli.)                            tional events of transposons and insertion
+                      19897.                                      13. Mellmann A, Bielaszewska M, Kock R,     sequences. PLoS ONE 2010;5(6):e11202.
+                      6. Cordesmeyer S, Peitz U, Godde N,         et al. Analysis of collection of hemolytic  19. Rasko DA, Webster DR, Sahl JW, et al.
+                      Kasper H, Hoffmann M, Allemeyer E. Co-      uremic syndrome-associated enterohem-       Origins of the E.coli strain causing an out-
+
+                      lonic ischaemia as a severe Shiga toxin/    orrhagic Escherichia coli. Emerg Infect     break of hemolytic–uremic syndrome in
+                      verotoxin   producing   Escherichia   coli  Dis 2008;14:1287-90.                        Germany. N Engl J Med 2011;365:709-17.
+                      O104:H4 complication in a patient with-     14. Creuzburg K, Middendorf B, Mellmann     20. Schmidt MA. LEEways: tales of EPEC,
+
+                      out haemolytic uraemic syndrome, Ger-       A, et al. Evolutionary analysis and distri- ATEC and EHEC. Cell Microbiol 2010;12:
+                      many, June 2011. Euro Surveill 2011;16:     bution of type III effector genes in patho- 1544-52.
+                      pii:19895.                                  genic Escherichia coli from human, ani-     21. Itoh Y, Nagano I, Kunishima M, Ezaki
+                      7.  Robert Koch Institute. Information up-  mal and food sources. Environ Microbiol     T. Laboratory investigation of enteroaggre-
+
+                      date on EHEC/HUS outbreak, 2011. (http://   2011;13:439-52.                             gative Escherichia coli O untypeable:H10
+                      www.rki.de/nn_217400/EN/Home/               15. Mossoro C, Glaziou P, Yassibanda S,     associated with a massive outbreak of
+                      PM082011.html.)                             etal.Chronicdiarrhea,hemorrhagiccolitis,    gastrointestinal illness. J Clin Microbiol
+                      8. Scheutz F, Moller Nielsen E, Frimodt-    and hemolytic-uremic syndrome associated    1997;35:2546-50.
+
+                      Moller J, et al. Characteristics of the entewith HEp-2 adherent Escherichia coli in     Copyright © 2011 Massachusetts Medical Society.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+724                                                           n engl j med 365;8   nejm.org     august 25, 2011
+
+                                                            The New England Journal of Medicine
+
+                      Downloaded from nejm.org at UEM on March 26, 2012. For personal use only. No other uses without permission.
+                                            Copyright © 2011 Massachusetts Medical Society. All rights reserved.

@@ -1,0 +1,1128 @@
+Sensors 2015, 15, 2980-2998; doi:10.3390/s150202980
+                                                                                 OPEN ACCESS
+
+                                                                            sensors
+
+                                                                               ISSN 1424-8220
+                                                                  www.mdpi.com/journal/sensors
+Article
+
+
+Citizen Sensors for SHM: Use of Accelerometer Data
+from Smartphones
+
+
+Maria Feng, Yoshio Fukuda, Masato Mizuta and Ekin Ozer *
+
+Department of Civil Engineering and Engineering Mechanics, Columbia University, 500 W 120th St,
+New York, NY 10027, USA; E-Mails: mfeng@columbia.edu (M.F.); yf2290@columbia.edu (Y.F.);
+
+mizuta.masato@gmail.com (M.M.)
+
+* Author to whom correspondence should be addressed; E-Mail: eo2327@columbia.edu;
+   Tel.: +1-917-826-2848.
+
+
+Academic Editor: Vittorio M.N. Passaro
+
+Received: 11 November 2014 / Accepted: 23 January 2015 / Published: 29 January 2015
+
+
+
+     Abstract: Ubiquitous smartphones have created a significant opportunity to form a low-cost
+     wireless Citizen Sensor network and producebig data for monitoring structural integrity and
+     safety under operational and extreme loads. Such data are particular ly useful for rapid
+
+     assessment of structural damage in a large ur ban setting after a major event such as an
+     earthquake. This study explores the utilization of smartphone accelerometers for measuring
+     structural vibration, from which structural health and post-event damage can be diagnosed.
+
+     Widely available smartphones are tested under sinusoidal wave excitations with frequencies
+     in the range relevant to civil engineering structures. Large-scale seismic shaking table tests,
+     observing input ground motion and response of a sctural model, are carried out to evaluate
+
+     the accuracy of smartphone accelerometers unde r operational, white-noise and earthquake
+     excitations of different intensity. Finally, th e smartphone accelerometers are tested on a
+     dynamically loaded bridge. The extensive expei ents show satisfactory agreements between
+
+     the reference and smartphone sensor measurem ents in both time and frequency domains,
+     demonstrating the cpability of the stphone sensors to measure srtuctural responses ranging
+     from low-amplitude ambient vibration to higaplitude seismic response. Encouraged by the
+
+     results of this study, the authors are devloping a citizen-engaging and data-analytics
+     crowdsourcing platform towards a smartphone-based Citizen Sensor network for structural
+     health monitoring and post-event damage assessment applications.
+Sensors 2015, 15                                                                                    2981
+
+
+      Keywords:smartphone sensors;Citizen Sensors; accelerometers; structural health monitoring;
+      post-event damage assessment; civil engineering structures; modal identification
+
+
+
+
+1. Introduction
+
+   With the rapid advances in computer and sensor tec  hnologies in the last two decades, structural health
+
+monitoring (SHM), mostly based on structural vibration, has become animportant research field in civil
+engineering [1,2]. Implementation of SHM in civ       il engineering structures, however, has practical
+
+difficulties and financial burdens associated with instrumentation and monitoring. Conventional sensors
+have high hardware, installation, and maintenance costs,as well as remote monitoring and cabling issues.
+Although wireless sensors aim to solve some of these issues,       additional issues are then introduced
+
+regarding power consumption, data acquisition and networking. These issues have hindered practical
+implementation of SHM methodologies on massive scal es such as networks of highway bridges and
+
+urban areas with large stocks of buildings. To address these issues, many emerging sensor technologies
+are being developed, including those proposed by the authors’ team (e.g., [3,4]).
+   On the other hand, the Internet, smartphones, and       mobile networks have given rise to citizen
+
+participation for crowdsourcing applications and producing valuable data. A number of seismology and
+earthquake engineering projects have shown the benefits of such data. In Southern California, citizens
+
+reported experiences to a seismology network after the 1999 7.1-magnitude Hector Mine Earthquake,
+taking part in mapping the intensityof the earthquake in a project calledShakeMap [5]. “Did you feel it?”
+
+the online seismic intensity database, received more than 750,000 responses by 2007, and was able to
+generate intensity maps in an automated fashion [6,]7. “The Quake Catcher Network” introduced a rapidly
+deployable seismic network that aimed to increase the number of seismic stations extensively with
+
+minimal cost based on inexpensive MEMS sensors and volunteers [8–11]. “Community Seismic
+Network” is a seismic network which is supporte d by low-cost accelerometers connected to personal
+
+computers or sensors embedded in mobile devices,        and uses data fusion tec hniques to distinguish
+earthquake-induced vibrations from false alarms[12–14]. “iShake” is the proposed framework for using
+smartphones as seismographs, and studies [15–17] i nvestigated the reliability of ground motion data
+
+obtained from the smartphone sensors. “Commun         ity Seismic Network” and “The Quake Catcher
+Network” are utilized to simulate structural response based on the Timoshenko beam theory [18]. These
+
+studies show the potential of using smartphones to measure vibrations.
+   Encouraged by the recent development and the ent husiasm of citizens to participate, the authors
+propose a smartphone-based Citizen Sensor network to collect structural integrity data at low cost. This
+
+network enables a crowdsourcing platform where        smartphones act as mobile sensors and provide
+structural vibration data (pre-processed by the p hones) and GPS location data to a cloud server. The
+
+long-term vibration measurement data and the subseque   ntly identified structuralvibration characteristics
+will establish a baseline database for the structure for the purposes of structural health monitoring and
+
+damage detection, as demonstrated in prior research(which is beyond the scope of this paper). Engaging
+the crowd will allow efficient monitoring of a large number of structures in an urban setting, which can
+Sensors 2015, 15                                                                                    2982
+
+
+be particularly useful for rapid assessment of stru ctural damage of buildings and urban infrastructure
+after a major event such as an earthquake.
+   This paper represents the firs t step toward the envisioned Citizen Sensor network by investigating
+
+the feasibility of using smartphone accelerometers to   monitor structural vibration under normal and
+extreme loads. A number ofshaking table tests are conducted tocompare smartphone sensor performance
+
+with high-quality accelerometers for measuring vibra tion of different frequencies. Furthermore, input
+ground motion and response of a column model, subjected to operational loads, white noise and earthquake
+excitations throughout shaking tabeltests, are monitored using smartpone and high-qualiyt accelerometers.
+
+Finally the smartphone sensor was used to measure ambient and forced vibrations of a bridge.
+   It is noted that the coupling between the smart    phone and the structure can affect the vibration
+
+measurement [19]. In this study, the smartphones are fixed on the structures using double-sided tapes to
+ensure that no local vibration would affect the quality of the structural vibration measurement. In reality,
+
+smartphone users would need to plac  e their phones on rigid holders thatare permanently fixed on building
+floors or columns/walls while taking the vibration measurement. The measurement could be automatically
+triggered by an event (such asan earthquake) whenthe phones are placedin such holders.
+
+
+2. Smartphone Sensor Properties
+
+   The most widely used brands       and generations of smartphones, referred to as Smartphone 1,
+
+Smartphone 2 and Smartphone 3, are te sted in this study. They were       carefully selected in order to
+consider the factors that might have an influence on the smartphone sensors’ measurement performance.
+These factors could be related to hardware such as the accelerometer and processor embedded in the
+
+phone, as well as the material and geometrical pr operties of the phone case. A detailed study on the
+effects of such physical properties on smartphone seismometer data quality was conducted by applying
+
+different coupling conditions and can be found in       [15,17]. Software including the measurement
+application and the phone’s operating system might also affect the measurement performance.
+   Over the last few years, smartphone technology has made significant advances. The phone central
+
+processing unit (CPU) and random-access memory (RAM ) capabilities have increased significantly
+while the phone size and weight have decreased [20]. Furthermore, Smartphone 1 and Smartphone 2,
+
+two generations of the same smartphone, are embedded with different microelectro-mechanical systems
+(MEMS) accelerometers, the LI S331DLH [21] and LIS331DL [22] , respectively. The accelerometer
+
+properties are listed in Table 1, in comparison with high-quality piezoelectric sensors used in this study
+as reference sensors [23]. In addition, anotherwidely available new generatin smartphone, Smartphone 3,
+was also tested [24].
+
+   Several available smartphone applications were tested and the “Seismometer” application was chosen
+for the vibration measurements in this study. Due to the limitations of the application, the sampling rate
+
+is set to 100 Hz for both smartphone sensors, leading to a Nyquist frequency of 50 Hz.
+Sensors 2015, 15                                                                                      2983
+
+
+                          Table 1. Reference and smartphone sensor properties.
+
+             Property                Reference       Smartphone 1        Smartphone 2        Smartphone 3
+
+                                       PCB
+           Sensor maker             Piezotronics  ST Micro-electronics ST Micro-electronics Bohensortec
+
+           Sensor model               393B04          LIS331DL            LIS331DLH            SMB380
+  Phone maker, model & Operating
+                                                                                            Samsung Galaxy
+    System (OS)/Data Acquisition   NI SCXI-1531     iPhone 3GS, iOS       iPhone 5, iOS       S4, Android
+           (DAQ) model
+               Type PiezoeMleEricSMEMMSEMS
+
+          Sensitivity ± 2 g          1000 mV/g        18 mg/digit          1 mg/digit         3.9 mg/digit
+        Measurement range               5 g               2 g                  2 g                2 g
+
+  Output data rate/Frequency range    0.05–750          100, 400            0.5–1000             3000
+      Noise density (▯▯√▯▯) 0.00004     N/A        0.218       0.5
+
+
+3. Small-Scale Shaking Table Tests
+
+
+   Although sensor datasheets provide extensive in formation regarding smartphone accelerometers,
+accelerometers’ performance can be influenced by anumber of external effects such as phone hardware,
+
+embedded filters, and phone geomet ry. In other words, bare accel erometer performance might be
+different than an accelerometer embedded in a smar        tphone. Therefore, in order to investigate the
+
+smartphone sensors’ ca pabilities of measuring vibration of diffenet frequencies and amplitudes, small-scale
+shaking table tests are carrieout. As shown in Figure 1, smartphone sensors are f xied on an electromagnetic
+
+shaking table, togetherwith two of the high-quality piezoelectric rference accelerometers.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                           Figure 1. Sinusoidal wave shaking table test setup.
+
+   The shaking table is excited with sinusoidal motions of different frequencies including 0.5, 0.8, 1, 2,
+
+5, 10 and 20 Hz. Due to the limitations of the shak ing table, low-frequency content sinusoidal wave
+amplitudes are relatively small compared with high-frequency content sinusoidal waves. As a result, the
+
+maximum acceleration amplitudes range from 0.05 g to 0.2 g.
+Sensors 2015, 15                                                                                     2984
+
+
+   Figure 2 illustrates the acceleration time histor   ies measured by the reference and smartphone
+accelerometers under sinusoidal excitations of different frequencies. The measured peak amplitudes by
+the smartphone sensors agree well with those by the reference sensors, although the smartphone sensors
+
+tend to slightly overestimate the amplitude (which isin correlation with Arias Intensity results presented
+in [17]). It is noted that the reference and the smartphone sensor data are acquired by different data
+
+acquisition systems and thus not perfectly synchronized. There are slight differences among the clocks
+in the smartphones and in the reference sensor data    acquisition system, result ing in the slight phase
+differences in the measured acceleration time histories.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        Figure 2. Time history of reference and smartphone sensors under different frequencies.
+
+
+   Table 2 summarizes the frequency and the amplitude errors between the reference and the smartphone
+sensors. It is observed that the new generation smartphone (Smartphone 2) is significantly more accurate
+
+than the old generation smartphone (Smartphone 1). For instance, for the 1 Hz excitation, the error
+between peak horizontal accelerations decreases from 17.5% (Smartphone 1) to 3.10% (Smartphone 2).
+Similarly, new smartphone sensors are capable of obtaining the dominant frequency of the signal with
+
+an error up to 0.96% whereas old generation smartphone errors are significantly large, ranging between
+4% and 5%. Although accur acy in frequency slightly changes with different tests, the accuracy in
+
+amplitude decreases as peak horizontal acceleration decreases. In conclusion, theerror results in Table 2
+show that the new generation smartphone (Smartphone 2)is reasonably accuratefor measuring vibration
+in the frequency range relevant to most of the civil engineering structures.
+Sensors 2015, 15                                                                                     2985
+
+
+
+    Table 2. Peak horizontal acceleration error between smartphone and reference accelerometers.
+
+                       Freque(Hcz)   0.0.81 2 5 1020
+                              Smartphone 1   4.57  4.58   5.04  5.03   4.73  4.96  4.01
+                  Error (%)   Smartphone 2   0.92  0.95   0.92  0.92   0.95  0.92  0.96
+
+                        Amplitude (g)        0.04  0.08   0.11  0.17   0.18  0.25  0.29
+                              Smartphone 1   43.9  25.6   17.5  8.19   15.3  17.3  25.7
+                  Error (%)
+                              Smartphone 2   17.4  8.51   3.10  4.97   1.14  0.45  3.82
+
+
+4. Large-Scale Seismic Shaking Table Tests of a Structural Model
+
+   In order to examine the capabilities of smartphone sensors for measuring different types of vibration
+
+at different amplitudes, large-scale seismic shak ing table tests are performed on a masonry column
+model, as shown in Figure3, involving operational, white noise and earthquakeexcitation inputs. Further
+
+details about the experiment can be found in [25,26]. The smartphone and reference accelerometers are
+
+installed on the top of the model, while another smartphone is installed on the top of the shaking table
+near the foot of the model. The visual inspections before and after the tests show no crack or other types
+
+of damage, and thus the structure isassumed to be a linear time invariant system throughout the tests. In
+previous studies, the same assumption is used by th e authors in [27,28], and the crack-damage relationship
+
+can be observed from the shaking table test data asshown in [29,30]. The vibration measurements are used
+
+to identify modal characteristics ofthe structure. In order to determine modal frequencies, power spectral
+densities are used. Prior to computation of power      spectral densities, opera tional, white-noise, and
+
+earthquake excitation test time histories are subjected to zero-padding to smoothen the spectral curves.
+Therefore, actual spectral resolutions, 0.0100, 0.0 142, and 0.0142 Hz, respectively, are converted into
+
+0.0015 Hz as a result of zero-padding the original time signals.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                          Figure 3. Masonry column model and shaking table.
+Sensors 2015, 15                                                                                    2986
+
+
+4.1. Operational Vibration Tests
+
+   First, the seismic shaking table is locked and the responses of th e column model to environmental
+vibrations and to hammer impact loading on top are measured. Figure 4 shows the acceleration time
+
+history responses measured at the top of the column by the reference and smartphone sensors under the
+hammer impact loading and under the operational vi      brations respectively. Th e plots corresponding
+
+to reference and smartphone sensors are plotted se    parately because that the measurements are not
+synchronized, yet the time historiesshow the similarities between the two measurements. Likewise, error
+is not quantified as a function of time since samples obtained from reference and smartphone sensors
+
+refer to different time instants. Cross-correlation or GPS synchronization can be addressed to deal with
+this problem, which can be addre      ssed in the future. The peak re    sponse to the im pact load is
+
+approximately 0.02 g, while the operational vibration amplitude is less than 0.004 g. It is observed that
+smartphone measurements agree well with the reference measurements in terms of amp                 litude
+
+characteristics. Figure 5 shows the power spectral densities of the vibration responses measured by the
+reference and smartphone sensors, demonstrating freq  uency characteristics of the measured responses are
+significantly close to each other. In other words, Figur5 reflects the spectra of the response to the initial
+
+impact followed by operational vibrations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          Figure 4. Time history of impact and operational vibration response measurements.
+Sensors 2015, 15                                                                                 2987
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     Figure 5. Power spectral density of impact and operational vibration response measurements.
+
+
+4.2. White-Noise Excitation Tests
+
+   The seismic shaking table is excited by white-n oise ground motion input and the smartphone and
+reference sensors measure the response of the co   lumn model. Figure 6 co mpares the time history
+
+responses obtained from the reference and smart phone sensors. Figure 7 shows the power spectral
+densities of reference and smartphonemeasurements. Significant agreement is observed in both the time
+
+and frequency domains.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+               Figure 6. Time history of white noise excitation response measurements.
+Sensors 2015, 15                                                                                     2988
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              Figure 7. Spectral density of white noise excitation response measurements.
+
+4.3. Earthquake Excitation Tests
+
+   Finally, seismic input ground motion and response meas urements are made in order to evaluate the
+
+smartphone performance in measuring seismic strongmotion and structural response. Figure 8 show the
+input ground motion time histories trageted by shaking table controller (eference), and the ones measured
+
+by Smartphone 2 and Smartphone 3. The bottom three pl        ots in the figure are the enlarged portions
+(between 15 s and 20 s) to show mo re details. It is noted that the shaking table acceleration (the input)
+
+was not measured by the reference sensor. The “Refer      ence” in Figure 8 refers to the input seismic
+acceleration generated by the controller of the seismic shaking table. The reference sensor was used for
+measuring the structural response in this seismic    excitation experiment. An excellent agreement is
+
+observed between the measurements made by the two different smartphones. A considerable difference
+is observed between the target timehistory and the measurements by the smartphone sensors, due to the
+
+fact that a seismic shaking table has physical limita tions of generating targeted motion [31]. Figure 9
+shows the acceleration response time histories measured at the top of the model by the reference sensor
+and Smartphone 2. Similarly, portions of the top two plots are enlarged in the bottom two plots to show
+
+more details. An excellent agreem ent is observed between the res ponses measured by the smartphone
+and the reference sensor.
+
+   Power spectral densities are obtained from the        targeted input, measured input and response
+acceleration time histories and plotted in Figure 10, ba sed on which the transfer function is developed
+and plotted in the same figure. Again, the spectral densities of the responses measured by the reference
+
+and the smartphone sensors agree well. Although theground motions of two different smartphones have
+significant difference with the target input motion app lied to the shaking table, they agree very well in
+
+the frequency domain as well.
+Sensors 2015, 15                                                                             2989
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   Figure 8. Time history of targeted and achieved earthquake input ground motion measurements.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   Figure 9. Time history of earthquake response measurements.
+Sensors 2015, 15                                                                                    2990
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  Figure 10. Spectral density of earthquake excitation measurements.
+
+
+4.4. Comparison of Identified Natural Frequencies of the Structural Model
+
+   Natural frequencies of the masonry column model are identified based on the measurements made in
+
+the seismic shaking table tests involving the different types of excitations. The peak picking method is
+applied to extract the natural frequencies from the power spectral densities of the response acceleration
+under the operational and white-noise excitations shown in Figures 5 and 7. For the seismic excitation,
+
+the natural frequencies are identified from the spectral density function plot in Figure 10. The identified
+fundamental frequency values are summarized in Tabe    l 3. From the measurements made by the reference
+
+sensor, the fundamental frequency of tehcolumn model is identified as8 1.2, 17.4, and 17.1 Hz respectively
+under the operational, white noise, and earthquake excitations. Th eir counterparts measured by the
+smartphone sensor are 18.4,17.2, and 17.5 Hz.The frequency values measured by the smartphone sensor
+
+and the reference sensors are highly comparable, demonts rating the capability of the smartphone sensor in
+measuring a structure’s natural frequencies.
+
+   Furthermore, it is observed that the fundamental fr equency of the structural model decreases as its
+vibration amplitude increases. This phenomenon has been confirmed by many other studies [32–34] and
+
+further analysis is beyond the scope of this paper.
+Sensors 2015, 15                                                                                    2991
+
+
+    Table 3. Comparison of structure’s natural frequencies identified from different measurements.
+
+                        Excitation Type              Ambient     White Noise    Earthquake
+                                        Reference 18.2     17.4      17.1
+              Natural frequency (Hz)   Smartphone 18.4       17.2      17.5
+
+                            Error (%)                   1.10         1.15          2.34
+
+5. Field Tests of a Bridge
+
+
+   In order to investigate the perfor mance of smartphone sensors on actual structures, a series of field
+tests are conducted on a pre-stressed re inforced concrete pedestrian br idge located in Princeton (NJ,
+
+USA) shown in Figure 11. Smartphone 2 and the reference sensor ar e fixed by double-sided adhesive
+tapes in the mid span of the bridge deck to m    easure its ambient vibrati on and response to dynamic
+
+loading. Two sets of dynamic loading tests are carried out. First, a group of participants runs randomly
+on the bridge with different speeds, rhythms and      directions to generate dynamic loads of broader
+
+frequency content. Second the same group jumps synchronically at 3 Hz, which isclose to the estimated
+natural frequency of the bridge, to excite the first mo de of vibration. Similar to the previous tests, in
+
+ambient vibration, random dynamic, and synchroni zed dynamic test time hist ories, zero-padding is
+applied. Therefore, actual spectral resolutions, 0142, 0.0067, and 0.0033 Hz, respectively, are converted
+
+into 0.0015 Hz as a result.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                         Figure 11. Pedestrian bridge in Princeton (NJ, USA).
+
+5.1. Ambient Vibration Test
+
+
+   Ambient vibration of the bridge, resulting from th e environmental vibration caused by pedestrians
+and vehicles passing under the bridge, are measuredusing the smartphone and reference accelerometers
+
+located at the mid span. Figure 12 compares the timheistories obtained from the reference and smartphone
+accelerometers. The bottom two plots are enlarged portionsto show more details. First, the amplitude of
+
+the vibration is less than 0.005 g. At this low amplitude, the smartphone sensor is not as sensitive as the
+high-quality reference sensor, and as a result some    differences between the two measurements are
+observed in the time histories. However, the frequency domain characteristics measured the two sensors
+
+match quite well, as shown in the power spectral density plots in Figure 13. For example, the fundamental
+frequency of the brdge identified from te reference sensor meausrement is 3.13 Hz comp  ared with 3.16 Hz
+
+by the smartphone measurement. The error is lessthan 1%. The higher modes by the two measurements
+also agree well. Moreover, measurements include smartphone sensors positioned without fixing, which
+Sensors 2015, 15                                                                                   2992
+
+
+also resulted in the same accuracy. In other word s, the smartphone sensors are free to move on the
+structure, yet coupled by the friction between the phonesurface and the bridge surface. This implies the
+practicality of smartphone sensors for vibration measurement. A deta iled study, considering different
+
+coupling conditions and targeting the effect of fixity on smartphone sensors as seismic instruments is
+conducted in [15,17].
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                 Figure 12. Time history of ambient vibration response measurements.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    Figure 13. Spectral density of ambient vibration measurements.
+
+5.2. Random Dynamic Test
+
+   In order to apply dynamic loads with broadba      nd frequency content to the bridge, a group of
+
+pedestrians run on the bridge deck randomly with different, varying speeds, rhythms and directions
+without any particular pattern. Fi gure 14 shows that the smartphone measurement agrees much better
+
+with the reference sensor measurement than it does in the ambient vibration case (shown in Figure 13).
+This is because of the increased vibration amplitude; in fact the random running-induced vibration is ten
+times higher than the ambient vibration. From the    power spectral density pl ots in Figure 15, natural
+Sensors 2015, 15                                                                                  2993
+
+
+frequency of bridge is estimated as 3.08 Hz and 3.11 Hz respectively from reference and smartphone
+sensor measurements, resulting in an error less than 1%.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    Figure 14. Time history of random dynamic test measurements.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  Figure 15. Spectral density of random dynamic test measurements.
+
+
+5.3. Synchronized Dynamic Test
+
+   Finally, in order to maximize the dynamic load eff ect, the pedestrian participants jump on the mid
+
+span of the bridge deck synchronica lly at a frequency of 3 Hz, which is close to the estimated natural
+frequency of the bridge. Figure 16 plots the time histories obtained from the reference and smartphone
+accelerometers. Due to the dynamic amplification, the bridge response acceleration exceeds 0.1 g. As the
+
+vibration amplitude increases, the measurement errorof smartphone sensor (with respect to the reference
+sensor) becomes insignificant. The power spectral densities based on the smartphone and reference
+
+measurements, as plotted shown inFigure 17, show their excellent agr eement. This synchronized jumping
+Sensors 2015, 15                                                                                    2994
+
+
+excited only the first mode, which is 3.00 Hz (by the reference sensor)and 3.03 Hz (by the smartphone
+sensor). Likewise, the error is less than 1%.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                 Figure 16. Time history of synchronized dynamic test measurements.
+
+
+
+
+
+
+
+
+
+
+
+
+
+               Figure 17. Spectral density of synchronized dynamic test measurements.
+
+
+5.4. Comparison of Identified Natural Frequencies of the Bridge
+
+   Natural frequencies of the bridgeare identified based on the measuremen  ts made in the field tests. The
+
+peak picking method is app lied to extract the natura l frequencies from the pow er spectral densities of
+the response acceleration under the ambient, random and synchronized excitations shown in Figures 13,
+
+15 and 17. Table 4 compares the iden tified fundamental frequency values. From the measurements made
+by the reference sensor, the fundamental frequencyof the bridge is identified as 3.13, 3.08, and 3.00 Hz
+respectively under the ambient vibration, and the random and synchronized dynamic loading tests, while
+
+their counterparts made by the smartphone sensor are 3.16, 3.11, and 3.03 Hz. Again, frequency values
+measured by the smartphone sensor and the referencesensors are highly comparable, demonstrating the
+
+capability of the smartphone sensor in measuring a structure’s natural frequencies. Like the observation
+made in the seismic shaking table tests, the fundamentalfrequency of the bridge decreases as its vibration
+amplitude increases.
+Sensors 2015, 15                                                                                    2995
+
+
+     Table 4. Comparison of bridge’s natural frequencies identified from different measurements.
+
+                             Excitation Type              Ambient     Random    Synch
+                                             Reference 3.13   3.08 3.00
+                   Natural frequencies (Hz) Smartphone 3.16     3.11 3.03
+
+                                 Error (%)                   0.96       0.97     1.00
+
+6. Conclusions
+
+
+   A comprehensive experimental study, involving seismicshaking table tests and bridge field tests, was
+carried out to investigate the pe  rformance of smartphone accelerometers in measuring structural
+
+response to dynamic loading ranging from low-ampliu   tde ambient to high-amplitude seismic excitations,
+as well as sinusoidal excitations. Three wi        dely-used smartphones embedded with different
+accelerometers and a high-quality reference sensor are tested on a small shaking table, a structural model
+
+on a large seismic shaking table, and an actual bridge. All the measurement results are compared in both
+time and frequency domains. The followingo   cnclusions can be drawn from this study:
+
+   (1) The small-scale shaking table tests confirm thatthe smartphone sensors are capable of accurately
+
+        measuring sinusoidal vibration of0.5 Hz through 20 Hz, a frequencyrange relevant to most civil
+        engineering structures. The measurement error      in terms of the vibration amplitude, when
+
+        compared with the high-quality reference sensor , is less than 5% for      vibration higher than
+        1 Hz, but increases as the peak horizontal acceleration decreases. The measurement error in
+
+        terms of vibration frequency is 1% and 5%      respectively for the new and the old generation
+        smartphone sensors.
+   (2) The large-scale seismic shaking table tests of the structural model and the field dynamic tests of
+
+        the bridge demonstrate the capabilities of smartphone sensors in measuring structural responses
+        to a variety of dynamic loads of different amplitudeas well as frequency characteristics. Despite
+
+        the measurement error of the structural response in the time domain under the low-amplitude
+        (less than 0.005 g) ambient vibration, it is po   ssible to extract the structures’ fundamental
+
+        frequencies with remarkably small error of less than 1%.
+   (3) The two types of the widely-used smartphones with different operating systems and different
+
+        accelerometers show comparable performance. The accelerometer in the newer generation
+        smartphone is significantly more accurate than that in the old generation smartphone. The quality
+
+        of the sensors embedded in smatrphones is expected to continue to improvein the future.
+   (4) The laboratory and field tests show advantages of the smartphone sensors over the conventional
+        sensor, such as the ease of installation and data acquisition as well as wireless transmission.
+
+   It is noted that many issues are yet to be solv    ed such as the on-phone     signal pre-processing,
+
+power-efficient signal transmission and practical phone -structure couplings. Ne vertheless, this study
+demonstrates the feasibility of using smartphone accelerometers for measurement of structural vibration
+
+characteristics, from which structuralhealth can be diagnosed as shown in prior research. Encouraged by
+the results of this study, the authors are exploring the potential of forming a smartphone-based low-cost
+
+Citizen Sensor network for structural healthmonitoring and post-event damage assessment in structure-
+Sensors 2015, 15                                                                                    2996
+
+
+and city-scales, by developing frameworks of citizen engagement, online database and crowdsourcing
+data analytics.
+
+Acknowledgments
+
+
+   The seismic shaking table test, together with the structural model, is designed by G. Deodatis of
+Columbia University and Emeritus R. Mark of Princeton University. The test is carried out at the Carlton
+
+Laboratory of Columbia University. The field test of the bridge is organized by B. Glisic of Princeton
+University. The authors are thankful for their contributions.
+
+Author Contributions
+
+
+   The work presented here was carried out in collaboration between all authors. The Citizen Sensors
+idea is initiated by M. Feng, Y. F ukuda, and M. Mizuta. Literature review, tests, and data analyses are
+
+conducted by E. Ozer. The article is written by M. Feng and E. Ozer.
+
+Conflicts of Interest
+
+   The authors declare no conflict of interest.
+
+
+References
+
+1.   Doebling, S.W.; Farrar, C.R.; Prime, M.B. A summarry  eview of vibration-based damage identification
+
+     methods. Shock Vib. Dig. 1998, 30, 91–105.
+2.   Carden, E.P.; Fanning, P. Vibration ba sed condition monitoring: A review. Struct. Health Monit.
+
+     2004, 3, 355–377.
+3.   Kim, D.H.; Feng, M.Q.Real-time structural health monitoringusing a novel fiber-optic accelerometer
+     system. IEEE Sens. J. 2007, 7, 536–543.
+
+4.   Fukuda, Y.; Feng, M.; Narita, Y.; Kaneko, S.I.; Tana ka, T. Vision-based displacement sensor for
+     monitoring dynamic response using robust object search algorithm. In Proceedings of the 2010
+
+     IEEE Sensors, Kona, HI, USA, 1–4 November 2010; pp. 1928–1931.
+5.   Smith, D.L. Did You Feel It? Eng. Sci. 1999, 62, 34–38.
+6.   Atkinson, G.M.; Wald, D.J. “Did You Feel It?”      intensity data: A surprisingly good measure of
+
+     earthquake ground motion. Seismol. Res. Lett. 2007, 78, 362–368.
+7.   Wald, D.J.; Quitoriano, V.; Worden, C.B.; Hopper, M.; Dewey, J.W. USGS “Did you feel it?”
+
+     internet-based macroseismic intensity maps. Ann. Geophys. 2012, 54, doi:10.4401/ag-5354.
+8.   Cochran, E.S.; Lawrence, J.F.; Christensen, C.; Jakka, R.S. The quake-cat cher network: Citizen
+
+     science expanding seismic horizons. Seismol. Res. Lett. 2009, 80, 26–30.
+9.   Cochran, E.; Lawrence, J.; Christensen, C.; Chung, A. A novel strong-motion seismic network for
+     community participation in earthquake monitoring. IEEE Instrum. Measur. Mag. 2009, 12, 8–15.
+
+10. Chung, A.I.; Neighb  ors, C.; Belmonte, A.; Miller, M.; Sepulvea, H.H.; Christensen,C.; Lawrence, J.F.
+     The Quake-catcher network rapid aftershock mobilz   iation program followingthe 2010 m 8.8 Maule,
+
+     Chile earthquake. Seismol. Res. Lett. 2011, 82, 526–532.
+Sensors 2015, 15                                                                                2997
+
+
+11. Cochran, E.S.; Lawrence, J.F.; Kaiser, A.; Fry, B.; Chung, A.; Christensen, C. Comparison between
+     low-cost and traditional MEMS accelerometers: A cae s study from the M7.1 Darfield, New Zealand,
+     aftershock deployment. Ann. Geophys. 2012, 54, doi:10.4401/ag-5268.
+
+12. Obenshain, D.; Chandy, K.M.; Chandy, R.; Clayton, R.; Krause, A.; Olson, M.; Rosenberg, D.;
+     Tang, A. Community Seismic Network: Catchi ng Earthquakes Quickly and Cheaply Through
+
+     Volunteer-based Sensor Networks. Caltech Undergrad. Res. J. 2010, 11, 31–37.
+13. Clayton, R.W.; Heaton, T.; Chandy, M.; Krause, A.;Kohler, M.; Bunn, J.; Aivazis, M. Community
+     seismic network. Ann. Geophys. 2012, 54, doi:10.4401/ag-5269.
+
+14. Faulkner, M.; Olson, M.; Chandy, R.; Krause, J. ; Chandy, K.M.; Krause, A. The next big one:
+     Detecting earthquakes and other rare events from community-based sensors. In Proceedings of the
+
+     10th ACM/IEEE International Conference on Information Processing in Sensor Networks (IPSN),
+     Chicago, IL, USA, 12–14 April 2011; pp. 13–24.
+
+15. Dashti, S.; Reilly, J.; Bray, J.D.yen, A.; Glaser, S.; Mari, E.; By, P.J.D. IShake: Using Personal
+     Devices to Deliver Rapid Semi-Qualita tive Earthquake Shaking Information.      GeoEngineering
+     Report, 2011. Available online: http:byen.eecs.berkeley.edu/sites/dfult/files/techreps/grdcee11.pdf
+
+     (accessed on 28 May 2014).
+16. Reilly, J.; Dashti, S.; Ervasti, M.; Bray, J.D.; ,S.D.; Bayen, A.M. MobilePhones as Seismologic
+
+     Sensors: Automating Data Extraction for the iShake System . IEEE T. Autom. Sci. Eng . 2013, 2,
+     242–251.
+17. Dashti, S.; Bray, J.D.; Reilly, J.; Glaser, S.; Bayen,A.; Mari, E. Evaluating the Reliability of Phones
+
+     as Seismic Monitoring Instruments. Earthq. Spectra 2013, 30, 721–742.
+18. Kohler, M.D.; Heaton, T.H.; Cheng, M.H. The Co mmunity Seismic Network and Quake-Catcher
+
+     Network: Enabling structural health monito      ring through instrument   ation by community
+     participants. In Proceedings of SPIE Smart Stru ctures and Materials + Nondestructive Evaluation
+     and Health Monitoring, San Diego,CA, USA, 10 March 2013; International Society for Optics and
+
+     Photonics: Bellingham, WA, USA, 2013; pp. 86923X1–86923X8, doi:10.1117/12.2010306.
+19. Eriksson, J.; Girod, L.; Hull, B.; Newton, R.; Ma dden, S.; Balakrishnan, H. The pothole patrol:
+
+     Using a mobile sensor network for road surface monitoring. In Proceedings of the 6th International
+     Conference on Mobile Systems, Applications, and Services, Breckenridge, CO, USA, 17–20 June
+
+     2008; pp. 29–39.
+20. Comparison of Smartphones. Ava       ilable online: http: //en.wikipedia.org/wiki/Comparison_of_
+     smartphones (accessed on 28 May 2014).
+
+21. ST Microelectronics. Available online: http://www.st.com/web/catalog/sense_power/FM89/SC444/
+     PF218132 (accessed on 28 May 2014).
+
+22. ST Microelectronics. Available online: http: //www.st.com/web/catalog /sense_power/FM89/FM89/
+     SC444/PF191236 (accessed on 28 May 2014).
+23. PCB Piezotronics. Available online: http://www.pcb.com/Product.saspx?m=393B04#.UxC-KvldV8F
+
+     (accessed on 28 May 2014).
+24. Bosch Sensortech. Available online: https         ://www.olimex.com/Products/Modules/Sensors/
+
+     MOD-SMB380/resources/SMB380_Preliminary_Datasheet_Rev13_20070918.pdf (accessed on
+     28 May 2014).
+Sensors 2015, 15                                                                                  2998
+
+
+25. Evarts, H. All Shook Up. Available online: http://engineering.columbia.edu/all-shook (accessed on
+     23 December 2014).
+26. Ruane, M.E. ‘Earthquake’ Rattles a Cathedral Pi       nnacle, But This Time in the Laboratory.
+
+     Available online: http://www.washingtonpost.com/local/earthquake-agian-rattles-cathedral-pinnacle-
+     but-this-time-in-the-laboratory/2014/02/19/ce42c86-959a-11e3-9616-d367fa6ea99b_story.html
+
+     (accessed on 23 December 2014).
+27. Ozer, E.; Soyoz, S. Vibration-Based Damage De tection and Seismic Performance Assessment of
+     Bridges. Earthq. Spectra 2013, doi:10.1193/080612EQS255M.
+
+28. Ozer, E.; Feng, M.Q.; Soyoz, S. SHM-integrated br idge reliability estimation using multivariate
+     stochastic processes. Earthq. Eng. Struct. Dyn. 2014, doi:10.1002/eqe.2527.
+
+29. Saiidi, M.S. NEES Project Warehouse, Large-Scale Experimental Seismic Studies of a Two-Span
+     Reinforced Concrete Bridge System. NEES: We st Lafayette, IN, USA, 2005 Available online:
+
+     http://nees.org/warehouse/project/32 (accessed on 5 January 2014).
+30. Johnson, N. Large-Scale Experimental and Analytical Seismic Studies of a Two-Span Reinforced
+     Concrete Bridge System. No. 32-10946 UMI. University of Nevada , Reno, NV, USA, 2006.
+
+     Available online: http://sunzi.lib.hku.hk/ER/detail/hkul/4343108 (accessed on 28 May 2015).
+31. Johnson, N.; Ranf, R.T.; Saiidi, M.S.; Sanders, D.;   Eberhard, M. Seismic testing of a two-span
+
+     reinforced concrete bridge. J. Bridge Eng. 2008, 13, 173–182.
+32. Skolnik, D.; Lei, Y.; Yu, E.; Wallace, J.W. Identification, model updating, and response prediction
+     of an instrumented 15-story steel-frame building. Earthq. Spectra 2006, 22, 781–802.
+
+33. Moaveni, B.; He, X.; Conte, J.P.; Restrepo, J.I.    Damage identification study of a seven-story
+     full-scale building slice tested on the UCSD-NEES shake table. Struct. Saf. 2010, 32, 347–356.
+
+34. Ulusoy, H.S.; Feng, M.Q.; Fanning, P.J. System identification of a building from multiple seismic
+     records. Earthq. Eng. Struct. Dyn. 2011, 40, 661–674.
+
+© 2015 by the authors; licensee MD     PI, Basel, Switzerland. This arti cle is an open access article
+
+distributed under the terms and conditions of         the Creative Commons Attribution license
+(http://creativecommons.org/licenses/by/4.0/).

@@ -1,0 +1,965 @@
+              NIH Public Access
+
+              Author Manuscript
+              Pac Symp Biocomput. Author manuscript; available in PMC 2015 January 01.
+
+N            Published in final edited form as:
+H             Pac Symp Biocomput. 2014 ; : 229–240.
+P
+A
+u
+h            PATH-SCAN: A REPORTING TOOL FOR IDENTIFYING
+o
+M            CLINICALLY ACTIONABLE VARIANTS
+a
+u            ROXANA DANESHJOU     †,, ZACHARY ZAPPALA   †,, KIM KUKURBA , SEAN M BOYLE ,  1
+s            KELLY E ORMOND , TERI E KLEIN , MICHAEL SNYDER , CARLOS D BUSTAMANTE ,       1
+i                            *,1,2                             *,1,3
+t            RUSS B ALTMAN      , and STEPHEN B MONTGOMERY
+             1Department of Genetics, Stanford University Stanford, CA 94061, United States
+
+             2Department of Bioengineering, Stanford University Stanford, CA 94061, United States
+
+             3Department of Pathology, Stanford University Stanford, CA 94061, United States
+
+N            Abstract
+H
+P               The American College of Medical Genetics and Genomics (ACMG) recently released guidelines
+A               regarding the reporting of incidental findings in sequencing data. Given the availability of Direct
+A
+t               to Consumer (DTC) genetic testing and the falling cost of whole exome and genome sequencing,
+o               individuals will increasingly have the opportunity to analyze their own genomic data. We have
+r               developed a web-based tool, PATH-SCAN, which annotates individual genomes and exomes for
+M               ClinVar designated pathogenic variants found within the genes from the ACMG guidelines.
+n
+s               Because mutations in these genes predispose individuals to conditions with actionable outcomes,
+r               our tool will allow individuals or researchers to identify potential risk variants in order to consult
+p               physicians or genetic counselors for further evaluation. Moreover, our tool allows individuals to
+t               anonymously submit their pathogenic burden, so that we can crowd source the collection of
+
+                quantitative information regarding the frequency of these variants. We tested our tool on 1092
+                publicly available genomes from the 1000 Genomes project, 163 genomes from the Personal
+                Genome Project, and 15 genomes from a clinical genome sequencing research project. Excluding
+
+                the most commonly seen variant in 1000 Genomes, about 20% of all genomes analyzed had a
+I               ClinVar designated pathogenic variant that required further evaluation.
+-
+A
+             1. Background and Significance
+u
+h                        The era of personalized genomics received a jumpstart in 2007, when 23andMe,
+r                        deCODEme, and Navigenics began to offer Direct to Consumer (DTC) personal genetic
+M                        testing. Reports from these companies include genotyping of up to hundreds of thousands
+a
+u                        of loci with phenotypic interpretation for dozens to hundreds of traits and conditions based
+c                        mainly upon genome wide association studies (The use of such genetic
+p                        information in a clinical setting has been slower to develop, although several academic
+t                        medical centers have established genomic medicine programs. Moreover, with the falling
+
+                         price of next generation sequencing, the number of whole genomes and exomes being
+
+
+             †Co-first author
+             *Co-last author
+           DANESHJOU et al.                                                                     Page 2
+
+                          sequenced is steadily increaWhole genome or exome sequencing provides much
+
+                          more data than genotyping, especially with regards to rare and private mutations. As a
+I                         consequence, incidental findings in an individual’s genome beyond the scope of the research
+-                         or clinical question are likely to exist. There is some debate surrounding the handling of the
+P                         so-called “incidentalome”, particularly since novel, rare, or private mutations may be
+A                                                                                        6
+u                         difficult to interpret and a full interpretation is cost prohibitive in most settings. Recently,
+h                         the American College of Medical Genetic and Genomics (ACMG) put out a report with
+r                         recommendations on which incidental findings should be specifically analyzed and
+M                                7
+a                         reported. In this case, “incidental findings” refer to pathogenic or potentially pathogenic
+u                         variants discovered in a subset of genes during whole genome or exome sequencing,
+c                         regardless of the reason sequencing was oThe list of 57 genes covering 24
+p                         conditions put forward by the ACMG are those that have medically actionable outcomes.
+t
+                          For example, the list includes BRCA1 and TNNI3, mutations in which can lead to breast
+                          cancer and hypertrophic cardiomyopathy, respectively. Currently, it is not known
+                          exactlywhat percentage of individual genomes will carry such variants, and an
+                          understanding of the pathogenic burden will allow researchers to better understand the
+
+                          resources required to evaluate such variants. Here, we present a publicly available tool,
+N                         PATH-SCAN, which annotates genomes for ClinVar designated pathogenic variants in the
+H                         list of genes recommended by the ACMG.
+P
+A
+A             2. Methods
+t
+o                         PATH-SCAN allows a researcher or individual to analyze and annotate individual exomes
+M                         or genomes for a set of pathogenic variants identified in the ClinVar database in the genes
+a                         put forward by the ACMG. These annotations are presented in a report with genomic
+n
+s                         information and links to additional information. Due to the consequences of many of these
+r                         variants, security and privacy are mainstays of the PATH-SCAN program. PATH-SCAN
+t                         maintains complete privacy by performing all analyses on an individual’s local machine,
+                          similar to a previously described genotype analysis tool, INTERPRETOME. PATH-SCAN
+
+                          offers an option to anonymously submit data to our research group allowing us to use crowd
+                          sourcing to determine the prevalence of pathogenic variants found in the ACMG gene list.
+
+              2.1.Pathogenic Variant Selection
+N
+H                         Pathogenic variants were selected from the National Center for Biotechnology Information’s
+-                         (NCBI) ClinVar variant call file (VCF). From this database of variants, those variants with
+A
+A                         at least one submission as “pathogenic” were extracted and annotated with links to other
+u                         clinically relevant databases. Since the ClinVar database is a collaborative database with
+h                         potentially variable quality in individual variant results, we filtered out any variant that was
+r                         tagged with a “variant suspect” code. A variant might be labeled as such for several reasons,
+M
+n                         including being called from an old genomic alignment or a suspected paralog From this list,
+u                         we then extracted only the variants that mapped to the 57 genes listed in the ACMG report.
+c                         Gene boundaries were determined using GRCh37.pIn total, ClinVar had records for
+p                         994 variants designated as pathogenic across 57 genes. These variants are included in the
+t
+                          PATH-SCAN package. The original ClinVar VCF can be found here http://
+                          www.ncbi.nlm.nih.gov/variation/docs/human_variation_vcf/. The use of other databases is
+
+
+
+                          Pac Symp Biocomput. Author manuscript; available in PMC 2015 January 01.
+           DANESHJOU et al.                                                                   Page 3
+
+                         allowed in case an individual wishes to use an alternative database for annotation (see
+
+N                        Appendix).
+H
+-            2.2.Analysis Tool
+A
+A                        Our cross-platform program, PATH-SCAN, utilizes a database of 994 variants to scan
+u                        personal genomes and annotate them. The annotations produced by PATH-SCAN are made
+h                        available to the end user or researcher as a local html page with a simplified user interface
+r                        for increased accessibility and transparency. To assist interpretation of this information and
+M
+n                        provide a model for future genome interpretation tools, each recognized variant and
+u                        annotation is presented alongside links to relevant educational resources, including ClinVar,
+c                        OMIM, and consolidated Gene Reviews from the National Center for Biotechnology
+p                        Information (NCBI).
+t
+                         Crowd sourcing data collection was accomplished by making a submission link available
+
+                         that transfers de-identified anonymous information back to our data collection server. In
+                         order to prevent any privacy concerns regarding this data collection, PATH-SCAN only
+                         transmits the total number of pathogenic variants annotated for each gene (e.g. the total
+                         pathogenic burden per gene of an individual genome) as well as a unique key to prevent
+I
+-                        duplicate submissions from unwary users. Additional information such as ancestry is
+A                        optional to transmit. The unique key is calculated by PATH-SCAN automatically by hashing
+A                        the personal genome file using the SHA-2 family of cryptographic functions. In addition to
+u                        these security measures, a privacy message is presented before the user can submit their
+h
+r                        data. For the personal genomes we had direct access to, the full annotations made by PATH-
+M                        SCAN were used to collect data on individual diseases and variants as well as aggregate
+n                        distributions of pathogenic variants across individuals.
+u
+c                        PATH-SCAN is a command line utility that was developed in Python 2.7.5 and has no
+p
+t                        external dependencies. The PATH-SCAN program comes pre-loaded with the existing
+                         database of pathogenic variants. We also have the ability to load updated databases pending
+                         re-releases of the ACMG recommendation or for custom made variant databases. PATH-
+                         SCAN will automatically detect and process variant call files (VCFs), tab-separated variant
+
+                         (TSV) files from Complete Genomics, and SNP chip results from 23andMe. Because
+                         23andMe only genotypes SNPs, PATH-SCAN will not scan data in this form for indels. For
+I                        a whole genome VCF file that is 336 MB, PATH-SCAN runs in 24 seconds on a machine
+H                        with 16GB of RAM and a 2.3 ghz processer. The script and database are bundled and
+P
+A                        available for download online at: http://montgomerylab.stanford.edu/pathscan.zip.
+u
+h            2.3.Applying PATH-SCAN to existing datasets: 1000 Genomes, Personal Genomes Project,
+r            and a clinical sequencing project
+M
+a                        We pilot tested PATH-SCAN on the 1092 individuals from the 1000 Genomes project
+u                        publicly available low coverage (~4x) geWe also investigated how ancestry
+c                        affected the number of variants found in each population. Additionally, we tested PATH-
+p
+t                        SCAN on exome chip data for 2123 individuals from the 1000 Genomes project. These
+                         individuals overlap with the 1092 whole genome data.
+
+
+
+
+                          Pac Symp Biocomput. Author manuscript; available in PMC 2015 January 01.
+           DANESHJOU et al.                                                                  Page 4
+
+                         We also tested our tool on 163 Genomes downloaded from the Personal Genomes Project,
+                         which were in the Complete Genomics format (www.personalgenomes.org/
+N                                      12
+H                        community.html).We only considered variants called with high quality. High quality
+P                        variants are called on homozygous calls with a quality score greater than or equal to 20 and
+A                        heterozygous calls with a quality score greater than or equal to 40 under the maximum
+A                        likelihood variable allele fraction.
+t
+o
+r                        In addition to the larger scale, low-coverage studies previously discussed, we tested our tool
+a                        on a clinical sequencing project consisting of 15 individuals (3 trios and 4 unrelated
+n                        individuals).
+s
+r
+p            3. Results
+t            3.1.Pathogenic variants studied
+
+                         By filtering ClinVar for variants with evidence of pathogenicity in the subset of ACMG
+                         guideline genes, we selected 994 variants that our tool evaluates. These variants include 651
+                         single nucleotide polymorphisms (SNPs) and 343 small insertions/deletions (indels). 65.5%
+
+N                        of the pathogenic variants evaluated were SNPs, evenly distributed across all 12 non-
+H                        synonymous nucleotide-to-nucleotide transversions. Variants were not evenly distributed
+P                        across the 57 genes, with BRCA1 and BRCA2 having the largest number of variants (Figure
+A                        1). An example of the output of PATH-SCAN can be seen in Figure 2.
+A
+t
+o            3.2.PATH-SCAN identifies variants in 1000 Genomes Data
+M                        Out of 1092 individuals with low coverage genome data, 633 have at least one ClinVar
+a
+n                        designated pathogenic variant reported in one of the ACMG genes. Out of the 2123 exome-
+s                        chipped individuals (which overlaps with the 1092 individuals with whole genomes), 997
+r                        individuals had at least one variant reported. The most common variant seen was rs1805124
+t                        (SCN5A), which was seen in 41.2% of individuals (Table 1). This variant has an allele
+
+                         frequency of about 20% in the 1000 Genomes population. Excluding this very common
+                         variant, out of 1092 low coverage genomes, 225 individuals had at least one pathogenic
+                         variant in one of the ACMG genes, and 237 individuals had at least one pathogenic variant
+                         in the exome chip data.
+
+N
+H            3.3.PATH-SCAN identifies variants in the Personal Genomes Project
+P                        We applied PATH-SCAN to 163 genomes in Complete Genomics format. 77 of these
+A                        individuals were found to have at least one variant. The most common variant, once again,
+A
+t                        was rs1805124 (Table 2). Excluding this variant, 27 individuals had at least one variant in
+o                        one of the ACMG guidelines genes.
+M
+a            3.4.Analyzing variant burden across populations
+u
+s                        We looked at the variant detection in the different 1000 Genomes populations (Table 3).
+i                        Because of the high allele frequency of rs180524, we looked at the frequencies with and
+t                        without this SNP.
+
+
+
+
+
+                          Pac Symp Biocomput. Author manuscript; available in PMC 2015 January 01.
+           DANESHJOU et al.                                                                   Page 5
+
+                         In 1092 Genomes, the average number of variants per genome ranged from 0.35 (CHS) to
+
+N                        1.29 (IBS). Without rs180524, the average number of variants per person ranged from 0.09
+H                        (LWK) to 0.39 (MXL). Populations that were closely related had similar average variants
+-                        per person (Figure 3). Particular populations, such as LWK, had a much lower variant count
+A                        than other populations when rs180524 was not taken into consideration.
+A
+u
+h            3.5.Applying PATH-SCAN to a clinical genome sequencing project
+r                        In a clinical genome sequencing project consisting of 15 individuals, 2 subjects had 2
+M
+n                        ClinVar pathogenic variants, 5 subjects had 2 ClinVar pathogenic variants, and 8 subjects
+u                        had 0 ClinVar pathogenic variants. The variant list was not directly reported to us due to
+c                        IRB constraints.
+p
+t
+             4. Discussion
+
+                         Since the ACMG report on incidental findings was published, the8,13as been much debate
+                         around explicitly searching for and reporting variants in the ACMGIssuese list.
+                         have included the difficulty of substantiating which variants are pathogenic, the cost of
+                         additional screening, and the lack of information about how often variants are seen and how
+I
+-                        many each individual could possibly carry. Here, we present a tool, which serves as an
+A                        example of how technicians, researchers, clinicians, and individuals may screen for
+A                        potentially pathogenic and actionable variants. Furthermore, we have applied this tool on
+u                        existing datasets and have made it available for public use in order to gauge the frequency
+h
+r                        that potentially pathogenic variants in the ACMG genes are observed.
+M
+n            4.1.Variant Selection
+u
+c                        One of the major issues was outlined in the original ACMG report: “The Working Group
+p                        recognized that there is no single database currently available that represents an accurately
+t                        curated compendium of known pathogenic variants, nor is there an automated algorithm to
+                         identify all novel variants meeting criteria for pathogenicity.” For the purposes of this
+
+                         project, we selected the ClinVar database, because the variants submitted come directly
+                         from patient data. We selected only those variants that had at least one submission indicating
+                         that the variant was pathogenic in nature. A limitation of this approach is the inclusion of
+                         variants that may have conflicting submissions listing the variant as pathogenic and benign,
+I
+H                        and issues such as sample size and study population can contribute to this confusion about
+P                        variant interpretation. However, the ClinVar curators are making an effort to review
+A                        submissions. We recognize that variants labeled as pathogenic by ClinVar may not be
+u                        viewed as so when analyzed by a clinical laboratory, genetic counselor, or clinician.
+h
+r                        However, their presence in a genome or exome will warrant evaluation in order to determine
+M                        if they should be acted upon. Thus, understanding the frequency of such variants will allow
+a                        us to draw conclusions about the amount of resources required to properly vet variants in the
+u                        ACMG guidelines genes.
+c
+p                        Another limitation of our database choice is that we do not pick up novel, rare, or private
+t
+                         mutations that are not currently annotated in ClinVar. However, since we could not reliably
+                         make any inference about the pathogenicity of such variants, we selected not to include them
+
+
+
+                          Pac Symp Biocomput. Author manuscript; available in PMC 2015 January 01.
+           DANESHJOU et al.                                                                      Page 6
+
+                          in our publicly available tool. Finally, because most research studies are done in individuals
+
+                          of European descent, there is likely an overrepresentation of variants that are pathogenic in
+I                         populations of European descent.
+-
+P                         We do note that the pathogenic variants in the ClinVar database are not evenly distributed
+A                         between genes. The number of pathogenic variants reported in a gene can be influenced by
+u
+h                         several factors – including the length of the gene, the amount of selective pressure, and the
+r                         number of studies focusing on the gene. Interestingly, BRCA1 and BRCA2 had the largest
+M                         number of pathogenic variants. This could be due to the extensive studies on these genes and
+a                         their role in hereditary breast and ovarian cancer.
+u
+c
+p             4.2.Findings in the 1000 Genomes Data and Personal Genomes Project
+t                         Our successful application of PATH-SCAN to the 1000 Genomes data sets confirmed the
+
+                          ability of our tool to process whole genomes. In 1092 low pass genomes, 566 individuals
+                          had a pathogenic variant in one of the ACMG genes.
+
+                          The most observed variant was rs1805124 (H558R), seen in 41.2% of individuals. The
+                          population allele frequency of this variant is about 20% in 1000 Genomes. This is a prime
+N
+H                         example of the challenge with implementing an automatic system to follow up on potentially
+P                         pathogenic variants in ACMG genes. SCN5A H558R has been associated with atrial
+A                         fibrillation and changes in cardiac conducMultiple studies have also demonstrated
+A
+t                         that the presence of this variant combined with other rare SCN5A variants perturbs heart
+o                         electrophysiology.1However, there are also studies in which this variant may mitigate
+M                         the effects of a particular mutation that causes BrugadaFinally, it should be
+a                         noted that this variant is quite common in the general population. As Klitzman et al. noted in
+n
+s                         response to the ACMG Guidelines, ‘pathogenic’ variants with a high frequency in the
+r                         population but a low corresponding disease prevalence may cause unnecessary alarm.
+t                         Because this variant can affect disease risk when other mutations are also present, its
+
+                          presence would require evaluation of the entire gene and family history by an experienced
+                          genetic counselor or clinician. This example supports the need for comprehensive follow up
+                          of variants that are thought to be pathogenic.
+
+                          Excluding rs1805124 (H558R), 233 individuals out of 1092 carried an incidental finding.
+N
+H                         These other variants were less common, with less than 5% of individuals carrying any single
+-                         variant. These variants included risks for such conditions as colon cancer (rs1801166) and
+A                         cardiomyopathy (rs121912998), which can profoundly impact health and lifestyle.
+A
+u                         When we looked across the populations, we saw that there were differences in the average
+h
+r                         number of variants per person. Because many of these variants were derived from studies
+M                         done in individuals of European ancestry, differences could be attributed to this selection
+n                         bias.4Furthermore, different populations likely have different variants driving their total
+u                         variant counts due to differences in population allele frequency. In the case of LWK, which
+c
+p                         had a very low average variant per person count when the most common variant was
+t                         removed, we are likely missing population specific pathogenic variants. Another complex
+                          issue brought up by ancestry is pathogenicity – variants that may be causative and
+                          pathogenic in one population may not have the same penetrance or impact in another.
+
+
+
+                           Pac Symp Biocomput. Author manuscript; available in PMC 2015 January 01.
+           DANESHJOU et al.                                                                   Page 7
+
+                         With our crowdsourcing tool, ancestry will be an option that individuals can submit; we
+
+N                        hope that this will allow us to get a more accurate picture of the distribution of these variants
+H                        across individuals of different and mixed ancestries.
+-
+A                        We also note that since these are low coverage genomes (~4x), some variants reported could
+A                        be false. Genomes sequenced to clinical standards would have much higher coverage and
+u                        have more confident calls. Thus, this data may be skewed by false positives.
+h
+r
+M                        To evaluate our tool on Complete Genomics data and higher coverage genomes, we applied
+n                        PATH-SCAN to 163 genomes made publicly available from the Personal Genomes Project.
+u                        Once again, rs1805124 (H558R) was the most common variant. However, excluding this
+c                        variant, 17% of genomes had variants of interest. Overrepresentation of certain variants may
+p
+t                        occur if individuals in the Personal Genome Project are related. Several of these variants
+                         were low frequency at a population level, as they did not appear in the 1000 Genomes data.
+                         Our tool assists in the evaluation of such variants by pinpointing them within minutes of
+                         scanning a genome.
+
+
+             4.3.Using PATH-SCAN on Clinical Genomes
+I                        Finally, we ran PATH-SCAN on a clinical genome sequencing cohort of fifteen individuals.
+-
+A                        The output provided a starting point for the evaluation of variants in the project. Previously,
+A                        people used a gene-based approach to look at all variants in a gene of interest and then used
+u                        manual curation to select variants for further evaluation.
+h
+r            4.4.PATH-SCAN as a quantitative evaluation tool
+M
+n                        PATH-SCAN is a publicly available tool; individuals using it can choose to anonymously
+u                        submit their pathogenic burden (i.e. the number of variants seen in their genome) and
+c
+p                        ancestry to our server. Over time, we aim to use crowdsourcing to get a more accurate
+t                        number of how often potentially pathogenic variants are seen and how ancestry affects these
+                         numbers.
+
+                         The current iteration of our tool serves as the foundation for additional functionalities in
+
+                         development. Because ClinVar designated pathogenic variants may not truly be pathogenic,
+                         we are currently working on adding variant effect prediction scores, such as PolyPhen and
+I                        SIFT to our tool.4
+H
+P                        We have found that even with the most common pathogenic variant removed, a substantial
+A                        percentage of individuals still carry variants in ACMG guidelines genes that require
+u
+h                        additional investigation. Of course, due to the limitations of the ClinVar database, many of
+r                        these variants may be benign. However, we feel that each variant needs to be evaluated in
+M                        the context of other mutations, clinical history, and family history by a clinician or genetic
+a                        counselor. While not all of these variants may be ultimately reported back, evaluating these
+u
+c                        variants will require additional resources. Thus, understanding how often such variants
+p                        occur is key to assessing the resource utilization of following the ACMG Guidelines. In the
+t                        past few months, there has much debate surrounding the ACMG Guidelines and their
+                         implementation. Our tool PATH-SCAN aims to streamline the identification of variants in
+
+
+
+
+                          Pac Symp Biocomput. Author manuscript; available in PMC 2015 January 01.
+           DANESHJOU et al.                                                                   Page 8
+
+                         ACMG recommended genes that warrant further investigation and to provide data on how
+
+                         often each variant is seen.
+I
+-            Acknowledgments
+P
+A                        RBA and TEK are funded by NIH/NIGMS NIGMS R24 GM61374. SBM is funded by the Edward Mallinckrodt Jr.
+u                        Foundation. RD is funded by Stanford MSTP and T32 HG000044. ZZ is funded by NSF GRFP and T32
+h                        HG000044. KEO is funded by 5 P50 HG003389-05
+r
+M            6. Appendix A
+a
+u                        PATH-SCAN Manual Download http://montgomerylab.stanford.edu/pathscan.zip
+c
+p                        Requirements: Python 2.7.5; a web browser
+t
+
+                         Command Line Interface A full description of the CLI for PATH-SCAN follows:
+
+                         $ python pathscan.py <genome file> [--suppress | --db <database>]
+
+                         <genome file> is either a VCF file, a Complete Genomics TSV file, or a 23andMe SNP file.
+N
+H                        --suppress If this flag is specificed PATH-SCAN will only report data on the command line.
+P
+A                        --db <database file> Can be used to specify a different database file. The database format is
+A
+t                        a TAB-delimited file with 9 columns, all required. First column is chromosome, second is
+o                        position, third is RSID, fourth is the reference allele, fifth is the alternate allele, sixth is the
+M                        gene name, seven is the gene review ID numbers (can be replaced with a '.'), eight is the
+a
+n                        OMIM ID number (can be replaced with a '.', and the ninth is the clinical significance code
+s                        from ClinVar (can be replaced with a '.').
+r
+t
+             References
+                         1. Gurwitz D, Bregman-Eschet Y. Personal genomics services: whose genomes? European journal of
+                           human genetics : EJHG. 2009; 17:883–9. [PubMed: 19259127]
+                         2. Kalf RRJ, et al. Variations in predicted risks in personal genome testing for common complex
+                           diseases. Genetics in medicine : official journal of the American College of Medical Genetics.
+                           2013:1–7. doi:10.1038/gim.2013.80.
+N
+H                        3. Vernez SL, Salari K, Ormond KE, Lee SS-J. Personal genome testing in medical education: student
+-                          experiences with genotyping in the classroom. Genome medicine. 2013; 5:24. [PubMed: 23510111]
+A                        4. Manolio, T. a, et al. Implementing genomic medicine in the clinic: the future is here. Genetics in
+A                          medicine: official journal of the American College of Medical Genetics. 2013; 15:258–67.
+u                          [PubMed: 23306799]
+h                        5. Metzker ML. Sequencing technologies - the next generation. Nature reviews. Genetics. 2010;
+r                          11:31–46. [PubMed: 19997069]
+M                        6. Kohane I, Masys D, Altman R. The incidentalome: a threat to genomic medicine. JAMA: the
+n                          journal of the. 2006; 296:212–215.
+u                        7. Green RC, et al. ACMG recommendations for reporting of incidental findings in clinical exome and
+c                          genome sequencing. Genetics in medicine: official journal of the American College of Medical
+p                          Genetics. 2013 doi:10.1038/gim.2013.73.
+t
+                         8. Allyse M, Michie M. Not-so-incidental findings: the ACMG recommendations on the reporting of
+                           incidental findings in clinical whole genome and whole exome sequencing. Trends in
+                           biotechnology. 2013; 31:439–441. [PubMed: 23664778]
+
+
+                          Pac Symp Biocomput. Author manuscript; available in PMC 2015 January 01.
+           DANESHJOU et al.                                                                    Page 9
+
+                         9. Karczewski K, Tirrell R. Interpretome: A freely available, modular, and secure personal genome
+                           interpretation engine. Pac. Symp. 2012
+
+I                        10. Consortium IHGS. Finishing the euchromatic sequence of the human genome. Nature. 2004;
+H                           431:931–45. [PubMed: 15496913]
+P                        11. Abecasis GR, et al. An integrated map of genetic variation from 1,092 human genomes. Nature.
+A                           2012; 491:56–65. [PubMed: 23128226]
+u                        12. Lunshof JE, Chadwick R, Vorhaus DB, Church GM. From genetic privacy to open consent. Nature
+h                           reviews. Genetics. 2008; 9:406–11.
+o                        13. Klitzman R, Appelbaum PS, Chung W. Return of Secondary Genomic Findings vs Patient
+M                           Autonomy Implications for Medical Care. JAMA. 2013; 310:369–370. [PubMed: 23917282]
+a                        14. Rosenberg, N. a, et al. Genome-wide association studies in diverse populations. Nature reviews.
+u                           Genetics. 2010; 11:356–66. [PubMed: 20395969]
+s
+r                        15. Chen L, et al. Polymorphism H558R in the Human Cardiac Sodium Channel SCN5A Gene is
+t                           Associated with Atrial Fibrillation. Journal of International Medical Research. 2011; 39:1908–
+                            1916. [PubMed: 22117993]
+                         16. Gouas L, et al. Association of KCNQ1, KCNE1, KCNH2 and SCN5A polymorphisms with QTc
+                            interval length in a healthy population. European journal of human genetics: EJHG. 2005;
+                            13:1213–22. [PubMed: 16132053]
+                         17. Cheng J, et al. SCN5A rare variants in familial dilated cardiomyopathy decrease peak sodium
+                            current depending on the common polymorphism H558R and common splice variant Q1077del.
+N                           Clinical and translational science. 2010; 3:287–94. [PubMed: 21167004]
+H                        18. Makielski JC, et al. A ubiquitous splice variant and a common polymorphism affect heterologous
+-                           expression of recombinant human SCN5A heart sodium channels. Circulation research. 2003;
+A                           93:821–8. [PubMed: 14500339]
+A
+u                        19. Ye B, Valdivia CR, Ackerman MJ, Makielski JC. A common human SCN5A polymorphism
+h                           modifies expression of an arrhythmia causing mutation. Physiological genomics. 2003; 12:187–93.
+r                           [PubMed: 12454206]
+M                        20. Poelzing S, et al. SCN5A polymorphism restores trafficking of a Brugada syndrome mutation on a
+n                           separate gene. Circulation. 2006; 114:368–76. [PubMed: 16864729]
+u                        21. Frayling I, Beck N. The APC variants I1307K and E1317Q are associated with colorectal tumors,
+c                           but not always with a family history. Proceedings of the. 1998
+p                        22. Yang Z, et al. Desmosomal dysfunction due to mutations in desmoplakin causes arrhythmogenic
+t                           right ventricular dysplasia/cardiomyopathy. Circulation research. 2006; 99:646–55. [PubMed:
+                            16917092]
+                         23. Kumar P, Henikoff S, Ng PC. Predicting the effects of coding non-synonymous variants on protein
+                            function using the SIFT algorithm. Nature protocols. 2009; 4:1073–81.
+
+                         24. Adzhubei, I. a, et al. A method and server for predicting damaging missense mutations. Nature
+                            methods. 2010; 7:248–9. [PubMed: 20354512]
+N
+H
+P
+A
+A
+t
+o
+r
+M
+n
+s
+r
+p
+t
+
+
+
+
+                          Pac Symp Biocomput. Author manuscript; available in PMC 2015 January 01.
+          DANESHJOU et al.                                                          Page 10
+
+
+
+N
+H
+P
+A
+u
+h
+r
+M
+n
+s
+r
+p
+t
+
+                                                    Figure 1.
+          Total number of pathogenic variants found per gene in ClinVar. In total there were 994 variants distributed across the 57 genes
+                                        specified by the ACMG recommendations.
+
+N
+H
+P
+A
+u
+h
+r
+M
+n
+u
+c
+p
+t
+
+
+
+
+
+N
+H
+P
+A
+u
+h
+r
+M
+n
+u
+c
+p
+t
+
+
+
+
+                       Pac Symp Biocomput. Author manuscript; available in PMC 2015 January 01.
+          DANESHJOU et al.                                                          Page 11
+
+
+
+N
+H
+P
+A
+u
+h
+r
+M
+n
+s
+r
+p
+t
+
+
+
+
+
+N                                                    Figure 2.
+H          Sample output of PATH-SCAN. Information regarding the affected variant (including chromosome, position, rsID, and gene)
+P         are displayed alongside relevant information including what condition this variant is expected to have pathology in and links to
+A          clinical reviews and publications regarding the condition. A crowd-sourcing form is available at the bottom of the page if users
+u
+h                                   wish to submit de-identified information to our servers.
+r
+M
+n
+u
+c
+p
+t
+
+
+
+
+
+N
+H
+P
+A
+u
+h
+r
+M
+n
+u
+c
+p
+t
+
+
+
+
+                       Pac Symp Biocomput. Author manuscript; available in PMC 2015 January 01.
+          DANESHJOU et al.                                                         Page 12
+
+
+
+N
+H
+P
+A
+u
+h
+r
+M
+n
+s
+r
+p
+t
+
+
+                                                    Figure 3.
+           Average variants per individual in 1092 Genomes (with rs1805124 removed due to high allele frequency in all populations).
+
+N
+H
+P
+A
+u
+h
+r
+M
+n
+u
+c
+p
+t
+
+
+
+
+
+N
+H
+P
+A
+u
+h
+r
+M
+n
+u
+c
+p
+t
+
+
+
+
+                       Pac Symp Biocomput. Author manuscript; available in PMC 2015 January 01.
+             DANESHJOU et al.                                                                                    Page 13
+
+
+
+
+                                                              Table 1
+
+N            Variants and individual frequencies seen in the 1000 Genomes Project Data. Absent data from the exome chip
+H
+-            columns due to incomplete sequencing coverage in those individuals. Frequencies represent frequency of
+P            individuals with at least one copy of the variant and not allele frequencies.
+A
+A
+u              Gene                         Disease                          rsID     4× Genome  Freq.   Exome    Freq.
+h                                                                                       (1,092            Chip
+o                                                                                       indv.)           indv.)
+M
+               APC                 Familial adenomatous polyposis         rs137854567     2      0.002     -        -
+n
+u                                                                          rs1801166      8      0.007     -        -
+c              DSP           Arrhythmogenic right-ventricular cardiomyopatrs121912998     4      0.004     -        -
+r
+p              LMNA        Hypertrophic cardiomyopathy, dilated cardiomyoprs57830985      1      0.001     -        -
+t              MSH6                      Lynch syndrome                    rs2020912     11      0.010     13     0.006
+
+              SCN5A      Romano–Ward long QT syndrome types 1, 2, and 3, Brrs1805124     450     0.412    852     0.401
+                                           syndrome
+                                                                          rs41261344     26      0.024     72     0.034
+                                                                          rs45620037      1      0.001     -        -
+
+                                                                           rs7626962     26      0.024     65     0.031
+N              SDHB       Hereditary paraganglioma–pheochromocytoma syndrors11203289     19      0.017     -        -
+H
+-                                                                         rs33927012     17      0.016     30     0.014
+P              SDHD       Hereditary paraganglioma–pheochromocytoma syndrors11214077     20      0.018     -        -
+A
+A                                                                         rs34677591     13      0.012     -        -
+u
+h              STK11                  Peutz–Jeghers syndrome              rs59912467     28      0.026     61     0.029
+o              TP53                   Li–Fraumeni syndrome                rs28934576      1      0.001     -        -
+M
+               TSC1                  Tuberous sclerosis complex           rs118203576    48      0.044     -        -
+n                                                                         rs118203657     5      0.005     -        -
+u
+c
+r
+p
+t
+
+
+
+
+
+
+
+N
+H
+-
+P
+A
+A
+u
+h
+o
+M
+
+n
+u
+c
+r
+p
+t
+
+
+
+
+                               Pac Symp Biocomput. Author manuscript; available in PMC 2015 January 01.
+            DANESHJOU et al.                                                                       Page 14
+
+
+
+                                                       Table 2
+
+N           Variants and counts seen in 163 Personal Genomes
+H
+-            Gene                             Disease                              rsID     PGP Genomes
+A                                                                                          (163 individuals)
+
+u             APC                      Familial adenomatous polyposis            rs1801166       5
+h            DSG2                Arrhythmogenic right-ventricular cardiomyopathyrs193922639      2
+o
+r            FBN1     Marfan syndrome, Loeys–Ddissectionsmes, and familial thorars137854475aneury1ms and
+M
+n            KCNQ1        Romano–Ward long QT syndrome types 1, 2, and 3, Brugadrs267607197      1
+u             RET          Multiple endocrine neoplasia type 2; Familial medullarrs77724903cancer1
+c
+p            SCN5A        Romano–Ward long QT syndrome types 1, 2, and 3, Brugadars1805124      62
+t                                                                                rs41261344      1
+                                                                                rs137854610      1
+
+             SDHB              Hereditary paraganglioma–pheochromocytoma syndromers33927012      7
+             SDHD              Hereditary paraganglioma–pheochromocytoma syndromers11214077      5
+
+                                                                                 rs34677591      1
+             STK11                       Peutz-Jeghers syndrome                  rs59912467      1
+N
+H            TNNT2              Hypertrophic cardiomyopathy, dilated cardiomyopars121964857      1
+P            TSC1                       Tuberous sclerosis complex              rs118203657      1
+A
+A
+u
+h
+o
+M
+a
+n
+s
+c
+p
+t
+
+
+
+
+
+
+
+N
+H
+P
+A
+A
+u
+h
+r
+M
+a
+n
+s
+r
+p
+t
+
+
+
+
+                           Pac Symp Biocomput. Author manuscript; available in PMC 2015 January 01.
+              DANESHJOU et al.                                                                                       Page 15
+
+
+
+
+                                                                 Table 3
+
+
+N             Number of variants seen in the different 1000 Genomes populations.
+H
+-              Population   4× Genome       Avg. variant    Avg. variant     Exome Chip      Avg. variant     Avg. variant
+P                          Samples (1092  count/ person 4× count/person 4×  Samples (2123    count/person    count/person
+A                              total)        Genome         Genome w/o          total)       Exome Chip     Exome Chip w/o
+A                                                             rs180524                                         rs180524
+u
+h                ACB            0               -                -               98            71/0.72          20/0.20
+o
+r                ASW            61            44/0.72         12/0.20            97            63/0.65          10/0.10
+M                CDX            0               -                -              100            36/0.36          24/0.24
+a
+u                CEU            85            45/0.53         13/0.15           104            41/0.39          5/0.05
+s
+c                CHB            97            44/0.45         20/0.21           100            44/0.44          20/0.2
+p                CHD            0               -                -               1               0/0             0/0
+t
+                 CHS           100            35/0.35         21/0.21           150            44/0.37          35/0.23
+
+                 CLM            60            47/0.78         21/0.35           107            52/0.46          2/0.19
+                  FIN           93            45/0.48         13/0.14           100            40/0.4           4/0.04
+
+                 GBR            89            53/0.60         13/0.15           101            54/0.53          9/0.09
+
+                  GIH           0               -                -               93            42/0.45          4/0.04
+N                 IBS           14            18/1.29          4/0.29           147            87/0.59          12/0.08
+I
+H                 JPT           89            35/0.39         10/0.11           100            37/0.37          10/0.1
+P
+A                KHV            0               -                -              118            56/0.47          38/0.32
+A                LWK            97            64/0.66          9/0.09           100            64/0.64          6/0.06
+u
+t                MKK            0               -                -               31            22/0.71          1/0.03
+o
+r                MXL            66            47/0.71         26/0.39           100            35/0.35          5/0.05
+M                 PEL           0               -                -              104            46/0.44           0/0
+a
+n                PUR            55            49/0.89         21/0.38           111            62/0.56          3/0.02
+u
+c                 TSI           98            69/0.70         22/0.22           100            57/0.57          9/0.09
+i                 YRI           88            85/0.97         25/0.28           161            129/0.80         24/0.15
+p
+t             ACB- African Caribbean in Barbados; ASW - HapMap African ancestry individuals from Southwest US; CDX- Chinese Dai in Xishuangban▯na,
+
+              China; CEU – Utah residents with Northern and Western European ancestry; CHB - Han Chinese in Beijing; CHD - Chinese in metropol▯itan
+              Denver, CO; CHS – Southern Han Chinese; CLM - Colombian in Medellin, Colombia; FIN -HapMap Finnish individuals from Finland; GBR▯ -
+              British individuals from England and Scotland; GIH - HapMap Gujarati India individuals from Texas; IBS - Iberian populations in ▯Spain; JPT –
+              Japanese in Tokyo, Japan; KHV - Kinh in Ho Chi Minh City, Vietnam; LWK - Luhya individuals in Webuye, Kenya; MKK- HapMap Maasai
+              individuals from Kenya; MXL - HapMap Mexican individuals from LA California; PEL - Peruvian in Lima, Peru; PUR- Puerto Rican in ▯Puerto
+              Rico; TSI – Tuscans from Italy; YRI- Yoruba from Ibadan, Nigeria
+N
+I
+H
+P
+A
+
+A
+t
+h
+r
+M
+a
+n
+u
+s
+r
+p
+t
+
+
+
+
+
+                                Pac Symp Biocomput. Author manuscript; available in PMC 2015 January 01.

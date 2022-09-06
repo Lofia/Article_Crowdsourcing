@@ -1,0 +1,681 @@
+Measuring Information Acquisition from Sensory Input
+
+
+Using Automated Scoring of Natural-Language
+
+Descriptions
+
+
+Daniel R. Saunders*, Peter J. Bex, Dylan J. Rose, Russell L. Woods
+
+Schepens Eye Research Institute, Massachusetts Eye and Ear, Boston, Massachusetts, United States of America
+
+
+
+    Abstract
+
+    Information acquisition, the gathering and interpretation of sensory information, is a basic function of mobile organisms.
+    We describe a new method for measuring this ability in humans, using free-recall responses to sensory stimuli which are
+    scored objectively using a ‘‘wisdom of crowds’’ approach. As an example, we demonstrate this metric using perception of
+    video stimuli. Immediately after viewing a 30 s video clip, subjects responded to a prompt to give a short description of the
+
+    clip in natural language. These responses were scored automatically by comparison to a dataset of responses to the same
+    clip by normally-sighted viewers (the crowd). In this case, the normative dataset consisted of responses to 200 clips by 60
+    subjects who were stratified by age (range 22 to 85y) and viewed the clips in the lab, for 2,400 responses, and by 99
+    crowdsourced participants (age range 20 to 66y) who viewed clips in their Web browser, for 4,000 responses. We compared
+    different algorithms for computing these similarities and found that a simple count of the words in common had the best
+
+    performance. It correctly matched 75% of the lab-sourced and 95% of crowdsourced responses to their corresponding clips.
+    We validated the measure by showing that when the amount of information in the clip was degraded using defocus lenses,
+    the shared word score decreased across the five predetermined visual-acuity levels, demonstrating a dose-response effect
+    (N=15). This approach, of scoring open-ended immediate free recall of the stimulus, is applicable not only to video, but also
+
+    to other situations where a measure of the information that is successfully acquired is desirable. Information acquired will
+    be affected by stimulus quality, sensory ability, and cognitive processes, so our metric can be used to assess each of these
+    components when the others are controlled.
+
+
+  Citation: Saunders DR, Bex PJ, Rose DJ, Woods RL (2014) Measuring Information Acquisition from Sensory Input Using Automated Scoring of Natural-Language
+  Descriptions. PLoS ONE 9(4): e93251. doi:10.1371/journal.pone.0093251
+
+  Editor: Denis G. Pelli, New York University, United States of America
+  Received May 20, 2013; Accepted March 3, 2014; Published April 2, 2014
+
+  Copyright: ß 2014 Saunders et al. This is an open-access article distributed under the terms of the Creative Commons Attribution License, which permits
+  unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
+  Funding: This research was supported by grant number R01EY019100 from the National Eye Institute. The funders had no role in study design, data collection
+  and analysis, decision to publish, or preparation of the manuscript.
+
+  Competing Interests: The information acquisition method described in this paper for scoring natural language responses relative to a normative dataset is part
+  of a patent application, naming DRS, PJB and RLW, that was submitted by the Schepens Eye Research Institute. The patent application titled ‘‘Measuring
+  Information Acquisition Using Free Recall’’, Application No.: 61/700,111, was filed September 12, 2012 as a provisional application and as a full application on
+  September 12, 2013. This patent application does not alter our adherence to the PLOS ONE policies on sharing data and materials.
+  * E-mail: daniel_saunders@meei.harvard.edu
+
+
+
+Introduction                                                        cognitive functioning. Therefore, while the approach does not
+                                                                    inherently diagnose the source of any impairment in acquiring
+  Mobile organisms are continually gathering information about
+                                                                    information from sensory input, it can be made more specific
+their environment, and acting on it. The information arrives via    through elimination of possibilities using other tests.
+sensory organs, such as eyes and ears, and must then be processed     This method could be used with high-level perception in any
+to derive usable facts about the world. This process is limited not
+                                                                    sensory modality, but we developed it in our search for an
+only by the fidelity of the information source, but also by the     objective metric for video quality. In particular, as a method for
+organism’s sensory and cognitive processing ability. Since these    assessing the benefit of image enhancement for people with vision
+sources of error jointly determine the organism’s functional
+                                                                    loss. Modern digital image processing has the potential to modify
+capabilities, there is a pressing need for performance metrics of   images to make them more visible to people with vision
+information acquisition. Existing approaches have focused on each   impairment. It is increasingly feasible to apply such modifications
+of these stages in isolation, e.g. with computational models of
+                                                                    to video in real time, which could improve the accessibility of
+information quality [1–3], sensory function estimates [4,5] and     television and movies. However, there is a lack of well-established,
+cognitive assessments [6,7], without considering the overall abilityobjective techniques for evaluating the potential benefit of image
+of the individual. Here we present a method for assessing
+                                                                    enhancement [9]. Apart from approaches that use computer
+acquisition and processing of information in humans, using free-    models of the human visual system [10–13], the most common
+recall reportage and a ‘‘wisdom of crowds’’ [8] approach to         methods for estimating video quality are side-by-side comparisons
+objectively measure the valid content of that reportage. While our
+                                                                    of videos [14,15], judgments of video quality on a rating scale [16–
+application assesses vision, and visual stimulus quality, the high  19], and observations of whether participants choose to set some
+level nature of the task means that the approach also assesses
+
+
+
+PLOS ONE | www.plosone.org                                       1                           April 2014 | Volume 9 | Issue 4 | e93251
+                                                                                          Measure Information Acquisition with Descriptions
+
+
+level of enhancement rather than no enhancement when given the         ‘‘normal’’ responses. The comparison is made using an objective
+
+ability to adjust the amount of enhancement [17,20].                   approach that can be broadly categorized as computational
+  A limitation of these methods is that they rely only on subjective   linguistics, though the most successful algorithm that we have
+impressions of video quality, and do not include direct assessment     identified so far is surprisingly simple.
+
+of whether an enhancement aids performance. In the domain of              As an illustration of this new information acquisition metric, we
+watching video for recreation (e.g. television), it is difficult to definecribe its use for video stimuli: 30 s segments from Hollywood
+what constitutes task performance. This, despite TV watching           films and documentaries. In response to an open-ended prompt
+
+being an activity to which many adults devote a significant portion    immediately after viewing, subjects gave a natural-language
+of their leisure time, find a benefit from as a source of relaxation,  description of what they could recall about the video clip.
+use as a way to spend time with other people, and learn from           Automated scoring algorithms were evaluated, and we report an
+
+about the world and their community. A potential objective             experiment which validated the method using artificially degraded
+approach to assessing TV watching is to measure the quantity and       vision.
+accuracy of information that is acquired by the viewer while
+
+watching. Most aspects of vision (e.g. contrast sensitivity, colour    Automated Scoring of Natural-language Descriptions
+vision, perception of fine detail, figure-ground segregation, and         Free-recall methods for measuring information acquisition, such
+face recognition) are engaged when watching a TV program, and          as those used in reading comprehension, typically score the
+
+if any of these abilities are degraded, information acquisition will   responses using a manual coding system [29–31]. In one scoring
+be affected. Similarly, degrading or enhancing (in an effective way)   system [31], coders compare the response to the original passage
+the video may also be able to affect information acquisition.          to count the number of concept words and concept-linking words
+
+Although people more often watch TV for enjoyment than                 they have in common, resulting in a final score in terms of ‘‘idea
+specifically to acquire information (e.g. news), here we are           units’’, which are similar to the ‘‘attributes’’ used when scoring
+considering the relevant information to be any content that needs      crime video responses [24,25]. However, these systems require
+to be understood to follow and appreciate the content of the video.
+                                                                       trained coders, and take a great deal of time [32]. Bernhardt [29]
+That information could include the identity of the people on           estimated up to 10 minutes per response, while Heinz [33] found
+screen, facial expressions or the nature of the setting, without       that manual scoring took 3 minutes per response. This is in
+which the viewing experience may not be coherent or pleasurable.
+                                                                       addition to the time required to construct and validate rubrics for
+For a short video, much of the information that is acquired should     specific stimuli. There is always the risk that the observers have a
+be available to the viewer to report immediately after viewing.        different perception of the meaning of the stimulus than the
+  In the related domain of reading comprehension, many studies
+                                                                       experimenter constructing the rubric (e.g. factors such as gender,
+have attempted to measure information acquisition from reading         age or race). Finally, at least a subset of the responses, if not all,
+material, using multiple choice questions, replacement of deleted      must be scored at least twice by different individuals to establish
+words, or immediate free recall [21,22]. The free-recall approach,     inter-rater reliability.
+
+of having subjects describe what they have just read in their own         Therefore, rather than scoring the free-recall descriptions of the
+words, has been advocated on the basis that it reflects correct        video clips manually using one of these systems, we developed an
+grammatical interpretations [22], and that it is much less             automated scoring strategy. Our algorithms compare responses to
+
+susceptible to guessing than multiple choice questions [23].           a normative dataset of responses to the same video clips. This
+Natural-language responses are scored according to the amount          approach is similar to one that has been used to evaluate machine
+of correct content from the passage, typically using a rubric          translations [34], and to automatically grade student papers [35].
+
+created by the experimenters. Scores have been found to correlate      In those studies, responses were scored by comparison to at least
+with the stimulus quality, as manipulated by adding optical            one ‘‘gold standard’’ response, with greater similarity being taken
+distortion to the image of the text [21]. In the context of eyewitness to indicate higher quality content.
+
+reportage of a short crime video, methods that included a free-           For most media clips, a gold standard is not available, and the
+recall component have been employed, with responses scored             development and validation of a gold standard would require
+using a rubric developed by the experimenters that counted             significant experimental effort, while still being subject to bias
+‘‘attributes’’ in the response [24,25].
+                                                                       towards the experimenters’ expectations. In the present study, we
+  Two studies that directly measured information acquisition in        compare a response to many normative responses, to allow for a
+the domain of video used quizzes about the content of TV episodes      range of valid types of responses that are criterion-free. We
+developed from the corresponding Assistive Description scripts
+                                                                       establish a distribution of standard responses by collecting the
+[26,27]. In those studies, subjects answered two-choice questions      natural language responses of a sample of unbiased viewers. In this
+about a 10-minute video segment. Though a small benefit of the         distribution, some details will be mentioned by most viewers,
+video enhancement for the people with vision impairment was            whereas other details will be mentioned only by a minority of
+
+demonstrated, the authors noted that the baseline performance          viewers. If a video modification, or an impairment of vision, leads
+level of over 70% correct may have led to a ceiling effect. In         to the acquisition of less information or to erroneous inferences,
+another study on the effects of video quality on information           then the responses should be less similar to the response
+
+acquisition, in the context of distance learning by video              distribution from normally-sighted viewers for the same video
+conferencing, quizzes did not detect any differences due to video      clip, just as student papers that contain less correct knowledge will
+degradation [28]. These results agree with the reading compre-         be scored lower using the comparison approach. When the
+
+hension literature regarding the limited value of quizzes, due to      normative dataset is sufficiently large, some concepts will be
+lack of sensitivity and difficulty of construction. The subjective     mentioned repeatedly, presumably because they are important,
+decisions that go into choosing quiz questions are also a concern.     and this can be used to weight the scoring. Also, in a large
+
+  Our solution to the need for objective and unbiased evaluation       normative dataset, less prominent features of the clip are more
+of the content of a natural-language response involves presentation    likely to be mentioned at least once, which gives a basis for
+of the stimulus to a suitable group of people to generate a reference  recognizing these features in new responses and thereby avoiding
+
+dataset. A new response to that stimulus is then compared to these     penalizing less common responses.
+
+
+PLOS ONE | www.plosone.org                                          2                            April 2014 | Volume 9 | Issue 4 | e93251
+                                                                                         Measure Information Acquisition with Descriptions
+
+
+  For the purpose of this scoring method, we collected a large set     distance between words reflects how often they co-occur in the
+
+of free-recall descriptions of the video clips from normally-sighted   same document (where documents correspond to responses in our
+individuals who came into the lab (lab-sourced). There were 60         method), or co-occur with words that themselves co-occur. For
+lab-sourced participants, with equal numbers of men and women          example, words such as ‘‘boat’’ and ‘‘anchor’’ will be drawn closer
+
+in three equally sized age groups: under 60 years old, 60–70 y, and    in semantic space because of their appearance in the same
+greater than 70 y. They all had binocular visual acuity better than    documents, while ‘‘boat’’ and ‘‘ship’’ will also be drawn closer,
+or equal to 20/30, no ocular conditions in their self-reported         even if they do not co-occur in any document, because they are
+
+ophthalmic history, and healthy retinas (assessed using fundus         associated with other words that do co-occur. The corpus used was
+photography). We selected 200 video clips of 30 s duration from        a combination of the freely available ukWaC [39] and Wack-
+Hollywood films and TV programs, representing the genres               ypedia [40] corpora, derived from the Web and Wikipedia, which
+
+Cartoon, Documentary/Nature, and Drama/Other (40, 40, and              together contain nearly three billion words. Passages were scored
+120 clips respectively). Clips were presented with audio, but          for semantic similarity based on their distance within the semantic
+participants were instructed not to comment on it. Participants        space that was constructed.
+
+saw 40 clips each, leading to 2,400 responses in total, or 12            The second approach that we tried was a similar vector space
+responses per video clip across all 60 participants. On completion     model (VSM) of semantics [41], where the co-occurrence of words
+of each video clip, the subject saw two prompts, ‘‘Describe this       in the corpus was judged not within documents but rather within a
+movie clip in a few sentences, as if to someone who has not seen it’’
+                                                                       window of either 2 words or 20 words to the left and right of the
+and ‘‘Is there any other detail you want to mention?’’ The audio       target word. Subsequently, the semantic space was created in the
+recordings of the two responses were concatenated to make a            same way, and the similarity scores were derived from the distance
+single response per video per participant. The responses were
+                                                                       in the resulting semantic space. The third approach that we tested
+automatically transcribed using the speech recognition program         was the Distributional Memory model [42], which is also based on
+MacSpeech Scribe (Nuance Communications, Burlington, MA,
+USA). We pilot tested the built-in speech recognition function of      analyzing a corpus to determine the semantic relationship between
+                                                                       words, but incorporates information about grammatical relations
+the Apple iPad 2 (Apple, Cupertino, CA, USA) for this purpose,         rather than only co-occurrence. It used a somewhat larger text
+but found it to be too limited both in its accuracy and its 90 s
+maximum recording time. These transcriptions were then                 corpus that included the British National Corpus.
+                                                                         Finally, for our fourth approach, we computed passage
+corrected by workers on Amazon Mechanical Turk, 112                    similarity by simply counting the number of words shared between
+individuals in all, who listened to the audio and edited the text
+to match it. Although spot inspection suggested that the accuracy      two passages, after removal of stop words. Words that occurred
+                                                                       more than once within a passage were only counted as a single
+of spelling was high for these transcript editors, there were still    match. Therefore, the score was the average of the vocabulary
+occasional mistakes, such as confusing ‘‘dessert’’ and ‘‘desert’’.
+  As described in detail in Saunders, Bex and Woods [36], we also      words shared with all the remaining responses to a video clip.
+                                                                         The highest rate of correct classification, that is, matching
+collected a separate set of natural-language video descriptions        responses to the video clip of origin, was the simple count of shared
+from Amazon Mechanical Turk workers (crowdsourced), with the
+same prompt and the same video clips. In this dataset, there were      words, for both datasets (Table 1). This result was surprising,
+20 responses per video clip rather than 12, and the demographics       because unlike the other algorithms, it does not have a mechanism
+                                                                       for dealing with synonyms, such as ‘‘river’’ and ‘‘stream’’. Since
+of the sample (N=99) were not controlled. However, we did
+collect self-reported demographic information, and the reported        the strings do not match, they will not increase the similarity score
+median age was 35 y (range 20–66 y), with 63% of the workers           between two passages. Nor does the shared word algorithm
+                                                                       explicitly deal with word endings, for example considering ‘‘read’’
+female.
+                                                                       and ‘‘reading’’ to be two unrelated words, as well as ‘‘book’’ and
+                                                                       ‘‘books’’. However, with a large enough normative dataset, several
+Comparison of Scoring Algorithms                                       synonyms for a concept will naturally occur among the responses,
+  We considered several algorithms for scoring the responses, all
+based on computing the similarity of responses to the normative        which increases the chances that a particular choice of words for a
+                                                                       concept in a new response will be recognized. We suspect that
+responses to the same video clip, such that greater similarity         while LSA and other algorithms deal with synonyms, they may
+corresponded to a better score. The evaluation used a take-one-out
+procedure: for each response in the normative dataset, we              have found false synonyms that contributed noise to the scores.
+removed it from the dataset (e.g. 2,400), and scored it based on       Whatever the reason, the shared word count was the best of the
+                                                                       algorithms that we tested, and achieved a classification rate of
+the remaining dataset (e.g. 2,399) as if it were a new response.
+These scores were used to classify the video clip from which the       75.4% for the lab-sourced dataset and 94.7% for the crowd-
+response originated, by determining which of the 200 clips had the     sourced, as compared to the chance rate of 0.5% (i.e. 1/200 clips).
+                                                                       When the lab-sourced dataset was used to classify crowdsourced
+highest average similarity between the new response and all the
+responses to that clip in the normative database. We then              responses using the shared word count, the rate decreased, to
+compared text-based similarity algorithms using the resulting          82.5%, while when the crowdsourced dataset was used to classify
+                                                                       lab-sourced responses, it improved the classification rate, to
+percent correctly classified.
+  The text passage similarity metrics we considered were derived       81.0%. When a pooled dataset consisting of both the lab-sourced
+from computational linguistics. In all cases, we first processed the   and crowdsourced responses was used to classify responses, the
+                                                                       overall mean classification rate was 90.3%.
+text with the Text to Matrix Generator toolbox for MATLAB
+[37], which, as a first step, removed a list of stop words from the      Therefore, in the subsequent results we report the scores
+text passage, including less informative words such as ‘‘of’’ and      obtained by averaging the number of non-repeating words that
+                                                                       appeared in both the target response and each of the normative
+‘‘the’’, as well as verbal interjections such as ‘‘um’’ and ‘‘sorry’’.
+The first approach to passage similarity that we evaluated was         responses for the corresponding video clip, after removal of stop
+Latent Semantic Analysis [38]. LSA uses a pre-existing corpus of       words. If the same word appeared in many normative responses, it
+                                                                       was effectively weighted more heavily, whereas multiple occur-
+English text documents to construct a semantic space in which the
+
+
+PLOS ONE | www.plosone.org                                          3                           April 2014 | Volume 9 | Issue 4 | e93251
+                                                                                           Measure Information Acquisition with Descriptions
+
+
+
+  Table 1. Comparison of Performance of Text Similarity Algorithms.
+
+
+
+  Text similarity algorithm Lab-sourced responses correctly classified (N=2,400)  Crowdsourced responses correctly classified (N=4,000)
+
+  Latent Semantic Analysis  33.6%                                                 63.5%
+
+  VSM, 2-word window        42.8%                                                 78.3%
+
+  VSM, 20-word window       37.8%                                                 74.4%
+  Distributional memory     36.1%                                                 70.7%
+
+  Shared words              75.4%                                                 94.7%
+
+  doi:10.1371/journal.pone.0093251.t001
+
+
+rences of the same word within a normative response did not affect      smaller normative dataset, but that the standard deviation of the
+
+the score.                                                              error was larger. Depending on the application and the desired
+                                                                        reliability, fewer than 12 responses per video clip in the normative
+                                                                        data set might be feasible, but reliability drops quickly if the size is
+Importance of Normative Dataset Size
+   Would a smaller normative dataset be as effective? We                reduced by more than a few responses below that, particularly in
+computed the percent correctly classified for normative datasets        the lab-sourced dataset.
+
+with fewer than 12 responses per video clip (20 in the case of the
+crowdsourced dataset), by randomly sampling n responses for each        Effect of Reduced Visual Acuity on the Measure of
+
+video and recomputing the percent of responses that were                Information Acquisition
+correctly classified according to their originating video clip, again     We conducted an experiment to validate the average shared
+using a take-one-out strategy and the shared word scoring method
+                                                                        word score as a measure of information acquisition. To assess a
+(relative to the corresponding dataset). We repeated the random-        dose response effect, participants wore defocus lenses of different
+ization procedure 100 times for each value of n, with n ranging         powers to induce optical blur, while they viewed a subset of video
+
+between 2 and the full number of responses available. Figure 1          clips and gave responses as in the normative data collection. We
+shows how the percent correctly classified rapidly increased, until     hypothesized that lower levels of visual acuity, induced by the
+it slowed at the higher values of n. We fitted a two-parameter
+                                                                        defocus lenses, would produce lower shared word scores.
+exponential function from which we determined the n at which the
+function reached 99% of its asymptotic value. The classification
+                                                                        Methods
+rate reached 99% of the asymptote at n=7.9 for the crowdsourced
+dataset, and at n=11.5 for the lab-sourced dataset.                       This research was approved by the Massachusetts Eye and Ear
+                                                                        Infirmary Human Subjects Committee. All participants in the
+   As another way to evaluate algorithm performance with smaller
+normative datasets, the error in the score of a particular response     experiment, and the normative dataset collection, gave informed,
+using a particular random subset was estimated as the difference        explicit consent (either with a signature or by clicking a box on a
+                                                                        Web form).
+between the computed score and the score with the full normative
+dataset. Figure 2 shows that there was not a systematic bias with a       We recruited 15 participants from the community with a
+                                                                        median age of 34 y (21 to 67 y). They all had binocular visual
+
+                                                                        acuity better than or equal to 20/20, no ocular conditions in their
+                                                                        self-reported ophthalmic history, and healthy retinas. Participants
+
+                                                                        had not contributed to the normative dataset, and so had not
+                                                                        viewed the video clips previously. Using a visual acuity chart, we
+                                                                        selected spherical defocus lenses for each participant that produced
+
+                                                                        visual acuities of 20/20 or better, 20/50, 20/125, 20/320, and
+                                                                        20/800.
+
+                                                                          We selected 20 clips for testing from the set of 200 that were
+                                                                        used in collecting the normative dataset, with each genre
+                                                                        represented proportionally (4 Cartoon, 4 Documentary/Nature,
+
+                                                                        and 12 Drama/Other). Each participant viewed all 20 clips in
+                                                                        random order, with audio included, looking through defocus
+
+                                                                        lenses that were switched in random order between each trial, for a
+                                                                        total of 4 trials per visual acuity condition per participant.
+                                                                        Participants received the same two prompts asking for a
+
+                                                                        description of the movie as in the normative data collection, and
+                                                                        their verbal responses were transcribed in the same manner using
+
+Figure 1. Response classification rate for smaller dataset sizes.       MacSpeech Scribe and Mechanical Turk workers.
+Results of simulations on the two datasets for the percent correctly      Responses were scored by counting the average number of
+classified when the size of the normative dataset was reduced from its  words in common with the 12 responses for the originating video
+full size of either 20 or 12 responses per video clip. Each point is based
+                                                                        in the lab-sourced normative dataset. We used a mixed-model
+on 100 random samples. The solid line indicates the best fit of a two-  analysis [43] to test for an effect of the fixed factor, ‘‘acuity
+parameter exponential function, while the dashed line indicates the
+point at which the function reached 99% of the asymptote.               condition’’, since ‘‘participant’’ and ‘‘video clip’’ were fully-crossed
+doi:10.1371/journal.pone.0093251.g001                                   random factors.
+
+
+
+PLOS ONE | www.plosone.org                                           4                            April 2014 | Volume 9 | Issue 4 | e93251
+                                                                                           Measure Information Acquisition with Descriptions
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 2. Error distribution of shared word scores for smaller dataset sizes. Error of the mean word score, relative to the score for the full
+normative dataset, as a function of the size of the A) lab-sourced dataset, or B) crowdsourced dataset. There were 100 random samples for each set
+size. Boxes indicate the interquartile range (IQR), the whiskers contain the range +/2 1.5 * IQR beyond the limits of the boxes (corresponding to
+99.7% of the area of a normal distribution).
+doi:10.1371/journal.pone.0093251.g002
+
+
+Results and Discussion                                                  p=0.003), even when not correcting for video clip or participant
+
+   Figure 3 illustrates the reduction in shared word score due to       differences.
+                                                                          The shared word measure was therefore capable of detecting an
+acuity condition, with a significant overall difference among the       effect of lowered visual acuity with 60 responses per acuity
+acuity levels, p,0.001. Comparing all conditions to the 20/20
+                                                                        condition. Impairing vision with defocus lenses significantly
+acuity condition, the 20/800 condition produced a significantly         reduced the amount of information that the viewer could access
+lower average score, p,0.001, and so did the 20/320 condition,          in the video clips. This demonstration provides support for the
+p=0.007. The shared word scores in the other acuity conditions
+                                                                        proposal that shared word scores from natural-language descrip-
+were not significantly different from the 20/20 condition. There        tions are a valid and reliable measure of information acquisition
+was also a significant decrease in mean score between the 20/50         from a video clip.
+condition and the 20/320 condition, p=0.012. As another test of
+
+the dose response effect, the trend for a reduction in shared words     General Discussion
+as visual acuity reduced was significant (Spearman’s rho=20.17,
+                                                                          In this paper, we describe a novel approach to evaluating
+
+                                                                        information acquisition, that does not rely on subjective judgments
+                                                                        or manual coding of responses, and apply it to watching TV and
+
+                                                                        movies for recreation. Since the scoring is objective, it is not
+                                                                        vulnerable to experimenter bias. While the process of information
+                                                                        acquisition from video is complicated, involving many stages of
+
+                                                                        cognitive and perceptual function, when there is less information
+                                                                        from the image available, as in the defocus experiment, less
+                                                                        information can be acquired. Therefore declining scores for the
+
+                                                                        natural-language descriptions associated with lower acuity is a
+                                                                        necessary outcome for any valid measure of information acquisi-
+                                                                        tion.
+
+                                                                          This method requires a substantial normative dataset, consisting
+                                                                        of multiple natural-language descriptions of each stimulus, with,
+
+                                                                        ideally, a large number of stimuli that should represent different
+                                                                        characteristics of the stimuli of interest. We showed previously that
+                                                                        crowdsourcing using Mechanical Turk is an efficient and low cost
+
+                                                                        way to collect such a natural-language dataset, with properties
+                                                                        similar to those of a dataset collected under more controlled
+Figure 3. Effect of visual acuity on shared word score. Mean            conditions in the lab [36]. That study also explored ways in which
+number of words shared with responses to the same clip in the lab-
+sourced dataset, for different levels of visual acuity as achieved with the two datasets were different, which can explain the difference in
+defocus lenses. Error bars indicate 95% confidence intervals.           mean classification rates: the lab-sourced participants had a more
+doi:10.1371/journal.pone.0093251.g003                                   varied vocabulary, and wrote shorter responses on average. They
+
+
+
+PLOS ONE | www.plosone.org                                           5                            April 2014 | Volume 9 | Issue 4 | e93251
+                                                                                                  Measure Information Acquisition with Descriptions
+
+
+
+
+were also more likely to be male, and were older on average, both            track. Another obstacle to interpreting scores for individuals is the
+factors that were found to be associated with lower shared word              possibility of subjects who use a distinctive vocabulary, or interpret
+
+scores. Here, we demonstrated through resampling that datasets               the video clip in an idiosyncratic manner. These scores will be
+smaller than those we collected may also be effective. With the lab-         systematically lower due to divergence of their responses from the
+sourced data collection method there may be little gain in
+                                                                             normative responses. The same problem affects groups of subjects
+precision beyond 12 responses per stimulus. The analysis also                who are not native speakers of the language of the normative
+suggests that with the somewhat more homogenous results of
+                                                                             dataset. However, although we evaluated several of the more
+crowdsourced data collection, as few as 8 responses per stimulus             popular algorithms for passage similarity and found them less
+makes an effective normative dataset for scoring responses drawn
+                                                                             effective than a simple count of shared words, more sophisticated
+from the same population.                                                    algorithms for comparing responses to the normative dataset may
+   The concept of measuring information acquisition through free
+                                                                             be able to better detect individual differences in vision or video
+recall has applications outside of video viewing and reading                 quality. In any case, we have demonstrated via the defocus
+comprehension. For example, a similar protocol could be used to
+                                                                             experiment that even the simplest word matching method can
+test information acquisition from auditory stimuli, which could              detect differences due to within-subject experimental manipula-
+then be used to identify differences in hearing ability, or to
+                                                                             tions. Therefore, it can also be used to assess treatment
+evaluate sound compression algorithms. The measure could also                effectiveness within individuals, and to track the progression or
+suggest the presence of aphasias or other forms of disfluency in
+                                                                             remediation of a condition.
+speech or writing, when standard vision test scores are within the              Organisms with healthy vision and an unimpaired view of their
+normal range. Alternatively, if both speech and low-level vision are
+                                                                             environment can extract a wealth of information about it, starting
+normal, a low score could suggest cognitive impairments, such as             from raw sensory input. We have presented a novel method for
+those resulting from traumatic brain injury or Alzheimer’s disease.
+                                                                             quantitatively assessing this general information acquisition in
+A deficit in any of the stages of processing from the eye to the             humans, that is objective and requires relatively few experimenter
+natural-language response would lower the score, and the
+                                                                             resources.
+contribution of other standardized tests could isolate which stage,
+or combination of stages, is causing the poor performance.
+                                                                             Acknowledgments
+   Improvements to the automatic scoring algorithm could
+increase the method’s sensitivity. In the present study, it could            We thank Rachel Berkowitz for preparing the video stimuli, Sarah Sheldon
+
+not detect the smallest differences in visual acuity, for example            for collecting the defocus experiment data, and Marco Baroni for
+between 20/20 and 20/50, with the sample size that was used. It              suggesting the alternate natural-language processing methods and running
+seems that at 20/50, most of the salient and frequently-mentioned            them on our datasets.
+
+details of a video clip were still acquired. Therefore, there are
+limitations to the sensitivity of the method in its present form for         Author Contributions
+
+monitoring and diagnosis of perceptual and cognitive problems in             Conceived and designed the experiments: DRS RLW PJB. Performed the
+individuals. It is possible that the inclusion of audio may have
+                                                                             experiments: DJR DRS. Analyzed the data: DRS RLW DJR. Wrote the
+reduced the sensitivity of the method to changes in visual acuity,           paper: DRS RLW PJB DJR.
+even though participants were instructed to ignore the sound
+
+
+
+References
+
+ 1. Wang Z, Bovik AC, Sheikh HR, Simoncelli EP (2004) Image quality assessment:. Lubin J (1995) A visual discrimination model for imaging system design and
+    From error visibility to structural similarity. IEEE Transactions on Image   evaluation. In: Peli E, editor. Vision Models for Target Detection. Singapore:
+    Processing 13: 600–612.                                                      World Scientific. 245–283.
+ 2. Stockham Jr TG (1972) Image processing in the context of a visual model. 14. Kim J, Vora A, Peli E (2004) MPEG-based image enhancement for the visually
+    Proceedings of the IEEE 60: 828–842.                                         impaired. Optical Engineering 43: 1318–1328.
+ 3. Jepsen ML, Ewert SD, Dau T (2008) A computational model of human auditory15. Satgunam P, Woods RL, Bronstad MP, Peli E (2010) Factors affecting image
+
+    signal processing and perception. The Journal of the Acoustical Society of   quality preferences. SID Symposium Digest of Technical Papers: Blackwell
+    America 124: 422.                                                            Publishing Ltd. 94–97.
+ 4. Bailey IL, Lovie J (1976) New design principles for visual acuity letter charts.berg R, Ridder H (1995) Continuous assessment of perceptual image
+    American Journal of Optometry and Physiological Optics 53: 740–745.          quality. JOSA A 12: 2573–2577.
+ 5. Sekuler R, Tynan P (1977) Rapid measurement of contrast-sensitivity functions.eli E (1999) Perceived quality of video enhanced for the visually impaired.
+    American Journal of Optometry and Physiological Optics 54: 573.              Vision Science and Its Applications. Santa Fe, NM: OSA. 46–48.
+
+ 6. Nasreddine ZS, Phillips NA, Be´dirian V, Charbonneau S, Whitehead V, et al.. Pinson M, Wolf S (2003) Comparing subjective video quality testing
+    (2005) The Montreal Cognitive Assessment, MoCA: A brief screening tool for    methodologies. In: Ebrahimi T, editor. Visual Communications and Image
+    mild cognitive impairment. Journal of the American Geriatrics Society 53: 695–Processing 2003: International Society for Optics and Photonics. 573–582.
+    699.                                                                     19. Peli E (2005) Recognition performance and perceived quality of video enhanced
+ 7. Crawford JR, Parker DM, McKinlay WW (1992) A Handbook of Neuropsy-           for the visually impaired. Ophthalmic and Physiological Optics 25: 543–555.
+    chological Assessment. Exeter, UK: Lawrence Erlbaum Associates.          20. Fullerton M, Woods RL, Vera-Diaz FA, Peli E (2007) Measuring perceived
+
+ 8. Surowiecki J (2004) The Wisdom of Crowds: Why the Many Are Smarter Than      video quality of MPEG enhancement by people with impaired vision. Journal of
+    the Few and How Collective Wisdom Shapes Business, Economies, Societies and  the Optical Society of America (A) 24: B174–B187.
+    Nation. New York, NY: Doubleday.                                         21. Dickinson CM, Rabbitt PMA (1991) Simulated visual impairment: Effects on
+ 9. Peli E, Woods RL (2009) Image enhancement for impaired vision: The           text comprehension and reading speed. Clinical Vision Sciences 6: 301–308.
+    challenge of evaluation. International Journal of Artificial Intelligence22. Bernhardt EB (1983) Testing foreign language reading comprehension: The
+    415–438.                                                                     immediate recall protocol. Die Unterrichtspraxis/Teaching German 16: 27–33.
+
+10. Wang Z, Sheikh HR, Bovik AC (2003) Objective video quality assessment. In23. Pyrczak F (1975) Passage-dependence of reading comprehension questions:
+    Furht B, Marques O, editors. The Handbook of Video Databases: Design and     Examples. Journal of reading 18: 308–311.
+    Applications. Boca Raton, FL: CRC Press. 1041–1078.                      24. Allwood CM, Innes-Ker AH, Homgren J, Fredin G (2008) Children’s and
+11. Barten PGJ (1990) Evaluation of subjective image quality with the square-rootadults’ realism in their event-recall confidence in responses to free recall and
+    integral method. Journal of the Optical Society of America A: Optics, Image  focused questions. Psychology, Crime and Law 14: 529–547.
+    Science and Vision 7: 2024–2031.                                         25. Allwood CM, Ask K, Granhag PrA (2005) The Cognitive Interview: Effects on
+
+12. Eskicioglu AM, Fisher PS (1995) Image quality measures and their performance.the realism in witnesses’ confidence in their free recall. Psychology, Crime &
+    IEEE Transactions on Communications 43: 2959–2965.                           Law 11: 183–198.
+
+
+
+
+PLOS ONE | www.plosone.org                                                6                              April 2014 | Volume 9 | Issue 4 | e93251
+                                                                                                             Measure Information Acquisition with Descriptions
+
+
+
+
+26. Fine EM, Peli E, Brady N (1996) Evaluating video enhancement for visually         36. Saunders DR, Bex PJ, Woods RL (2013) Crowdsourcing a normative natural
+     impaired viewers. Vision ’96: Proceedings of the International Conference on          language dataset: A comparison of Mechanical Turk and in-lab data collection.
+     Low Vision. Madrid, Spain: ONCE. 85–92.                                               Journal of Medical Internet Research 15: e100.
+
+27. Peli E, Fine EM, Labianca AT (1996) Evaluating visual information provided by     37. Zeimpekis D, Gallopoulos E (2005) Design of a MATLAB toolbox for term-
+     audio description. Journal of Visual Impairment and Blindness 90: 378–385.            document matrix generation. In: Dhillon IS, Kogan J, Ghosh J, editors.
+28. Kies JK, Williges RC, Rosson MB (1997) Evaluating desktop video conferencing           Proceedings of the Workshop on Clustering High Dimensional Data. Newport
+
+     for distance learning. Computers & Education 28: 79–91.                               Beach, CA: SIAM. 38–48.
+29. Bernhardt EB (1991) Reading development in a second language: Theoretical,        38. Landauer TK, Dumais ST (1997) A solution to Plato’s problem: The latent
+     empirical, and classroom perspectives. Norwood, New Jersey: Ablex Publishing
+     Corporation.                                                                          semantic analysis theory of acquisition, induction, and representation of
+                                                                                           knowledge. Psychological Review 104: 211–240.
+30. Kintsch W (1974) The Representation of Meaning in Memory. Hillsdale, N.J:         39. Ferraresi A, Zanchetta E, Baroni M, Bernardini S (2008) Introducing and
+     Erlbaum.
+31. Meyer BJF, Brandt DM, Bluth GJ (1980) Use of top-level structure in text: Key          evaluating ukWaC, a very large web-derived corpus of english. In: Evert S,
+                                                                                           Kilgarriff A, Sharoff S, editors. Proceedings of the 4th Web as Corpus Workshop
+     for reading comprehension of ninth-grade students. Reading Research                   (WAC-4). Marrakech, Morocco: LREC 2008. 47–54.
+     Quarterly 16: 72–103.
+32. Alderson JC (2000) Assessing reading. Cambridge: Cambridge University Press.      40. Baroni M, Bernardini S, Ferraresi A, Zanchetta E (2009) The WaCky wide web:
+                                                                                           A collection of very large linguistically processed web-crawled corpora.
+33. Heinz PJ (2004) Towards enhanced second language reading comprehension                 Language Resources and Evaluation 43: 209–226.
+     assessment: Computerized versus manual scoring of written recall protocols.
+     Reading in a foreign language 16: 97–124.                                        41. Turney PD, Pantel P (2010) From frequency to meaning: Vector space models of
+                                                                                           semantics. Journal of Artificial Intelligence Research 37: 141–188.
+34. Papineni K, Roukos S, Ward T, Zhu W (2002) BLEU: A method for automatic           42. Baroni M, Lenci A (2010) Distributional memory: A general framework for
+     evaluation of machine translation. Proceedings of the 40th Annual Meeting of
+     the Association for Computational Linguistics. Philadelphia, PA: Association for      corpus-based semantics. Computational Linguistics 36: 673–721.
+     Computational Linguistics. 311–318.                                              43. Janssen D (2011) Twice random, once mixed: Applying mixed models to
+                                                                                           simultaneously analyze random effects of language and participants. Behavior
+35. Foltz PW, Wells AD (1999) Automatically deriving readers’ knowledge structures
+     from texts. Behaviour Research Methods, Instruments and Computers 31: 208–            Research Methods 44: 232–247.
+     214.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PLOS ONE | www.plosone.org                                                        7                                  April 2014 | Volume 9 | Issue 4 | e93251

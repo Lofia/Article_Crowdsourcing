@@ -1,0 +1,1171 @@
+        JMIR SERIOUS GAMES                                                                                        Good et al
+
+
+        Original Paper
+
+
+        The Cure: Design and Evaluation of a Crowdsourcing Game for
+
+        Gene Selection for Breast Cancer Survival Prediction
+
+
+
+
+        Benjamin M Good , PhD; Salvatore Loguercio , PhD; Obi L Griffith , PhD; Max Nanis , BS; Chunlei Wu , PhD;   1
+                     1
+        Andrew I Su , PhD
+        1
+        2The Scripps Research Institute, Department of Molecular and Experimental Medicine, La Jolla, CA, United States
+         Washington University School of Medicine, Department of Medicine, St Louis, MO, United States
+
+        Corresponding Author:
+        Benjamin M Good, PhD
+        The Scripps Research Institute
+        Department of Molecular and Experimental Medicine
+
+        MEM-216
+        10550 North Torrey Pines Road
+        La Jolla, CA, 92037
+        United States
+        Phone: 1 619 261 2046
+        Fax: 1 (858) 784 2345
+
+        Email: bgood@scripps.edu
+
+
+        Abstract
+
+        Background: Molecular signatures for predicting breast cancer prognosis could greatly improve care through personalization
+        of treatment. Computational analyses of genome-wide expression datasets have identified such signatures, but these signatures
+
+        leave much to be desired in terms of accuracy, reproducibility, and biological interpretability. Methods that take advantage of
+        structured prior knowledge (eg, protein interaction networks) show promise in helping to define better signatures, but most
+        knowledgeremainsunstructured.Crowdsourcingviascientificdiscoverygamesisanemergingmethodologythathasthepotential
+        to tap into human intelligence at scales and in modes unheard of before.
+
+        Objective: The main objective of this study was to test the hypothesis that knowledge linking expression patterns of specific
+        genestobreastcanceroutcomescouldbecapturedfromplayersofanopen,Web-basedgame.Weenvisionedcapturingknowledge
+        both from the player’s prior experience and from their ability to interpret text related to candidate genes presented to them in the
+        context of the game.
+
+        Methods: We developed and evaluated an online game called The Cure that captured information from players regarding genes
+        for use as predictors of breast cancer survival. Information gathered from game play was aggregated using a voting approach,
+        and used to create rankings of genes. The top genes from these rankings were evaluated using annotation enrichment analysis,
+        comparison to prior predictor gene sets, and by using them to train and test machine learning systems for predicting 10 year
+        survival.
+
+        Results: Between its launch in September 2012 and September 2013, The Cure attracted more than 1000 registered players,
+        who collectively played nearly 10,000 games. Gene sets assembled through aggregation of the collected data showed significant
+        enrichment for genes known to be related to key concepts such as cancer, disease progression, and recurrence. In terms of the
+        predictive accuracy of models trained using this information, these gene sets provided comparable performance to gene sets
+
+        generated using other methods, including those used in commercial tests. The Cure is available on the Internet.
+        Conclusions: The principal contribution of this work is to show that crowdsourcing games can be developed as a means to
+        address problems involving domain knowledge. While most prior work on scientific discovery games and crowdsourcing in
+        generaltakesasapremisethatcontributorshavelittleornoexpertise,herewedemonstratedacrowdsourcingsystemthatsucceeded
+
+        in capturing expert knowledge.
+
+        (JMIR Serious Games 2014;2(2):e7)   doi:10.2196/games.3350
+
+
+
+
+
+        http://games.jmir.org/2014/2/e7/                                                   JMIR Serious Games 2014 | vol. 2 | iss. 2 | e7 | p.1
+                                                                                                  (page number not for citation purposes)
+XSL  •FO
+RenderX
+         JMIR SERIOUS GAMES                                                                                           Good et al
+
+
+         KEYWORDS
+         breast neoplasms; gene expression; artificial intelligence; survival analysis; crowdsourcing; Web applications; computer games;
+         collaborative and social computing systems and tools; supervised learning; feature selection
+
+                                                                      selecting gene sets for survival prediction. Here, we explore a
+         Introduction
+                                                                      crowdsourcing approach for tapping into that knowledge.
+         Molecular Predictors for Breast Cancer                       Crowdsourcing
+
+         Breast cancer is the most common form of cancer in women     Crowdsourcing processes take tasks traditionally performed by
+         [1]. It has been studied extensively with genomic technologieindividualsorsmallgroupsandreformulatethemsuchthatlarge
+         with many attempts to devise molecular predictors of clinicalnumbers of people can participate in their completion. There
+         outcomes[2-4]anddrugresponse[5].Ifsuccessful,testsderived    are many instantiations of the crowdsourcing paradigm [15],
+         from these predictors would pave the way toward personalized
+                                                                      here we focus on just one, games with a purpose (GWAP) [16].
+         therapy and better care. While much progress has been made,  GWAPsincentivizelargescaleworkbytranslatingtherequired
+         including several commercially available tests [6], molecularlabor into elements of games. The games are played for fun, for
+         predictors consistently show lower than desirable accuracy,  learning,andtoaidinachievingtheunderlyingpurpose.Popular
+         degradeinperformanceinsubsequentvalidationstudies,identify   GWAPs within biology include Foldit for protein folding [17],
+         different gene sets in every permutation, and often have no
+         discernable biological rationale [7].                        Phylo for multiple sequence alignment [18], and MalariaSpot
+                                                                      forimageanalysis[19].HereweintroduceaGWAPforgenomic
+         Here, we address the challenge of predicting survival based oneature selection called The Cure.
+         gene expression and copy number variation. Given a database
+                                                                      Our high-level objective is to identify genes that can be used
+         of these genomic measurements and associated clinical        to build improved prognostic predictors for breast cancer. Our
+         outcomes, the objective is to produce a classifier that will hypothesis is that, if aggregated effectively, the collective
+         accurately separate the patients into two classes, those thatknowledge,reading,andreasoningabilityofalargecommunity
+         survive beyond ten years from initial diagnosis, and those thcouldhelptoidentifygenesthatareusefulinconstructingrobust
+         do not. Any such attempt at class prediction based on        classifiers, but might be hidden from purely data driven
+         high-throughput(eg,microarray)dataistechnicallychallenging
+                                                                      approaches. In striving to achieve that aim, we conducted the
+         because of the very large number of potential features [8].  study described here to assess the feasibility of the use of an
+         Typical datasets provide measurements for tens of thousands  open, online game (The Cure) in capturing pertinent,
+         of genes, and each gene is a potential predictive feature forexpert-level biomedical knowledge.
+         in a classifier. The individual members of optimal feature sets
+         work synergistically, displaying relationships that make the The central questions addressed are: (1) How many people, of
+         groupmoreusefulforpredictionasawholethananyindividual        what levels of expertise, would play a game oriented around
+                                                                      gene selection for breast cancer survival prediction and why?
+         unit. The space of possible feature combinations is too large(2) Would it be possible to extract a gene ranking from the
+         explore exhaustively and, even if it were, the tests available for
+         evaluating feature set quality are not precise. As a result, results of play that reflected biomedical knowledge? That is,
+         researchers rely on heuristics and, increasingly, on prior   could the game act as a portal for expert-level knowledge
+         knowledge to identify good feature groups.                   transfer? And (3) could the gene ranking captured through the
+                                                                      game be used to generate classifiers that perform well in
+         Recent gene selection methods are driven by structured prior cross-dataset evaluations?
+         knowledgeinformssuchasprotein-proteininteractionnetworks
+         [9,10], pathway databases [11,12], and information gathered  The null hypotheses are that: (1) no one would play, (2) the
+                                                                      results of their play would not yield discernible biological
+         from pan-cancer datasets [13]. These methods guide the searchknowledge, and (3) any gene ranking produced would be no
+         for predictive gene sets toward cohesive groups related to eabetter than random. Below we discuss the design of the game,
+         other, and to the predicted phenotype through biological
+         mechanism.Indoingso,theyhaveimprovedthestabilityofthe        and then present results from one year of open play that shed
+         gene selection process and the biological relevance of the   light on each of the questions posed above.
+         identified signatures. These techniques hint at the potential of
+                                                                      Methods
+         strategies that marry a top-down approach based on established
+         knowledge with a bottom-up approach based directly on        Game Design
+         experimental data, but they have not yet produced substantially
+         greateraccuracythanotherapproaches.Thismaybedueinpart        The Cure is a Web application consisting of the pages home,
+         to a scarcity of relevant structured knowledge with which to login,boardselection,game,andhelp.Thehomepageprovides
+         compute.                                                     information about the project and the game, and allows users
+                                                                      toeitherloginorcreateaccounts.Usersmustcreateanaccount
+         Since the year 2000, more than 166,000 publications related to
+         breast cancer have been added to PubMed [14]. Within that    to play. During account creation, users must select a username
+         body of literature, and in the minds of those that have createdd password, and have the option of entering an email address
+                                                                      and answering three short survey questions: (1) “Most recent
+         and consumed it, lays a wealth of knowledge relevant to      academic   degree?”,  (2)  “Do    you   consider  yourself
+
+
+         http://games.jmir.org/2014/2/e7/                                                      JMIR Serious Games 2014 | vol. 2 | iss. 2 | e7 | p.2
+                                                                                                      (page number not for citation purposes)
+XSL  •FO
+RenderX
+        JMIR SERIOUS GAMES                                                                                          Good et al
+
+
+        knowledgeable about cancer biology?”, and (3) “Do you        Game
+        consider yourself a biologist?”.                             After training, the player is presented with boards containing
+
+        Training                                                     25 different genes (Figure 1 shows an example board). The
+        When players first register, they are presented with a trainingjective of each game is to choose a set of 5 genes that
+                                                                     produces a better decision tree classifier than that of the
+        stage that must be passed before they enter the main game areautomated opponent “Barney”. The players, the human player
+        The training stage consists of four “boards” containing 2 to and Barney, alternate turns, taking a gene card from the board
+        features common to animals such as “number of legs, breathes
+        air, produces milk, etc”. To complete the level, the player mustplacingitintheirhand,withthehumanplayeralwaysgoing
+        selectthefeaturesthatcanbestbeusedtodiscriminatebetween      first. Once a card is taken from the board, it cannot be put back,
+        mammals and other classes of animal, before the games        andtheotherplayercannottakeit.Thescoreforthefinal5card
+                                                                     hand determines the winner of the game. Note that each time a
+        automated opponent “Barney” beats them to it. This task was  board is rendered, the locations of the genes are randomized to
+        chosen as a way to introduce the dynamics of the game, and toprevent bias.
+        get across the idea of feature selection for classification on a
+        straightforward problem.
+
+        Figure 1. The Cure game. The figure shows a game in progress in which both players have completed 2 of the 5 turns. Players alternate turns, taking
+        a gene card from the board and adding it to their hand. The player with the highest score after 5 turns is the winner. The tabbed display provides gene
+        annotations ("Ontology", "Rifs") and views of decision trees constructed by the system using the selected genes. The scores reflect the predictive power
+        of the selected genes. The system produces these scores by using data associated with the selected genes to train and test a decision tree classifier. The
+        scores are the accuracy of these inferred classifiers.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        Gene Annotations                                             tabs). All of the annotations contain hyperlinks that the players
+                                                                     can follow for more information. A search interface allows the
+        Dragging the mouse over each gene provides the player with   player to find genes on the board based on the text in their
+        informationincluding:(1)asummarydescriptionfromUnigene,      related annotations. Coupled with the player’s biological
+        (2) Gene Ontology annotations, and (3) snippets of text relatknowledge, this information helps the player make informed
+        to the gene from The United States National Center for
+                                                                     guessesaboutwhichgenesfromtheboardmightmakethemost
+        Biotechnology Information’s Gene Rifs (Figure 2 shows these  useful predictors.
+
+
+
+
+        http://games.jmir.org/2014/2/e7/                                                     JMIR Serious Games 2014 | vol. 2 | iss. 2 | e7 | p.3
+                                                                                                    (page number not for citation purposes)
+XSL  •FO
+RenderX
+        JMIR SERIOUS GAMES                                                                                           Good et al
+
+
+        Figure 2. The Gene Rifs tab showing information about the Dicer gene. Gene Rifs provide textual descriptions of gene function extracted from abstracts.
+        These can be used to gain insights into the possible connections between the gene and breast cancer prognosis, and thus can help players to intelligently
+        select genes in the game.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                     displayedontheboardselectionpagealongwithitsglobalrank
+        Scoring                                                      and the current top 10 scores.
+        Each time a card is added to a player’s hand, the game server
+                                                                     Board Selection
+        scores the hand by evaluating the combined predictive
+        performance of the genes it contains. To accomplish this     EachroundofTheCureconsistsofacollectionof100different
+        evaluation,theserverusesageneexpressiondatasetcontaining     boards for players to choose from (Figure 3 shows this
+        samples classified with long-term (>10 year) survival status.selection). Each board is composed of a different set of 25
+        each evaluation, the server uses data from just the genes in semirandomly selected genes (see Multimedia Appendix 1 for
+        player’s hand to train and test a decision tree classifier. Tboardcompositionstrategies).Theboardsarearrangedinloose
+
+        scoreforthehandistheaccuracyreturnedbyacross-validation      order of difficulty, with the easiest boards occupying the lower
+        experiment. In machine learning parlance, this is known as a numbers. The difficulty is assessed based on an estimation of
+        “wrapper” feature set evaluation scheme [20]. A simplified   the predictive power of the complete 25 gene set, the more
+        decisiontreecreatedusingalloftheavailabletraininginstances,  predictive, the easier the board. The goal of the board selection
+        but just the selected genes, is displayed for the player and pageistocapturebothbroadanddeepcoverageofalltheboards
+
+        opponent (Figure 1 and Multimedia Appendix 1 for additional  (and their corresponding gene sets) by the player community.
+        details on the implementation of the scoring process). If theOnce a given board has been completed by at least 11 players,
+        player loses, they are not awarded any points; they may play it is closed off so that players are forced to select a different
+        the board again or select a different board to play. If they board. Any open board can be selected for play. Once a player
+        theirscoreisdeterminedbasedontheaccuracyoftheirwinning       has completed a particular board, they are not allowed to play
+
+        tree.Withineachround,playerscoresarecumulative.Themore       it again.
+        games they win, the higher their score. The player’s score is
+
+
+
+
+
+
+
+
+
+        http://games.jmir.org/2014/2/e7/                                                      JMIR Serious Games 2014 | vol. 2 | iss. 2 | e7 | p.4
+                                                                                                     (page number not for citation purposes)
+XSL  •FO
+RenderX
+        JMIR SERIOUS GAMES                                                                                          Good et al
+
+
+        Figure3.Theboardselectionview.Starsindicateboardstheactiveplayerhascompleted,circlesindicateboardsthathavebeencompletedbyasufficient
+        number of different players, and numbers indicate open boards. The pink progress bar indicates how close the community is to finishing the board.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                     We then empirically calculated a one-tailed P value for each
+        Purpose                                                      value of F given O through simulations of random game play.
+        The purpose of The Cure is to translate the knowledge of the The P values indicate the chances of observing a value of S or
+        players, along with their ability to process textual information,
+                                                                     greatergivenO,assumingthatallgeneselectionswererandom.
+        into a ranked list of genes for use in the development of    Importantly, they allow for comparisons between genes with
+        predictorsforbreastcancerprognosis.Thistranslationisenacted  different numbers of occurrences. For example, the known
+        when the players select genes in the game. We record the geneapoptosis regulator BCL2 gene occurred in 13 played games
+        selections, and apply aggregation functions to produce gene  (O=13), and was selected in 10 of those games (S=10), thus F
+        rankings that reflect the consensus of the player community. for BCL2 was 0.77 with P<.001. Our simulations stopped at
+
+        Aggregation Function for Gene Ranking                        10,000 iterations per value of O, hence P values below .0001
+                                                                     cannotbereported.Ontheotherendofthespectrum,theAARD
+        Each time a player selects a gene in a game, they are indicatgene (of unknown function) appeared in 33 played games
+        to the system their intuition of that gene’s relevance for   (O=33), was selected 3 times (S=3), had an F of 0.09 with
+        predicting breast cancer survival. That intuition may be baseP=.91. Given any collection of played games, we generate gene
+        on their knowledge, on inferences drawn from gene annotation rankings based on the estimated P values for each value of F.
+        information, or solely on random speculation. By aggregating
+        the data collected from many different players across many   We can thus assemble gene sets based on different groups of
+                                                                     games as well as different P value cutoffs.
+        different games, we tried to eliminate the noise from random
+        clicking and reveal the community consensus with regard to   Gene Set Assessments
+        predictive genes.
+                                                                     Quality
+        Given a set of recorded games, our gene ranking method is as Given the gene sets produced by this system, we assess quality
+        follows.Foreachgeneg,weestimatethefrequencyofselection       by: (1) direct comparison to gene sets used in published
+        F(g) as,                                                     predictors of breast cancer survival, (2) gene set enrichment
+
+        F(g)=(S(g))/(O(g))                                           analysis, and (3) classifier accuracy.
+                                                                     Enrichment Analysis
+        O(g)equalsthenumberoftimesthegenegappearedinaplayed
+        game. Some genes appear on multiple boards, multiple players Enrichment analysis is a widely used statistical technique for
+        play all boards, and all occurrences are counted. S(g) is theassessing the functional roles of gene sets based on their
+        number of times the gene was selected by the human player.   annotations.GivenasetofgeneswithannotationssuchasGene
+
+
+        http://games.jmir.org/2014/2/e7/                                                     JMIR Serious Games 2014 | vol. 2 | iss. 2 | e7 | p.5
+                                                                                                    (page number not for citation purposes)
+XSL  •FO
+RenderX
+         JMIR SERIOUS GAMES                                                                                           Good et al
+
+
+         OntologyorDiseaseOntologyassociations,thesetestsestimate     Players and Games Played
+         the annotation terms that are overrepresented in the gene setBased on the self-reported data collected during registration,
+         Forexample,atypicalhigh-throughputexperimentmayidentify      the player population was mixed in terms of education,
+         a set of 100 or more active genes in a given condition. An
+         enrichment analysis can be used to detect if genes related to aientation as a biologist, and declared knowledge of cancer.
+                                                                      Intotal,35.00%(377/1077)oftheplayershadagraduatedegree,
+         functional category, such as the immune response or a disease28.88% (311/1077) had an undergraduate degree, and 36.12%
+         group such as cancer, are represented in that set of 100 gene(389/1077) did not declare any degree. There were 31.94%
+         more than they would be expected to by chance. By applying   (344/1077)oftheplayersthatconsideredthemselvesbiologists,
+         enrichment analysis to the gene sets produced by The Cure    while 62.67% (675/1077) did not, with 5.39% (58/1077) not
+         player community, we can identify whether genes annotated
+         with terms related to breast cancer or other related diseases orponding. There were 32.96% (355/1077) of the players that
+                                                                      declared that they were knowledgeable about cancer biology,
+         processes are being preferentially selected, as we would expe60.35% (650/1077) did not, and 6.69% (72/1077) declined to
+         if the players are not choosing randomly. In principle, it corespond.
+         also unearth interesting new categories of genes selected by the
+         player community.                                            Over the course of the year, the number and demographics of
+                                                                      players registering per month fluctuated (Figure 4 shows this
+         Classifier Accuracy                                          fluctuation). In the first two months, 36.4% (67/184) and 37%
+         Finally, we measure the value of the gene sets by using them (13/35) of the players who registered had PhDs. After those
+
+         to construct machine-learning-based classifiers that predict months, the percentage for the next four months ranged from
+         year survival. Given a particular dataset, we eliminate      16% (4/25) to 18% (15/80), and then fluctuated between
+         measurements from all genes outside of the set in question, aapproximately5%and10%thereafter.Weobservedtwonotable
+         use the remaining measurements to train and test a predictivespikesinplayerregistrations.Thefirstcoincidedwiththelaunch
+         model. For the experiments conducted here, we trained supportof the game, its presentation at Genome Informatics 2012, and
+         vector machine (SVM) classifiers on gene expression derived  its advertisement as part of the Sage Bionetworks DREAM7
+
+         datasets, and tested them on independent test sets. We comparbreastcancerprognosischallenge.Thesecond,inMayof2013,
+         the accuracy of the predictors produced using gene sets derivis likely related to a posting on the popular website i09, which
+         from the game and gene sets used in published survival       occurred on May 1, 2013 [21].
+         predictors.
+                                                                      The total number of games played roughly followed the trends
+         Results                                                      observed for new player registrations. The most games played
+                                                                      on a single day were 550, on May 2, immediately after the i09
+                                                                      posting.
+         Data From One Year of Game Play
+         The results presented here are derived from games played     The number of games played per player followed a power law,
+         between September 7, 2012 and September 5, 2013. In that     consistent with most studies of the quantity of voluntary
+         time, 1077 player accounts were created and a total of 15,669contributions  in  open   environments    (eg,  Wikipedia
+                                                                      contributions) [22]. There were 243 players that played more
+         gameswereplayed(includingtraininggames).Therewere9904
+         games that were played on the cancer datasets. All collected than 10 games, 28 players that played more than 100 games,
+         data except personal player information is available, see    andthemostprolificplayer(“oneoff64”)thatplayed718games
+         Multimedia Appendix 2.                                       (Figure 5 shows these numbers).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         http://games.jmir.org/2014/2/e7/                                                      JMIR Serious Games 2014 | vol. 2 | iss. 2 | e7 | p.6
+                                                                                                      (page number not for citation purposes)
+XSL  •FO
+RenderX
+       JMIR SERIOUS GAMES                                                                        Good et al
+
+       Figure 4. New player registrations per month, with academic degree. The figure shows the fluctuations in both the size and the demographics of the
+       player population over time.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       Figure 5. Games played per player. The majority of players only played a few games, while some players played several hundred games.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       http://games.jmir.org/2014/2/e7/                                       JMIR Serious Games 2014 | vol. 2 | iss. 2 | e7 | p.7
+                                                                                   (page number not for citation purposes)
+XSL •FO
+RenderX
+         JMIR SERIOUS GAMES                                                                                             Good et al
+
+         Gene Set Evaluations                                          reflect only the player’s thoughts about the best genes for that
+                                                                       board prior to seeing the results of the decision tree analysis.
+         We evaluated three game collections: (1) “all”, (2) “expert”,
+         and(3)“inexperienced”.“All”considersgamesfromallplayers;      For all the results reported here, we select genes with P≤.001
+         “expert” includes games from players that indicated that they (see Aggregation Function in the Methods section). At that
+         had either a PhD or an MD and knowledge of cancer; and
+                                                                       threshold, we observed 61 genes in the “all” group, 85 in the
+         “inexperienced” includes just the games played by people      “expert” group, and 13 in the “inexperienced” group (Table 1).
+         without an advanced degree, with no knowledge of cancer, and  The complete set of game-derived gene rankings is available in
+         that were not biologists. Only the first five cards per playerMultimedia Appendix 3.
+         board are used for the analysis. This reduces the chances that
+                                                                       There was one gene, CASP1, which appeared in all three sets.
+         individual players who repeatedly play the same board, either The “all” gene set included 35 genes that also appeared in the
+         through cheating or by repeatedly losing to Barney, can
+         introducebiasbasedonoverfittingthatboard.Eachgameshould       “expert” set, as well as 4 genes from the “inexperienced” set
+                                                                       (Figure 6 shows these sets). Aside from CASP1, there was no
+                                                                       overlap between the “expert” and “inexperienced” gene sets.
+
+         Table 1. Predictor gene sets derived from The Cure.
+          Player group                  n genes                         Games considered               Contributing players
+
+                                        P≤.001
+          All                           61                              4314                           477
+
+          Expert                        85                              1106                           52
+
+          Inexperienced                 13                              1643                           231
+
+
+         Figure 6. Overlap of game-derived gene sets.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                       any diseases (Table 2). The background genes used for the
+         Enrichment Analysis of Gene Sets                              enrichment analysis statistics corresponded to the 3731 genes
+         Given the gene sets identified above, the next question is    that appeared in at least one game. The disease term with the
+         whetherornottheyarerelevanttobreastcancer.Hasknowledge
+                                                                       mostsignificantcorrectedPvalueinboththe“all”and“expert”
+         successfully been transferred from the player population into gene sets was “cancer or viral infections”. All of the top ten
+         thegame?Toaddressthisquestion,wefirstusedtheWebGestalt        disease terms for both gene sets correspond to various kinds of
+         enrichmentanalysistooltoidentifywhichdiseaserelatedterms      cancer or cancer processes, such as “recurrence” and “disease
+         werestatisticallyoverrepresentedintheannotationsofthegenes    progression”. Though they do not appear in the top ten results,
+         [23]. We found both the “expert” gene set and the “all” gene
+                                                                       “Breast neoplasms” and “Carcinoma, Ductal, Breast” are
+         sets to be significantly enriched for cancer-related diseases,significantly represented in both gene sets (P < e-05).
+         whilethe“inexperienced”setwasnotsignificantlyenrichedfor
+
+
+         http://games.jmir.org/2014/2/e7/                                                        JMIR Se(page number not for citation purposes) | p.8
+
+XSL  •FO
+RenderX
+         JMIR SERIOUS GAMES                                                                                                     Good et al
+
+
+         Table 2. The top ten disease terms for the “expert” gene set based on WebGestalt analysis. All reported disease terms had adjusted P values using the
+         Benjamini & Hochberg correction for multiple testing <.001. All of these terms were also significantly enriched in the “all” gene set with P<.001 except
+         “Intestinal neoplasms“ which had a corrected P value of .01 in that set.
+
+          Disease term                                     Expert players (85 genes)              All (61 genes)
+
+                                                           Genes in set   Adjusted                Genes in set   Adjusted
+                                                                                    a                                      a
+                                                                          P value (BH )                          P value (BH )
+
+          Cancer or viral infections                       37             5.5e-16                 25             8.1e-10
+          Neoplasms                                        32             4.7e-13                 22             1.6e-08
+
+          Urogenital neoplasms                             23             2.7e-11                 12             9.0e-05
+
+          Cell transformation, neoplastic                  16             4.7e-11                 13             3.0e-09
+
+          Stomach neoplasms                                14             2.6e-08                 8              2.0e-04
+
+          Disease progression                              16             3.7e-08                 13             2.5e-07
+
+          Neoplastic processes                             20             5.1e-08                 18             1.3e-08
+          Recurrence                                       14             5.1e-08                 11             1.1e-06
+
+          Intestinal neoplasms                             15             6.1e-08                 6              .01
+
+          Necrosis                                         15             1.1e-07                 13             1.8e-07
+
+         a
+          BH = Benjamini & Hochberg correction for multiple testing
+
+         Comparison to Established Predictor Gene Sets                      the 94 genes recently identified via the Attractor Metagenes
+                                                                            approach [8]. Genes in the “gold standard” sets that never
+         Inadditiontothediseaseenrichmentanalysis,wemeasuredthe             appeared in a played game were removed from the comparison
+
+         overlapbetweenthegame-derivedgenesetsand“goldstandard”             (eg, only 58 of the 70 genes in the MammaPrint set were used.)
+         predictor gene sets used in commercial prognostic tests, and       The “expert” gene set contained four of the OncoType genes,
+         from recent publications. Figure 7 shows the overlaps between
+                                                                            zero of the MammaPrint genes, three of the RFRS genes, and
+         theexpertgamegeneset,the21genesusedintheOncoTypeDx                 two of the Attractor Metagenes. Based on a Fisher’s exact test,
+         test[24],the70genesintheMammaPrinttest[2],the100genes              there was a statistically significant overlap with only the
+         recentlyidentifiedviaRandomForestanalysis(RFRS)[4],and
+                                                                            OncoType genes (P=2.026e-4).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         http://games.jmir.org/2014/2/e7/                                                              JMIR Serious Games 2014 | vol. 2 | iss. 2 | e7 | p.9
+                                                                                                              (page number not for citation purposes)
+     •
+XSL    FO
+RenderX
+        JMIR SERIOUS GAMES                                                                                           Good et al
+
+
+        Figure 7. Overlap of "expert" gene set derived from game data (in green) with prior published predictor gene sets. RFRS: Random Forest Relapse
+        Score.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        Classifier Evaluations                                       selected in a literature review [26]. In fact, the “expert” gene
+                                                                     set from The Cure had the highest accuracy on the Griffith test
+        The gene set comparisons and enrichment analyses described   set, and the third highest accuracy on the Oslo test set. In
+        above show clearly that the gene sets generated from the gamecontrast, the 13 genes selected by the “inexperienced” players
+        data are nonrandom, with a significant representation of geneproducedtheworstclassifierfortheOslotestset,andthesecond
+        that are related to cancer. The final question addressed here is
+                                                                     worst for the Griffith test set.
+        how well the game-derived gene sets do when used to create   Based on these experiments, and others employing different
+        classifiers for predicting breast cancer survival.           machine learning methods (data not reported), we could not
+        Weconductedtwoexperiments,eachinvolvingthedevelopment
+                                                                     establish a statistically significant difference between the
+        of machine learning models for predicting 10 year survival   performance of models trained using the game-derived gene
+        based only on gene expression information. In the first, we  setsversusmodelstrainedwithgenesetsfrommoreestablished
+        trained an SVM classifier using gene expression data from themethodologies.Whilewecouldnotprovethatthegame-derived
+        Metabricdataset[25],andtesteditontheOslovalidationdataset    “expert” gene set was better than the other gene sets in a
+        generated for the Sage Dream7 breast cancer challenge [3]. Instatistically significant manner, none of the other gene
+        thesecond,weusedthedatasetfrom[4],usingthesamedivision
+                                                                     sets—including those used in commercial tests—were found
+        of training/test data described in that publication. In both to be consistently better either. The lack of a clear “winner” in
+        we varied only the gene sets provided to the classifiers, andthis analysis reinforces the concept that there are actually many
+        measured the performance of each gene set based on the       different gene sets whose expression signatures are nearly
+        accuracy of the SVM on the samples in the corresponding test equallypredictiveofabreastcancerprognosis[27].Identifying
+        set. Figure 8 shows that both the “expert” and “all” gene sets
+                                                                     the optimal combination of genes, clinical features (eg, age,
+        from the game performed comparably to the OncoType,          lymph node status), and machine learning approach remains a
+        MammaPrint, RFRS, Attractor MetaGenes, and to gene sets      future challenge.
+
+
+
+
+
+
+
+
+
+
+
+        http://games.jmir.org/2014/2/e7/                                                     JMIR Serious Games 2014 | vol. 2 | iss. 2 | e7 | p.10
+                                                                                                     (page number not for citation purposes)
+XSL  •FO
+RenderX
+        JMIR SERIOUS GAMES                                                                                           Good et al
+
+
+        Figure 8. Evaluation of accuracy of models trained to predict ten year survival using gene sets derived from the game, and prior gene sets from the
+        breast cancer literature. Lauss, Literature survey [27]. Vant’Veer datasets [3]. RFRS: Random Forest Relapse Score.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        Player Survey                                                through which they could try to help. In some cases, this
+                                                                     motivation is likely very personal, 63.6% (75/118) of
+        The Cure managed to attract and engage a surprisingly large  respondents indicated that they know or have known someone
+        number of people. To ascertain more about the player         that has or has had breast cancer.
+        population, we conducted a survey of registered players as of
+        November 2013. We sent an email to the 1162 players who had  Looking at the player demographics, we found that 59.0%
+                                                                     (69/117) of the respondents were male, and 41.0% (48/117)
+        entered an email address when they registered, inviting them female with 2 not responding. The largest age brackets were
+        to answer questions about themselves, their motivations for
+        playing, and their experience with the game. We received     21-29 years old (34.5%, 41/119) and 30-39 years old (28.6%,
+        responsesfrom119participants.Whiletherespondentsrepresent    34/119) (Figure 9 shows the ages).
+        only about 10.24% (119/1162) of the total player population
+        (andlikelyamoremotivatedsegment),theresponsesdoprovide       Expandingontheexpertiseinformationcollectedwhenplayers
+                                                                     registered, we asked the players to categorize their knowledge
+        some interesting insights.                                   of breast cancer. The most popular answer by a wide margin
+        The first and perhaps most telling question in the survey was,as the middle expertise level, “I know some biology and have
+                                                                     some understanding of what cancer is” at 57.1% (68/119) with
+        “Why did you sign up for The Cure?”. Overall, 71.4% (85/119) numbers decreasing toward the high and low expertise levels
+        indicatedthattheyplayedtohelpbreastcancerresearch,52.9%
+        (63/119) played to learn something, and just 43.7 (52/119)   (Figure 10 shows these answers).
+        played in order to have fun. Respondents could select multiplFinally,weaskedplayerswhetherthegamewasfunandwhether
+        answers. Given the design of The Cure website (“Play Games,  or not they learned anything. Most (66.4%, 79/119) found the
+        Cure Cancer!”) [28], as well as the way it was promoted, it is
+                                                                     game to be “A little bit entertaining”, 14.3% (17/119) found it
+        surprising to see that the game aspect was actually the leastto be “very fun”, and 19.3% (23/119) found it “not at all” fun.
+        motivational of the three. While we feel that developing thisTheresultsforlearningaresimilar,with62.2%(74/119)feeling
+        system as a game had a strong positive effect on recruitment that they “learned a little bit”, 9.2% (11/119) that they “learned
+        and engagement, it is clear that there is a large pool of peoa lot”, and 28.6% (34/119) that they “did not learn thing”.
+        thatarehighlymotivatedtocontributetobreastcancerresearch
+        in any way they can. The game was simply one more vehicle
+
+
+        http://games.jmir.org/2014/2/e7/                                                     JMIR Serious Games 2014 | vol. 2 | iss. 2 | e7 | p.11
+                                                                                                     (page number not for citation purposes)
+XSL  •FO
+RenderX
+        JMIR SERIOUS GAMES                                                                                     Good et al
+
+
+        In summary, the survey showed that The Cure reached a     and educational, and that the dominant motivation for playing
+        demographically diverse audience containing both experts awas to help breast cancer research.
+        novices, that most players found the game mildly entertaining
+        Figure 9. Ages of players.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        Figure 10. Levels of breast cancer knowledge among players.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                  knowledge, and (3) translating the captured knowledge to
+        Discussion                                                advance a research objective. We now briefly explore each of
+
+        Principal Results                                         these in turn.
+                                                                  While previous work on scientific discovery games such as
+        The principal contribution of this work is as an exemplar Foldit have focused on visual problems that do not require any
+        show that crowdsourcing games can be developed as a means
+        to address problems that require expert-level knowledge. Tonowledge on the part of the participants, the task presented in
+        our knowledge, this is the first serious game of this kind. In the was knowledge intensive. In order to successfully
+        introduction, we laid out three foundational question areasarticipate, players either had to bring significant prior
+        pertaining to: (1) recruiting participants, (2) capturing experience or be willing to invest a substantial amount of time
+
+        http://games.jmir.org/2014/2/e7/                                                 JMIR Serious Games 2014 | vol. 2 | iss. 2 | e7 | p.12
+                                                                                                (page number not for citation purposes)
+XSL  •FO
+RenderX
+         JMIR SERIOUS GAMES                                                                                            Good et al
+
+
+         learning. Given the challenging nature of the task, and the  backedbyliterallydecadesofresearchprovidesstrongevidence
+         importance of prior knowledge, the results from the first yeathat this approach is worthy of additional study.
+         of the game were quite positive in terms of recruitment (1000+
+         players) and engagement (nearly 10,000 games). Based on the  Limitations
+         data collected when players registered, and through the survey,e game described here was an early stage prototype with
+                                                                      many limitations in terms of both its ability to achieve its
+         the game clearly succeeded in capturing the attention of a
+         diverse audience including both novices and experts. While   purpose, and its ability to entertain players. Chief among the
+         motivations were mixed, the dominant theme appeared to be a  former was that the prebuilt boards severely constrained the
+         strong desire to help advance breast cancer research.        number of different feature combinations that players could
+                                                                      explore. The vast majority of possible gene sets simply could
+         The second question was whether or not knowledge could be    never be examined within this game framework. Further,
+         captured from players. The gene rankings produced from both  becausetheaggregationfunctionrankedindividualgenesrather
+         the entire set of games played (the “all” set) and the games
+         playedbythe“expert”playersclearlydemonstratethatadvanced     thangenesets,itisunlikelythatitwouldidentifyoptimalfeature
+         biomedical knowledge was transferred from the community      combinations.Infutureiterations,itwouldbebeneficialtoadapt
+                                                                      the game to allow advanced players more freedom to explore
+         through the game (Table 2). The game succeeded in capturing  the feature space, while still maintaining the competitive
+         knowledge from players with prior experience, but it did not dynamics that made the game entertaining.
+         appeartosuccessfullyharnessthereadingandreasoningability
+         of the nonexperts. This was apparent in the poor performance Finally, the game could be made much more fun overall. The
+         ofthegenesextractedfromthe“inexperienced”players(Figure      currentformulationwashighlyrepetitive,andhadanextremely
+                                                                      steeplearningcurve.Thetransitionfromthebrieftrainingstage
+         8).                                                          to the real games was abrupt, and left many players confused.
+         The final question was whether or not the collected knowledge
+         could be used to advance the state of the art in breast cancern the future, both the fun factor and the learning aspects of the
+                                                                      game could be improved by implementing different levels of
+         survival prediction. While we demonstrated that the gene setsdifficulty, providing more educational information in the early
+         selected by the aggregated actions of the player community   stages, and diversifying the tasks presented to players. Such
+         were both relevant and competitive with gene sets produced   changesshouldimprovebothplayerengagementandthequality
+         using other means, we did not conclusively generate a better
+         predictor of breast cancer prognosis (Figure 8). There is no of the information captured by the system. The code for The
+         doubt that the case for applying serious games in the context ofe game is open source, and we would warmly welcome any
+                                                                      contributions or adaptations [29].
+         knowledge-intensive challenges would have been strengthened
+         by a better result here. However, it is important to keep in mindlusions
+         thatthisisanextremelydifficult,wellstudiedproblemthatmay     There is a large, heterogeneous population of people on the
+         not even have an optimal solution [27]. The fact that the genInternet that actively seek ways to use their minds to help solve
+         setsderivedfromthegamearecomparableintermsofpredictive
+         accuracy to gene sets identified using statistical approachesimportant problems. Games such as The Cure provide one
+                                                                      avenuetotapintothishiddenresourceforbiomedicaldiscovery.
+          
+
+         Acknowledgments
+
+         WewouldliketothankallofthepeoplewhoplayedTheCure.ResearchreportedinthispublicationwassupportedbytheNational
+         InstituteofGeneralMedicalSciencesoftheNationalInstitutesofHealthunderawardnumbersR01GM089820andR01GM083924,
+         and by the National Center for Advancing Translational Sciences of the National Institute of Health under award number
+         UL1TR001114. BMG and ASU conceived of the study. BMG and MN implemented the game. BMG drafted the manuscript. SL
+
+         and CW contributed to the preprocessing of the microarray datasets. OLG provided advanced access to the microarray dataset
+         used in the second two rounds of the game, and provided feedback on the game interface.
+
+
+         Conflicts of Interest
+         None declared.
+
+
+         Multimedia Appendix 1
+         Additionaldetailonmethods.Atextdocumentcontainingadditionalinformationaboutthemethodsusedtoprocessthemicroarray
+         datasets, select genes for boards, and execute the machine learning experiments.
+
+         [PDF File (Adobe PDF File), 328KB - games_v2i2e7_app1.pdf ]
+
+
+         Multimedia Appendix 2
+         Cure database export. The complete SQL database used to capture data for The Cure game. The database contains: (1) gene
+
+         annotation information provided to the players in the game, (2) gene sets used to compose the boards in the game, (3) genes
+
+         http://games.jmir.org/2014/2/e7/                                                      JMIR Serious Games 2014 | vol. 2 | iss. 2 | e7 | p.13
+                                                                                                      (page number not for citation purposes)
+XSL  •FO
+RenderX
+         JMIR SERIOUS GAMES                                                                                           Good et al
+
+
+         (“cards”) selected by the players during their games including the order in which they were selected, (4) a log of games played,
+         (5) logs of user actions including mouse click and hover events, and (6) player information (note that email and IP addresses have
+         been removed). This is a compressed file that can be imported and opened using a MySQL database.
+
+         [GZ File, 31MB - games_v2i2e7_app2.gz ]
+
+
+         Multimedia Appendix 3
+         Gene rankings from The Cure. An Excel workbook that shows the gene rankings generated from game play data. Rankings are
+         shown for games from all players, from "experts" (those with a PhD or MD and knowledge of cancer), those with no expertise
+         (no advanced degree, no knowledge of cancer, not a biologist), those with cancer knowledge, and those with a PhD or MD.
+
+         Additional worksheets show the results from the WebGestalt analysis of the top ranked genes.
+         [XLSX File (Microsoft Excel File), 772KB - games_v2i2e7_app3.xlsx ]
+
+
+         References
+         1.   Bray F, Ren JS, Masuyer E, Ferlay J. Global estimates of cancer prevalence for 27 sites in the adult population in 2008.
+              Int J Cancer 2013 Mar 1;132(5):1133-1145. [doi: 10.1002/ijc.27711] [Medline: 22752881]
+
+         2.   van'tVeerLJ,DaiH,vandeVijverMJ,HeYD,HartAA,MaoM,etal.Geneexpressionprofilingpredictsclinicaloutcome
+              of breast cancer. Nature 2002 Jan 31;415(6871):530-536. [doi: 10.1038/415530a] [Medline: 11823860]
+         3.   Margolin AA, Bilal E, Huang E, Norman TC, Ottestad L, Mecham BH, et al. Systematic analysis of challenge-driven
+              improvements in molecular prognostic models for breast cancer. Sci Transl Med 2013 Apr 17;5(181):181re1 [FREE Full
+              text] [doi: 10.1126/scitranslmed.3006112] [Medline: 23596205]
+         4.   Griffith OL, Pepin F, Enache OM, Heiser LM, Collisson EA, Spellman PT, et al. A robust prognostic signature for
+
+              hormone-positive node-negative breast cancer. Genome Med 2013;5(10):92 [FREE Full text] [doi: 10.1186/gm496]
+              [Medline: 24112773]
+         5.   DaemenA,GriffithOL,HeiserLM,WangNJ,EnacheOM,SanbornZ,etal.Modelingprecisiontreatmentofbreastcancer.
+              Genome Biol 2013;14(10):R110 [FREE Full text] [doi: 10.1186/gb-2013-14-10-r110] [Medline: 24176112]
+         6.   Ross JS, Hatzis C, Symmans WF, Pusztai L, Hortobágyi GN. Commercialized multigene predictors of clinical outcome
+              forbreastcancer.Oncologist2008May;13(5):477-493[FREEFulltext][doi:10.1634/theoncologist.2007-0248][Medline:
+
+              18515733]
+         7.   Weigelt B, Pusztai L, Ashworth A, Reis-Filho JS. Challenges translating breast cancer gene signatures into the clinic. Nat
+              Rev Clin Oncol 2012 Jan;9(1):58-64. [doi: 10.1038/nrclinonc.2011.125] [Medline: 21878891]
+         8.   ChengWY,OuYangTH,AnastassiouD.Developmentofaprognosticmodelforbreastcancersurvivalinanopenchallenge
+              environment.SciTranslMed2013Apr17;5(181):181ra50[FREEFulltext][doi:10.1126/scitranslmed.3005974][Medline:
+              23596202]
+
+         9.   Dutkowski J, Ideker T. Protein networks as logic functions in development and cancer. PLoS Comput Biol 2011
+              Sep;7(9):e1002180 [FREE Full text] [doi: 10.1371/journal.pcbi.1002180] [Medline: 21980275]
+         10.  Winter C, Kristiansen G, Kersting S, Roy J, Aust D, Knösel T, et al. Google goes cancer: Improving outcome prediction
+              for cancer patients by network-based ranking of marker genes. PLoS Comput Biol 2012;8(5):e1002511 [FREE Full text]
+              [doi: 10.1371/journal.pcbi.1002511] [Medline: 22615549]
+         11.  Bild AH, Yao G, Chang JT, Wang Q, Potti A, Chasse D, et al. Oncogenic pathway signatures in human cancers as a guide
+
+              to targeted therapies. Nature 2006 Jan 19;439(7074):353-357. [doi: 10.1038/nature04296] [Medline: 16273092]
+         12.  Su J, Yoon BJ, Dougherty ER. Accurate and reliable cancer classification based on probabilistic inference of pathway
+              activity. PLoS One 2009;4(12):e8161 [FREE Full text] [doi: 10.1371/journal.pone.0008161] [Medline: 19997592]
+         13.  Cheng WY, Ou Yang TH, Anastassiou D. Biomolecular events in cancer revealed by attractor metagenes. PLoS Comput
+              Biol 2013;9(2):e1002920 [FREE Full text] [doi: 10.1371/journal.pcbi.1002920] [Medline: 23468608]
+         14.  PubMed search for breast cancer. URL: http://www.ncbi.nlm.nih.gov/pubmed/
+
+              ?term=((breast+cancer))+AND+(%222000%22%5BDate+-+Publication%5D+%3A+%223000%22%5BDate+-+Publication%5D)
+              [accessed 2014-02-24] [WebCite Cache ID 6NdE37LPi]
+         15.  Good BM, Su AI. Crowdsourcing for bioinformatics. Bioinformatics 2013 Aug 15;29(16):1925-1933. [doi:
+              10.1093/bioinformatics/btt333] [Medline: 23782614]
+         16.  von Ahn L, Dabbish L. Designing games with a purpose. Commun. ACM 2008 Aug 01;51(8):57-67. [doi:
+              10.1145/1378704.1378719]
+
+         17.  Cooper S, Khatib F, Treuille A, Barbero J, Lee J, Beenen M, et al. Predicting protein structures with a multiplayer online
+              game. Nature 2010 Aug 5;466(7307):756-760 [FREE Full text] [doi: 10.1038/nature09304] [Medline: 20686574]
+         18.  Kawrykow A, Roumanis G, Kam A, Kwak D, Leung C, Wu C, Phylo players, et al. Phylo: A citizen science approach for
+              improvingmultiplesequencealignment.PLoSOne2012;7(3):e31362[FREEFulltext][doi:10.1371/journal.pone.0031362]
+              [Medline: 22412834]
+
+
+
+         http://games.jmir.org/2014/2/e7/                                                     JMIR Serious Games 2014 | vol. 2 | iss. 2 | e7 | p.14
+                                                                                                      (page number not for citation purposes)
+XSL  •FO
+RenderX
+         JMIR SERIOUS GAMES                                                                                           Good et al
+
+
+         19.  Luengo-OrozMA,ArranzA,FreanJ.Crowdsourcingmalariaparasitequantification:Anonlinegameforanalyzingimages
+              of infected thick blood smears. J Med Internet Res 2012;14(6):e167 [FREE Full text] [doi: 10.2196/jmir.2338] [Medline:
+              23196001]
+         20.  Kohavi R, John GH. Wrappers for feature subset selection. Artificial Intelligence 1997 Dec;97(1-2):273-324. [doi:
+
+              10.1016/S0004-3702(97)00043-X]
+         21.  Yesilbas A. io9. These-cool-games-let-you-do-real-life-science URL: http://io9.com/
+              these-cool-games-let-you-do-real-life-science-486173006 [accessed 2014-06-17] [WebCite Cache ID 6QP1ukCNC]
+         22.  Javanmardi S, Ganjisaffar Y, Lopes C, Baldi P. User contribution and trust in wikipedia. In: Collaborative Computing:
+              Networking, Applications and Worksharing.: IEEE; 2009 Presented at: CollaborateCom; 2009; Washington D.C p. 1-6
+
+              URL:http://pensivepuffin.com/dwmcphd/syllabi/info447_wi14/readings/07-WikipediaTrust/javanmardi-TrustInWikipedia.
+              CollaborateCon2009.pdf [WebCite Cache] [doi: 10.4108/ICST.COLLABORATECOM2009.8376]
+         23.  Wang J, Duncan D, Shi Z, Zhang B. Web-based gene set analysis toolkit (WebGestalt): Update 2013. Nucleic Acids Res
+              2013 Jul;41(Web Server issue):W77-W83 [FREE Full text] [doi: 10.1093/nar/gkt439] [Medline: 23703215]
+         24.  Paik S. Development and clinical utility of a 21-gene recurrence score prognostic assay in patients with early breast cancer
+
+              treated with tamoxifen. Oncologist 2007 Jun;12(6):631-635 [FREE Full text] [doi: 10.1634/theoncologist.12-6-631]
+              [Medline: 17602054]
+         25.  Curtis C, Shah SP, Chin SF, Turashvili G, Rueda OM, Dunning MJ, METABRIC Group, et al. The genomic and
+              transcriptomicarchitectureof2,000breasttumoursrevealsnovelsubgroups.Nature2012Jun21;486(7403):346-352[FREE
+              Full text] [doi: 10.1038/nature10983] [Medline: 22522925]
+
+         26.  Lauss M, Kriegner A, Vierlinger K, Visne I, Yildiz A, Dilaveroglu E, et al. Consensus genes of the literature to predict
+              breast cancer recurrence. Breast Cancer Res Treat 2008 Jul;110(2):235-244. [doi: 10.1007/s10549-007-9716-3] [Medline:
+              17899371]
+         27.  Venet D, Dumont JE, Detours V. Most random gene expression signatures are significantly associated with breast cancer
+              outcome. PLoS Comput Biol 2011 Oct;7(10):e1002240 [FREE Full text] [doi: 10.1371/journal.pcbi.1002240] [Medline:
+
+              22028643]
+         28.  The Cure game website. URL: http://genegames.org/cure/ [accessed 2014-02-24] [WebCite Cache ID 6NdDULq2v]
+         29.  Open source code repository for The Cure. URL: https://bitbucket.org/sulab/thecure/ [accessed 2014-02-24] [WebCite
+              Cache ID 6NdEQWw3D]
+
+
+         Abbreviations
+                GWAP: games with a purpose
+                RFRS: Random Forest Relapse Score
+
+                SVM: support vector machine
+
+
+
+
+                Edited by G Eysenbach, C Boyer; submitted 24.02.14; peer-reviewed by W Luo, RS Sadasivam; comments to author 28.03.14; revised
+                version received 18.04.14; accepted 31.05.14; published 29.07.14
+
+                Please cite as:
+                Good BM, Loguercio S, Griffith OL, Nanis M, Wu C, Su AI
+                The Cure: Design and Evaluation of a Crowdsourcing Game for Gene Selection for Breast Cancer Survival Prediction
+                JMIR Serious Games 2014;2(2):e7
+                URL: http://games.jmir.org/2014/2/e7/ 
+                doi:10.2196/games.3350
+                PMID:
+
+
+
+         ©Benjamin M Good, Salvatore Loguercio, Obi L Griffith, Max Nanis, Chunlei Wu, Andrew I Su. Originally published in JMIR
+         Serious Games (http://games.jmir.org), 29.07.2014. This is an open-access article distributed under the terms of the Creative
+
+         Commons Attribution License (http://creativecommons.org/licenses/by/2.0/), which permits unrestricted use, distribution, and
+         reproduction in any medium, provided the original work, first published in JMIR Serious Games, is properly cited. The complete
+         bibliographic information, a link to the original publication on http://games.jmir.org, as well as this copyright and license
+         information must be included.
+
+
+
+
+
+
+
+
+         http://games.jmir.org/2014/2/e7/                                                     JMIR Serious Games 2014 | vol. 2 | iss. 2 | e7 | p.15
+                                                                                                      (page number not for citation purposes)
+XSL  •FO
+RenderX

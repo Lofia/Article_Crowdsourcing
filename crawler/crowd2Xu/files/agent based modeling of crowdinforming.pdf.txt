@@ -1,0 +1,823 @@
+   Agent Based Modeling of “Crowdinforming” as a Means of Load Balancing at Emergency Departments
+
+
+
+
+    Agent Based Modeling of “Crowdinforming”
+
+                  as a Means of Load Balancing
+
+                     at Emergency Departments
+
+                Ryan Neighbour , Luis Oppenheimer , Shamir N. Mukhi ,       1,3
+                           Marcia R. Friesen , Robert D. McLeod    1
+
+                             1
+                              University of Manitoba
+                             2Winnipeg Regional Health Authority
+                             3Public Health Agency of Canada
+
+
+
+Abstract
+
+This work extends ongoing devel opment of a framework for model ing the spread of contact -
+
+transmission infectious diseases. The framework is built upon Agent Based Modeling (ABM),
+with emphasis on urban scale mo     delling integrated with institutional models of hospital
+emergency departments. The method presented here includes ABM modeling an outbreak of
+influenza-like illness (ILI) with concomitant surges at h ospital emergency departments, and
+illustrates the pre   liminary modeling of        ‘crowdinforming’     as an intervention.
+‘Crowdinforming’, a component of ‘crowdsourcing’, is characterized as the dissemination of
+
+collected and processed information back to the ‘crowd’ via public access. The objective of the
+simulation is to allow for effective policy evaluation to better inform the public of expected
+wait times as part of their decision making process in attending an emergency department or
+clinic. In effect, this is a means of providing additional decision support gar nered from a
+simulation, prior to real world implementation. The conjecture is that more optimal service
+delivery can be achieved under balanced patient loads, compared to situations where some
+
+emergency departments are overextended while others are underutilized. Load balancing
+optimization is a common notion in many operations      , and the simulation illustrates that
+‘crowdinforming’ is a potential tool when used as a process control parameter to balance the
+load at emergency departments as well as serving as an effective means to direct patients
+during an ILI outbreak with temporary clinics deployed. The information provided in the
+‘crowdinforming’ model is readily available in a local context, although it requires thoughtful
+
+consideration in its interpretation. The extension to a wider dissemination of information via a
+web service is readily achievable and presents no technical obstacles, although political
+obstacles may be present . The ‘crowdinforming’ simulation is not limited to arrivals of
+patients at emergency departments due to ILI; it applies equally to any scenarios where
+patients arrive in any arrival pattern that may cause disparity in the waiting times at multiple
+facilities.
+
+Keywords—Contact Graphs, Agent Based Models, Infection Spread Models
+
+
+
+
+
+
+
+                                                                                             1
+        Online Journal of Public Health Informatics * ISSN 1947-2579 * http://ojphi.org0
+   Agent Based Modeling of “Crowdinforming” as a Means of Load Balancing at Emergency Departments
+
+
+
+
+Introduction
+
+The worldwide H1N1 influenza pandemic (pH1N1) in 2009 and 2010 has mobilized and
+renewed research attention to the many facets of infection control and impact, ranging from the
+
+epidemiology of the illness, development and deployment of vaccines and other pharmaceutical
+interventions, and public health and emergency management measures. Predicting how a             n
+infection may spread within a population and the consequent impact that it may have includes
+forecasting with intelligent models and rea l data, as well as back-casting based on available data
+as one validation process. The focus of this paper is to present a computer simulation framework
+(model) of an urban community to model the spread of pH1N1 in the community, in which the
+model carries the capacity to model the impact of various intervention strategies, e.g. temporary
+
+clinics, vaccination, chemoprophylaxis, hygienic and social distancing measures. The
+intervention of direct interest in the present study is to provide the public with a      dditional
+information related to expected waiting times at regional hospital emergency departments (EDs),
+and its potential impact on patient loads and consequent service delivery.          A true metric
+associated with estimating expected wait times at a particular hospital is a   random variable of
+many factors and difficult to estimate even with extensive ED data. The work here demonstrates
+the role that patient redirection can play if this metric were available. In the interim, we have
+
+associated the number of pa     tients with a ‘ busyness’ metric that would be amenable for
+presentation to the community. As the social dynamics and agent behaviours coupled with real
+data (economic, cultural, and social) become better defined, the computer simulation naturally
+allows one to focus on the population subsets and apply the framework to other jurisdictions.
+
+The work is located within the larger context of healthcare informatics. The role of informatics in
+
+healthcare re-engineering and optimization has become a new reality i        n efforts to improve
+service delivery and efficiencies in healthcare. Both well vetted engineering approaches as well
+as emerging methods are being applied to generate       solutions for health policy and decision
+makers. New service delivery paradigms are developed and justified from a variety of domains,
+including statistics, operations research and lean manufacturing concepts from industrial
+
+engineering, and business models [1]-[5]. In healthcare, t he challenge is exacerbated by the
+inherent unpredictability of social behaviour ; this contributes to the computational irreducibility
+of the problems encountered within many healthcare environments. As a consequence , modeling
+and simulation are playing a larger role as a design aid or tool in support of decision making [6]-
+
+[9].
+
+Background
+
+The computer simulation framework is built, in       part, on an Agent -Based Model/Modeling
+(ABM) approach. A central premise of this work is that ABMs – combined with real data and as
+
+high a resolution (fidelity) as the computer system affords –   will create a new paradigm for a
+better understanding of epidemiology within a social system dynamics, and thereby lead to more
+effective tools for policy makers guiding the future. ABM is a relatively new approach to
+disease modeling (10+ yrs), an area historically addressed by well-vetted mathematical modeling
+techniques (70+ yrs). However, the use of ABM for simulating infection spread within an urban
+area and built upon the incorporation of real data is only now emerging (2+ yrs). ABM is based
+
+on simulating a collection of agents –      i.e. the people in the mode    l – in terms of their
+
+
+                                                                                                  2
+         Online Journal of Public Health Informatics * ISSN 1947-2579 * http://ojphi.org010
+   Agent Based Modeling of “Crowdinforming” as a Means of Load Balancing at Emergency Departments
+
+
+
+
+characteristics, behaviours, and interactions with other agents. Agents (people) are purposeful
+and autonomous entities able to assess their situations, make decisions and compete with one
+another. ABM’s conceptual depth is derived from its ability to model emergent behaviour that
+may be counterintuitive, and to discern a complex behavioural whole that is greater than the sum
+
+of its parts. Counterintuitive or counter intent behaviour may arise from non- obvious non-linear
+feedback loops that may exacerbate system dynamics, such as financial incentives to remain
+working while infected, or non- obvious pressures within the healthcare system that strain the
+system to its breaking point. Complex behaviour that is greater than the sum of i ts parts may be
+associated with an agent’s ability to learn or make heuristic         -based adaptations to their
+behaviours. ABM provides a natural description of a system that can be calibrated and validated
+by representative expert agents (healthcare specialists), and is flexible enough to be tuned to high
+
+degrees of specificity (sensitivity) in agents’ behaviours and interactions. ABMs are particularly
+well suited to system modeling in which agent behaviour is complex, non- linear, stochastic, and
+may exhibit memory or path-dependence [10][11][12]. Early application areas of ABM include
+logistics, economics, and transportation systems.
+
+ABM also provides one of the most useful tools available in terms of knowledge transfer and
+requirements capture, independent of whatever other techniques may also be employed. The
+
+model construction forces ideas to be clarified; unclear and hidde n assumptions are exposed and
+debated in a common and familiar lexicon, leading to the ABM having a direct correspondence
+to the problem as understood by the practitioner and the developer. The resulting model closely
+resembles the system description, whi      ch could come from business rules or some other
+description by stakeholders who need not be overly familiar with ABM itself. Many ABMs are
+developed to gain a better understanding of operations through the use of what -if scenarios, and
+
+in doing so will provide a decision support tool to public health decision-makers.
+
+A more recent and considerable area of application for ABMs has been country scale
+(community-level) disease spread modeling in human populations [13][14]. The focus generally
+constitutes large scale community -level epidemics of respiratory infections, as this is an
+important public health and policy issue with far-ranging health and economic impacts. Our own
+work has included the development of one of the first urban-      level epidemic proof -of-concept
+
+ABMs, based on a paradigm of a ‘discrete space scheduled walker’ (DSSW)            [15]. The urban
+scale ABM is one of the      most appropriate modeling levels in terms of incorporating high
+resolution data (individual based), as well as for simulating social dynamics reinforced by
+patterns of behaviour and readily available topographical data. The proof -of-concept is built on
+synthesized data and a very limited range of agent parameters. It can model a medium          -sized
+North American City using approximately 650,000 discrete agents (people), each of whom are
+assigned a demographic profile and a weekly schedule on the topography of the City of
+
+Winnipeg, Canada . Running the simulation with these types of numbers however is
+computationally tasking for a reasonable desktop environment. The proof -of-concept was built
+upon a conceptual framework of statistical reasoning (law of large numbers, statistical
+mechanics) as well as a correct -by-construction bias, meaning that the system dynamics emerge
+directly out of the agents’ characteristics and behaviours, rather than by the inclusion of artificial
+small-world networks. The proof -of-concept addresses where, who, when, and what elements.
+
+Where: underlying topographical (network / graph) data is extracted from map and search
+engine utilities such as Google Earth, in order to build a network of objects, denoted institutions.
+
+
+
+                                                                                                   3
+         Online Journal of Public Health Informatics * ISSN 1947-2579 * http://ojphi.org 2010
+   Agent Based Modeling of “Crowdinforming” as a Means of Load Balancing at Emergency Departments
+
+
+
+
+Institutions are existing geographic locations such as homes, businesses, schools, leisure sites,
+hospitals, airport, and transport vehicles. Who: Agents are people that make up a community,
+and between whom an infection would be spread. When: a central premise of the DSSW-ABM
+is that agents are primarily creatures of habit, operating on routine schedules with slight random
+
+perturbations [16]. What: The factor of interest is the spread of the pH1N1 virus or other viruses
+that cause respiratory infections among the population of agents, through agent -to-agent contact
+associated with routine daily activities. Once infected, the agents probabilistically choose to stay
+home for the duration of the infection or attend a hospital ED.
+
+As an intervention, we have considered modeling the potential role of ‘        crowdinforming’ in
+directing or governing an agent’s behaviour. The notion of ‘        crowdinforming’ is a natural
+
+extension of ‘crowdsourcing’ [16], whereby data collected by crowdsourcing is again fed back to
+the ‘crowd’ via public access. Low-tech examples of the role of ‘crowdinforming’ in modifying
+human behaviour are readily available, such as line-       ups at vaccination clinics as vac   cine
+shortages are announced in the mass media. While a fairly obvious intervention,
+‘crowdinforming’ is a novel inclusion into the ABM and simulation.
+
+Methods
+
+
+The ABM engine is coded in C++, an Object Oriented Language. The object oriented approach
+has natural extensions to the spatial modeling inherent in the spatial nature of the system under
+study. Developing an ABM within an object oriented framework from the ground up provides
+an additional degree of understanding the problem in contrast to using a more commercial
+
+platform. The simulated world is a two        -dimensional (X, Y) discrete Cartesian world of
+extremely high resolution. Building upon the proof-of-concept, the ABM is general purpose and
+at present is a spatially directed ABM reflective of a specific topography – in this case, the City
+of Winnipeg, Canada . Agents can access a limited number of features of other agents and
+objects, which can be set by the programmer, depending on the model. They can also pass
+messages to other agents in order to achieve interaction. The ABM houses institutions such as
+hospitals, homes, malls, leisure facilities, schools, businesses, and transportation institutions such
+
+as cars and public transport. Graphical inputs serve as defining location derived from maps     and
+community planning documents. The ABM framework is illustrated in Fig.             1. The publicly
+accessible information ‘dashboard’ is illustrated on the left -hand side, providing near real time
+information on waiting times at various EDs        at hospitals within a   region. Currently, this
+information is available in individual facilities’ waiting rooms; yet, for the present simulation it
+is assumed to be web accessible to the general public via readily available web services. The web
+
+services can include traditional web 2.0 applications supporting dynamic updating of web pages
+based on new information from various facility waiting time estimates, as well as access via
+traditional wired services to those offered over 3G cellular networks or ‘smart phones’.
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                  4
+         Online Journal of Public Health Informatics * ISSN 1947-2579 * http://ojphi.org2010
+   Agent Based Modeling of “Crowdinforming” as a Means of Load Balancing at Emergency Departments
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                 Fig. 1. The ABM framework encompassing various data sources.
+
+
+  A. Modeling Surges at Hospitals
+
+This section outlines the urban based ABM under conditions associated with an ILI outbreak in
+Winnipeg, Canada. In the model, a parameterized distribution of households is associated with a
+colour as a graphical input. For this scenario, various colours represent a number of multiple
+person households uniformly distributed across Winnipeg, as shown in Fig. 2. At this scale, the
+colours tend to blend although roads, rivers, a    nd other infrastructure and features are clearly
+
+evident.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                               Fig. 2. A screenshot of the ABM input.
+
+
+
+A number of institutions such as schools, large businesses, restaurants, leisure institutes as well
+as hospitals are modelled. The spread of infection is a stochastic process with the probability of
+infection being directly related to social contact. Social contact can take place at home, work,
+school, or on public transport, with institutions also having probabilities of contraction associated
+
+with them. A baseline simulation involves scheduled agents being modelled, and as they become
+ill, they probabilistically go to the closest ED . Once at the ED, another individual-based state or
+phase model is introduced as illustrated in Fig.     3. At the ED , the agent may be discharged,
+
+
+
+                                                                                                     5
+         Online Journal of Public Health Informatics * ISSN 1947-2579 * http://ojphi.org, 2010
+   Agent Based Modeling of “Crowdinforming” as a Means of Load Balancing at Emergency Departments
+
+
+
+treated, or admitted. Once admitted, the patient may again undergo treatment and recover, or
+alternatively the agent may not recover. The current institutional ED       model is quite simple but
+
+could be extended and refined with a more detai led model as required, an example of which has
+been developed by the authors [18][19].
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    Fig. 3. The emergency department individual based model.
+
+
+A statistic inst rumented during the simulation was the number of agents arriving at individual
+hospital EDs. These surges are shown in Fig. 4 for the seven hospitals in the Winnipeg area.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                Fig. 4. Simulated Surges at Winnipeg Hospitals during an Outbreak
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                      6
+         Online Journal of Public Health Informatics * ISSN 1947-2579 * http://ojphi.org4, 2010
+   Agent Based Modeling of “Crowdinforming” as a Means of Load Balancing at Emergency Departments
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            Fig. 5. Day of Week Variations at Winnipeg Hospitals during an Outbreak
+
+
+ Fig. 4 illustrates a disparity between various hospitals   , corresponding to population density
+variations with the city. Fig. 5 illustrates the variation within weekly routines or schedules. These
+data are averaged over five runs. This averaging raises an interesting consideration from a policy
+perspective: as the data is averaged , it tends to become smoother and may tends to mask short-
+term variations that may otherwise be present and important to note in the physical environment
+
+as well as the model.
+
+
+Results: Self redirection
+
+
+  B. ‘Crowdinfoming’ diversions
+
+
+Although expected, reduced surges at hospital EDs         can reasonably be argued to facilitate
+improved treatment and service efficiencies during an outbreak. These outcomes illuminated a
+potential indirect intervention. The modelling initially planned for reactive   hospital diversions,
+i.e. setting demarcation levels related to capacity to support diversion policy and redirection [20].
+With recent interests in ‘ crowdsourcing’ [16] and as a means to aid in biosurveillance of
+potential infection spread, the model was adapted to model the counterpoint of ‘ crowdsourcing’,
+
+that being ‘crowdinforming.’ One of the fundamental tenets of ‘         crowdsourcing’ is that the
+feedback loop needs to be closed, as information mined through crowdsourcing flows back to the
+crowd that generated it, presumably to accrue benefit.
+
+At present, one trial hospital in the Winnipeg Regional Health Authority (WRHA) jurisdiction
+has an ED ‘dashboard’ in place, updating the number of patients waiting and their waiting times
+
+in terms of maximum wait at various triage levels. The dashboard is inten      ded to inform those
+already in the waiting room of    the anticipated wait before being seen. These dashboards are
+derived from the WRHA Electronic Data Information System (EDIS) which was recently rolled
+out across the WRHA hospitals. Our model develops this notion further and conjectures that in a
+reasonably short period of time, this data could be made publicly         available through a web
+service, such that an individual would be able to query the hospital ‘       dashboards’ from the
+
+WRHA site over the internet with any browser, be it mobile cellular or wired, or made available
+
+
+
+                                                                                                   7
+         Online Journal of Public Health Informatics * ISSN 1947-2579 * http://ojphi.org 2010
+   Agent Based Modeling of “Crowdinforming” as a Means of Load Balancing at Emergency Departments
+
+
+
+
+via a community call centre such as a 311 service whereby a patient would call and enquire
+about expected wait times.
+
+For our modeling purposes, in this ‘crowdinforming’ scenario, a proactive decision is then made
+
+by an agent seeking treatment at an ED. In addition to the stochastic process of deciding upon
+going to an ED , each agent is also provided with estimates of wait times and the number of
+patients waiting. This data is available and easily instrumented within the ABM.
+
+As an illustration of our weighted fair redirecting, we assumed four hospitals with waits of 1, 2, 3
+and 4 hours with travel times of 60 minutes, 45 minutes, 30 minutes, and 15 minutes, coarsely
+extracted from topographical distances. An agent would create a roulette wheel to guide their
+
+decision once they have elected to go to an ED   . The associated normalized probabilities
+associated with informed self redirection are shown in Table 1.
+
+            Table 1. Informed Emergency Department Self Redirect Probabilities
+
+                                    ED    ED    ED3 ED4       Tot
+
+                                     1     2                   al
+                        Wait
+                        Time         1     2      3     4
+                        (hr)
+
+                        Travel
+                        Time         1    0.75   0.5   0.25
+                        (hr)
+                        Total
+                                     2    2.75   3.5   4.25  12.5
+                        Time
+                        (hr)
+                                          1/2.   1/3.  1/4.
+                        1/over       ½     75     5     25   1.38
+
+                        Probabili  0.36   0.26  0.20   0.17   1.0
+                        ty                 4      7
+
+
+
+Table 1 combines estimates of travel time and wait times in an additive manner. Alternatively, it
+
+may be more appropriate to generate a total time as a linear combination weighted appropriately
+as in (1).
+
+                    Total Time =                                 ((1)aitingTime) + (TravelTime)
+
+Using such a method, the agents make a probabilistic decision weighted by the least anticipated
+wait. As a consequence, the overall surge seen at hospitals is dampened by the behaviour of
+
+informed individuals. Modeling the ‘crowdinformed’ load-balancing results in surges at hospital
+as shown in Fig. 6, which was derived with              equal to zero.
+
+
+
+
+                                                                                         8
+        Online Journal of Public Health Informatics * ISSN 1947-2579 * http://ojphi.org
+   Agent Based Modeling of “Crowdinforming” as a Means of Load Balancing at Emergency Departments
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  Fig. 6. Surges at Winnipeg Hospitals with ‘crowdinforming’.
+
+
+
+Crowdinforming appears to f ilter the simulated patient surges. A simple statistical measure
+associated with mean and variance indicates that the load balancing is statistically significant
+given our behavioural assumptions, where a known estimated wait time probabilistically
+influences a person’s decision in attending a particular ED. The overall effect was expected to be
+that of a low pass filter smoothing out the peaks and valleys in both space and time. Fig. 6
+clearly illustrates filtering in space as each ED   roughly serves the s ame number of patients
+
+within a few percent. Filtering in time is expected to result from incorporation of an estimate of
+travel time as indicated in Equation 1. This simulation illustrates load balancing at the cost of
+greater variance in the patient load over time. This type of emergent behaviour inherently has
+greater information content than anticipated or expected results. While the simulation results are
+presently a coarse approximation of a policy implementation, they serve as an indication of
+possible trends and side effects.
+
+
+As a further extension, the additions of temporary clinics were     also modeled. The temporary
+clinics were modeled as being available provided sufficient    staff resources existed to off -load
+EDs during a serious influenza outbreak. In this case, hospitals were augmented with temporary
+clinics and the public was informed of their location and services. Temporary clinics are
+modelled as being staffed with and providing a level of service similar to a hospital ED. In the
+
+following simulation, six temporary facilities were instantiated in highly populated postal code
+areas. Given the model of the information provided to the public, the consequent balancing of
+loads at hospital EDs and temporary clinics are seen to be balanced . Fig. 7 also demonstrates the
+effect of prioritizing travel in the decision-making process (Fig. 7 is derived with               equal to 0.5)
+with 80% of infected agents seeking treatment. In addition, acute patients are modeled as not
+presenting themselves at a clinic but rather deciding to directly attend an ED. An additional
+
+modification is that the tempora ry clinics are more heavily recommended once hospitals near
+capacity, or alternately that hospitals are preferred destinations until they are near capacity.
+
+
+
+
+
+
+
+
+                                                                                                  9
+         Online Journal of Public Health Informatics * ISSN 1947-2579 * http://ojphi.org010
+   Agent Based Modeling of “Crowdinforming” as a Means of Load Balancing at Emergency Departments
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+             Fig. 7. Surges at Winnipeg Hospitals and Clinics with ‘crowdinforming’.
+
+
+
+ An additional param eter of interest was the location     of temporary clinics. For the simulation
+above, the clinics were located in central and highly populated postal code areas. The simulation
+allows for one to vary the location of clinics , such that they may better serve a community or
+region.
+
+ Fig. 8 illustrates a simulation run without averaging over multiple runs (which carries the effect
+of averaging over multiple days) . Without averaging, the day to day variations are clearly
+apparent. If this variability  were to be an    actual consequence of the patient self redirection
+policy, it may be that the increase in day to day variation would not be a reasonable trade -off for
+a balanced load. It is these types of insights that ABM and what -if scenarios provide for policy
+
+makers a-priori to policy implementation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                             Fig. 8. Hospital Loads without averaging.
+
+
+
+
+
+
+                                                                                                     10
+         Online Journal of Public Health Informatics * ISSN 1947-2579 * http://ojphi.org4, 2010
+   Agent Based Modeling of “Crowdinforming” as a Means of Load Balancing at Emergency Departments
+
+
+
+
+Discussion
+
+
+Although preliminary, this work represents one of the first modelled instances of the potential of
+‘crowdinforming’ in providing a policymaker with a simulation to assist in public health decision
+support. In doing so, t his work illustrated the role that an ABM can play in developing policy
+decision support systems. The model presented here illustrates how one specific intervention –
+that of proactive information   dissemination or ‘crowdinforming’ – can provide a degree of
+patient load balancing at ED s. A similar model was constructed corresponding to the scenario
+where sufficient public health resources existed for the deployment of temporary clinics. In the
+
+event of the temporary clinics , the model also allows for an investigation into their utilization
+where the public would be informed of their location and services.
+
+The findings are somewhat self -evident in that the model for ‘ crowdinforming’ contributed to
+load balancing at individual hospital  EDs. The findings also indicate that the location of the
+clinics is reasonably important in off -loading EDs. The most significant limitations associated
+with research of this nature is that stochastic models of behaviour  have to be estimated. Other
+
+shortcomings are associated with the access and usability of real data. These latter barriers are
+technological, while the former are theoretical. The validity of the underlying ABM framework
+is enhanced as the characterization of agents and their behaviours is improved and refined with
+additional real data. Consequently, barriers to access and usability of real data –      whether
+technological or political – are limitations to the work. A more significant deficit in the model is
+that the deployment of temporary clinics assumes that the resources exist for staffing and
+
+treatment.
+
+Summary
+
+
+The work presented here allows a policy for patient directed redirection to be simulated, adding a
+qualitative assessment to a model that may ot herwise be experiential or best-intent. This work is
+one of the first demonstrations of the ‘ crowdsourcing’ intervention, and it demonstrates the role
+an ABM and similar technologies will continue to play in the future.
+  .
+
+Acknowledgments
+
+
+The authors acknowledge Maciej Borkowski, Marek Laskowski, and Bryan Demianyk for early
+developments of the ABM framework. The authors also acknowledge Manitoba Hydro for
+
+financial support.
+
+Correspondence:
+
+
+Bob McLeod
+University of Manitoba
+mcleod@ee.umanitoba.ca
+
+
+
+
+
+                                                                                               11
+         Online Journal of Public Health Informatics * ISSN 1947-2579 * http://ojphi.org10
+   Agent Based Modeling of “Crowdinforming” as a Means of Load Balancing at Emergency Departments
+
+
+
+References
+
+
+
+[1] Marshall A, Burns L. A Bayesian network hybrid model for representing accident and
+    emergency waiting times. Proceedings of the IEEE Symposium on Computer-Based Medical
+    Systems. June 2007; 91-96.
+
+[2] Komashie A, Mousavi A. Modeling emergency departments using discr ete event simulation
+    techniques. Proceedings of the Winter Simulation Conference. Dec. 2005; 2681-2685.
+[3] Patrick J, Puterman M. Reducing wait times through operations research: Optimizing the use
+    of surge capacity. Healthcare Quarterly, 2008;11(3): 77-83.
+[4] Khurma N, Bacioiu G, Pasek Z. Simulation-based verification of lean improve ment for
+    emergency room process. Proceedings of the Winter Simulation Conference. Dec 2008;1490-
+
+    1499.
+[5] McNulty    T, Re -engineering Health Care: The Complexities of O               rganizational
+    Transformation, New York, Oxford University Press, 2002.
+[6] Kanagarajah A, Lindsay P, Miller A, Parker D. An exploration into the uses of agent -based
+    modeling to improve quality of health care. International Conference on Complex Systems .
+    June 2006; 1-10.
+
+[7] Gunal M, Pidd M. Simulation modelling for perform ance measurement in healthcare.
+    Proceedings of the Winter Simulation Conference, Dec. 2005; 2663 - 2668.
+[8] Blachowicz D, Christiansen J, Ranginani A, Simunich K. How to determine future HER
+    ROI: Agent -based modeling and simulation offers a new alternative to traditional
+    techniques, J. Healthcare Information Management. Winter 2008;22(1):39-45.
+[9] Gunal M, Pidd M. Understanding accident and emergency departmen t performance using
+                                     th
+    simulation. Proceedings of the 38 conference on Winter simulation, 2006;446-452.
+[10]   Bonabeau E. Agent -based modeling: Methods and techniques for simulating human
+    systems. Proceedings of the National Academy of Science. May 2002        [Online]. 99(Suppl
+    3), pp. 7280-7287. Available: http://www.pnas.org/content/99/suppl.3/7280.full#xref-ref-3-
+    1
+[11]   Epstein J. Modelling to contain pandemics. Nature. 2009:460;687.
+
+[12]   Hupert N, Xiong W, Mushlin A. The virtue of virtuality: The promise of agent -based
+    epidemic modeling,” Translational Research. 2008:151(6):273-274.
+[13]   Epstein J. Artificial society: Getting clues on how a pandemic might happen by creating
+    a h uge model of the United States,     The Brookings Institution. [Online]. Available:
+    www.brookings.edu/interviews/2008/0402_agent_based_epstein.aspx.
+[14]   Merler S, Ajelli M, Jurman G, Furlanello C, Rizzo C., Bella A, Massari M, Ciofi degli
+
+    Atti M. Modeling influenza pandemic in Italy: An individual     -based approach. The 2007
+    intermediate conference of the Italian Statistical Society. June 200           7. Available
+    http://www.sis-statistica.it/files/pdf/atti/SIS%202007%20Venezia%20intermedio_121-
+    131.pdf
+[15]   M. Borkowski M, Podaima B, McLeod R., Epidemic modeling with discrete space
+    scheduled walkers: Possible extensions to HIV/AIDS,” BMC Public Health, vol. 9 (Suppl 1):
+
+    S14, 2009. [Online}. Available: doi:10.1186/1471-2458-9-S1-S14.
+[16]   Song, C, Qu Z, Blumm N, Barabási A. Limits of Predictability in Human Mobility,
+    Science, 2010 327(5968);1018-1021.
+
+
+
+
+                                                                                              12
+         Online Journal of Public Health Informatics * ISSN 1947-2579 * http://ojphi.org10
+   Agent Based Modeling of “Crowdinforming” as a Means of Load Balancing at Emergency Departments
+
+
+
+[17]   Howe       J, The Rise of Crowdsourcing.                      Wired.      June 2006,
+    http://www.wired.com/wired/archive/14.06/crowds.html.
+[18]   Laskowski M, Borkowski M, Demianyk B, Friesen M, McLeod R. The utility of agent-
+
+    based models for healthcare applications,” The Second IASTED International Conference on
+    Telehealth and Assistive Technology, Cambridge, MA, Nov. 2009.
+[19]   Laskowski M, McLeod R,Friesen M, Podaima B, Alfa A., Models of emergency
+    departments for reduci ng patient waiting times. PLoS ONE,. 2009;4( 70: e6127. [Online].
+    Available: doi:10.1371/journal.pone.0006127, 2009.
+[20]   Mukhi S, Laskowski M, Agent-based simulation of emergency depa rtments with patient
+
+    diversion. Electronic Healthcare, D. Weerasinghe, Ed. Berlin: Springer. 2009;25-37.
+
+
+   doi: 10.5210/ojphi.v2i3.3225
+
+   Cite this item as: McLeod, B. 2010 Dec 23. Agent Based Modeling of “Crowdinforming” as
+   a Means of Load Balancing at Emergency Departments. Online Journal of Public Health
+   Informatics [Online] 2(3):e4.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                              13
+        Online Journal of Public Health Informatics * ISSN 1947-2579 * http://ojphi.org10

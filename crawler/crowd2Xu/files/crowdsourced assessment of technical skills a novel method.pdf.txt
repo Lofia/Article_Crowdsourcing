@@ -1,0 +1,710 @@
+                                     journal of surgical research 187 (2014) 65       e71
+
+
+
+                                          Available online at www.sciencedirect.com
+
+
+                                                   ScienceDirect
+
+
+
+
+
+                              journal homepage: www.Journa         lofSurgicalResearch.com
+
+
+
+
+Crowd-Sourced Assessment of Technical Skills: a novel
+
+
+method to evaluate surgical performance
+
+
+
+                          a                       b                                        c
+Carolyn Chen, BA, Lee White, PhD, Timothy Kowalewski, PhD,
+                                       d                            e                               f
+Rajesh Aggarwal, MD, PhD, Chris Lintott, PhD, Bryan Comstock, MS,
+                             g                              g                         a,
+Katie Kuksenok, BA, Cecilia Aragon, PhD, Daniel Holst, BS, *
+                                     h
+and Thomas Lendvay, MD
+
+aUniversity of Washington, School of Medicine, Seattle, Washington
+b
+ Department of Bioengineering, University of Washington, Seattle, Washington
+cDepartment of Mechanical Engineering, University of Minnesota, Seattle, Washington
+d
+ Department of Surgery, University of Pennsylvania, Philadelphia, Pennsylvania
+e
+ Department of Physics, University of Oxford, Oxford, United Kingdom
+fDepartment of Biostatistics, University of Washington, Seattle, Washington
+g
+ Department of Computer Science Engineering, University of Washington, Seattle, Washington
+hDepartment of Urology, University of Washington, Seattle Children’s Hospital, Seattle, Washington
+
+
+
+
+article info                              abstract
+
+
+Article history:                          Background: Validated methods of objective assessments of surgical skills are resource
+Received 31 July 2013
+                                          intensive. We sought to test a web-based grading tool using crowdsourcing called Crowd-
+Received in revised form                  Sourced Assessment of Technical Skill.
+6 September 2013
+                                          Materials and methods: Institutional Review Board approval was granted to test the accuracy
+Accepted 18 September 2013                of Amazon.com’s Mechanical Turk and Facebook crowdworkers compared with experi-
+Available online 10 October 2013
+                                          enced surgical faculty grading a recorded dry-laboratory robotic surgical suturing perfor-
+                                          mance using three performance domains from a validated assessment tool. Assessor
+Keywords:
+                                          free-text comments describing their rating rationale were used to explore a relationship
+Crowdsourcing                             between the language used by the crowd and grading accuracy.
+
+Robotic surgery                           Results: Of a total possible global performance score of 3e15, 10 experienced surgeons
+OSATS                                     graded the suturing video at a mean score of 12.11 (95% conﬁdence interval [CI], 11.11
+
+GEARS                                     e13.11). Mechanical Turk and Facebook graders rated the video at mean scores of 12.21
+Education
+                                          (95% CI, 11.98e12.43) and 12.06 (95% CI, 11.57e12.55), respectively. It took 24 h to obtain
+Training                                  responses from 501 Mechanical Turk subjects, whereas it took 24 d for 10 faculty surgeons
+
+                                          to complete the 3-min survey. Facebook subjects (110) responded within 25 d. Language
+                                          analysis indicated that crowdworkers who used negation words (i.e., “but,” “although,” and
+
+                                          so forth) scored the performance more equivalently to experienced surgeons than
+                                          crowdworkers who did not (P < 0.00001).
+
+                                          Conclusions: For a robotic suturing performance, we have shown that surgery-naive crowd-
+                                          workers can rapidly assess skill equivalent to experienced faculty surgeons using
+
+
+
+
+
+
+
+ * Corresponding author. Department of Urology, University of Washington, Seattle Children’s Hospital, 4800 Sand Point Way NE, Seattle,
+
+WA, PO Box 359300. Tel.: þ1 307 752 1996; fax: þ1 206 987 3925.
+   E-mail address: dholst12@gmail.com (D. Holst).
+0022-4804/$ e see front matter ª 2014 Elsevier Inc. All rights reserved.
+
+http://dx.doi.org/10.1016/j.jss.2013.09.024
+66                                   journal of surgical research 187 (2014) 65        e71
+
+
+
+                                          Crowd-Sourced Assessment of Technical Skill. It remains to be seen whether crowds can
+
+                                          discriminate different levels of skill and can accurately assess human surgery performances.
+
+                                                                                          ª 2014 Elsevier Inc. All rights reserved.
+
+
+
+
+1.      Introduction                                              who had completed 50 or more Human Intelligence Tasks, the
+
+                                                                  task unit used by Mechanical Turk, and had achieved a greater
+
+The annual mortality because of medical errors may be as high     than 95% approval rating. Each Mechanical Turk subject was
+as 98,000 patients in the United States [1]. Even more patients   compensated $1.00 for participating. In the second group, 110
+
+experience morbidity yielding consequences both clinically        subjects were recruited using Facebook (Fig. 1B). The control
+and economically [1]. An extra 2.4 million hospital days and      group consisted of 10 experienced robotic surgeons, who have
+
+$9.3 billion are incurred annually because of medical errors [2]. all practiced as attending surgeons for a minimum of 3 y with
+
+Efforts to reduce surgical complication rates have included       predominantly minimally invasive surgery practices and who
+incorporation of simulation training for learning and recertiﬁ-   were familiar with evaluating surgical performances by video
+
+cation of surgical skills [3]. Global surgical performance-rating analysis (Fig. 1C). Neither the Facebook subjects nor the sur-
+
+scales, such as the Objective Structured Assessment of Tech-      geon raters received monetary compensation. All subjects
+nical Skills (OSATS), have been widely adopted for the assess-    were required to be older than 18 y.
+
+ment of surgical skill and the determination of trainee              A surgical skill assessment survey was adapted from the
+advancement [4,5]. These methods, although validated, are         Global Evaluative Assessment of Robotic Skills (GEARS) vali-
+
+time-intensive and rely on real-time or video-recorded analysis   dated robotic surgery rating tool [14] and hosted online (Fig. 2).
+
+by surgical experts who ﬁrst need to demonstrate inter-rater      Each of the subjects from the three groups completed the
+reliability. Increasing responsibilities of surgical educators    same survey. The survey consisted of two steps. First, the
+
+and the trend toward standardization of training dictate a need   subjects were asked to answer a qualiﬁcation question in
+for a cheaper, faster, less biased method of rating surgical      which a pair of videos of surgeons performing a Fundamentals
+
+performance.                                                      of Laparoscopic Surgery block transfer task were displayed
+
+   Crowdsourcing is a relatively recent trend that uses an        side by side on the screen [15] (Fig. 3). These videos were ob-
+anonymous crowd to complete small, well-deﬁned tasks [6].         tained from a previous study [16]. The left video demonstrated
+
+The crowd must be diverse, decentralized, and independent,        a surgeon performing with high skill, whereas the right video
+and the generated data need to be able to be aggregated [7].      presented a surgeon performing with intermediate skill based
+
+Ongoing research in the area investigates how to deﬁne tasks      on published benchmark metrics for this particular task
+
+in a way that enable the crowd to accomplish complex and          [17,18]. Subject assessors were directed to indicate which
+expert-level work. Various workﬂows [8] can be used to break      video showed the surgeon of higher skill. This question was
+
+a complex piece of work into approachable parts and can also      used to assess the subject’s discriminative ability. After the
+use the crowd to check the quality of its own work [9].           qualiﬁcation question, the criterion test involved rating a less
+
+Crowdsourcing has been used to help blind mobile phone            than 2-min robotic surgery suture knot-tying video of an
+
+users navigate their environment [10], decipher complex           above average performance (Fig. 4) based on existing bench-
+protein folding structures with the online game called Foldit     mark data [17,18]. No subject-identifying features were visible.
+
+[11], and solve medical cases through the website CrowdMed.       After watching the video, each reviewer rated the suturing
+
+com [12]. These applications all use online work marketplaces,    performance on three domains: depth perception, bimanual
+such as Amazon Mechanical Turk [13] to quickly and cheaply        dexterity, and efﬁciency (Fig. 2). The domains were chosen
+
+recruit an anonymous crowd of nonexperts. We hypothesize          from the six domains included in the GEARS tool and were
+that crowd-sourced surgery performance rating is equivalent       rated on a Likert scale from 1e5 [14]. The global performance
+
+to ratings done by experienced surgeons. We also explored a       rating was obtained by summing the ratings of the three do-
+
+link between the language of the crowd and more accurate          mains with a scale of 3e15. An attention question was also
+ratings of surgical performances.                                 embedded within the criterion test to ensure that the assessor
+
+                                                                  was actively paying attention and if the question was
+                                                                  answered incorrectly, the subject was excluded from the
+
+2.      Materials and methods                                     study.
+
+                                                                     The assessor was asked to describe his or her grading
+After Institutional Review Board approval (IRB #42,811), three    rationale in a free-text box after rating for each domain. We
+
+groups of subjects were recruited for this study: Amazon.com      focused on using the occurrence of style words, which are
+                                                                  words that do not carry content individually, such as “the,”
+Mechanical Turk users, Facebook users, and teaching sur-
+geons whose expertise and practice involve robotic surgery.       “and,” “but,” and “however,” to identify more accurate re-
+
+Recruitmentemailstotheexperiencedsurgeonsweresentand              sponses. Chung and Pennebaker distinguished between con-
+Mechanical Turk and Facebook announcements were posted            tent and style words in text analysis, and found that
+
+on the respective websites. Five hundred one subjects were        noncontent words in English can help identify aspects of the
+                                                                  writer’s mood, expertise, and other characteristics [19].Inan
+recruited through the Amazon.com Mechanical Turk crowd-
+sourcing platform (https://www.mturk.com/mturk/welcome)           exploratory step, we split all qualifying responses into two
+
+(Fig. 1A). Eligible subjects were active Mechanical Turk users    groups: those closer to the expert answers, and those farther
+                                     journal of surgical research 187 (2014) 65       e71                                  67
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fig. 1 e (A) Mechanical Turk subjects inclusion/exclusion diagram. (B) Facebook subjects inclusion and exclusion diagram.
+
+(C) Medical expert subjects inclusion/exclusion diagram.
+
+
+
+away (Fig. 5). We achieved separation by computing the dis-      The a priori determined equivalence was þ/▯ 1 point,
+
+tance between each response and the expert average, and          assuming average rating differences of no greater than 0.5
+
+separating the responses along the median distance into          points. The present study aimed to obtain a minimum of 100
+roughly equal-sized parts: better and worse responses. Because   Facebook user ratings to test the feasibility of alternative
+
+Likert scale responses cannot be presumed to be interval-        recruitment methods. All CIs were two-sided and not
+
+valued [20], and ﬁnding the distance between a response          adjusted for multiple testing of groups. Statistical analyses
+and the expert average does so, splitting the responses into     were conducted using the R (v2.15; Institute for Statistics and
+
+two coarse categories serves to reduce the effect of this        Mathematics of WU [Wirtschaftsuniversitat ¨ien]) statistical
+assumption [20].                                                 computing environment [22]. Explanations for the ratings for
+
+   Grades were obtained from 10 available experienced sur-       each of the domains were also collected. Four hundred
+
+geons to establish a gold standard or ground truth grade for     seventy-six participants from Mechanical Turk and Facebook
+the video. A minimum of 400 ratings was determined a priori      provided text responses.
+
+for the Mechanical Turk group to show equivalency with the
+average (mean) expert grade with >90% power, assuming a
+
+standard deviation in grades of three [21]. To establish         3.      Results
+
+equivalency, the entire 95% conﬁdence interval (CI) for the
+mean Mechanical Turk grade had to be contained within the        After eliminating subjects based on our screening criterion,
+
+equivalence margin surrounding the gold standard grade.          we were left with nine experts (90% of the initial responses)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                              Fig. 2 e Assessment survey of skills (adapted from GEARS [14]).
+68                                   journal of surgical research 187 (2014) 65         e71
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Fig. 3 e Fundamentals of Laparoscopic Surgery block transfer task side-by-side video used to screen subjects. The expert
+surgeon is on the left. (Color version of ﬁgure is available online.)
+
+
+
+
+
+(Fig. 1C), 409 Mechanical Turk subjects (82% of the initial re-   of times each frequently occurring style word was observed in
+
+sponses) (Fig. 1A), and 67 Facebook subjects (63% of the initial  any of the explanations in the better versus worse responses.
+
+responses) (Fig. 1B). Surgeon raters graded the skills assess-    The probability of a word to occur given a good or bad response
+ment video with a mean score 12.11, yielding an equivalence       is related to the probability of a response being good or bad
+
+window of 11.11e13.11. Mechanical Turk and Facebook               given the word occurring, according to the Bayes theorem [23].
+graders rated the video with mean scores of 12.21 (95% CI,        We found that the word “but” was much more likely to occur in
+
+11.98e12.43) and 12.06 (95% CI, 11.57e12.55), respectively        the better set of responses and therefore, focused on “but,” and
+
+(Table 1 and Fig. 6). CIs for both crowd-sourced rating groups    related negation words “however,” “despite,” “although,” and
+were contained entirely within the window of equivalence          “though.” We used the existence of these words to split all
+
+with experts. Bias from the gold standard rating was small in     qualifying responses into new predicted-better and predicted-
+both crowd-sourced groups, with rating differences of þ0.10       worse categories. The predicted-better set contained 277 (58%)
+
+and ▯0.05 points for Mechanical Turk and Facebook users,          of the responses. As shown in Figure 8, the differences be-
+
+respectively.                                                     tween predicted-better and predicted-worse are numerically
+   Response time from the different groups varied greatly.        small, but statistically signiﬁcant using nonparametric Man-
+
+Table 2 shows the number of days required to achieve the          neWhitney U test (P < 0.00001) for each of the three di-
+
+responses from Mechanical Turk and faculty surgeon sub-           mensions of rating. The distance between the predicted-better
+jects. Figure 7 indicates the participation rate of each group    responses is also closer to the expert average (as there were
+
+over time.                                                        only nine expert responses, no statistical test was run).
+   With the Mechanical Turk and Facebook groups combined,
+
+476 survey participants provided justiﬁcation for their selec-
+
+tions regarding all three domains. We considered the number       4.       Discussion
+
+
+                                                                  Development of an accurate crowd-sourced assessment of
+
+                                                                  skills would address many challenges surrounding current
+                                                                  methods of surgical performance assessment. Using C-SATS
+
+                                                                  would be a faster, cheaper, less biased method of technical
+
+                                                                  skill assessment compared with current methods. Although
+                                                                  C-SATS will not replace conventional one-on-one instruction,
+
+                                                                  it may be used within discrete elements of procedural edu-
+
+                                                                  cation that can be outsourced to ensure objectivity and efﬁ-
+                                                                  ciency. OSATS is the current gold standard method for
+
+                                                                  measuring surgical performance and relies on ratings gener-
+                                                                  ated by expert surgeons, which is time and resource intensive
+
+                                                                  [4]. C-SATS could provide initial categorization of skills among
+
+                                                                  trainees and re-evaluation of skills among experienced sur-
+                                                                  geons for maintenance of certiﬁcation. It could also serve as
+
+                                                                  an adjunct assessment alongside traditional rating methods,
+                                                                  such as OSATS. If skill deﬁciencies can be identiﬁed early
+
+                                                                  in a surgeon’s training, additional focused training can be
+
+                                                                  initiated.
+Fig. 4 e Criterion video: intracorporeal robotic suturing            One limitation of OSATS is the potential for bias. OSATS
+
+video graded by subjects in this study. (Color version of         assessments are often performed in-person and it is difﬁcult
+ﬁgure is available online.)                                       to blind assessors to the identity of the subject. Furthermore,
+                                         journal of surgical research 187 (2014) 65             e71                                      69
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                   Fig. 5 e Word analysis diagram.
+
+
+
+
+
+blinded or not, raters tend to be from the same training pro-           watch a set of performance videos while assigning scores by
+
+grams as their students and are confronted with the conﬂict of          hand, scan, and email or mail their scores, and ﬁnally have
+not advancing their own trainees if ‘objective’ assessments             anotherindividual collatethosescorepagesintoa spreadsheet
+
+identify unsafe or ineffective practice. The crowd-sourced              or other database for assessment. This approach is actually
+
+method is blind and thus the ratings are truly objective.               very time-consuming both for the graders and other personnel
+
+   We found that applying assessment tools to more than just            involved in the evaluation of scores. Furthermore, this limits
+
+a very small number of performances, necessitated the crea-             the locations where surgeons can perform the scoring task to
+tion of an online assessment suite for surgeon graders to use.          those where they have access to equipment to play a digital
+
+The conventional method to distribute this task to a panel of           video disk. An attractive alternative approach is to create a
+
+surgeons would be to mail a scoring tool page and digital video         simple website with embedded performance videos accessible
+
+disk of performance videos to all graders, have the graders             fromanywhereontheInternet.Thisistheapproachweelected
+
+                                                                        to take. Scores were collected in a format natively compatible
+                                                                        with assessment tools, such as Excel, SPSS, R, Matlab, and so
+
+                                                                        forth. The grading infrastructure we built includes a very
+
+  Table 1 e Summary of grades assigned by each subject                  simple hypertext markup languageebased survey whose re-
+  group.
+                                                                        sults are sent directly to our server. Maintenance of the server
+  Score given                          Group
+
+
+                    Mechanical         Facebook         Faculty
+                        Turk                           surgeons
+
+
+  Initial N              501              107              10
+  Qualiﬁed N           409 (82%)         67 (63%)        9 (90%)
+
+  C-SATS
+    Mean (SD)        12.21 (2.35)     12.06 (2.01)     12.11 (1.45)
+
+    95% CI           11.98, 12.44     11.56, 12.55     11.00, 13.22
+
+  Grade, n (%)
+    3   0 0 0
+
+    4                    1 (0.2)           0                0
+    5                    2 (0.5)           0                0
+
+    6                   10 (2.4)          3 (4.5)           0
+    7                   11 (2.7)           0                0
+
+    8                   14 (3.4)           0                0
+    9                   17 (4.2)          4 (6.0)           0
+
+    10                  26 (6.4)          3 (4.5)           0
+
+    11                  36 (8.8)         11 (16.4)       4 (44.4)
+    12                  78 (19.1)        17 (25.4)       3 (33.3)
+
+    13                  76 (18.6)        10 (14.9)          0           Fig. 6 e Graph showing a scoring density composite of all
+    14                  73 (17.9)        16 (23.9)       1 (11.1)
+                                                                        three assessor groups. (Color version of ﬁgure is available
+    15                  65 (15.9)         3 (4.5)        1 (11.1)
+                                                                        online.)
+70                                    journal of surgical research 187 (2014) 65        e71
+
+
+
+
+  Table 2 e Time to receive full responses from each subject
+
+  group.
+
+  Group                                                 Days
+
+  Mechanical Turk                                         5
+  Facebook                                               25
+
+  Faculty surgeons                                       24
+
+
+
+
+and generation of the survey do require a certain level of
+
+computer aptitude but in our experience has not necessitated
+the use of outside contractors. Once assumed that this level of
+
+infrastructure is needed for the assessment of either tradi-
+
+tional GEARS or C-SATS, the marginal effort needed to set up a
+crowd-sourced assessment is very low. Essentially the same
+
+surveys presented to the surgeon graders can be added to the
+Amazon Mechanical Turk interface following the simple
+
+guidelines available on that site to make the surveys available
+
+to vast numbers of crowd graders.                                  Fig. 8 e Graph showing a composite of scoring density
+   The use of a crowd-sourced assessment is time-efﬁcient.
+                                                                   based on assessors’ free-text use or nonuse of negation
+The study was able to generate 409 usable responses in a 24-       words.
+
+h period (Fig. 7). In contrast, it took 25 d to generate 67 Face-
+book responses and 24 d to receive nine surgeon responses.
+
+One limitation to the study was that only the Mechanical Turk      words serve to identify more critical responses. It is also
+
+subjects were compensated. Perhaps more Facebook re-               possible that the overall crowd is more lenient than experts
+sponses could have been generated at a quicker rate with
+                                                                   and identifying more critical responses implies identifying
+compensation; however, it is unlikely that a $1.00 offer would     more accurate ones. For example, one subject justiﬁed rating
+have accelerated surgeon participation.
+                                                                   depth perception as a ‘four’ (which was equivalent to the
+   Our approach of using writing style cues to identify better     rating given by the experts for depth perception) and stated
+
+responses is similar to the approach of using behavioral pat-      that, “Making the knots seemed at ﬁrst choppy, but looked
+terns for the same purpose [24]. We were able to isolate
+                                                                   better the second time a knot was made.” Using additional
+meaningfully different ratings using writing style cues alone,     text cues may provide the ability to hone the crowds for spe-
+
+as evidenced by signiﬁcant differences between predicted-          ciﬁc tasks.
+better and predicted-worse sets. Furthermore, it is possible
+                                                                      A limitation of this study is that a single video was assessed,
+that these writing style cues can help identify more accurate      so we cannot make conclusions with regard to variance. Future
+
+responses, as the predicted-better responses were closer to        studies aiming to include videos across a range of surgical do-
+the expert average. They were also more critical than the
+                                                                   mains (robotic, laparoscopic, open, and so forth), surgeon skills,
+predicted-worse responses, which may be because negation           and human surgery will help build strength to demonstrate
+
+                                                                   discrimination of variance. The present study is also limited, in
+                                                                   that it is difﬁcult to obtain a detailed understanding of the
+
+                                                                   background of the subjects who participated in the study and
+
+                                                                   the length of time that any subject spent on the survey or if the
+                                                                   subject skipped ahead in the video. In future studies, collecting
+
+                                                                   information about the assessor population, such as location,
+
+                                                                   occupational history, and the length of time spent on the sur-
+                                                                   vey, may provide valuable information. It is possible that some
+
+                                                                   of the crowdworkers were medical professionals who use the
+
+                                                                   Mechanical Turk venue, which could skew the data. However,
+                                                                   it is not likely that a large proportion of the Mechanical Turk
+
+                                                                   users were medical professionals. Ideally, honing the crowd’s
+
+                                                                   discriminative abilities through a series of videos would allow
+                                                                   us to identify and use individuals who show a record of accu-
+
+                                                                   rate task assessment.
+                                                                      Inthis study, we used the Mechanical Turk platform because
+
+                                                                   it was an easily accessible venue to distribute our video and
+
+                                                                   survey content rapidly. There exist a number of free crowd-
+Fig. 7 e Elapsed time plot. The percent of submitted               sourcing venues (such as CitizenScienceAlliance.org)thatare
+
+evaluations per group over time. Only participants who             strictly voluntary. These platforms are populated by “workers”
+
+passed the qualiﬁcation step are shown. (Color version of          who choose to participate because they are interested in
+ﬁgure is available online.)                                        advancing science, hence the name of the workers is ‘citizen
+                                       journal of surgical research 187 (2014) 65          e71                                   71
+
+
+
+
+scientists.’ We acknowledge that there are potential ethical          [4] van Hove PD, Tuijthof GJM, Verdaasdonk EGG, Stassen LP,
+considerations, and our future C-SATS studies seek to enroll             Dankelman J. Objective assessment of technical surgical
+                                                                         skills. Br J Surg 2010;97:972.
+subjects through free platforms thereby excluding the potential
+for appearing coercive because of the remunerative gain.              [5] Datta V, Bann S, Mandalia M, Darzi A. The surgical efﬁciency
+                                                                         score: a feasible, reliable, and valid method of skills
+   C-SATS represents a novel methodology for rapid and
+                                                                         assessment. Am J Surg 2006;192:372.
+efﬁcient assessment of technical skills. Future studies may           [6] Quinn AJ, Bederson BB. Human computation: a survey and
+determine the minimum number of crowd-sourced users to                   taxonomy of a growing ﬁeld. In: Proceedings of the SIGCHI
+
+reliably match the assessment of experienced surgeons and                Conference on Human Factors in Computing Systems. New
+                                                                         York, NY: ACM, pp. 1403e1412, 2011.
+determine the optimal remuneration strategies that balance
+cost against the time it takes to collect a complete set of           [7] Surowiecki J. The wisdom of crowds. 1st Anchor books ed.
+                                                                         New York, NY: Anchor Books; 2005.
+assessment responses. Use of a crowd to rate technical skills         [8] Bernstein MS, Little G, Miller RC, et al. Soylent: a word
+could be expanded to any type of medical procedure any-
+                                                                         processor with a crowd inside. Presented at the Proceedings
+where in the world. One can envision procedural training in              of the 23rd Annual ACM Symposium on User Interface
+
+remote centers globally that use online crowdsourcing to                 Software and Technology, 2010.
+rapidly and objectively quantify and perhaps even qualify             [9] Zaidan OF, Callison-Burch C. Crowdsourcing translation:
+
+performance so that expertise for evaluation of skills does not          professional quality from non-professionals. In: Proceedings
+                                                                         of the 49th Annual Meeting of the Association for
+need to be ‘on the ground.’ Furthermore, methods to use                  Computational Linguistics: Human Language Technologies -
+crowds for real-time intraoperative feedback may be possible
+                                                                         vol 1. Stroudsburg, PA: Association for Computational
+to help improve performance and patient outcomes.                        Linguistics, pp. 1220e1229, 2011.
+   We report the development of a crowdsourcing method (C-
+                                                                     [10] Bigham J, Jayant C, Ji H, et al. VizWiz: nearly real-time
+SATS)forevaluatingsurgicalperformance.Thecrowd-sourced                   answers to visual questions. Presented at the Proceedings of
+                                                                         the 23rd Annual ACM Symposium on User Interface Software
+method provides an objective and feasible way to evaluate
+surgical trainees and re-evaluate experienced surgeons. With             and Technology 2012.
+                                                                     [11] Foldit Wiki. http://foldit.wikia.com/wiki/Foldit_Wiki
+further validation, this method could be implemented to pro-
+                                                                         [accessed 18.04.13].
+vide formative feedback for training and to create checkpoints       [12] CrowdMed. CrowdMed Beta, https://www.crowdmed.com/;
+during residency and postresidency to monitor surgical per-              2012 [accessed 18.04.13].
+
+formance and acquisition of surgical skills. Further investiga-      [13] Amazon.com I. Amazon Mechanical Turk: artiﬁcial artiﬁcial
+tion is required to validate C-SATS as an adjunct to the gold            intelligence. 2005-2013. https://www.mturk.com/mturk/
+
+standards for evaluation of procedural skills.                           [accessed 18.04.13].
+                                                                     [14] Goh AC, Goldfarb DW, Sander JC, Miles BJ, Dunkin BJ. Global
+
+                                                                         evaluative assessment of robotic skills: validation of a
+                                                                         clinical assessment tool to measure robotic surgical skills. J
+                                                                         Urol 2012;187:247.
+Acknowledgment
+                                                                     [15] Fried GM. FLS assessment of competency using simulated
+                                                                         laparoscopic tasks. J Gastrointest Surg 2008;12:210.
+Katie Kuksenok was supported by an NSF Graduate Research
+                                                                     [16] Lendvay TS, Brand TC, White L, et al. Virtual reality robotic
+Fellowship in Computer Science, grant number DGE-0718124.                surgery warm-up improves task performance in a dry
+Rajesh Aggarwal was funded by a Clinician Scientist Award                laboratory environment: a prospective randomized
+
+from the National Institute of Health Research, UK grant                 controlled study. J Am Coll Surg 2013;216:1181.
+                                                                     [17] Tausch TJ, Kowalewski TM, White LW, McDonough PS,
+number NIHR/CS/099/001.
+   Carolyn Chen, Thomas Lendvay, Timothy Kowalewski,                     Brand TC, Lendvay TS. Content and construct validation of a
+                                                                         robotic surgery curriculum using an electromagnetic
+Katie Kuksenok, Cecilia Aragon, Lee White, Bryan Comstock,               instrument tracker. J Urol 2012;188:919.
+and Daniel Holst contributed to the literature search, ﬁgures,
+                                                                     [18] Lendvay TS, Hannaford B, Satava RM. Future of robotic
+study design, data collection, and data analysis. Rajesh                 surgery. Cancer J (Sudbury, Mass.) 2013;19:109.
+
+Aggarwal and Chris Lintott performed valuable contextual             [19] Chung CK, Pennebaker JW. The psychological function of
+analysis and input. All the authors contributed to the data              function words. In: Fiedler K, editor. Social Communication.
+
+interpretation and writing of the manuscript.                            New York: Psychology Press; 2007. p. 343e59.
+   The authors have no conﬂict of interest.                          [20] Jamieson S. Likert scales: how to (ab) use them. Med Educ
+                                                                         2004;38:1217.
+
+                                                                     [21] Piaggio G, Elbourne DR, Altman DG, Pocock SJ, Evans SJ.
+                                                                         Reporting of noninferiority and equivalence randomized
+references
+                                                                         trials: an extension of the CONSORT statement. JAMA 2006;
+                                                                         295:1152.
+                                                                     [22] Team RC. R: a language and environment for statistical
+
+ [1] Kohn LT, Corrigan JM, Donaldson MS. To err is human:                computing. Vienna, Austria: R Foundation for Statistical
+    building a safer health system. Washington, DC: National             Computing. ISBN 3-900051-07e0. Available from: http://
+
+    Academies Press; 2000.                                               www.R-project.org; 2008. 2011.
+ [2] Zhan C, Miller MR. Excess length of stay, charges, and          [23] Bertsekas D, Tsitsiklis J. Introduction to probability. 2nd ed.
+                                                                         Belmont, MA: Athena Scientiﬁc; 2008.
+    mortality attributable to medical injuries during
+    hospitalization. JAMA 2003;290:1868.                             [24] Rzeszotarski J, Kittur A. CrowdScape: interactively
+ [3] Scalese RJ, Obeso VT, Issenberg SB. Simulation technology           visualizing user behavior and output. In: Proceedings of the
+
+    for skills training and competency assessment in medical             25th Annual ACM Symposium on User Interface Software
+    education. J Gen Intern Med 2008;23(Suppl 1):46.                     and Technology. New York, NY: ACM, pp. 55e62, 2012.

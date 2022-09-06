@@ -1,0 +1,791 @@
+                                 th
+                               26 Bled eConference
+
+                                   eInnovations:
+       Challenges and Impacts for Individuals, Organizations and Society
+
+                    June 9, 2013 – June 13, 2013; Bled, Slovenia
+
+
+
+
+
+                 Social Networking and Dental Care:
+   State of the Art and Analysis of the Impact on Dentists,
+
+                  Dental Practices and their Patients
+
+                                  Sojen Pradhan
+                  University of Technology Sydney (UTS), Australia
+                           sojendra.pradhan@uts.edu.au
+
+                                    Valerie Gay
+                  University of Technology Sydney (UTS), Australia
+
+                               valerie.gay@uts.edu.au
+
+                                    Surya Nepal
+                            CSIRO ICT Centre, Australia
+                               surya.nepal@csiro.au
+
+Abstract
+Health Social networking sites offering search, reviews and recommendation are gaining
+popularity. This paper reviews the most popular social networking sites related to dental
+care. Social networks such as DrOogle and Yelp enable their users to review and rate their
+
+dentists and dental practices. Such information is then used to rank and recommend dentists
+or dental practices to new users/patients. This paper compares the dental care social
+networking sites in terms of their features and criteria supported for search, reviews and
+recommendations of dentists or dental practices. Mismatches between features and criteria
+among different dental care reviews sites are identified, which may cause inconsistency in the
+recommendations in the dental care. Therefore, this paper proposes a new framework for
+dynamic dental care recommendation system which takes both local (personalised) and
+global (crowdsourced) trust into account. It analyses the impact of current social networks on
+
+dentists, dental practices and their patients. Finally, it identifies the open issues and
+challenges that need to be addressed to design a trustworthy recommendation system for both
+the dental professionalsd their patients.
+
+Keywords: health social networks, dental review sites, search, ratings, rankings,
+recommendations, trust.
+
+
+1.   Introduction
+The use of Social Networking Sites (SNSs) has made a substantial impact on the revolution of
+health care digital communications and has changed the role of both health care professionals
+and patients. Healthcare consumers have moved from searching information online to sharing
+
+
+
+
+                                                                                 178
+                                                         Sojen Pradhan, Valerie Gay, Surya Nepal
+
+
+
+information and in fact interacting with other users within a platform (Lober and Flowers
+2011). These platforms are referred as Health Social Networks (HSNs). They allow their
+members to create, retrieve and share information and experiences. Examples include
+MedHelp , PatientsLikeMe , DailyStrength , CureTogether , Tudiabetes , Asthmapolis etc.    6
+(Swan 2012). These popular platforms provide valuable information about symptoms and
+treatments of various illnesses as well as opportunities for people to discuss their experiences
+with health professionals or other users with similar symptoms and experiences.
+
+Pew Research Center (Lee 2012) reported a rising number of e-patients stating that 80%
+internet users in the US get health information online, third most popular online activity after
+email and search (Gallant et al. 2011), 60% use social media and 19% consult rankings of the
+providers. One of the most popular features of the online world is „peer review‟ and ratings on
+any product or service. These ratings are shaping and influencing public views on health
+issues such as vaccines, mental health, and dental implants. By doing so, healthcare patients
+are empowered and able to find other patients in similar illnesses or health situations. They
+are able to interact with each other about conditions, symptoms and treatments (Swan 2009).
+The HSN platforms provide opportunity to be able to connect and relate with each other. It
+has been reported that 23% of chronic health e-patients have searched for other patients with
+
+similar conditions (Lober and Flowers 2011).
+Dental care falls under the category of health care and a specialized social network for dental
+care has not been emerged yet. However, dental reviews and rankings sites in the form of
+social networks have emerged to help their users finding a dentist or dental practice in a given
+location. These sites allow users to review or rate their dentists or dental practices and based
+on that information, the sites provide rankings or recommendation.
+
+The contribution of this paper can be summarized as follows:
+   It provides an overview of HSNs and existing dental search, reviews and
+
+    recommendation sites.
+   It compares the features and criteria used in different sites to search, rate and rank the
+    dentists or dental practices.
+   It identifies the criteria these sites are using to help users/patients find the right dentist
+    or dental practice. However, there are many mismatches of the criteria amongst the
+    sites.
+   It briefly analyses the impacts of these sites to the dentists or dental practices and their
+    patients.
+   It proposes a new framework for dynamic dental care recommendation system to find
+    the most suitable and trustworthy dentist or dental practice. The new framework is
+    dedicated to reduce any negative impacts in the dental care society.
+
+The remainder of this paper is organised in the sections. Section 2 discusses the popularity of
+HSNs and introduces the emerging dental specific search and review sites. Section 3 focuses
+on dental care social networks and it compares their features and their search, review and
+recommendation criteria. Section 4 introduces a proposed framework for dynamic dental care
+recommendation system by incorporating preferred criteria and trust derived from social
+
+
+
+
+1 www.medhelp.org
+2 www.patientslikeme.com
+3 www.dailystrength.org
+4 www.curetogether.com
+5 www.tudiabetes.org
+6 www.asthmapolis.com
+
+
+
+
+
+
+                                                                                             179
+        Social Networking and Dental Care: State of the Art and Analysis of the Impact on Dentists ...
+
+
+
+networks as well as crowdsources of dental information. The paper concludes with a
+discussion on impact on Dentists, Dental Practices and their Patients and on open issues.
+
+
+2.    Health Social Networks (HSNs)
+
+The growing popularity of social media has made it easier to collect and rapidly analyse
+public health information such as data from food-borne illness or infectious disease outbreaks
+or dental implants. Nowadays, not all patients are automatically accepting doctors‟ or
+dentists‟ recommendation without doing their own online research (Ratzan 2011). If patients
+fail to have their need (e.g. questions, certainty of illness, understanding, etc.) fulfilled
+through direct communication with health professionals they may become frustrated and
+experience increasing uncertainty of their illness which would lead them to search on Internet,
+an alternative source (Hou & Shim 2010 and Tustin 2010). Indeed, unsatisfying interpersonal
+channel for patients has been a significant motivator for mediated channel such as HSNs. The
+Internet has become a better source of information in some cases than physical healthcare
+providers for patients (Hou & Shim 2010). Moturu & Liu (2010) quoted that a survey
+indicated 81% of adult users have used the Internet for health information and acknowledged
+that the Internet is the most widely used source for health information ahead of doctors,
+
+friends and families. But, is the information trustworthy? And is the data accurate? Search
+engines cannot provide answers to these questions (Moturu & Liu 2010).
+Nonetheless, the users of HSNs are increasing as they can find comments or information
+related to the specific health condition or symptoms or find others who have experienced
+similar health issues. The users are not only able to retrieve related information but also create
+and share their experiences through the platform.        Moreover, the users/patients can get
+emotional support by seeing others with similar health symptoms/conditions and feel “I am
+
+not alone”, which empowers users/patients and give them a sense of community so that they
+would go back and share more in the same platform (Swan 2009). It is one of the most
+efficient approaches to win users/patients‟ hearts or allow them to trust the platform. Some of
+the HSN platforms are successful in allowing their users to share a lot of information about
+their medication, side effects, and types of therapies along with their symptoms. The HSNs
+have been used by both health professionals and patients, transforming the way health
+consumers connect, search and communicate. One of the most important factors for
+users/patients to use such platform is trust. Trust plays an important role for healthcare
+consumers to reduce uncertainty in technology-mediated environment (Hernández-Ortega
+2011) and to decide whether to use the information or not to make their health related
+sensitive decisions.
+
+The similar trend exists for dental care services as well. A website dedicated to dentist
+reviews quoted, “About 60% of population has some fear of dentist… and the best way to find
+a dentist is through unbiased patient reviews of dentists.” (TheDentistReviews.com). It also
+provides a list of dentists reviews sites, such as DentalCenter         7, DentalFearCentral , 8
+DentistDig , DentistReviewsOnline    10 and DrOogle . Dental professionals are also listed
+under other health professionals review sites such as RateMDs        12 and HealthGrades   13.In
+addition, a generic review site Yelp   14 has been gaining popularity in the US for dentist
+
+
+
+7 www.dentalcenter.com
+8 www.dentalfearcentral.org
+9 www.dentistdig.com
+10 www.dentistreviewsonline.com
+11 www.doctoroogle.com
+12 www.ratemds.com
+13 www.healthgrades.com
+14 www.yelp.com
+
+
+
+
+
+                                                                                            180
+                                                        Sojen Pradhan, Valerie Gay, Surya Nepal
+
+
+
+reviews, which allows patients to post reviews/comments about their visits to their dentists.
+Amongst all, DrOogle is one of the most dedicated sites for dental professionals in the US,
+which provides rankings on dentists based on patients‟ positive reviews (Dr.Oogle.com).
+However, the problem is not only there are many different sites available but also the different
+measuring criteria amongst the sites make it harder to choose the right dentist.
+
+As mentioned earlier, trust is crucial for users/patients to use the information available online
+and it is paramount for dental care due to the invasive nature of treatment and the level of fear
+people have towards the dental treatment. For instance, a study in dental care patients by
+Rodriguez-Vazquez (2008) revealed that 96.8% of the participants in Spain (out of total 804
+patients) showed some degree of stress about dental treatment. The same study also quoted
+that dental fear can upset up to 50% of the general population. Another dental health survey
+showed that 46% of the participants in Australia were anxious about going to the dentist
+(Armitage & Reidy 2012). Armfield (2010) defined a term „dental beliefs scale‟ as a
+measurement of dental fear, which calculates subjective perception of dentist behaviour and
+beliefs related to lack of power, control, and trust.
+
+3.    Dental Care Social Networks – State of the art
+
+Many researchers in the area of dental care has been exploring subjective attributes which
+affects patients during the visit to the dental clinic such as dental fear (Armitage & Reidy
+2012, Armfied 2010, Armfield et al. 2009, McNeil et al. 2011, Ng & Leung 2008 and
+Rodriguez-Vazquez et al. 2008) and quality of care (Clarkson et al. 2010, Eriksen et al. 2008,
+Elgin 2012, Merijohn et al. 2008, Sbaraini et al. 2012, St. Louis et al. 2009 and Yarascavitch
+et al. 2009). Few other researchers discussed other attributes such as regular visits (Beirne et
+al. 2008 and Ito et al. 2012) safety (Perea-Perez et al. 2011) knowledge and education
+(Hedman et al. 2009). Sbaraini et al. (2012) stated that dental patients‟ expectations are
+proportionately related to dental professionals‟ friendly caring attitudes, confidence and
+caring dental team helped patients to take control of their own oral health.”tive and
+
+There are many sites where the Internet users can search for dentists and get reviews. In an
+attempt to alleviate and compromise the dental anxiety and give confidence to the patients,
+dental reviews and ratings sites are emerging in the Internet world. However, some of them
+have only basic functionality such as location (postal code or suburb) whereas some others are
+gaining popularity and acquainting more features such as specialities of dentists, service
+looking for and even insurance plans. Table 1 shows some of the dental review sites, their
+established year, average monthly visitors in the year of 2009 and membership fees. The table
+is sub-categorised into dentistry, healthcare and business sectors because the review sites for
+dentists are also spread across both healthcare and general business reviews as well.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                          181
+        Social Networking and Dental Care: State of the Art and Analysis of the Impact on Dentists ...
+
+
+
+
+
+Review Site Address              Established Year      Monthly visitors as of Membership fee
+                                                       2009
+
+doctoroogle.com                          2004                 60,000           US$18 (one off)
+
+dentalfearcentral.org                    2005                 19,500                 free
+
+dentalcenter.com                         1996                 11,000                 free
+dentistdig.com                           2009                  5,200                 free
+
+dentistreviewsonline.com                 2008                   100                  free
+
+dentist-ratings.net                      2008                   N/A                  free
+
+ nationaldentalreviews.org               2011                   N/A                  free
+
+1800dentist.com                          N/A                    N/A                  free
+
+   Healthcare – the following sites also allow patients to review on dentists
+
+ratemds.com                             2003                 450,000                 free
+
+healthgrades.com                        1999                2,000,000                free
+
+  Business – the site below is popular for reviews on dentists among other local businesses.
+
+
+yelp.com                                2003                6,500,000               free
+Angieslist.com                          1995                  65,000           US$26 per year
+
+
+               Table 1. Reviews or Rating sites (source: thedentistreviews.com)
+
+Summary of some of the dental specific platforms are given below.
+
+DrOogle: This site allows dental patients to write reviews and personal feedbacks to their
+dentists or dental practices. The patients can rate the dentists or dental practices on specific
+criteria with a likert scale between 1 to 4 on „facilities‟, „service‟, „painless‟, „results‟ and
+„cost‟. In addition to the reviews/feedback and ratings on their dental visits, the patients are
+also asked to provide feedback on dental hygienist. Based on positive reviews and ratings, the
+
+dentists are ranked within a particular location/suburb of the US. This site is paid service
+(US$18 to become a member) and it is regulated so that the users can only post one review
+per dentist. This site also monitors shilling attacks (biased behavior and in fact making
+positive reviews to yourselves) to provide fair ratings to the users. At the time of writing,
+there are 171,796 reviews available from the patients and it is increasing everyday
+
+(Doctoroogle.com).
+Dental Fear Central: This is a non-commercial site which provides awareness to the public
+
+about the dental anxiety/fear. It is based in UK but it has been gradually expanded around the
+world. The dentist reviews and recommendations forum is now expanded to Australia,
+Europe, New Zealand and other countries in the world. This site provides the services such as
+'dental phobia support forum', 'commons fears in dental' and 'tips to deal with them', 'step by
+step guide to search for a dentist', 'psychological ways of tackling dental phobia', 'tips for
+
+dentists' and 'dental FAQ'.
+All dental patients, students and professionals are welcomed in this site. Main motive is to
+
+spread awareness in regards to dental anxiety. Dental fear central site has put quotes from its
+users such as, “ So much of it is about having the right dentist, one who will stop when you tell
+them to stop and who you trust 100%. I was ….. and who understood my fears.” and “Just
+
+
+
+
+
+
+                                                                                            182
+                                                          Sojen Pradhan, Valerie Gay, Surya Nepal
+
+
+
+want to say a big thank you – I had a very bad fear of the dentist ….. I now have a beautiful
+mouthful of teeth ….information you supplied me.”
+Other Dental Search, Reviews sites: There are many other dental search and reviews sites
+emerging. Most of them allow users to find the dentist based on the location (post code) and
+their own criteria and patients‟ reviews. For example, National Dental Reviews has come up
+with the rating criteria: „office cleanliness‟, „staff cleanliness‟, „short wait time‟, „chairside
+manner‟ and „explained treatment‟ for patients to rate between 1 to 5 stars.
+
+HealthGrades: This is another site in the healthcare sector which helps to find doctors,
+dentists and hospitals based on location. It does not allow writing reviews in free text but
+shows the result of short online survey filled by the patients‟ satisfaction. The criteria used on
+the short survey are divided into 5 likert scales from „poor‟ to „excellent‟ and „definitely not‟
+to „definitely yes‟. The survey question includes „scheduling appointments‟, „office
+environment‟, „office friendliness‟, „wait time‟, „level of trust‟, „helps patients understand
+their condition‟, „listens and answers questions‟, and „time spent with patient‟. In addition, it
+exclusively asks the question „would you recommend to family and friends?‟
+RateMDs: It is a dedicated site to find and rate doctors and dentists. The patients can rate
+them on the criteria such as „staff friendliness‟, punctuality‟, „helpfulness‟ and „knowledge‟.
+The site allows users to search the doctors or dentists for a location and provides a list with
+scores as shown above. It allows adding doctors or dentists if they are not already in the list.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         Figure 1. Dentist search result for Sydney Australia (Source: RateMDS.com).
+Yelp: This is a general business review site which helps people to find great local businesses
+including dentists or dental practices based on reviews provided by the users. Yelp claims that
+in second quarter of 2012, there were approximately 78 million unique visitors monthly. This
+site is increasingly getting popular to find the dentists in the local area in the US. It allows
+users to give an overall rate out of 5 stars and write feedback/reviews. This site also allows
+the readers of the reviews to mark whether the feedback was „useful‟, „funny‟ or „cool‟.
+
+
+3.1 Analysis on Dental Reviews Sites
+
+Different criteria are used amongst different dental reviews sites to find or recommend a right
+dentist, which makes it difficult for users/patients. The table 2 below shows the summary of
+how some of the reviews sites mentioned in the above section differ in the services provided.
+
+
+15 www.nationaldentalreviews.org
+
+
+
+
+
+
+
+                                                                                              183
+        Social Networking and Dental Care: State of the Art and Analysis of the Impact on Dentists ...
+
+
+
+
+             Sites            Search   Reviews     Rate       Rank     Recommendation
+
+   DrOogle                       √        √          √          √              √
+
+   Dental Fear Central           √        √          ×          ×              √
+
+   National Dental Reviews       √        √          √          ×              ×
+
+   RateMDs                       √        √          √          √              √
+
+   Health Grade                  √        ×          √          ×              √
+
+
+   Yelp                          √        √          √          ×              ×
+
+        Table 2. Comparison of the services provided by the sites (√ - Yes and × - No)
+
+All the reviews sites allow the users/patients to search for a dentist based on the specific
+
+location such as suburb or postal code. Most of them allow the users/patients to provide free
+textual comments/feedbacks reviews on anything about the dental service. Only in the Health
+Grade site, there is a short survey questionnaire to measure patient satisfaction. However,
+almost all the reviews sites have different measuring criteria to rate a dentist or dental care
+practice. The table 3 below shows a brief summary of the comparison of the criteria used on
+
+some of those sites.
+             Sites                             Criteria used likert scale
+
+
+   DrOogle                    ‘like a health spa’, ‘first class service’, ‘painless procedures’ and ‘superb
+                                                        results’
+
+   Dental Fear Central                                   None
+
+
+   National         Dental
+                              ‘office cleanliness’, ‘staff cleanliness’, ‘short wait time’, ‘chairside manner’
+   Reviews                                       and ‘explained treatment’
+
+
+   RateMDs                         ‘staff friendliness’, punctuality’, ‘helpfulness’ and ‘knowledge’
+
+
+                              ‘scheduling appointments’, ‘office environment’, ‘office friendliness’, ‘wait
+   Health Grade                time’, ‘level of trust’, ‘helps patients understand their condition’, ‘listens
+                                      and answers questions’, and ‘time spent with patient’
+
+   Yelp                                                 Overall
+
+
+                     Table 3. Comparison of the criteria used in the sites
+
+As shown in the Table 3 above, Dental Fear Central does not rate dentist because it is
+dedicated to provide awareness of dental fear to the community, hence it provides a forum to
+
+discuss about the dental anxiety and many other tips to overcome the dental fear. Based on
+specific location, the sites, DrOogle and RateMDs rank the dentists based on the positive
+reviews and ratings. But exact algorithm for the ranks is not known. It is apparent that
+different sites have different system in place to recommend the best dentists to the users.
+Although some sites including Yelp do not directly recommend to the users/patients they
+
+provide extensive reviews of users/patients which eventually mean indirect recommendations.
+
+
+
+
+
+
+
+                                                                                        184
+                                                 Sojen Pradhan, Valerie Gay, Surya Nepal
+
+
+
+Since these sites are using different vocabulary terms for the criteria to rate the service, the
+criteria in the above table 3 are re-arranged on the categories of: „quality of service‟, „quality
+of care‟, „quality of staff‟, „quality of environment‟, „scheduling appointments‟, „waiting
+time‟, „specific knowledge‟ and „explanation to the patients‟. The table 4 compares the sites
+based on these categories of criteria.
+
+          Criteria         DrOogle  National DentalRateMDs     HealthGrade  Yelp
+                                      Reviews
+  Quality of Service         √           ×            ×            ×         ×
+
+  Quality of Care            √           ×            ×            √         ×
+
+  Quality of Staff
+                             ×           √            √            √         ×
+  Quality of Environment
+                             √           √            ×            √         ×
+
+  Schedule appointments      ×           ×            ×            √         ×
+
+  Wait time                  ×           √            ×            √         ×
+
+  Specific Knowledge         ×           ×            √            √         ×
+
+  Explanation                ×           √            √            √         ×
+
+         Table 4. Comparison of the criteria used in the sites (√ - Yes and × - No)
+
+This table highlights that the popular sites such as Yelp and DrOogle are more focussed on
+providing free text reviews and comments rather than ratings on specific criteria.
+
+There are no consistencies on the words the users/patients use to describe the same experience
+or feelings. That has an impact on how it has been read or understood (or misunderstood). In
+any activities on social media such as chatting, blogging, posting or twitting in the social
+networks, a level of trust is inherent. In that environment, the user has a choice to trust the
+media (particular website) especially for health related information (Hou and Shim 2010) at
+the first instance, and then the information posted (content) on the media and „who has
+posted‟ and so on. Trust from own social networks could be integrated with the HSNs to
+enhance the trust and refine the search list. Even the search criteria can be made flexible
+depending on the situation the users/patients are in to make it flexible and more trustworthy
+altogether.
+
+
+4.   Proposed Framework for Dental Care Recommendation
+Most people make their healthcare decisions based on recommendations from people they
+trust the most. The trust can be developed by number of ways in online environment such as
+from the interactions, or previous postings, or similarity in dental symptoms or their expertise
+in the domain. Due to the invasive nature of treatment and level of dental fear, trust becomes
+
+very important factor while recommending a good dentist online. Trustworthiness of the sites
+which provides reviews and recommendations as well as the users who provided reviews and
+ratings are very important while searching for the right dentist or dental information. In this
+social media age, where everyone has own social network, it would sound logical to integrate
+personal social network with the HSNs to enhance trust (both local and global) of the sites,
+reviews and recommendations.
+
+
+
+
+
+
+
+                                                                               185
+        Social Networking and Dental Care: State of the Art and Analysis of the Impact on Dentists ...
+
+
+
+We have proposed a trust-based framework for dynamic dental care environment to show how
+a dental patient can refine the search by measuring trust from the social networks. A
+framework for dental care recommendation backed up by profile-based (local) trust and
+global trust from crowdsourced dental sites can incorporate the concerns people usually have
+for dental treatments. The proposed framework is shown in the figure 2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          Figure 2. Proposed framework for Dynamic Dental Care Recommendation.
+
+In the framework, the patients/users select their objective and subjective criteria while
+searching for the most suitable dental professionals initially. Some of the criteria are shown in
+the table 4. Computation of personalised profile-based trust derived from major components
+analysis (dental context, relationships and expertise) for dental care is the second step. It will
+include system trust (trust of the HSNs), content trust (information or reviews) and personal
+(relationship driven) trust.
+Incorporating trust based on similarities of dental symptoms, hereditary, side-effects and
+dental fear in the context analysis enhances the accuracy of measuring users‟ trust. In
+addition, relationships with other patients/users (including FOAF – Friend of a Friend) and
+their expertise in the dental care area refine and measure trust efficiently. Figure 3 shows the
+snapshot of these components which have significant impacts to build personalised trust while
+searching for a trustworthy dental information and professional for users/patients.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                            186
+                                                        Sojen Pradhan, Valerie Gay, Surya Nepal
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                      Figure 3. Components of Personalised Local Trust
+
+In the framework (figure 2), the list after second step can further be refined by cross-checking
+with existing crowdsourced dental reviews and rating sites (global trust) which is shown in
+the table 1. Overall, the information in the form of reviews and feedbacks in those specific
+dental reviews and rating sites are impacting the dentists and dental practices.
+
+5.    Open Issues and Impacts
+
+The number of dental reviews sites is growing and they allow the patients to leave reviews
+after their visit to the dentist. As it is the case for a lot of new recommendation systems, the
+majority of the ratings and feedbacks are done by the patients who are either terribly
+dissatisfied (negative feedback) or very happy with the service (positive feedback). There is
+one star instead of 5 stars thinking that 1 star is better than multiple stars. Another example on
+the DrOogle site, '$' sign for cost, some users are using only one or two $ signs to say the
+pricing/cost is not that bad. It should have been more $ signs. This individual rating does
+impact overall ratings of the particular dentist and therefore overall rankings. In some cases,
+the same dentist has been listed twice with two different ratings on DrOogle site. Similar
+errors are also found in Yelp site. More interestingly, the same dentist has been rated and
+ranked differently amongst various reviews sites, how can that be combined as a federated
+reviews or ranking?
+
+The HSNs have changed the way both health professionals and patients communicate with
+each other. Dental social networks have an impact on the patients‟ decisions to visit a dentist
+or dental practice through the ratings and reviews from other users/patients. Besides the
+positive benefits from the dental review sites such as time savings, faster access, ability to
+collaborate and advertisements, there are some potential negative impacts to both sides. From
+time to time lawsuits have been filed in the US due to the negative reviews on these sites for
+dentists. Some dentists are trying to silence their critics by using legal system in the US
+(Mascagni 2012). People have been raising the voice via blogs and articles about how the
+reviews are flawed (Connelly 2012) despite the HSNs claiming to be flawless. Due to such
+issues, it is for sure that the dentists have to be aware of the possible danger, so do the
+patients. If not managed properly one bad interaction may jeopardize the dentist‟s reputation.
+Therefore, it is important for the dental profession to get involved in dental social network
+design and management. Dental associations and other regulatory bodies should be involved
+in the process of designing recommendation systems that are suitable for dentists and dental
+
+
+
+
+
+
+                                                                                          187
+        Social Networking and Dental Care: State of the Art and Analysis of the Impact on Dentists ...
+
+
+
+practices. In addition, other challenges such as anonymous user identity, cold start problem
+when new dentist is added, or when there is a unique dental situation. Finding a solution to
+these challenges needs the involvement of researchers, patients and dental health
+professionals.
+
+References
+
+Armfield, J.M. (2010). The extent and nature of dental fear and phobia in Australia.
+      Australian Dental Journal. Vol. 55. Issue 4. pp. 368-377.
+Armfield, J.M., Slade, G.D. and Spencer, A.J. (2009). Dental fear and adult oral health in
+      Australia. Community Dentistry and Oral Epidemiology. Vol. 37. Issue 3. pp. 220-230.
+Armitage, C. J. and Reidy, J.G. (2012). Evidence that process simulations reduce anxiety in
+      patients receiving dental treatment: randomized exploratory trial. Anxiety, Stress &
+      Coping: An International Journal, 25:2. pp. 155-165.
+
+Beirne, P., Clarkson, J.E. and Worthington, J.V.(2008). Recall Intervals for oral health in
+      primary care patients (Review). The Cochrane Collaboration. The Cochrane Library.
+      Issue 4.
+Connelly, T.P. (2012). Flawed: Consumer Review Sites for Dentists and Physicians.
+      Huffington Post, from <http://www.huffingtonpost.com/thomas-p-connelly-
+      dds/medical-consumer-reviews_b_1132262.html>
+Dental Fear Central (2013). Dental Fear Central –  the world‟s biggest Dental Phobia, Dental
+
+      Fear and Dental Anxiety Resources, United Kingdom, accessed 5 February 2013.
+      <www.dentalfearcentral.org>.
+DrOogle (2013). DrOogle Good Dentist Guide, Dentist Reviews, Dentist Ratings and
+      Recommendations, USA, accessed 28 February 2013, <http://www.doctoroogle.com>.
+Elgin, C.R. (2012). Factors Affecting Patient Selection of an Orthodontic Practice. Ohio State
+      University. Dentistry.
+Gallant L.M., Irizarry, C., Boone, G and Kreps, G.L. (2011). Promoting participatory
+
+      medicine with social media: New media applications on hospital websites that enhance
+      health education and e-patients voices. Journal of Participatory Medicine, Vol.3.
+Hedman, E., Ringberg, K. and Gabre, P. (2009). Oral health education for school children: a
+      qualitative study of dental care professionals‟ view of knowledge and learning. Journal
+      of Dental Hygiene. Vol. 7. Issue 7. pp. 204-211.
+Hernández-Ortega, B. 2011, 'The role of post-use trust in the acceptance of a technology:
+      Drivers and consequences', Technovation.
+
+Hou, J., Shim, M. (2010). The Role of Provider–  Patient Communication and Trust in Online
+      Sources in Internet Use for Health-Related Activities. In: Journal of Health
+      Communication. vol. 15, no. S3,  pp. 186-99.
+Ito, A., Hayashi, M., Hamasaki, T. and Ebisu, S. (2012). How Regular Visits and Preventive
+      Programs Affect Onset of Adult Caries. Journal of Dental Research. Vol. 91. No. 7.pp.
+      S52-s58.
+
+Kwan, M. & Ramachandran, D. (2009). Trust and online reputation systems. Computing with
+      Social Trust, pp. 287-311.
+Lee, R. (2012). The rise of the e-patient, understanding social networks and online health
+      information seeking. Pew Internet Project, Pew Research Center.
+Lober, W.B. and Flowers, J.L. (2011). Consumer empowerement in health care amid the
+      internet and social media. Seminars in Oncology Nursing. Vol 27. No 3. pp. 169-182.
+
+
+
+
+
+
+                                                                                            188
+                                                        Sojen Pradhan, Valerie Gay, Surya Nepal
+
+
+
+Luo, J.S. & Smith, B.N. (2011). Social Networking, Health 2.0, and Beyond. Information
+      Technology Essentials for Behavioral Health Clinicians, pp. 119-31.
+Mascagni, E. (2012). SLAPP-Happy Dentists: When Lawsuits are Used to Fight Bad Yelp!
+      Reviews. Policymic.com, from < http://www.policymic.com/articles/2746/slapp-happy-
+      dentists-when-lawsuits-are-used-to-fight-bad-yelp-reviews/category_list>
+McNeil, D.W., Helfer, A.J., Weaver, B.D., Graves, R.W., Kyle, B.N. and Davis, A.M. (2011).
+
+      Memory of Pain and Anxiety Associated with Tooth Extraction. Journal of Dental
+      Research. Vol. 90. pp. 220-224.
+Moturu, S. & Liu, H. (2010). Quantifying the Trustworthiness of Social Media Content:
+      Content Analysis for the Social Web, LAP Lambert Academic Publishing.
+Ng, S.K.S. and Leung, W.K. (2008). A community study on relationship of dental anxiety
+      with oral health status and oral health-related quality of life. Community Dentistry and
+      Oral Epidemiology. Vol. 36. Issue 4. pp. 347-356.
+
+Perea-Perez, B., Santiago-Saez, A., Garcia-Marin, M., Labajo-Gonzalez, E. and Villa-Vigil,
+      A. (2011). Patient safety in dentistry: Dental care risk management plan. Med Oral
+      Patol Oral Cir Bucal. Sep 1;16(6). Pp. e805-9.
+Ratzan, S.C. (2011). Our New “Social” Communication Age in Health. Journal of Health
+      Communication. vol. 16, no. 8, pp. 803-4.
+Rodriguez-Vazquez, L. M., Lopez, E. R., Centelles, A. V., Otero, A.I.B. Otero, F. V. and
+      Centelles, P. V. (2008). Stress amongst primary dental care patients. Med Oral Patol
+
+      Oral Cir Buscal, April 1. 13(4), E:253-6.
+Sbaraini, A., Carter, S.M. and Evans, R.W. (2012). Experiences of dental care: What do
+      patients value? BMC Health Services Research. 12:177
+Swan, M. (2009). Emerging patient-driven health care models: an examination of health
+      social networks, consumer personalized medicine and quantified self-tracking.
+      International journal of environmental research and public health, vol. 6, no. 2,p. 492-
+      525.
+
+Swan, M. (2012). Crowdsourced health research studies: an important emerging complement
+      to clinical trials in the public health research ecosystem. Journal of Medical Internet
+      Research, Vol 14, No.2.
+The Dentist Reviews (2013). The Dentist Reviews: All Reviews –     All the time. Accessed 5
+      Feb 2013. <www.thedentistreviews.com>.
+Tustin, N. (2010). The role of patient satisfaction in online health information seeking',
+      Journal of Health Communication, vol. 15, no. 1, pp. 3-17.
+
+Yarascavitch, C., Regehr, G., Hodges, B. and Haas, D.A. (2009). Changes in Dental Student
+      Empathy During Training. Journal of Dental Education. Vol. 73. No. 4. pp. 509-517.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                            189

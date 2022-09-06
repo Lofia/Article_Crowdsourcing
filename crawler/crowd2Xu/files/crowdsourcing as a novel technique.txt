@@ -1,0 +1,715 @@
+Crowdsourcing as a Novel Technique for Retinal Fundus
+
+
+Photography Classification: Analysis of Images in the
+
+EPIC Norfolk Cohort on Behalf of the UKBiobank Eye and
+
+
+Vision Consortium
+
+                1                 1                    2                       3                    4                  1
+Danny Mitry *, Tunde Peto , Shabina Hayat , James E. Morgan , Kay-Tee Khaw , Paul J. Foster
+
+1National Institute for Health Research Biomedical Research Centre at Moorfields Eye Hospital & University College London Institute of Ophthalmology, London, United
+Kingdom, 2Department of Public Health and Primary Care, University of Cambridge Strangeways Research Laboratory, Worts Causeway, Cambridge, United Kingdom,
+3School of Optometry and Vision Sciences, Cardiff University, Cardiff, United Kingdom, 4Department of Clinical Gerontology, Addenbrookes Hospital, University of
+Cambridge, Cambridge, United Kingdom
+
+
+
+    Abstract
+
+
+    Aim: Crowdsourcing is the process of outsourcing numerous tasks to many untrained individuals. Our aim was to assess the
+    performance and repeatability of crowdsourcing for the classification of retinal fundus photography.
+
+    Methods: One hundred retinal fundus photograph images with pre-determined disease criteria were selected by experts
+    from a large cohort study. After reading brief instructions and an example classification, we requested that knowledge
+
+    workers (KWs) from a crowdsourcing platform classified each image as normal or abnormal with grades of severity. Each
+    image was classified 20 times by different KWs. Four study designs were examined to assess the effect of varying incentive
+    and KW experience in classification accuracy. All study designs were conducted twice to examine repeatability. Performance
+    was assessed by comparing the sensitivity, specificity and area under the receiver operating characteristic curve (AUC).
+
+
+    Results: Without restriction on eligible participants, two thousand classifications of 100 images were received in under 24
+    hours at minimal cost. In trial 1 all study designs had an AUC (95%CI) of 0.701(0.680–0.721) or greater for classification of
+    normal/abnormal. In trial 1, the highest AUC (95%CI) for normal/abnormal classification was 0.757 (0.738–0.776) for KWs
+    with moderate experience. Comparable results were observed in trial 2. In trial 1, between 64–86% of any abnormal image
+
+    was correctly classified by over half of all KWs. In trial 2, this ranged between 74–97%. Sensitivity was $96% for normal
+    versus severely abnormal detections across all trials. Sensitivity for normal versus mildly abnormal varied between 61–79%
+    across trials.
+
+    Conclusions: With minimal training, crowdsourcing represents an accurate, rapid and cost-effective method of retinal image
+
+    analysis which demonstrates good repeatability. Larger studies with more comprehensive participant training are needed to
+    explore the utility of this compelling technique in large scale medical image analysis.
+
+
+  Citation: Mitry D, Peto T, Hayat S, Morgan JE, Khaw K-T, et al. (2013) Crowdsourcing as a Novel Technique for Retinal Fundus Photography Classification: Analysis
+  of Images in the EPIC Norfolk Cohort on Behalf of the UKBiobank Eye and Vision Consortium. PLoS ONE 8(8): e71154. doi:10.1371/journal.pone.0071154
+  Editor: H. Peter Soyer, The University of Queensland, Australia
+
+  Received June 6, 2013; Accepted July 3, 2013; Published August 21, 2013
+  Copyright: ß 2013 Mitry et al. This is an open-access article distributed under the terms of the Creative Commons Attribution License, which permits
+  unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
+
+  Funding: This work was funded by the Special Trustees of Moorfields Eye Hospital and National Institute for Health Research Biomedical Research Centre at
+  Moorfields Eye Hospital and University College London Institute of Ophthalmology. EPIC-Norfolk infrastructure and core functions are supported by grants from
+  the Medical Research Council (G0401527) and Cancer Research United Kingdom (C864/A8257). The clinic for the third health examination was funded by Research
+  into Ageing (262). The funders had no role in study design, data collection and analysis, decision to publish, or preparation of the manuscript.
+  Competing Interests: The authors have declared that no competing interests exist.
+
+  * E-mail: mitryd@gmail.com
+
+
+
+Introduction                                                       protein folding structure which has limited feasibility with
+                                                                   conventional computational approaches. [2] In healthcare,
+  Crowdsourcing is an emerging concept that has attracted
+significant attention in recent years as a strategy for solving    crowdsourcing has been used in drug discovery, analysis of
+                                                                   imaging, clinical diagnosis and to improve service efficiency [3–6].
+computationally expensive and difficult problems. Crowdsourcing      In general there is a lot of detail and subtlety associated with the
+is the process of outsourcing numerous tasks to many untrained
+individuals. It is in widespread use in marketing and can deliver aanalysis of medical images. Image categorisation can, therefore be
+                                                                   tedious and time consuming, even for highly trained professionals.
+productivity on a scale that is otherwise very difficult to achieveOne of the principal advantages of crowdsourcing in medical
+Scientifically crowdsourcing has been popularised through its      image analysis is the potential for a marked reduction in analysis
+success in the categorization of galaxies. [1] In the biological
+                                                                   time with attendant reductions in analysis costs. These observa-
+sciences it has shown great potential in the determination of
+
+
+
+PLOS ONE | www.plosone.org                                      1                        August 2013 | Volume 8 | Issue 8 | e71154
+                                                                                      Crowdsourcing and Retinal Fundus Image Analysis
+
+
+
+tions are predicated on the assumption that humans are better and   tasks. At the time of this study there were over 200,000 registered
+
+more flexible than machines at certain tasks.                       KWs. Each KW receives a small monetary reward from the
+  The largest commercial crowdsourcing provider is Amazon’s         requester for each task that they complete that is of a suitable
+Mechanical    Turk.   (https://www.mturk.com/mturk/welcome)         standard to the requester. Amazon keeps a record of the
+
+MTurk is an Internet-based platform that allows requesters to       performance of each KW and if desired, filters can be set by the
+distribute small computer-based tasks to a large number of          requester, for example, permitting only KWs with a high success
+untrained workers. Typically the tasks require simple categoriza-   rate to perform the task. Each retinal image classification was
+
+tion based on discrete and small datasets and/or images using       published as one human intelligence task (HIT). For each HIT,
+multiple choice question format.                                    KWs were given some background information about the nature
+  The large scale acquisition of retinal images has become routine  of the photograph and a written description of abnormal features
+
+in the management of disease such as diabetic retinopathy,          of interest. In addition, they were shown two labelled example
+macular degeneration and glaucoma. These datasets present a         images of normal fundus photographs as part of a basic training
+formidable challenge in terms of analysis, for which a crowd-       exercise to help distinguish normal from abnormal. KWs were
+
+sourced approach may be feasible. We therefore evaluated the        asked if the test image differed from the normal image.
+potential for crowdsourcing (also known as distributed human        Specifically, they were asked to determine if there were any
+intelligence) as an effective and accurate method of fundus         additional features in the test image that were absent in the normal
+
+photography classification.                                         image. If the answer was ‘yes’ they were then asked to describe the
+                                                                    nature of the additional features through a simple drop-down
+                                                                    menu. (see Figure S1 for sample questionnaire) Each KW could
+Methods
+                                                                    only complete the same image once but there were no restrictions
+  The EPIC-Norfolk 3HC was reviewed and approved by the             on the number of assignments that a KW could complete. No
+East Norfolk and Waverney NHS Research Governance Com-              demographic data was collected on KWs completing the task and
+mittee (2005EC07L) and the Norfolk Research Ethics Committee        no nationality restrictions were placed. Based on previous
+
+(05/Q0101/191). Local research and development approval was         estimations of repeated task accuracy in distributed human
+obtained    through    Moorfield’s   Eye    Hospital,   London      intelligence tasks, we requested 20 KW classifications per image.
+(FOSP1018S). The research was conducted in accordance with          [4] In order to assess the effect of skill and compensation on
+
+the principles of the Declaration of Helsinki. All participants gaveclassification accuracy we conducted four different study designs:
+written, informed consent.
+  EPIC (European Prospective Investigation of Cancer) is a pan-      1) No previous experience required - compensation 0.03 cents
+                                                                        (USD) per HIT
+European study that started in 1989 with the primary aim of
+investigating the relationship between diet and cancer risk.[16]     2) No previous experience required - compensation 0.05 cents
+EPIC-Norfolk is one of the U.K. arms of the European cohort             per HIT
+
+study. The aims of the EPIC-Norfolk cohort were subsequently         3) Completed $500 HITs with $90% approval - compensation
+broadened to include additional endpoints and exposures such as         0.03 cents per HIT
+lifestyle and other environmental factors. The EPIC-Norfolk
+cohort was recruited in 1993–1997 and comprised 25,639               4) Completed $5000 HITs with $99% approval - compensa-
+                                                                        tion 0.03 cents per HIT
+predominantly white European participants aged 40–79 years.
+The third health examination (3HC) was carried out between
+2006 and 2011 with the objective of investigating various physical,   All four study designs were repeated to determine if the findings
+                                                                    from trial 1 were reproducible. Using the selection of images as a
+cognitive and ocular characteristics of 8,623 participants then agedpre-defined reference standard, we calculated the sensitivity and
+48–91 years. A detailed eye examination including mydriatic
+fundus photography was attempted on all participants in the 3HC     specificity for each of the study designs by degree of abnormality.
+                                                                    Receiver operating characteristic (ROC) curves were analysed.
+using a Topcon TRC NW6S camera. [7] A single image of the           The area under the ROC plot measures discrimination and is the
+macular region and optic disc (field 2 of the modified Airlie House most commonly used global index of diagnostic accuracy. The
+classification) was taken of each eye. [8].
+                                                                    area under the ROC curves (AUC) were calculated as non
+  A panel of two expert clinicians (D.M., P.F.) and two senior      parametric Mann-Whitney estimates and comparison between
+retinal photography graders selected, by consensus, a series of 100 curves was performed using the z statistic for correlation. As a
+retinal images from the EPIC Norfolk 3HC. We selected 10
+                                                                    secondary analysis, we compared the characteristics for easy
+severely abnormal images, 60 mildly abnormal images and 30          classifications (distinguishing normal and severely abnormal) and
+normal images, with pre-determined criteria to assess the           difficult classifications (distinguishing normal and mildly abnor-
+discriminating efficacy of the proposed technique. Severely
+                                                                    mal). Where relevant, statistics are reported with associated 95%
+abnormal images were determined as having grossly abnormal          confidence intervals. All analyses were performed using STATA
+findings, including significant haemorrhage, pigmentation or        v12.
+fibrosis. Mildly abnormal images were designated if there was a
+
+subtle abnormality such as dot haemorrhages or fine pigmentary      Results
+changes. Normal images had no discernible pathology. Figures S2,
+S3, S4 demonstrate example images for each category. All images       For each study design in trial 1 and 2, we received all 2,000
+
+were anonymysed and uploaded onto an ftp site for the study         requested classifications of the 100 images selected. Table 1
+duration to allow remote access.                                    illustrates the baseline characteristics for the KW participation in
+  We used the MTurk Web platform for anonymous workers to           each of the four study designs in trial 1 and 2 highlighting a
+
+perform a classification task of the fundus photographs in our      decrease in the number of KWs performing our task and a longer
+dataset. MTurk employs knowledge workers (KWs), who are             time to overall completion when experience eligibility restrictions
+untrained individuals to carry out simple tasks. KWs are registered were applied. The sensitivity and AUC for each study design in
+
+Amazon users who have a record of completing these types of         trials 1 and 2 by classification difficulty is shown in table 2. In trial
+
+
+PLOS ONE | www.plosone.org                                       2                        August 2013 | Volume 8 | Issue 8 | e71154
+                                                                                             Crowdsourcing and Retinal Fundus Image Analysis
+
+
+
+
+  Table 1. Baseline characteristics of KW participation by study design for trials 1 and 2.
+
+
+
+                                                      Trial 1
+
+                                                      0.03c          0.05c           0.03c_500_90%               0.03c_5000_99%
+
+  Number of different KWs                             152            127             39                          61
+
+  Mean (SD) number of HITs per KWs                    13(18)         15(20)          51(96)                      26(16)
+
+  Mean (SD) time on each HIT (secs)                   78(109)        62(76)          63(71)                      66(90)
+  Time to overall completion                          ,1day          ,1 day          1–2 days                    15 days
+
+
+                                                      Trial 2
+
+                                                      0.03_20        0.05_20         0.03_500_90%                0.03_5000_99
+
+
+  Number of different workers                         69             72              56                          46
+
+  Mean (SD) number of hits per KWs                    37(18)         35(19)          25(15)                      24(14)
+
+  Mean (SD) time on each hit (secs)                   63(83)         73(105)         79(102)                     58(80)
+  Time to overall completion                          ,1day          ,1 day          2–3 days                    7 days
+
+
+  (0.03c=study design 1; 0.05c =study design 2; 0.03c_500_90%=study design 3; 0.03c_5000_99%=study design 4).
+  doi:10.1371/journal.pone.0071154.t001
+
+
+1, all study designs demonstrated a sensitivity of $98% for the           and in both trials. However, there was a variation in the optimal
+correct classification of normal versus severely abnormal retinal         number of KWs needed to achieve the highest ROC. For trial 1,
+
+images, which is comparable to the value of $96% in trial 2.              this varied between 11–16 KWs and for trial 2 this ranged between
+   The AUC is illustrated in figure 1 both for all study designs and      11–20 KWs.
+
+grouped by easy (normal versus severely abnormal) and difficult
+(normal versus mildly abnormal) classification in both trials. In         Discussion
+
+trial 1, all study designs had an AUC of 0.701 or greater for
+classification of normal/abnormal. The highest AUC for normal/              This study demonstrates that crowdsourcing is a potentially
+                                                                          effective, viable and inexpensive method for the preliminary
+abnormal classification was 0.757 for those with moderate HIT
+experience (study design 3). Pairwise comparison between study            analysis of fundus photographs. Identification of severe abnor-
+designs demonstrated a significantly higher AUC for study design          malities is particularly accurate with a sensitivity of $98%, and a
+
+3 compared with each of the other study designs in the                    high AUC estimate (range 0.819–0.915) which was replicated in
+classification of normal/abnormal. (p,0.001) This was also                the second trial (AUC range: 0.754–0.938). The ability to
+                                                                          distinguish between normal and mildly abnormal images had a
+demonstrated when comparing the AUC of each study design
+stratified by easy and difficult classification. (p,0.001) There were     sensitivity ranging between 61–72% and between 64–86% of any
+                                                                          abnormal image was correctly classified by over half of all KWs.
+no other statistically significant differences in pairwise comparison
+of study designs. In trial 2, the AUC ranged between 0.671–0.806          In trial 2, these findings were replicated and compared
+                                                                          favourably with trial 1.
+for classification of normal/abnormal in all study designs. In both
+trials, the study design with the lowest AUC was interestingly the          Several interesting features of distributed human intelligence
+design with most experience and highest approval rating (study            tasks should be noted. Using an unselected crowdsource, we
+
+design 4). This was due to a low true positive rate when classifying      received 2,000 classifications at a total cost of  $60 in under 24
+normal images (52–64% - Table 2). Pairwise comparison between             hours, highlighting the power of this technique for rapid cost-
+
+study designs in trial 2 demonstrated a significantly lower AUC for       effective data analysis. In line with previous reports, increased
+study design 4 compared with each of the other study designs in           incentive did not necessarily lead to increased accuracy [9] and
+                                                                          increasing the number of KW gradings and the KW experience
+the classification of normal/abnormal, as well as easy and difficult
+classification. (p,0.001) Similar to trial 1, study design 3              did not have a simple relationship with classification accuracy.
+demonstrated the highest overall AUC. Paired comparison of                  Population screening for common diseases such as diabetic
+
+study designs between trial 1 and 2 demonstrated a significantly          retinopathy can be costly and time-consuming, with increasing
+higher AUC for normal-abnormal classification (p,0.001) in trial          research emphasis being placed on automated or semi-automated
+
+2 for all study designs with the exception of study design 4, where       grading. [10] Sanchez et al [11] recently compared computer
+trial 1 had a higher AUC (p=0.004).                                       automated detection (CAD) and expert grading for diabetic
+
+   Examining the responses from majority of KWs (.50% of                  retinopathy based on non-mydriatic fundus photography. They
+KWs) across both trials highlighted that all severely abnormal            reported no difference in accuracy between the expert graders and
+
+images were correctly classified. The majority of KWs correctly           CAD, with an AUC for computer aided detection of 0.721–0.973
+classified between 64–86% of any abnormal image in trial 1 and            depending on the difficulty of classification. Other studies have
+
+between 74–97% in trial 2 (Table 3).                                      similarly demonstrated an AUC ranging between 0.812–0.839 for
+   The AUC varied depending on the number of individual KW                automated detection of early diabetic retinopathy. [12] These
+gradings per image. For study design 1 (0.03c) in trial 1, the AUC        recent studies are comparable to our crowdsourced data, with an
+
+rose steadily peaking at 16 gradings per image, diminishing slightly      AUC ranging between 0.731–0.915 for abnormal versus normal
+thereafter. (Figure 2) The overall relationship between a higher          depending on classification difficulty. Similarly, our results
+
+AUC and a larger number of KWs was similar in all study designs           compare favourably to automated techniques for detection of
+
+
+
+PLOS ONE | www.plosone.org                                             3                          August 2013 | Volume 8 | Issue 8 | e71154
+                                                                                                       Crowdsourcing and Retinal Fundus Image Analysis
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     dy design in trials 1                                                                                              0.6(506.–00.702–0..67468)–0.693)
+
+
+
+
+
+
+
+
+
+
+                                                                                                                        0.7(804.–00.902–0..75839)–0.823)
+
+
+
+
+
+
+
+
+
+                                                                                                                        0.7(707.–00.801–0..72798)–0.814)
+
+
+
+
+
+
+
+
+
+                  Trial 2                     Specificity                    Sensitivity                                0.7(7010.9(209.–0..74746)–0.811)
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                        0.6(8010.8(109.–0..63890–)0.721)
+
+
+
+
+
+
+
+
+
+
+                                                                                                                        0.7(3010.9(105.–0..73308)–0.776)
+
+
+
+
+
+
+
+
+
+                                                                                                                        0.6(9020.8(303.–0..65942–)0.732)
+
+
+
+
+
+
+
+
+
+                  TrialP1roo.rioc7%co7re9cly iS.etcfi4i3y574%% 704.03c55%050790n%sii.80yc.1%%%068%_99968%5rco0%rai6793or0..%%y50.8(701.–0..68893)–0.724)c8535%_8680_908.60c.0000%089%_9_909%9%6A9e0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     The proportion correctly identified by severity of abnormality as well as the sensitivity, specificity and area under the ROC curve (AUC) for each stu
+
+
+
+
+
+     Taband 2 by classification MildNorabeve(meyl6(0n)=r20a0llasslMii)tlyfratalAeyanlamifrc(rtlNsfsiltllfravtlre)yanlmifrc(altEAU(Ea(sy5clCss)icCriin0Sudya/-subaalro.alc=llt)1u50esign 2; 0.03c_500_90% =study design 3; 0.03c_5000_99% =study design 4).
+
+
+
+
+
+PLOS ONE | www.plosone.org                                                    4                             August 2013 | Volume 8 | Issue 8 | e71154
+                                                                                          Crowdsourcing and Retinal Fundus Image Analysis
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 1. Comparative graphical illustration of the AUC for all classifications by study design (normal-abnormal) - Trial 1 (A) and
+
+Trial 2 (D); Comparative graphical illustration of the AUC for easy classifications (normal versus severely abnormal) by study
+design- Trial 1 (B) and Trial 2 (E); Comparative graphical illustration of the AUC for difficult classifications (normal versus mildly
+abnormal) by study design- Trial 1 (C) and Trial 2 (F).
+doi:10.1371/journal.pone.0071154.g001
+
+
+
+
+
+PLOS ONE | www.plosone.org                                          5                         August 2013 | Volume 8 | Issue 8 | e71154
+                                                                                              Crowdsourcing and Retinal Fundus Image Analysis
+
+
+
+
+  Table 3. The percentage of HITs correctly classified by the majority (.50%) of KW’s, with range of percentage of correct ‘‘votes’’
+
+  for each image category in brackets.
+
+
+
+  Trial 1                                  0.03c                     0.05c                  0.03c_500_90%            0.03c_5000_99%
+
+
+  Normal (N=30)                            90%(25–95)                87%(30–90)             97%(50–100)              90%(30–90)
+  Mildly abnormal (N=60)                   58%(25–95)                83%(25–100)            63%(20–100)              80%(35–100)
+
+  Severely abnormal (N=10)                 100%(90–100)              100%(90–100)           100%(90–100)             100%(95–100)
+
+  Any abnormality (N=70)                   64%(25–100)               86%(25–100)            69%(20–100)              83%(35–100)
+
+
+  Trial 2                                  0.03c                     0.05c                  0.03c_500_90%            0.03c_5000_99%
+
+
+  Normal (N=30)                            97%(50–100)               97%(40–100)            97%(45–100)              50%(30–75)
+  Mildly abnormal (N=60)                   68%(10–100)               85%(20–100)            70%(15–100)              96%(45–100)
+
+  Severely abnormal (N=10)                 100%(95–100)              100%(95–100)           100%(95–100)             100%(95–100)
+
+  Any abnormality (N=70)                   80%(10–100)               87%(20–100)            74%(15–100)              97%(45–100)
+
+
+  doi:10.1371/journal.pone.0071154.t003
+
+
+age-related macular degeneration where a sensitivity of .94% was           higher than our finding for mildly abnormal detection (61–79%),
+
+found for severe disease. [13].                                            but lower than the range for severely abnormal detection (96–
+   Recent compelling clinical examples of crowdsourcing have also          99%). Findings from this study should be interpreted with certain
+
+demonstrated a high level of diagnostic accuracy equalling results         considerations. By design, our data was heavily biased towards
+from expert graders. [4,6] Expert graders of mild retinopathy of           mildly abnormal images which comprised 60 out of 100 images.
+
+prematurity have recently reported an AUC of 0.84 [14], which is           Distinguishing normal from mildly abnormal is the most difficult
+higher than the AUC for mildly abnormal image classification               classification task. In addition, our instructions were kept simple,
+
+identified in this study (0.656–0.777 across both trials). However,        with very limited examples and training provided to the
+
+our results compare favourably with other studies, where expert            crowdsourced participants. Additional training exercises and
+grading of grade 1 diabetic retinopathy demonstrated an AUC                examples are likely improve the classification accuracy. All KWs
+
+range of between 0.623–0.789. [11] Furthermore, an analysis of             meeting the eligibility requirements were allowed to participate in
+the automated detection of drusen, cotton-wool spots, exudates             the trials, thus a proportion of individuals may have participated in
+
+and bright retinal lesions reported an expert grading sensitivity of       both trials, however based on the rapidity of the response and the
+between 87–95% depending on the type of lesion [15], which is              low mean number of HITs performed by each KW we expect this
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 2. The AUC and associated 95%CI for trial 1 (0.03c) as a function of the number of KW gradings per image. The AUC increases
+
+as the number of KW gradings increases with a peak at 16 individual gradings per image. A similar curve was obtained for all study designs in both
+trials, although a variation was seen in the optimal number of KWs needed to achieve a peak ROC.
+doi:10.1371/journal.pone.0071154.g002
+
+
+
+PLOS ONE | www.plosone.org                                              6                          August 2013 | Volume 8 | Issue 8 | e71154
+                                                                                             Crowdsourcing and Retinal Fundus Image Analysis
+
+
+
+
+number to be low. Moreover, it should be noted that there are            to explore the utility of this novel technique in large scale medical
+limitations to using crowdsourcing as a tool. The individuals            image analysis.
+
+classifying the images are unknown and may represent a stratified
+subgroup with a risk of inherent bias, [9] and ethical issues            Supporting Information
+surrounding the release and online access of anonymised clinical
+                                                                         Figure S1     An example of a typical questionnaire each
+data can be complex. The availability of robust anonymisation
+tools for the analysis of large clinical datasets may facilitate the     KW was asked to complete.
+                                                                         (DOC)
+uptake of crowdsourcing methods and ensure compliance with
+patient confidentiality. [16].
+                                                                         Figure S2      An example of an image with a mild
+   Nonetheless, micro-task markets offer a potential paradigm for        abnormality.
+engaging a large number of users for low time and monetary costs.
+                                                                         (DOC)
+With minimal training, crowdsourcing represents an effective,
+repeatable, rapid and cost-effective method of retinal image             Figure S3      An example of an image with a mild
+                                                                         abnormality.
+analysis. Based on our study, the accuracy obtained from
+crowdsourcing retinal image analysis compared to a gold standard         (DOC)
+
+is at least comparable both to computer automated techniques in          Figure S4      An example of an image with a severe
+disease detection and some reports from expert graders. Further          abnormality.
+
+work is needed to compare the diagnostic accuracy of specific            (DOC)
+disease detection tasks between a crowdsource and expert graders.
+
+The ideal crowdsource remuneration and categorization skill              Author Contributions
+required remains uncertain, however in this task, a moderate skill
+                                                                         Conceived and designed the experiments: DM JM PJF. Performed the
+level provided a higher accuracy than both unskilled and highly          experiments: DM PJF. Analyzed the data: SH DM. Contributed reagents/
+skilled KWs in the detection of mild and severe disease. Larger          materials/analysis tools: SH KTK PJF TP. Wrote the paper: DM JM TP
+
+studies with more comprehensive crowdsource training are needed          KTK.
+
+
+References
+
+ 1. Raddick MJ, Bracey G, Lintott CJ, Cardamone C, Murray P et al. (2013 March)hrmester M, Kwang T, Gosling SD (2011) Amazon’s Mechanical Turk : A
+    Galaxy Zoo: Motivations of Citizen Scientists. arXiv: 1303.6886.         New Source of Inexpensive, Yet High -Quality, Data? Perspectives on
+ 2. Eiben CB, Siegel JB, Bale JB, Cooper S, Khatib F, et al (2012) Increased Diels-logical Science 6. 10.1177/1745691610393980.
+    Alderase activity through backbone remodeling guided by Foldit players. Natnclair SH (2006) Diabetic retinopathy: the unmet needs for screening and a
+                                                                             review of potential solutions. Expert Rev Med Devices 3: 301–313.
+    Biotechnol 30: 190–192.
+ 3. Lessl M, Bryans JS, Richards D, Asadullah K (2011) Crowd sourcing in drugSanchez CI, Niemeijer M, Dumitrescu AV, Suttorp-Schulten MS, Abramoff
+    discovery. Nat Rev Drug Discov 10: 241–242.                              MD, et al (2011) Evaluation of a computer-aided diagnosis system for diabetic
+ 4. Nguyen TB, Wang S, Anugu V, Rose N, McKenna M, et al (2012) Distributed  retinopathy screening on public data. Invest Ophthalmol Vis Sci 52: 4866–4871.
+    human intelligence for colonic polyp classification in computer-aided detectionff MD, Reinhardt JM, Russell SR, Folk JC, Mahajan VB, et al (2010)
+    for CT colonography. Radiology 262: 824–833.                             Automated early detection of diabetic retinopathy. Ophthalmology 117: 1147–
+                                                                             1154.
+ 5. Turner AM, Kirchhoff K, Capurro D (2012) Using crowdsourcing technolo13. Kankanahalli S, Burlina PM, Wolfson Y, Freund DE, Bressler NM (2013)
+    for testing multilingual public health promotion materials. J Med InterneAutomated Classification of Severity of Age-related Macular Degeneration from
+    14: e79.
+ 6. Mavandadi S, Dimitrov S, Feng S, Yu F, Sikora U, et al (2012) DistributedFundus Photographs. Invest Ophthalmol Vis Sci.
+    medical image analysis and diagnosis through crowd-sourced games: a malariaiang MF, Wang L, Busuioc M, Du YE, Chan P, et al (2007) Telemedical
+    case study. PLoS One 7: e37245.                                          retinopathy of prematurity diagnosis: accuracy, reliability, and image quality.
+                                                                             Arch Ophthalmol 125: 1531–1538.
+ 7. Khawaja AP, Chan MP, Hayat S, Broadway DC, Luben R, et al (2013) The 15. Niemeijer M, van GB, Russell SR, Suttorp-Schulten MS, Abramoff MD (2007)
+    EPIC-Norfolk Eye Study: rationale, methods and a cross-sectional analysisAutomated detection and differentiation of drusen, exudates, and cotton-wool
+    visual impairment in a population-based cohort. BMJ Open 3.              spots in digital color fundus photographs for diabetic retinopathy diagnosis.
+ 8. Diabetic retinopathy study. Report Number 6. Design, methods, and baseline
+    results. Report Number 7. A modification of the Airlie House classification oft Ophthalmol Vis Sci 48: 2260–2267.
+    diabetic retinopathy. (1981) Prepared by the Diabetic Retinopathy Study Group.DV, Jones KH, Verplancke JP, Lyons RA, John G, et al (2009) The SAIL
+                                                                             Databank: building a national architecture for e-health research and evaluation.
+    Invest Ophthalmol Vis Sci 21: 1–226.                                     BMC Health Serv Res 9: 157.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PLOS ONE | www.plosone.org                                            7                           August 2013 | Volume 8 | Issue 8 | e71154

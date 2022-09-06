@@ -1,0 +1,582 @@
+                                                                                                      Research and applications
+
+
+
+
+                             Development and evaluation of a crowdsourcing
+
+
+                             methodology for knowledge base construction:
+
+                             identifying relationships between clinical problems
+
+
+                             and medications
+
+
+                             Allison B McCoy,      1,2 Adam Wright, Archana Laxmisan,               4
+                                                        2                       5                   4                  1,2
+                             Madelene J Ottosen, Jacob A McCoy, David Butten, Dean F Sittig
+
+
+<
+  An additional material is  ABSTRACT                                                 housed within the EHR, this can also lead to frus-
+published online only. To vieObjective We describe a novel, crowdsourcing method      tration and inefﬁciency, often causing important
+this ﬁle please visit the joufor generating a knowledge base of problememedication    clinical data to be overlooked.78 Efforts to simplify
+online (http://dx.doi.org/10.
+1136/amiajnl-2012-000852).   pairs that takes advantage of manually asserted links    the way EHRs provide information to the end-user
+1                            between medications and problems.                        comprise an important area of investigation.   2
+ School of Biomedical        Methods Through iterative review, we developed             Problem-oriented summaries of patients’ EHRs
+Informatics, The University of
+Texas Health Science Center atetrics to estimate the appropriateness of manually      may provide a means for optimizing the efﬁciency,
+Houston (UTHealth), Houston, entered problememedication links for inclusion in        quality, and safety of patient care by clinicians,
+Texas, USA
+2The University of Texas at  a knowledge base that can be used to infer previously    especially in the setting 9e12arge quantities of elec-
+Houston-Memorial Hermann     unasserted links between problems and medications.       tronically available data.     The development of
+                             Results Clinicians manually linked 231223 medications    such summaries requires knowledge about the
+Center for Healthcare Quality
+3nd Safety, Houston, TX, US  (55.30% of prescribed medications) to problems within    inter-relationships between data elements in the
+ Brigham and Women’s         the electronic health record, generating 41203 distinct  record. The most common and salient link type is
+Hospital, Harvard Medical    problememedication pairs, although not all were          the ‘treats’ or ‘is treated by’ link between medica-
+School, Boston, Massachusetts,
+USA                          accurate. We developed methods to evaluate the           tions and problems. Linking medications and
+4Houston VA Health Services  accuracy of the pairs, and after limiting the pairs to thoseblems enables additional functionality in EHRs,
+Research and Development     meeting an estimated 95% appropriateness threshold,      such as problem-oriented presentations of the
+
+Center of Excellence,        11166 pairs remained. The pairs in the knowledge base    medication list for clinicians and patients, indica-
+Michael E. DeBakey Veterans  accounted for 183127 total links asserted (76.47% of all tion-based prescribing, problem inference, various
+Affairs Medical Center and
+Section of Health Services   links). Retrospective application of the knowledge base  types of error detection, and more speciﬁc clinical
+Research, Department of      linked 68316 medications not previously linked by        decision support.
+Medicine, Baylor College of  a clinician to an indicated problem (36.53% of unlinked    However, various difﬁculties exist with current
+Medicine, Houston, Texas, USA
+5The University of Texas     medications). Expert review of the combined knowledge    procedures for linking medications and problems.
+Medical School at Houston,   base, including inferred and manually linked             Some standard terminologies and commercial and
+                             problememedication pairs, found a sensitivity of 65.8%   publicly available knowledge bases are available
+Houston, Texas, USA
+                             and a speciﬁcity of 97.9%.                               that   contain   selected  information    on   medi-
+Correspondence to            Conclusion Crowdsourcing is an effective, inexpensive    cationeproblem links.  13 14 Development of these
+Dr Allison Beck McCoy, Schoolmethod for generating a knowledge base of                knowledge bases is difﬁcult and expensive, and they
+of Biomedical Informatics, The
+University of Texas Health   problememedication pairs that is automatically mapped    require   considerable    maintenance.      Similarly,
+Science Center at Houston    to local terminologies, up-to-date, and reﬂective of localnowledge bases linking other types of necessary
+(UTHealth), 6410 Fannin St,
+                             prescribing practices and trends.                        clinical data, such as problems linked to laboratory
+UTPB 1100, Houston, TX 77030,                                                         results (ie, ‘diagnoses,’‘ is diagnosed by,’‘ is moni-
+USA;                                                                                  tored by’), are not currently available. Data mining
+allison.b.mccoy@uth.tmc.edu
+                                                                                      techniques for inferring such relationships have
+Received 13 January 2012     BACKGROUND AND SIGNIFICANCE                              been proposed, including using association-rule
+Accepted 16 April 2012       Typical electronic health records (EHRs) contain         mining to ﬁnd frequency-based links    15e17 or liter-
+Published Online First
+12 May 2012                  a variety of patient data elements almost univer-        ature-mining approaches to extract links from free-
+                             sally organized by content type, including medica-       text sources, 18e20  but these approaches have
+
+                             tions, laboratory results, problems, allergies, notes,   important limitations and are generally biased
+                             visits, health   maintenance     items,  and   many      toward more common links, often omitting infre-
+                             others.1 2While these elements are necessary, clin-      quent links. Clinicians can also be asked to manu-
+
+                             ical care and medical decision making are most           ally link medications or other data elements to
+                             often organized around clinical conditions. For          problems. However, because such linking by clini-
+                             example, a clinician may want to know about all          cians is frequently optional in clinical systems and
+
+                             laboratory results, medications, and notes related to    can be burdensome, it is most often underutilized,
+                             a particular patient’s diabetes or hypertension.         and linking can be incomplete or incorrect.  21
+                             There is signiﬁcant evidence to suggest that               We propose a novel crowdsourcing method for
+
+                             suboptimal presentations of clinical data in clinical    inferring medicationeproblem inter-relationships
+                             information systems can impair medical decision          that takes advantage of manually asserted links
+
+                             making, 3e6tribute to medical errors, and reduce         between    medications    and    problems.   Crowd-
+                             quality.    With the enormous quantity of data           sourcing, which is deﬁned as outsourcing a task to
+
+
+J Am Med Inform Assoc 2012;19:713e718. doi:10.1136/amiajnl-2012-000852                                                                  713
+ Research and applications
+
+                                      22 23
+a group or community of people,             can facilitate rapid     prescribe medications. Clinicians are required to manually link
+generation of a large knowledge base. For example, Wikipedia,        medications to an indication within the patient’s clinical
+
+a free internet encyclopedia, depends on contributions from the      problem list for all medications ordered through e-prescribing
+public, and it was found to have accuracy comparable to the          (ﬁgure 1); however, medications listed in the EHR not added
+                         24
+Encyclopedia Britannica.   Crowdsourcing has also been utilized25    through e-prescribing do not require selection of an indicated
+in pharmaceutical research to develop drug discovery resources       problem. Between June 1, 2010 and May 31, 2011, clinicians
+and among patients to share treatment, symptom, progression,         entered 418221 medications and 1222308 problems for 53108
+                   26 27
+and outcome data.       One preliminary report proposes the use      patients.
+of crowdsourcing to create SNOMED CTsubsets.      28However, no
+
+prior study has utilized crowdsourcing to generate clinical          Method development
+knowledge within an existing clinician workﬂow.                      Identiﬁcation of problememedication pairs
+  We utilized crowdsourcing to generate a problememedication
+                                                                     We ﬁrst retrieved medications from the clinical data warehouse
+knowledge base. In the described scenario, clinician EHR users       that had been entered and linked to one or more problems during
+represent the community or crowd, and generating probleme
+                                                                     the study period. We excluded problem entries with an ICD-9 V
+medication pairs represents the outsourced task. In this paper,      code (eg, V70.0dNormal Routine History and Physical), as
+we describe a method for identifying accurate probleme               these concepts are for supplementary classiﬁcation of factors
+medication pairs obtained through crowdsourcing, which we
+                                                                     and are not clinical problems, although they are frequently
+validated through expert review.                                     added to the problem list for billing purposes.
+
+                                                                        During the study period, 867 clinicians linked 231223 medi-
+METHODS                                                              cations (55.30%) to a problem (239469 total links). The links
+Study setting                                                        included 41203 distinct problememedication pairs, comprised
+
+We conducted the study at a large, multi-specialty, ambulatory       of 4903 distinct medications (46.91% of medications ordered at
+academic practice that provides medical care for adults, adoles-     least once) and 4676 distinct problems (20.96% of problems
+
+cents, and children throughout the Houston community.                entered at least once). Of the links, 25434 (61.73%) were
+Clinicians utilized Allscripts Enterprise Electronic Health Record   asserted more than once, 12517 (30.38%) were asserted for more
+(v11.1.7; Chicago, Illinois, USA) to maintain patient notes and      than one patient, and 12996 (31.54%) were asserted by more
+
+problem lists, order and view the results of laboratory tests, and   than one clinician.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 1  Sample screen for linking a medication to an indicated problem.
+
+
+714                                                                       J Am Med Inform Assoc 2012;19:713e718. doi:10.1136/amiajnl-2012-000852
+                                                                                                     Research and applications
+
+
+  Clinicians asserted a mean of 879.30 links each weekday
+
+(656.24 including weekends). The mean number of clinicians
+asserting a link each day was 172.61 (125.70 including week-
+ends) with an average of 5.09 daily links per clinician (3.63
+
+including weekends). When only counting new links (ie, the ﬁrst
+time any clinician linked ‘Metformin 500MG Oral Tablet’ to
+
+‘Type II Diabetes Mellitus’ for any patient), the mean daily
+rate was 156.45 new links each weekday (112.97 including
+
+weekends). Figure 2 illustrates the total number of known
+problememedication links each day during the study period.
+Figure 3 illustrates the number of links asserted by clinicians
+
+each day, separately including all links, and those links asserted
+for the ﬁrst time.
+
+
+Identiﬁcation of correct links
+During preliminary review of randomly selected probleme
+                                                                       Figure 3   Number of links asserted by clinicians each day during the
+medication pairs, we identiﬁed a number of incorrect links             study period.
+(eg, simvastatin linked to hypertension). Many of these may
+
+have been entered in error during e-prescribing, while others may
+have been clinically justiﬁable with the linked problem as             their record without regard to link. The ratio can be interpreted
+                                                                       as the proportion of patients receiving a particular drug and with
+a secondary, related problem to the prescribed medication.             a particular problem for which a link between the drug and
+However, our intended use of the knowledge base to summarize
+problems with indicated medications required the identiﬁcation         problem has been manually asserted; a ratio of 1.0 indicates that
+                                                                       all patients with the speciﬁc drug and problem had that link
+of more directly related links. We ﬁrst explored the use of
+absolute frequency of manual links as a threshold. Including in        asserted.
+                                                                          We stratiﬁed problememedication pairs into threshold groups
+the knowledge base only those links that had been asserted for
+more than one patient resulted in 12517 distinct probleme              using patient link frequency into 1, 2, 3e4, 5e9, or $10 and link
+                                                                       ratio values into <0.1, 0.1e0.19, 0.2e0.29, 0.3e0.49, or $0.5. We
+medication pairs (30.38% of distinct pairs), accounting for            then evaluated 100 randomly selected problememedication
+189073 total links (78.96% of all links); however, informal
+review still revealed many erroneous links. Limiting inclusion to      pairs from each group to determine a threshold for which links
+                                                                       could be considered appropriate to use for inference of new links.
+only those links asserted for more than 10 patients increased the
+number of correct links but reduced the number of included             An investigator (JAM), blinded to the threshold values, deter-
+                                                                       mined for each pair whether each medication was appropriate
+pairs to 1756 (4.26% of distinct links), accounting for 121341
+total links (50.67% of all links).                                     for use in the treatment of the manually linked problem
+  During the development process, we also noted that inclusion         according to the Lexi-Comp drug database (Wolters Kluwer,
+                                                                       Hudson, Ohio, USA), a free-text resource, curated by pharma-
+of pairs based on absolute frequency did not take into account
+the baseline probability of various medicationeproblem pairs           cists and pharmacology experts, that is commonly utilized by
+                                                                       clinicians at our institution to look up drug information. The
+occurring. For example, commonly co-occurring but unrelated
+pairs (eg, simvastatin and hypertension) could be erroneously          proportions of appropriate links in each group are shown in
+                                                                       table 1. An increase in the number of patient links and the link
+linked sufﬁciently often to exceed a ﬁxed threshold, and rare but      ratio corresponded positively with link appropriateness.
+strongly linked pairs (eg, magnesium and Gitelman syndrome)
+might not exceed the threshold even though they are correct.              We selected 95% estimated appropriateness (cells indicated
+                                                                       with an asterisk in table 1) as the threshold for pairs included in
+Therefore, we supplemented our ﬁxed threshold with a relative
+threshold; for each problememedication pair, we divided the            the knowledge base to be used to infer new problememedication
+                                                                       links for medications that were not linked by clinicians. Thus, we
+number of patients for whom that link had been asserted by the
+number of patients with both the medication and problem in             included those problememedication pairs with either a link ratio
+                                                                       $0.2 and having at least two patient links, a link ratio $0.1 and
+                                                                       having at least three patient links, or having at least 10 patient
+
+                                                                       links. The resulting knowledge base included 11166 distinct
+
+
+
+
+                                                                       Table 1   Appropriateness thresholds for problememedication link
+                                                                       inference
+
+                                                                                  Link ratio
+                                                                                  <0.1        0.1e0.19     0.2e0.29     0.3e0.49    ‡0.5
+
+                                                                       Patient link frequency
+                                                                         1        57%         78%          89%           87%         92%
+
+                                                                         2        77%         94%          96%*          96%*       100%*
+                                                                         3e4      77%         99%*         96%*          96%*        99%*
+
+                                                                         5e9      76%         98%*         97%*         100%*        99%*
+                                                                         $10       96.8%*     99%*         99%*         100%*       100%*
+
+Figure 2  Number of known problememedication links by day during        The link ratio is the proportion of patients receiving a particular drug and with a particular
+                                                                        problem for whom a link between the drug and problem has been manually asserted.
+the study period.                                                       *Groups meeting the 95% or greater appropriateness threshold.
+
+
+J Am Med Inform Assoc 2012;19:713e718. doi:10.1136/amiajnl-2012-000852                                                                715
+ Research and applications
+
+
+problememedication pairs (27.10% of distinct links), which were     that had been linked previously and were included in the
+comprised of 2537 distinct medications and 1575 problems (see       knowledge base.
+
+supplementary online data). The pairs in the knowledge base
+accounted for 183127 total manual links asserted by clinicians      Accuracy of inferred problememedication links
+
+(76.47% of all links).                                              The 100 randomly selected patients for evaluation included
+                                                                    11029 potential problememedication pairs (669 medications
+                                                                    and 1200 problems) with 356 pairs manually linked by clini-
+Method validation
+Application of the knowledge base                                   cians. The knowledge base generated 611 linked pairs; manually
+                                                                    linked pairs and knowledge base linked pairs totaled 698 prob-
+Using the knowledge base of manually linked probleme
+medication pairs that met the selected threshold, we retrospec-     lememedication links.
+tively inferred links between co-occurring medications and            Reviewers agreed on the appropriateness of probleme
+                                                                    medication pairs for 94.5% of pairs (  k¼0.68). After resolving
+problems for patients during the study period. For each
+problememedication pair, we recorded separately whether             disagreements, the reviewers determined that 726 potential pairs
+a clinician manually linked the pair and whether application of     were appropriate links. Compared to expert review, manual links
+
+the knowledge base inferred a link between the pair. We deter-      by clinicians achieved a sensitivity of 42.8% and speciﬁcity of
+mined the number of new links inferred and the number of            99.6%, and links inferred by the knowledge base achieved
+                                                                    a sensitivity of 56.2% and speciﬁcity of 98.0%. Evaluation of
+previously unlinked medications that were linked to a problem
+with the knowledge base.                                            links either asserted manually by clinicians or inferred from the
+                                                                    knowledge base found a sensitivity of 65.8% and speciﬁcity of
+                                                                    97.9% (table 2).
+Evaluation of the knowledge base
+To evaluate the utility of the knowledge base, we randomly
+
+selected 100 patients with at least two medications to determine    DISCUSSION
+whether the retrospectively inferred links were appropriate and     We developed a knowledge base for problememedication links
+whether unlinked medications should have been linked. Two
+                                                                    by applying crowdsourcing techniques, collecting manual links
+investigators (MJO, DB) independently reviewed 55 patient           asserted by clinicians between medications and clinical problems
+charts to identify true medication indications, 10 of which         during e-prescribing. The methods for generating the knowledge
+
+overlapped with the other reviewer (100 total reviewed              base may be easily adopted by other institutions that have
+patients). For each potential problememedication pair (ie, the      implemented EHRs allowing clinicians to link medications to
+Cartesian product of each patient’s problem list and medication
+                                                                    clinical problems, requiring only that the institution extract the
+list), the reviewers indicated whether a link would be appro-       links and determine the local threshold for link inclusion in the
+priate or inappropriate according to a documented indication in     knowledge base (ie, which patient frequency and link ratio
+
+the patient’s chart or the Lexi-Comp gold standard. Therefore,      groups had sufﬁcient appropriateness).
+a medication could have more than one indicated problem, and          The resulting knowledge base of problememedication pairs
+a problem could have more than one medication involved in its
+                                                                    has a number of potential uses. First, the knowledge base can
+treatment. We calculated inter-rater reliability for the over-      assist semi-automation of problem-oriented clinical summaries,
+lapping charts using the k statistic. A third investigator (JAM)    which may allow clinicians to provide more efﬁcient, compre-
+                                                                                 11
+reviewed each case to determine the appropriateness of the link     hensive care.    Using only those links with an estimated
+when the reviewers disagreed. With these results, we estimated      appropriateness greater than 95% in the retrospective analysis,
+the sensitivity and speciﬁcity of the knowledge base. This study    we increased the number of linked medications at the end of the
+
+was approved by The University of Texas Health Science Center       study period from 55% to 72%, which would result in a more
+at Houston’s Committee for the Protection of Human Subjects         complete summary of patient medications compared to one
+
+(HSC-SHIS-10-0238).                                                 generated only by manual links. The knowledge base can also be
+                                                                    used to suggest links during e-prescribing, reducing clinician
+                                                                    workload and potentially increasing the accuracy of linked
+RESULTS
+                                                                    problems and medications. Finally, the knowledge base can be
+Inference of problememedication links                               used to identify undocumented patient problems for those
+After retrospective analysis using the knowledge base of only
+                                                                    medications that cannot be linked to an entry in a patient’s
+those links meeting the threshold criteria, we linked 68316         problem list, contributing to the Stage 1 Meaningful Use goal of
+previously unlinked medications to problems (36.53% of 186998
+unlinked medications), inferring 229251 previously unasserted
+
+links. Manually linked and automatically linked medications         Table 2  Comparison of manual links and crowdsourced knowledge
+totaled 299539 (71.62%) linked medications, a difference
+                                                                    base to expert problememedication link review
+increase of 16.32% compared to manual links alone.                                                          Expert review
+  Of the 118682 medication instances that could not be linked
+using the knowledge base, 27554 (23.22%) corresponded to links                                              +       e         Total
+
+that had been previously asserted by a clinician but did not meet   Manual links                   +        311        45        356
+the threshold criteria for inclusion in the knowledge base. Of the                                 e        415     10258     10673
+91128    remaining   unlinked   medication   instances,  23006                                     Total    726     10303     11029
+
+(25.25%) were for 5550 distinct medications that had never been     Knowledge base                 +        408       203        611
+linked to a problem by a clinician and were therefore not           Inferred links                 e        318     10100     10418
+                                                                                                   Total    726     10303     11029
+included in the knowledge base. Also among the remaining            Manual links and knowledge base+        478       220        698
+unlinked   medication   instances   were   18452   medications
+(20.25%) occurring for 4671 patients with no problem list           Inferred links combined        e        248     10083     10331
+                                                                                                   Total    726     10303     11029
+entries; 17008 of these (4580 patients) were for medications
+
+
+716                                                                     J Am Med Inform Assoc 2012;19:713e718. doi:10.1136/amiajnl-2012-000852
+                                                                                                  Research and applications
+
+
+
+maintaining an up-to-date problem list of current and active         speciﬁcity and therefore may require the developer to select an
+diagnoses.29 Among medications not linked using the knowledge        alternate cut-off to meet the speciﬁc needs for that application.
+
+base, 20% were ordered for patients with no problem list entries,       Finally, because clinicians are only required to link e-prescribed
+and 92% of these medications existed in the knowledge base           medications to problems, medications that are added to the
+from which a problem may have been inferred and added to the         patient’s chart but never e-prescribed, such as over-the-counter
+
+patient’s problem list.                                              medications or supplements, are likely to be missing from our
+  These ﬁndings also have signiﬁcant implications beyond             knowledge base. Combining the crowdsourcing approach with
+
+application of the problememedication knowledge base; the use        data mining, ontology-based, or other knowledge acquisition
+of crowdsourcing to generate knowledge has revolutionized the        methods may contribute to the development of a more complete
+creation and use of encyclopedias,  24and it could have similar      knowledge base.
+
+results in the EHR knowledge domain. One alternative to
+generating such knowledge is the use of existing knowledge
+bases, whether open standards-based or proprietary. However,         Future work
+                                                                     Future work includes improving methods for evaluating the
+this approach often requires the substantial time-consuming
+effort of mapping local data elements to the source elements, as     appropriateness of the problememedication pairs in the
+                                                                     knowledge base. An initial approach to improving the appro-
+EHRs frequently implement coding schemas that differ from            priateness involves increasing the size of the dataset to include
+standardized terminologies, and the results are still frequently
+incomplete or inaccurate.30e32 Data mining techniques represent      links from multiple institutions, allowing higher frequency
+                                                                     restrictions in the evaluation process. In addition to evaluating
+another approach to generating knowledge bases, providing
+a localized solution for generating problememedication links.        the pairs based on the patient link frequency and link ratio, we
+                                                                     can also evaluate the pairs based on a reputation score of the
+Still, these methods can require large amounts of data and           clinician asserting the link, a metric that has previously been
+signiﬁcant computational resources, and may result in a number
+of spurious associations due to commonly co-occurring but            employed in e-commerce and online forum settings. This could
+                                         15e17                       be adapted by calculating the percentage of links asserted by
+unrelated medications and problems.            Knowledge base
+development through crowdsourcing is advantageous compared           a clinician that are shared by other clinicians to predict which
+to these existing methods. Like data mining techniques,              clinicians have a percentage of appropriate links meeting the
+                                                                     inclusion cut-off, and links asserted by clinicians meeting the
+crowdsourcing allows the development of a knowledge base that
+uses the system’s existing coding schema, eliminating the need       cut-off would be included in the knowledge base in addition to
+                                                                     those meeting the patient link frequency and link ratio threshold
+to map data elements, a step which alone can be a source of          cut-offs.
+errors. Crowdsourcing also allows the generation of clinical
+content without the need for external resources, using methods          We can also further this work by expanding the knowledge
+                                                                     base to include additional clinical data elements that would also
+already existing in clinical workﬂows for a short period of time.
+Because the knowledge is generated using links asserted by           be beneﬁcial in a clinical summary. For example, clinicians are
+clinicians, accuracy is likely to be high, and methods can be        also frequently required to link laboratory test orders to prob-
+                                                                     lems within the EHR, and the same methods could be applied to
+applied to only retain the data most likely to be correct. Further,
+as clinicians continue to assert links, the appropriateness metrics  generate a problemelaboratory result pair knowledge base.
+                                                                        Finally, our ﬁndings that some manually asserted links are
+can be reassessed to include an increased number of links with       incorrect implicate a variety of scenarios meriting further
+higher accuracy; thus, the knowledge base improves over time.
+Finally, clinicians can continuously generate new knowledge as       research. Some incorrect links may persist as juxtaposition
+                                                                     errors, where users unknowingly make a wrong selection by
+new clinical knowledge is available, such as new medications or
+new uses for existing medications. This allows an institution to     selecting the incorrect item that is adjacent to the correct item,
+                                                                     which frequently results from poor system design.      33 In one
+always maintain an up-to-date knowledge base without                 example, simvastatin is linked to hypertension instead of
+spending considerable resources for updating an external
+knowledge base or repeating alternate methods for generating         hypercholesterolemia when the two are adjacent in a long list of
+                                                                     patient problems. Future work can identify the proportion of
+the knowledge.
+                                                                     incorrect links that are related to juxtaposition errors, missing
+Limitations                                                          problem list entries, or other entry error, indicating a need for
+                                                                     improved user interfaces, interventions to populate the problem
+The crowdsourcing method for generating problememedication
+links has some limitations. Like data mining methods, resulting      list, and clinician education, respectively.
+
+knowledge bases may not be easily generalized for adoption in
+other settings with different underlying clinical terminologies.
+However, the methods may be more easily reproduced with less         CONCLUSION
+                                                                     Crowdsourcing is an effective, inexpensive method for gener-
+computational effort required by implementers. Generation of
+shared knowledge bases using links asserted by clinicians at         ating an accurate, up-to-date problememedication knowledge
+multiple institutions may improve the generalizability.              base, which healthcare information systems can employ to
+                                                                     generate problem-oriented summaries or infer missing problem
+  Another limitation is the potential for clinicians to make
+incorrect links. Our proposed methods for calculating the            list items to improve patient safety. Further research may
+                                                                     improve the sensitivity of the knowledge base and expand the
+appropriateness of links at various patient frequency and link       use of crowdsourcing to other EHR data types.
+ratio thresholds and selection of only those links in threshold
+groups estimated to be accurate for inclusion in the resulting       Contributors ABM had full access to all the data in the study and takes responsibility
+                                                                     for the integrity of the data and the accuracy of the data analysis. ABM, AW, AL, and
+knowledge base can help overcome this limitation. Further,
+although we selected an appropriateness cut-off of 95% appro-        DFS: study concept and design; ABM, MJO, JAM, and DB: acquisition of data; ABM,
+                                                                     AW, AL, MJO, JAM, DB, and DFS: analysis and interpretation of data; ABM, AW, and
+priateness for inclusion of our resulting knowledge base, other      DFS: drafting of the manuscript; ABM, AW, AL, MJO, JAM, DB, and DFS: critical
+knowledge base use cases may require a higher sensitivity or         revision of the manuscript for important intellectual content and ﬁnal approval.
+
+
+J Am Med Inform Assoc 2012;19:713e718. doi:10.1136/amiajnl-2012-000852                                                             717
+ Research and applications
+
+
+
+Funding This project was supported in part by Grant No. 10510592 for                          14.   Elkin PL, Carter JS, Nabar M, et al. Drug knowledge expressed as computable
+Patient-Centered Cognitive Support under the Strategic Health IT Advanced Research                  semantic triples. Stud Health Technol Inform 2011;166:38e47.
+Projects Program (SHARP) from the Ofﬁce of the National Coordinator for Health                15.   Wright A, Chen ES, Maloney FL. An automated technique for identifying
+                                                                                                    associations between medications, laboratory results and problems. J Biomed Inform
+Information Technology. The UTHealth Clinical Data Warehouse is supported by NCRR                   2010;43:891e901.
+Grant 3UL1RR024148.
+                                                                                              16.   Brown SH, Miller RA, Camp HN, et al. Empirical derivation of an electronic clinically
+Competing interests None.                                                                           useful problem statement system. Ann Intern Med 1999;131:117e26.
+                                                                                              17.   Zeng Q, Cimino JJ, Zou KH. Providing concept-oriented views for clinical data using
+Ethics approval Ethics approval was provided by the Committee for the Protection of                 a knowledge-based system: an evaluation. J Am Med Inform Assoc
+Human Subjects at the University of Texas Health Science Center at Houston.                         2002;9:294e305.
+
+Provenance and peer review Not commissioned; externally peer reviewed.                        18.   Chen ES, Hripcsak G, Xu H, et al. Automated acquisition of disease drug knowledge
+                                                                                                    from biomedical and clinical documents: an initial study. J Am Med Inform Assoc
+                                                                                                    2008;15:87e98.
+                                                                                              19.   Kilicoglu H, Fiszman M, Rodriguez A, et al. Semantic MEDLINE: A Web Application
+REFERENCES                                                                                          for Managing the Results of PubMed Searches. Turku, Finland: Proceedings of the
+
+ 1.   Laxmisan A, McCoy AB, Wright A, et al. Clinical Summarization Capabilities of                 Third International Symposium for Semantic Mining in Biomedicine (SMBM),
+      Commercially-Available and Internally-developed Electronic Health Records. Appl Clin          2008:69e76.
+      Inform 2012;3:80e93.                                                                    20.   Duke JD, Friedlin J. ADESSA: a real-time decision support service for delivery of
+ 2.   Health IT and Patient Safety: Building Safer systems for Better care - Institute of           semantically coded adverse drug event data. AMIA Annu Symp Proc
+      medicine [Internet]. http://iom.edu/Reports/2011/Health-IT-and-Patient-Safety-                2010;2010:177e81.
+
+      Building-Safer-Systems-for-Better-Care.aspx (accessed 9 Nov 2011).                      21.   Sweidan M, Williamson M, Reeve JF, et al. Evaluation of features to support safety
+ 3.   Han YY, Carcillo JA, Venkataraman ST, et al. Unexpected increased mortality after             and quality in general practice clinical software. BMC Med Inform Decis Mak
+      implementation of a commercially sold computerized physician order entry system.              2011;11:27.
+      Pediatrics 2005;116:1506e12.                                                            22.   Tapscott D. Wikinomics: How Mass Collaboration Changes Everything. New York:
+ 4.   Horsky J, Kuperman GJ, Patel VL. Comprehensive analysis of a medication dosing                Portfolio, 2006.
+
+      error related to CPOE. J Am Med Inform Assoc 2005;12:377e82.                            23.   Howe J. The rise of crowdsourcing. Wired magazine 2006;14:1e4.
+ 5.   Koppel R, Metlay JP, Cohen A, et al. Role of computerized physician order entry         24.   Giles J. Internet encyclopaedias go head to head. Nature 2005;438:900e1.
+      systems in facilitating medication errors. JAMA 2005;293:1197e203.                      25.   Ekins S, Williams AJ. Reaching out to collaborators: crowdsourcing for
+ 6.   McCoy AB, Waitman LR, Lewis JB, et al. A framework for evaluating the                         pharmaceutical research. Pharm Res 2010;27:393e5.
+      appropriateness of clinical decision support alerts and responses. J Am Med Inform      26.   Hughes S, Cohen D. Can online consumers contribute to drug knowledge? a mixed-
+
+      Assoc 2012;19:346e52. http://www.ncbi.nlm.nih.gov/pubmed/21849334 (accessed                   methods comparison of consumer-generated and professionally controlled
+      29 Aug 2011).                                                                                 psychotropic medication information on the internet. J Med Internet Res 2011;13:e53.
+ 7.   Ash JS, Berg M, Coiera E. Some unintended consequences of information                   27.   Brownstein CA, Brownstein JS, Williams DS 3rd, et al. The power of social
+      technology in health care: the nature of patient care information system-related              networking in medicine. Nat Biotechnol 2009;27:888e90.
+      errors. J Am Med Inform Assoc 2004;11:104e12.                                           28.   Parry DT, Tsung-Chun T. Crowdsourcing Techniques to Create a Fuzzy Subset of
+
+ 8.   Ash JS, Sittig DF, Poon EG, et al. The extent and importance of unintended                    SNOMED CT for Semantic Tagging of Medical Documents. 2010 IEEE International
+      consequences related to computerized provider order entry. J Am Med Inform Assoc              Conference on Fuzzy systems (FUZZ). Barcelona: IEEE, 2010:1e8. doi:10.1109/
+      2007;14:415e23.                                                                               FUZZY.2010.5584055
+ 9.   Sittig DF, Singh H. Legal, ethical, and ﬁnancial dilemmas in electronic health record   29.   Blumenthal D, Tavenner M. The “meaningful use” regulation for electronic health
+      adoption and use. Pediatrics 2011;127:e1042e7.                                                records. N Engl J Med 2010;363:501e4.
+10.   Sittig DF, Teich JM, Osheroff JA, et al. Improving clinical quality indicators through
+                                                                                              30.   Elkin PL, Brown SH, Husser CS, et al. Evaluation of the content coverage of
+      electronic health records: it takes more than just a reminder. Pediatrics                     SNOMED CT: ability of SNOMED clinical terms to represent clinical problem lists.
+      2009;124:375e7.                                                                               Mayo Clin Proc 2006;81:741e8.
+11.   Feblowitz JC, Wright A, Singh H, et al. Summarization of clinical information:          31.   Burton MM, Simonaitis L, Schadow G. Medication and indication linkage: a practical
+      a conceptual model. J Biomed Inform 2011;44:688e99.                                           therapy for the problem list? AMIA Annu Symp Proc 2008:86e90.
+12.   Sittig DF, Singh H. Rights and responsibilities of EHR users. CMAJ. Published Online    32.   McCoy AB, Wright A, Laxmisan A, et al. A prototype knowledge base and SMART
+
+      First: 13 February 2012. doi:10.1503/cmaj.111599                                              app to facilitate organization of patient medications by clinical problems. AMIA Annu
+13.   Carter JS, Brown SH, Erlbaum MS, et al. Initializing the VA medication reference              Symp Proc 2011;2011:888e94.
+      terminology using UMLS metathesaurus co-occurrences. Proc AMIA Symp                     33.   Campbell EM, Sittig DF, Ash JS, et al. Types of unintended consequences related to
+      2002:116e20.                                                                                  computerized provider order entry. J Am Med Inform Assoc 2006;13:547e56.
+
+
+
+
+                                                                                                                                                 PAGE fraction trail=5.75
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+718                                                                                                 J Am Med Inform Assoc 2012;19:713e718. doi:10.1136/amiajnl-2012-000852

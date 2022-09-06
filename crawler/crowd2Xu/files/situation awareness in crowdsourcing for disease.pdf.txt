@@ -1,0 +1,297 @@
+         Situation Awareness in Crowdsensing for Disease
+
+                            Surveillance in Crisis Situations
+
+           Peter Haddawy                          Lutz Frommberger                          Tomi Kauppinen
+             Faculty of ICT                           Capacity Lab                           School of Science
+
+           Mahidol University                      Universität Bremen                         Aalto University
+                Thailand                                Germany                                   Finland
+            +66 2 441 0909                         +49 421 218 64199                           +358 9 47001
+       peter.had@mahidol.ac.th               lutz@informatik.uni-bremen.de               tomi.kauppinen@aalto.fi
+
+
+         Giorgio De Felice                       Prae Charkratpahu
+
+              Capacity Lab                      Sirawaratt Saengpao
+          Universität Bremen               Phanumas Kanchanakitsakul
+                Germany                                Faculty of ICT
+  defelice@informatik.uni-bremen.de
+                                                     Mahidol University
+                                                         Thailand
+                                                 {prae.cha, sirawaratt.sae,
+                                           phanumas.kan}@student.mahidol.ac.th
+
+
+ABSTRACT                                                        such as natural disasters and disease outbreaks. Crowdsensing can
+Crowdsensing can provide real time and detailed information     provide real time and detailed information about rapidly evolving
+about rapidly evolving crisis situations to facilitate rapid responsetions and can facilitate effective use of scarce resources by
+and effective resource allocation. But while challenges such as identifying important hot spots to which to send disaster or
+heterogeneity of data content and quality, asynchronicity, and  healthcare workers. This is particularly important when dealing
+                                                                with low resource environments and remote locations. But the
+volume call for robust data integration and interpretation      large volumes of data, the heterogeneity of its content and quality,
+capabilities, situation awareness in crowdsensing for crisis    as well as the asynchronous nature of the information received
+management remains a largely unexplored area of research. In
+this paper we extend the mobile4D smartphone-based disaster     pose great challenges in making effective use of such data.
+reporting and alerting system with a situation awareness data   Without a significant data interpretation layer, useful information
+interpretation and integration layer and demonstrate its applicationsimply get lost in the noise. Yet situation awareness in
+to the problem of tracking cholera outbreaks. The communication crowdsensing for crisis management remains a largely unexplored
+workflow   in  mobile4D-SA    supports interaction between      area of research. Indeed, in a recent review of crowdsensing
+                                                                systems for crisis management, Salfinger et al. [12] concluded
+crowdsensed information, system predictions, and multifaceted   that the core situation awareness functions of integrated
+communication between authorities and affected people on the    perception, comprehension, and projection remain unsupported by
+ground.
+                                                                existing systems.
+Categories and Subject Descriptors                              In this paper we present an approach to using Bayesian networks
+H. [Information Systems].   H.5.3 [Group and Organization       for situation assessment in crowdsensing for crisis situations. In
+Interfaces]. I.2 [Artificial Intelligence]. I.2.1 [Applications and
+Expert Systems]                                                 particular, we extend the mobile4D smartphone-based disaster
+                                                                reporting and alerting system [5] with a situation awareness data
+General Terms:       Algorithms, Human Factors.                 interpretation and integration layer and demonstrate its application
+                                                                to the problem of tracking cholera outbreaks. The extended
+                                                                mobile4D-SA system is able to integrate information from
+Keywords:      Crowdsourcing, Situation Awareness, Disease      authority-sensed data and crowdsensed data, infer information
+Surveillance, Bayesian Networks, Hidden Markov Models.          about hypotheses of interest from individual reports and
+                                                                background information, and integrate information across
+
+1. INTRODUCTION                                                 multiple reports over time to assess the current situation as well as
+    The ubiquity of mobile and smart phones and the             to project likely future situations. The communication workflow
+proliferation of social media channels has made crowdsourcing a in mobile4D-SA supports interaction between crowdsensed
+promising approach to sensing, particularly in crisis situationsinformation, system predictions, and multilateral communication
+                                                                among and between authorities and affected people on the ground.
+ Permission to make digital or hard copies of all or part of this work for personal or
+ classroom use is granted without fee provided that copies are n2. RELATED WORK
+ distributed for profit or commercial advantage and that copies Two notable crowdsourcing systems in the area of Humanitarian
+ the full citation on the first page. Copyrights for components Aid and Disaster Relief that provide some form of situation
+ by others than ACM must be honored. Abstracting with credit is permitted. To
+ prior specific permission and/or a fee. Request permissions fromwareness are HADRian [13] and ESA [14]. In contrast to most
+ Permissions@acm.org.                                           systems that focus on map-based visualizations of extracted
+ ICTD '15, May 15 - 18, 2015, Singapore, Singapore              events or stories, HADRian [13] enriches information from
+ Copyright is held by the owner/author(s). Publication rights licensed to ACM.s by mapping them to an ontology, thus providing
+ ACM 978-1-4503-3163-0/15/05…$15.00
+ http://dx.doi.org/10.1145/2737856.2737879
+increased flexibility in responding to user queries. ESA [14]        been trained and system use is being monitored in order to
+provides some degree of projection by classifying tweets             optimize workflow and performance under real conditions.
+according to whether they refer to infrastructural damage or to      Let us consider an example of the communication flow. With the
+requests for help, but no more integrated summary of the data.
+                                                                     assessment of risk factors and first reports on disease symptoms,
+There has been a surge of interest in the application of             mobile4D-SA can infer the risk of a cholera outbreak. Officials in
+crowdsourcing for disease surveillance.    Approaches include        the affected region are then notified and can use mobile4D-SA to
+analysis of search queries [2] and micro-blogging activity [11] as   send relevant information to local people such as general advice
+well as platforms for users to actively report disease [4]. Analysis on hygiene and, most importantly, information of symptoms of
+in these systems is carried out by examining temporal and spatial    cholera with the invitation to report observed symptoms back to
+                                                                     mobile4D-SA. If then mobile4D-SA, based on new reports and
+distributions of relevant data points as well as social relations andrisk factors, predicts a cholera outbreak, officials may send out an
+locations in the case of micro-blogging activity. A major issue is
+screening of relevant from irrelevant data. Approaches to this       alert with updated information. In parallel, the disease outbreak
+consist of screening with statistical techniques and learned         prediction module of mobile4D-SA will predict the severity and
+classifiers [2, 11] and screening by human analysts [4], with the    spread of the disease, and in a next step notify further authorities
+latter having challenges of scalability.                             and local people. This communication workflow extends classical
+                                                                     situation awareness and crowdsensing systems by mutual
+A number of researchers have made use of Bayesian networks in        interaction between system-made predictions and crowdsensed
+biosurveillance applications. Cooper et al. [3] describe the use of  information and the opportunity for rich communication between
+Bayesian networks to model spatio-temporal patterns for non-         authorities and affected people on the ground.
+contagious diseases that can cause outbreaks in a population such
+as may occur in bioterrorist attacks. Their PANDA system uses        4. SITUATION ASSESSMENT
+
+health surveillance information such as emergency department         ARCHITECTURE
+chief complaints for individuals in a population to infer the        Mobile4D-SA follows the general architecture of the JDL data
+probability of outbreak. Burkom et al. [1] present an approach to    fusion model [9, 12]. The Sensing level (L0), consisting of report
+using Bayes nets to fuse environmental and human health              receipt and feature extraction, receives raw reports from mobile
+information to infer the probability of waterborne disease           devices and tags them with a time and geo-reference coordinate.
+outbreaks.   Their network takes as input daily counts of            Reports are then grouped according to regions. While the system
+emergency department patient visits, filtered by chief complaint.
+Mnatsakanyan et al. [10] present an approach to using Bayesian       architecture can handle general hierarchical regions such as
+                                                                     villages, districts, and provinces, the current implementation
+networks to emulate epidemiologists’ cognitive analyses of           divides space into a 10 km by 10 km grid (as also used for
+statistical anomalies to detect patterns suggestive of disease       distribution of notifications in mobile4D) and groups together
+outbreaks. Using the output from algorithms for temporal data        reports that fall in a common grid square. In the feature extraction
+anomaly detection, their Bayes nets infer the probability of         step, keywords and phrases relevant to the domain of interest are
+occurrence of disease outbreaks.                                     extracted from the report.
+
+3. MOBILE4D SYSTEM DESCRIPTION                                       The perception (L1) and comprehension (L2) levels are handled
+                                                                     by a process that interprets each received report. This is done
+AND COMMUNICATION MODEL                                              using a diagnostic Bayesian network. The network fuses
+Mobile4D [5] is a disaster reporting and alerting system for         information from the report with information about general
+smartphones in which bi-directional communication is a key           background factors, such as environmental factors. The keywords
+feature. Mobile4D connects stakeholders on administrative levels
+and ground level and encourages continued communication.             extracted from each report and the background factors are entered
+When officials send out alerts or add information such as updates    as evidence into the Bayes net and the likelihoods of hypotheses
+or advice, local stakeholders are notified via a Push message.       of interest are inferred.
+                                                                     The collection of information inferred from the reports is
+Mobile4D users receive alerts based on the locations of their        aggregated and then used by the projection level (L3), which
+devices. In this way notifications can be targeted so that only
+people in affected areas and the corresponding administrative        consists of a time-sliced Bayesian network. The network
+structures are notified. Furthermore, contact can be established     represents time discretely and takes as input information about
+through the app or through traditional means such as SMS or          background factors as well as information inferred from the
+phone calls. Mobile4D is a crowdsourced system so that users on      diagnostic Bayes net at the previous level. It produces projections
+the ground level are able to report hazards and threats like floods, in terms of likelihoods of future states of hypotheses of interest.
+fires, blocked roads, and diseases via a smartphone app. The         Projection results are graphically displayed on a map in relation to
+                                                                     the previously defined geographic regions and alerts are sent to
+information is then sent over the Internet to authorities on the     relevant channels.
+appropriate administrative level. Ground level reports are also
+distributed  to   other   local  stakeholders   to   encourage       5. CHOLERA DISEASE SURVEILLANCE
+communication and ground level solutions. A key strength of          This section presents an instance of the mobile4D-SA architecture
+mobile4D is a continuous flow of information between affected
+stakeholders, making mobile4D an ideal platform to provide           implemented as a prototype system for cholera disease
+situation awareness and integrate dissemination of health            surveillance.  This domain was chosen because cholera is
+information into the system workflow. We call the mobile4D           commonly associated with flooding in developing countries.
+
+system with the situation awareness extension mobile4D-SA.           5.1 Report Interpretation
+In January 2015 mobile4D was deployed as a pilot system in three     Reports consist of self-reported illness symptoms that individuals
+provinces of Lao PDR: Attapeu, Salavan, and Xekong. Provincial       are experiencing. In an examination of a variety tweets related to
+and district staff of the Ministry of Agriculture and Forestry have  disease outbreaks, Krieck et al. [7] found that self-reported
+symptoms are the most reliable information in determining               supporting communication. For this we make use of the Resource
+relevance to an outbreak or not since even if people do not know        Description Framework (RDF) which allows describing not only
+
+what their problem is, they can readily write about how they feel.      textual and numerical information about a disease but also linking
+Each report is interpreted using the diagnostic network shown in        to useful resources in online Linked Open Data. For instance,
+Figure 1. The network contains a central hypothesis node for the        linking the description of cholera to an online resource
+severity of cholera, as well as a node indicating simple presence       (http://live.dbpedia.org/resource/Cholera) enriches the description
+or absence of cholera. The latter has the state Yes if cholera is       by links to related subjects (like pandemics or waterborne
+either mild, moderate, or severe and is used as the main                diseases) and different language versions. These support enriched
+
+interpretation of the report.        Cholera is influenced by           functionality such as multilingual reporting and alerting.       A
+environmental risk factors such as contaminated water. Cholera          Linked Open Data architecture also supports fusion of information
+has the direct symptoms vomiting, diarrhea, and rice-water stools.      from crowdsourced reports with background information, as well
+Vomiting and diarrhea can cause dehydration with noticeable             as sharing of situation assessment results.
+symptoms low blood pressure, cold skin, thirst, shock, sunken
+                                                                        6. EXAMPLE
+eyes, weak pulse, weakness, muscle cramps, and reduced urine.           We demonstrate the situation assessment capabilities with a
+Links in this network and in the outbreak projection network are
+quantified with conditional probabilities.     Probabilities were       simulated example of disease due to flooding over the period
+obtained from published statistical studies, e.g [6,8].                 September 8 - 11. Suppose two reports of disease symptoms are
+                                                                        received from a particular cluster of villages on Sept 8, three on
+For each report received, symptoms are entered using extracted          Sept 9 and five on Sept 10. We also have information that the
+keywords. For symptoms not mentioned, the Bayes net simply              water in that area is contaminated throughout the period. The two
+reverts to the prior probability. Environmental risk factors are
+entered based either on report information or from conventional         reports received on Sept 8 are shown in Table 1. Figure 1 shows
+                                                                        that entering the information from the first report and the
+information sources, e.g. government surveillance data. For each        environmental information into the diagnostic network yields a
+report in a given grid square on a given day, the probability of that   probability of cholera of 0.96. The data from the other report is
+person having cholera is computed and the number of reported            similarly entered into the diagnostic network, yielding a
+cases is taken to be the expected value of the probabilities
+computed over all reports received in that day in that grid square.     probability of 0.94. Mobile4D-SA then calculates the expected
+                                                                        number of reported cases of cholera as the sum of the
+                                                                        probabilities: 1.90.   This value is used as the value of the
+5.2 Disease Outbreak Projection                                         reports_t1 node in the epidemiological network, as shown in
+Disease outbreak projection is performed by a separate                  Figure 2. Similarly, the expected number of reported cases for
+epidemiological Bayes net, shown in Figure 2. The time-sliced           days t2 and t3 are entered, as well as the environmental conditions
+Bayes net represents a hidden Markov model of the number of
+sick individuals in the population over time. There is one copy of      for the three days. After propagating the evidence, we obtain the
+                                                                        projected total cases of cholera on Sept 8, 9, 10, as well as Sept
+the basic network structure for each day with links connecting the      11. The assumption that the reports received may under report the
+time slices. The network is contextually generated dynamically          number of actual cases is reflected in the probabilities of
+depending on the number of days for which the projection is             new_cases_t1 in the network in Figure 2.      Inferred information
+needed and the population of the region under consideration. The
+hidden hypothesis nodes are New_Cases and Total_Cases.                  about the number of projected cases is then displayed on a map of
+                                                                        the region (not shown).
+Evidence for the number of new cases is provided by reported             Table 1: Reports received on Sept 8 and inferred probabilities
+cases of cholera symptoms. Since not every sick individual will
+report their symptoms, we assume that the number of reports                Date       Symptoms        Location   Env. Risk FactorP(Cholera)
+
+received is an underestimate, which is quantified in the                  08-09-14 vomiting, diarrhealatitude: 46  contaminated    0.96
+conditional probability of the number of reports given the actual                    muscle cramps  longitude: 14     water
+number of new cases. Since the exact correlation between cases
+and reports will vary depending on the prevalence of mobile               08-09-14  diarrhea, reducedlatitude: 46  contaminated    0.94
+phones and the reporting behavior of the particular population, the                urine, sunken eyelongitude: 14     water
+value can be set based on experience. The value for the number
+                                                                        7. CONCLUSIONS
+of reported cases is simply the expected value of the probabilities
+for the Cholera_Present node in the diagnostic network over all         By combining a crowdsourcing-based communication model with
+reports received in the current day.                                    a situation awareness layer, Mobile4D-SA provides a platform for
+                                                                        rapid identification and response to emerging crisis situations.
+The number of new cases is causally influenced by the number of         The system engages citizens in detection of disease outbreaks by
+cases in the previous day and this causal link is quantified in terms   collecting and interpreting their reports of disease symptoms.
+of the infection rate of the disease. The New_Cases node also has
+a link from the Environment node, representing the fact that the        Reliability of interpretation of reports is increased by fusing report
+infection rate is attenuated by the state of the environment so that,   information with information on prevailing environmental risk
+                                                                        factors.  The system provides a coherent picture of emerging
+for example, if the sanitation condition is poor the infection rate is  situations to decision makers by integrating report information
+higher than average. We assume that once someone contracts              into an epidemiological model of the disease to produce
+cholera, they continue to have it, so that the Total_Cases in a day
+is simply the sum of the number of cases in the previous day and        projections that are graphically displayed on maps.
+the number of new cases.                                                The current system is yet a prototype and there remain a number
+                                                                        of directions for further development and research. The accuracy
+5.3 Linking to External Data with RDF
+                                                                        of the model needs to be validated against data from an actual
+Storing and structuring information on diseases and their               cholera outbreak. The epidemiological model provides projection
+characteristics is essential to building robust models and              within each geographic region but does not yet include
+                                                                          ”Spatial Cognition”. We thank the Ministry of Agriculture and
+
+                                                                          Forestry of Lao PDR for their longstanding collaboration and the
+                                                                          mobile4D student project participants for their contributions.
+
+                                                                          9. REFERENCES
+                                                                          [1]  Burkom, H.S., Ramac-Thomas, L., Babin, S., Holtry, R.,
+                                                                               Mnatsakanyan, Z., and Yund, C. 2011. An integrated approach
+
+                                                                               for fusion of environmental and human health data for disease
+                                                                               surveillance, Statistics in Medicine, 30:470-479.
+                                                                          [2]  Chan, E.H., Sahai, V., Conrad, C., Brownstein, J.S. 2011. Using
+
+                                                                               web search query data to monitor dengue epidemics: A new
+                                                                               model for neglected tropical disease surveillance, PLoS
+                                                                               Neglected Tropical Diseases, 5(5), e1206.
+
+                                                                          [3]  Cooper, G.F., Dash, D.H., Levander, J.D., Wong, W., Hogan,
+                                                                               W.R., and Wagner, M.M. 2004. Bayesian Biosurveillance of
+                                                                               Disease Outbreaks, In Proc. of the 20th Conf. on Uncertainty in
+                                                                               Artificial Intelligence (UAI '04). AUAI Press, Arlington, 94-103.
+
+                                                                          [4]  Freifeld, C.C., Chunara, R., Mekaru, S.R., Chan, E.H., Kass-
+                                                                               Hout, T., Iacucci, A.A., and Brownstein, J.S. 2010 Participatory
+                                                                               Epidemiology: Use of Mobile Phones for Community-Based
+                                                                               Health Reporting. PLoS Medicine, 7(12): e1000376.
+
+                                                                          [5]  Frommberger, L. and Schmid, F. 2013. Mobile4D:
+                                                                               Crowdsourced Disaster Alerting and Reporting, In Proceedings
+                                                                               of the Sixth Int’l Conf. on Information and Communications
+Figure1:DiagnosticNetworkwithevidenceenteredfromonereport.                     Technologies and Development (ICTD '13), Vol. 2. ACM.
+
+                                                                          [6]  Jackson, B.R., et al. 2013. Seroepidemiologic Survey of
+                                                                               Epidemic Cholera in Haiti to Assess Spectrum of Illness and
+                                                                               Risk Factors for Severe Disease. The American Journal of
+                                                                               Tropical Medicine and Hygiene, vol. 89, no. 4, 654-664.
+
+                                                                          [7]  Krieck, M., Dreesman, J., Otrusina, L., and Denecke, K. A new
+                                                                               age of public health: Identifying disease outbreaks by analyzing
+                                                                               tweets. Proceedings of Health WebScience Workshop, ACM
+                                                                               Web Science Conference, 2011.
+
+                                                                          [8]  Kur, L., Mounir, C., Lagu, J., Muita, M., Rumunu, J., Ochieng,
+                                                                               B., Weathers, A., Nsubuga, P., Maes, E., and Rolle, I. 2009.
+                                                                               Cholera Outbreak - Southern Sudan, 2007. Morbidity and
+
+                                                                               Mortality Weekly, 58(13), 337-341.
+                                                                          [9]  Llinas, J., Bowman, C., Rogova, G., Steinberg, A., Waltz, E.,
+                                                                               and White, F. 2004. Revisiting the JDL data fusion model II. In
+                                                                               Proceedings of the Seventh International Conference on
+
+                                                                               Information Fusion (FUSION 2004), 1218-1230.
+                                                                          [10] Mnatsakanyan, Z.R., Burkom, H.S., Coberly, J.S., and
+                                                                               Lombardo, J.S. 2009. Bayesian information fusion networks for
+
+                                                                               biosurveillance applications. Journal of the American Medical
+Figure2:EpidemiologicalNetwork. Evidencedenteredis:reports_t1                  Informatics Assoc, 16(6): 855-863.
+   =cases_1-2,reports_t2=cases_1-2,reports_t3=cases_3-4,and               [11] Sadilek, A., Kautz, H. Silenzio, V. 2012. Predicting disease
+  contaminated_water=Presentthreetimeslices(onlytwoshown).
+                                                                               transmission from geo-tagged micro-blog data. Proc. of the
+transmission between geographic regions. Finally, there is great               Twenty-Sixth AAAI Conf. on Artificial Intelligence (AAAI-
+promise in using Bayes nets to create generic situation awareness              2012), pp 136 - 142.
+structures that can be assembled and parameterized in response to
+particular circumstances. Because the structure of the Bayesian           [12] Salfinger, A., Girtelschmid, S., Proll, B., Retschitzegger, W., and
+network models nicely mirrors that of the physical phenomenon                  Schwinger, W. 2015. Crowd-Sensing Meets Situation
+                                                                               Awareness: A Research Roadmap for Crisis Management, In
+being modeled, this is a promising direction for further                       Proceedings of the 48th Annual Hawaii International Conference
+development. The use of Linked Data technologies can support                   on System Sciences (HICSS-2015), Hawaii.
+such flexible modeling by providing access to information about
+diseases such as incubation times and information about relevant          [13] Ulicny, B., Moskal, J., and Kokar, M. 2013. Situational
+                                                                               Awareness from Social Media. Eighth Conference on Semantic
+geographic features such as waterways in a standard machine                    Technologies for Intelligence, Defense, and Security, Fairfax,
+parsable format.                                                               VA, USA.
+
+8. ACKNOWLEDGEMENTS                                                       [14] Yin, J., Lampert, A., Cameron, M., Robinson, B., and Power, R.
+This work was partially supported by the German Research                       2012. Using Social Media to Enhance Emergency Situation
+                                                                               Awareness. IEEE Intelligent Systems, vol. 27, no. 6, 52-59.
+Foundation through the Collaborate Research Center SFB/TR 8

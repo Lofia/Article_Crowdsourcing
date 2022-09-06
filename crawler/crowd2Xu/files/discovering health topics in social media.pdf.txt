@@ -1,0 +1,1106 @@
+Discovering Health Topics in Social Media Using Topic
+
+
+Models
+
+                    1                    1,2
+Michael J. Paul *, Mark Dredze
+
+1Department of Computer Science and Center for Language and Speech Processing, Johns Hopkins University, Baltimore, Maryland, United States of America, 2Human
+Language Technology Center of Excellence and Department of Computer Science, Johns Hopkins University, Baltimore, Maryland, United States of America
+
+
+
+    Abstract
+
+    By aggregating self-reported health statuses across millions of users, we seek to characterize the variety of health
+    information discussed in Twitter. We describe a topic modeling framework for discovering health topics in Twitter, a social
+    media website. This is an exploratory approach with the goal of understanding what health topics are commonly discussed
+    in social media. This paper describes in detail a statistical topic model created for this purpose, the Ailment Topic Aspect
+
+    Model (ATAM), as well as our system for filtering general Twitter data based on health keywords and supervised
+    classification. We show how ATAM and other topic models can automatically infer health topics in 144 million Twitter
+    messages from 2011 to 2013. ATAM discovered 13 coherent clusters of Twitter messages, some of which correlate with
+    seasonal influenza (r=0.689) and allergies (r=0.810) temporal surveillance data, as well as exercise (r=.534) and obesity
+
+    (r=2.631) related geographic survey data in the United States. These results demonstrate that it is possible to automatically
+    discover topics that attain statistically significant correlations with ground truth data, despite using minimal human
+    supervision and no historical data to train the model, in contrast to prior work. Additionally, these results demonstrate that a
+    single general-purpose model can identify many different health topics in social media.
+
+
+  Citation: Paul MJ, Dredze M (2014) Discovering Health Topics in Social Media Using Topic Models. PLoS ONE 9(8): e103408. doi:10.1371/journal.pone.0103408
+
+  Editor: Renaud Lambiotte, University of Namur, Belgium
+
+  Received January 7, 2014; Accepted July 2, 2014; Published August 1, 2014
+  Copyright: ß 2014 Paul, Dredze. This is an open-access article distributed under the terms of the Creative Commons Attribution License, which permits
+  unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
+
+  Funding: Mr. Paul was supported in part by a National Science Foundation Graduate Research Fellowship under Grant No. DGE-0707427 and a PhD fellowship
+  from Microsoft Research. Publication of this article was funded in part by the Open Access Promotion Fund of the Johns Hopkins University Libraries. The funders
+  had no role in study design, data collection and analysis, decision to publish, or preparation of the manuscript.
+  Competing Interests: Dr. Dredze reports receipt of compensation for travel for talks at various academic, corporate, and governmental entities and consulting
+  for Directing Medicine, Progeny Systems, and Sickweather. Mr. Paul serves on the advisory board for Sickweather. This does not alter the authors’ adherence to
+  PLOS ONE policies on sharing data and materials.
+
+  * Email: mpaul@cs.jhu.edu
+
+
+
+Introduction                                                          information that they do not provide to their doctor, and thus it is
+                                                                      potentially a source of new information, such as off-label use of
+  Several studies have utilized social media for tracking trends and
+                                                                      medications. [23,24].
+analyzing real world events, including news events, [1] natural          Studies like these rely on the detection of specific illnesses such as
+disasters, [2] user sentiment, [3] and political opinions. [4–5]      influenza or health topics such as exercise. In this work, we instead
+Twitter is an especially compelling source of social media data,
+                                                                      describe how to perform discovery of ailments and health topics.
+with over half a billion user-generated status messages (‘‘tweets’’)  We do this using topic models, which automatically infer
+posted every day, often publicly and easily accessible with           interesting patterns in large text corpora. We believe an
+streaming tools. [6] By aggregating the words used by millions
+                                                                      exploratory, discovery-driven approach can serve us a useful
+of people to express what they are doing and thinking, automated      starting point for medical data mining of social media, by
+systems can approximately infer what is happening around the          automatically identifying and characterizing the health topics that
+world. Researchers have begun to tap into social media feeds to
+                                                                      are prominently discussed on social media. Our goal is not to
+monitor and study health issues, [7] with applications in disease     improve modeling of any one specific illness, but to demonstrate a
+surveillance and other epidemiological analysis.                      model for illness discovery. While we may validate the discovered
+  By far the most commonly analyzed disease in social media is
+                                                                      illnesses against specialized approaches for tracking each specific
+influenza. Many researchers have tracked influenza in social          illness, the strength of our model is that it allows discovery of new
+media data, most commonly Twitter, using a variety of techniques      illness in new data without a priori knowledge. Furthermore, our
+such as linear regression, [8–10] supervised classification, [11–12]
+                                                                      list of discovered illnesses contains several that have previously
+and social network analysis. [13] Researchers have also used social   been unexplored in Twitter, suggesting new areas for directed
+media to study cholera, [14] dental pain, [15] and cardiac arrest,    research, described in the Discussion section.
+
+[16] as well as population behavior including physical activities,       In this paper, we describe a statistical topic modeling framework
+[17] mood and mental health, [18–19] and alcohol, [9,20]              for identifying general public health information from millions of
+tobacco, [21] and drug use. [22] Twitter has a desirable property     health-related tweets. In addition to a basic topic model, we also
+
+of being a real time data source, in contrast to surveys and          describe our Ailment Topic Aspect Model (ATAM), previously
+surveillance networks that can take weeks or even years to deliver    used to analyze tweets from 2009–10. [24] This framework is used
+information. Additionally, users of Twitter may candidly share        to explore the diversity of health topics that are discussed on
+
+
+
+PLOS ONE | www.plosone.org                                         1                        August 2014 | Volume 9 | Issue 8 | e103408
+                                                                                                 Discovering Health Topics in Social Media
+
+
+
+Twitter, and we find that many health topics correlate with
+existing survey data. Our specific contributions are: (1) we describe
+a current end-to-end framework for data collection and analysis,
+
+which includes multiple data streams, keyword filters, and
+supervised classifiers for identifying relevant data; (2) we analyze
+a set of 144 million health-related tweets that we have been
+
+downloading continuously since August 2011; (3) we provide many
+previously unpublished details about the creation of our classifier
+
+for identifying health tweets and details of ATAM, our specialized
+health topic model, including procedures for large-scale inference;
+(4) we evaluate this framework and topic model quality by
+
+comparing temporal and geographic trends in the data with
+external data sources. We experiment with both a basic topic
+model and ATAM, as well as individual keyword filters for
+
+comparison. This article is an extension of an earlier unpublished
+technical report [25] and includes a longer explanation of ATAM
+and LDA, more technical detail such as the Gibbs sampling
+
+update equations, and more experimental comparisons between
+various approaches than any of our previous studies on this
+subject.
+
+
+Materials and Methods
+
+
+Ethics Statement
+  The work described in this paper was reviewed by the
+Homewood Institutional Review Board at Johns Hopkins Univer-
+
+sity and received an exemption since all data is publicly available.
+
+
+Data Collection
+  We used two Twitter datasets from different time periods. The
+
+first is a collection of over 2 billion tweets from May 2009 to
+October 2010. [5] We used this dataset in earlier experiments [24]
+which were used to inform our current data collection process.
+
+The second collection comes from Twitter’s streaming API [26]
+starting in August 2011 until February 2013, a daily average of 4
+million tweets. We select all tweets that match any of 269 health
+
+keywords as well as 1% of public tweets. The selection of these 269
+keywords was made by identifying words strongly associated with        Figure 1. The graphical model and generative story for ATAM.
+the collection of health-related tweets used in our previous study     The graphical model representation of ATAM using plate notation,
+                                                                       followed by the ‘‘generative story’’ description of the model. In the
+[24] and manually removing non-informative terms.                      graphical model, the variable z denotes the topic index, and the
+  We collected 20,000 keyphrases related to illnesses, symptoms,       Bernoulli variables x and , are switch variables indicating whether a
+                                                                       word is an ailment or topic word and whether a word is background
+and treatments from two websites. [27–28] We added ‘‘sick’’ and
+‘‘doctor’’ and removed spurious keywords. These keyphrases were        noise. These three variables do not appear in the conditional likelihood
+used for our health filter and to identify symptom and treatment       because they have been summed out. A is the number of ailments, Y is
+                                                                       the number of aspects, Z is the number of topics, D is the number of
+words as described below. We selected words from consumer-             documents, and N m is the number of tokens in document m. In the
+oriented websites because the language is more likely to match the     generative description, ‘‘Dir’’ refers to the Dirichlet distribution.
+informal language used in social media as compared to language         doi:10.1371/journal.pone.0103408.g001
+
+used in literature intended for medical professionals.
+  We additionally collected articles concerning 20 health issues       Data Filtering
+from WebMD:[29] allergies, anxiety, asthma, back pain, breast
+                                                                         We filter data to identify health tweets. Keyword filtering, which
+cancer, COPD, depression, diabetes, ear infection, eye health, flu,    is used to obtain the data, is insufficient; e.g., ‘‘I’m sick of this’’ and
+foot injuries, heartburn, irritable bowel syndrome, migraine,          ‘‘justin beber ur so cool and i have beber fever.’’ [8] Instead, we
+
+obesity, oral health, skin health, and sleep disorders. As described   rely on supervised machine learning classification to filter tweets.
+below, these articles were used to guide model inference. These          We filtered tweets from 2009–2010 with 20,000 keyphrases and
+conditions were selected among the most popular health topics
+                                                                       randomly annotated a subset of the remaining 11.7 million tweets
+featured on the homepage of WebMD, excluding topics such as            using Amazon Mechanical Turk, a crowdsourcing service, [30–31]
+sexual conditions that were not commonly discussed health topics       to distinguish relevant health tweets from spurious matches.
+in Twitter, based on a preliminary topic model analysis. Within
+                                                                       Workers annotated examples as positive (about the user’s health),
+each health condition, we collected all articles that contained        negative (unrelated, e.g. news updates or advertisements, or not
+information describing the condition and its symptoms and              English), or ambiguous. To ensure quality, we annotated a sample
+treatments.
+                                                                       ourselves and required workers to annotate some of these ‘‘gold’’
+                                                                       tweets, which allowed us to check annotator accuracy and exclude
+                                                                       inaccurate workers. Second, each tweet was labeled by three
+
+
+
+PLOS ONE | www.plosone.org                                          2                        August 2014 | Volume 9 | Issue 8 | e103408
+                                                                                                 Discovering Health Topics in Social Media
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 2. Top words associated with ailments and topics. The highest probability words for a sample of ailments and non-ailment topics. The
+top ten general words are shown for ailments along with the top five symptom and top five treatment words. The top ten words are shown for
+topics. The names of the ailments and topics are manually assigned by humans upon inspection of the associated words.
+doi:10.1371/journal.pone.0103408.g002
+
+
+annotators and the final label was determined by majority vote,        Model Descriptions
+
+removing the 1.1% of examples where the majority vote was                Our approach to identifying health topics is based on the
+ambiguous.                                                             framework of probabilistic topic modeling [34] for text analysis.
+  This yielded a set of 5,128 tweets (36.1% positive) for training
+                                                                       We describe two such topic models.
+data to create a classifier for health relevance. We trained a binary    Latent Dirichlet Allocation (LDA).       Latent Dirichlet Allo-
+logistic regression model using the MALLET toolkit [32] with n-
+                                                                       cation (LDA) [35] assumes that a text document has some
+gram (1#n#3) word features. We tokenized the raw text such that        probability distribution over ‘‘topics,’’ and each such topic is
+contiguous blocks of punctuation were treated as word separators,      associated with a distribution over words. Topics are not observed
+with punctuation blocks retained as word tokens. We removed
+                                                                       as input, rather they are inferred. Topic models are unsupervised
+tweets containing URLs, which were almost always false positives.      models; they can be thought of as automatically clustering words
+  We tuned the prediction threshold using 10-fold cross validation
+                                                                       into topics and associating documents with those topics.
+to result in an estimated 68% precision and 72% recall, a balance        LDA posits that each word (token) n in a document d has a
+of precision and recall. Applying this classifier to the health stream variable w    that represents the observed word type (i.e. a
+yielded 144 million health tweets, a nearly hundred-fold increase                 dn
+                                                                       dictionary entry) as well as a latent topic variabldnz Under this
+over our earlier study of 1.6 million tweets. [24].                    model, a word token is generated by randomly sampling a value
+  Location Filtering.    For experiments that require geographic
+                                                                       dn =k from the document’s topic distribution h d then sampling a
+information, we used Carmen, a Twitter geolocation system. [33]        word type w dn=v from the topic k’s word distribution w .kGiven
+Carmen relies on a combination of GPS coordinates from mobile
+devices and user-supplied profile information (e.g. ‘‘NYC’’, ‘‘The     the parameters h and w, the marginal probabiXity of a word under
+                                                                       the LDA model is: P( w ~dnD h , w d ~            h dkw  kv
+Big Apple’’) to determine the location (city, county, state, country)
+associated with each tweet, when possible.                                                                          k
+
+
+
+PLOS ONE | www.plosone.org                                          3                        August 2014 | Volume 9 | Issue 8 | e103408
+                                                                                                           Discovering Health Topics in Social Media
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 3. Influenza over time. The weekly rate of influenza as estimated by the volume of tweets assigned to the influenza-like illness topics and
+
+keywords alongside the rates given by the CDC ILINet (solid black line). The better of the two LDA topics is shown. All rates are standardized (z-scores)
+so that they are comparable on the y-axis.
+doi:10.1371/journal.pone.0103408.g003
+
+
+
+   Each word is conditionally independent given the parameters.               non-topical words, which can produce less noisy topics. [36–37]
+LDA is a Bayesian model in which there are also distributions                 This model assumes that each word is generated under the
+
+(priors) over the parameters h and w, given by Dirichlet                      standard LDA model with probability l, while with probability 1–
+
+distributions with hyperparameters a and b.                                   l the word comes from the background distribution. This concept
+   In our experiments, we use a variant of LDA that includes an               is also in ATAM, described below.
+
+additional ‘‘background’’ word distribution to model common,
+
+
+
+
+  Table 1. Pearson correlations between various Twitter models and keywords and CDC influenza-like illness (ILI) surveillance data
+  for three time periods.
+
+
+
+
+                                             2011–12                              2012–13                           2011–13
+
+  ATAM                                       .613                                 .643                              .689
+
+  LDA (1)                                    .670                                 .198                              .455
+
+  LDA (2)                                    20.421                               .698                              .637
+  ‘‘flu’’                                    .259                                 .652                              .717
+
+  ‘‘influenza’’                              .509                                 .767                              .782
+
+
+  The two LDA rows correspond to two different LDA topics.
+  doi:10.1371/journal.pone.0103408.t001
+
+
+
+PLOS ONE | www.plosone.org                                                4                           August 2014 | Volume 9 | Issue 8 | e103408
+                                                                                                          Discovering Health Topics in Social Media
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 4. Allergies over time. The monthly rate of influenza as estimated by the volume of tweets assigned to the allergies topics and keywords
+alongside the rates given by the Gallup phone survey (solid black line). Gallup data after April 2012 does not exist, so we duplicated the same rates
+from the previous year (05/2011–02/2012). All rates are standardized (z-scores) so that they are comparable on the y-axis.
+doi:10.1371/journal.pone.0103408.g004
+
+
+
+   Ailment Topic Aspect Model (ATAM).               Preliminary LDA          that are not about the ailment but are topically related (‘‘home,’’
+experiments discovered health-related topics around ailments but             ‘‘watching,’’ ‘‘TV’’), which might be described by a ‘‘stay at
+
+many other topics as well. For example, some topic clusters would            home’’ topic. Finally, it contains common words that would not be
+correspond to symptom terms that could be associated with many               described with a particular topic or ailment (‘‘damn,’’ ‘‘with,’’
+
+illnesses.                                                                   ‘‘a’’).
+   Consider the example sentence, ‘‘damn flu, home with a fever                 We developed a model that explicitly labels each tweet with an
+
+watching TV.’’ It contains two words relevant to the ailment of flu          ailment category and distinguishes ailment words from other
+(‘‘flu,’’ ‘‘fever’’), one of which is a symptom. It also contains words      topics and non-topical words. Our model includes a standard LDA
+
+
+
+
+  Table 2. Pearson correlations between various Twitter models and keywords and Gallup allergy survey data for two time periods.
+
+
+
+                                                    08/11–04/12                                       08/11–02/13
+
+
+  ATAM                                              .810                                              .479
+  LDA                                               .705                                              .366
+
+  ‘‘allergy’’                                       .873                                              .823
+
+  ‘‘allergies’’                                     .922                                              .877
+
+  The earlier period is the original data, while the data after April 2012 is from the previous year (05/2011–02/2012).
+  doi:10.1371/journal.pone.0103408.t002
+
+
+
+
+PLOS ONE | www.plosone.org                                                5                          August 2014 | Volume 9 | Issue 8 | e103408
+                                                                                                      Discovering Health Topics in Social Media
+
+
+
+
+  Table 3. Pearson correlations between various Twitter models and keywords and CDC BRFSS data for various diet and exercise risk
+
+  factors.
+
+
+
+                       Activity             Exercise             Obesity                  Diabetes                Cholesterol
+
+  ATAM                 .606                 .534                 2.631                    2.583                   2.194
+
+  LDA                  .518                 .521                 2.532                    2.560                   2.146
+
+  ‘‘diet’’             .546                 .547                 2.567                    2.579                   2.214
+  ‘‘exercise’’         .517                 .539                 2.505                    2.611                   2.170
+
+
+  doi:10.1371/journal.pone.0103408.t003
+
+
+model to explain non-ailment topics, but also includes a model to            Having separate word distributions for each aspect is an idea
+
+filter out background noise and a specialized ailment model that          borrowed from the Topic Aspect Model (TAM), [38] in which
+incorporates symptom and treatment information.                           topics in a topic model are decomposed into multiple aspects
+                                                                          (similar to ‘‘cross-collection’’ [39–40] or ‘‘multi-view’’ [41] topic
+   Under our model, each tweet d is categorized with an ailment
+ad =i with probability g . Eich word token n in tweet d is                models). We thus call our model the Ailment Topic Aspect Model
+                                                                          (ATAM). Conditioned on the parameters and the ailment a =i,
+associated with two observed variables: the word type w , andna                                                                           d
+label ydnthat we call the ‘‘aspect’’ which denotes whether the word       the likelihood of a word token w   diunder ATAM is:
+
+is a symptom word, treatment word, or anything else – a general
+word. The y variables are given as input; the dataset is labeled
+                                                                                    P(w dn~vDa ~d,y ~jdn,w,l,p)~
+using the list of 20,000 symptom and treatment keyphrases
+described above. Each word token in a tweet is generated as                         (1{l)w  B,jvz                Background model
+                                                                                              X
+follows.                                                                            l½(1{p)(       h w     )z      Topic model
+                                                                                                    dk T,kv
+    Background model: The word is assumed to be back-                                           k
+ N
+    ground noise (binary random variable , ) wdnh probability 1–                      pw A,ijv                 Ailment model
+    l, and it is a non-background word with probability l. If the
+
+    word w  dn =v is background noise, it has probability Q      B,jv
+    where y    =j. The background word distributions are shared              As in LDA, we place Dirichlet priors over the model
+            dn
+    across the entire dataset and each aspect has a separate              parameters. These prior probabilities are formulated as follows.
+    distribution.
+                                                                              Word priors: We place informative priors over the word
+ N  Topic model: Non-background words are either an ailment                N
+                                                                              distributions to incorporate knowledge from external resources
+    word with probability p orda non-ailment topic word with                  into the model: in this case, a Dirichlet distribution centered
+    probability 1–p d (binary random variable x ).dnf it is a topic
+                                                                              around the word distribution found in the WebMD articles.
+    word, then the word’s probability is given by the standard                Specifically, for the ailment i and each aspect j, w            is
+    LDA model: the word is associated with topic z =k withdi                                                                             A,ij
+                                                                              distributed according to Dirichlet (b  i, where b =i *m iuci
+    probability h dk, and the topic k generates the word w     dn=v           that m is a vector of the empirical unigram word distribution
+    with probability     wT,kv. Each topic has its own word                          i
+                                                                              in the WebMD articles pertaining to the ith ailment, and s isia
+    distribution.                                                             scalar precision parameter. This encodes an a priori belief that
+
+ N  Ailment model: If the word is an ailment word, then the                   the ailment word distributions are likely to match the word
+    word probability depends on both the tweet’s ailment label and            distributions in these health and medical articles. The precision
+
+    the token’s aspect label. The ailment a di generates the word             s controls the degree of this belief and can be automatically
+    w dn=v with probability w  A,ijv where ydn =j. Each ailment has           adjusted to optimize marginal likelihood. We fix b=0.01 for
+
+    three separate word distributions for general words, symptom              the non-ailment distributions.
+    words, and treatment words. The distributions of ailment
+                                                                           N  Topic priors: Each document’s topic distribution h has a  d
+    words is thus structurally different from the distributions of            Dirichlet (a i prior, where the document ailment variable
+    topic words, which do not distinguish symptom and treatment
+                                                                              ad=i. That is, there is a separate a veitor for each ailment
+    words from others.                                                        value, so the document’s prior over topic distributions depends
+
+
+
+  Table 4. Pearson correlations between various Twitter models and keywords and CDC BRFSS data for various serious illness risk
+  factors.
+
+
+
+
+                             Cancer                  Tobacco                 Heart Disease                      Heart Attack
+
+  ATAM                       .030                    .069                    .043                               .080
+  LDA                        2.045                   2.005                   2.069                              2.023
+
+  ‘‘cancer’’                 2.037                   2.180                   2.232                              2.181
+
+  ‘‘surgery’’                2.049                   .188                    .021                               .060
+
+  doi:10.1371/journal.pone.0103408.t004
+
+
+
+
+PLOS ONE | www.plosone.org                                             6                         August 2014 | Volume 9 | Issue 8 | e103408
+                                                                                        Discovering Health Topics in Social Media
+
+
+
+   on the document ailment. This allows the model to make       our distributed ATAM and LDA implementations across 50
+
+   associations between particular ailments and particular non- processors.
+   ailment topics.                                                Second, we initially ran the sampler on smaller subsets of data
+
+ N Other priors: The other parameters all have simple           and incrementally brought in more data, under the intuition that
+   symmetric and pre-specified Dirichlet or Beta (the bivariate the inference algorithm may learn good parameters on a smaller
+
+   analog) priors, which act as regularizers: g,Dirichlet (s),  sample of the data. Our implementation fed data to the sampler in
+   p dBeta (c), both set to 1.0 in our experiments. We do not   10% increments. Each time additional data is added, the variables
+
+   place a prior over the background noise parameter l; instead are initialized to their optimal value under the current sampler
+   we assume this parameter is given as input to control the    state. The increment schedule is that a fraction t of the data is
+                                                                           pﬃﬃ
+   degree of noise filtering, set to 0.2 in our experiments (i.esampled for  t of the iterations, so more iterations are spent on
+   probability of noise is 0.8).                                less data.
+
+                                                                  Gibbs Sampling Equations for ATAM.         Assignments to
+  The marginal likelihood of the data under these priors is:    ailments a are sampled for each document according to the
+
+                                                                following distribution:
+ P(wDy,l,a,b,s,c)
+   ð      ð        ð      X    ð
+ ~   P(gDs) P(wDbP   P(pDc)  gi  P(hDiP) P(wdnad~i,dn,h,w,l,p)                              P(a d~iDa{a ,d,x,‘,y,a,b,s)
+    g     w       d p      i    h     n[d                                                  2         0            1
+
+                                                                                                        cd za
+                                                                       ca~izs              6         B   zdnX  idnC
+  Figure 1 shows the graphical model representation of ATAM          ! c zAs   n[d I(dn~1) 4(x ~dn   @  d         A z
+                                                                        ▯                              c▯z     aik’
+along with its probabilistic ‘‘generative story’’.                                                           k’
+  In our experiments, we fixed both the number of ailments and                                     0               13
+the number of topics to 20.                                                                            A,iy
+                                                                                                   B  cw dnzb  iw  C7
+                                                                                          I(xdn1)  B    dn   X  dn C7
+                                                                                                   @  A,dn         A5
+Model Inference                                                                                      c▯   z     biv’
+  Posterior Inference.   ATAM includes many variables and                                                     v’
+parameters which must be inferred. Our goal is posterior
+
+inference, the standard type of inference used in LDA-based
+models, [42] in which we infer a distribution over the parameters.
+                                                                  Assignments to ,,x , and z are sampled for each token according
+A popular method of posterior inference in topic models is Gibbs
+sampling, [43] a Markov Chain Monte Carlo method. [44] In a     to the following distributions:
+
+Gibbs sampler, values of each variable will be sampled according
+to the posterior distribution, and with enough samples, the
+                                                                                                         B,y
+expected value of the variable can be reasonably approximated.                                          cw  dzb
+The algorithm iteratively samples a new value for each random            P(‘dn0D‘{‘ ,dnx,y,b)!(1{l)     B,yn
+variable from the conditional distribution given the current values                                    c▯ dnzWb
+
+of all other variables. We can derive a collapsed Gibbs sampler by
+marginalizing the multinomial parameters out of the sampling    .
+
+equations, requiring us to only sample the variables a, z, x and ,.
+[43] We alternately sample the document-level variable a and the  P(‘dn1,x ~dnz ~kdn{z ,x{x dn{‘ ,ydn ~i,dnb,d)dn
+
+token-level variables (z, x, ,). The sampling equations for these               d          d          T,k
+four variables are given at the end of this section. We ran the                cx~0zd  0  cz~kza ik  cwdnb
+                                                                          !l   d          d   P      T,k
+Gibbs sampler for 8000 iterations. We use the same inference                  c▯zd z0 c 1 ▯     aik’c▯ zWb
+procedure for LDA. [43,36].                                                                   k’
+  Hyperparameter Optimization.      The Dirichlet hyperpara-
+
+meters a and b are optimized during the inference procedure. We
+alternate between running the Gibbs sampler conditioned on the          P(‘ dn1,x dnD‘{‘ ,x{dn,z,y,dn~i,b,dn
+
+current hyperparameters for 10 iterations, then optimizing the                                     A,idn
+hyperparameters to maximize the marginal likelihood of the                              cd  zd 1  cwdn  zb iw
+                                                                                   !l   dx~1       A,iy   P  dn
+sampled variables. We use the fixed-point iterative update                             c▯zd 0d  1 c▯ dnz    b
+equations derived by Minka [45] to optimize the hyperparameters                                           v’  iv’
+
+of a Dirichlet-multinomial distribution. Recall that for ATAM’s
+priors over word distributions, we have defined eakh b such that
+the precision s and mean m are decoupled. In this case, the mean  The notation a–addenotes the set of a variables excluding a ,as
+             i           i
+is fixed, and we only update the precisiin s . For the priors overe sampling distribution is conditioned on all variables except for
+topic distributions, we freely optimize each i without such     the one being sampled. The c variable denotes sufficient statistics
+                                                                                                      a
+constraints. Minka provides update equations for both scenarios.of the current sampler state; specificblldenotes the number
+  Large Scale Inference.    We relied on two procedures to      of times b appears in a, with * being a wildcard. For example,
+                                                                 d
+handle our large dataset. First, we use an iterative map-reduce cz~ k is the number of times the topic variable z was assigned to
+framework to distribute the computation. [46] Gibbs samplers arevalue k in document d. A is the number of ailments, Z is the
+independently run on different shards of data (map stage), and at
+                                                                number of topics, and W is the size of the vocabulary. I(x)sian
+the end of the sampling iteration, the counts across all shards indicator function that returns 1 if the expression x is true and 0
+pooled together and the sufficient statistics within each process are
+                                                                otherwise.
+updated to reflect the current global counts (reduce stage). We ran
+
+
+
+PLOS ONE | www.plosone.org                                   7                      August 2014 | Volume 9 | Issue 8 | e103408
+                                                                                                Discovering Health Topics in Social Media
+
+
+
+                                                                     important large-scale survey provides a single source of data for a
+Mining Trends
+  Our goal is to discover coherent ailments composed of groups of    variety of experimental comparisons. We measured the correlation
+tweets. While we will present an analysis directly on these groups,  between the ‘‘diet and exercise’’ ailment/topic with the following
+we also seek extrinsic validation of these groups by utilizing them  four BRFSS results which are associated with dietary and exercise
+
+for various tasks. We do not expect to outperform methods crafted    patterns: the percentage who participated in physical activity and
+specifically for these tasks, rather we use them to measure whether  aerobic exercise, the percentage who are obese (BMI .=30.0),
+our unsupervised approach has discovered a signal of interest.       the percentage who have been diagnosed with diabetes (data from
+                                                                     2010; not asked in 2011), and the percentage who have high
+  For extrinsic evaluations, we consider two types of analysis
+based on the ailments: the prevalence of ailments over time and      cholesterol. We also measured the correlation of the ‘‘cancer and
+over geographic regions. For an ailment i, we consider P(a=i |       serious illness’’ ailment with the following three related BRFSS
+                                                                     results: the percentage who have or have had cancer, the
+time period) or P(a=i | region), computed as the percentage of
+tweets assigned to ailment i for that time period or region. We do   percentage who have had a heart attack, the percentage who
+the same with LDA, with topics instead of ailments.                  have had heart disease, and the percentage who have used
+  In our experiments, we also consider trends of individual          tobacco. A subset of these factors were also considered in our
+
+keywords for comparison, in which case we simply count the           conference paper using 2009–2010 data. [24].
+number of tweets containing a keyword, normalized by the total
+number of tweets in the dataset from that time period or region.     Results and Discussion
+
+
+Temporal Trends                                                      Ailment Discovery
+  We consider two ailments with seasonal temporal patterns:             Figure 2 shows examples of the most probable words for various
+                                                                     ailments as well as non-ailment topics in ATAM. In addition to the
+influenza and allergies. While there is a body of work on tracking
+influenza on Twitter, [7] the surveillance of allergy symptoms is a  six ailments shown in the table, we identified the following:
+novel use of Twitter. We do not use geolocation in these             allergies, depression, cough and respiratory illness, anxiety, sports
+                                                                     injuries, hunger and stomach pain, and body image and skin
+experiments.
+  Influenza over Time.     We computed the Pearson correlation       health (13 total). These designations are manually assigned based
+between the weekly influenza rate in Twitter, as measured using      on the coherence of the most probable words. We note that the
+the topic model ailment most closely resembling influenza, and       model parameters include only unigram word distributions and
+                                                                     words can appear as different aspects depending on the larger
+weekly data from the Centers for Disease Control and Prevention
+(CDC). In particular, we use data from the U.S. Outpatient           context. For example, ‘‘eye’’ would be counted as a symptom word
+Influenza-like Illness Surveillance Network (ILINet), [47] which     if it is part of the phrase ‘‘red eye’’, a treatment word if part of the
+                                                                     phrase ‘‘eye drops’’, and a general word if not part of a symptom/
+measures the percentage of outpatient visits due to influenza-like
+illness in the United States.                                        treatment phrase. As is usually the case with unsupervised topic
+  Our data spans two influenza seasons. The 2011–2012 season         models, many of the word clusters lacked semantic coherence, [50]
+                                                                     and we did not consider incoherent ailment clusters in analysis.
+began October 2, 2011 (n=52 weeks). The 2012–2013 season
+began September 30, 2012. Our results for the 2012–2013 season       Even the coherent ailment clusters exhibit some noise, such as
+only go up to the week beginning February 24, 2013, which was        ‘‘throat’’ in the diet and exercise cluster, which is because this
+the last week of data in our Twitter collection (n=22).              word commonly co-occurs with ‘‘sore’’ which is a top symptom
+                                                                     word in this cluster (as in ‘‘legs are sore’’). This is a drawback of
+  Allergies over Time.     We computed the Pearson correlation
+between the monthly allergy rate in Twitter and monthly survey       unigram word models, but our quantitative experiments below
+data given by a Gallup-Healthways poll. This data gives the          show that these clusters are still capturing meaningful concepts.
+
+percentage of respondents who answered yes to the question,
+‘‘Were you sick with allergies yesterday?’’ in telephone interviews  Topic Coherence
+of adults in the United States. The survey data includes monthly        Our intrinsic evaluation of ATAM is based on a user study
+rates from 2010 through April 2012. [48].
+                                                                     comparing the quality and interpretability of ATAM to LDA. Our
+  Our dataset overlaps the survey data from August 2011–April        goal is to directly evaluate the coherence of ATAM ailments. We
+2012 (n=9). Additionally, we also compared all of our Twitter        performed experiments using Amazon’s Mechanical Turk, a
+data from August 2011–February 2013 (n=19) to Gallup data,           crowdsourcing system, on the Twitter dataset from 2009–10. We
+
+where after April 2012 we use each month’s data from the             labeled the resulting topics so that they could be aligned across the
+previous year, under the assumption that the monthly trend is        two models for comparison. Three annotators (the second author
+similar across years. This allowed us to compare all months of our   of this paper and two computer science graduate students) each
+
+Twitter data to approximate survey data.                             labeled the resulting LDA topics and ATAM ailments with either
+  Our earlier conference paper gave examples of allergy trends       an ailment name or as ‘‘non-ailment’’ and we then obtained a
+but did not compare to external data. [24] To the best of our        consensus as to the best label for each topic/ailment. These
+knowledge, this is the first time Twitter data has been compared to
+                                                                     experiments are described in our earlier technical report. [25].
+external survey data about allergies.                                   We then evaluated model output through two Mechanical Turk
+                                                                     experiments. First, we measured agreement of annotators on
+                                                                     labeling clusters (ailments/topics). We displayed the top 8 general
+Geographic Trends
+  To evaluate geographic trends, we measured the Pearson             words, 5 symptoms and 5 treatments for each cluster. Symptom
+correlation between the ailment rates in U.S. states (n=51,          and treatment words were identified in LDA by separating out
+including the District of Columbia) with survey data for various     those words appearing in the keyphrase lists as a post-processing
+
+health and lifestyle factors such as physical activity. We used      step. We then showed three randomly sorted ailment names (one
+survey data from the CDC’s Behavioral Risk Factor Surveillance       correct and two randomly chosen) as well as ‘‘other’’ and ‘‘junk’’
+System (BRFSS), which includes survey results from phone             options. 80 annotators provided annotations. ATAM discovered
+
+interviews of over 500,000 adults in the U.S. in 2011. [49] This     more ailments as measured by the number of ailments agreed to
+
+
+PLOS ONE | www.plosone.org                                        8                        August 2014 | Volume 9 | Issue 8 | e103408
+                                                                                                 Discovering Health Topics in Social Media
+
+
+
+by two thirds of the annotators; 14 unique ATAM ailments versus        keyword ‘‘allergy’’ had slightly weaker correlations than ‘‘aller-
+
+10 for LDA. Additionally, ATAM produced more identifiable              gies’’.
+ailments; 45% of annotators agreed with our consensus LDA
+labels versus 70% for ATAM.                                            Geographic Trends
+
+  We next sought to evaluate which model produced more                   The ATAM ailment we identified as ‘‘diet and exercise’’ is
+coherent ailment clusters. Using our labels, we paired ATAM and        significantly and often strongly correlated (p#0.001) with all
+LDA clusters that represented the same ailment (e.g., both were        pertinent BRFSS statistics. LDA’s similar diet and exercise topic as
+labeled as influenza). We then displayed each ailment as before,
+                                                                       well as the ‘‘diet’’ and ‘‘exercise’’ keywords all have very similar
+but now side by side, randomly permuting which appeared on             correlations which are not significantly different. These correla-
+which side, with the ailment name. 67 annotators were asked to         tions are shown in Table 3.
+select the list of words (including symptoms/treatments) that best
+                                                                         The ATAM ailment we identified as ‘‘cancer and serious
+described the given ailment, or to indicate a tie otherwise. ATAM      illness’’ is not strongly correlated with any pertinent BRFSS
+was favored over LDA in 11 out of 18 comparisons with an               statistic. The corresponding LDA topic and keywords ‘‘cancer’’
+average of 55% of the votes (median 64%).
+                                                                       and ‘‘surgery’’ are similarly weak. Some of the keyword
+  These experiments show that ATAM discovers more human-               correlations are stronger (up to magnitude of 0.23, p,0.001) but
+identifiable ailments with higher coherence than LDA.                  these are still relatively weak and not necessarily in the direction
+
+                                                                       one would expect (‘‘cancer’’ has negative rather than positive
+Temporal Trends                                                        correlations with related risk factors). One possible explanation for
+  Influenza.    The weekly rate P(a) for the ATAM ailment we           these weak correlations is that most tweets in this ailment group
+identified as ‘‘influenza-like illness’’ correlated strongly with the  appear to be describing friends and family rather than the user
+
+CDC ILI data. These correlations are shown in Table 1. Figure 3        personally, so the incidents described might actually occur in other
+shows the CDC and Twitter trends over time. We observe that the        locations. Another explanation is that tweets in this group may be
+ATAM trend has lower variance and the rate does not fall in off-       promoting awareness rather than reporting incidence, which could
+
+season weeks as much as the CDC data. This may be because              perhaps also explain the reversed direction of the correlation.
+there is background noise grouped with the influenza ailment on        These correlations are shown in Table 4.
+Twitter, so the baseline rate is high. Nevertheless, the rates from
+the data sources often peak in the same week, and the Twitter rate
+                                                                       Discussion
+in 2012–2013 is higher than 2011–2012, in agreement with the
+ground truth trend.                                                      These results show that topic models can discover a number of
+  LDA discovered two topics that contain ILI-related words. The        ailments that are significantly and often strongly correlated with
+                                                                       ground truth surveillance and survey data. Surprisingly, in contrast
+first is very similar to the ATAM ILI ailment. The second has
+‘‘fever’’ as the top two word, with ‘‘flu’’ among the top ten, but the to prior work that trained systems to identify specific diseases,
+rest of the word distribution is noisy. ATAM is significantly more     these trends were identified without human supervision or
+                                                                       historical survey or surveillance data. Instead, the unsupervised
+correlated with both seasons than the first LDA topic (p#0.034)
+and the second LDA topic in the second season (p,0.001). The           models automatically discovered word clusters that meaningfully
+difference between ATAM and the second LDA topic are not               correspond with real world events, which suggests that topic
+significant across both seasons.                                       models could discover novel ailments and trends. This is a critical
+
+  Two individual keywords, ‘‘flu’’ and ‘‘influenza’’ have higher       point: even though keyword-based or supervised methods may
+correlations in the later two seasons than the topic models though     yield better correlations on specific tasks, it is impressive that
+the differences are all insignificant (p$0.222). ATAM is signifi-      general-purpose topic models can discover similar information
+
+cantly better than ‘‘flu’’ in the 2011–12 season (p=0.026) but not     across numerous ailments. This suggests that topic models can be
+‘‘influenza’’ (p=0.453). Since topic models combine many key-          adapted to find topics on novel health data sets, such as specialized
+words to determine a tweet’s relevance to influenza, we are            online communities, [22] and because the models require minimal
+                                                                       input, there is even potential for the discovery of novel ailments,
+encouraged by its ability to discover these word groups such that
+they obtain levels similar to hand-picked keywords.                    such as during a disease outbreak.
+  Allergies.   We selected the ailment we identified as ‘‘allergies      Beyond using standard topic models, we created ATAM
+                                                                       specifically for the purpose of modeling health topics, in line with
+and colds’’ for the allergies experiments. Correlation results are
+shown in Table 2. Figure 4 shows the Gallup and Twitter trends         other research creating specialized topic models for analyzing
+over time. As with the influenza plot, there is less variance in the   medical text. [51–52] Moreover, we showed a simple way to
+Twitter curve than the survey data. However, all of the spikes line    incorporate domain knowledge via word priors created from
+
+up, with one exception: in December of 2011 and 2012, there was        external resources. By creating an example of how to create a
+a small spike of the ATAM rate that is not present in the survey       specialized model augmented with prior knowledge, we hope that
+data. We believe this is because the common cold is mixed in with      medical domain experts can contribute in future work to craft
+
+this ATAM ailment, and cold-related messages increase in the           topic models that are more appropriate for specific tasks than off-
+winter. This spurious rise is stronger in 2012 and persists through    the-shelf tools. While LDA and ATAM did not have significantly
+2013, which may be due to the unusually strong influenza season        different results in some experiments, ATAM performed better at
+this year, [47] during which people report similar symptoms.           influenza detection and was shown in a user study to have more
+
+  LDA discovered a similar allergy-related topic, but this topic       interpretable clusters. The addition of informative word priors was
+also contained noise from similar symptoms for other ailments,         also shown in our earlier work to result in ailment clusters that
+which were less correlated than ATAM. The differences between          more closely correspond to specific ailment categories. [24].
+
+ATAM and LDA correlations were not significant. Across all               Our work differs from previous social media based public health
+months, the keyword ‘‘allergies’’ has a significantly higher           analyses in that our aim was broad rather than deep. Rather than
+correlation than the topic models (p#0.012), with no significant       focusing on a particular health issue, our purpose was exploratory,
+
+differences from the topic models in the earlier time period. The      and we identified multiple health issues. We conducted a large
+
+
+PLOS ONE | www.plosone.org                                          9                        August 2014 | Volume 9 | Issue 8 | e103408
+                                                                                                               Discovering Health Topics in Social Media
+
+
+
+
+scale analysis with over a hundred million tweets to identify                    keywords in the 2011–12 influenza season, which was mild and
+
+numerous health trends. Our results show that indeed many                        difficult to capture. [12] Finally, we note that the keyword
+different ailments and health issues are discussed on Twitter                    baselines are applied to the subset of tweets that our classifiers had
+
+beyond what has been commonly studied, such as influenza. For                    already identified as relevant, removing many spurious matches
+example, injuries, stomach pain, and skin health have not been
+                                                                                 that likely would have worsened the results if we had applied the
+analyzed in depth in Twitter, to our knowledge. Behavioral topics,               simple keyword filters to the full set of tweets.
+
+such as diet and exercise patterns, have also been understudied in                 There are inherent limitations in using Twitter and other social
+social media, especially in light of their importance to behavioral              media websites for health analyses. Many people will not publicly
+
+medicine. [53] Our model’s characterization of these ailments and                share their health statuses online, and Twitter is not a
+their associated keywords could serve as a helpful starting point for
+                                                                                 representative sample of the population. However, we have shown
+deeper analysis of each ailment in the future.                                   that a variety of trends can be detected despite these limitations,
+   While individual keywords were often as good as or better than
+                                                                                 and it has been shown that such analyses can be adjusted to
+the topic models in our experiments, the topic models can help                   account for demographic biases. [54] While far from perfect, we
+
+with keyword identification, particularly for less obvious words                 believe social media sources can complement existing surveillance
+that are used on Twitter, and can automatically organize many
+                                                                                 tools, with some unique advantages such as near real-time access
+words into a small number of topics. Topic models also have the                  to naturalistic information.
+advantage of capturing co-occurrences of words within tweets. For
+
+example, the influenza ailment includes words like ‘‘hope’’, ‘‘feel’’,
+and ‘‘better’’, which in the context of influenza are highly                     Author Contributions
+
+indicative of a person experiencing the illness rather than talking              Conceived and designed the experiments: MJP MD. Performed the
+                                                                                 experiments: MJP. Analyzed the data: MJP MD. Contributed reagents/
+about it in non-experiential contexts that might get captured by
+the keyword ‘‘flu’’ alone. This property may make ATAM more                      materials/analysis tools: MJP MD. Wrote the paper: MJP MD.
+
+robust and could explain why this model did better than individual
+
+
+References
+
+ 1. Petrovic S, Osborne M, Lavrenko V (2010) Streaming first story detection with20. Moreno M, Christakis DA, Egan KG, Brockman LN, Becker T (2011)
+    application to Twitter. Conference of the North American Chapter of the          Associations between displayed alcohol references on Facebook and problem
+
+    Association for Computational Linguistics.                                       drinking among college students. Arch Pediatr Adolesc Med.
+ 2. Sakaki T, Okazaki M, Matsuo Y (2010) Earthquake shakes Twitter users: real-  21. Cobb NK, Graham AL, Byron J, Niaura RS, Abrams DB (2011) Online Social
+    time event detection by social sensors. International World Wide Web             Networks and Smoking Cessation: A Scientific Research Agenda. J Med
+    Conference.                                                                      Internet Res 13(4).
+
+ 3. Barbosa L, Feng J (2010) Robust Sentiment Detection on Twitter from Biased   22. Paul MJ, Dredze M (2013) Drug Extraction from the Web: Summarizing Drug
+    and Noisy Data. International Conference on Computational Linguistics.           Experiences with Multi-Dimensional Topic Models. Conference of the North
+ 4. Tumasjan A, Sprenger T, Sandner P, Welpe I (2010) Predicting elections with      American Chapter of the Association for Computational Linguistics.
+    twitter: What 140 characters reveal about political sentiment. International 23. Scanfeld D, Scanfeld V, Larson E (2010) Dissemination of health information
+
+    Conference on Weblogs and Social Media.                                          through social networks: Twitter and antibiotics. American journal of infection
+ 5. O’Connor B, Balasubramanyan R, Routledge BR, Smith NA (2010) From                control 38(3): 182–188.
+    Tweets to Polls: Linking Text Sentiment to Public Opinion Time Series.       24. Paul M, Dredze M (2011) You are what you Tweet: Analyzing Twitter for
+    International Conference on Weblogs and Social Media.                            Public Health. International Conference on Weblogs and Social Media.
+
+ 6. Terdiman D (2012) Report: Twitter hits half a billion tweets a day. Available:5. Paul M, Dredze M (2011) A model for mining public health topics from Twitter.
+    http://news.cnet.com/8301-1023_3-57541566- 93/report-twitter-hits-half-a-        Technical Report, Johns Hopkins University.
+    billion-tweets-a-day. Accessed 2013 Jul 1.                                   26. Twitter: Streaming API keyword matching. Available: https://dev.twitter.com/
+ 7. Dredze M (2012) How Social Media Will Change Public Health. IEEE                 docs/streaming-apis/keyword-matching. Accessed 2013 Jul 1.
+
+    Intelligent Systems 27(4): 81–84.                                            27. WrongDiagnosis. Available: http://wrondgiagnosis.com/lisst/{symptoms,condsaz,
+ 8. Culotta A (2010) Towards detecting influenza epidemics by analyzing Twitter      treats}.htm. Accessed 2011 Jan 1.
+    messages. KDD Workshop on Social Media Analytics.                            28. MTWorld.com. Available: http://mtworld.com/tools_resources/
+ 9. Culotta A (2012) Lightweight methods to estimate influenza rates and alcohol     commondrugs.php. Accessed 2011 Jan 1.
+
+    sales volume from Twitter messages. Language Resources and Evaluation,       29. WebMD. Available: http://webmd.com. Accessed 2011 Jan 1.
+    Special Issue on Analysis of Short Texts on the Web.                         30. Amazon Mechanical Turk. Available: https://www.mturk.com. Accessed 2011
+10. Lampos V, Cristianini N (2010) Tracking the flu pandemic by monitoring the       Jan 1.
+    social web. IAPR 2nd Workshop on Cognitive Information Processing.           31. Callison-Burch C, Dredze M (2010) Creating Speech and Language Data With
+
+11. Maskawa S, Aramaki E, Morita M (2010) Twitter catches the flu: Detecting         Amazon’s Mechanical Turk. Workshop on Creating Speech and Language Data
+    influenza epidemics using Twitter. Conference on Empirical Methods in Natural    With Mechanical Turk at NAACL-HLT.
+    Language Processing.                                                         32. McCallum AK (2002) MALLET: A Machine Learning for Language Toolkit.
+12. Lamb A, Paul MJ, Dredze M (2013) Separating Fact from Fear: Tracking Flu     33. Dredze M, Paul MJ, Bergsma S, Tran H (2013) Carmen: A Twitter Geolocation
+    Infections on Twitter. Conference of the North American Chapter of the
+                                                                                     System with Applications to Public Health. AAAI Workshop on Expanding the
+    Association for Computational Linguistics.                                       Boundaries of Health Informatics Using AI.
+13. Sadilek A, Kautz H, Silenzio V (2012) Modeling spread of disease from social 34. Blei D (2012) Probabilistic topic models. Communications of the ACM 55(4):
+    interactions. International Conference on Weblogs and Social Media.              77–84.
+14. Chunara R, Andrews J, Brownstein J (2012) Social and news media enable       35. Blei D, Ng A, Jordan MI (2003) Latent Dirichlet allocation. Journal of Machine
+
+    estimation of epidemiological patterns early in the 2010 Haitian cholera         Learning Research 3.
+    outbreak. Am J Trop Med Hyg 86(1).                                           36. Chemudugunta C, Smyth P, Steyvers M (2006) Modeling general and specific
+15. Heaivilin N, Gerbert B, Page J, Gibbs J (2011) Public health surveillance of     aspects of documents with a probabilistic topic model. Advances in Neural
+    dental pain via Twitter. J Dent Res 90(9).                                       Information Processing Systems.
+
+16. Bosley JC, Zhao NW, Hill S, Shofer FS, Asch DA, et al. (2013) Decoding twitte37. Paul MJ (2012) Mixed Membership Markov Models for Unsupervised
+    Surveillance and trends for cardiac arrest and resuscitation communication.      Conversation Modeling. Conference on Empirical Methods in Natural
+    Resuscitation 84(2).                                                             Language Processing.
+17. Yoon S, Elhadad N, Bakken S (2013) A Practical Approach for Content Mining   38. Paul M, Girju R (2010) A Two-Dimensional Topic-Aspect Model for
+
+    of Tweets. American Journal of Preventive Medicine 45(1).                        Discovering Multi-Faceted Topics. AAAI Conference on Artificial Intelligence.
+18. Golder S, Macy MW (2011) Diurnal and Seasonal Mood Varies with Work,         39. Zhai C, Velivelli A, Yu B (2004) A cross-collection mixture model for
+    Sleep and Daylength Across Diverse Cultures. Science 333(6051): 1878–1881.       comparative text mining. ACM KDD.
+19. De Choudhury M, Gamon M, Counts S, Horvitz E (2013) Predicting               40. Paul MJ, Girju R (2009) Cross-Cultural Analysis of Blogs and Forums with
+
+    Depression via Social Media. International Conference on Weblogs and Social      Mixed-Collection Topic Models. Conference on Empirical Methods in Natural
+    Media.                                                                           Language Processing.
+
+
+
+PLOS ONE | www.plosone.org                                                   10                           August 2014 | Volume 9 | Issue 8 | e103408
+                                                                                                                    Discovering Health Topics in Social Media
+
+
+
+
+41. Ahmed A, Xing EP (2010) Staying Informed: Supervised and Semi-Supervised        48. Morales L (2012) U.S. Allergy Season Worse Than Usual. Available: http://
+    Multi-view Topical Analysis of Ideological Perspective. Conference on Empirical     www.gallup.com/poll/153950/allergy-season-worse-usual.aspx. Accessed 2013
+    Methods in Natural Language Processing.                                             May 1.
+                                                                                    49. Behavioral Risk Factor Surveillance System. Available: http://apps.nccd.cdc.
+42. Asuncion A, Welling M, Smyth P, Teh YW (2009) On Smoothing and Inference
+    for Topic Models. Conference on Uncertainty in Artificial Intelligence.             gov/gisbrfss/default.aspx. Accessed 2013 May 1.
+43. Griffiths T, Steyvers M (2004) Finding scientific topics. Proceedings of the    50. Chang J, Boyd-Graber J, Gerrish S, Wang C, Blei D (2009) Reading tea leaves:
+                                                                                        How humans interpret topic models. Advances in Neural Information
+    National Academy of Sciences of the United States of America.
+44. Geman S, Geman D (1984) Stochastic Relaxation, Gibbs Distributions, and the         Processing Systems.
+    Bayesian Restoration of Images. IEEE Transactions on Pattern Analysis and       51. Mo¨rchen F, Dejori Mu, Fradkin D, Etienne J, Wachmann B, et al. (2008)
+                                                                                        Anticipating annotations and emerging trends in biomedical literature. ACM
+    Machine Intelligence 6(6): 721–741.
+45. Minka T (2003) Estimating a Dirichlet distribution. Technical report, Microsoft     KDD.
+    Research.                                                                       52. Wang H, Ding Y, Tang J, Dong X, He B, et al. (2011) Finding Complex
+                                                                                        Biological Relationships in Recent PubMed Articles Using Bio-LDA. PLoS
+46. Newman D, Asuncion A, Smyth P, Welling M (2007) Distributed Inference for           ONE 6(3): e17243.
+    Latent Dirichlet Allocation. Advances in Neural Information Processing
+    Systems.                                                                        53. Ayers JW, Althouse BM, Dredze M (2014) Could behavioral medicine lead the
+                                                                                        Web data revolution? JAMA 311(14): 1399–1400.
+47. CDC: Seasonal Influenza. Available: http://www.cdc.gov/flu/weekly/. Ac-         54. Mislove A, Lehmann S, Ahn YY, Onnela JP, Rosenquist NJ (2011)
+    cessed 2013 May 1.
+                                                                                         Understanding the Demographics of Twitter Users. International Conference
+                                                                                         on Weblogs and Social Media.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PLOS ONE | www.plosone.org                                                      11                            August 2014 | Volume 9 | Issue 8 | e103408

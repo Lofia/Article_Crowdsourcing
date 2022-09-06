@@ -1,0 +1,694 @@
+Zhang et al. BMC Bioinformatics 2013, 14(Suppl 12):S5
+http://www.biomedcentral.com/1471-2105/14/S12/S5
+
+
+
+
+
+ RESEARCH                                                                                        Open Access
+
+
+
+Learning by aggregating experts and filtering
+
+
+novices: a solution to crowdsourcing problems
+
+
+in bioinformatics
+
+Ping Zhang, Weidan Cao, Zoran Obradovic      3*
+
+From IEEE International Conference on Bioinformatics and Biomedicine 2012
+
+Philadelphia, PA, USA. 4-7 October 2012
+
+
+
+  Abstract
+
+  Background: In many biomedical applications, there is a need for developing classification models based on noisy
+  annotations. Recently, various methods addressed this scenario by relaying on unreliable annotations obtained
+  from multiple sources.
+
+  Results: We proposed a probabilistic classification algorithm based on labels obtained by multiple noisy
+  annotators. The new algorithm is capable of eliminating annotations provided by novice labellers and of providing
+
+  a more accurate estimate of the ground truth by consensus labelling according to higher quality annotations. The
+  approach is evaluated on text classification and prediction of protein disorder. Our study suggests that the higher
+  levels of accuracy, effectiveness and performance can be achieved by the new method as compared to
+  alternatives.
+
+  Conclusions: The proposed method is applicable for meta-learning from multiple existing classification models
+  and noisy annotations obtained by humans. It is particularly beneficial when many annotations are obtained by
+
+  novice labellers. In addition, the proposed method can provide further characterization of each annotator that can
+  help in developing more accurate classifiers by identifying the most competent annotators for each data instance.
+
+
+Background                                                 improved performance against single-annotator strategy
+
+In recent years, various groups studied the problem of     and majority voting baselines.
+developing classification models based on examples           Learning from multiple annotators is also applied to
+annotated by multiple labellers. The labels we integrate   bioinformatics. For example, manually labelled data is
+
+come from not only human beings (e.g., data curation       successfully used together with mathematical models to
+tasks in modern biology, and crowdsourcing services)       provide annotator-specific accuracy estimates based on
+but also machine-based classifiers (e.g., protein disorder multi-annotator agreement [19,20]. In computer-aided
+predictors).                                               diagnosis (CAD), many computer-aided image diagnosis
+
+  From the methodology perspective of the multi-annotator  systems [5,21-24] were built from labels (i.e., diagnoses)
+problem, one line of research focuses on annotator filter- assigned by multiple physicians who provide their estima-
+ing by identifying and excluding low-performing annota-    tions of the gold standard, which can only be obtained from
+tors [1-3]. The other line of research aims at a single    dangerous surgical operations. Also, Valizadegan et al. [25]
+
+consensus label by aggregating labels from multiple anno-  developed a probabilistic approach for learning classifica-
+tators [4-18]. Both strategie s demonstrate significantly  tion models from opinions provided by multiple doctors
+                                                           and applied the approach to Heparin Induced Thrombo-
+
+* Correspondence: zoran.obradovic@temple.edu               cytopenia (HIT) electronic health records (EHR). In the
+3Center for Data Analytics and Biomedical Informatics, Temple University,protein disorder, meta-learning is commonly
+Philadelphia, PA 19122, USA                                used (e.g., metaPrDos [26], MD [27], PONDR-FIT [28],
+Full list of author information is available at the end of the article
+
+                             © 2013 Zhang et al.; licensee BioMed Central Ltd. This is an open access article distributed under the terms of the Creative Commons
+                             any medium, provided the original work is properly cited.by/2.0), which permits unrestricted use, distribution, and reproduction in
+Zhang et al. BMC Bioinformatics 2013, 14(Suppl 12):S5                                                                         Page 2 of 8
+http://www.biomedcentral.com/1471-2105/14/S12/S5
+
+
+
+
+
+MFDp [29], MetaDisorder [30], and disCoP [31]). Meta                  Methods
+predictors are typically developed relying on disorder/order          Given a dataset       D={x , i , i.., y }, ihere x is an  i
+labelled training datasets. These datasets contain a very             instance, y Î{0,1} is x ’s corresponding binary label which
+                                                                                  i            i
+small number of proteins which have not already been used             is provided by the j-th annotator. For multi-annotator
+for development of the component predictors. In addition,             problem the task is to get an estimation of the unknown
+
+there is a potential problem of over-optimization for                 true label y i
+the meta predictors when combining information from                      Majority Voting (MV), a commonly used approach for
+
+multiple components. In contrast, here a meta predictor is            this problem, has a limitation that the aggregated label
+constructed in a completely unsupervised process without              for an example is estimated locally by only estimating the
+use of confirmed disorder/order annotations [32].                     labels assigned to that example and not considering the
+
+  In this study, we learn a classification model using                performance of the labels for other examples.
+multiple noisy labels obtained by multiple annotators.                   In order to solve that problem, [8] introduced an MAP-
+
+Specifically, we address a scenario where novice annota-              ML algorithm. As [8] proposed            “MAP-ML algorithm
+tors are dominant. Our method for integration of multiple             models the accuracy of the annotator separately on the
+
+annotators by Aggregating Experts and Filtering Novices               positive and negative instances. If the true label is one, the
+will be called AEFN. Based solely on the information                  sensitivity (true positive rate) a for the j-th annotator is
+obtained from the good annotators, in an iterative process                                                                         j
+                                                                      thejprobability that the annotator labels it as one: a =Pr
+our method evaluates annotators to exclude low-quality                [y i1| y =i]. On the other hand, if the true label is zero,
+ones followed by re-estimation of the labels. In a scenario           the specificity (1-false positive rate) b is the probability
+                                                                                                             j      j
+considered in our study the noisy annotations are obtained            that annotator labels it as zero: b =Pr[y =0| i =0]. Tien
+by a combination of humans and existing classification                MAP-ML corrects the annotator biases by jointly estima-
+                                                                                                              j      j
+models. Therefore, the new method is applicable to many               ting the annotator accuracy (i.e., a and b) and the hidden
+biomedical problems.                                                  true label.” For details of MAP-ML, please refer to [8].
+  Compared to previous studies, the uniqueness of our
+                                                                         MAP-ML implicitly assumesjthat thj performance of
+study lies in the following aspects:                                  the annotators (i.e., a and b )doesn          ’tdependonthe
+   The AEFN algorithm combines the removal of some                   examples. To fix this problem, GMM-MAPML algo-
+
+annotators with labelling based on consensus of the                   rithm takes into account that the annotators are not
+remaining annotations. This is achieved without using                 only unreliable, but may also be inconsistently accurate
+
+any ground truth information.                                         depending on the data. As [10] mentioned                 “GMM-
+   It provides estimates of good annotators’ accuracy in             MAPML models the annotators to generate labels as
+addition to removing novice annotators.
+                                                                      follows: given an instance x to libel, the annotators find
+   It is applicable in situations where annotators’ accuracy         the Gaussian mixture compo nent which most probably
+varies across the data subsets which are not the case with            generates that instance. Then the annotators generate
+
+previously proposed solutions (other than [9] and [10]).              labels with their sensitivities and specificities at the most
+   Compared to our previous study [33], AEFN algorithm               probable component. ” For details of GMM-MAPML,
+
+is explored in more details        by conducting additional           please refer to [10].
+experiments on prediction of protein disorder on CASP9                   Our previous study [33] goes further. As [33] argued
+(i.e., the 9th Biannual Community Wide Experiment
+                                                                      “Recent experiments show that in some cases, a consensus
+on the Critical Assessment of Techniques for Protein                  labelling of a few experts will achieve better performance
+Structure Prediction held in year 2010) data. The new                 [32]. To further characterize the behaviour of annotators,
+                                                                                                                          j    j   j
+experiments with machine-based classifiers provide a                  we define the ranking evaluation score as S =|a +b -1|.
+complementary character ization to experiments on                     Random annotations result in S near zero, while perfect
+                                                                                                         j
+human annotators reported at the preliminary version                  annotations correspond to         S =1. Based on the ranking
+[33]. In our solution, a combination of noisy annotations             evaluation score, we propose an AEFN algorithm by
+obtained by humans and existing machine-based classifi-
+                                                                      extending the GMM-MAPML. In each iteration, ML esti-
+cation models were integrated. Therefore, AEFN has the                mation measures annotators’ performance at each mixture
+potential to be applied as a solution to many biomedicine             component (i.e., their sensitivity        j and specificity     j).
+                                                                                                              α k                   β k
+and bioinformatics problems.                                          Then, we add a step to filter the low-quality annotators at
+   Based on AEFN algorithm, a way of deciding which                  each Gaussian component according to the score (i.e., the
+
+annotator is more appropriate to label new instances                  ranking evaluation score of the j-th annotator at the k-th
+has been investigated in our experiments. This is poten-              Gaussian component): if         Sj  is smaller than a pruning
+tially beneficial in any situation where annotating instances                                          k
+                                                                      threshold, we filter the j-th annotator from the pool of
+is expensive.                                                         annotators at the k-th Gaussian component. Thus, we refit
+Zhang et al. BMC Bioinformatics 2013, 14(Suppl 12):S5                                                                   Page 3 of 8
+http://www.biomedcentral.com/1471-2105/14/S12/S5
+
+
+
+
+
+the MAP estimation with only the good annotators and                        R       j            j
+                                                                                j yi       j 1−yi
+get the updated probabilistic labels        z iased on the             ai=     [αq] [1 − α ]q
+Bayesian rule.” The algorithm is summarized at Algorithm 1                  j=1
+
+while details are provided at a preliminary version of this
+study [33].                                                                          j yi  j 1−yi
+                                                                       bi=     [1 − β q [β ]q
+  Algorithm 1: AEFN Algorithm                                               j=1
+                                 1      R N
+  Input:    Dataset    D = {x iy i...,yi} i=1  containing    N
+instances. Each instance has binary labels          y ∈{ 0,1}
+                                                     i                 q =argmax    (τik
+from R annotators.                                                          k=1,...,K
+  1: Find the fittest K-mixture-component GMM for the
+                                                                     22: iter¬iter+1(update the number of iterations)
+instances, and get the corresponding GMM parameters
+and components responsibilities τ for ikch instance.                 23: until change of         zi between two successive
+                                                                   iterations< ξ .
+  2: Initialize▯ =k{1,... ,R}    the sets of good annotators
+for each Gaussian component k=1,...,K.                               24: Estimate the hidden true label        y iy applying a
+                               R   j                              threshold    γ   on z .Tht,iy         =1 if z >  γ   and y =0
+  3: Initialize   zi=(1/ R)     j=1yi based on a majority                                i              i         i            i
+voting.                                                            otherwise.
+                                                                     Output:
+  4: Initialize iteration indication iter¬0.
+  5: repeat                                                           Detected low-quality annotators of all Gaussian
+
+  6:     (ML estimation)                                           components in set     {1,... ,R}− ▯   k.
+                                                j                     Good quality annotators of all Gaussian components
+  7:      ∀j ∈ ▯ k , update the sensitivity   α k and specifi-                                j                    j
+city β j as follows                                                in ▯ k  with sensitivity  αk and specificity   βk,for  j ∈ ▯ k ,
+       k                                                           k=1,...,K.
+           N          N
+      j         j                                                   The probabilistic labels z ani the estimation of the
+    α k       ziki        zik                                      hidden true label y ,i ∀i =1, ... ,N  .
+          i=1         i=1
+                                                                    All multi-annotator algorithms are unsupervised
+          N                        N                             meaning that integration of noisy labels is achieved
+    β =       (τ − z )(1 − y ) j        (τ − z )
+      k         ik    ik       i           ik   ik                 without using true labels. Following properties differ-
+          i=1                        i=1                           entiate the proposed AEFN algorithm from alternative
+
+  8:     Update the prior probability p as i    σ(w x )  .         multi-annotator approaches (i.e., MV, MAP-ML, GMM-
+                                                       i           MAPML): (1) It integrates labels globally (considers the
+  9:     (Low-quality annotators filtering)
+  10:      if iter>0 (check from the second iteration)             accuracies of annotators globally and automatically
+                                                                   assigns greater weights to more accurate annotators); (2)
+  11:          for all k=1,...,K (all Gaussian components)
+do                                                                 It is data-dependent (applicable in situations where
+
+  12:              for all  j ∈ ▯ kdo                              annotators’ accuracy varies across the data subsets); and
+  13:                   Update    j      j    j     .              (3) It filters novice annotators (eliminates novice annota-
+                             j   Sk= |α k β − k|
+  14:                    if S <ξ    (the pruning threshold)        tions and estimates the consensus ground truth based only
+                             k                                     on expert annotations of high quality). Also we summarize
+then
+  15:                       ▯ ←k▯ −{ jk                            the properties of all multi-annotator algorithms in the
+                                                                   Table 1.
+  16:                   end if
+  17:              end for
+
+  18:          end for                                             Results
+  19:      end if                                                  In this section, we intend to validate the proposed AEFN
+
+  20:      (MAP estimation)                                        algorithm by doing experiments on a biomedical text clas-
+  21:       ∀i =1, ... ,N  restricted to the annotators in         sification task and a protein disorder prediction task. The
+
+the set  ▯ k instead of integrating all R annotators, esti-        protein disorder prediction experiment with machine-
+mate z as follows                                                  based classifiers provides a complementary characteri-
+       i
+                                                                   zation to the usage of human annotators reported in the
+                                                                   biomedical text classification experiments.
+    z =        a i i
+     i   ai i+ bi(1 − p i
+
+                                                                   Biomedical text classification experiment
+                                                                   In the experiment, we used a 1,000-sentence scientific texts
+  where
+                                                                   corpus from Rzhetsky et al. [19]. For details of data pre-
+    pi=Pr[ y i1 |x ,i]= σ(w x ) T  i
+                                                                   processing and experimental settings, please refer to [33].
+Zhang et al. BMC Bioinformatics 2013, 14(Suppl 12):S5                                                                      Page 4 of 8
+
+http://www.biomedcentral.com/1471-2105/14/S12/S5
+
+
+
+
+
+Table 1 Properties of multi-annotator algorithms.
+
+    Algorithms           Unsupervised?          Integrate labels globally?       Data dependent?           Filter novice annotation?
+        MV                     Y                           N                             N                            N
+
+      MAP-ML                   Y                           Y                             N                            N
+
+    GMM-MAPML                  Y                           Y                             Y                            N
+       AEFN                    Y                           Y                             Y                            Y
+
+The comparisons of properties of multi-annotator algorithms are shown. ‘Y’ denotes that the algorithm has the property; ‘N’ denotes that the algorithm doesn’t
+have the property.
+
+
+
+
+Table 2 AEFN based accuracy estimates on the text evidence classification task without using ground truth.
+                        First Component                         Second Component                          Third Component
+
+Annotators       Estimated            Estimated           Estimated            Estimated            Estimated           Estimated
+                 Sensitivity          Specificity         Sensitivity          Specificity         Sensitivity          Specificity
+
+Annotator 1                  Filtered                       0.7573               0.7737                        Filtered
+
+Annotator 2        0.8400               0.8445              0.8901               0.9303               0.8103              0.8798
+Annotator 3        0.8984               0.9061              0.8150               0.8870               0.8235              0.8196
+
+Annotator 4        0.7492               0.7553                        Filtered                        0.7184              0.8197
+Annotator 5        0.8035               0.7810              0.7991               0.8199              0.8819               0.9152
+
+The estimates by five annotators for three principal components on the text evidence task are shown.
+
+
+
+
+Table 3 AEFN based accuracy estimates on the text focus classification task without using ground truth.
+                        First Component                         Second Component                          Third Component
+
+Annotators       Estimated            Estimated           Estimated            Estimated            Estimated           Estimated
+                 Sensitivity          Specificity         Sensitivity          Specificity         Sensitivity          Specificity
+
+Annotator 1        0.7672               0.7749              0.8005               0.7969               0.7634              0.7907
+
+Annotator 2        0.9373               0.8588              0.8753               0.8271               0.8958              0.8863
+Annotator 3        0.7383               0.8258                        Filtered                                 Filtered
+
+Annotator 4        0.8059               0.8652              0.9010               0.8594              0.8318               0.8413
+Annotator 5                  Filtered                                 Filtered                                 Filtered
+
+The estimates by five annotators for three principal components on the text focus task are shown.
+
+
+
+  In the preliminary version of this study [33], we showed           was eliminated. These results are consistent with the results
+that our AEFN was slightly better than GMM-MAPML,                    of ourpreliminary versionofthisstudy [33].
+
+while it significantly outpe rformed other competitors,                In [33], we also showed that our AEFN has much better
+when all annotations were from experts. Using the same               AUCs than all competitor methods, especially when low-
+
+settings, our AEFN also selected a three-component                   quality annotators dominate (e.g., 90% low-quality anno-
+                                                       T
+GMM model with covariance matrix               λD kD   k for the     tators and only 10% experts). To further characterize our
+biomedical text data. Shown in Table 2 and Table 3 are               AEFN method on annotator-performance estimation, we
+
+the filtered annotators and e       stimated sensitivity and         designed another experiment on the same biomedical text
+specificity of each good annotator on the Evidence classi-           data as follows: (1) Find the fittest K-mixture-component
+
+fication task and Focus classification task for each compo-          GMM for all instances by using step 1 of AEFN. As
+
+nent. For the Evidence classification task, Annotator 1 has          discussed in the previous paragraph, we found a three-
+been filtered in the 1st and 3rd components, and Anno-               Gaussian-component model for the text data. (2) Randomly
+
+tator 4 has been filtered in the 2nd component. For the              split 40% of instances as training data and the remaining
+Focus classification task, Annotator 5 has been filtered             60% as testing data. (3) On training data, estimate anno-
+
+in all three components and Annotator 3 has been filtered            tators’ performance and identify the best annotator for each
+
+in the 2nd and 3rd components. The tables show that for              Gaussian component by using our AEFN method. Here,
+different tasks the annotators perform in different man-             we used the estimated ranking evaluation score as the
+
+ners. For example, Annotator 5 is good at the Evidence               criterion (the higher the better) to choose the best anno-
+classification task, but not at the Focus classification task.       tator. For the Evidence classification task, Annotator 3 was
+
+In addition, we found that the five annotators had compar-           the best for the first component, Annotator 2 was the best
+
+able overall quality, and on average only one per component          for the second component, and Annotator 5 was the best
+Zhang et al. BMC Bioinformatics 2013, 14(Suppl 12):S5                                                                Page 5 of 8
+http://www.biomedcentral.com/1471-2105/14/S12/S5
+
+
+
+
+for the third component. For the Focus classification task,      This is an interesting and important potential in the
+Annotator 2 was the best for both the first and the third        situation where annotating instances is expensive.
+
+components, and Annotator 4 was the best for the second
+component. (4) On testing data, we compare three logistic        Protein disorder prediction experiment
+regression classifiers: a) Randomly Selected Annotator           Treating an individual predictor as an annotator, the
+
+that for each training data point used a label obtained by a     multi-annotator methods can be used to build meta-
+randomly picked annotator among the five available anno-         predictors for protein disorder prediction. In this section
+tators; b)AEFN Indicated Annotatorthat for each training         we experimentally validate the proposed algorithm on
+
+data point picked an annotator based on the suggestion           the CASP9 protein disorder prediction task. CASP9 data
+from (3); c) Ground Truth that is trained using an approxi-      [34] consists of 117 experimentally characterized protein
+mation of ground truth labels defined by the majority vote       sequences with 2,427 disordered and 23,656 ordered
+
+of the eight annotators’ labels as previously discussed. The     residues. To reduce prediction noise due to experimental
+accuracies of these classifiers were compared according to       uncertainty, we didn’t consider disorder segments shorter
+
+5-fold cross-validation on the 60% testing data. The purpose than four residues in the evaluation process. We selected
+of using the 40% training data is to obtain annotator sugges- 15 predictors developed by groups at different institutions,
+tion for AEFN Indicated Annotator classifier.                    assuming that their errors are independent. Therefore we
+
+  TheROCcompaionsforli rinress                                   can treat them as individual annotators.
+classifiers on the Evidence and Focus classification tasks          In the study, a feature vector (20 dimensions) of each
+are shown in Figure 1 and 2, respectively. The figures           residue was derived from the subsequence covered by a
+
+show that when using the annotator ’s labels suggested           moving window centred at the current position. Of the
+by our AEFN method, a simple logistic regression                 20 dimensions, the first 19 features come from amino
+method clearly outperforms the classifier trained using          acid frequencies composition and the last one is a local
+
+labels chosen randomly from five available annotators.           sequence complexity feature (based on the observation
+The results show that our AEFN method can rank                   that low complexity regions are more likely to be disor-
+annotators by instance, and can help decide which                dered than ordered). For details of amino acid feature vec-
+
+annotator is more appropriate to label new instances.            tor construction, please refer to [35]. In this experiment,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Figure 1 Three logistic regression classifier ROC compar isons on the text evidence classification task . The ROC comparison on the
+  biomedical evidence classification of three strategies for selecting an annotation source for logistic regression. Methods are sorted in the legend
+  of the figure according to their AUC values.
+Zhang et al. BMC Bioinformatics 2013, 14(Suppl 12):S5                                                                     Page 6 of 8
+
+http://www.biomedcentral.com/1471-2105/14/S12/S5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Figure 2 Three logistic regression classifier ROC comparisons on the text focus classification task  . The ROC comparison on the
+  biomedical focus classification of three strategies for selecting an annotation source for logistic regression. Methods are sorted in the legend of
+  the figure according to their AUC values.
+
+
+
+
+we set the size of the moving window as 21, which is based          measures [36]: the average of s ensitivity and specificity
+on our previous study [32] as well as the ratio of short (<30       (ACC),andtheareaundertheROCcurve(AUC).Our
+
+residues) disordered segments to long ones in the data.             proposed AEFN algorithm significantly outperforms the
+  Comparisons of 15 protein disorder predictors, the MV             three competitor multiple-annotator methods (i.e., GMM-
+
+algorithm, the MAP-ML algorithm, the GMM-MAPML                      MAPML, MAP-ML, and MV) and each individual protein
+algorithm, and our AEFN algorithm on CASP9 data are                 disorder predictor based on both ACC and AUC scores.
+
+shown in Table 4. Methods were evaluated by two                        For CASP9 data, AEFN algorithm also finds that a three-
+
+                                                                    component GMM with the covariance matrix              λk Bk.For
+Table 4 CASP9 comparison on labelled data.                          each component, estimated sensitivity and specificity of
+
+Predictor Name          Institution                ACC      AUC     the best predictors, as well as filtered less-accurate predic-
+                                                                    tors using AEFN, are shown in Figure 3. For comparison,
+AEFN                                              0.801    0.887
+GMM-MAPML                                         0.785     0.874   we also plot the actual sensitivity and specificity of each
+                                                                    individual predictor at each Gaussian component on the
+MAP-ML                                            0.764     0.859
+MV                                                0.735     0.776   same figure. Figure 3 clearly shows that the individual
+                                                                    CASP9 disorder predictors perform differently at different
+PRDOS2                  Tokyo Tech                0.754     0.855
+MULTICOM-REFINE         U of Missouri             0.750     0.822   components. For example, GSMETADISORDERMD per-
+
+BIOMINE_DR_PDB          U of Alberta              0.741     0.821   formswellinthefirstandthirdcomponents,butitis
+                                                                    not among the best in the second component. BIOMINE-
+GSMETADISORDERMD        IIMCB in Warsaw           0.738     0.816
+MASON                   George Mason U            0.736     0.743   DR-PDB performs well in the second component, but it is
+                                                                    not among the best in the first and third components. The
+ZHOU-SPINE-D            Indiana University        0.731     0.832
+DISTILL-PUNCH1          UCD Dublin                0.726     0.800   figure also demonstrates the main benefit of our proposed
+                                                                    AEFN algorithm: the predictors identified as experts with-
+OND-CRF                 Umea University           0.706     0.759
+UNITED3D                Kitasato University       0.704     0.780   out relying on ground truth were indeed among the best
+
+CBRC_POODLE             CBRC                      0.694     0.830   according to their actual prediction performance at each
+                                                                    component as verified by labelled data of confirmed
+MCGUFFIN                University of Reading     0.688     0.817
+ISUNSTRUCT              IPR RAS                   0.676     0.739   order/disorder residues.
+                                                                       For further analysis, we found that the first, the second,
+DISOPRED3C              UCL                       0.670     0.853
+ULG-GIGA                University of Liege       0.588     0.726   and the third Gaussian components highly correlate with
+                                                                    N-terminus (defined as 20% of residues at the start of a
+MEDOR                   Aix-Marseille U           0.579     0.679
+                                                                    protein sequence), internal, and C-terminus (defined as
+Comparisons of AEFN vs. alternative multi-annotator methods (GMM-MAPML,
+MAP-ML and MV) and individual CASP9 protein disorder predictors.    20% of residues at the end of a protein sequence) of protein
+Zhang et al. BMC Bioinformatics 2013, 14(Suppl 12):S5                                                                         Page 7 of 8
+http://www.biomedcentral.com/1471-2105/14/S12/S5
+
+
+
+
+
+                                                                      GSMETADISORDERMD while for the internal region we
+                                                                      may also rely on BIOMINE_DR_PDB and for C-terminus
+
+                                                                      we may also use MCGUFFIN, MASON, and GSMETA-
+                                                                      DISORDERMD. The experiment provides evidence that
+                                                                      AEFN algorithm can potentially be used to provide helpful
+
+                                                                      suggestions on choosing the suitable disorder predictors
+                                                                      for each region (N-terminus, internal, or C-terminus) of
+
+                                                                      unknown protein sequences.
+
+
+                                                                      Conclusions
+                                                                      A probabilistic algorithm ( i.e., AEFN) for the multi-
+
+                                                                      annotator classification problem is addressed in our study.
+                                                                      Without using any ground truth information, the pro-
+                                                                      posed AEFN algorithm is excluding lower quality annota-
+
+                                                                      tions of novice labellers and providing more accurate
+                                                                      classifications based on consensus of remaining experts ’
+
+                                                                      annotations of higher quality. Evaluation on biomedical
+                                                                      text classification and prediction of protein disorder pro-
+
+                                                                      vides the evidence of the effectiveness of the proposed
+                                                                      method. In our experiments,          AEFN significantly out-
+
+                                                                      performed alternatives that include the MV and multi-
+                                                                      annotator algorithms (GMM-MAPML and MAP-ML).
+                                                                      It was particularly beneficial when low-quality annota-
+
+                                                                      tors are dominant. We have also found that AEFN
+                                                                      algorithm can be used to determine which annotator is
+
+                                                                      appropriate to label new instances. This is potentially
+                                                                      beneficial in any situation where annotating instances
+
+                                                                      is expensive. In addition, AEFN can be used for devel-
+                                                                      opigmoreaccurint-fiigi modls
+
+                                                                      by identifying groups of competent annotators for specific
+                                                                      instances.
+
+
+
+                                                                      List of abbreviations used
+                                                                      EHR: Electronic Health Record; MV: Majority Voting; ROC: Receiver Operating
+                                                                      Characteristic; CASP: Critical Assessment of Techniques for Protein Structure
+                                                                      Prediction.
+
+                                                                      Competing interests
+                                                                      The authors declare that they have no competing interests.
+  Figure 3 Analysis of CASP9 disorder predictors at three
+                                                                      Authors’ contributions
+  components identified by AEFN. In panels a, b, and c: the black
+  cross plots the actual sensitivity and specificity of each predictor; thenceived the algorithm, developed theoretical contributions, developed
+  red dot plots the sensitivity and specificity of the best predictors as proposed algorithm’s prototype, performed experiments, carried out the
+  estimated by the AEFN algorithm; the green squares show the         analysis, and drafted the manuscript. WC reviewed theoretical contributions,
+                                                                      and helped to revise the manuscript. ZO inspired the overall work, provided
+  predictors filtered as those less accurate in the experiment.       advice, and revised the final manuscript. All authors read and approved the
+                                                                      final manuscript.
+
+                                                                      Acknowledgements
+sequences respectively. For details of the CASP9 amino-               This project was funded in part under a grant with the GlaxoSmithKline LLC.
+acid position distribution analysis, please refer to [10].
+                                                                      Declarations
+Based on the CASP9 analysis summarized in Figure 3                    The publication costs for this article were funded by the corresponding
+and the position distribution analysis, the only reliable
+                                                                      author (ZO).
+predictors for all three regions are PRDOS2 and MULTI-                This article has been published as part of BMC Bioinformatics Volume 14
+COM-REFINE (they are also the best individual predic-                 Supplement 12, 2013: Selected articles from the IEEE International
+                                                                      Conference on Bioinformatics and Biomedicine 2012: Bioinformatics. The full
+tors in the evaluation shown in Table 4). For N-terminal,             contents of the supplement are available online at http://www.
+reliable predictors also include ZHOU-SPINE-D and                     biomedcentral.com/bmcbioinformatics/supplements/14/S12.
+Zhang et al. BMC Bioinformatics 2013, 14(Suppl 12):S5                                                                                                   Page 8 of 8
+http://www.biomedcentral.com/1471-2105/14/S12/S5
+
+
+
+
+
+
+1uthors’ details                                                                     23.  Zhou XS, Zhan Y, Raykar VC, Hermosillo G, Bogoni L, PengM     Zi:ning
+ Healthcare Analytics Research, IBM T.J. Watson Research Center, Yorktown                 anatomical, physiological and pathological information from medical
+Heights, NY 10598, USA.   2School of Media and Communication, Temple                      images.ACM SIGKDD Explorations2012, 14(1):25-34.
+                                          3                                          24.  Raghupathi L, Devarakota PR, Wolf ML:earning-based image
+University, Philadelphia, PA 19122, USA.   Center for Data Analytics and
+Biomedical Informatics, Temple University, Philadelphia, PA 19122, USA.                   preprocessing for robust computer-aided detectioP     nr.oc SPIE Medical
+                                                                                          Imaging: Computer-Aided Diagnosi2  s013.
+Published: 24 September 2013                                                         25.  Valizadegan H, Nguyen Q, Hauskrecht M    L:earning Medical Diagnosis
+
+                                                                                          Models from Multiple ExpertsP.roc AMIA Annu Symp2012, 921-930.
+References                                                                           26.  Ishida T, Kinoshita K: rediction of disordered regions in proteins based
+                                                                                          on the meta approach.Bioinformatics2008, 24(11):1344-1348.
+1.   Hyun JJ, Lease M:Improving Consensus Accuracy via Z-score and                   27.  Schlessinger A, Punta M, Yachdav G, Kajan L, RostIB  m: proved disorder
+     Weighted Voting.Proc Human Computation Workshop        2011, 88-90.
+2.   Chen S, Zhang J, Chen G, Zhang CW    : hat if the irresponsible teachers are         prediction by combination of orthogonal approachePsL.oS ONE2009,
+                                                                                          4(2):e4433.
+     dominating.Proc AAAI Conference on Artificial Intelligenc2e010, 419-424.        28.  Xue B, Dunbrack RL, Williams RW, Dunker AK, Uversky VPNO    : NDR-FIT: a
+3.   Dekel O, Shamir OV  : ox populi: Collecting high-quality labels from a
+     crowd.Proc Conference on Learning Theory2009.                                        meta-predictor of intrinsically disordered amino acidBsi.ochim Biophys
+4.   Snow R, O’Connor B, Jurafsky D, Ng AYC  : heap and fast - but is it good?            Acta 2010, 1804(4):996-1010.
+                                                                                     29.  Mizianty MJ, Stach W, Chen K, Kedarisetti KD, Disfani FM, Kurgan L:
+     Evaluating non-expert annotations for natural language taskPsro    . c
+     Conference on Empirical Methods on Natural Language Processin   20g08,               Improved sequence-based prediction of disordered regions with
+     254-263.                                                                             multilayer fusion of multiple information sourceBsi.oinformatics2010,
+                                                                                          26(18):i489-i496.
+5.   Raykar VC, Yu S, Zhao LH, Jerebko AK, Florin C, Valadez GH, Bogoni L,           30.  Kozlowski LP, Bujnicki JMM: etaDisorder: a meta-server for the prediction
+     Moy L:Supervised learning from multiple experts: whom to trust when
+     everyone lies a bit.Proc International Conference on Machine Learnin2g009,           of intrinsic disorder in proteinsB.MC Bioinformatics2012, 13:111.
+     889-896.                                                                        31.  Fan X, Kurgan L:Accurate prediction of disorder in protein chains with a
+                                                                                          comprehensive and empirically designed consensuJso.urnal of
+6.   Whitehill J, Ruvolo P, Wu T, Bergsma J, MovellanW  J:hose vote should
+     count more: optimal integration of labels from labelers of unknown                   Biomolecular Structure and Dynamic2  s013.
+     expertise.Advances in Neural Information Processing System2s009,                32.  Zhang P, Obradovic ZU  : nsupervised Integration of Multiple Protein
+                                                                                          Disorder Predictors: The Method and Evaluation on CASP7, CASP8 and
+     2035-2043.                                                                           CASP9 Data.Proteome Science2011, 9(S1):S12.
+7.   Welinder P, Branson S, Belongie S, Perona T  P: e multidimensional
+     wisdom of crowds.Advances in Neural Information Processing System2s010,         33.  Zhang P, Obradovic ZI:ntegration of multiple annotators by aggregating
+     2424-2432.                                                                           experts and filtering novices.Bioinformatics and Biomedicine (BIBM), 2012
+                                                                                          IEEE International Conference on: 4-7 October 20122012, 1-6.
+8.   Zhang P, Obradovic ZU  : nsupervised integration of multiple protein
+     disorder predictors.Proc IEEE Conference on Bioinformatics and Biomedicine      34. CASP9 Experiment.[http://predictioncenter.org/casp9/].
+     2010, 49-52.                                                                    35.  Peng K, Vucetic S, Radivojac P, Brown CJ, Dunker AK, Obradovic Z:
+                                                                                          Optimizing long intrinsic disorder predictors with protein evolutionary
+9.   Yan Y, Rosales R, Fung G, Schmidt MW, Valadez GH, Bogoni L, Moy L,                   information.J Bioinform Comput Biol2005, 3(1):35-60.
+     Dy JG:Modeling annotator expertise: Learning when everybody knows a
+     bit of something.Proc International Conference on Artificial Intelligence and   36.  Monastyrskyy B, Fidelis K, Moult J, Tramontano A, Kryshtafovych A:
+     Statistics2010, 932-939.                                                             Evaluation of disorder predictions in CASP9   P.roteins2011,
+                                                                                          79(S10):107-118.
+10.  Zhang P, Obradovic ZL: earning from Inconsistent and Unreliable
+     Annotators by a Gaussian Mixture Model and Bayesian Information
+     Criteria.Proc European Conference on Machine Learning and Principles and          doi:10.1186/1471-2105-14-S12-S5
+                                                                                       Cite this article as: Zhang et al.: Learning by aggregating experts and
+     Practice of Knowledge Discovery in Database2s011, 553-568.                        filtering novices: a solution to crowdsourcing problems
+11.  Kasneci G, Gael JV, Stern DH, Graepel T C:oBayes: bayesian knowledge              in bioinformatics. BMC Bioinformatics 2013 14(Suppl 12):S5.
+     corroboration with assessors of unknown areas of expertisPero    . c ACM
+     International Conference on Web Search and Data Minin2g011, 465-474.
+
+12.  Sheng VS:Simple Multiple Noisy Label Utilization StrategiePsr.oc IEEE
+     International Conference on Data Mining 2011, 635-644.
+13.  Kajino H, Tsuboi Y, Kashima HA: Convex Formulation for Learning from
+
+     Crowds.Proc AAAI Conference on Artificial Intelligenc2e012, 73-79.
+14.  Kajino H, Tsuboi Y, Sato I, Kashima HL:earning from Crowds and Experts.
+     Proc of the Human Computation Worksho2     p012, 107-113.
+15.  Zhou D, Platt JC, Basu S, Mao YL:earning from the Wisdom of Crowds by
+
+     Minimax Entropy.Advances in Neural Information Processing System2s012.
+16.  Liu Q, Peng J, Ihler A: ariational Inference for CrowdsourcingA.dvances
+     in Neural Information Processing System2s012.
+
+17.  Wolley C, Quafafou ML: earning from Multiple Naive AnnotatorsP.roc
+     Advanced Data Mining and Application2s012, 173-185.
+18.  Xiao H, Xiao H, Eckert CL:earning from Multiple Observers with Unknown
+     Expertise.Proc Pacific-Asia Conference on Knowledge Discovery and Data
+                                                                                          Submit your next manuscript to BioMed Central
+     Mining2013, 595-606.
+19.  Rzhetsky A, Shatkay H, Wilbur WJH:ow to get the most out of your                     and take full advantage of:
+     curation effort.PLoS Comput. Biol2009, 5(5):e1000391.
+
+20.  Wilbur WJ, Kim WI:mproving a gold standard: treating human relevance                 • Convenient online submission
+     judgments of MEDLINE document pairsB.MC Bioinformatics2011,12(S3):S5.
+21.  Cholleti SR, Goldman SA, Blum A, Politte DG, Don S, Smith K, Prior F:                • Thorough peer review
+
+     Veritas: combining expert opinions without labeled datIn    a.ternational            • No space constraints or color ﬁgure charges
+     Journal on Artificial Intelligence Ts009, 18:633-651.                                • Immediate publication on acceptance
+22.  Mavandadi S, Dimitrov S, Feng S, Yu F, Sikora U, Yaglidere O,
+     Padmanabhan S, Nielsen K, Ozcan AD: istributed medical image analysis                • Inclusion in PubMed, CAS, Scopus and Google Scholar
+
+     and diagnosis through crowd-sourced games: a malaria case stud        PyL. S         • Research which is freely available for redistribution
+     ONE 2012, 7(5):e37245.
+
+                                                                                          Submit your manuscript at
+                                                                                          www.biomedcentral.com/submit

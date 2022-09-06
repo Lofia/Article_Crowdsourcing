@@ -1,0 +1,786 @@
+Distributed Medical Image Analysis and Diagnosis
+
+
+through Crowd-Sourced Games: A Malaria Case Study
+
+                     1                       1                1              1                 1                           1
+Sam Mavandadi , Stoyan Dimitrov , Steve Feng , Frank Yu , Uzair Sikora , Oguzhan Yaglidere ,
+                           1                   2                      1,3,4,5
+Swati Padmanabhan           , Karin Nielsen , Aydogan Ozcan                 *
+
+1Electrical Engineering Department, University of California Los Angeles, Los Angeles, California, United States of America, 2Division of Infectious Diseases, Department
+of Pediatrics, School of Medicine, University of California Los Angeles, Los Angeles, California, United States of America, 3Bioengineering Department, University of
+California Los Angeles, Los Angeles, California, United States of America, 4California NanoSystems Institute, University of California Los Angeles, Los Angeles, California,
+United States of America, 5Department of Surgery, School of Medicine, University of California Los Angeles, Los Angeles, California, United States of America
+
+
+
+    Abstract
+
+    In this work we investigate whether the innate visual recognition and learning capabilities of untrained humans can be used
+    in conducting reliable microscopic analysis of biomedical samples toward diagnosis. For this purpose, we designed
+
+    entertaining digital games that are interfaced with artificial learning and processing back-ends to demonstrate that in the
+    case of binary medical diagnostics decisions (e.g., infected vs. uninfected), with the use of crowd-sourced games it is
+    possible to approach the accuracy of medical experts in making such diagnoses. Specifically, using non-expert gamers we
+
+    report diagnosis of malaria infected red blood cells with an accuracy that is within 1.25% of the diagnostics decisions made
+    by a trained medical professional.
+
+
+  Citation: Mavandadi S, Dimitrov S, Feng S, Yu F, Sikora U, et al. (2012) Distributed Medical Image Analysis and Diagnosis through Crowd-Sourced Games: A
+  Malaria Case Study. PLoS ONE 7(5): e37245. doi:10.1371/journal.pone.0037245
+  Editor: Luzia Helena Carvalho, Centro de Pesquisa Rene Rachou/Fundac¸ao Oswaldo Cruz (Fiocruz-Minas), Brazil
+
+  Received February 8, 2012; Accepted April 16, 2012; Published May 11, 2012
+
+  Copyright: ß 2012 Mavandadi et al. This is an open-access article distributed under the terms of the Creative Commons Attribution License, which permits
+  unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
+  Funding: These authors have no support or funding to report.
+
+  Competing Interests: The authors have declared that no competing interests exist.
+  * E-mail: ozcan@ucla.edu
+
+
+
+                                                                       In this work, we take a similar strategy and demonstrate a
+Introduction
+                                                                     platform to use digital gaming and machine learning to crowd-
+  Crowd-sourcing is an emerging concept that has attracted           source the analysis of optical microscopy images of biomedical
+significant attention in recent years as a strategy for solving      specimens through engaging the interest of human game players
+computationally expensive and difficult problems [1–6]. In this
+                                                                     (i.e., gamers). The primary goal of this methodology is to
+computing paradigm, pieces of difficult computational problems       accurately diagnose medical conditions, approaching the overall
+are distributed to a large number of individuals. Each participant   accuracy of medical experts, while only using non-expert gamers
+
+completes one piece of the computational puzzle, sending the         (see Figure 1). The same method can also function as a
+results back to a central system where they are all combined         telemedicine platform, where trained medical experts could be
+together to formulate the overall solution to the original problem.
+                                                                     made part of our gamer crowd through various incentives.
+In this context, crowd-sourcing is often used as a solution to         In general there is much detail and subtlety associated with
+various pattern-recognition and analysis tasks that may take         medical images, and therefore accurate analysis and interpretation
+computers long times to solve. One of the underlying assumptions
+                                                                     of such images often become tedious and time consuming, even for
+of such an approach is that humans are better than machines at       highly trained professionals. Crowd-sourcing of microscopic
+certain computational and pattern recognition tasks.                 analysis and related diagnosis through gaming is rather timely in
+  There has been much work in the general field of ‘gaming’ as a
+                                                                     several ways. First, with rapid advances in mobile telecommuni-
+method for crowd-sourcing of computational tasks [1,7–13].           cation and internet technologies such as mobile-phones, tablet
+Digital games have been used as effective means to engage an         PCs, etc., we have hundreds of millions of active users and
+
+individual’s attention to computational tasks of interest. If a      potential gamers in the cloud that are all connected to a global
+pattern-recognition task can be embedded as part of an engaging      network. In addition to this massive crowd volume, over the last
+game, then a gamer may help in solving this task together with       few years, there has been a significant effort to create cost-effective,
+
+other gamers. Recently a number of gaming platforms have been        compact and lightweight microscope designs such that even
+created to tackle problems in e.g., biology and medical sciences,    mobile-phones could be converted into microscopic analysis tools
+allowing non-experts to take part in solving such problems. FoldIt   [14–21]. Similar to the development of the PC, this is a very
+
+[7–8], as an example, is a game in which players attempt to          important development since it could enable wide-spread use of
+digitally simulate folding of various proteins, helping researchers toptical microscopy globally, with several orders of magnitude
+achieve better predictions about protein structures. EteRNA [9] is   increase in the number of microscope users over the next decade.
+
+another game, which likewise makes use of crowds to get a better     As will be further discussed in this manuscript, these recent
+understanding of RNA folding.                                        advances make it feasible to create a self-learning platform that
+                                                                     leverages crowd-sourcing and gaming concepts to conduct
+
+
+
+      PLoS ONE | www.plosone.org                                  1                           May 2012 | Volume 7 | Issue 5 | e37245
+                                                                                             Distributed Medical Diagnosis through Gaming
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 1. Proposed platform. A) Biomedical data (e.g., images of thin blood smear samples) from individual light microscopes all around the
+world are transmitted to data centres where they are pre-processed and digitally distributed among gamers, which in turn diagnose and transmit
+their responses back. These individual results of the gamers are then fused toward a final diagnosis, the result of which is transmitted back to the
+point-of-care or the clinic/hospital. In the map above, orange-coloured regions show locations where risk of contraction of malaria still exists. B) Block
+
+diagram of the presented platform.
+doi:10.1371/journal.pone.0037245.g001
+
+
+accurate and sensitive microscopic analysis of biomedical speci-       create a self-learning integrated network of microscopes and
+mens.                                                                  imagers toward intelligent automated biomedical micro-analysis
+  We believe that this crowd-sourcing and gaming based micro-          and diagnosis. Once scaled up, this smart network may have a
+
+analysis platform could in particular be significant for telemedicine  significant impact on e.g., medical, environmental, and biological
+applications such that diagnostics decisions can be remotely made      sciences, among others, through various innovative uses of this
+without the need for a local medical expert (e.g., a pathologist),     network and its constantly expanding database. For instance, by
+
+especially impacting the medical infrastructure in resource-poor       creating large data libraries of various specimens (e.g., microbial
+countries. We hypothesise that the gaming community can                communities, parasites, pathology slides, blood/sputum/pap
+                                                                       smears etc.) we may be able to dynamically track both temporal
+develop better recognition skills over time for specific medical
+conditions through a scoring system built in the games to identify     and spatial evolution of different pathogens, diseases, or infectious
+such abilities of individuals (some of whom may also be health-care    outbreaks and be able to better investigate and identify the cause-
+                                                                       effect relationships of these spatiotemporal patterns (see Figure 1).
+professionals that e.g., are even paid for each image that is
+diagnosed as part of the game). In addition to providing accurate         To demonstrate the proof-of-concept of the above outlined
+remote diagnosis, the datasets of biomedical images characterized      framework, we chose malaria as the medical condition to be
+                                                                       diagnosed, and developed a crowd-sourcing and distributed
+through this distributed platform can potentially be used as
+training images for automated machine learning based algorithms        gaming platform that allows individuals from anywhere in the
+that over time self-learn to make reliable diagnosis (Figure 1). As    world to assist in identifying malaria infected red blood cells
+                                                                       (RBCs) imaged under light microscopes. In addition, we developed
+such, through this crowd-sourcing and gaming platform we can
+                                                                       an automated algorithm for diagnosing the same images using
+                                                                       computer vision, and created a novel hybrid platform for
+                                                                       combining human and machine resources toward efficient,
+
+                                                                       accurate and remote diagnosis of malaria.
+                                                                          For this initial demonstration, we chose malaria since it is still a
+
+                                                                       major health problem in many tropical and sub-tropical climates,
+                                                                       including much of sub-Saharan Africa (see Figure 1). It is the cause
+                                                                       of ,20% of all childhood deaths in this region, and almost 40% of
+
+                                                                       all hospitalizations in whole of Africa. For diagnosis of malaria,
+                                                                       conventional light microscopy remains the gold standard method.
+                                                                       A pathologist must typically check between 100 and 300 different
+
+                                                                       field-of-views (FOVs) of a thin blood smear (corresponding to
+                                                                       inspection of at least 1,000 individual RBCs) using a light
+                                                                       microscope with 100X objective lens before being able to reliably
+
+                                                                       call a thin smear sample negative (i.e. not infected). This, however,
+                                                                       is a very time-consuming task and a significant challenge given the
+                                                                       large number of cases observed in these resource-poor settings (see
+
+                                                                       Figure 1). Furthermore, approximately 60% of the cases reported
+                                                                       in sub-Saharan Africa are actually false-positives,[22] leading to
+                                                                       unnecessary treatments and hospitalizations.
+Figure 2. Malaria Diagnosis Game Interface: the gamer can use
+the syringe tool to ‘‘kill’’ infected RBCs or use the blood bank          For the same purpose of malaria diagnosis in resource poor
+button to ‘‘bank/collect’’ all the healthy RBCs.                       conditions, rapid diagnostic tests (RDTs) are also being developed
+doi:10.1371/journal.pone.0037245.g002                                  to create an alternative to optical microscopy. However, RDTs
+
+
+
+       PLoS ONE | www.plosone.org                                   2                             May 2012 | Volume 7 | Issue 5 | e37245
+                                                                                              Distributed Medical Diagnosis through Gaming
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 3. Overview of the gaming analysis framework. The images are treated as a sequence of binary values that are broadcast by the server.
+The gamers are effectively noisy repeaters that in the most ideal case output the correct symbol for the inputs that they receive. Each repeater
+transmits its own noisy version of the same input symbol to a decoder. The decoder combines all the received repeater outputs and decodes a final
+output zi which ideally will be the correct label/diagnosis for the input images. The repeaters can be modelled as Binary Communication Channels
+(top-left).ijorresponds to the probability of receiving symbol j when in fact symbol i was transmitted.
+doi:10.1371/journal.pone.0037245.g003
+
+
+still have various shortcomings such as: (i) being relatively           Methods
+
+expensive compared to microscopy, costing ,0.5–2.0 USD per
+test; (ii) existence of insufficient information on their quality and   Game Design
+the lack of ability to test their performance in the field, (i.e., the    We developed a digital gaming platform through which we
+                                                                        allow an unlimited number of gamers from any location in the
+lack of quality controls); (iii) poor heat and humidity stability; and
+(iv) mistrust of RDTs by health-care workers and community              world to access and diagnose images of human RBCs that are
+members (which is technically coupled to issues i and iv                potentially infected with P. falciparum. The game (see Figure 2) was
+
+mentioned above) [22]. Therefore, microscopic imaging of blood          implemented to be run both on PCs (using Adobe Flash running
+smears still remains as the gold standard method toward diagnosis       on any internet browser such as Internet Explorer, Mozilla Firefox
+of malaria.                                                             etc.) and on Android-based mobile devices, including mobile-
+
+   There have been prior attempts based on machine vision               phones as well as tablet PCs. We preferred an open-source
+algorithms to automate the process of malaria diagnosis in              operating system for mobile devices such that other game
+                                                                        developers could easily contribute to the same crowd-sourcing
+Giemsa-stained thin blood smears using optical microscopy images
+with promising performance results [23–27]. However, there are a        platform in the future.
+number of factors that can negatively affect the performance of           Before starting to play the game, each gamer was given a brief
+                                                                        online tutorial explaining the rules of the game and how malaria
+such algorithms, including variations in blood smear preparation
+and cell density on the slide, as well as variations in illumination,   infected RBCs typically look with some example images. After this,
+digital recording conditions, optical aberrations and the lens          each gamer played a training game where s/he was required to
+
+quality. As a result, these methodologies have not yet been able to     successfully complete in order to continue playing the rest of the
+find their ways into mainstream malaria diagnostics tools to start      game. This test game consisted of 261 unique RBC images, where
+replacing manual inspection of blood smears.                            20 of them were infected. The gamers were required to achieve
+
+   The human visual system, however, does not suffer from the           .99% accuracy in this training game, and in the case of failure,
+above mentioned limitations, and can correctly recognise patterns       they were asked to re-play it until they achieved 99%. This way all
+                                                                        the gamers became familiar with the rules of the game and were
+of parasitic infection even under severe variations in sample
+preparation, density and imaging/recording conditions. As such,         briefly trained on the diagnostics task. Note that this training game
+we believe that scaling up accurate, automated, and remote              was required only once at the time when the gamers registered on
+                                                                        our platform. Upon registration, a unique user ID was assigned to
+diagnosis of malaria through a crowd-sourcing and gaming
+platform may achieve significant impact in the developing world         each gamer and her/his individual diagnostics performance was
+through: (i) Elimination of the overuse and misuse of anti-malarial     tracked. Furthermore, this training game provided direct feedback
+
+drugs, which is quite important for avoiding long-term drug             to the players on their performance and their mistakes through a
+resistance issues; (ii) Improved management of non-malaria fevers       scoring mechanism. Since the labels (i.e., infected cell vs. healthy
+by allowing malaria to be ruled out, so that patients can receive       cell) of all the images were known a priori for the purposes of this
+
+more appropriate treatment; (iii) Much better use of existing funds     training game, the player’s score was updated throughout the
+and reduction in drug stock-outs; and (iv) Reduced risks due to         game (i.e., positive score for correct diagnosis, and negative score
+                                                                        for incorrect diagnosis). It is important to note that there exists a
+long-term side-effects of anti-malarial drugs on patients who do
+not actually need treatment. Finally, we should also emphasize          large body of work on educational games [28–29]. However, given
+that the same crowd-sourcing and gaming based micro-analysis            that our focus was not to educate the players, and in fact it was to
+                                                                        demonstrate the quality of diagnostic results that can be achieved
+and medical diagnosis platform could further scale up for a variety
+of other biomedical and environmental applications where                through untrained (non-expert) individuals, this initial test/
+microscopic images need to be examined by experts.                      training game was designed in a simple repetitive fashion.
+
+
+
+       PLoS ONE | www.plosone.org                                    3                            May 2012 | Volume 7 | Issue 5 | e37245
+                                                                                              Distributed Medical Diagnosis through Gaming
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                      Figure 4. The hybrid (human + machine) diagnostics frame-
+                                                                      work. As new images are generated, they are diagnosed by pre-trained
+
+                                                                      machine learning algorithms. The confidence of these algorithms in
+                                                                      their decisions determines whether the images should be passed on to
+                                                                      human gamers or not. Once the difficult-to-diagnose images for these
+                     CoInmtraogles              Accuracy      SE             SP          PPV         NPV
+                                                                      algorithms are crowd-sourced and are diagnosed by the human
+                                                                      gamers, they are merged with the easy-to-diagnose images to compute
+                                                                      the final diagnostics results. The data is then fed back through the
+
+                                                                      system and added to the training dataset used by the machine learning
+                                                                      algorithms. During each cycle, self-learning algorithms will improve as a
+                     NeRgBatve                                        result of added training data. ‘T’ refers to a threshold value.
+
+                                                                      doi:10.1371/journal.pone.0037245.g004
+
+
+                                                                         As the gamer goes through the game, s/he is presented with
+
+                     PoRsitvse                                        multiple frames of RBC images. The gamer has the option of using
+                                                                      a‘‘ syringe’’ tool to ‘‘kill’’ the infected cells one by one, or use a ‘‘collect-
+
+                                                                      all’’ tool to designate all the remaining cells in the current frame as
+                                                                      ‘‘healthy’’, which significantly speeds up the cell diagnosis process
+
+                                                                      since most of the RBCs are healthy. Within each frame, there are
+                                NA     27     471    274     4584  185     1266 (1266ning Images)  96.26%95.42%  69.64%97.81%  99.00% 91.89%7.70% 94.70%6.95% 96.59%
+                                                                      a certain number of cells whose labels (infected or healthy) are
+                                                                      known to the game, but unknown to the gamers. These control cell
+
+                                                                      images allow us to dynamically estimate the performance of the
+                                                                      gamers (in terms of correct and incorrect diagnosis) as they go
+
+                                                                      through each frame and also help us assign a score for every frame
+
+                                                                      that they pass through (Note that this is different in the training
+                                                                      game where all the images are effectively control images). Once a
+
+                                                                      frame is completed, a score is assigned based on the performance
+                                                                      of the gamer only on the control images. These control images
+
+                                                                      (roughly 20% of all the images) along with the scoring system allow
+
+                                                                      the game to provide some feedback to the gamer on their
+                                                                      performance such that as the gamers continue to play, they can
+
+                                                                      improve their diagnostics performance. The images and their
+                                                                      order of appearance were identical among different gamers, thus
+
+                                                                      allowing us to make a fair comparison among their relative
+
+                                                                      performances.
+
+
+                                                                      Image Database
+                   Deosfrpesons    classiof experiment 2on 1266 RBC images       Gamers
+                                                                         To build a malaria infected RBC database, we used thin blood
+          Summary of experimental results for diagnosis of malaria infsmear slides that contained mono-layers of cultured human RBCs
+
+                                                                      which were infected by Plasmodium falciparum (P. falciparum) forming
+
+                                                                      the source for our image dataset (refer to Reference [17] for
+                                                                      further details). These malaria slides were then scanned with a
+          Table 1.      Experiment     3     405550te5doi:10.13H7y0u4rdlsoss.C03u7al2ing1wedorrcedtsto2h3 an gamers47127 20       45471 1549    1245845496      1266234999.01%        9598.50
+                                                                      bright-field optical microscope using a 100X oil-immersion
+
+
+
+PLoS ONE | www.plosone.org                                         4                               May 2012 | Volume 7 | Issue 5 | e37245
+                                                                                             Distributed Medical Diagnosis through Gaming
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 5. The Crowd Effect: gamer performance results for experiment #5. The plots show the worst case scenarios where the diagnoses
+
+from the worst performing players are used to generate an overall diagnosis for each RBC in the game. Note that the specificity (or true negative rate)
+is always very high for the gamers, and does not improve much as more gamers are added to the mix. However, the sensitivity (or true positive rate)
+benefits the most as more players are added, and climbs above 95% once 15-gamers form the crowd. The accuracy also increases as more players are
+added, but since it reflects both the specificity and the sensitivity its increase is not as drastic as that of the sensitivity.
+doi:10.1371/journal.pone.0037245.g005
+
+
+objective lens (numerical aperture: 1.25). At each FOV, the            each gamer will act as a noisy Binary Channel [30], retransmitting the
+captured RBC images were passed on to an infectious disease            symbols back along with some errors. Therefore, we model the
+
+expert for identification of P. falciparum signatures and digital      framework of our games as a noisy communication network consisting
+labeling of each RBC image (positive vs. negative). This process       of a broadcast unit, multiple repeaters, and a receiver/decoder
+generated a dataset of 7116 unique RBC images, with 1603 of            unit for the final diagnosis (see Figure 3). In the ideal scenario, the
+
+them infected by the malaria parasite. To form the set of images to    repeaters (i.e. the gamers) would simply receive a set of incoming
+be used in our games, each individual RBC image was cropped            symbols (images to be diagnosed) from the broadcast unit (through
+and resized to fixed dimensions of 50650 pixels. To further
+                                                                       various light microscopes located in e.g., point-of-care offices or
+increase the total number of images and their diversity (in terms of   malaria clinics), and transmit them to the receiver/decoder block,
+sample preparation, density and imaging conditions), we also used      which in turn computes the optimal ‘‘correct’’ label for each
+a set of images provided by the Center for Disease Control (CDC),
+                                                                       individual unknown RBC image using a Maximum a Posteriori
+yielding an addition of 118 infected and 595 uninfected RBC            Probability (MAP) approach. In Text S1 (Section II) we provide a
+images. With this, we had a total of 7829 characterized human          theoretical description of how this performance analysis is done
+RBC images, with 1721 of them infected with P. falciparum,
+                                                                       and is used to diagnose unknown RBCs based on gamers’
+forming our ground truth database for evaluating our crowd-sourcing,   responses.
+gaming, and machine-vision based diagnostics platform. Please
+refer to Text S1 for further details and Figure S4 for sample
+                                                                       Results and Discussion
+images. No IRB approval was required since the digital red blood
+cell images that we used in our work were not linked to any patient      To test the viability of our crowd-sourced gaming-based malaria
+data or diagnosis and were digitally created and shared for            diagnosis platform, different experiments were run with 31 unique
+
+microscopic training purposes.                                         participants (non-experts), ranging between the ages of 18 and 40. In
+                                                                       total, five different experiments were performed, the results of
+Diagnostic Analysis                                                    which are summarized in Table 1.
+
+  When analysing the game results, we have access to the                 We initially tested the capability of the presented platform
+individual performance parameters and diagnoses (for both the          through a game consisting of 5055 images, of which 471 were of
+                                                                       infected RBCs and 4584 were of healthy RBCs (see Table 1).
+control images and the unknown test images). We fuse the results
+from all gamers that have completed a particular game and              Additionally, 1266 (103 positives and 1163 negatives) RBC images
+generate a more accurate set of diagnoses for the test RBC images.     were embedded as control images within the same game such that
+Given that each RBC image either corresponds to a healthy cell or      each gamer had to go through 6321 RBC images. The combined
+
+an infected cell, we can use binary labels to identify them: 0 for     accuracy of the gamer diagnoses was 99%, with sensitivity (SE) of
+healthy and 1 for infected. Recasting our setup as a communications    95.1% and specificity (SP) of 99.4%. The positive predictive value
+system, our server will act as a broadcaster of a binary sequence and  (PPV) and negative predictive value (NPV) were also quite high at
+
+
+
+       PLoS ONE | www.plosone.org                                   5                            May 2012 | Volume 7 | Issue 5 | e37245
+                                                                                             Distributed Medical Diagnosis through Gaming
+
+
+
+94.3% and 99.5% respectively (for definitions of SE, SP, PPV, and      through 9394 RBC images, a quarter of which (2349) are known
+
+NPV refer to Table S1).                                                control images. Within the remaining 7045 test RBC images, there
+  In addition to the gaming and the crowd-sourcing platform            were 1549 (22%) positive images and 5496 negative images, which
+described earlier, we also developed an automated computer             were all treated as unknown images to be diagnosed by the human
+
+vision-based algorithm to detect the presence of malaria parasites     crowd at the single cell level. The same ratio of positive to negative
+(refer to Text S1–Section III and Figure S1 for details of             images was also chosen for the control RBC images in the game to
+implementation). In doing so our aim was to ultimately create a        eliminate any unfair estimation biases that may result from
+
+hybrid system such that machine vision and human vision can be         differing distributions. Completing this game (i.e. experiment # 5)
+coupled to each other, creating a more efficient and accurate          took on average less than one hour for each gamer, and we can see
+biomedical diagnostics platform. For this purpose, independent of the  in Table 1 that the accuracy of the overall human crowd (non-
+
+human crowd, we next tested the automated diagnosis performance        professionals) is within 1.25% of the diagnostic decisions made by
+of our machine-vision algorithm, which was trained on 1266 RBC         the infectious disease expert. This experiment yielded an SE of
+images (same as the control images used in experiment #1) and was tested7.8% and an SP of 99.1%. The PPV was 96.7% and the NPV
+
+on a total of 5055 unique RBC images (471 positives and 4584           was 99.4%. The performance results of the individual players and
+negatives – see Table 1). This algorithm was able to achieve an        their combined performances are shown in Figures S2 and S3.
+overall accuracy of 96.3%, with SE-SP of 69.6%–99.0%, and                Based on experiment #5, Figure 5 summarizes ‘‘the effect of the
+
+PPV-NPV of 87.7%–96.9%. In terms of performance, our gamer             crowd’’ on diagnosis accuracy and sensitivity, i.e., how the overall
+crowd did better than this machine algorithm as summarized in          performance of the crowd’s diagnosis is improved as more gamers
+Table 1. However, we should note that with an even larger              are added to the system. We can see significant boosts in the
+
+training dataset (containing e.g., .10,000 RBC images) and more        sensitivity (i.e., the true positive rate) as diagnosis results from more
+advanced classifiers, it may be possible to significantly improve the  gamers are added into the system. This is quite important as one of
+performance of our automated algorithm. This feat may be               the major challenges in malaria diagnosis in sub-Saharan Africa is
+achieved through the coupling of statistical learning and crowd-       the unacceptably high false-positive rate, reaching ,60% of the
+
+sourcing into a hybrid model as illustrated in Figure 4, where a       reported cases [22]. Our overall diagnosis accuracy also steadily
+feedback exists between the gamers and the automated algorithm,        improves as more gamers are added as shown in Figure 5. This
+yielding an ever-enlarging training dataset as more games are          crowd effect may seem like a deviation from the traditional
+
+played. This uni-directional feedback loop has the effect of           benefits of crowd-sourcing, in that multiple players are inaccu-
+labelling more and more images as training data for the automated      rately solving the whole puzzle and then their results are combined
+algorithm, potentially leaving only the most difficult ones to be      to yield a more accurate solution. However, we should also note
+
+labelled by human gamers.                                              that cell images from a single blood smear slide can be broken up
+  Following this initial comparison between human vision and           into multiple batches, where each batch is crowd-sourced to a
+machine vision for identification of malaria infected RBCs, to         group of players. In other words, each unique group of players will
+
+assess the viability of the above discussed hybrid diagnosis           focus on one common batch of cell images, and in the end the
+methodology, we conducted another test (experiments #3& #4             diagnosis results will be combined once at the group level to boost
+in Table 1), where among all the RBC images characterized using        the accuracies for each cell, and again at the slide level to make a
+
+our machine-vision algorithm, we extracted the ones with a             correct overall diagnosis per patient. Therefore, the contribution
+diagnosis confidence level that is less than 30% of the maximum        of the crowd is twofold. First, it allows for the analysis problem to
+achieved confidence level, i.e. a total of 459 RBC images that were    be broken up into smaller batches, and second, the analysis of the
+
+relatively difficult to diagnose were extracted. The training dataset  same batch by multiple individuals from the crowd allows for
+(1266 RBC images that were used to train our machine algorithm,        significantly higher overall diagnosis accuracies.
+which also served as the control images of experiment #1) were           We should emphasise that throughout the manuscript we
+
+then mixed with these ‘‘difficult-to-diagnose’’ 459 RBC images and     discuss diagnosis results for ‘individual’ RBCs, not for patients. In
+were used to form a new game that is crowd-sourced to 27 human         reality, malaria diagnosis using a blood smear sample correspond-
+gamers. This new game (experiment #3) yielded an accuracy of           ing to a patient is a relatively easier task compared to single cell
+95.4%, with SE-SP at 97.8%–91.9%, and PPV-NPV at 94.7%–                diagnosis since a thin blood smear for each patient sample already
+
+96.6% on these 459 difficult-to-diagnose RBC images. Next, we          contains thousands of RBCs on it. Therefore statistical errors in
+merged the results from the crowd-sourced game (experiment #3)         the parasite recognition task could be partially hidden if the
+and our machine algorithm (experiment #2) to arrive at an overall      diagnostics decisions are made on a per blood-smear slide basis.
+
+accuracy of 98.5%, with SE-SP of 89.4%–99.4% and PPV-NPV of            To better demonstrate the proof of concept of our gaming based
+94.2%–98.9% (see experiment #4, Table 1). Thus, in this hybrid case    crowd-sourcing approach we aimed for the diagnosis of individual
+we were able to increase the specificity and positive predictive value RBCs, rather than patients. Since any given patient’s blood smear
+
+and 7%, respectively, and achieved a performance comparable to that of slide will be digitally divided into smaller images (containing e.g., a
+completely human-labelled system (experiment #1), but with only 10% of handful of RBCs per image), and .1,000 RBC images per patient
+the number of cells actually being labelled by humans. This significantwill be distributed to the crowd, we expect much higher levels of
+
+increases the efficiency of the presented gaming platform such that    accuracy and sensitivity for diagnosis of individual patients.
+the innate visual and pattern-recognition abilities of the human       Furthermore, our single-cell-diagnosis-based gaming approach
+crowd/gamers is put to much better use by only focusing on the         could also be very useful to estimate the parasitemia rate of
+
+‘difficult-to-diagnose’ images through the hybrid system (Figure 4).   patients which can be quite important and valuable for monitoring
+  In our next experiment (# 5) we increased the number of              the treatment of malaria patients.
+infected RBC images in the game by three-fold to simulate a              We should also emphasise that the work presented in this paper
+
+scaled up version of the gaming platform. A total of 7829 unique       is a proof of concept and not the complete envisioned system, with
+RBC images were incorporated into the game, of which 784 were          potentially thousands of gamers and many patient slides to be
+taken as control images that were repeatedly inserted into the         diagnosed, which is left as future work. In addition to generating
+
+game for a total of 2349 times. As a result, each gamer would go       remote biomedical diagnosis through engaging games, the
+
+
+       PLoS ONE | www.plosone.org                                   6                            May 2012 | Volume 7 | Issue 5 | e37245
+                                                                                             Distributed Medical Diagnosis through Gaming
+
+
+
+presented platform can serve as an information hub for the global      dominant pair of colours is used to compute an index (e.g., with
+healthcare community as summarized in Figure 1. This digital hub       5 bins, there are a total of 10 different index values). A histogram
+will allow for the creation of very large databases of microscopic
+                                                                       of all index values is computed and used as part of the feature
+images that can be used for e.g., the purposes of training and fine    vector. In addition to colour-based features, we also used a
+tuning automated computer vision algorithms. It can also serve as      number of more basic image features such as mean, variance, and
+
+an analysis tool for health-care policy makers toward e.g., better     gradient magnitude histograms to form our final feature vectors.
+management and/or prevention of pandemics.                             (TIF)
+  Next, we would like to briefly discuss regulatory and practical
+                                                                       Figure S2    Individual performance results for experi-
+issues that need to be addressed for deployment of the presented       ment 5 of the Main Text. A total of 20 individual gamers
+gaming and crowd-sourcing-based diagnosis and telemedicine
+platform. As a potential future expansion of the platform,             played this game that consisted of 7045 test cell images with 1549
+                                                                       cells infected and 5496 cells healthy. We use a maximum a
+incentives (e.g., monetary ones) can be used to recruit health-
+care professionals who are trained and educated to diagnose such       posterior probability (MAP) based approach to combine the results
+biomedical conditions, making them part of our gamer crowd. In         of multiple gamers and obtain higher performance levels. In order
+                                                                       to show the worst case scenario, the worst N performances are
+such a scenario, one can envision the gaming platform to serve as
+an intelligent telemedicine backbone that helps the sharing of         combined in each MAP estimation.
+                                                                       (TIF)
+medical resources through e.g., remote diagnosis and centralised
+data collection/processing. In other words, it would be a platform     Figure S3    Combined performance of gamers using the
+whereby the diagnosis can take place by professionals far away
+                                                                       described MAP approach. We observe that if we combine all
+from the point-of-care. At the same time, it also enables the          the available gamer data, we can determine the best gamer relative
+resolution of possible conflicting diagnostics decisions among         to others regardless of the ground truth data, lending itself to a
+medical experts, potentially improving the diagnostics outcome.
+                                                                       scoring and ranking mechanism for gamers.
+  For this potentially highly trained crowd of ‘‘professional’’        (TIF)
+gamers, the final decisions made through the crowd can be used
+for direct treatment of the patient (without the need for regulatory   Figure S4    Examples of RBC images used in experi-
+                                                                       ments and games. The images exhibit significantly different
+approval). Furthermore, since these are trained medical profes-
+sionals, the number of gamers assigned to an image that is waiting     illumination conditions, colours and backgrounds, mimicking a
+                                                                       real-life scenario where various different optical microscopes
+to be diagnosed can be significantly lower as compared to the case
+where ‘‘non-professional’’ gamers are assigned to the same image.      located at e.g., point-of-care offices and malaria clinics would be
+On the other hand, if an image is diagnosed by entirely non-           used in our games.
+                                                                       (TIF)
+professional gamers, the result of the diagnosis can still be very
+useful to reduce the workload of health-care professionals located     Table S1     Definition of acronyms used in the manu-
+at point-of-care offices or clinics where the raw images were
+                                                                       script.
+acquired. In the case of malaria diagnosis, this is especially         (PDF)
+relevant since the health-care professional is required to look at
+.1,000 RBC images for accurate diagnosis. Hence even a non-            Text S1    This supporting text describes the mathemat-
+
+professional crowd’s diagnostics decisions could be highly valuable    ical and algorithmic details of the proposed framework.
+in guiding the local medical expert through the examination of a       (PDF)
+
+malaria slide, such that the most relevant RBC images are quickly
+screened first, eliminating the need for conducting a manual           Acknowledgments
+random scan for rare parasite signatures.
+                                                                       The authors acknowledge Dr. Shirley Luckhart and Kong Wai Cheung of
+  Finally, the proposed methodology can be expanded to include         UC Davis as well as Dr. Omai Garner, Ting-Wei Su, Onur Mudanyali,
+a ‘training platform’. Assuming the expansion of this crowd-           Justin Wong, Wei Luo, Grace Chen, Jimmy Zhu, Na Wei, Bach Vu, Chris
+sourced diagnostics platform and the generation of large image
+                                                                       That, Koay Chan, and Mayur Chaudari of UCLA for their assistance with
+databases with correct diagnostics labels, software can be created     the samples, their imaging and handling.
+to make use of such databases to assist in the training of medical
+professionals. Through such software, medical students and/or
+                                                                       Author Contributions
+trainees can spend time looking at thousands of images, attempting
+diagnosis, and getting real-time feedback on their performances.       Wrote the paper: SM AO. Designed and developed the theoretical
+                                                                       framework and algorithms; contributed to the overall design of the games
+Based on the concepts described in this paper, we also envision this   and related infrastructure; conducted the analysis and interpretation of the
+platform to expand to other micro-analysis and diagnostics needs       data and results: SM. Contributed to the development and implementation
+where biomedical images need to be examined by experts.
+                                                                       of the games and related infrastructure: SD SF FY. Contributed to the
+                                                                       acquisition and compilation of microscopic images: US OY SP.
+Supporting Information                                                 Contributed to the medical implementation of the presented platform:
+                                                                       KN. Conceived the idea, supervised the project, and contributed to the
+Figure S1    Local Colour Peak Histograms (LCPH). For                  overall design of the games, related infrastructure and theory as well as to
+
+every window block, a colour histogram is calculated. The              the analysis and interpretation of the data and the results: AO.
+
+
+References
+1.  Cooper S, Khatib F, Treuille A, Barbero J, Lee J, et al. (2010) Predicting proteinDabbish L (2008) Designing games with a purpose. Communications of
+    structures with a multiplayer online game. Nature 466(7307): 756–760.  the ACM, 58–67.
+
+2.  von Ahn L, Maurer B, McMillen C, Abraham D, Blum M (2008) reCAPTCHA:.  von Ahn L, Dabbish L (2004) Labeling images with a computer game. In:
+    Human-Based Character Recognition via Web Security Measures. Science   Proceedings of the SIGCHI conference on Human factors in computing systems, Vienna,
+    321(5895): 1465–1468.                                                  Austria, 319–326.
+
+
+
+
+       PLoS ONE | www.plosone.org                                   7                            May 2012 | Volume 7 | Issue 5 | e37245
+                                                                                                                      Distributed Medical Diagnosis through Gaming
+
+
+
+
+5.   Rotman D (2009) Crowdsourcing and the question of expertise. Communications of       18. Smith ZJ, Chu K, Espenson AR, Rahimzadeh M, Gryshuk A, et al. (2011) Cell-
+     the ACM 52(12): 12–12.                                                                    Phone-Based Platform for Biomedical Device Development and Education
+6.   Huberman BA (2008) Crowdsourcing and Attention. Computer 41(11): 103–105.                 Applications. PLoS ONE 6(3).
+
+7.   Khatib F, Cooper S, Tyka MD, Xu K, Makedon I, et al. (2011) Algorithm                19. Zhu H, Mavandadi S, Coskun AF, Yaglidere O, Ozcan A (2011) Optofluidic
+     discovery by protein folding game players. Proceedings of the National Academy of         Fluorescent Imaging Cytometry on a Cell Phone. Analytical Chemistry 83(17):
+     Sciences 108(47): 18949–18953.                                                            6641–6647.
+
+8.   foldit website. Available: http://fold.it. Accessed 2012 April, 20.                  20. Mudanyali O, Tseng D, Oh C, Isikman SO, Sencan I, et al. (2010) Compact,
+9.   EteRNA website. Available: http://EteRNA.stanford.edu. Accessed 2012 April,               light-weight and cost-effective mic roscope based on lensless incoherent
+     20.                                                                                       holography for telemedicine applications. Lab Chip 10(11): 1417–1428.
+10. Tuite K, Snavely N, Hsiao Dy, Tabing N, Popovic Z (2011) PhotoCity: training
+                                                                                          21. Tseng D, Mudanyali O, Oztoprak C, Isikman SO, Sencan I, et al. (2010)
+     experts at large-scale image acquisition through a competitive game. In:                  Lensfree microscopy on a cellphone. Lab Chip 10(14): 1787–1792.
+     Proceedings of the 2011 annual conference on Human factors in computing systems,
+     Vancouver, BC, Canada, 1383–1392.                                                    22. World Health Organization (2010) World Malaria Report 2010., World Health
+                                                                                               Organization.
+11. Cooper S, Treuille A, Barbero J, Leaver-Fay A, Tuite K, et al. (2010) The             23. Tek FB, Dempster AG, Kale I (2010) Parasite detection and identification for
+     challenge of designing scientific discovery games. In: Proceedings of the Fifth
+     International Conference on the Foundations of Digital Games}, Monterey, California,      automated thin blood films malaria diagnosis. Computer Vision and Image
+                                                                                               Understanding 114: 21–32.
+     40–47.                                                                               24. Tek FB, Dempster AG, Kale I (2009) Computer vision for microscopy diagnosis
+12. Andersen E, Liu YE, Apter E, Boucher-Genesse F, Popovic Z (2010) Gameplay
+     analysis through state projection. In: Proceedings of the Fifth International Conference onf malaria. Malaria Journal.
+                                                                                          25. Tek FB, Dempster AG, Kale I (2006) Malaria Parasite Detection in Peripheral
+     the Foundations of Digital Games, Monterey, California, 1–8.                              Blood Images. In: British Machine Vision.
+13. Tuite K, Snavely N, Hsiao DY, Smith AM, Popovic Z (2010) Reconstructing the
+     world in 3D: bringing games with a purpose outdoors. In: Proceedings of the Fifth    26. Sio SWS, Sun W, Kumar S, Bin WZ, Tan SS, et al. (2007) MalariaCount: An
+     International Conference on the Foundations of Digital Games, Monterey, California,       image analysis-based program for the accurate determination of parasitema.
+
+     232–239.                                                                             27. Diaz G, Gonzalez FA, Romero E (2009) A semi-automatic method for
+14. Breslauer DN, Maamari R, Switz NA, Lam WA, Fletcher D (2009) Mobile                        quantification and classification of erythrocytes infected with malaria parasites in
+     phone based clinical microscopy for global health applications. PLoS ONE 4(7).            microscopic images. Journal of Biomedical Informatics 42: 296–307.
+
+15. Zhu H, Yaglidere O, Su TW, Tseng D, Ozcan A (2011) Cost-effective and                 28. Kafai YB (2006) Playing and Making Games for Learning: Instructionist and
+     compact wide-field fluorescent imaging on a cell-phone. Lab Chip 11(2): 315–322.          Constructionist Perspectives for Game Studies. Games and Culture 1: 36–40.
+16. Miller AR, Davis GL, Oden ZM, Razavi MR, Fateh A, et al. (2010) Portable,             29. Amory A, Naicker K, Vincent J, Adams C (1999) The use of computer games as
+
+     Battery-Operated, Low-Cost, Bright Field and Fluorescence Microscope. PLoS                an educational tool: identification of appropriate game types and game elements.
+     ONE 5(8).                                                                                 British Journal of Educational Technology 30: 311–321.
+17. Bishara W, Sikora U, Mudanyali O, Su TW, Yaglidere O, et al. (2011)                   30. Cover TM, Thomas JA (2006) Elements of Information Theory. Wiley.
+
+     Holographic pixel super-resolution in portable lensless on-chip microscopy using
+     a fiber-optic array. Lab Chip 11(7): 1276–1279.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        PLoS ONE | www.plosone.org                                                    8                                    May 2012 | Volume 7 | Issue 5 | e37245

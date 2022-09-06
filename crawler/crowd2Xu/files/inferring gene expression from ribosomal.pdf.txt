@@ -1,0 +1,1065 @@
+Resource
+
+
+
+Inferring gene expression from ribosomal promoter
+
+
+
+sequences, a crowdsourcing approach
+
+                    1,6                       2                     3                     4                      1
+Pablo Meyer,            Geoffrey Siwo, Danny Zeevi, Eilon Sharon, Raquel Norel,
+
+DREAM6 Promoter Prediction Consortium, Eran Segal, and Gustavo Stolovitzky         4                                     1
+
+1IBM T.J. Watson Research Center, Yorktown Heights, New York 10598, USA; Eck Institute for Global Health, Department
+
+of Biological Sciences, University of Notre Dame, Notre Dame, Indiana 46556, USA; Lewis-Sigler Institute for Integrative Genomics,
+                                                        4
+Princeton University, Princeton, New Jersey 08540, USA; Department of Computer Science and Applied Mathematics, Weizmann
+Institute of Science, Rehovot 76100, Israel
+
+
+
+      The Gene Promoter Expression Prediction challenge consisted of predicting gene expression from promoter sequences in
+      a previously unknown experimentally generated data set. The challenge was presented to the community in the frame-
+
+      work of the sixth Dialogue for Reverse Engineering Assessments and Methods (DREAM6), a community effort to evaluate
+      the status of systems biology modeling methodologies. Nucleotide-specific promoter activity was obtained by measuring
+
+      fluorescence from promoter sequences fused upstream of a gene for yellow fluorescence protein and inserted in the same
+      genomic site of yeast Saccharomyces cerevisiae. Twenty-one teams submitted results predicting the expression levels of 53
+
+      different promoters from yeast ribosomal protein genes. Analysis of participant predictions shows that accurate values for
+      low-expressed and mutated promoters were difficult to obtain, although in the latter case, only when the mutation induced
+
+      a large change in promoter activity compared to the wild-type sequence. As in previous DREAM challenges, we found that
+      aggregation of participant predictions provided robust results, but did not fare better than the three best algorithms.
+      Finally, this study not only provides a benchmark for the assessment of methods predicting activity of a specific set of
+
+      promoters from their sequence, but it also shows that the top performing algorithm, which used machine-learning ap-
+      proaches, can be improved by the addition of biological features such as transcription factor binding sites.
+
+
+      [Supplemental material is available for this article.]
+
+
+One of the main objectives of the Dialogue for Reverse Engineering promoter region. Although widely studied, we are still far from
+Assessments and Methods (DREAM) (Stolovitzky et al. 2007) is to    a quantitative and predictive understanding of how transcrip-
+
+catalyze the interaction between experiment and theory in systems  tional regulation is encoded in cis-regulatory elements of gene
+biology, particularly for quante model building. For this purpose, promoters (Kaplan et al. 2009; Sharon et al. 2012). One obstacle in
+unpublished data is used to objectively test team predictions gener-he field is obtaining accurate measurements of transcription de-
+
+ated by their methods/algorithms. The evaluation of participants’  rived from different promoters. Fusion of promoters to fluorescent
+methods is blind, as inspired by the community challenges posed in reporters can be used to determine the relative contribution of
+CASP (Critical Assessment of Techniques for Protein Structure Pre- transcription to the resulting mRNA levels, since they provide
+
+diction)’maingoalistoobtainanin-depthandobjectiveas-               measurements of promoter activity independent of the se-
+sessment of state-of-the-art tqiues for protein structure predictionuence of the associated transcript (Kalir et al. 2001). To further
+
+using a set of unpublished proteinstructures (Moult et al. 1995;   address this, an experimental system was designed to measure
+Shortle 1995; Moult 1996). This same principle is used in DREAM    the transcription derived from different promoters, all of which
+where a blind benchmark is proviedd so predictions from different  are inserted into the same genomic location upstream of a re-
+
+algorithms can be easily compared, thus enhancing the reliability oforter gene—a yellow fluorescence protein gene (YFP) (Zeevi et al.
+programs/methods used. We describe here the Gene Promoter Ex-      2011).
+
+pression Prediction challenge from DREAM6, identify the best per-       To study a set of promoters that share many regulatory ele-
+formers, and discuss the main results, as well as an improvement ofments and thus are suitable for computational learning, data per-
+the top-performing algorithm. The full description of the challenge, asing to promoters of most of the ribosomal protein (RP) genes in
+
+was presented to the participants, including the teams’ rankings, canast Saccharomyces cerevisiae grown in a rich medium condition
+be found at the DREAM website (htpt://the-dream-project.org).      was obtained (Zeevi et al. 2011). Although ribosomal promoters
+                                                                   may not capture generic promoter features, the challenge pre-
+
+Gene Promoter Expression Prediction challenge                      sented sought to model RP promoters to address questions left
+                                                                   unanswered by successful genome-wide models (Beer and Tavazoie
+The level at which genes are transcribed is determined in large
+part by the DNA sequence upstream of the gene, known as the        2004; Gertz and Cohen 2009; Irie et al. 2011), such as what are the
+                                                                   mechanisms behind the equimolar expression of the RP genes
+
+5
+ A complete list of consortium authors appears at the end of this
+6anuscript.                                                        Ó 2013 Meyer et alThis article is distributed exclusively by Cold Spring Harbor
+ Corresponding author                                              Laboratory Press for the first six months after the full-issue publication date (see
+E-mail pmeyerr@us.ibm.com                                          http://genome.cshlp.org/site/misc/terms.xhtml). After six months, it is available
+Article published online before print. Article, supplemental material, and pub-ive Commons License(Attribution-NonCommercial3.0 Unported),
+lication date are at http://www.genome.org/cgi/doi/10.1101/gr.157420.113.cribed at http://creativecommons.org/licenses/by-nc/3.0/.
+
+
+
+1928     Genome Research                   23:1928–1937 Published by Cold Spring Harbor Laboratory Press; ISSN 1088-9051/13; www.genome.org
+           www.genome.org
+                                                                                        Crowdsourcing gene expression prediction
+
+
+
+
+despite their varying copy numbers and how the information for            transcriptional regulation related to the coding and 39 un-
+fine-tuned expression is encoded in promoter regions. Also, un-           translated regions. Each promoter was linked to a URA3 selection
+
+derstanding the basis of fine-tuned regulation of highly homolo-          marker (Linshiz et al. 2008) and inserted into the same fixed lo-
+gous promoters could provide clues to engineer promoter libraries         cation in the yeast genome (Gietz and Schiestl 2007) of a master
+
+of desired activity, starting from a parent promoter sequence.            strain that contained the YFP gene (see Fig. 1A). In addition to 110
+     The promoter regions for the S. cerevisiae RP genes were de-         natural RP promoter strains, we constructed 33 strains with site-
+
+fined as the sequence immediately upstream of the ribosomal               specific mutated RP promoters using similar methods (Gietz and
+protein coding region beginning at the translation start site (TrSS)      Schiestl 2007; Linshiz et al. 2008).
+
+and continuing 1200 bp or until reaching another upstream                      The strains containing the different RP derived promoters
+gene’s coding sequence, selecting whichever came first. This              were synchronized and grown, and their YFP fluorescence was
+
+removes a source of variability between strains derived from post-        recorded in a plate reader. The transcription initiated by each
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 1.   Overview of the experimental system and results.A() Illustration of the master strain into which we integrated all the tested promoters. At a fixed
+
+chromosomal location, the master strain contains a gene that encodes a red fluorescent protein (mCherry), followed by the prEFr2,andagenethat
+encodes for a yellow fluorescent protein (YFP). Every tested promongrated into this strain, together with a selection marker, between thTeEF2promoter
+andtheYFPgene.(B) Strains withdifferentpromoters havehighlysimilargrowth rates.Shown isthe growth of71differentpromoterstrains,measuredas optical
+density (OD). Measurements were obtained from a single 96-well plate,hlucose-rich media and a small numberof cells from each strain insto eachn
+well at time zero. The exponential growth phase is indicated (vertical dashed gray lines)C.B, but where the measurements correspond to mCherry
+
+intensity.NotethesmallvariabilityintheintensityofmCherry,whicisdrivenbythesamecontrolpromoteracrossthedifferentstrainsD .()Sameas C,butwhere
+the measurements correspond to YFP intensity. Note the large variabiht intensity of YFP, which is driven by a different promoter in each strna.i(Adapted
+withpermissionfromZeevietal.[2011].)E()Blacklineshowsthescoresfrom differentparticipatingteamsplottedindescendingorder,andredlineshowsscores
+of aggregated teams starting with the score obtained from averaging the prediction results of the two best-performing teams, followed by thest-bee
+performing teams, and so on until all 21 teams are included. The stand-alondeot represents the post-hoc model combining SVM and biological features.
+
+
+
+                                                                                                              Genome Research           1929
+                                                                                                                www.genome.org
+Meyer et al.
+
+
+
+
+promoter was measured by its promoter activity, defined as the av-           gated teams are formed by averaging the predicted promoter
+erage YFP fluorescence during the exponential growth phase di-               activity values of the best N teams, the score of the aggregated best
+
+vided by the average optical density (OD) during that time period            15 teams becomes 1.49, close to that of the second-best performing
+(see Fig. 1B,D). Hence, promoter activity represents the average             team (c4lab) (see Fig. 1E). Scores for the remaining aggregated teams
+
+rate of YFP production from each promoter, per cell per second,              are also observed to be above the fourth ranked team, showing that
+
+during the exponential phase of growth (Zeevi et al. 2011). As               blending community predictions produces robust results (see Sup-
+a control for the experimental error, a red fluorescent protein              plemental Material, DREAM6 Participants Predictions files).
+
+(mCherry) was driven by a control promoter, identical in all strains               We analyzed whether some participants were better at pre-
+(see Fig. 1C). Several tests were performed to gauge the accuracy            dicting specific promoters but could not find any correlation be-
+
+and sensitivity of the system. The results showed that growth                tween overall team ranking and the number of promoters a team
+curves of all strains were nearly identical, YFP levels of indepen-          predicted best. Also, when predicting single promoters, the overall
+
+dent clones of the same promoter sequence were indistinguishable             highly ranked methods did not rank first more often than lower
+
+from those of replicate measurements of the same clone, signals              ranked ones but fared well across all promoters.
+measured in the YFP wavelength were not affected by the presence                   In order to investigate whether some promoters were harder
+                                                                                                                                  2
+of the mCherry protein, and no correlation was found between the             to predict, we calculated the average distance d      iover all partici-
+YFP and mCherry promoter activities across the different RP pro-             pants for promoter i from the promoter’s predicted value to its
+
+moter strains. Finally, the average difference between any two               measured value (see Eq. 6, Methods). As seen in Figure 2A, where
+mCherry strains was ;5%, and when using replicate measure-                   promoters are ordered by increasing d , five promoters out of the
+                                                                                                                       i
+ments, the relative error in the estimated YFP promoter activity of          53 stand out for being predicted with less accuracy. We next di-
+                                                                                                                2
+an RP promoter is ;2%, indicating that it is possible to distinguish         vided the promoters based on d intoitwo groups consisting of the
+between any two promoters whose activities differ by as little               best 30 predictions (green dots, Fig. 2A) and the 23 worst pre-
+
+as ;8% (Zeevi et al. 2011).                                                  dictions (red dots, Fig. 2A) and plotted the Pearson correlation of
+                                                                             each of the participating teams for these two groups of promoters
+
+                                                                             (Fig. 2B). For all teams, the Pearson correlation clearly separated
+The challenge                                                                the best-predicted and worst-predicted promoters as defined by d ,     2
+                                                                                                                                                    i
+The challenge consisted of predicting the promoter activity de-              showing that, for all participants, promoters could be consistently
+
+rived from a given RP promoter sequence. Participants were                   divided into two groups, one of which was harder to predict than
+provided with a training set of 90 natural RP promoters (see Sup-            the other.
+
+plemental Table S1) for which both the promoter sequence and                       To identify the source of the difficulty in predicting the ex-
+activity were known and a test set of 53 promoters (see Supple-              pression values of these 23 promoters, we explored the possibility
+
+mental Table S2) for which only the promoter sequence was given.             of this list being enriched for mutant promoters. Wild-type pro-
+The test set was divided into two subsets. The first subset had 20           moters were found to be distributed equally between the worst-
+
+natural RP promoters. The second subset contained 33 promoters               predicted promoters (10 empty dots on red side of Fig. 2A) and
+
+that are similar to natural RP promoters but have some mutations             best-predicted promoters (10 empty dots on green side of Fig. 2A).
+in their sequence. These mutations can be separated into six types:          A Fisher test shows no statistical significance for mutant or wild-
+
+mutations of TATA boxes (Basehoar et al. 2004), of binding sites             type promoter enrichment. We next used measure x           i (see Eq. 7,
+for Fhl1 and Sfp1—known transcriptional regulators of RP genes               Methods) to evaluate whether promoter activity was correlated to
+
+(Badis et al. 2008; Zhu et al. 2009), mutations to nucleosome                the difficulty of predicting its value. Figure 2C, showing how x        i
+disfavoring sequences, random mutations that occurred un-                    varies for each promoter, reflects that participants’ performance is
+
+intentionally while creating the natural promoters, and finally,             anti-correlated with promoter activity, with a Pearson correlation
+
+sequences mutated intentionally with additional random muta-                 of ▯0.836. Participants’ prediction accuracy can be divided into
+tions (see Table 1). The goal was to predict as accurately as possible       three groups according to their promoter activity j : j ialuis be-
+
+the promoter activity of the 53 promoters in the test set using the          tween 1 and 3 (<x >= i.25 6 0.73 for i such that 1 > j > 3, 18 i
+90 promoters for training.                                                   promoters)—which fared significantly better than the following
+
+                                                                             two groups: j vilues less than 1 (<x >=i3.02 6 1.10 for i such that
+                                                                             j < 1, 8 promoters, t-test p < 1.1 3 10 ▯11); and j values higher than
+Results and analysis                                                          i                                                 i
+                                                                             3( <x >i ▯1.48 6 0.51 for i such that j > 3, 7ipromoters, t-test
+                                                                                             ▯7
+The challenge was scored in four different ways using criteria that          p < 1.75 3 10     ). Both observations are independent of whether
+considered the ‘‘distance’’ between measured and predicted values            the promoters contain mutations (Fig. 2C, full and empty dots).
+
+or differences in rank between measured and predicted values. The                  As we could not find clear differences between mutant and
+first metric consists of a Pearson correlation between the predicted         wild-type promoters when using the d        2 measure, we calculated
+                                                                                                             1
+and measuredpromoter activity. The second metric is a normalized             a different type of distance d to compare participant predictions
+sum of squared differences. The third is the Spearman rank corre-            and measurements (see Eq. 8, Methods). As shown in Figure 3A, d        1
+                                                                                                                                                  1  i
+lation, which is essentially the Pearson correlation between the             clearly distinguishes wild-type promoters (mean value of d is        i
+                                                                                                                                          1
+ranks, and the fourth metric is a normalized sum of the squared              1.62 6 0.22) from mutant promoters (mean value of d is 2.23 6i
+difference in ranks. These metrics were then combined into a score           0.41, t-test P < 8 3 108 ).Inorderto understand the differences ind    1
+
+(see Methods, Eqs. 1–5).                                                     for the various mutant promoters, we formed six groups according
+     As shown in Figure 1E and Table 2, out of 21 participating              tothe natureof their mutations.InFigure3B, the different groups of
+                                                                                                                                      1
+teams, team FiRST was the best performer, with a score of 1.88,              mutations were ordered according to the associated d mean value.
+followed by team c4lab with 1.55, in a close race for the second             Participants’ predictions fared better for mutations typically in-
+                                                                                                                                       1
+place with the third team, which was then followed by a monoto-              ducing small changes in promoter expression (low d in Fig. 3B),
+
+nous decrease in the participants’ scores. When a series of aggre-           such as random mutations. Conversely, sequence mutations known
+
+
+
+1930      Genome Research
+             www.genome.org
+                                                                                        Crowdsourcing gene expression prediction
+
+
+
+Table 1.   Information on the promoter sequence mutations
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+For every promoter, locationsof TATAboxes (pink circles), and ofbinding sites for Rap1 (red),Fhl1 (green), and Sfp1 (blue) are shown.In addition, shown is the
+
+per-base pair nucleosome occupancy of every promoter (occupancy is shonia white to black scale, with white corresponding to no occupancy and olactk
+full occupancy), predicted using a computational model of nucleosome sequence preferences (Kaplan et al. 2009). Also shown isft)(summary of the
+number of factor sites that appear in every RP promoter (counts for Rap1 are olynshown for the 400 bp upstream of the TrSS; for Fhl1 and Sfp1, 300 bp; andrfo
+TATA, 200 bp), along with a column representing whether the corresponding RPene exists in a single copy in the yeast genome (first column, black) and
+
+whether it is an essential gene (second column, gray). The length of each navtei promoter is indicated (cyan vertical line) if it is shorter than 600 bp.
+
+
+
+to induce large changes by lowering promoter expression, such as          than the three best-performing teams. As the best-performing
+                                                                    1
+mutations to the TATA box, were the worst-predicted group (higd   h i     models of this challenge did not include biological features such as
+in Fig. 3B). As there is not enough data to extract a statistical measure the binding sites for Fhl1 and Sfp1, known transcriptional regu-
+
+of the differences between groups of promoters, we decided to follow      lators of RP transcription factors, we decided to try to improve
+up on the previous observation and compare thed value for each            model performance by including biological features in the best-
+                                                     i
+mutant promoter to the relative promoter activity difference induced      performer algorithm of team FiRST. To do this, we modified a re-
+by the mutations. As shown in Figure 3C,d grows exponentially             cently published mechanistically motivated model that takes into
+                                              i
+with increasing differences between wild-type and mutant promoter         account the competition between transcription factors and nu-
+expression. Hence, prediction accuracy for mutant promoters wors-         cleosomes for DNA binding sites in the regulation of gene ex-
+
+ened when mutations induced hg    iher changes on expression.             pression (Zeevi et al. 2011) (Eqs. 9 and 10; see Methods). The score
+                                                                          for this model based on C , the Pearson correlation between pre-
+                                                                                                     p
+Improving promoter expression prediction                                  dicted and observed activity, was 0.49 (see Eq. 1, Methods). We
+
+by adding biological features                                             then combined this model with that of the best-performing team,
+                                                                          FiRST, in two ways. In the first approach, we averaged the predicted
+
+As shown in Figure 1B, scores of aggregated teams were observed to        activity of each promoter by team FiRST and the mechanistic
+be robustly above the fourth-ranked team but did not fare better          model. The correlation between the predicted and actual activities
+
+
+
+                                                                                                              Genome Research           1931
+                                                                                                                www.genome.org
+Meyer et al.
+
+
+
+Table 2.  Scores from different teams ranked in descending order
+
+              Rank         Cp          X2           Sp            R2           p1          p2          p3           p4        Score
+
+
+FiRST            1       0.6475      52.6197      0.6469        35.852       0.0035      0.515       0.0011       0.0152      1.8759
+c4lab            2       0.5386      30.8202      0.4938        37.7716      0.0979      0.0013      0.162        0.0306      1.5462
+
+Team263          3       0.5184      29.7988      0.4436        37.1604      0.1461      0.0007      0.3505       0.0245      1.5107
+Team164          4       0.4925      35.1053      0.4837        40.5142      0.2243      0.0121      0.1946       0.07        1.1079
+Team259          5       0.4959      31.3914      0.456         48.8889      0.2132      0.0019      0.2982       0.3445      1.0941
+Team140          6       0.534       61.2089      0.5887        47.7112      0.1077      0.8205      0.0136       0.2944      0.8628
+Team250          7       0.4743      40.7905      0.5262        50.29        0.291       0.0783      0.0825       0.4066      0.7791
+
+Team84           8       0.5253      65.7449      0.4732        37.8666      0.1285      0.9089      0.2315       0.0317      0.7669
+Team17           9       0.5211      69.0551      0.477         41.6918      0.1391      0.9477      0.2176       0.0945      0.6418
+Team154        10        0.4457      55.4508      0.4901        40.4362      0.4071      0.6326      0.1735       0.0685      0.6286
+Team21         11        0.4197      57.103       0.5661        49.2351      0.5181      0.694       0.029        0.3599      0.6065
+Team76         12        0.469       50.4026      0.4598        42.6173      0.3116      0.4159      0.2826       0.1176      0.5914
+
+Team61         13        0.5327      55.4348      0.4514        46.5912      0.1109      0.632       0.3171       0.2494      0.564
+Team187        14        0.5467      61.9649      0.5064        55.8043      0.0825      0.8386      0.1266       0.6453      0.5619
+Team257        15        0.502       47.6773      0.4547        50.6775      0.1939      0.2976      0.3036       0.4244      0.5322
+Team253        16        0.4478      91.0982      0.4386        50.7745      0.3984      0.9996      0.3721       0.4286      0.2993
+Team264        17        0.3278      44.0867      0.2259        77.3447      0.8439      0.1645      0.9776       0.9916      0.2178
+
+Team245        18        0.3031      46.4831      0.2973        60.9865      0.8963      0.2503      0.8949       0.8163      0.1964
+Team265        19        0.3932      50.2789      0.3729        81.9649      0.6294      0.4104      0.665        0.9973      0.1916
+Team176        20        0.2658      47.6607      0.2385        72.0592      0.9485      0.2969      0.9699       0.9737      0.1438
+Team138        21        0.1279      88.8242      0.0928       106.762       0.9984      0.9994      0.9997       1           0.0003
+
+                                                                                                                   2
+Only names of the two best-performing teams are indicated. Cp (see Eq. 1) indicates the Pearson metric, X2 the score based on the x metric (see Eq. 2),
+Sp the score based on the Spearman metric (see Eq. 3), and R2 the score based on the rank metric (see Eq. 4). p1, p2, p3, and p4 are the associated
+P-values based on the null-hypothesis generated from randomized values for the distances Cp, X2, Sp, and R2. Note that P-values become significant
+                                                                                                               1    Q 4
+across the table if a less stringent null-hypothesis is applied. The last column is the final score calculated 4s the j =1jsee Eq. 5). ▯ log
+
+
+
+remained the same as for FiRST (;0.65) (see Table 1), demonstrating metric used (see Table 2). The best-performing team did not get the
+
+the robustness of aggregating predictions even when one method      top score for all metrics nor all promoters but was the most con-
+hasconsiderablylowerperformance.Giventhatthemethodbyteam            sistent. Also, participants had difficulties while predicting low-
+
+FiRSTdidnotexplicitlyusetranscription factorbinding,wereasoned      expressed promoters and certain mutant RP promoters. Finally,
+that incorporating the transcription factor binding site informationcommunity predictions were robust to the aggregation of teams’
+
+directly into team FiRST’s model should be complementary to the     results, and the best score of 2.6 was obtained by combining fea-
+method and could reveal interactions between transcription factors  tures from team FiRST’s machine-learning model and a mechanis-
+
+and sequence context. To test this idea, we included the transcrip- tic model based on biophysical assumptions.
+tion factor binding affinities for each promoter as additional features  During their presentations at the DREAM6 conference, the
+
+to those used by team FiRST (see Supplemental Table S3 for details  best-performing teams, FiRST and c4lab, showed that mutated
+on the features). We then trained a support vector machine (SVM)    promoters were harder to predict than natural promoters. Team
+
+using the combined features from both models. The resulting model   FiRST mainly used the first 100 bp of the promoter to predict pro-
+provided predictions that had a correlation of 0.67 to the actual   moter activity, and team c4lab used a 12-mer motif. Team FiRST
+
+promoter activity and a combined score of 2.6 (p = 0.67289; X2=     tried to include features such as k-mer counts (mono, di, tri, tetra,
+39.79601; Sp= 0.66815; R2 = 30.75429) (see Fig. 1E and Supple-      and penta), homopolymer stretches, promoter length, DNA bend-
+
+mental Data, DREAM6 Participants Predictions files), presenting     ability, DNA protein deformability, DNA bending stiffness, and
+a significant improvement and best performance compared to all      nucleosome binding potential. They used a machine-learning SVM
+
+the other teams or the aggregate of their predictions.              approach to select 12 features that can be summarized as follows:
+                                                                    one mononucleotide G, one dinucleotide GT, six trinucleotides, 12
+
+Discussion                                                          tetranucleotides, length of T-tracts and TA-tracts, DNA deform-
+                                                                    ability (a detailed description of this model will appear in a different
+
+The scoring and analysis of submitted predictions for the DREAM6    manuscript). Team c4lab also used different k-mer counts to finally
+Gene Promoter Expression Predictoin challenge revealed excellent    concentrate on 12-mer motifs used in a support vector regression
+
+performances (see Fig. 1E and Table2). This is, indeed, remarkable, asproach but did not find any correlation between the 12-mers and
+the data set presented a difficult learning problem due to the high biological features such as distance to a TrSS or copy number motifs
+
+homology between the promoters in the relatively small RP promoter  (see Supplemental Table S4 for a brief description of other partici-
+training set—yeast only has 137 ribosomal promoters—and lower       pants’ methods).
+
+dynamic range of promoter activity compared to what would be             Neither of the best-performing teams directly used general
+observed on a genome-wide scale. Methods with typically high        features related to transcription factors such as TATA boxes and
+
+accuracy in genome-wide predictions ranked 11 and 12 here (see      nucleosome occluding sequences. Actually, none of the four bi-
+Supplemental Table S4), indicating that the challenge posed by RP   ological features targeted by the mutations—TATA boxes, binding
+
+promoters is distinct and requires the development of specific      sites for the transcriptional regulators Fhl1 and Sfp1, and muta-
+methods in order to be solved.                                      tions to nucleosome disfavoring sequences—were detected by the
+
+     Choosing the right scoring scheme to evaluate the challenge    participants. Since most participants did not include these features
+was essential, as participants fared differently depending on the   in their models, it is not surprising that many fared worse with
+
+
+
+1932     Genome Research
+            www.genome.org
+                                                                                                 Crowdsourcing gene expression prediction
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                     q  ﬃﬃﬃﬃﬃﬃﬃﬃ2ﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ
+                                                                                                   2    < ðXip2iÞ > p
+Figure 2.    Analysis of promoter prediction results. (A) Promoters are ordered by increasing d =  i         i       , where X ip is the predicted value of
+promoter i and participant p = 1,2... 21 , and i is the measured value for promoter i = 1,2... 53. Green dots represent the 30 best predictions, and red dots
+the 23 worst predictions. Empty dots represent the 20 wild-type promoters; full dots represent the 33 mutated promoters. (B) The Pearson correlation of
+
+each of the participating teams is shown in green dots for the best predictions and in red dots for the worst predictions as defined in A. Teams are ordered
+by rank based on their final score. (C) For each promoter, xiis plotted in logarithmic scale against the promoter activity value. Empty dots represent wild-
+type promoters and full dots mutant promoters.
+
+
+
+
+promoters where these sequences were mutated. Figure 3, B and C                 quence changes that could affect the promoter expression level.
+show precisely that, as mutation-induced expression changes in-                 We expected participants to analyze the origin of these mutations
+
+crease, predictions become worse. One exception is team FiRST’s                 and think that our strategy was correct, as Figure 2A shows that,
+
+machine-learning method that was able to identify a number of                   although participants did not look for the origin of mutated pro-
+nucleosome disfavoring features, in particular TA-tracts, as being              moters, these were distributed equally between the groups of best-
+
+useful in predicting promoter activity.                                         and worst-predicted promoters. It is only when all mutated and
+
+      During the DREAM6 conference discussion, an audience                      wild-type promoters are separated into two groups thatparticipants’
+member proposed that the training set should have included mu-                  predictions for those two groups can be differentiated (Fig. 3A).
+
+tated promoter sequences. However, an intended feature of the                         The mechanism by which Fhl1, Sfp1, Rap1, and TATA boxes
+challenge was to indicate that mutated sequences were present in                contribute to the promoter expression appear to follow a simple
+
+the test set without giving hints or providing training data on se-             rule, where more sites from these factors in closer proximity to the
+
+
+
+                                                                                                                        Genome Research             1933
+
+                                                                                                                           www.genome.org
+Meyer et al.
+
+
+
+                                                                            whose activity is higher than 3 are mutated promoters, shown to
+
+                                                                            be difficult to predict. Low-activity promoters are RPL41B_Mut1,
+
+                                                                            RPL15A_Mut1, RPL21B, RPL4A_Mut6, RPL11A, RPL35B, RPL39_
+                                                                            Mut1,and   RPS14B_Mut1. As the experimental setup can distinguish
+
+                                                                            promoteractivitiesseparatedby lessthan8%,we donotthinkthatthe
+                                                                            difficulties with predicting low promoters arise from experimental
+
+                                                                            limitations while measuring lower signals. Instead, as shown in Table
+                                                                            1, promotersRPL41B_Mut1, RPL21B, RPL11A, RPL35B, RPL39_Mut1,
+
+                                                                            and RPS14B_Mut1 have dispersed or lack binding motifs (see also
+                                                                            Supplemental Table S5). The other mutations present in promoters of
+
+                                                                            low activity are RPL4A_Mut6 and RPL15A_Mut1, which cause an
+                                                                            ;70% decrease in promoter activity, and as discussed, participants
+
+                                                                            had difficulties predicting strong mutation effects. We conclude that
+
+                                                                            the difficulty participants had while predicting low-expressed pro-
+                                                                            moters is, indeed, due to less information available in these promoter
+
+                                                                            sequences and a less coherent organization of the different sequence
+                                                                            features,withveryfewTATAboxes,Fhl1,Rap1,andSfp1sites.
+
+                                                                                 Finally, the improvement of the best-performing model, by
+                                                                            mixing a biology-based mechanistic approach and machine-
+
+                                                                            learning techniques, implies that the wisdom of crowds could be
+                                                                            tapped further by methods that directly incorporate distinct fea-
+
+                                                                            tures from independent models. Simple aggregation might miss
+                                                                            the interactions between the different features in the models se-
+
+                                                                            lected. Estimating the relative contributions of features extracted
+
+                                                                            from each model could be approached as a learning problem where
+                                                                            the different models are reduced to being independent tools for
+
+                                                                            feature selection. Once the relevant features are selected, they are
+                                                                            integrated into a new model, and adequate parameters are learned
+
+                                                                            once again. Overall, we think this study not only provides
+                                                                            a benchmark for the assessment of methods predicting promoter
+
+                                                                            activity from sequence, but it also shows that understanding the
+                                                                            basis of fine-tuned regulation of highly homologous promoters
+
+                                                                            could provide clues for engineering promoter libraries to obtain
+                                                                            a desired promoter strength from a parent promoter sequence.
+
+
+
+                                                                            Methods
+
+
+                                                                            Constructing promoter strains
+
+Figure 3.   Analysis of prediction results for mutated promoters. (A)       A construct of ADH1 terminator–mCherry–TEF2 promoter–YFP–
+Promotersweredividedinto twogroupsdepending on whether they were            ADH1 terminator–NAT1 was inserted into the SGA-compatible
+wildtype(emptydots)orcontainedmutations(fulldots)andplottedaccording
+    1    X ▯j                                                               strain Y8205 at the his3 deletion location (the construct replaced
+to di=<   ij i >p,where   Xip is the predicted value of promoter i and      chromosome 15, at base pairs 721987–722506). The resulting
+            i
+participant p = 1,2... 21, and i is the measured value for promoter i =     strain served as a master strain for the entire library. Desired pro-
+1,2... 53. (B) Mutant promoter expression values were grouped               moters were lifted by PCR from the BY4741 yeast strain. Primers
+according to the nature of the mutation and ordered by mean d value
+for each group. The six groups consist of mutations of TATA boxes           contained one part matching the ends of the lifted promoters, and
+                                                                            a constant part at their59 end matching the first 25 bases of the YFP
+(Dtata), of binding sites for Fhl1 ( Dfhl1) and Sfp1 ( Dsfp1), mutations to
+nucleosome disfavoring sequences D  ( NucDisf), random mutations (Ran-      gene (for reverse primers) or a linker sequence (for forward primers;
+dom), and finally, sequences mutated intentionally with additional ran-     see all primer sequences in Zeevi et al. 2011). Each promoter was
+dom mutations (Addition). The d value for each promoter is indicated
+                               1                                            linked to a URA3 selection marker (Linshiz et al. 2008) and then
+by full dots; the mean value of d for each of the six grou1ed mutations is  amplified such that its genomic integration sites increased to 45/
+indicated by a thick bar. ( C) For each mutated promoter ii d is plotted as 50 bp. Integration into the genome was performed by homologous
+a function of the percentage of expression value change induced in the
+wild-type promoter by the mutation. The vertical scale is logarithmic.      recombination as described in Gietz and Schiestl (2007). All steps
+                                                                            were performed on 96-well plates, except for growing the final
+
+                                                                            clones, which was performed on six-well plates (2% agar, SCD–
+                                                                            URA). To validate the inserted promoter sequences, the insertions
+TrSS result in higher promoter activity (Zeevi et al. 2011). The
+contribution of one of these factors to the overall promoter activity       were lifted from each target strain by PCR and sequenced.
+
+depends on the specific organization of its sites within the pro-
+                                                                            Constructing promoter strains with targeted mutations
+moter (Lieb et al. 2001; Wade et al. 2004; Sharon et al. 2012). As
+shown in Figure 2C, participants had difficulties predicting low-           To create a mutated promoter, we amplified it in two parts which
+
+and high-expressed promoters. The thresholds for low/high pro-              flank the desired mutation area. The left part was amplified using
+moter activity are sharply defined and define values lower than             a reverse primer with a 35-bp tail at its 59 end that contains the
+
+1.5 and higher than 3, respectively. Seven of the eight promoters           desired mutation, while the right part was amplified using a for-
+
+
+
+1934      Genome Research
+             www.genome.org
+                                                                                           Crowdsourcing gene expression prediction
+
+
+
+
+ward primer that also had a similar tail. The two new parts, both           predicted values for a given promoter, and also for each partici-
+containing the desired mutation in an overlapping region of 35 bp,          pant, and that P-value was denoted as p .
+                                                                                                                      2
+were then connected, similar to the way in which we connected                    We also defined the score by comparing the rank of predicted
+promoters to the URA3 selection marker. See Table 1 and Supple-             values to the actual rank of measured values. Let us denote by R
+                                                                                                                                                ip
+mental Table S6 for more information.                                       the predicted rank of promoter i for participant p, 1< R ip<53 and r i
+
+                                                                            the rank of the measured promoter i = 1, 2 ... , 53 and p = 1,2,... ,P.
+                                                                            Then, the score based on a Spearman metric for participant p is
+
+Library measurements                                                        defined by
+
+Cells were inoculated from stocks kept at ▯80°C into SCD (180 mL,
+                                                                                             1   N            1  N       1   N
+96-well plate) and left to grow at 30°C for 48 h, reaching complete            S  ¼ qﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ:ﬃﬃﬃð3Þﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ
+saturation. Next, 8 mL were passed into fresh medium (180 mL)                   p          N             N      2     N             N    2
+                                                                                       N + i¼1ðRip▯  N + i¼1R ip: N1 +i¼1 ðji▯  N + i¼1jiÞ
+according to the desired condition (e.g., SCD, ethanol, heat shock).
+
+Measurements were carried out every ;20 min using a robotic                      A null prediction was created by randomly permuting par-
+system (Tecan Freedom EVO) with a plate reader (Tecan Infinite
+                                                                            ticipants’ predicted values for a given promoter and then ranking
+F500). Each measurement included optical density (filter wave-              a given ‘‘random’’ participant i to obtain the R  ranks across the 53
+lengths 600 nm, bandwidth 10 nm), YFP fluorescence (excitation                                                              ip
+                                                                            different rankings of promoters, thus generating a distribution of
+500 nm, emission 540 nm, bandwidths 25/25 nm, accordingly),
+                                                                            distances between measured and estimated values, for which a
+and mCherry fluorescence (excitation 570 nm, emission 630 nm,               P-value denoted as p can be estimated for S . The score based on
+bandwidths 25/35 nm, accordingly). Measurements were carried                      2               3                        p
+                                                                            a rank  metric for participant p is defined by
+out using a total of eight different conditions. In all experiments,
+yeast cells were grown on SC (6.9 g/L YNB, 1.6 g/L amino acids
+                                                                                                        N     ðjip▯ j i2
+complete). Four conditions used different 2% sugar growth media:                                  Rp ¼ +                                       ð4Þ
+                                                                                                       i¼1 1 + P  ðj  ▯ j Þ2
+SC-glucose, SC-galactose, SC-ethanol, and SC-glycerol. The other                                           P   i¼1  ip   i
+four conditions used SC-glucose with an additional stress factor:
+
+Rapamycin (40 mg/mL), amino acid starvation (no amino acids                 where j ipis the rank of proximity of X tipj ,i < j  ip< P, and rithe
+except histidine and leucine), heat shock (39°C), and osmotic               rank of the measured promoter i = 1, 2 ... , 53. The null hypothesis
+
+stress (750 mM KCl). Every strain was measured in three biological          was derived from the random permutation of participants’ pre-
+                                                                            dicted values for a given promoter and then ranking a given
+replicates for each condition. Most of the data analysis was per-
+formed on data from growth on SC-glucose (without stress), which            ‘‘random’’ participant. The derived P-value is denoted as p . T4e
+
+was measured in five replicates.                                            overall score was defined as a function of the product of all the
+                                                                            P-values defined as
+
+
+                                                                                                                    Y4
+Scoring                                                                                                       1
+                                                                                                    Score ¼▯  4 log    pj:                     ð5Þ
+The challenge was scored in four different ways using criteria based                                                j¼1
+
+on the ‘‘distance’’ between measured and predicted values or dif-
+ferences in rank between measured and predicted values. As we               Prediction distances to promoter values
+
+requested predictions of the expression levels from N = 53 pro-             The average distance d over all participants p for promoter i from
+moter sequences, let us denote by X         the predicted activity of                               i
+                                         ip                                 the promoter predicted value (X  ip) to the promoter measured value
+promoter i for participant p, and j thi measured activity of pro-           (ji) is defined as
+
+moter i = 1, 2 ... , 53 and p = 1,2... .,P, where P = 21 is the number of                              s  ﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ
+teams that participated in the challenge. The score based on                                                          2
+                                                                                                    2       ðX ip▯ j i
+a Pearson metric for participant p is defined by                                                  d i¼    <       2     > p                    ð6Þ
+                                                                                                                ji
+
+                        <X :j > ▯ <X >< j >
+                  C p¼      ip  iq ﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ  :              ð1Þ
+                                     2   2
+                                   s Xip ji                                      We also considered whether promoter activity was correlated
+                                                                            to the difficulty to predict its value and used the following measure
+
+                                                                            xidefined by
+     In order to calculate for each participant the probability of
+getting by chance a score at least as good, we randomly sampled
+                                                                                                           <X ip> pj   i
+the predictions across the entire set of participants. For each pro-                              xi¼  qﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ:ð7Þ
+                                                                                                         ðX ip▯ <X  ip> p 2
+moter i = 1,2... 53, we chose at random one of the X        ip predic-
+tions, where p = 1,2,... ,P. We thus obtained a value of C whiph
+
+corresponded to one possible random choice of predictions among
+allthe participants.Byrepeatingthe sameprocess100,000times,we                    We finally calculated a different type of distance d        1  to
+                                                                                                                                              i
+generated a null distribution of distances between measured and             compare participant predictions and measurements, defined such
+
+estimated values, from which a P-value can be estimated for C .Fop          that
+each participant, that P-value was denoted as p .                                                           ▯       ▯
+                               2                 1                                                          ▯       ▯
+     The score based on the x   metric for participant p is defined by                              d1      X ip▯ j i                          ð8Þ
+                                                                                                     i ¼ <     j      >p:
+                                           2                                                                    i
+                       2    N     ðXip▯ j i
+                      jp ¼ +      P           2 :                  ð2Þ
+                           i¼1 P+ i¼1 ðXi▯ j i
+                                                                            Combined model
+
+     The null hypothesis was generated in a similar way by gen-             We considered binding sites for three transcription factors—Rap1
+
+erating P-values resulting from the permutation of participants’            (Wade et al. 2004), Fhl1 (Harbison et al. 2004; Schawalder et al.
+
+
+
+                                                                                                                 Genome Research            1935
+
+                                                                                                                    www.genome.org
+Meyer et al.
+
+
+
+                                                                                                       11                12                    12
+2004; Wade et al. 2004), Sfp1 (Badis et al. 2008; Zhu et al.                    Shahrokh Esfahani,        Rene Dreos,       Philipp Bucher,       Ezekiel
+2009)—that have been shown to influence yeast ribosomal gene                    Maier, 13 Yvan Saeys,   14,15,16Ewa Szczurek,   17  Alena Mysickova,  ´ 17
+
+expression. Our model considered promoter activity X as direcply                Martin Vingron,     17 Holger Klein,    18 Szymon M. Kie1basa,       17,19
+                                                                                             20                20                  20                   21
+proportional to the binding likelihood of each of the three tran-               Jeff Knisley,   Jeff Bonnell,     Debra Knisley,      Miron B. Kursa,
+scription factors to their cognate motifs, above a specific thresh-                                     21                                     22
+                                                                                Witold R. Rudnicki,         Madhuchhanda Bhattacharjee,            Mikko
+old, relative to the nucleosome binding potential of the same                   J. Sillanpaa,23 James Yeung,    24 Pieter Meysman,     25,26,27 Aminael
+                                                                                                      25                   25,28                     15,25
+sites:                                                                          Sanchez Rodrıguez,      Kristof Engelen,        Kathleen Marchal,
+                                                                                                  29                      29                            29
+                                   pðtÞ                                         Yezhou Huang, Fantine Mordelet,               Alexander Hartemink,
+                                                                                Luca Pinello,  30 and Guo-Cheng Yuan       30
+                    X p 1 þ +       + w Ptt ¼ bjS½i▯Þ                  ð9Þ
+                               t TFs i¼1
+
+
+                                                                                Acknowledgments
+where P(t) is the set of all potential binding sites for transcription
+factor t above a certain threshold, w ista coefficient measuring the            We thank Noam Kaplan from the Weizmann Institute of Science
+
+relative contribution of factor t to the promoter activity de-                  for computing the average nucleosome occupancies and Kahn
+termined using MATLAB’s nonlinear solver, and Pðt Þ=bjS½i▯          is the      Rhrissorrakrai for useful comments on the manuscript.
+
+probability that transcription factor t binds its potential site at
+
+position i in promoter sequence S. To determine the binding sites
+for the three transcription factors, we used their sequence speci-              References
+
+ficities documented in position weight matrices (PWMs) (Basehoar                Badis G, Chan ET, van Bakel H, Pena-Castillo L, Tillo D, Tsui K, Carlson
+
+et al. 2004; Badis et al. 2008; Zhu et al. 2009). In estimating the                 CD, Gossett AJ, Hasinoff MJ, Warren CL, et al. 2008. A library of yeast
+binding threshold for each transcription factor, we explored                        transcription factor motifs reveals a widespread function for Rsc3 in
+
+the correlation between promoter activity and sites above each                      targeting nucleosome exclusion at promoters. Mol Cell 32: 878–887.
+                                                                                Basehoar AD, Zanton SJ, Pugh BF. 2004. Identification and distinct
+possible threshold at intervals of 0.1. For each transcription                      regulation of yeast TATA box-containing genes. Cell 116: 699–709.
+factor, we considered potential binding sites as those with an
+                                                                                Beer MA, Tavazoie S. 2004. Predicting gene expression from sequence. Cell
+affinity above the threshold and located within known spatial                       117: 185–198.
+localization sites: for Rap1, 400 bp upstream of the TrSS; for Fhl1             Gertz J, Cohen BA. 2009. Environment-specific combinatorial cis-regulation
+
+and Sfp1, 300 bp upstream of t he TrSS (Zeevi et al. 2011). We                      in synthetic promoters. Mol Syst Biol 5: 244.
+                                                                                Gietz RD, Schiestl RH. 2007. Microtiter plate transformation using the LiAc/
+then modeled the probability for tr anscription factor binding as                   SS carrier DNA/PEG method. Nat Protoc 2: 5–8.
+the weight of the configuration in which the factor is bound
+                                                                                Harbison CT, Gordon DB, Lee TI, Rinaldi NJ, Macisaac KD, Danford TW,
+divided by the sum of the weight of that configuration, the                         Hannett NM, Tagne JB, Reynolds DB, Yoo J, et al. 2004. Transcriptional
+                                                                                    regulatory code of a eukaryotic genome. Nature 431: 99–104.
+weight of the configuration in which the DNA is unbound, and
+the weight of the configuration in which a nucleosome is bound                  Irie T, Park SJ, Yamashita R, Seki M, Yada T, Sugano S, Nakai K, Suzuki Y. 2011.
+                                                                                    Predicting promoter activities of primary human DNA sequences.
+to the site:                                                                        Nucleic Acids Res 39: e75.
+
+
+                                          A t½i▯
+                 ¼Pðt Þ¼ bjS½i▯                                       ð10Þ      12Swiss Institute for Experimental Cancer Research (ISREC), School of Life
+                                   1 þ A t½i▯þ A nuc S½i▯
+                                                                                Sciences, Swiss Federal Institute of Technology (EPFL), CH-1015 Lausanne,
+                                                                                Switzerland
+where 1 represents the DNA unbound configuration, A             S½i▯ repre-     13Center for Genome Sciences and Systems Biology and Department of
+                                                               t
+sents the affinity of transcription factor t for the binding site at            14mputer Science, Washington University, St. Louis, Missouri 63110, USA
+                                                                                  Laboratory of Immunoregulation and Mucosal Immunology, Department for
+position i in promoter S, and A   nuc S½i▯ is the affinity of nucleosomes       Molecular Biomedical Research, VIB, Ghent University, 9052 Gent, Belgium
+for position i in promoter S.                                                   15
+                                                                                  Department of Plant Systems Biology, VIB, Ghent University, 9052 Gent,
+      For A nucS½i▯, we used a sequence-based nucleosome affinity               Belgium
+                                                                                16Department of Plant Biotechnology and Bioinformatics, Ghent University,
+model to compute the average nucleosome occupancy (Kaplan                       9052 Gent, Belgium
+et al. 2009).                                                                   17
+                                                                                  Max Planck Institute for Molecular Genetics, 14195 Berlin, Germany
+      We applied w cotfficients obtained from a nonlinear solver                18Institute of Molecular Biology, 55128 Mainz, Germany
+                                                                                19Institute for Medical Genetics, Univers¨tsklinikum Charite, 13353 Berlin,
+trained on 90 promoters to predictpromoter activities of a held-out
+set of 53 promoters used in the DREAM challenge.                                20rmany
+                                                                                  The Institute for Quantitative Biology, East Tennessee State University,
+                                                                                Johnson City, Tennessee 37614-0663, USA
+                                                                                21
+DREAM6 consortium                                                                 Interdisciplinary Centre for Mathematical and Computational Modeling,
+                                                                                University of Warsaw, 00-927 Warsaw, Poland
+                7                   8             7                      7      22School of Mathematics and Statistics, University of Hyderabad, Hyderabad-
+Geoffrey Siwo, AndrewK. Rider, Asako Tan, Richard S. Pinapati,
+               8                  8                     7,8              9      230046, India
+Scott Emrich, Nitesh Chawla, Michael T. Ferdig,             Yi-An Tung,           Department of Mathematical Sciences, Department of Biology, Biocenter
+Yong-Syuan Chen,     10 Mei-Ju May Chen, Chien-Yu Chen,         9,10Jason       Oulu, University of Oulu, FIN-90014 Finland
+                                                                                24Department of Mathematics, MIT, Cambridge, Massachusetts 02139, USA
+M. Knight,  11 Sayed Mohammad Ebrahim Sahraeian, Mohammad 11                    25
+                                                                                  Department of Microbial and Molecular Systems, KU Leuven, Leuven,
+                                                                                Belgium
+                                                                                26Department of Mathematics & Computer Sciences, University of Antwerp,
+7
+ Eck Institute for Global Health, Department of Biological Sciences, University of020 Antwerp, Belgium
+Notre Dame, Notre Dame, Indiana 46556, USA                                      27Biomedical Informatics Research Center Antwerp (biomina), University of
+8Interdisciplinary Center for Network Science and Applications (iCeNSA), Uni-   Antwerp, B2020 Antwerp, Belgium
+                                                                                28
+9ersity of Notre Dame, Notre Dame, Indiana 46556, USA                             Fondazione Edmund Mach, Research and Innovation Centre, 38010 Trento,
+ Genome and Systems Biology Degree Program, National Taiwan University          Italy
+and Academia Sinica, Taipei 106, Taiwan                                         29Department of Computer Science, Duke University, Durham, North Carolina
+10
+  Department of Bio-Industrial Mechatronics Engineering, National Taiwan        30708, USA
+University, Taipei 106, Taiwan                                                    Department of Biostatistics and Computational Biology, Dana-Farber Cancer
+11Electrical Engineering Department, Texas A&M University, College Station,     Institute, Department of Biostatistics, Harvard School of Public Health, Boston,
+Texas 77843, USA                                                                Massachusetts 02115, USA
+
+
+
+
+1936       Genome Research
+             www.genome.org
+                                                                                              Crowdsourcing gene expression prediction
+
+
+
+Kalir S, McClure J, Pabbaraju K, Southward C, Ronen M, Leibler S,             Sharon E, Kalma Y, Sharp A, Raveh-Sadka T, Levo M, Zeevi D, Keren L,
+
+    Surette MG, Alon U. 2001. Ordering genes in a flagella pathway by             Yakhini Z, Weinberger A, Segal E. 2012. Inferring gene regulatory logic
+    analysis of expression kinetics from living bacteria. Science 292: 2080–      from high-throughput measurements of thousands of systematically
+    2083.                                                                         designed promoters. Nat Biotechnol 30: 521–530.
+Kaplan N, Moore IK, Fondufe-Mittendorf Y, Gossett AJ, Tillo D, Field Y,
+                                                                              Shortle D. 1995. Protein fold recognition. Nat Struct Mol Biol 2: 91–93.
+    LeProust EM, Hughes TR, Lieb JD, Widom J, et al. 2009. The DNA-           Stolovitzky G, Monroe D, Califano A. 2007. Dialogue on reverse-
+    encoded nucleosome organization of a eukaryotic genome. Nature 458:           engineering assessment and methods. Ann NY Acad Sci 1115: 1–22.
+    362–366.                                                                  Wade JT, Hall DB, Struhl K. 2004. The transcription factor Ifh1 is a key
+
+Lieb JD, Liu X, Botstein D, Brown PO. 2001. Promoter-specific binding of          regulator of yeast ribosomal protein genes. Nature 432: 1054–1058.
+    Rap1 revealed by genome-wide maps of protein-DNA association. Nat         Zeevi D, Sharon E, Lotan-Pompan M, Lubling Y, Shipony Z, Raveh-Sadka T,
+    Genet 28: 327–334.                                                            Keren L, Levo M, Weinberger A, Segal E. 2011. Compensation for
+Linshiz G, Yehezkel TB, Kaplan S, Gronau I, Ravid S, Adar R, Shapiro E. 2008.
+                                                                                  differences in gene copy number among yeast ribosomal proteins is
+    Recursive construction of perfect DNA molecules from imperfect                encoded within their promoters. Genome Res 21: 2114–2128.
+    oligonucleotides. Mol Syst Biol 4: 191.                                   Zhu C, Byers KJ, McCord RP, Shi Z, Berger MF, Newburger DE, Saulrieta K,
+Moult J. 1996. The current state of the art in protein structure prediction.      Smith Z, Shah MV, Radhakrishnan M, et al. 2009. High-resolution DNA-
+    Curr Opin Biotechnol 7: 422–427.
+                                                                                  binding specificity analysis of yeast transcription factors. Genome Res 19:
+Moult J, Pedersen JT, Judson R, Fidelis K. 1995. A large-scale experiment to      556–566.
+    assess protein structure prediction methods. Proteins 23: ii–iv.
+Schawalder SB, Kabani M, Howald I, Choudhury U, Werner M, Shore D.
+
+    2004. Growth-regulated recruitment of the essential yeast ribosomal
+    protein gene activator Ifh1. Nature 432: 1058–1061.                       Received March 12, 2013; accepted in revised form August 14, 2013.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                     Genome Research            1937
+
+                                                                                                                        www.genome.org

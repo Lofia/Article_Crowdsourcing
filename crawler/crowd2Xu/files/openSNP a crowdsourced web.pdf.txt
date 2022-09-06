@@ -1,0 +1,882 @@
+openSNP–A Crowdsourced Web Resource for Personal
+
+
+Genomics
+
+                       1,2                       3,4                   5                6
+Bastian Greshake          *, Philipp E. Bayer       , Helge Rausch , Julia Reda
+
+1Molecular Ecology Group, Biodiversity & Climate Research Centre, Frankfurt am Main, Germany, 2Department for Applied Bioinformatics, Institute for Cell Biology and
+Neuroscience, Goethe University, Frankfurt am Main, Germany, 3School of Land, Crop, and Food Sciences, University of Queensland, Brisbane, Australia, 4Australian
+Centre for Plant Functional Genomics, School of Agriculture and Food Sciences, University of Queensland, Brisbane, Australia, 5Hochschule fur Technik und Wirtschaft,
+
+Berlin, Germany, 6Johannes Gutenberg University, Mainz, Germany
+
+
+    Abstract
+
+    Genome-Wide Association Studies are widely used to correlate phenotypic traits with genetic variants. These studies usually
+
+    compare the genetic variation between two groups to single out certain Single Nucleotide Polymorphisms (SNPs) that are
+    linked to a phenotypic variation in one of the groups. However, it is necessary to have a large enough sample size to find
+    statistically significant correlations. Direct-To-Consumer (DTC) genetic testing can supply additional data: DTC-companies
+    offer the analysis of a large amount of SNPs for an individual at low cost without the need to consult a physician or
+
+    geneticist. Over 100,000 people have already been genotyped through Direct-To-Consumer genetic testing companies.
+    However, this data is not public for a variety of reasons and thus cannot be used in research. It seems reasonable to create a
+    central open data repository for such data. Here we present the web platform openSNP, an open database which allows
+
+    participants of Direct-To-Consumer genetic testing to publish their genetic data at no cost along with phenotypic
+    information. Through this crowdsourced effort of collecting genetic and phenotypic information, openSNP has become a
+    resource for a wide area of studies, including Genome-Wide Association Studies. openSNP is hosted at http://www.opensnp.
+    org, and the code is released under MIT-license at http://github.com/gedankenstuecke/snpr.
+
+
+  Citation: Greshake B, Bayer PE, Rausch H, Reda J (2014) openSNP–A Crowdsourced Web Resource for Personal Genomics. PLoS ONE 9(3): e89204. doi:10.1371/
+  journal.pone.0089204
+
+  Editor: Tricia A. Thornton-Wells, Vanderbilt University, United States of America
+
+  Received October 31, 2012; Accepted January 9, 2014; Published March 19, 2014
+  Copyright: ß 2014 Greshake et al. This is an open-access article distributed under the terms of the Creative Commons Attribution License, which permits
+  unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
+
+  Funding: The study was partially funded by 5000J from the German Wikimedia Foundation (http://www.wikimedia.de/wiki/Hauptseite) in the context of their
+  WissensWert contest, which funds projects for the use of open licenses to create a more open culture (2011) (http://de.wikipedia.org/wiki/Wikipedia:WissensWert).
+  The funders had no role in study design, data collection and analysis, decision to publish, or preparation of the manuscript. No additional external funding was
+  received for this study.
+  Competing Interests: The authors have declared that no competing interests exist.
+
+  * E-mail: info@opensnp.org
+
+
+
+Introduction                                                          degeneration in contrast to a healthy control group [7]. Since the
+                                                                      beginning, the number of participants in such studies has been
+  The availability of new DNA sequencing techniques has shifted
+                                                                      rising. To date, over 1200 GWAS have been performed [8] and
+the focus of biological data acquisition towards new biomedical       over 5000 SNPs have been linked to different illnesses and traits
+applications. Many illnesses - for example Alzheimer’s [1],           [9].
+Parkinson’s [2] or different types of cancers [3,4] - are at least
+                                                                        GWAS are not only performed inside the traditional scientific
+partially heritable, so the genome of patients can be used for        community. Since 2006, companies like 23andMe, deCODEme
+diagnostic purposes. Using the genetic information of patients for
+                                                                      or FamilyTreeDNA have been offering Direct-To-Consumer
+diagnostics is made possible through the sharp decrease in costs for  (DTC) genetic testing. These companies use DNA microarrays
+analysing genetic information [5].                                    to screen for around 0.5 to 1 million SNPs spread over the human
+  If genetic information on more than one individual is known,
+                                                                      genome. In return, customers receive an analysis of the results, as
+the analysis of allele frequencies of Single Nucleotide Polymor-      well as a raw file that includes the customer’s individual genotypes.
+phisms (SNPs) can be used to associate such SNPs with illnesses       In 2011, 23andMe alone had over 100,000 customers [10]. The
+and other inheritable traits. Genome-Wide Association Studies
+                                                                      company realizes the potential of performing GWAS with this
+(GWAS) make use of statistics to compare the allele frequencies in    amount of data by using surveys to ask their customers about traits
+patients to the alleles in healthy controls. This enables GWAS to     and illnesses. With the consent of the customer, the data is used for
+find SNPs which are significantly overrepresented in patients and
+                                                                      association studies. 23andMe has published several studies in
+associates those SNPs with a trait or illness. While the method does  which known findings are replicated together with new associa-
+not allow inference of causal differences but merely identifies
+                                                                      tions for disorders like Parkinson’s Disease [11,12]. So far, over
+correlations, it can serve as a valuable tool for the unbiased        30,000 23andMe-customers have participated in 23andMe’s
+discovery of candidate loci, which then can be checked up in          association studies, which proves that this data source has a lot
+functional follow-up studies [6], leading to a deeper understanding
+                                                                      of potential for other researchers.
+of diseases and thus potentially to new drug targets. The first         The generation of biomedical data by private companies raises
+GWAS was published in 2005 and compared age-related macular           concerns about privacy [13], liability and consent [14]. Nevertheless,
+
+
+
+PLOS ONE | www.plosone.org                                         1                         March 2014 | Volume 9 | Issue 3 | e89204
+                                                                                        openSNP - A Web Resource for Personal Genomics
+
+
+
+in some instances individual customers are willingly sharing their    performing GWAS or other types of analysis with the data.
+
+data. Most do so by uploading their data to their personal website or Customers of DTC testing are encouraged to share their
+to open software repositories like GitHub. This data is scattered and genotyping results along with their phenotypic traits to enable
+unorganized, making it hard to use in studies. While projects like    easy access for researchers. Users of openSNP can create a
+
+SNPedia try to keep track of all the publicly available genotyping    personal profile, discuss SNPs and phenotypes on the platform
+files [15], they usually do not provide the information necessary to  using a simple commenting system, or send each other private
+perform GWAS, as the phenotypic information is often not attached     messages.
+to the genetic information. Projects that attach the phenotype to the
+                                                                        People interested in using the data of openSNP can download
+genetic information, like the Personal Genome Project [16], still do ncomplete dumps of the genotypic and phenotypic information or
+allow for an easy re-use of the data, as they currently lack an       use query API endpoints utilizing JavaScript Object Notation
+application programming interface (API) or other methods by which
+                                                                      (JSON) objects or the Distributed Annotation System (DAS) [23].
+researchers could download the data. Additionally, not every            Currently users can upload their genotyping results from the
+customer of DTC genetic testing can participate in the Personal       companies 23andMe, deCODEme and FamilyTreeDNA via a web
+Genome Project, as their consent forms only allow residents of the
+                                                                      interface to the openSNP project. There is experimental support
+United States to apply.                                               for uploading exomes in the VCF format [24], as 23andMe recently
+  Crowdsourcing, giving a task into the hands of a potentially        started exome sequencing for its customers. Due to space
+large number of – mainly intrinsically motivated – people, has
+                                                                      constraints on the database level, openSNP currently only displays
+become a widely used practice in the internet age and is getting      the SNPs of the exome data sets on the website but the whole VCF
+adopted in the realm of science as well. One of the main benefits of  files can be downloaded. The uploaded data is published under the
+crowdsourcing is that small contributions to a project pile up to     Creative Commons Zero license, which – in accordance with the
+create a larger work, which would have been virtually impossible
+                                                                      Panton Principles [25] – allows a complete re-use of the data
+to create otherwise. This approach especially benefits scientists     without any constraints. Between the launch of openSNP on 09/
+who might not have enough funding or time to create data, or in       27/2011 and 10/27/2012, 633 people have signed up with
+cases where the amounts of data are too large to be analyzed by
+                                                                      openSNP, and 270 genetic datasets have been made available. As
+researchers alone. Galaxy Zoo and FoldIt [17,18] are two of the       of 10/27/2012, the openSNP database lists 215,546,685 geno-
+best known examples. Galaxy Zoo enables amateur astronomers           types which are distributed over 2,140,643 unique SNPs. Figures 1
+to walk through telescopic images to categorize the shown objects
+                                                                      and 2 depict the increase in users and genotyping files since
+at a rate which could not have been matched by the efforts of         September 2011.
+professional astronomers. Similarly, crowdsourcing can not only
+be applied to analyzing data, but also to collecting data. This
+                                                                      Crowdsourcing phenotypes
+approach has been shown to work when it comes to tracking bird          Users are able to create new phenotypes that are not yet listed
+migration [19]. With the advent of DTC genetic testing and the        by openSNP. The specification of these phenotypes is open and
+internet, a similar approach can now be applied to human
+genetics.                                                             not limited to pre-defined categories. To reduce the amount of
+                                                                      manual data curation, openSNP tries to harmonize the expression
+  There have been studies investigating how likely customers of       and spelling of the same phenotype or variation. We implemented
+such companies are to share their data. [20] investigated the
+likelihood of 2,024 individuals to share their test results with theiran autocompletion feature, which helps users reuse already
+                                                                      entered phenotypes. Users are encouraged to list as many
+health-care providers and found that 26.5% (540 individuals) did      phenotypes as possible through a simple achievement system,
+share their results with their physician or health-care provider.
+Those that shared were older, had a higher income and were less       rewarding users that upload their data and enter phenotypic
+                                                                      information with badges that are shown on their profile pages.
+concerned about testing or the privacy implications of sharing          In the same timeframe mentioned above, all users combined
+their data compared to customers that didn’t share their data.
+  Other studies have shown that DTC customers see themselves          have entered a total of 4743 variations on 130 different phenotypes
+                                                                      with those variations being the different values on a given trait or
+as being well-informed. Interviews with early adopters have shown     phenotype. The mean number of users that have entered their
+that these customers are better informed and more skeptical about
+the capabilities of genotyping than expected [21]. However, in        variations for a single phenotype is 36.48. The distribution of how
+another study of early adopters, 32% of customers had misper-         many users have entered their data per phenotype, compared to
+                                                                      the amount of unique phenotypes, can be seen in Figure 3. The
+ceptions about personal genomic testing [22]. Of these partici-
+pants, 92% intended to share their results with physicians in order   phenotype provided by the most users is ‘‘eye color’’, for which
+to receive medical recommendations. In both studies, participants     207 users entered their phenotype (retrieved 10/27/2012).
+
+generally chose this technology to be better informed about
+genetic risks and to satisfy their own curiosity.                     Connection to external services
+  Here, we present openSNP, an online platform which enables            In order to provide users with relevant information on their
+                                                                      respective genotypes, openSNP scans databases of the scientific
+DTC customers to share genotypic and phenoytypic information,
+as well as receive additional information on their genotypes. The     literature for specific SNPs. A total number of 21,134 documents
+genotypes are made available to researchers via the open Creative     relevant to the SNPs listed in openSNP could be found in the
+                                                                      publication and annotation databases of Mendeley, the Public
+Commons Zero license.
+                                                                      Library of Science, in the GET Evidence System [16] and the NHGRI
+Results                                                               GWAS Catalog [9] and in the crowdsourced SNPedia (Figure 4). Of
+                                                                      the primary literature listed on Mendeley, the NHGRI GWAS
+
+Sharing genotypic information                                         Catalog & the Public Library of Science, about 20% are released in
+  We created the openSNP project (http://opensnp.org) as an           open access journals and can be accessed free of charge (Figure 5),
+open, crowdsourced online platform for DTC customers interested       although probably not all publications on Mendeley are correctly
+
+in sharing their raw data and for researchers interested in           flagged and the NHGRI GWAS Catalog does not give details on
+
+
+PLOS ONE | www.plosone.org                                         2                         March 2014 | Volume 9 | Issue 3 | e89204
+                                                                                          openSNP - A Web Resource for Personal Genomics
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 1. Growth of openSNP-user-accounts. The increase in numbers for users from 27.09.2011 to 27.10.2012 is shown.
+doi:10.1371/journal.pone.0089204.g001
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 2. Growth of available genotypings. The increase in numbers for genotyping-files from 27.09.2011 to 27.10.2012 is shown.
+doi:10.1371/journal.pone.0089204.g002
+
+
+
+
+PLOS ONE | www.plosone.org                                           3                          March 2014 | Volume 9 | Issue 3 | e89204
+                                                                                       openSNP - A Web Resource for Personal Genomics
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 3. Development of unique phenotypes and phenotypic information over time. The x-axis shows the time-frame from start of the
+project until October 2012, the left y-axis shows how many unique phenotypes have been entered, and the right y-axis shows the amount of
+phenotypes users entered.
+doi:10.1371/journal.pone.0089204.g003
+
+
+whether a publication is open access or not. So the total number of  [23,27], which offers all data for specific chromosomes and specific
+open access publications might be higher.                            positions on single chromosomes. An example of how the DAS can
+
+  For usability reasons, SNPs are ranked by the amount of            be used is implemented on openSNP, where users’ genotypes are
+information gathered through the external services. The external     visualized inside a genome browser. All chromosomal positions are
+services themselves are ranked by how easily non-scientists can      based on the human reference genome NCBI37, as this is the
+
+understand information from these sources and how available this     standard reference used by DTC providers right now.
+information is to the public. The SNPedia entries are given the         The data is additionally available over a JSON API which
+highest impact, as those are already manually curated and            allows users to directly access data in the JSON format. The
+
+summarized in plain English, followed by open access publications    methods allow users to programmatically look for the genotypes
+out of the Public Library of Science and the curated databases of    and annotations at a given SNP as well as for phenotypes for a
+the GET Evidence System and the NHGRI GWAS Catalog. Lowest           given user and phenotypic variation for a given phenotype.
+
+values are given to the Mendeley results, as the publications listed
+there are for the most part not freely available without             Discussion
+subscriptions or one-time payments. An entry on SNPedia is
+valued 2.5 times as high as a PLOS publication or entries in GET        Here, we present openSNP, a crowdsourced resource that
+
+or the GWAS Catalog and 5 times as high as a Mendeley entry.         enables customers of DTC testing companies to share their
+  Users are also able to link their Fitbit[26] accounts to their user-enotypings with researchers and receive new annotations for their
+accounts. Fitbit is a commercial service which lets its customers    genetic variants. Through a of number of active users already
+
+track their BMI, movement and sleep data. This data can be           present on openSNP, we have shown that at least some customers
+linked to openSNP to give interested researchers an automatically    of DTC companies are willing to share their data at no cost to
+maintained dataset of body and sleep developments over time.         researchers around the world and are willing to annotate their
+
+                                                                     data with phenotypes.
+Data access
+                                                                     Comparing openSNP to other crowdsourcing platforms
+  openSNP offers complete access to the data uploaded by users.
+Anyone can download single genotyping files for specific users, get     Projects similar to openSNP are the SNPedia, the Personal
+archives of multiple genotyping files grouped by phenotypic          Genome Project and PatientsLikeMe.com (see table 1 for an
+
+variation, or access a single download that includes all genotyping  overview). The focus of the SNPedia is the aggregation and
+files and all phenotypic variation in a comma-separated table. For   summary of primary scientific literature on SNPs. The project uses
+privacy reasons, openSNP does not log any IPs. The genetic data      a Wiki to store and display the data collected by volunteers
+
+is also accessible through the Distributed Annotation System         contributing to the project. The data is mainly organized by the
+
+
+PLOS ONE | www.plosone.org                                        4                          March 2014 | Volume 9 | Issue 3 | e89204
+                                                                                          openSNP - A Web Resource for Personal Genomics
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 4. Distribution of annotation-sources at openSNP. Currently, SNP-annotations from SNPedia, PLOS, Mendeley, the GET Evidence System
+and the NHGRI GWAS Catalog are being collected.
+doi:10.1371/journal.pone.0089204.g004
+
+
+unique Rs-ID, as given by dbSNP. If Rs-IDs are missing, the             pages may list scientific literature and summaries on the found
+
+identifiers given by the DTC testing companies may be used,             impact can be given. As those pages are largely created manually
+similar to the way openSNP stores the data. For individual SNPs,        and not automatically through database access, these summaries
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 5. Ratio of open access Publications. Green pieces are open access. The NHGRI GWAS Catalog doesn’t give information about the open
+
+access status.
+doi:10.1371/journal.pone.0089204.g005
+
+
+
+PLOS ONE | www.plosone.org                                           5                          March 2014 | Volume 9 | Issue 3 | e89204
+                                                                                             openSNP - A Web Resource for Personal Genomics
+
+
+
+may not be complete. openSNP utilizes the SNPedia by crawling             Privacy, health implications and ethical considerations
+their data for SNPs, the summary of the impact and the magnitude
+                                                                            Much of the criticism of DTC genetic testing focuses on the
+a SNP has. While they offer a page listing download-URLs, the             practice of delivering medical information without consulting a
+SNPedia does not offer any uploading capabilities for genetic data
+                                                                          physician or genetic counselor to help patients/customers make
+and has no APIs to easily access SNPs or data subsets in the              sense of the information and to put the new knowledge to good use
+different data sets. Similarly, there is no way for users of SNPedia      [30–32].
+
+to share their phenotypes in a machine readable format.                     There is a variety of ethical and privacy implications when it
+   The Personal Genome Project (PGP) has its focus on collecting          comes to DTC genetic testing [14,33,34]. Nevertheless, studies
+and hosting genetic as well as phenotypic data. Unlike openSNP,
+                                                                          show that DTC customers are willing to share their results given
+they do not offer a completely open enrollment. For each                  the right circumstances and personal benefits gained through the
+participant of the PGP, eligibility has to be established and
+                                                                          sharing, while being aware that sharing genetic data can lead to
+participants have to give IRB approved informed consent. This             misuse of the data and consequences such as genetic discrimina-
+allows for an easier re-use of the data, but at the same time makes       tion [20].
+
+it impossible for many people to enroll (e.g. non-US citizens).             As people are concerned about their privacy and fear that
+Depending on the specific use one has for the data, the PGPs              stakeholders like employers, insurance companies, governments or
+
+enrollment policy might be preferable to the open approach                advertisers might misuse the information [35], policy makers start
+openSNP takes. While the PGP stores genotyping data as well as            to react to those changes by having introduced laws like the Genetic
+exome and genome data sets, it is currently impossible to access
+                                                                          Information Non-Discrimination Act (GINA) in the United States or the
+this data through an API, instead data has to be manually                 Gendiagnostikgesetz (GenDG) in Germany to minimize the impact of
+extracted from their database. The annotation database of the             widely available genetic information. DTC genetic testing
+
+PGP is not aimed at delivering specific publications, but instead         companies themselves also try to create online communities - like
+focuses more on specific traits. The annotation data stored by the        the 23andMe community forums - that help in educating their
+
+PGP is incorporated into openSNP as well.                                 customers about the risks of releasing genetic data [36]. Neither
+   PatientsLikeMe is a community for patients with life-changing          GINA nor the GenDG offer complete protection from genetic
+illnesses to track and share the development of their illness with
+                                                                          discrimination, as certain areas, such as life insurances, are not
+other patients with similar illnesses [28]. This helps patients in        covered by those laws.
+gaining a better understanding of their illnesses – 72% of surveyed         openSNP openly addresses the problem of privacy implications
+
+participants found the site ‘‘moderately’’ or ‘‘very helpful’’, for       that come with releasing genetic data twice, once during
+example when it comes to starting a new medication (37% found             registration for openSNP and once during the upload of the
+
+the site helpful), or when it comes to changing the medication            DTC genetic testing results. Users have to confirm that they have
+(27%). Some subsets of data stored in PatientsLikeMe are open to          read and understood the disclaimer about possible side-effects of
+the public and have been shown to be useful for research, for
+                                                                          publishing their data. Further versions of openSNP may include
+example in Multiple Sclerosis [29]. Alternatively, access to the          further consent processes.
+data they store can be licensed by researchers for a fee.
+                                                                            For users of openSNP, the biggest potential problem is legal
+   There are some projects that use gamification to let players           genetic discrimination, in fields not covered by laws such as GINA
+work with crowdsourced scientific data. For example, FoldIt is a          or GenDG, once their public data is re-identified. As the genetic
+
+puzzle game that lets players fold protein structures in order to         information itself is highly personalized the anonymous sharing of
+achieve optimal structures. Players of Foldit have been able to           genetic data is impossible. And while users can register pseudon-
+identify protein structures and were even able to improve the
+                                                                          ymously, this should not be seen as ultimate protection against re-
+activity of existing protein structures [17]. Another example is          identification. A recent study once again showed that metadata,
+Galaxy Zoo [18], which allows everyone to perform classification
+                                                                          potentially attached to genetic profiles, such as date of birth,
+tasks for galaxies based on images collected by the Sloan Digital         gender and postal code, can be be used to re-identify individuals
+Sky Survey.                                                               on a name basis [37]. A similar approach utilized genetic markers
+
+   Unlike PatientsLikeMe, the PGP, or openSNP – which give the            on the Y chromosome along with genealogical databases and
+task of collecting the data into the hands of the crowd – Foldit and      metadata such as age and state to infer surnames and from there
+Galaxy Zoo limit themselves to analyzing data which was
+                                                                          on the individuals [38]. Thus users need to be aware of the
+previously collected by scientists.                                       potential of re-identification through providing metadata along
+
+                                                                          with their genetic information and the genetic discrimination that
+                                                                          could follow.
+
+
+
+  Table 1. Comparison of crowdsourced genetics platforms.
+
+
+
+  Name                      Provides               Provides         Open                  API         IRB approval      License
+
+                            annotation             data             enrollment
+
+  SNPedia                   (x*)                   -                N/A                   x           N/A               CC-NC-SA 3.0
+  PGP                       x                      x                -                     -           x                 CC-BY 1.0, CC0
+
+  PatientsLikeMe            -                      x                x                     -           x                 Closed, CC-BY-SA 3.0
+
+  openSNP                   x                      x                x                     x           -                 CC-BY 3.0
+
+  N/A = Not Applicable, x = Present, - = Absent *SNPedia only provides an API to webpages of individual SNPs, not access to genetic data of individuals.
+  doi:10.1371/journal.pone.0089204.t001
+
+
+
+PLOS ONE | www.plosone.org                                             6                           March 2014 | Volume 9 | Issue 3 | e89204
+                                                                                         openSNP - A Web Resource for Personal Genomics
+
+
+
+                                                                       measurement systems. Another problem with user-entered data
+GWAS and Open Data
+  Although prices of exome or even full genome sequencing are          is the frequent switching between categorical and continuous
+dropping rapidly, GWAS are still considerably cheaper. However,        phenotypes - for example, some users entered the specific value of
+                                                                       their height, while other users entered their height according to a
+GWAS can only detect correlations of SNPs with those traits and
+do not allow inference on the cause for any correlation.               category like ‘‘150 cm to 160 cm’’.
+Furthermore, for a statistically sound analysis, GWAS need a             While we try to suggest similar entries to the users, there are
+                                                                       some cases where users will not follow those suggestions, so
+large enough sample size, which often is not easy to obtain. Either
+because generating the needed amount of data still is a cost factor    duplicates or similar phenotypes or variations in traits may arise.
+or because it is hard to find enough participants for the case         There are three possible solutions to this problem: The first one
+                                                                       would be to only allow a trusted subset of users to enter new
+conditions, for example if rare diseases are to be studied.
+Nevertheless, GWAS are still frequently used and new associations      phenotypes. The second one would be to make users enter all
+are still being discovered [39–41].                                    possible variations of a phenotype while creating a new phenotype,
+                                                                       so that later users cannot add variations that have not been
+  One way of bringing down costs for GWAS even further is to
+make use of already available genotyping results and datasets.         available from the start. The third one is to exclude users from the
+Data produced by DTC genetic testing companies is a promising          phenotype-creation process by allowing users to select their
+                                                                       phenotypes from a pre-given set of possible variations.
+source for such results, as those companies already have high
+numbers of customers who are willing to pay for the genotyping by        In the first two cases it makes it harder for users to enter their
+themselves.                                                            data which raises the bar for participation, and the third case
+
+  openSNP tries to enable and facilitate the re-use of this already    doesn’t let users participate at all. We decided to keep data entry as
+generated data by offering a platform where customers of DTC           easy as possible, at the cost of forcing users who want to perform
+genetic testing can publish their results into the public domain.      GWAS with the data to perform additional quality control.
+
+Allowing interested parties to use the data for their own research       Another risk regarding data quality that should be kept in mind
+allows scientists to perform studies without the need to generate      is a possible bias in data availability on openSNP: only a subset of
+genetic data sets on their own. Additionally the data can be used to   people buy DTC genetic testing, from which an even smaller
+
+enrich other data sets in order to overcome limited sample sizes,      subset is willing to publish the results, which can potentially lead to
+which is especially of interest for rare diseases.                     skewed GWAS-results. 21 people, mainly from underrepresented
+  In crowdsourcing the acquisition of genetic and phenotypic           demographics, have been offered free genotypings using funding
+
+data, openSNP faces the same problems as any other open                provided by the Wikimedia Germany association in order to
+platform on the Internet, namely the need to trust users regarding     mitigate this bias.
+the data they upload and enter on openSNP. Additionally, the             Furthermore, it is impossible to verify whether users who have
+
+quality of the data varies, especially in terms of accuracy on the     uploaded data are actually the sources of that data. This opens the
+phenotypic variation, with users entering data in different            venue to potentially malicious usage, as genotypings from strangers
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 6. Flow of data inside openSNP. External databases and user-provided data are used as input. Output of data is done using the website,
+the Distributed Annotation System and a JSON-API.
+
+doi:10.1371/journal.pone.0089204.g006
+
+
+PLOS ONE | www.plosone.org                                          7                          March 2014 | Volume 9 | Issue 3 | e89204
+                                                                                            openSNP - A Web Resource for Personal Genomics
+
+
+
+can be uploaded, as well as misinformation about phenotypes can             SNPs are catalogued by their unique identifier, which consists of
+be entered. The openSNP project has currently no means of                a prefix (mostly rs, rarely i) and a unique number. This is a
+
+verifying the validity of data uploaded by users. Of course, users       common format, which is employed by the NCBI dbSNP database
+can always delete their data or contact the team to delete stored        [43] and is also widely used and easily parsed from different
+                                                                         literature sources. Publications from the different databases as well
+data. Old backups of the database are deleted so that at any given
+time, there are only two backups. This means that deleted data           as the users’ genotypes are associated with individual SNPs by the
+disappears from the webpage immediately and will disappear after         Rs-ID. Allele and genotype frequencies are updated regularly,
+
+two months in the backend where it isn’t accessible to the public.       based on the data present in openSNP.
+   With openSNP, we have built a platform that can be used by               Processes with a longer runtime, such as parsing the genotyping
+                                                                         results, creating archives of results which are to be mailed to users
+customers of DTC genetic testing to easily share their genetic and
+phenotypic data with a wide audience, as well as by scientists and       and queries to external resources are handled using the ruby gem
+interested citizens who are looking for datasets to freely use in their  Resque and the standalone key-value storage server Redis. Search
+
+studies. Customers of DTC genetic testing also benefit from an           features on the platform itself are implemented using Solr and the
+easy access to primary literature on SNPs and genetic variations         ruby gem Sunspot. Additionally, data can be requested from
+they carry. While there is not enough data uploaded to perform a         openSNP using the Distributed Annotation System. The required
+
+statistically sound GWAS yet, this will be possible in the future, as    data is stored in a PostgreSQL database. Requested data is
+user numbers continue to rise. By including the option of                delivered in XML-format to facilitate parsing. Additionally, users
+
+uploading exome data sets, the platform is already capable of            can request data in the JSON-format, using a system not specified
+adjusting for changes in the type of data generated by DTC               in any standard.
+genetic testing. Future improvements made on openSNP will                   openSNP only serves as a platform for SNPs, so methods for the
+
+address interoperability with other platforms and tools in Personal      delivery of nucleotide sequences as described in the DAS-standard
+Genomics, amongst others: The standardization of phenotypes,             are not implemented. Currently, two methods are implemented:
+                                                                         firstly features, which is used to deliver SNPs located on specific
+the inclusion of further annotation sources and support for a wider
+range of data sets, including full genome data.                          chromosomes or between specific nucleotide positions, based on
+                                                                         the user’s query. The second method is sources, which advertises all
+
+Materials and Methods                                                    DAS sources for all genotypes present in openSNP.
+                                                                            A flowchart of all services incorporated in openSNP and of all
+                                                                         the ways users can upload or access the data is given in Figure 6.
+Ethics Statement
+   In line with the German regulations and the ethics approval           The source code of openSNP is published under the MIT license
+system for biomedical studies [42] we contacted the ethics               and can be downloaded at http://github.com/gedankenstuecke/
+
+commission of the Goethe University Frankfurt am Main,                   snpr. The genetical and phenotypical data is licensed under
+Germany teaching hospital. Its director confirmed that this study        Creative Commons Zero.
+
+does not fall within their remit.
+                                                                         Acknowledgments
+
+Technical implementation of the platform                                 We thank Dr. Manuel Corpas and Prof. David Edwards for constructive
+   The main platform is implemented using the web framework              advice in grammar, spelling and structure of this study. Further thanks go
+Ruby on Rails 3.2.13. Postgres 9.2 is used as the main database          to Samantha Clark, Fabian Zimmer and Dan Bolser for providing valuable
+
+backend for Rails. The database stores genotyping results, users’        feedback and feature ideas during the development, and Thomas Down,
+phenotypic information, literature results from Mendeley and the         author of BioDalliance, and Rafael Jimenez, author of MyKaryoView, for their
+                                                                         support on implementing the Distributed Annotation System and the
+Public Library of Science as well as summaries on SNPs which can         genome browser. For help with their APIs we are grateful to Mike Cariaso
+be found in SNPedia. The literature database of Mendeley is
+queried using the REST API, which delivers results in JSON. The          of SNPedia and the PLOS & Mendeley API teams. Thanks go to Misha
+                                                                         Angrist and the anonymous reviewers for their helpful comments on this
+literature database of the Public Library of Science is queried using    manuscript. We would especially like to thank the users of openSNP.org for
+the respective REST API, which delivers results in an XML-               their participation, their constructive criticism and bug-finding abilities and
+                                                                         especially for sharing their genotyping and phenotype data.
+format. Summaries on SNPs are provided by SNPedia, through
+querying the content via the MediaWiki API. The NHGRI GWAS
+Catalog and the GET Evidence System provide complete dumps in            Author Contributions
+
+plain text formats. Those are regularly downloaded and parsed.           Conceived and designed the experiments: BG PB HR JR. Performed the
+SNPs that are described as ‘Insufficiently evaluated’ in the GET         experiments: BG PB HR JR. Analyzed the data: BG PB HR JR.
+
+Evidence System are not stored. All databases are queried or parsed      Contributed reagents/materials/analysis tools: BG PB HR JR. Wrote the
+using the unique identifier of each SNP as the search term.              paper: BG PB JR. Wrote the software presented: BG PB HR.
+
+
+References
+
+ 1. Tanzi RE (2012) The genetics of alzheimer disease. Cold Spring Harbor 6. Pattaro C, Ko¨ttgen A, Teumer A, Garnaas M, Bo¨ger CA, et al. (2012) Genome-
+    Perspectives in Medicine 2.                                              wide association and functional follow-up reveals new loci for kidney function.
+ 2. Lill CM, Roehr JT, McQueen MB, Kavvoura FK, Bagade S, et al. (2012)      PLoS Genet 8: e1002584.
+    Comprehensive research synopsis and systematic meta-analyses in parkinson’sein RJ, Zeiss C, Chew EY, Tsai JY, Sackler RS, et al. (2005) Complement
+    disease genetics: The pdgene database. PLoS Genet 8: e1002548.           factor h polymorphism in age-related macular degeneration. Science 308: 385–
+ 3. Njiaju UO, Olopade OI (2012) Genetic determinants of breast cancer risk: A89.
+    review of current literature and issues pertaining to clinical application. Then A, O’Donnell C (2009) An open access database of genome-wide
+    Breast Journal 18: 436–442.                                              association results. BMC Medical Genetics 10: 6.
+
+ 4. Abate-Shen C, Shen MM (2000) Molecular genetics of prostate cancer. Genes &ndorff LA, Sethupathy P, Junkins HA, Ramos EM, Mehta JP, et al. (2009)
+    Development 14: 2410–2434.                                               Potential etiologic and functional implications of genome-wide association loci
+ 5. Brown PO, Botstein D (1999) Exploring the new world of the genomewith DNAfor human diseases and traits. Proceedings of the National Academy of Sciences
+    microarray. nature genetics supplement 21: 33–37.                        106: 9362–9367.
+
+
+
+
+PLOS ONE | www.plosone.org                                            8                           March 2014 | Volume 9 | Issue 3 | e89204
+                                                                                                              openSNP - A Web Resource for Personal Genomics
+
+
+
+
+10. 23andMe (2011) 23andMe 2011 State of the Database Address. The Spittoon.           26. FitbitInc (2012) Fitbit. Available: http://www.fitbit.com. Fitbit Homepage.
+     Available: http://spittoon23andmecom/2011/06/15/23andme-2011-state-of-            27. Jenkinson A, Albrecht M, Birney E, Blankenburg H, Down T, et al. (2008)
+     the-database-address/.                                                                 Integrating biological data - the distributed annotation system. BMC Bioinfor-
+
+11. Eriksson N, Macpherson JM, Tung JY, Hon LS, Naughton B, et al. (2010) Web-              matics 9: S3.
+     based, participantdriven studies yield novel genetic associations for common      28. Wicks P, Massagli M, Frost J, Brownstein C, Okun S, et al. (2010) Sharing health
+     traits. PLoS Genet 6: e1000993.                                                        data for better outcomes on patientslikeme. J Med Internet Res 12: e19.
+
+12. Do CB, Tung JY, Dorfman E, Kiefer AK, Drabant EM, et al. (2011) Web-based          29. Bove R, Secor E, Healy BC, Musallam A, Vaughan T, et al. (2013) Evaluation
+     genome-wide association study identifies two novel loci and a substantial genetic      of an online platform for multiple sclerosis research: patient description,
+     component for parkinson’s disease. PLoS Genet 7: e1002141.
+13. andMe (2012) 23andMe Privacy Statement. Available: http://www.23andme.                  validation of severity scale, and exploration of bmi effects on disease course.
+                                                                                            PLoS One 8: e59707.
+     com/about/privacy/. 23andMe Homepage.                                             30. Hauskeller C (2011) Direct to consumer genetic testing. Bmj 342: d2317–d2317.
+14. Caulfield T, McGuire AL (2011) Direct-to-consumer genetic testing: Percep-
+     tions, problems and policy responses. Annual Review of Medicine 63: 1.1–1.11.     31. Hogarth S, Javitt G, Melzer D (2008) The current landscape for direct-to-
+                                                                                            consumer genetic testing: legal, ethical, and policy issues. Annual review of
+15. Cariaso M, Lennon G (2011) Snpedia: a wiki supporting personal genome                   genomics and human genetics 9: 161–82.
+     annotation, interpretation and analysis. Nucleic Acids Research.
+16. Ball MP, Thakuria JV, Zaranek AW, Clegg T, Rosenbaum AM, et al. (2012) A           32. Wasson K (2009) Direct-to-consumer genomics and research ethics: should a
+                                                                                            more robust informed consent process be included? The American Journal of
+     public resource facilitating clinical use of genomes. Proceedings of the National      Bioethics 9: 56–58.
+     Academy of Sciences 109: 11920–11927.
+17. Eiben CB, Siegel JB, Bale JB, Cooper S, Khatib F, et al. (2012) Increased diels-   33. Joh EE (2011) Ethics watch: DNA theft: your genetic information at risk. Nature
+                                                                                            reviews Genetics 12: 3113.
+     alderase activity through backbone remodeling guided by foldit players. Nat       34. Joly Y, Ngueng Feze I, Simard J (2013) Genetic discrimination and life
+     Biotechnol 30: 190–192.
+18. Lintott CJ, Schawinski K, Slosar A, Land K, Bamford S, et al. (2008) Galaxy             insurance: a systematic review of the evidence. BMC Medicine 11: 25.
+     zoo: morphologies derived from visual inspection of galaxies from the sloan       35. Wolinsky H (2005) Do-it-yourself diagnosis. EMBO Rep 6: 805–807.
+
+     digital sky survey. Monthly Notices of the Royal Astronomical Society 389:        36. Lee SSJ, Crawley L (2009) Research 2.0: social networking and direct-to-
+     1179–1189.                                                                             consumer (dtc) genomics. Am J Bioeth 9: 35–44.
+19. Dickinson JL, Zuckerberg B, Bonter DN (2010) Citizen Science as an Ecological      37. Sweeney L, Abu A, Winn J (2013) Identifying Participants in the Personal
+
+     Research Tool: Challenges and Benefits. The Annual Review of Ecology,                  Genome Project by Name (A Re-identification Experiment). ArXiv.
+     Evolution, and Systematics 41: 149–172.                                           38. Gymrek M, McGuire AL, Golan D, Halperin E, Erlich Y (2013) Identifying
+20. Darst BF, Madlensky L, Schork NJ, Topol EJ, Bloss CS (2013) Characteristics of          personal genomes by surname inference. Science 339: 321–324.
+
+     genomic test consumers who spontaneously share results with their health care     39. Mei H, Chen W, Jiang F, He J, Srinivasan S, et al. (2012) Longitudinal
+     provider. Health Commun.                                                               replication studies of gwas risk snps inuencing body mass index over the course
+21. McGowan ML, Fishman JR, Lambrix MA (2010) Personal genomics and                         of childhood and adulthood. PLoS ONE 7: e31470.
+
+     individual identities: motivations and moral imperatives of early users. New      40. Xu B, Tong N, Chen SQ, Yang Y, Zhang XW, et al. (2012) Contribution of
+     Genet Soc 29: 261–290.                                                                 hogg1 ser326cys polymorphism to the development of prostate cancer in
+22. Gollust SE, Gordon ES, Zayac C, Griffin G, Christman MF, et al. (2012)                  smokers: Meta-analysis of 2779 cases and 3484 controls. PLoS ONE 7: e30309.
+
+     Motivations and perceptions of early adopters of personalized genomics:           41. Sebastiani P, Solovieff N, DeWan AT, Walsh KM, Puca A, et al. (2012) Genetic
+     perspectives from research participants. Public Health Genomics 15: 22–30.             signatures of exceptional longevity in humans. PLoS ONE 7: e29848.
+23. Dowell R, Jokerst R, Day A, Eddy S, Stein L (2001) The distributed annotation
+     system. BMC Bioinformatics 2: 7.                                                  42. Pinkerton C, Ablett S, Boos J, Philip T (2002) Ethical approval for multicentre
+                                                                                            clinical trials in children: contrasting systems in three european countries.
+24. Danecek P, Auton A, Abecasis G, Albers CA, Banks E, et al. (2011) The variant           European Journal of Cancer 38: 1051–1058.
+     call format and vcftools. Bioinformatics 27: 2156–2158.
+25. Molloy JC (2011) The open knowledge foundation: Open data means better             43. Sherry ST, Ward MH, Kholodov M, Baker J, Phan L, et al. (2001) dbsnp: the
+                                                                                            ncbi database of genetic variation. Nucleic Acids Res 29: 308–311.
+     science. PLoS Biol 9: e1001195.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PLOS ONE | www.plosone.org                                                          9                                March 2014 | Volume 9 | Issue 3 | e89204

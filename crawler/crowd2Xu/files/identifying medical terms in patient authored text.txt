@@ -1,0 +1,726 @@
+ Research and applications
+
+
+
+                            Identifying medical terms in patient-authored text:
+
+
+                            a crowdsourcing-based approach
+
+
+                            Diana Lynn MacLean, Jeffrey Heer
+
+
+▸ Additional material is    ABSTRACT                                                 drug-treatment effects have been discovered on
+published online only. To view                                                                                4                        5
+please visit the journal onlinekground and objective As people increasingly          sites like CureTogether     and PatientsLikeMe. In
+(http://dx.doi.org/10.1136/ engage in online health-seeking behavior and contribute  these cases, however, the supporting data were
+                            to health-oriented websites, the volume of medical text  curated: attempts to mine large, organic PAT
+amiajnl-2012-001110).
+Department of Computer      authored by patients and other medical novices grows     corpora for medical insights have been noticeably
+Science, Stanford University,apidly. However, we lack an effective method for        limited. We believe this is due, in part, to the lack
+Stanford, California, USA   automatically identifying medical terms in patient-      of an effective method for extracting medical terms
+
+Correspondence to           authored text (PAT). We demonstrate that crowdsourcing   from PAT.
+                            PAT medical term identiﬁcation tasks to non-experts is a    Identifying medical concepts in text is a long-
+Diana Lynn MacLean,         viable method for creating large, accurately-labeled PAT standing research challenge that has spurred the
+Department of Computer      datasets; moreover, such datasets can be used to train   development of several software toolkits.   6 Toolkits
+Science, Stanford University,
+372 Gates Hall (3B Wing),   classiﬁers that outperform existing medical term         like MetaMap and the Open Biomedical Annotator
+Stanford, CA 94305-9035,    identiﬁcation tools.                                     (OBA) focus primarily on mapping words from
+USA; malcdi@stanford.edu    Materials and methods To evaluate the viability of       text authored by medical experts to concepts in bio-
+
+Received 23 May 2013        using non-expert crowds to label PAT, we compare         medical ontologies. Despite recent efforts to
+Revised 4 March 2013        expert (registered nurses) and non-expert (Amazon        develop an ontology suitable for PAT—the open
+Accepted 15 April 2013      Mechanical Turk workers; Turkers) responses to a PAT     and collaborative Consumer Health Vocabulary
+Published Online First                                                                             7–9
+5 May 2013                  medical term identiﬁcation task. Next, we build a crowd- (OAC) CHV        —we suspect that these tools will
+                            labeled dataset comprising 10 000 sentences from         remain ill-suited to the task due to structural differ-
+                            MedHelp. We train two models on this dataset and         ences between PAT and text authored by medical
+                            evaluate their performance, as well as that of MetaMap,  experts. Such differences include lexical and seman-
+                                                                                                     10 11
+                            Open Biomedical Annotator (OBA), and NaCTeM’s            tic mismatches,       mismatches in consumers’ and
+                            TerMINE, against two gold standard datasets: one from    experts’ understanding of medical concepts,      10 12
+                            MedHelp and the other from CureTogether.                 and    mismatches    in   descriptive  richness   and
+                                                                                            10–12
+                            Results When aggregated according to a corroborative     length.       Consider, for example, the text snip-
+                            voting policy, Turker responses predict expert responses pets below, both discussing the predictive value of a
+                            with an F1 score of 84%. A conditional random ﬁeld       family history of breast cancer. The ﬁrst snippet is
+                                                                                                                             13
+                            (CRF) trained on 10 000 crowd-labeled MedHelp            from a medical study by De Bock et al :
+                            sentences achieves an F1 score of 78% against the
+                            CureTogether gold standard, widely outperforming OBA         In our study, at least two cases of female breast
+                            (47%), TerMINE (43%), and MetaMap (39%). A failure           cancer in ﬁrst-degree relatives, or having at least
+                                                                                         one case of breast cancer in a woman younger than
+                            analysis of the CRF suggests that misclassiﬁed terms are     40 years in a ﬁrst or second-degree relative were
+                            likely to be either generic or rare.                         associated with early onset of breast cancer.
+                            Conclusions Our results show that combining
+                                                                                        The second (unedited) snippet is from the
+                            statistical models sensitive to sentence-level context with
+                            crowd-labeled data is a scalable and effective technique MedHelp Breast Cancer community:
+                            for automatically identifying medical terms in PAT.
+                                                                                         im 40 yrs old and my mother is a breast cancer
+                                                                                         surivor. i have had a hard knot about an inch long.
+                                                                                         the knot is a little movable. the knot has grew a
+                                                                                         little over the past year and on the edge closest to
+                            OBJECTIVE                                                    my underarm. i am scared and dnt want to worry
+                            As people rely increasingly on the internet as a
+                            source of medical knowledge, online health com-              my mom ..
+
+                            munities, along with the volume of potentially              Our goal is to automatically and accurately iden-
+                            valuable patient-authored text (PAT) they contain,       tify medically relevant terms in PAT. Note that we
+                            are growing. This shift is attributed mostly to          do not attempt to map terms to ontological con-
+
+                            changes    in  the   healthcare   system    (including   cepts; we view this as a separate and complemen-
+                            decreased access to healthcare professionals and         tary task. We make the following contributions:
+                            higher costs of healthcare) and increased techno-        ▸ We show that crowdsourcing PAT medical word
+                            logical literacy in the patient population. While           identiﬁcation tasks to non-experts achieves
+
+      Scan to access more   PAT may not contain scientiﬁcally accurate or sys-          results comparable in quality to those given by
+         free content       tematic data, it comprises rich descriptions of hun-        medical experts—in our case, registered nurses.
+                            dreds of patients’ experiences over a wide range of      ▸ We present a comparative performance analysis
+
+                            conditions, 2n real time. Alre3dy, projects such as         of   MetaMap,      OBA,    TerMINE,      and   two
+ To cite: MacLean DL,       Google Flu    and HealthMap have shown that PAT             models—a dictionary and a conditional random
+ Heer J. J Am Med Inform    is a reliable data source for tracking disease trends;      ﬁeld (CRF)—trained on 10 000 crowd-labeled
+ Assoc 2013;20:1120–1127.
+                            moreover, novel insights into co-morbidities and            sentences.
+
+1120                                                      MacLean DL, et al. J Am Med Inform Assoc 2013;20:1120–1127. doi:10.1136/amiajnl-2012-001110
+                                                                                                Research and applications
+
+
+▸ We make our trained CRF classiﬁer, ADEPT (Automatic               Consumer health vocabularies
+
+   Detection of Patient Terminology) freely available as a web      A complementary and closely related branch of research to ours
+   service from our website (http://vis.stanford.edu/projects/      is Consumer Health Vocabularies: ontologies that link laymen
+   adept). ADEPT is trained on 10 000 crowd-labeled sentences,      and UMLS medical terminology.     85    Supporting motivations
+
+   to our knowledge the largest labeled corpus of its kind.         include: narrowing knowledge gaps between consumers and
+                                                                    providers,89  coding data for retrieval and analysis, improving
+                                                                    the ‘readability’ of health texts for lay consumers,and coding
+                                                                                                                       27 28
+                                                                    ‘new’ concepts that were missing from the UMLS.         We are
+BACKGROUND AND SIGNIFICANCE                                         currently aware of two consumer health vocabularies: the
+Medical term identiﬁcation                                          MedlinePlus Consumer Health Vocabulary, and the open and
+MetaMap, arguably the best-known medical entity extractor, is
+                                                                    collaborative Consumer Health Vocabulary—(OAC) CHV—
+a highly conﬁgurable program that relates words in free text to     which was included in UMLS as of May 2011.
+concepts in the UMLS Metathesaurus.    614  MetaMap sports an         To date, most research in this area has focused on uncovering
+array of analytic components, including word sense disambigu-       new terms to add to the (OAC) CHV. In an analysis of 376
+
+ation, lexical and syntactical analysis, variant generation, and    patient-deﬁned symptoms from PatientsLikeMe, Smith and
+POS tagging. MetaMap has been widely used to process datasets       Wicks found that only 43% of unique terms had either exact or
+ranging from email to MEDLINE abstracts to clinical                 synonymous matches in the UMLS; of the exact matches, 93%
+        61516                                                                                          28
+records.                                                            were contributed by SNOMED CT.        In 2007, Zeng et al com-
+  The Open Biomedical Annotator (OBA) is a more recent bio-         pared several automated approaches for discovering new ‘con-
+medical concept extraction tool under development at Stanford       sumer medical terms’ from MedlinePlus query logs. Using a
+
+University. OBA is based on MGREP: a concept17ecognizer             logistic regression classiﬁer, they achieved 9n AUC of 95.5% on
+developed at the University of Michigan.       Like MetaMap,        all n-grams not present in the UMLS.            More recently,
+OBA maps words in free text to ontological concepts; its            Doing-Harris and Zeng proposed a computer-assisted update
+workﬂow, however, is signiﬁcantly simpler, comprising a             (CAU) system to crawl PatientsLikeMe, suggesting candidate
+                                                                                                                     26
+dictionary-based concept recognition tool and a semantic expan-     terms for the (OAC) CHV to human reviewers.         By ﬁltering
+sion component, which ﬁnds concepts semantically related to         CAU terms by C-value   20and termhood scores, they were able
+those present in the exact text.                                    to achieve a 4: 1 ratio of valid to invalid terms; however, this
+
+  A handful of studies compare MetaMap and/or OBA to                also resulted in discarding over 50% of the original valid
+human annotators. Ruau et al evaluated automated MeSH               terms.26 Given the goals of the CHV movement, our CRF
+annotations on PRoteomics IDEntiﬁcation (PRIDE) experiment          model for PAT medical word identiﬁcation may prove to be an
+
+descriptions against manually assigned MeSH annotations.            effective method for generating new candidates terms for the
+MetaMap achieved precision and recall scores of 15.66% and          (OAC) CHV.
+79.44%, while OBA achieved 20.97% and 79.48%, respect-
+ively.8 Pratt and Yetisgen-Yildiz compare MetaMap’s annota-
+                                                                    MATERIALS AND METHODS
+tions to human annotations on 60 MEDLINE titles: they found         We present two hypotheses. The ﬁrst is that a non-expert crowd
+that MetaMap achieved exact precision and recall scores of
+27.7% and 52.8%, and partial precision and recall scores of         can identify medical terms in PATas proﬁciently as experts. The
+                                                                    second is that we can use large, crowd-labeled datasets to train
+55.2% and 93.3%, respectively. They note t19t several failures      classiﬁers that will outperform existing medical term identiﬁca-
+result from missing concepts in the UMLS.                           tion tools.
+  In addition to ontological approaches, there are several statis-
+
+tical approaches to medical term identiﬁcation. NaCTeM’s            Datasets
+TerMINE is a domain-independent tool that uses statistical
+scoring to identify technical terms in text corpora.20 Given a      MedHelp (http://www.medhelp.com) is an online health com-
+corpus, TerMINE produces a ranked list of candidate terms. In       munity designed to aid users in the diagnosis, exploration, and
+                                                                    management of personal medical conditions. The site boasts a
+a test on eye pathology medical records, precision was highest
+for the top 40—as ranked by C-value—terms (∼75%) and                variety of tools and services, including over 200 condition-
+decreased steadily down the list (∼30% overall). Absolute recall    speciﬁc user communities. Our dataset comprises the entire,
+                                                                    anonymized discussion history of MedHelp’s forums. The raw
+was not calculated, due to the time-consuming nature of having
+experts verify true negative classiﬁcations in the test corpus;     dataset contains approximately 1 250 000 discussions. After
+recall relative to the extracted term list was ∼97%.                cleaning and ﬁltering (described below), the dataset comprises
+                                                                    approximately 950 000 discussions from 138 forums: a total of
+  Takeuchi and Collier use a support vector machine to classify     27 230 721 sentences.
+text in MEDLINE abstracts to ontological concepts, achieving
+an F-score of 74% in 10-fold cross validation.21Along a similar       CureTogether (http://www.curetogether.com) is an online
+                                                                    health community where members share primarily categorical
+vein, several statistical, supervised models achieved F scores in   and quantitative data, but also hold short discussions. Our
+the 70% range for the 2004 BioNLP/NLPBA shared task for
+identifying ﬁve medical terminology types in the GENIA              dataset comprises about 3000 user comments from a variety of
+corpus.22–24                                                        forums. Both our MedHelp and CureTogether data were
+                                                                    acquired through research agreements with the respective
+  The general trend of statistical models outperforming
+MetaMap and OBA on generic input suggests that such                 institutions.
+methods may be more appropriate for PAT medical word identi-
+
+ﬁcation tasks. Finally, a signiﬁcant limitation of the stated prior Data preparation
+work is the small size of annotated datasets used for training      We analyze our data at the sentence level. This promotes a fairer
+and evaluation. Our results are based on 2000 expert-labeled        comparison between machine taggers, which break text into
+
+and 10 000 crowd-labeled sentences.                                 independent sentences or phrases before annotating, and human
+
+MacLean DL, et al. J Am Med Inform Assoc 2013;20:1120–1127. doi:10.1136/amiajnl-2012-001110                                    1121
+ Research and applications
+
+
+taggers, who may otherwise transfer context across several sen-      ▸ concept granularity: in a sentence like ‘I have low blood
+tences. We use Lucene (lucene.apache.org) to tokenize the text          sugar’, users would not know whether to select ‘low blood
+
+into sentences. For consistency, we exclude sentences from              sugar’ or just ‘blood sugar’.
+MedHelp forums that the researchers agreed were tangentially            After several iterations, we arrived at a prompt (see ﬁgure 1)
+medical   (eg,   ‘Relationships’), over-general   (eg,  ‘General     that produced consistent results. We discovered that asking users
+Health’), or that contain fewer than 1000 sentences.                 to tag words/phrases that they thought doctors would ﬁnd inter-
+  We randomly sample 10 000 sentences from the MedHelp               esting mitigated context and concept granularity inconsistencies.
+
+dataset to use as a training corpus, and 1000 additional sen-        We also veriﬁed that 100 sentences is a reasonably sized task for
+tences to use as a gold standard. Finally, we sample 1000 sen-       most users to complete in one sitting.
+tences from the CureTogether comment database as an addition
+gold standard independent of MedHelp.
+
+                                                                     Experiment design
+Metrics                                                              We uniformly sampled 1000 sentences from our MedHelp
+We evaluate our results using ﬁve metrics: F1 score, precision,      dataset, deeming 1000 sufﬁciently large for an informative com-
+recall, accuracy, and Matthews Correlation Coefﬁcient (MCC).         parison between Nurse and Turker responses, but small enough
+
+Our goal is to maximize classiﬁer performance on F1 score. F1        to make expert annotation affordable. Per our pilot study obser-
+score is the harmonic mean of precision and recall; a high F1        vations, we split the sample into 10 groups of 100 sentences.
+score implies that precision and recall are both high and               Our experts comprised 30 registered nurses from ODesk
+balanced. Precision (positive predictive value) measures the pro-    (http://www.odesk.com), an online professional contracting
+portion of model predictions that are correct. Recall (speciﬁcity)   service. In addition to the registered nurse qualiﬁcation, we
+
+measures the proportion of correct instances that were pre-          required that each expert have perfectly rated English language
+dicted. Accuracy measures the fraction of correct predictions        proﬁciency. Each expert did one PAT medical word identiﬁca-
+overall. Accuracy can be misleading, as the medical to non-          tion task (100 sentences), and each sentence group was tagged
+medical term ratio in the MedHelp corpus is approximately 1:4.       by three experts. The experts were reimbursed $5.00 for com-
+
+MCC reﬂects the correlation between true values and model-           pleting the task. All tasks were completed within 2 weeks at a
+predicted values; as it accounts for different class sizes it is a   cost of $150.
+more informative metric than accuracy.                                  Our non-expert crowd comprised 50 Turkers recruited from
+                                                                     Amazon’s Mechanical Turk (AMT). We required that our
+
+Hypothesis 1: non-expert crowds can replace experts                  Turkers have high English language proﬁciency, reside in the
+Crowdsourcing is the act of allocating a series of small tasks       USA, and be certiﬁed to work on potentially explicit content.
+(often called ‘micro-tasks’)toa ‘crowd’ of online workers, typic-    Each Turker performed a single PAT medical word identiﬁcation
+ally via a web-based marketplace. When the workﬂow is prop-          task (100 sentences), and each sentence group was tagged by
+
+erly managed (eg, via quality control measures such as aggregate     ﬁve Turkers. The Turkers were reimbursed $1.20 on faithful
+voting), the combined results are often comparable in quality to     completion of the task. All tasks were completed within 17
+those   obtained    via  more    traditional   task  completion      hours at a cost of $60.
+methods. 29  30  Crowdsourcing is particularly attractive for
+obtaining results faster and at lower cost than other participant
+
+recruitment schemes.                                                 Turkers versus gold standard
+  A common barrier to both training and evaluating medical           We determine a gold standard for each sentence by taking a
+text annotators is the lack of sufﬁciently large, labeled data-      majority vote over the nurses’ responses. Voting is performed at
+sets.19  The challenge in building such datasets lies in sourcing    the word level, despite the prompt to extract words or phrases
+
+medical expert19with enough time to annotate text at a reason-       from the sentences. Figure 2 illustrates how this simpliﬁes word
+ably low cost.   Replacing such experts with non-expert crowds       identiﬁcation by eliminating partial matching considerations
+would address these concerns and allow us to build labeled data-     over multi-word concepts. N-gram terms can be recovered by
+sets quickly and cheaply. To test the viability of replacing         heuristically combining adjacent words.
+
+experts with non-expert crowds, we construct a PAT medical              To test the feasibility of using non-expert crowds in place of
+word identiﬁcation task comprising 1000 MedHelp sentences.           experts, we compare Turker responses to Nurse responses dir-
+                                                                     ectly, aggregating across possible Turker voting thresholds. This
+PAT medical word identiﬁcation task                                  allows us both to evaluate the quality of aggregated Turker
+
+Amazon’s Mechanical Turk (http://www.mturk.com) is an online         responses against the gold standard and to select the optimal
+crowdsourcing platform where workers (Turkers) can browse            voting threshold.
+‘human intelligence tasks’ (or HITs) posted by requesters and
+complete them for a small payment. We ran several pilot studies
+with Turkers in order to determine a suitable interface and          Hypothesis 2: classiﬁers trained on crowd-labeled data
+
+prompt for the task. Originally, we asked users to select all        perform better
+words/phrases relating to medical concepts from the given sen-       To test our second hypothesis, we create a crowd-labeled dataset
+tences. This generated several inconsistencies, including:           comprising 10 000 MedHelp sentences, and an expert-labeled
+▸ context: users selected terms that had no medical relevance        dataset comprising 1000 CureTogether sentences. Using the pro-
+
+   in the context of the given sentence, but might have medical      cedures described above, this cost approximately $600 and
+   connotations in other contexts. For example, ‘I apologize if      $150, respectively. We train two models—a dictionary and a
+   my post created any undue anxiety’;                               CRF—on the MedHelp dataset, and evaluate their performance
+▸ numerical measurements: users inconsistently extracted             via ﬁvefold cross validation; we compare MetaMap, OBA, and
+
+   numbers, units of measurement, dosages, or some combin-           TerMINE’s output directly. Finally, we compare the perform-
+   ation of these;                                                   ance of all ﬁve models against the CureTogether gold standard.
+
+1122                                                    MacLean DL, et al. J Am Med Inform Assoc 2013;20:1120–1127. doi:10.1136/amiajnl-2012-001110
+                                                                                                   Research and applications
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 1 Patient-authored text (PAT) medical word identiﬁcation task instructions and interface. Access the article online to view this ﬁgure in colour.
+
+
+MetaMap, OBA, and TerMINE                                             Dictionary
+
+We used the Java API for MetaMap 2012 (metamap.nlm.nih.               A dictionary is one of the simplest classiﬁers we can build using
+gov), running it under three conditions: default; restricting the     labeled training data. Our dictionary compiles a vocabulary of
+target ontology to SNOMED CT, as a high percentage of ‘con-           all words tagged as ‘medical’ in the training data according to
+
+sum28 health vocabulary’ is reputedly contained in SNOMED             the corroborative voting policy; it then scans the test data, and
+CT ; and restricting the target ontology to the (OAC) CHV.            tags any words that match a vocabulary element. Our dictionary
+  We used the Java client for OBA,  17 running it under two con-      implements case-insensitive, space-normalized matching.
+ditions: default; and restricting the target ontology to
+
+SNOMED CT (the OAC (CHV) was not available to the OBA
+at the time of writing).                                              ADEPT: a CRF model
+  For TerMINE, we used the online web service (http://www.            CRFs are probabilistic graphical models particularly suited to
+nactem.ac.uk/software/termine). In all cases, we consider the         labeling sequence data. 31 Their suitability stems from the fact
+
+words extracted in the result set, ignoring any particulars of the    that they relax several independence assumptions made by
+mappings themselves (illustrated in ﬁgure 2).                         Hidden Markov Models; moreover, they can encode arbitrarily
+                                                                      related feature sets without having to represent the joint
+                                                                      dependency distribution over features.   31  As such, CRFs can
+
+                                                                      incorporate sentence-level context into their inference proced-
+                                                                      ure. Our CRF training procedure takes, as input, labeled train-
+                                                                      ing data coupled with a set of feature deﬁnitions, and
+
+                                                                      determines model feature weights that maximize the likelihood
+                                                                      of the observed annotations. We use the Stanford Named Entity
+                                                                      Recognizer package (http://nlp.stanford.edu/software/CRF-NER.
+Figure 2 An illustration of our corroborative, word-level voting policy.tml), a trainable, Java implementation of a CRF classiﬁer, and
+
+Stopwords (like ‘of’) are excluded from the vote.                     its default feature set. Examples of default features include word
+
+MacLean DL, et al. J Am Med Inform Assoc 2013;20:1120–1127. doi:10.1136/amiajnl-2012-001110                                         1123
+  Research and applications
+
+
+                                                                                To verify the statistical signiﬁcance of these results, for each
+  Table 1 Turker performance against the Nurse gold standard
+  along Turker voting thresholds                                              annotator we bootstrap 1000 sets of 1000 F1 scores sampled
+                                                                              with replacement from each gold standard dataset. We then
+  Turker vote threshold  F1       Precision   Recall   Accuracy    MCC
+                                                                              apply a paired t-test to each annotator pair. All annotator F1
+                                                                              scores were signiﬁcantly distinct from one another, with
+  1                      78.45    67.15       94.31    93.96       0.77       p≤0.001, for both the MedHelp and the CureTogether gold
+  2                      84.43    82.53       86.41    96.29       0.82
+                                                                              standards (ﬁgure 4).
+  3                      83.80    91.67       77.18    96.52       0.82
+  4                      76.61    95.70       63.87    95.46       0.76
+                                                                              ADEPT failure analysis
+  5                      59.81    97.99       43.04    93.26       0.62       While ADEPT’s results are promising, it is also important to
+   A corroborative vote of 2 or more yields high scores across the board, and maximizes
+   F1 score.                                                                  assess failure cases. Figure 5 plots term classiﬁcation accuracy
+                                                                              against logged term frequency in both test corpora. We observe
+
+                                                                              that while most terms are classiﬁed correctly all of the time, a
+                                                                              number of terms (∼650) are never classiﬁed correctly; of these,
+substrings (eg, ‘ology’ from ‘biology’) and windows (previous
+                                                                              almost all (>90%) appear only once in the test corpora.
+and trailing words); the full list is detailed in online supplemen-             A LOWESS ﬁt to the points representing terms that were mis-
+tary Appendix A. We refer to our trained CRF model as ADEPT                   classiﬁed at least once shows that classiﬁcation accuracy
+(Automatic Detection of Patient Terminology).
+                                                                              increases with term frequency in the test corpora (and by logical
+                                                                              extension, term frequency in the training corpus). As we might
+
+RESULTS                                                                       expect, over half (∼51%) of the misclassiﬁed terms occur with
+Replacing experts with crowds                                                 frequency one in the test corpora. A review of these terms
+
+Both the Nurse and the Turker groups achieve high inter-rater                 reveals no obvious term type (or set of term types) likely to be
+reliability scores: 0.709 and 0.707, respectively, on the Fleiss κ            incorrectly classiﬁed. Indeed, many are typical words with con-
+measure. Table 1 compares aggregated Turker responses against
+                                                                              ceivable medical relevance (eg, gout, aggravates, irritated). Such
+the MedHelp gold standard; voting thresholds dictate the                      misclassiﬁcations would likely improve with more training data,
+number of Turker votes required for a word to be tagged as                    which would allow ADEPT to learn new terms and patterns.
+
+‘medical’. F1 score is maximized at a voting threshold of 2. We                 What remains is to investigate terms that are both frequent
+call this a corroborated vote, and select 2 as the appropriate                and frequently misclassiﬁed. Table 3 gives examples of terms
+
+threshold for our remaining experiments. Overall, Turker scores               that occur more than once in the test corpora and are misclassi-
+are sufﬁciently high that we regard corroborated Turker                       ﬁed more often than not. Immediately obvious is the presence
+
+responses as an acceptable approximation for expert judgment.                 of terms that are medical but generic, for example doctor,
+                                                                              doctors, drs, physician, nurse, appointment,c ondition, health,
+
+Classiﬁers trained on crowd-labeled data                                      etc. These misclassiﬁcations likely stem from ambivalence in the
+Table 2 shows the performance of MetaMap, OBA, TerMINE,                       training data. If so, either speciﬁc instructions to human annota-
+                                                                              tors on how to handle generic terms, or rule-based post process-
+the dictionary model, and ADEPT on the 10 000 sentence
+crowd-labeled corpus, as well as against both gold standard                   ing of annotations, could improve classiﬁer performance.
+
+datasets. ADEPT achieves the maximum score in every metric,
+bar recall. Moreover, its high performance carries over onto the              DISCUSSION
+CureTogether test corpus, suggesting adequate generalization                  We explored two hypotheses in this work. The ﬁrst was that we
+
+from the training data. Figure 3 provides illustrative examples of            can reliably replace experts with non-expert crowds for PAT
+ADEPT’s performance on sample sentences from the MedHelp                      medical word identiﬁcation tasks. Both Nurses and Turkers
+
+gold standard.                                                                achieved high inter-rater reliability scores in the task. We
+
+
+
+  Table 2 Annotator performance against the crowd-labeled dataset and the gold standards
+
+  Validation dataset                            Annotator         F1           Precision        Recall       Accuracy         MCC         Parameters
+
+
+  MedHelp, Crowd-labeled 10 000 sentences       MetaMap           32.64        21.88            64.20        70.44            0.24        Default
+                                                                  34.97        25.45            55.85        76.83            0.26        SNOMED CT
+                                                                  34.88        24.48            60.63        74.75            0.26        CHV
+                                                OBA               43.77        30.20            79.53        77.21            0.39        Default
+                                                                  43.23        36.15            53.76        84.25            0.35        SNOMED CT
+
+                                                Dictionary        46.18        32.34            80.75        79.02            0.42
+                                                ADEPT             78.41        82.66            74.59        95.42            0.76
+
+  MedHelp, Gold Standard 1000 sentences         MetaMap           37.73        28.03            57.67        77.82            0.29        SNOMED CT
+                                                OBA               45.78        32.10            79.31        78.04            0.41        SNOMED CT
+                                                TerMine           42.35        52.67            35.41        88.77            0.37
+
+                                                Dictionary        37.30        26.34            63.89        74.98            0.29
+                                                ADEPT             78.33        82.55            74.53        95.20            0.76
+
+  CureTogether, Gold Standard 1000 sentences    MetaMap           39.12        29.33            58.57        74.13            0.27        SNOMED CT
+                                                OBA               47.28        33.56            79.91        74.74            0.40        SNOMED CT
+                                                TerMine           43.09        53.11            36.25        86.43            0.37
+                                                Dictionary        38.74        27.53            65.35        70.65            0.27
+
+                                                ADEPT             77.74        78.82            76.69        93.78            0.74
+
+
+
+1124                                                           MacLean DL, et al. J Am Med Inform Assoc 2013;20:1120–1127. doi:10.1136/amiajnl-2012-001110
+                                                                                                          Research and applications
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 3 A comparison of terms identiﬁed as medically-relevant (shown in black) by different models in ﬁve sample sentences. OBA and
+MetaMap are run using the SNOMED CT ontology.
+
+
+attribute the fact that inter-rater reliability is not even higher to      through interfaces like AMT, this opens up new avenues for
+inherent task ambiguity.                                                   building large, labeled PAT datasets both quickly and cheaply.
+   Combining and aggregating Turker responses predicts Nurse                  Our second hypothesis was that statistical models trained on
+
+responses with an F1 score of 84%. As crowds of non-experts                large, crowd-labeled PAT datasets would outperform the current
+are much easier to coordinate than medical experts, especially             state of the art in medical word identiﬁcation. Our CRF model
+
+
+
+Figure 4 Term classiﬁcation accuracy
+plotted against logged term frequency
+in test corpora. Purple (darker) circles
+
+represent terms that are always
+classiﬁed correctly; blue (lighter) circles
+represent terms that are misclassiﬁed
+at least once. A LOWESS ﬁt line to the
+entire dataset (black) shows that most
+terms are always classiﬁed correctly. A
+LOWESS ﬁt line to the misclassiﬁed
+points (blue, or lighter) shows that
+classiﬁcation accuracy increases with
+
+term frequency. Access the article
+online to view this ﬁgure in colour.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MacLean DL, et al. J Am Med Inform Assoc 2013;20:1120–1127. doi:10.1136/amiajnl-2012-001110                                                  1125
+  Research and applications
+
+
+
+                                                                              Table 3   Examples of terms that occur more than once, and are
+
+                                                                              misclassified more than 50% of the time
+                                                                              Frequently misclassified baby, bc, condition, doctor, doctors, drs, health,
+                                                                              (FP>1, FN>1)             ice, natural, relief, short, strain, weight
+
+                                                                              Mostly false positive    accident, decreased, drinks, drunk, exertion,
+                                                                              (FP>1, FN≤1)             external, healthy, heavy, higher, lie, lying, milk,
+                                                                                                       million, pants, periods, prevention, solution,
+                                                                                                       suicidal… [37 more terms]
+                                                                              Mostly false negative    appointment, clear, copd, hiccups, lack, ldn,
+                                                                              (FP≤1, FN>1)             massage, maxalt, missed, nurse, physician, pubic,
+                                                                                                       rebound, silver, sleeping, smell, tea, treat, tree, tx
+
+                                                                                                       … [41 more terms]
+                                                                              Infrequently misclassifiecravings, generic, growing, hereditary, increasing,
+                                                                              (FP≤1, FN≤1)             lab, limit, lunch, panel, pituitary, position,
+                                                                                                       possibilities, precursor, taste, version, waves,
+                                                                                                       weakness …[118 more terms]
+
+
+
+
+                                                                            The third sentence in ﬁgure 3 suggests that context-based rele-
+                                                                            vance detection may be problematic for MetaMap and OBA,
+
+                                                                            too. In this sentence, the term case is annotated because of its
+                                                                            membership in SNOMED CT as a medically relevant term per-
+                                                                            taining to either a ‘situation’ or a ‘unit of product usage’.
+
+                                                                               In spite of encouraging results, limitations to this work
+                                                                            remain. Most notable is the fact that our technique simply iden-
+                                                                            tiﬁes medically relevant terms in PAT: we do not attempt entity
+
+                                                                            resolution or ontology mapping. A related limitation is
+                                                                            ADEPT’s lack of speciﬁcity: we have not trained it to pick out
+                                                                            particular types (eg, drugs, body parts) of terms. An adaptation
+
+                                                                            of the framework presented in this paper would likely generate
+                                                                            suitable training data for such a task. Finally, ADEPTstill fails in
+                                                                            some cases. We expect ADEPT’s performance to degrade as the
+
+                                                                            corpus diverges from the training corpus in terms of generality
+                                                                            and style. As discussed in the failure analysis section, classiﬁca-
+                                                                            tion accuracy on rare terms would likely be improved through
+                                                                            providing additional training data; classiﬁcation accuracy on fre-
+
+                                                                            quent terms might be addressed via imposing a speciﬁc policy
+                                                                            on generic term annotation.
+                                                                               As a ﬁnal demonstration of the usefulness and efﬁcacy of our
+
+                                                                            method, consider the task of describing a MedHelp forum with
+                                                                            its most important constituent medical terms. A natural ﬁrst
+                                                                            attempt would be to rank all relevant terms by their frequency,
+
+Figure 5 Top 50 terms, ranked by frequency, derived for MedHelp's           and select the top N. Figure 5 compares the top 50 medical terms
+                                                                            in MedHelp’s Arthritis forum as determined by ADEPTand the
+Arthritis forum as determined by ADEPT (left) and OBA (right). Terms        OBA. The terms recovered by ADEPTare both diverse and richly
+unique to their respective portion of the list are shown in black. Terms
+occurring in both lists are linked with a line. The gradient of these lines descriptive of arthritic conditions; in contrast, the majority of
+show that all co-occurring terms, bar three, are ranked more highly by      terms recovered by the OBA are spurious, and serve only to
+ADEPT.                                                                      demote the rankings of relevant terms.
+
+
+                                                                            CONCLUSION
+achieves an F1 score of 78%, dramatically outperforming exist-              We have shown that the combination of crowdsourced training
+
+ing annotation toolkits MetaMap and OBA, and statistical term               data and statistical models sensitive to sentence-level context
+extractor TerMINE. This performance carries over from cross-                results in a powerful, scalable and effective technique for auto-
+validation to validation against an independently sourced PAT               matically identifying medical words in PAT. We have made our
+gold standard from CureTogether.
+                                                                            trained CRF model, named ADEPT (Automatic Detection of
+   We attribute ADEPT’s success to the suitability of sentence-             Patient Terminology), available to the public both for download
+level context-sensitive learning models, like CRFs, to PAT                  and as a web service (http://vis.stanford.edu/projects/adept).
+medical word identiﬁcation tasks. Our dictionary, trained on the
+
+same data as ADEPT, achieves high recall because it learns many             Acknowledgements The authors thank Atul Butte and Joel Dudley for their
+medical terms from training data, but it achieves low precision             feedback on this work.
+because it cannot discriminate between relevant and irrelevant              Contributors DLM and JH: conception and design. DLM and JH: data acquisition.
+                                                                            DLM and JH: experiment design and execution. DLM and JH: analysis and
+invocations of these words. Unlike ADEPT, the dictionary                    interpretation of the data. DLM and JH: drafting of manuscript. DLM and JH: critical
+cannot learn, for example, that the word ‘ sugar’ is of particular          revision of the paper for important intellectual content. DLM and JH: ﬁnal approval
+medical relevance when it co-occurs with the word ‘diabetes’.               of the paper.
+
+
+1126                                                          MacLean DL, et al. J Am Med Inform Assoc 2013;20:1120–1127. doi:10.1136/amiajnl-2012-001110
+                                                                                                                            Research and applications
+
+
+
+Funding This work was supported by NSF grant number 0964173 and NIH R01                 14   Aronson AR. Effective mapping of biomedical text to the UMLS Metathesaurus: the
+GM079719-07.                                                                                 MetaMap program. Proc AMIA Fall Symp 2001:17–21.
+                                                                                        15   Brennan PF, Aronson AR. Towards linking patients and clinical information:
+Competing interests None.
+                                                                                             detecting UMLS concepts in e-mail. J Biomed Inform 2003;36:334–41.
+Provenance and peer review Not commissioned; externally peer reviewed.                  16   Chapmann WW, Fiszman M, Dowling JN, et al. Identifying respiratory ﬁndings in
+                                                                                             emergency department reports for biosurveillance using MetaMap. Medinfo
+Open Access This is an Open Access article distributed in accordance with the                2004;11:487–91.
+Creative Commons Attribution Non Commercial (CC BY-NC 3.0) license, which
+permits others to distribute, remix, adapt, build upon this work non-commercially,      17   Jonquet C, Shah NH, Musen MA. The open biomedical annotator. Summit on
+and license their derivative works on different terms, provided the original work is         Translat Bioinforma 2009:56–60.
+                                                                                        18   Ruau D, Mbagwu M, Dudley JT, et al. Comparison of automated and human
+properly cited and the use is non-commercial. See: http://creativecommons.org/               assignment of MeSH terms on publicly-available molecular data sets. J Biomed
+licenses/by-nc/3.0/
+                                                                                             Inform 2011;44:S39–43.
+                                                                                        19   Pratt W, Yetisgen-Yildiz M. A study of biomedical concept identiﬁcation: MetaMap
+                                                                                             vs. people. Proc AMIA Symp 2003:529–33.
+
+REFERENCES                                                                              20   Frantzi K, Ananiadou S, Mima H. Automatic recognition of multi-word terms: the
+ 1   Neal L, Oakley K, Lindgaard G, et al. Online Health Communities. Proc ACM SIGCHI        C-value/NC-value method. Int J Dig Libraries 2000;3:115–30.
+     Conference on Human Factors in Computing Systems 2007, 2129–32.                    21   Takeuchi K, Collier N. Bio-medical entity extraction using support vector machines.
+ 2   Ginsberg J, Mohebbi MH, Patel RS, et al. Detecting inﬂuenza epidemics using             Artif Intelligence Med 2005;33:125–37.
+
+     search engine query data. Nature 2008;457:1012–14.                                 22   Finkel JR, Dingare S, Nguyen N, et al. Exploiting context for biomedical entity
+ 3   Freifeld CC, Mandl KD, Reis BY, et al. Healthmap: global infectious disease             recognition: from syntax to the web. Proc Intl Joint Workshop on NLP in
+     monitoring through automated classiﬁcation and visualization of internet media          Biomedicine and its Applications 2004:88–91.
+     reports. J Med Internet Res 2008;15:150–7.                                         23   GuoDong Z, Jian S. Exploring deep knowledge resources in biomedical name
+
+ 4   Carmichael A. Infertility-Asthma link conﬁrmed. Cure Together Blog. http://             recognition. Proc Intl Joint Workshop on NLP in Biomedicine and its Applications
+     curetogether.com/blog/2011/03/07/infertility-asthma-link-conﬁrmed. Updated March        2004:96–9.
+     7, 2011 (accessed 12 Jan 2012).                                                    24   Settles B. Biomedical named entity recognition using conditional random ﬁelds and
+                                                                                             rich feature sets. Proc Intl Joint Workshop on NLP in Biomedicine and its
+ 5   Wicks P, Vaughan TE, Massagli MP, et al. Accelerated clinical discovery using
+     self-reported patient data collected online and a patient-matching algorithm. Nat       Applications 2004;104–7.
+     Biotechnol 2011;29:411–14.                                                         25   Fernandez-Luque L, Karlsen R, Bonander J. Review of extracting
+ 6   Aronson AR. An overview of MetaMap: historical perspective and recent advances.         information from the social web for health personalization. J Med Internet Res
+
+     J Med Internet Res 2010;17:229–36.                                                      2011;13:e15.
+ 7   Doing-Harris KM, Zeng-Treitler Q. Computer-assisted update of a consumer health    26   Keselman A, Tse T, Crowell J, et al. Assessing consumer health vocabulary
+     vocabulary through mining of social network data. J Med Internet Res 2011;13:e37.       familiarity: an exploratory study. J Med Internet Res 2007;9:e5.
+ 8   Zeng QT, Tse T. Exploring and developing consumer health vocabularies. J Am Med    27   Keselman A, Smith CA, Divita G, et al. Consumer health concepts that do
+
+     Inform Assoc 2006;13:24–9.                                                              not map to the UMLS: where do they ﬁt? J Am Med Inform Assoc
+ 9   Zeng QT, Tse T, Divita G, et al. Term identiﬁcation methods for consumer health         2008;15:496–505.
+     vocabulary development. J Med Internet Res 2007;9:e4.                              28   Smith CA, Wicks PJ. PatientsLikeMe: consumer health vocabulary as a folksonomy.
+                                                                                             Proc AMIA Symp 2008:682–6.
+10   Zeng Q, Kogan S, Ash N, et al. Characteristics of consumer terminology for health
+     information retrieval. Meth Inform Med 2002;41:289–98.                             29   Kittur A, Chi EH, Suh B. Crowdsourcing user studies with Mechanical Turk. Proc
+11   McCray AT, Loane RF, Browne AC, et al. Terminology issues in user access to             ACM SIGCHI Conf on Human Factors in Computing Systems 2009:453–6.
+     web-based medical information. Proc AMIA Symp 1999:107–11.                         30   Bostock J M. Crowdsourcing graphical perception: using Mechanical Turk to assess
+
+12   Gibbs RD, Gibbs PH, Henrich J. Patient understanding of commonly used medical           visualization design. Proc ACM SIGCHI Conf on Human Factors in Computing
+     vocabulary. J Fam Pract 1987;25:176–8.                                                  Systems 2010:203–12.
+13   De Bock Geertruida JC, Caroline S, Elly KW, et al. A family history of breast cancer1   Lafferty JD, McCallum A, Pereira F. Conditional random ﬁelds: probabilistic models
+     will not predict female early onset breast cancer in a population-based setting. BMC    for segmenting and labeling sequence data. Proc International Conference on
+
+     Cancer 2008;8:203.                                                                      Machine Leaning 2001: 282–9.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MacLean DL, et al. J Am Med Inform Assoc 2013;20:1120–1127. doi:10.1136/amiajnl-2012-001110                                                                          1127

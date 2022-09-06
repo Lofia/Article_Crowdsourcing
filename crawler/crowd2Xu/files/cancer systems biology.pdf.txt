@@ -1,0 +1,1433 @@
+              NIH Public Access
+
+              Author Manuscript
+              Nat Rev Clin Oncol. Author manuscript; available in PMC 2015 February 09.
+
+I            Published in final edited form as:
+-             Nat Rev Clin Oncol. 2014 March ; 11(3): 167–176. doi:10.1038/nrclinonc.2014.6.
+A
+A
+u            Cancer Systems Biology: a peak into the future of patient care?
+h
+r
+M            Henrica M. J. Werner , Gordon B. Mills , and Prahlad T. Ram
+n            1Centre for Cancer Biomarkers, Department of Clinical Science, The University of Bergen, 5053,
+s
+c            Bergen, Norway
+p            2Department of Systems Biology, The University of Texas MD Anderson Cancer Center, Houston,
+t
+             TX 77030, USA
+
+             Abstract
+
+                 Traditionally, scientific research has focused on studying individual events, such as single
+N                mutations, gene function or the effect of the manipulation of one protein on a biological
+H                phenotype. A range of technologies, combined with the ability to develop robust and predictive
+-                mathematical models, is beginning to provide information that will enable a holistic view of how
+A
+A                the genomic and epigenetic aberrations in cancer cells can alter the homeostasis of signalling
+u                networks within these cells, between cancer cells and the local microenvironment, at the organ and
+o                organism level. This systems biology process needs to be integrated with an iterative approach
+r                wherein hypotheses and predictions that arise from modelling are refined and constrained by
+M
+n                experimental evaluation. Systems biology approaches will be vital for developing and
+s                implementing effective strategies to deliver personalized cancer therapy. Specifically, these
+r                approaches will be important to select those patients most likely to benefit from targeted therapies
+p                as well as for the development and implementation of rational combinatorial therapies. Systems
+t                biology can help to increase therapy efficacy or bypass the emergence of resistance, thus
+
+                 converting the current (often short term) effects of targeted therapies into durable responses,
+                 ultimately to improve quality of life and provide a cure.
+
+
+N                        To ensure the survival of the organism, millions of signals are sent and received every
+H                        second between cells, tissues, or organs and the external environment, and they are
+P                        integrated into responses at multiple levels and scales in the body. Robust homeostatic
+A                        mechanisms must be in place to fine-tune responses and, in particular, allow the organism to
+A
+t                        deal with potentially toxic environmental perturbations, such as those derived from
+o                        pathogens, food, air (tobacco smoke, diesel fumes), or drugs. These mechanisms must also
+r                        be resistant to the effects of spontaneous somatic mutations and the many germline
+a                        mutations that ultimately alter the biological function of proteins.
+n
+s                        In a cancer cell, genomic and epigenetic deregulation results in marked disruption of these
+r                                            1,2
+t                        homeostatic mechanismsDeveloping an integrated view of the mechanisms by which
+
+
+
+
+             Correspondence to: Gordon B. Mills, gmills@mdanderson.org.
+             The authors declare no competing interests
+           Werner et al.                                                                        Page 2
+
+                          genomic and epigenetic aberrations disrupt normal cellular function to induce malignant
+
+N                         transformation and tumour progression remains a tremendous challenge.
+H
+-                         Advances in high-throughput, cost-effective, and tissue-sparing technologies that can
+A                         analyse tumours at multiple levels, combined with high-speed computing resources, has
+A                         facilitated a transition in the research paradigm toward an integrated systems biology
+u                         approach.–7These new technologies have greatly expanded our ability to develop robust
+h
+r                         datasets and to integrate the data into a holistic view that is much more than the sum of the
+M                         parts. Although the traditional research approach is instrumental in the acquisition of basic
+n                         detailed knowledge of the function of specific genes and proteins, the appreciation of the
+u
+c                         wider cellular signalling networks between cells, stroma, organs, and the entire organism
+p                         through an integrated ‘system biology’ approach is crucial for the development and
+t                         implementation of effective anti-cancer strategies. Systems biology is a ‘data-driven’
+                          science requiring large amounts of high-quality data, crossing multiple scales and concepts
+
+                          in order to build robust predictive models. Indeed, one of the key precepts of systems
+                          biology is that the complexity of the cell and its environment can be “modeled” and that
+                          these models can be both robust and predictive. It allows an unbiased analysis of the data
+                          and has the important advantage that it is also hypothesis deriving. Several aspect of clinical
+I
+-                         research can benefit from the use of systems biology, including understanding of (emergent)
+A                         drug resistance, prediction of effective combination therapies and identification of predictive
+A                         biomarkers to increase the response rate to (targeted) treatments. In this review we will
+u                         cover an overview of systems biology approaches and resources that have been developed,
+h
+r                         focusing on some of the clinical and basic science studies that have benefitted from using a
+M                         systems approach to uncover novel concepts and properties. We will also discuss some of
+n                         the challenges and how this relatively young filed can make a positive impact on cancer.
+u
+c
+p             Cancer systems biology
+t                         Cancer systems biology, therefore, represents the application of systems biology approaches
+
+                          to the analysis of how the intracellular networks of normal cells are perturbed during
+                          carcinogenesis to develop effective predictive models that can assist scientists and clinicians
+                          in the validations of new therapies and drugs. These perturbations are caused by the massive
+                          and ongoing genomic and epigenetic instability in tumors altering the functions of many
+
+I                         different molecules and networks in a single cell and further complicated by the alterations
+H                         in the interactions with the local environment as well as the individual as a whole through
+P                         the tumorigenic process itself. Cancer systems biology approaches are therefore based on the
+A                         use of computational and mathematical methods to decipher the complexity in cancer
+u
+h                         heterogeneity
+r
+M                         Projects such as The Cancer Genome Atlas (TCGA) , and the International Cancer
+a                         Genomics Consortium (ICGC) , that build on the success of the Human Genome Project,
+u                         are providing the ‘parts list’ of cancer; while (cancer) systems biology will provide the
+c                                      10
+p                         regulatory logiMultiple data types are used and integrated, including clinical data. Just
+t                         as the spectrum of input cancer biology data is wide, so are the computational approaches
+                          used in cancer systems biology, including new mathematical and computational algorithms
+                          that reflect the dynamic interplay between experimental biology and the quantitative
+
+
+
+                           Nat Rev Clin Oncol. Author manuscript; available in PMC 2015 February 09.
+           Werner et al.                                                                         Page 3
+
+                          sciences. A cancer systems biology approach can be applied at the level of an individual cell
+
+                          or to a tissue, to a patient with a primary tumour and possible metastases, or to any
+I                         combination of these (Figure 1). This approach can integrate the molecular characteristics of
+-                         tumours at different levels (DNA, RNA, protein, epigenetic, imaging) and different intervals
+P                         (seconds vs. days) with multidisciplinary analysis. One of the major challenges to its
+A
+u                         success, besides the challenge posed by the heterogeneity of cancer per se, resides in
+h                         acquiring high-quality data describing clinical characteristics, pathology, treatment, and
+r                         outcomes and integrating the data into robust predictive models.
+M
+a                         Modelling approaches tackling various aspects of cancer have been successful in predicting
+u
+c                         the behaviour of cancer cells and tissues in the context of drug response and angiogenesis,
+p                         understanding stem cell heterogeneity, the integration of large omics data as well as
+t                         modelling cellular behaviours at the tissue The urgency for the implementation of
+
+                          a successful cancer systems biology programme has been highlighted by the emergence of
+                          targeted therapies as cancer treatment. Although targeted therapies have many advantages
+                          owing to their ability to specifically target one process, the response rates have not as yet
+                          fulfilled their early promise and hThe use of cancer systems biology and integrated
+
+N                         network analyses has the potential to support the understanding of the relationship between
+H                         molecular markers and response to (targeted) therapies, facilitating the identification of the
+P                         subgroup of patients most likely to benefit from a particular therapy, or the identification of
+A                         those combinations of therapies that will result in an increased efficacy or will be able to
+A
+t                         bypass drug resistance. Resistance to therapy remains the most frequent cause of treatment
+o                         failure. A systems analysis of the molecular characteristics of non-responsive or resistant
+M                         tumours is an exciting opportunity to elucidate mechanisms underlying resistance and to
+a
+n                         identify ways to overcome it (Figure 2).
+s
+r                         Because of the extreme heterogeneity and genomic instability of cancer cells, one of the
+t                         emerging challenges is to distinguish ‘driver’ aberrations, which directly alter the behaviour
+                          of the tumour, and thus represent potential targets or biomarkers, from ‘passenger’
+                                                                                          20,21
+                          aberrations that do not affect the cancer cell (and thus are not effIt ise targets).
+                          important to emphasize that passenger aberrations can occur within cancer genes, those
+                          genes that clearly play a role in cancer pathophysiology, and that different aberrations within
+                          cancer genes can have distinct effects on cellular functions and response to targeted
+N
+H                         therapeutics. Systems-based computational methods have been useful in identifying low
+-                         frequency mutations in impure and heterogenous samples, which is related directly to the
+A                         correct identification of subclonal drivers and, therefore, our understanding of tumour
+A                         progression and treatment resistThus, a systems biology approach has the potential
+u
+h                         to provide the infrastructure to allow a more-efficient discrimination between drivers and
+r                         passengers mutations.
+M
+n
+u             Cancer systems biology resources
+c                         High-throughput technologies have been developed to enable comprehensive genomic
+p
+t                         analyses of mutations, rearrangements, copy number variations, and methylation at the
+                          cellular and tissue levels, as well as robust analysis of RNA and microRNA expression data,
+                          protein levels and metabolite levels.23In parallel, predictive data-driven
+
+
+
+                           Nat Rev Clin Oncol. Author manuscript; available in PMC 2015 February 09.
+           Werner et al.                                                                         Page 4
+
+                          mathematical and computational methods have been developed to analyse the large amounts
+                                                                 28–33
+                          of data arising from the new analysis platfUnfortunately, none of the platforms
+I                         alone is sufficient to capture the complexity of changes in the genome of a cancer cell or to
+-                         discriminate optimally between cancer driver and passenger mutIn addition, all
+P                         methods generate noise and have their own intrinsic weaknesses, thereby hampering
+A
+u                         interpretation. Beyond the previously mentioned problem of obtaining high-quality clinical
+h                         and phenotypic data to be integrated with the ‘omics’ platforms, a major challenge will be
+r                         the integration of data across the different platforms.
+M
+a                         So far, the ability to integrate and interpret data across platforms has substantially lagged
+u                                                        36
+c                         behind the ability to generate thhowever, integrative genomic studies can provide a
+p                         new paradigm for the discovery of cancer aberrations and interactions, novel treatments, and
+t                         resistance mechanisms. Large-scale projects have generated terabytes of ‘omics’ data that
+
+                          have been curated and made available to the international scientific community (Table 1).
+                          To integrate the data and present them in a way that biological translations can be
+                          generated,large programs have developed novel computational tools and databases of
+                          interactions that are accessible to the larger community (table 1). Furthermore, independent
+
+N                         of these large-scale projects, many online resources contain annotated high-throughput data,
+H                         computing tools and visualization, databases of interaction and quantitative biological
+P                         information (Table 1).
+A
+A                         The existing systems biology resources contain different types of data that are synergistic
+t
+o                         and complementary and form the spokes of the cancer systems biology wheel (Fig. 3). On
+M                         one side, TCGA, ICGC, and Stand Up to Cancer projects have focused on the collection of
+a                         tumour samples and on the characterization of their molecular profiles together with data on
+n                         patient outcomes. On the other side, CCLE, LINCS, and ICBP projects have focused on
+s
+r                         obtaining a detailed molecular characterization of the responses of several cancer cell lines
+t                         to multiple perturbations. Online databases and computing resources contain detailed
+                          information on genes, proteins, and molecular interactions as well as online computing
+
+                          software and tools to visualize and analyze large datasets (Table 1).
+
+                          The data collection and computing efforts through many programmes have provided a rich
+                          resource for the implementation of cancer systems biology and have supported the
+N                         progression of the field. Moreover, adapting new efforts, such as ‘crowd sourcing’ to large
+H
+-                         data analysis, have already provided an exciting and novel way to analyse large system-level
+A                         biological data.9Projects such as the Dialogue for Reverse Engineering Assessments and
+A                         Methods (DREAM challenge), have made ‘big data’, collected through efforts such as the
+u                         ICBP, available to the international community of computational biologists and
+h
+r                         mathematicians (Table 1).
+M
+n             Cancer systems biology approaches
+u
+c                         In spite of extensive research investigating and uncovering many important aspects of
+p                         cancer biology, we are still far from an integrated understanding of how the genomic and
+t
+                          epigenetic abnormalities that occur in cancer cells mediate their functional consequences.
+                          Many groups have assessed large clinical cohorts by measuring one molecular data type
+
+
+
+                           Nat Rev Clin Oncol. Author manuscript; available in PMC 2015 February 09.
+           Werner et al.                                                                          Page 5
+
+                          (such as gene expression, mutation, single-nucleotide polymorphism) in relation to a
+
+                          measurable outcome to derive correlations between a particular molecular event and disease
+I                         subtypes. These observational studies are important, but they are insufficient to demonstrate
+-                         causality. Furthermore, the interactions between genes, proteins, and metabolites are
+P                         coordinated in intracellular and intercellular networks to enable effective interaction with the
+A
+u                         microenvironment and with all organ systems in our body, necessitating both the acquisition
+h                         and integration of data across multiple levels. The cellular networks that are perturbed in
+r                         cancer are, in general, the same cellular pathways used by normal cells to perceive and
+M
+a                         respond to the environment, although not always with the same interactions or spatio-
+u                         temporal dynamics, owing to the rewiring of the networks as a result of molecular
+c                         aberrations. Furthermore, in some cases, gene mutations or fusions can result in new
+p                         functions that are not mediated by the parental molecule. These neomorphic functions
+t
+                          engendered by genomic aberrations in cancer cells are particularly difficult to deconvolute
+                          and integrate into cellular pathways and networks. Because aberrations can occur at various
+                          levels and lead to changes in multiple parts of a signalling network, integrating multiple data
+                          types from the same tumour becomes necessary in order to derive a more global or
+
+                          ‘systemic’ understanding of the molecular drivers of the cancer.
+N
+H                         The TCGA Research Network has developed perhaps the most comprehensive data set
+P                         encompassing exon and whole-genome sequencing data combined with analysis of DNA
+A                         copy number, mRNA, microRNA, promoter methylation and protein expression. In each
+A
+t                         tumour lineage examined, new observations have been reported. For example, the genomic
+o                         analysis of high-grade serous ovarian cancer in the North American and European
+M                         populations has revealed the existence of TP53 mutations across virtually all tumours and
+a
+n                         the dominant effect of DNA copy number aberrations, Furthermore, this analysis identified
+s                         specific microRNA, mRNA, or methylation subtypes and the activation of the NOTCH and
+r                         FOXM1 pathways as key features of ovarian carcinoSimilar analyses in breast cancer
+t                         increased our understanding of previously identified subsets, highlighted the recurrence of
+
+                          mutations in TP53, PIK3CA, and GATA3 genes as well as specific mutations within
+                          subtypes, such as PIK3CA in luminal tumours, and led to the identification of new subtypes
+                          of breast cancer that were not obvious from previous analyses.ngly, integrated
+                                                                                               3
+                          analyses identified dominant signalling pathways driven by HER2 or EGFR activity. based
+N                         on the downstream phosphorylation of the EGFR HER2 signaling network stressing the
+H                         differential treatment of patients within this subgroup moving forward. In endometrial,
+-                         colon, and rectal cancer, hypermutated tumours seemed to be a result of microsatellite
+A
+A                         instability, with a new type of instability driven by pole gene mutations resulting in
+u                         ultramutated tumorsIntegrated analyses also revealed MYC-directed activation in
+h                         aggressive colorectal carcinoThe use of this type of analysis in clear-cell renal cell
+r                         carcinoma, identified cellular oxygen sensing, chromatin remodeling/histone methylation,
+M
+n                         and metabolic shifts in the tricarboxylic acid (TCA) cycle as key processes in this
+u                         pathology.0Of note, integrated analyses across different cancer types highlighted some
+c                         striking similarities in terms of molecular characteristics for basal-like breast cancer, high-
+p                                                                          21
+t                         grade serous ovarian cancer, and serous endometrialSystems approaches
+                          integrating data across multiple diseases in a ‘pan cancer’ effort aimed at improving our
+                          knowledge of the molecular pathogenesis of cancer whereby data is analyzed across tumor
+
+
+
+                           Nat Rev Clin Oncol. Author manuscript; available in PMC 2015 February 09.
+           Werner et al.                                                                         Page 6
+
+                          types to identify molecular characteristics common to a range of cancer types versus disease
+
+                          sub-types. The greatest opportunities associated with such analysis are only beginning to
+I                         emerge. The multiplatform data sets on highly characterized patient samples provide the
+-                         information necessary for the development of robust and predictive models. However, the
+P                         importance of an iterative approach wherein hypotheses and predictions arising from the
+A
+u                         modelling are refined and constrained by experimental evaluation must be emphasized. In
+h                         addition to such large consortial efforts, several groups have employed systems approaches
+r                         using novel computational methods to integrate different data types to elicit novel principles.
+M                                   11
+a                         Carro et al.using gene expression and network approaches, identified key transcriptional
+u                         factors, such as CEBP and Stat3, as master regulators of the mesenchymal transformation in
+c                         glioblastoma. Importantly, they demonstrated that the expression of these transcription
+p                         factors could predict poor clinical outcome. In another approach the integration of protein
+t
+                          and phosphoproteomic interactions with transcription factor-DNA binding data led to the
+                          discovery of novel features of cellular responses to stress and groSimilarly,s.
+                          systems-level analyses of proteomic and metabolomic data revealed novel regulatory
+                          functions between these two important cellular networks that would not have been achieved
+                                  40
+                          otherwise.Furthermore, the integration, through network analysis, of mRNA expression
+N                         data with proteomic, phosphoproteomic and clinical outcomes data, allowed the
+H                         identification of key regulators of EGFR signalling and correlated these events with patient
+P                                41
+A                         survival.Whole-genome sequencing and proteomics were also used to identify new driver
+A                         genes in endometrial cancer and to identify a novel functional association between ARID1A
+t                         and PI3K pathway activity.
+o
+M
+a             Systems approaches for tissue complexity
+n                         In any tissue in the body, there is extensive interaction between cells within the organ and
+s                         the microenvironment, giving rise to an additional layer of complexity whereby multiple
+r
+t                         networks must work together cohesively. These same interactions occur between the tumour
+                          and its microenvironment, regulating the process of tumorigenesis. Many of these
+                          interactions are contextual, with markedly different effects at different stages of tumour
+                          development. For example, it is clear that TGFβ in the tumour microenvironment can
+
+                          mediate both tumour growth and inhibition. However, an understanding of the mechanisms
+                          underlying these disparate processes has remained elusive. This complex functionality may
+N                         in fact only be solved via a systems biology approach. The molecular aberrations in cancer
+H
+-                         can significantly alter the normal dynamics of (neo)vascularisation and hypoxia response..
+A                         Furthermore, the role of the microenvironment in tumour dormancy and evading therapeutic
+A                         interventions that allows oestrogen receptor-positive breast cancer to recur years later
+u                         remains elusive.
+h
+r
+M                         Owing to the complexity of the tumour microenvironment interactions, many other aspects
+n                         of cancer biology have not been explained by traditional scientific approaches and can
+u                         benefit by the integrated analysis supported by system biImaging of cells and
+c                         their interactions with the extracellular environment can provide the high-quality data
+p
+t                         needed for the development of predictive models. To distinguish a stromal signature from a
+                          tumour signature and to understand the influence of different (metastatic)
+                          microenvironments, or how stromal expression changes can influence tumour progression,
+
+
+
+                           Nat Rev Clin Oncol. Author manuscript; available in PMC 2015 February 09.
+            Werner et al.                                                                          Page 7
+
+                          several strategies have been used. An extensive analysis of gene-expression patterns in
+
+                          primary and metastatic tumours, applying novel statistical analytical methods, led to the
+I                         discovery of genes that were reprogrammed in brain metastases, but not in other metastatic
+H                         sites. This reprogramming event was a function of the local microenvironment, likely
+P                                                       45                  46
+A                         regulated by promoter methylatioMoreover, Finak et apurified tumour stromal cells
+u                         by laser capture microdissection and compared gene-expression data of the tumour stroma to
+h                         healthy stroma, and developed a stromal signature with clear prognostic impact independent
+o
+M                         of tumour subtypes. Thus, using systems-based methods, several groups have shown that the
+a                         stroma has an important interplay with the tumour and has clear effects on disease
+u                         progression and possibly also on effective treatment options. Developing computational
+s                         models to fit the complex dynamics of the cellular microenvironment can provide potential
+r
+t                         hypotheses to be tested experimentally and aid in the interpretation of the results. This
+                          iterative approach provides the basis for a truly integrative modelling and experimental
+                          platform. Several experimental approaches are well adapted to feed data for this high-
+
+                          complexity integrative platform.
+
+                          Three-dimensional culture systems provide a potential approach to more realistically mimic
+N                         the in vivo situation. Multiple articles have shown that in contrast to 2D culture, cells grown
+H                         in 3D respond differently to chemotherapy and radiotherand also have markedly
+-                                                                                                 49
+A                         different gene-expression patterns related to the extracellular matrix and cell adhesion.
+A                         Moreover, microfluidic systems, where tissues and even multiple different cell lineages can
+u                         be studied in relatively high-throughput (micro)models, provide another experimental
+h
+r                         approach to support the modelling of the interactions between the tumour and
+M                         microenvironment.0These approaches have demonstrated critical environmental and
+n                         spatial aspects of cellular responses within the tumour microenviromThese in
+u                         vitro approaches, therefore, have the potential to provide tractable experimental systems to
+c
+p                         develop hypotheses to test in vivo and also to experimentally test mathematical models
+t                         developed from in vivo studies. Integrating in vitro and in vivo modeling approaches can
+                          play a major role in understanding how spatial orientation and interactions with the
+
+                          microenvironment can affect diverse tumour behaviour.
+
+                          Response to (targeted) treatment and tumor progression are intrinsically linked to
+                          immunological pathways. At a single platform level, the complex interplay from the
+N                         multitude of players cannot be completely captured. Using a pathway recognition algorithm
+H                                                                  55
+P                         and multilevel data from TCGA, Kristensen eshowed that tumors can be stratified by
+A                         their immune signatures. This stratification is shown to be relevant for patient survival and
+A                         targeted treatment response. Further underlining the importance of the relationship between
+t
+o                         the tumor and the microenvironment, multiscale analysis showed the tumor can recreate its
+r                         immune environment throughout cancer progression .
+M
+n                         Several investigators have developed modelling approaches to study the relationship
+s                         between intracellular pathways and the behaviour of cells at the Recently,vel.
+r
+p                         some researchers modelled myc and p53 pathways during the proliferation of lymphoma
+t                         cells in the context of surrounding tissue, growth factors, and aIn addition,
+                          models considering the effect of cell division rates as well as interactions between cancer
+                          cells and the microenvironment predicted that the order in which targeted and chemotherapy
+
+
+                           Nat Rev Clin Oncol. Author manuscript; available in PMC 2015 February 09.
+            Werner et al.                                                                          Page 8
+
+                           approaches are delivered, is important to optimizing benefit whereby the proliferation rates
+
+                           and migration capabilities of different cell types could alter the tissue level response to
+I                          therapy. Critically, these models will help to predict how effects at small intervals within
+H                          the cell relate to long-term effects observed at the tissue or whole body level. Mathematical
+P
+A                          models of the spatio-temporal heterogeneity of the extracellular matrix have provided
+u                          unexpected insights into how, for example, the urokinase plasminogen activation system
+h                          impacts on cell invasiThe aforementioned studies primarily used ‘omics’ data derived
+o
+M                          from analyses of tumour lysates without the consideration of spatial orientation, one of the
+a                          key aspects of the tumour microenvironment is spatial constraints. To incorporate spatial
+u                          information, imaging of tumour cells and their environment is of paramount importance,
+s                          particularly in the context of angiogenesis. The differential imaging of blood vessels and cell
+r
+t                          types using fluorescent probes as well as intravital imaging of tumours in animal models and
+                           cell cultures are techniques that provide the data necessary to develop ‘tissue-level’
+                           computational models that can incorporate all these facets. For example, two predictive
+
+                           models for angiogenesis and cell-cell interactions have been developed, by incorporating
+                           imaging data, in order to study in vivo aspects of the tumour biology and drug response,
+                           respectively.7Furthermore, Haeno et alused a dissemination dynamics model
+N                          (including well-annotated patient data) to predict the type and sequential order of treatments
+H
+-                          most likely to benefit patients with pancreatic cancer. This model can have important
+A                          clinical implications for this disease that has a notoriously poor prognosis. Importantly, Kim
+A                          and colleagues highlighted the applicability and individual benefits of different types of
+u
+h                          modelling in combination with in vitro and patient data to study spatio temporal drug
+r                          distribution within the tumor to optimize drug selection and delivery.
+M
+n             Systems approaches for cell heterogeneity
+u
+c                          Cancer stem-like cells, also known as tumour-initiating cells, have been intensely studied in
+p                          recent years. These studies have been driven in part by the discovery that the presence of
+t                                                                                          63,64
+                           cancer stem-like cells likely contributes to drug resistance and poor outcome.
+                           Interestingly, characteristics previously attributed to epithelial-mesenchymal transition
+                           (EMT), including EMT markers and mesenchymal morphology, can contribute to or be
+                           associated with a cancer stem cell-like state and drug The ability to transition in
+
+                           and out of an EMT-like state is critical for a cell to initiate and complete the metastatic
+N                          process.,67Systems-based analysis of prostate cancer identified a molecular signature
+H                          associated with patient outcoMoreover, the results from this study highlighted an
+P
+A                          extensive plasticity of basal cells, supporting a model in which cells of origin can generate
+A                          distinct molecular subtypes of prostate cancer.
+t
+o                          Different models of the spatiotemporal dynamics of stem cells in both healthy cells and
+r                          tumour cells have been published to evaluate normal olfactory ebowel crypts,0
+M                                        71
+n                          and solid tumoursin an attempt to understand the regulatory strategies of cell renewal.
+s                          These models give rise to the hypothesis that stem cells are not cell types as such, but rather
+r                          a behavioural state imposed on the cell by feedback mechanisms. Such mechanisms are still
+p
+t                          in place in tumours, although they are susceptible to perturbations, including those induced
+                           by treatment. Changes in tumour size can alter cell proliferation and death by disturbing the
+
+
+
+                            Nat Rev Clin Oncol. Author manuscript; available in PMC 2015 February 09.
+            Werner et al.                                                                          Page 9
+
+                          feedback mechanisms and shift the balance towards cell renewal. These models could help
+                                                                                                    71
+                          in predicting which approaches might successfully shrink the tumour and benefit patients.
+I
+H                         Intratumoural and intertumoural heterogeneity contribute to patient prognosis and predicts
+P                         response to therapy.7Intratumoural heterogeneity may represent the greatest challenge to
+A                                                                         73
+u                         deliver effective personalized cancer therapy. Tysdeveloped novel automated
+h                         tools to capture and quantitate multiplexed imaging features to develop predictive models of
+o                         the heterogeneity of response of individual cells to perturbations and were able to show
+M                         heterogeneous cell fates upon exposure to anti-proliferative drugs. In another study,
+a                                       74
+u                         Yankeelov et al.,used quantitative tumour imaging methods and developed a model of
+s                         interactions between cancer cells, stroma and immune cells, vascularisation and the
+r                         extracellular matrix, that was able to predict treatment response and tumour progression.
+t
+                          These modeling approaches have been very useful in enabling us to understand cellular
+                          heterogeneity and response to perturbations and lay the foundation of how we can use such
+                          information to develop novel methods to treat tumors which are inherently heterogeneous.
+
+
+              Systems approaches for targeted therapy
+N                         One of the continual challenges in the use of targeted therapy is the low response rates
+H                                                   16–19
+-                         observed in the clinical settinIn many cancer systems biology efforts, novel
+A                         computational and mathematical methods are used to integrate and analyse patients’
+A                         molecular data to identify optimal markers and targets. Recent efforts focusing on colorectal
+u                         and liver cancers have integrated whole-genome expression data with patient’s outcomes to
+h                                                                                              75
+r                         classify patients and their therapy responses according to gene-expressUsingatterns.
+M                         unbiased analysis of these datasets, the investigators identified specific expression patterns
+n                         and pathways that were associated to specific mutations in the tumour, and which altered
+u                                                     75
+c                         drug response in the cancer ceFurthermore, extensive computational analysis of a large
+p                         metabolic network revealed key regulatory nodes, such as oxidative phosphorylation,
+t                         glycolysis and citric acid cycle that could serve as optimal targets Severalrapy.
+                          groups have also integrated phosphoproteomic time-course data of cell line responses to
+
+                          growth factors and perturbations in epithelial tumours, developing predictive data-driven
+                          models to identify rational targets and combinations of drugs for effective therapy.
+                          In diseases with limited therapeutic options (such as pancreatic cancer) an extensive systems
+
+N                         biology approach integrating gene-expression data from primary pancreatic ductal
+H                         adenocarcinomas and from human or murine pancreatic adenocarcinoma cell lines, revealed
+P                         novel classifiers, predicted potential subtype-specific therapies, and identified non-
+A                         responders.0
+A
+t
+o                         Beyond pancreatic cancer, an area of intense research in terms of system biology has been
+r                         breast cancer. Much work has in fact focused on molecular phenotypes and drug responses
+M                         in breast cancer. These efforts used several systems-level approaches, including large
+n
+s                         ‘omics’ data acquisition, analysis of patients and responses to clinically approved drugs as
+r                         well as large panels of cell line-based assaysComputational modeling and
+p                         analysis of perturbation screens using non-coding RNA have also proven useful in defining
+t                         network topologies and predicting combinations of targets based on mechanistic functions of
+                                     7,86–88
+                          subnetworks.
+
+
+                           Nat Rev Clin Oncol. Author manuscript; available in PMC 2015 February 09.
+           Werner et al.                                                                         Page 10
+
+
+              Approaches for drug resistance
+                          As mentioned before, drug resistance is one of the major challenges to effective cancer-
+I                         treatments. Integration of thousands of ‘omics’ datapoints acquired from sensitive and
+H
+P                         resistant tumours into a systems-based therapeutic strategy has been shown to be a powerful
+A                         tool for tackling resistancFor example., models of dynamic changes in signalling
+u                         networks of receptor tyrosine kinases (RTK) families have facilitated the classification of
+h
+o                         RTKs and their network activation and led to the identification of points of intervention to
+M                         delay or overcome drug resistanceFurthermore, Komurov et alused a novel
+a                         network-based analysis of gene expression and proteomics coupled to ErbB2-positive
+u                         patient survival data, and showed that in breast tumours with acquired resistance to
+s
+r                         lapatinib, the drug was still able to block EGFR/ErbB2 signalling, but that upregulation of
+t                         glucose metabolism, unfolded protein response, and endoplasmic reticulum (ER) stress
+                          pathways mitigated the ability of lapatinib to induce cell death, suggesting that coordinated
+
+                          targeting of metabolic networks and signalling networks has the potential to improve patient
+                          outcomes.91,9Beckman et al.illustrated that the potential effects on drug response and
+                          resistance acquisition induced by single cell heterogeneity and cellular dynamics can be
+
+N                         mathematically modeled and, therefore, should be included in personalized treatment
+H                         strategies. They demonstrated that a strategy targeting all cancer subpopulations including
+-                         the precursors of resistant clones, rather than treatment targeting the clone predominantly
+A                         present which therefore initially leads to the largest reduction in tumour size, may be more
+A
+u                         effective. As such counterintuitive strategies may be of advantage for patient outcome.
+h                         Lastly, integrating patient data with murine models has proven a powerful systems approach
+r                         to identify mechanisms to overcome resistance to androgen therapy in prostate cancers.
+M
+n                         All these different studies highlight how using systems biology approaches can improve
+u                         targeted therapy and help to overcome drug resistance.
+c
+p                         With the aim of improving effective combinatorial drug prediction in cancer, mathematical
+t                         modelling combined with high-density time-dependent measurements showed that
+
+                          modulation of oncogenic pathways through sequential application of drug combinations is
+                          possible and can render cancer cells much more susceptible to the drugs, thus significantly
+                          increasing the efficacy of treatContext-specific metabolic modelling algorithms
+
+                          demonstrated feasibility in predicting drug targets and phenotypic tumour response,
+N                         including off-target effects, making this an effective systems approach for the development
+H                         of new (combinatorial) drugs therFor example, STK38 (Serine-threonine kinase 38,)
+P                         was identified as an upstream regulator of MYC activity through a model of network
+A
+A                         dynamics(modulator inference by network dynamics (MINDy) Algorithm) aimed at
+t                         predicting transcription factor modulators, and experimental manipulation of STK38
+o                         demonstrated inhibition of tumour growth in MYC-dependent tumors in vivo; and thus a
+r                                                               97
+M                         potential novel means to target these tumours.
+n
+s                         Cancer systems biology has made an impact on drug discovery and development from the
+r                         identification of targets up to the clinical trial stage. Computational analysis of the ErbB
+p                         family network has revealed ErbB3 as a key node of ligand-induced ErbB2 activation.
+t
+                          These results facilitated the engineering of a bispecific ErbB3 antibody, MM-111, that
+                          inhibits ligand-induced receptor activation in an ErbB2-overexpressed environment and as
+
+
+                           Nat Rev Clin Oncol. Author manuscript; available in PMC 2015 February 09.
+           Werner et al.                                                                       Page 11
+
+                          such bypasses the tumour ErbB3 escape route that is often activated in drug resistance.
+
+                          Computational modelling together with pharmacodynamic and tumour growth algorithms
+I                         aimed at identifying optimal drug combinations (with MM-111) to prevent drug
+-                         resistance.Of note, the MM-111 antibody, a drug that would not likely have been
+P                         developed without a systems biology approach, is currently in clinical development.
+A
+u
+h                         The examples described in this Review highlight the potential of combining multiscale high-
+r                         throughput data analysis with mathematical modelling to identify novel and sometimes
+M                         unexpected principles. Importantly, a number of these models are being used to develop
+a                         selection approaches for implementation into clinical trials.
+u
+c
+p             Data sharing
+t
+                          Although large-scale collections of data is inherently associated with risks of errors, making
+                          these data sets available to the cancer research community and the public enables a
+                          community or crowdsourcing approach to data analysis as well as data forensics, facilitating
+                                                     101–103       101
+                          the recognition of possible errorBilal et alhave proposed competition-based
+                          modelling using large datasets with omics and clinical information to improve survival
+N                         predictions among patients with breast cancer. The fact that the data sets are available to the
+H                         public, allows the models to evolve through interaction with the community and prevents the
+P
+A                         so-called ‘self-assessment trap’, where model building and testing are carried out within the
+A                         same group with the risk of reporting (too) favourable results. A different crowdsourcing
+t                         research study focused on developing prognostic models for breast cancer using genome-
+o
+M                         scale data (gene expression, copy number analysis, and clinical variables), and showed the
+a                         approach to be capable of generating prognostic models of at least equal quality to
+n                         previously reported studiand consistent across multiple independent evaluations.
+s                         Much as there have been different experimental approaches to understand cancer there have
+r
+t                         also been many different modeling approaches that have been developed. The modeling
+                          approaches utilise different algorithms and these are largely dependent on the type of data
+                          that has been available and the questions that are being answered
+
+
+              Conclusions and future directions
+
+N                         The era in which cancer was treated solely according to the organ of origin is coming to an
+H                         end, leaving space for a greater understanding of the complex interactions between the
+-                         genomic aberrations present in tumour cells, the intrinsic gene-expression patterns of the
+A                         tissue of origin, and the tumour microenvironment (Figure 2). Cancer systems biology has
+A
+u                         the potential to usher in an era in which the effects of molecular aberrations and interactions
+h                         within networks are integrated with molecular knowledge and pharmacogenomics.
+r                         Improvements in our ability to image and measure quantitatively spatial localization of
+M                         network activities and incorporate spatio-temporal information acquired in patients with
+n
+u                         ‘omics’ data and computational analysis are providing the right platform for systems biology
+c                         to impact on patient outcomes. Cancer systems biology approaches can improve our
+p                         understanding of how tumour heterogeneity, neovascularization, immune response, and
+t
+                          changes in the tumour and its microenvironment over time and in response to therapeutic
+                          interventions contribute to treatment response. Cancer systems biology is a young field and
+
+
+
+                           Nat Rev Clin Oncol. Author manuscript; available in PMC 2015 February 09.
+           Werner et al.                                                                        Page 12
+
+                          clinical studies have not yet been reported based on systems approaches, nevertheless
+
+                          systems biology has already shown a great potential and it is clear that will have a major role
+I                         in the further development of personalized therapy. In our opinion, the greatest opportunity
+H                         for cancer systems biology in the near future is to elicit emergent mechanisms of resistance
+P
+A                         and identify rational combination approaches to prevent or bypass drug resistance. It will
+u                         also be important to incorporate side effects and toxicities in the models. In this way,
+h                         systems approaches will contribute to the development of the next generation of clinical
+o
+M                         trials and cancer therapy.
+a
+u             Supplementary Material
+s
+r                         Refer to Web version on PubMed Central for supplementary material.
+t
+
+              References
+
+                          1. Hanahan D, Weinberg RA. The hallmarks of cancer. Cell. 2000; 100:57–70. [PubMed: 10647931]
+                          2. Hanahan D, Weinberg RA. Hallmarks of cancer: the next generation. Cell. 2011; 144:646–74.
+                            [PubMed: 21376230]
+N                         3. Cancer Genome Atlas N. Comprehensive molecular portraits of human breast tumours. Nature.
+H                           2012; 490:61–70. [PubMed: 23000897]
+-                         4. Gentles AJ, Gallahan D. Systems biology: confronting the complexity of cancer. Cancer Res. 2011;
+A                           71:5961–4. [PubMed: 21896642]
+A                         5. Basu A, et al. An interactive resource to identify cancer genetic and lineage dependencies targeted
+u                           by small molecules. Cell. 2013; 154:1151–61. [PubMed: 23993102]
+h
+r                         6. Berns K, Bernards R. Understanding resistance to targeted cancer drugs through loss of function
+M                           genetic screens. Drug Resist Updat. 2012; 15:268–75. [PubMed: 23142522]
+n                         7. Whitehurst AW, et al. Synthetic lethal screen identification of chemosensitizer loci in cancer cells.
+u                           Nature. 2007; 446:815–9. [PubMed: 17429401]
+c                         8. Institute, T.N.C. The Cancer Genome Atlas. http://cancergenome.nih.gov/
+p                         9. ICGC. International Cancer Genome Consortium. http://icgc.org/
+t                         10. Lefebvre C, Rieckhof G, Califano A. Reverse-engineering human regulatory networks. Wiley
+                             Interdiscip Rev Syst Biol Med. 2012; 4:311–25. [PubMed: 22246697]
+
+                          11. Carro MS, et al. The transcriptional network for mesenchymal transformation of brain tumours.
+                             Nature. 2010; 463:318–25. [PubMed: 20032975]
+                          12. Huang SS, et al. Linking proteomic and transcriptional data through the interactome and
+                             epigenome reveals a map of oncogene-induced signaling. PLoS Comput Biol. 2013; 9:e1002887.
+N                            [PubMed: 23408876]
+H                         13. Iadevaia S, Lu Y, Morales FC, Mills GB, Ram PT. Identification of optimal drug combinations
+P                            targeting cellular networks: integrating phospho-proteomics and computational network analysis.
+A                            Cancer Res. 2010; 70:6704–14. [PubMed: 20643779]
+A                         14. Pascal J, et al. Mechanistic patient-specific predictive correlation of tumor drug response with
+t                            microenvironment and perfusion measurements. Proc Natl Acad Sci U S A. 2013; 110:14266–71.
+o                            [PubMed: 23940372]
+r
+M                         15. Swanson KR, et al. Quantifying the role of angiogenesis in malignant progression of gliomas: in
+n                            silico modeling integrates imaging and histology. Cancer Res. 2011; 71:7366–75. [PubMed:
+s                            21900399]
+r                         16. Dedes KJ, Wetterskog D, Ashworth A, Kaye SB, Reis-Filho JS. Emerging therapeutic targets in
+p                            endometrial cancer. Nat Rev Clin Oncol. 2011; 8:261–71. [PubMed: 21221135]
+t                         17. Gore ME, Larkin JM. Challenges and opportunities for converting renal cell carcinoma into a
+                             chronic disease with targeted therapies. Br J Cancer. 2011; 104:399–406. [PubMed: 21285971]
+                          18. Diaz LA Jr, et al. Nature. 2012; 486:537–40. [PubMed: 22722843]
+
+
+                           Nat Rev Clin Oncol. Author manuscript; available in PMC 2015 February 09.
+            Werner et al.                                                                         Page 13
+
+                          19. Janku F, et al. PI3K/AKT/mTOR inhibitors in patients with breast and gynecologic malignancies
+                             harboring PIK3CA mutations. J Clin Oncol. 2012; 30:777–82. [PubMed: 22271473]
+
+N                         20. Cancer Genome Atlas Research N. Comprehensive molecular characterization of clear cell renal
+H                            cell carcinoma. Nature. 2013; 499:43–9. [PubMed: 23792563]
+P                         21. Cancer Genome Atlas Research N. Integrated genomic characterization of endometrial carcinoma.
+A                            Nature. 2013; 497:67–73. [PubMed: 23636398]
+A                         22. Cibulskis K, et al. Sensitive detection of somatic point mutations in impure and heterogeneous
+t                            cancer samples. Nat Biotechnol. 2013; 31:213–9. [PubMed: 23396013]
+o                         23. Hennessy BT, et al. A Technical Assessment of the Utility of Reverse Phase Protein Arrays for the
+r                            Study of the Functional Proteome in Non-microdissected Human Breast Cancers. Clin Proteomics.
+a                            2010; 6:129–51. [PubMed: 21691416]
+n
+s                         24. Cancer Genome Atlas N. Comprehensive molecular characterization of human colon and rectal
+r                            cancer. Nature. 2012; 487:330–7. [PubMed: 22810696]
+p                         25. Cancer Genome Atlas Research N. Integrated genomic analyses of ovarian carcinoma. Nature.
+t                            2011; 474:609–15. [PubMed: 21720365]
+                          26. Chin K, et al. Genomic and transcriptional aberrations linked to breast cancer pathophysiologies.
+                             Cancer Cell. 2006; 10:529–41. [PubMed: 17157792]
+                          27. Neve RM, et al. A collection of breast cancer cell lines for the study of functionally distinct cancer
+                             subtypes. Cancer Cell. 2006; 10:515–27. [PubMed: 17157791]
+
+                          28. Bodenmiller B, et al. Multiplexed mass cytometry profiling of cellular states perturbed by small-
+N                            molecule regulators. Nat Biotechnol. 2012; 30:858–67. [PubMed: 22902532]
+H                         29. Hill SM, et al. Bayesian inference of signaling network topology in a cancer cell line.
+P                            Bioinformatics. 2012; 28:2804–10. [PubMed: 22923301]
+A                         30. Pritchard JR, et al. Defining principles of combination drug mechanisms of action. Proc Natl Acad
+A                            Sci U S A. 2013; 110:E170–9. [PubMed: 23251029]
+t                         31. Qiu P, et al. Extracting a cellular hierarchy from high-dimensional cytometry data with SPADE.
+o                            Nat Biotechnol. 2011; 29:886–91. [PubMed: 21964415]
+M
+a                         32. Sumazin P, et al. An extensive microRNA-mediated network of RNA-RNA interactions regulates
+n                            established oncogenic pathways in glioblastoma. Cell. 2011; 147:370–81. [PubMed: 22000015]
+s                         33. Tentner AR, et al. Combined experimental and computational analysis of DNA damage signaling
+r                            reveals context-dependent roles for Erk in apoptosis and G1/S arrest after genotoxic stress. Mol
+p                            Syst Biol. 2012; 8:568. [PubMed: 22294094]
+t                         34. Bozic I, et al. Accumulation of driver and passenger mutations during tumor progression. Proc Natl
+                             Acad Sci U S A. 2010; 107:18545–50. [PubMed: 20876136]
+                          35. Greenman C, et al. Patterns of somatic mutation in human cancer genomes. Nature. 2007;
+                             446:153–8. [PubMed: 17344846]
+
+                          36. Mills GB. An emerging toolkit for targeted cancer therapies. Genome Res. 2012; 22:177–82.
+                             [PubMed: 22301131]
+I                         37. Chin L, Hahn WC, Getz G, Meyerson M. Making sense of cancer genomic data. Genes Dev. 2011;
+H                            25:534–55. [PubMed: 21406553]
+P                         38. Derry JM, et al. Developing predictive molecular maps of human disease through community-
+A                            based modeling. Nat Genet. 2012; 44:127–30. [PubMed: 22281773]
+A                         39. Norman TC, Bountra C, Edwards AM, Yamamoto KR, Friend SH. Leveraging crowdsourcing to
+h                            facilitate the discovery of new medicines. Sci Transl Med. 2011; 3:88mr1.
+o
+M                         40. Bordbar A, et al. Model-driven multi-omic data analysis elucidates metabolic immunomodulators
+a                            of macrophage activation. Mol Syst Biol. 2012; 8:558. [PubMed: 22735334]
+n                         41. Amit I, et al. A module of negative feedback regulators defines growth factor signaling. Nat Genet.
+s                            2007; 39:503–12. [PubMed: 17322878]
+r                         42. Liang H, et al. Whole-exome sequencing combined with functional genomics reveals novel
+p                            candidate driver cancer genes in endometrial cancer. Genome Res. 2012; 22:2120–9. [PubMed:
+t                            23028188]
+                          43. Swartz MA, et al. Tumor microenvironment complexity: emerging roles in cancer therapy. Cancer
+                             Res. 2012; 72:2473–80. [PubMed: 22414581]
+
+
+                           Nat Rev Clin Oncol. Author manuscript; available in PMC 2015 February 09.
+            Werner et al.                                                                         Page 14
+
+                          44. Lander AD, et al. What does the concept of the stem cell niche really mean today? BMC Biol.
+                             2012; 10:19. [PubMed: 22405133]
+
+N                         45. Park ES, et al. Cross-species hybridization of microarrays for studying tumor transcriptome of
+H                            brain metastasis. Proc Natl Acad Sci U S A. 2011; 108:17456–61. [PubMed: 21987811]
+P                         46. Finak G, et al. Stromal gene expression predicts clinical outcome in breast cancer. Nat Med. 2008;
+A                            14:518–27. [PubMed: 18438415]
+A                         47. Puigvert JC, et al. Cross-talk between integrins and oncogenes modulates chemosensitivity. Mol
+t                            Pharmacol. 2009; 75:947–55. [PubMed: 19158362]
+o                         48. Storch K, et al. Three-dimensional cell growth confers radioresistance by chromatin density
+r                            modification. Cancer Res. 2010; 70:3925–34. [PubMed: 20442295]
+a
+n                         49. Zschenker O, Streichert T, Hehlgans S, Cordes N. Genome-wide gene expression analysis in
+s                            cancer cells reveals 3D growth to affect ECM and processes associated with cell adhesion but not
+r                            DNA repair. PLoS One. 2012; 7:e34279. [PubMed: 22509286]
+p                         50. Whitesides GM. The origins and the future of microfluidics. Nature. 2006; 442:368–73. [PubMed:
+t                            16871203]
+                          51. Albeck JG, Mills GB, Brugge JS. Frequency-modulated pulses of ERK activity transmit
+                             quantitative proliferation signals. Mol Cell. 2013; 49:249–61. [PubMed: 23219535]
+                          52. Kenny HA, Krausz T, Yamada SD, Lengyel E. Use of a novel 3D culture model to elucidate the
+                             role of mesothelial cells, fibroblasts and extra-cellular matrices on adhesion and invasion of
+                             ovarian cancer cells to the omentum. Int J Cancer. 2007; 121:1463–72. [PubMed: 17546601]
+
+N                         53. Kenny PA, et al. The morphologies of breast cancer cell lines in three-dimensional assays correlate
+H                            with their profiles of gene expression. Mol Oncol. 2007; 1:84–96. [PubMed: 18516279]
+P                         54. Rejniak KA, et al. Linking changes in epithelial morphogenesis to cancer mutations using
+A                            computational modeling. PLoS Comput Biol. 2010; 6
+A                         55. Kristensen VN, et al. Integrated molecular profiles of invasive breast tumors and ductal carcinoma
+t                            in situ (DCIS) reveal differential vascular and interleukin signaling. Proc Natl Acad Sci U S A.
+o                            2012; 109:2802–7. [PubMed: 21908711]
+M                         56. Remark R, et al. Characteristics and Clinical Impacts of the Immune Environments in Colorectal
+a                            and Renal Cell Carcinoma Lung Metastases: Influence of Tumor Origin. Clin Cancer Res. 2013;
+n                            19:4079–4091. [PubMed: 23785047]
+s
+r                         57. Enderling H, Hlatky L, Hahnfeldt P. Cancer Stem Cells: A Minor Cancer Subpopulation that
+p                            Redefines Global Cancer Features. Front Oncol. 2013; 3:76. [PubMed: 23596563]
+t                         58. Frieboes HB, et al. An integrated computational/experimental model of lymphoma growth. PLoS
+                             Comput Biol. 2013; 9:e1003008. [PubMed: 23555235]
+                          59. Enderling H, et al. Paradoxical dependencies of tumor dormancy and progression on basic cell
+                             kinetics. Cancer Res. 2009; 69:8814–21. [PubMed: 19887613]
+                          60. Andasari V, Gerisch A, Lolas G, South AP, Chaplain MA. Mathematical modeling of cancer cell
+                             invasion of tissue: biological insight from mathematical analysis and computational simulation. J
+                             Math Biol. 2011; 63:141–71. [PubMed: 20872264]
+I
+H                         61. Haeno H, et al. Computational modeling of pancreatic cancer reveals kinetics of metastasis
+P                            suggesting optimum treatment strategies. Cell. 2012; 148:362–75. [PubMed: 22265421]
+A                         62. Kim M, Gillies RJ, Rejniak KA. Current Advances in Mathematical Modeling of Anti-Cancer
+A                            Drug Penetration into Tumor Tissues. Front Oncol. 2013; 3:278. [PubMed: 24303366]
+h                         63. Eyler CE, Rich JN. Survival of the fittest: cancer stem cells in therapeutic resistance and
+o                            angiogenesis. J Clin Oncol. 2008; 26:2839–45. [PubMed: 18539962]
+M                         64. Singh A, Settleman J. EMT, cancer stem cells and drug resistance: an emerging axis of evil in the
+a                            war on cancer. Oncogene. 2010; 29:4741–51. [PubMed: 20531305]
+n
+s                         65. Biddle A, et al. Cancer stem cells in squamous cell carcinoma switch between two distinct
+r                            phenotypes that are preferentially migratory or proliferative. Cancer Res. 2011; 71:5317–26.
+p                            [PubMed: 21685475]
+t                         66. Chaffer CL, et al. Normal and neoplastic nonstem cells can spontaneously convert to a stem-like
+                             state. Proc Natl Acad Sci U S A. 2011; 108:7950–5. [PubMed: 21498687]
+
+
+
+                           Nat Rev Clin Oncol. Author manuscript; available in PMC 2015 February 09.
+            Werner et al.                                                                          Page 15
+
+                           67. Gupta PB, et al. Stochastic state transitions give rise to phenotypic equilibrium in populations of
+                              cancer cells. Cell. 2011; 146:633–44. [PubMed: 21854987]
+
+N                          68. Wang ZA, et al. Lineage analysis of basal epithelial cells reveals their unexpected plasticity and
+H                             supports a cell-of-origin model for prostate cancer heterogeneity. Nat Cell Biol. 2013; 15:274–83.
+P                             [PubMed: 23434823]
+A                          69. Lander AD, Gokoffski KK, Wan FY, Nie Q, Calof AL. Cell lineages and the logic of proliferative
+A                             control. PLoS Biol. 2009; 7:e15. [PubMed: 19166268]
+t                          70. Zhang L, Lander AD, Nie Q. A reaction-diffusion mechanism influences cell lineage progression
+o                             as a basis for formation, regeneration, and stability of intestinal crypts. BMC Syst Biol. 2012;
+r                             6:93. [PubMed: 22849824]
+a                          71. Youssefpour H, Li X, Lander AD, Lowengrub JS. Multispecies model of cell lineages and
+n                             feedback control in solid tumors. J Theor Biol. 2012; 304:39–59. [PubMed: 22554945]
+s
+r                          72. Lawrence MS, et al. Mutational heterogeneity in cancer and the search for new cancer-associated
+p                             genes. Nature. 2013; 499:214–8. [PubMed: 23770567]
+t                          73. Tyson DR, Garbett SP, Frick PL, Quaranta V. Fractional proliferation: a method to deconvolve cell
+                              population dynamics from single-cell data. Nat Methods. 2012; 9:923–8. [PubMed: 22886092]
+                           74. Yankeelov TE, et al. Clinically relevant modeling of tumor growth and treatment response. Sci
+                              Transl Med. 2013; 5:187ps9.
+                           75. Sadanandam A, et al. A colorectal cancer classification system that associates cellular phenotype
+                              and responses to therapy. Nat Med. 2013; 19:619–25. [PubMed: 23584089]
+
+N                          76. Hu J, et al. Heterogeneity of tumor-induced gene expression changes in the human metabolic
+H                             network. Nat Biotechnol. 2013; 31:522–9. [PubMed: 23604282]
+P                          77. Nelander S, et al. Models from experiments: combinatorial drug perturbations of cancer cells. Mol
+A                             Syst Biol. 2008; 4:216. [PubMed: 18766176]
+A                          78. Saez-Rodriguez J, et al. Comparing signaling networks between normal and transformed
+t                             hepatocytes using discrete logical models. Cancer Res. 2011; 71:5400–11. [PubMed: 21742771]
+o                          79. Alexopoulos LG, Saez-Rodriguez J, Cosgrove BD, Lauffenburger DA, Sorger PK. Networks
+M                             inferred from biochemical data reveal profound differences in toll-like receptor and inflammatory
+a                             signaling between normal and transformed hepatocytes. Mol Cell Proteomics. 2010; 9:1849–65.
+n                             [PubMed: 20460255]
+s
+r                          80. Collisson EA, et al. Subtypes of pancreatic ductal adenocarcinoma and their differing responses to
+p                             therapy. Nat Med. 2011; 17:500–3. [PubMed: 21460848]
+t                          81. Bussey KJ, et al. Integrating data on DNA copy number with gene expression levels and drug
+                              sensitivities in the NCI-60 cell line panel. Mol Cancer Ther. 2006; 5:853–67. [PubMed: 16648555]
+                           82. Heiser LM, et al. Integrated analysis of breast cancer cell lines reveals unique signaling pathways.
+                              Genome Biol. 2009; 10:R31. [PubMed: 19317917]
+                           83. Heiser LM, et al. Subtype and pathway specific responses to anticancer compounds in breast
+                              cancer. Proc Natl Acad Sci U S A. 2012; 109:2724–9. [PubMed: 22003129]
+
+I                          84. Kim N, et al. Systematic analysis of genotype-specific drug responses in cancer. Int J Cancer.
+H                             2012; 131:2456–64. [PubMed: 22422301]
+P                          85. Tabchy A, Eltonsy N, Housman DE, Mills GB. Systematic identification of combinatorial drivers
+A                             and targets in cancer cell lines. PLoS One. 2013; 8:e60339. [PubMed: 23577104]
+A                          86. Banko MR, et al. Chemical genetic screen for AMPKalpha2 substrates uncovers a network of
+h                             proteins involved in mitosis. Mol Cell. 2011; 44:878–92. [PubMed: 22137581]
+o                          87. Jiang H, Pritchard JR, Williams RT, Lauffenburger DA, Hemann MT. A mammalian functional-
+M                             genetic approach to characterizing cancer therapeutics. Nat Chem Biol. 2011; 7:92–100. [PubMed:
+a                             21186347]
+n
+s                          88. Lu Y, et al. Kinome siRNA-phosphoproteomic screen identifies networks regulating AKT
+r                             signaling. Oncogene. 2011; 30:4567–77. [PubMed: 21666717]
+p                          89. Nieman KM, et al. Adipocytes promote ovarian cancer metastasis and provide energy for rapid
+t                             tumor growth. Nat Med. 2011; 17:1498–503. [PubMed: 22037646]
+                           90. Wagner JP, et al. Receptor tyrosine kinases fall into distinct classes based on their inferred
+                              signaling networks. Sci Signal. 2013; 6:ra58. [PubMed: 23861540]
+
+
+                            Nat Rev Clin Oncol. Author manuscript; available in PMC 2015 February 09.
+           Werner et al.                                                                       Page 16
+
+                          91. Komurov K, et al. The glucose-deprivation network counteracts lapatinib-induced toxicity in
+                             resistant ErbB2-positive breast cancer cells. Mol Syst Biol. 2012; 8:596. [PubMed: 22864381]
+                          92. Csibi A, et al. The mTORC1 pathway stimulates glutamine metabolism and cell proliferation by
+I                            repressing SIRT4. Cell. 2013; 153:840–54. [PubMed: 23663782]
+-
+P                         93. Beckman RA, Schemmann GS, Yeang CH. Impact of genetic dynamics and single-cell
+A                            heterogeneity on development of nonstandard personalized medicine strategies for cancer. Proc
+u                            Natl Acad Sci U S A. 2012; 109:14586–91. [PubMed: 22891318]
+h                         94. Lunardi A, et al. A co-clinical approach identifies mechanisms and potential therapies for androgen
+r                            deprivation resistance in prostate cancer. Nat Genet. 2013; 45:747–55. [PubMed: 23727860]
+M                         95. Lee MJ, et al. Sequential application of anticancer drugs enhances cell death by rewiring apoptotic
+a                            signaling networks. Cell. 2012; 149:780–94. [PubMed: 22579283]
+u                         96. Chang RL, Xie L, Xie L, Bourne PE, Palsson BO. Drug off-target effects predicted using structural
+c                            analysis in the context of a metabolic network model. PLoS Comput Biol. 2010; 6:e1000938.
+p                            [PubMed: 20957118]
+t                         97. Bisikirska BC, et al. STK38 is a critical upstream regulator of MYC’s oncogenic activity in human
+                             B-cell lymphoma. Oncogene. 2012
+
+                          98. Schoeberl B, et al. Therapeutically targeting ErbB3: a key node in ligand-induced activation of the
+                             ErbB receptor-PI3K axis. Sci Signal. 2009; 2:ra31. [PubMed: 19567914]
+                          99. McDonagh CF, et al. Antitumor activity of a novel bispecific antibody that targets the ErbB2/
+                             ErbB3 oncogenic unit and inhibits heregulin-induced activation of ErbB3. Mol Cancer Ther. 2012;
+N                            11:582–93. [PubMed: 22248472]
+H                         100. Kirouac DC, et al. Computational Modeling of ERBB2-Amplified Breast Cancer Identifies
+P                             Combined ErbB2/3 Blockade as Superior to the Combination of MEK and AKT Inhibitors. Sci
+A                             Signal. 2013; 6:ra68. [PubMed: 23943608]
+A                         101. Bilal E, et al. Improving breast cancer survival analysis through competition-based
+t                             multidimensional modeling. PLoS Comput Biol. 2013; 9:e1003047. [PubMed: 23671412]
+o                         102. Challenge, t.D. the Dream Challenge.
+M                         103. Shi L, et al. The MicroArray Quality Control (MAQC)-II study of common practices for the
+a                             development and validation of microarray-based predictive models. Nat Biotechnol. 2010;
+n                             28:827–38. [PubMed: 20676074]
+s
+r
+t             Biographies
+
+                          Dr HMJ Werner gained her MD in 2000 from Maastricht University, Maastricht, the
+                          Netherlands and currently works as a consultant gynaecologist at Haukeland University
+                          Hospital in Bergen, Norway. She is a PhD student in translational research in endometrial
+
+                          carcinoma at the University in Bergen during which she joined the department of Systems
+N                         Biology at MD Anderson Cancer Center, Houston, USA for one year.
+H
+-                         Dr. Prahlad T. Ram received his PhD from Tulane University, New Orleans, LA in 1997 and
+A
+A                         is currently Associate Professor in the Department of Systems Biology at The University of
+u                         Texas MD Anderson Cancer Center and Co-Director of the Biostatistics, Bioinformatics and
+h                         Systems Biology Program in the Graduate School of Biological Science, Houston, TX. Dr.
+r                         Ram’s research lab is half experimental and half computational and utilizes an integrated
+M
+n                         systems approach to understand and target networks in cancer.
+u
+c                         Dr. Gordon B. Mills received his MD in 1977 and PhD in 1984 from The University of
+p                         Alberta, Canada and is currently Professor and Chairman of the Department of Systems
+t
+                          Biology, the Co-Director of the Institute for Personalized Cancer Therapy, the Head of the
+                          Kleberg Center for Molecular Markers and co-Director of the Women’s Cancer Moonshot
+
+
+
+                           Nat Rev Clin Oncol. Author manuscript; available in PMC 2015 February 09.
+          Werner et al.                                                             Page 17
+
+                       Program at the University of Texas MD Anderson Cancer Center, Houston, TX. Dr. Mills
+                       has published over 600 papers and has been on the forefront of cancer systems biology,
+N                      molecular markers, targeted and personalized therapy in cancer.
+H
+P
+A
+u
+h
+r
+M
+n
+s
+r
+p
+t
+
+
+
+
+
+N
+H
+P
+A
+u
+h
+r
+M
+n
+u
+c
+p
+t
+
+
+
+
+
+N
+H
+P
+A
+u
+h
+r
+M
+n
+u
+c
+p
+t
+
+
+
+
+                       Nat Rev Clin Oncol. Author manuscript; available in PMC 2015 February 09.
+          Werner et al.                                                              Page 18
+
+
+                                                 Review criteria
+N                      A search for original articles was performed in MEDLINE and PubMed, with the search
+H                      terms ‘integrative/systematic analysis’, ‘computational/mathematical modeling’,
+P
+A                      ‘multidimensional networks’, ‘genetic dynamics’, ‘cellular heterogeneity’, alone and in
+u                      combination; with a strong emphasis on literature published in the last 3 years. All
+h                      articles identified were English-language, full-text papers. We also searched the reference
+r                      lists of identified articles for further relevant papers.
+M
+n
+s
+r
+p
+t
+
+
+
+
+
+N
+H
+P
+A
+u
+h
+r
+M
+n
+u
+c
+p
+t
+
+
+
+
+
+N
+H
+P
+A
+u
+h
+r
+M
+n
+u
+c
+p
+t
+
+
+
+
+                        Nat Rev Clin Oncol. Author manuscript; available in PMC 2015 February 09.
+          Werner et al.                                                                Page 19
+
+
+                                                    Key points
+N                          •  Systems biology and its application to cancer research and therapy
+H
+P                          •  Integration of multiple omics data types to determine systems properties that can
+A                             exploited for cancer therapy
+A
+h                          •  Integration of computational and mathematical models with patient and lab-
+o                             based data to identify and target novel emergent properties
+M
+a                          •  Use of systems biology approaches to make clinical impact in the future of
+u                             cancer personalized therapy
+c
+p
+t
+
+
+
+
+
+N
+H
+-
+A
+A
+t
+o
+M
+a
+u
+s
+i
+t
+
+
+
+
+
+
+I
+-
+P
+A
+u
+h
+r
+M
+n
+s
+r
+p
+t
+
+
+
+
+                        Nat Rev Clin Oncol. Author manuscript; available in PMC 2015 February 09.
+          Werner et al.                                                                Page 20
+
+
+
+N
+H
+P
+A
+A
+h
+o
+M
+a
+u
+c
+p
+t
+
+
+
+
+
+N
+H
+-
+A
+A
+t
+o                      Figure 1. Application of cancer systems biology to decipher complex interactions in multiple
+M                      dimensions
+a                      This figure shows the complexity of interactions between different molecular networks
+u                      within the cell that regulate the multitude of cellular functions. The intracellular machinery
+s                      must coordinate with surrounding cells and the extracellular microenvironment to achieve
+i
+t                      homeostasis. Working within the body as a whole, each of these physiologically functional
+                       units is tightly coupled and regulated. Accumulated aberrations at the molecular level can
+                       decouple any one of these complex interactions and lead to a neoplastic phenotype. The
+                       promise of cancer systems biology is the ability to integrate these multi-scale characteristics
+                       into cohesive predictive models that can uncover emergent properties to be used in making
+
+                       cancer history.
+I
+-
+P
+A
+u
+h
+r
+M
+n
+s
+r
+p
+t
+
+
+
+
+                        Nat Rev Clin Oncol. Author manuscript; available in PMC 2015 February 09.
+          Werner et al.                                                              Page 21
+
+
+
+N
+H
+P
+A
+u
+h
+r
+M
+n
+s
+r
+p
+t
+
+
+
+
+
+N
+H
+P
+A
+u                      Figure 2. Integrating tumour molecular characteristics with pharmacogenomics for precision
+h                      Cancer systems biology can bridge the vast amount of molecular characteristics of the
+r                      tumour with pharmacogenomics to deliver on the promise of personalized therapy. The use
+M
+n                      of systems models to integrate patient specific data sets with drug response profiles can
+u                      enable the prediction of effective patient-specific therapeutic options.
+c
+p
+t
+
+
+
+
+
+N
+H
+P
+A
+u
+h
+r
+M
+n
+u
+c
+p
+t
+
+
+
+
+                        Nat Rev Clin Oncol. Author manuscript; available in PMC 2015 February 09.
+            Werner et al.                                                                              Page 22
+
+
+
+                                                         Table 1
+
+N
+H            Project                                  Website
+-            TCGA (The Cancer Genome Project)         http://cancergenome.nih.gov/
+A
+               TCGA performs comprehensive genomic characterisation and analysis of multiple cancer types to drive the understanding of the mol▯ecular
+u            basis of cancer
+h
+o            ICGC (International Cancer Genome Consorthttp://icgc.org/
+r              ICGC is focused on a comprehensive understanding of the genomic abnormalities in cancer
+M
+n            SU2C (Stand Up to Cancer)                http://www.standup2cancer.org/
+u
+c              SU2C aims to drive innovative cancer research through interdisciplinary science
+p
+t            LINCS (Library of Integrated Network-basehttp://www.lincsproject.org/
+             Signatures)
+               LINCS aims to enhance a network-based understanding of biology, cataloging changes in gene expression and other cellular process▯es in
+             response to perturbations
+
+             Sanger Institute databases               http://www.sanger.ac.uk/resources/databases
+
+               The institute has developed a suite of databases to manage and interpret large-scale data
+N
+H            cBioPortal for Cancer Genomics           http://www.cbioportal.org/public-portal/
+P              CBIO is a platform to visualise, analyse and download large scale genomic data sets
+A
+A            The Human Protein Atlas                  http://www.proteinatlas.org/
+u
+h              The atlas aims to explore the human proteome systematically through antibody-based proteomics
+o
+M            The Cancer proteome atlas                http://app1.bioinformatics.mdanderson.org/tcpa/_design/basic/index.html
+a              The atlas aims to provide a comprehensive resource for accessing, visualising, and analysing cancer functional proteomics
+n
+s            TCGA data portal                         https://tcga-data.nci.nih.gov/tcga/
+c
+p              A platform for researchers to search, download, and analyse data sets generated by TCGA
+t
+             Cytoscape                                http://www.cytoscape.org/
+
+               Cytoscope is an open source platform for visualising complex networks and integrating the networks with other data types
+
+             Vcell                                    http://www.nrcam.uchc.edu/
+               The Virtual cell is a computational platform to model and simulate cell biology
+
+N            COPASI                                   http://www.copasi.org/tiki-view_articles.php
+H
+P              COPASI is a platform to simulate and analyse networks and their dynamics
+A
+A            Netwalker                                https://netwalkersuite.org/
+u              Netwalker is a platform to assist in functional analyses of large-scale genomics datasets focused on molecular networks
+h
+r            SageBio                                  http://sagebase.org/
+M
+a              SageBio creates platforms to enable collaboration on data and data sharing.
+n              They also run challenges on complex biomedical problems
+s
+r            STRING                                   http://string-db.org/
+p
+t              String is a database of known and predicted physical and functional protein interactions
+
+
+
+
+                             Nat Rev Clin Oncol. Author manuscript; available in PMC 2015 February 09.
+          Werner et al.                                                                   Page 23
+
+
+
+            Project                            Website
+
+N           GeneCards                          http://www.genecards.org/
+H            GeneCards provides a database of human genes with comprehensive information on all known and predicted human genes.
+P
+A           Pathway Commons                    http://www.pathwaycommons.org/about/
+A            Pathway Commons is a portal to access biological pathway information collected from public pathway databases
+h           DREAM (Dialogue for Reverse Engineehttp://www.the-dream-project.org/
+o           and Methods)
+M            DREAM aims to be a catalyser for the interaction between experiment and theory focused on cellular network inference and quantit▯ative
+a           model building
+u
+s           ICBP (Integrated Cancer Biology Prohttp://icbp.nci.nih.gov/
+r            ICBP develops and implements computational models of cancer processes
+t
+
+
+
+
+
+
+N
+H
+P
+A
+A
+u
+o
+r
+M
+n
+s
+c
+p
+t
+
+
+
+
+
+
+I
+-
+P
+A
+u
+h
+r
+M
+a
+u
+c
+i
+t
+
+
+
+
+                         Nat Rev Clin Oncol. Author manuscript; available in PMC 2015 February 09.

@@ -1,0 +1,873 @@
+                                                                                                          AnAlysis
+
+
+
+
+
+
+
+
+
+
+
+
+
+      Crowdsourced analysis of clinical trial data to predict
+
+
+      amyotrophic lateral sclerosis progression
+
+
+      Robert Küffner     1,2,1, Neta Zach   3,19, Raquel Norel , Johann Hawe , David Schoenfeld , Liuxia Wang , Guang Li ,      7             7
+                  8                   9                     10                      11                          11                       12
+      Lilly Fang   , Lester Mackey , Orla Hardiman , Merit Cudkowicz , Alexander Sherman , Gokhan Ertaylan ,
+      Moritz Grosse-Wentrup        13 , Torsten Hothorn , Jules van Ligtenberg , Jakob H Macke , Timm Meyer , 16                  13
+
+      Bernhard Schölkopf       13, Linh Tran , Rubio Vaughan , Gustavo Stolovitzky & Melanie L Leitner                     3,18
+
+
+
+
+      Amyotrophic lateral sclerosis (ALS) is a fatal neurodegenerative       ALS, also known as Lou Gehrig’s disease, is a progressive neuro-
+      disease with substantial heterogeneity in its clinical                 degenerative disorder affecting upper and lower motor neurons.
+
+      presentation. This makes diagnosis and effective treatment             Symptoms include muscle weakness, paralysis and eventually death,
+      difficult, so better tools for estimating disease progression are      usually within 3 to 5 years from disease onset. Approximately 1 out
+      needed. Here, we report results from the DREAM-Phil Bowen              of 400 people will be diagnosed with, and die of ALS,2, and modern
+
+      ALS Prediction Prize4Life challenge. In this crowdsourcing             medicine is faced with a major challenge in finding an effective treat-
+      competition, competitors developed algorithms for the prediction       ment . Riluzole (Rilutek) is the only approved medication for ALS,
+      of disease progression of 1,822 ALS patients from standardized,        and has a limited effect on survival .
+
+      anonymized phase 2/3 clinical trials. The two best algorithms            One substantial obstacle to understanding and developing an
+      outperformed a method designed by the challenge organizers             effective treatment for ALS is the heterogeneity of the disease course,
+      as well as predictions by ALS clinicians. We estimate that using       ranging from under a year to over10 years. The more heterogeneous
+
+      both winning algorithms in future trial designs could reduce           the disease, the more difficult it is to predict how a given patient’s
+      the required number of patients by at least 20%. The DREAM-            diseasewillprogressandtherebytodemonstratetheeffectofapoten-
+
+      Phil Bowen ALS Prediction Prize4Life challenge also identified         tialtherapy,makingclinicaltrialsespeciallychallenging.Inaddition,
+      several potential nonstandard predictors of disease progression        the uncertainty surrounding prognosis is an enormous burden for
+© 2015 Nature America, Inc. All rights reserved.singly, blood pressure,      patients and their families. A more accurate way to anticipate disease
+
+      shedding light on ALS pathobiology. This analysis reveals the          progression, as measured by a clinical scale (ALS Functional Rating
+      potential of a crowdsourcing competition that uses clinical trial      Scale: ALSFRS , or the revised version, ALSFRS-R ), can therefore
+      data for accelerating ALS research and development.                    leadtomeaningfulimprovementsinclinicalpracticeandclinicaltrial
+npg
+                                                                             management,andincreasethelikelihoodofseeingafuturetreatment
+                                                                             brought to market .,8
+      1Institute of Bioinformatics and Systems Biology, German Research Center In an effort to address the important issue of variability of ALS
+                                            2
+      for Environmental Health, Munich, Germany.3Department of Informatics,  diseaseprogression,wetookadvantageoftwotools:alargedatasetof
+      Ludwig-Maximilians-University, M4nich, Germany. Prize4Life, Tel Aviv, Iclinical,longitudinal,patientinformationandthevastknowledgeand
+      and Cambridge, Massachusetts,5USA. IBM T.J. Watson Research Center,
+      Yorktown Heights, New York, USA. MGH Bio6tatistics Center, Massachusettsew computational approaches obtainable through crowdsourcing.
+      General Hospital, Boston, Mas7achusetts, USA. Harvard Medical School,    Pooled clinical trial data sets have proven invaluable for research-
+      Charlestown, Massachusetts, USA. Sentrana Inc., Washington, DC, USA.   ers seeking to unravel complex diseases such as multiple sclerosis,
+      8Latham&Watkins LLP, Silicon Valley, California, USA. Department of Statistics,               9–12
+      Stanford University, Stanford, CaliforniaDepartment of Neuroscience,   Alzheimer’s and others     . With that in mind, Prize4Life and the
+      Beaumont Hospital and Trinity College Dublin, Dublin, Neurological     Neurological Clinical Research Institute (NCRI) at Massachusetts
+      Clinical Research Institute, Massachusetts General Hospital, CharlestowGeneral Hospital created the Pooled Resource Open-Access ALS
+      Massachusetts, USA.2Luxembourg Centre for Systems Biomedicine, University
+      of Luxembourg, Esch/Alzette, LuxembourMax Planck Institute for         Clinical Trials (PRO-ACT, www.ALSdatabase.org/) platform with
+      Intelligent Systems, Tübingen, GermaInstitute of Social- and Preventivefunding from the ALS Therapy Alliance and in partnership with the
+      Medicine, University of Zürich, Zürich, SwitzOrca XL Problem Solvers,
+      Amsterdam, the Netherlands.Max Planck Institute for Biological Cyberneticstheast ALS Consortium. The vision of the PRO-ACT project was
+      and Bernstein Center for Computational Neuroscience, Tübingen, Germany.to accelerate and enhance translational ALS research by designing and
+      17Berkeley School of Public Health, University of California, Berkeley,building a data set that would contain the merged data from as many
+      California, USA.ALS Innovation Hub, Biogen Idec, Cambridge, Massachusetts,
+      USA. 19These authors contributed equally to this work. Correspondence shouldetedALSclinicaltrialsaspossible.Containing>8,600patients,
+      be addressed to R.K. (robert.kueffner@helmholtz-muenchen.de) or        PRO-ACT was launched as an open access platform for researchers
+      N.Z. (nzach@prize4life.org).                                           in December 2012.
+                                                                                                             13
+      Received 17 January; accepted 23 September; published online 2 November  We turned to crowdsourcing      to facilitate an unbiased assess-
+      2014; doi:10.1038/nbt.3051                                             ment of the performance of diverse methods for prediction and to
+
+
+
+      nature biotechnology VOLUME 33           NUMBER 1    JANUARY 2015                                                                      51
+      AnAlysis
+
+
+
+      raise awareness of the research potential of this new data resource.      The challenge lasted 3 months, from July 13 to October 15, 2012.
+
+      To address the question of the variability in the progression of ALS,   It drew 1,073 registrants from >60 countries. Following the chal-
+      a subset of the PRO-ACT data was used before its public launch          lenge, a survey of registrants was conducted. The survey revealed
+      for an international crowdsourcing initiative, The DREAM-Phil           a diverse audience comprising academic (58%) and industry (30%)
+
+      Bowen ALS Prediction Prize4Life. The prize for the challenge was        professionals as well as others (12%). Notably, 80% of the solvers
+      $50,000 to be awarded for the most accurate methods to predict ALS      had almost no familiarity with ALS. No fewer than 93% expressed
+      progression.Thechallengewasdevelopedandrunthroughacollabo-              interest in participating in a future challenge (comprehensive survey
+
+      rationbetweentheDialogueforReverseEngineeringAssessmentsand             results appear in the Supplementary Note 2 and Supplementary
+      Methods (DREAM) initiative and Prize4Life using the InnoCentive         Tables 1 and 2). However, as is typical for crowdsourcing chal-
+      Platform. In this challenge, solvers were asked to use 3 months of      lenges, only a small fraction of the registrants submitted an
+                                                                              algorithmfortesting.Duringthechallengeatotalof37teamssubmit-
+      individual patient level clinical trial information to predict that
+      patient’s disease progression over the subsequent 9 months.             ted an algorithm to be tested through the leaderboard and 10 teams
+         The challenge resulted in the submission of 37 unique algorithms     made valid final submissions. In order to be valid, the submitted R14
+      from which two winning entries were identified. Overall, the best-      code was required to be executable within InnoCentive’s system and
+
+      performingalgorithmspredicteddiseaseprogressionbetterthanboth           to predict ALSFRS slopes for all given patients.
+      a baseline model and clinicians using the same data. Clinical trial
+      modelingindicatesthatusingthealgorithmsshouldenableasubstan-            Method performance and assessment
+
+      tial reduction in the size of a clinical trial required to demonstrate aWe evaluated and compared the ten final submissions provided by
+      drug effect. Finally, the challenge uncovered several clinical meas-    the solvers, as well as an eleventh method designed by the challenge
+      urements formerly unknown to be predictive of disease progression,      organizers.Thelattermethodisreferredtoasthebaselinemethod,as
+
+      which may shed new light on the biology of ALS.                         itwasusedtoestablishthebaselineperformancethatbest-performing
+                                                                              teamswouldneedtooutperform.Thesolvers’methodsandthebaseline
+      RESULTS                                                                 algorithm are described in Supplementary Note 3, Supplementary
+
+      Challenge design and participation statistics                           Figure 1 and Supplementary Tables 2–8; the full sets of predictions
+      As part of the 7th DREAM initiative, the DREAM-Phil Bowen ALS           are provided in Supplementary Predictions. As a separate archive
+      Prediction Prize4Life (referred to henceforth as the ALS Prediction     (Supplementary Software), we provide the source code of six teams
+
+      Prize) solicited computational approaches for the assessment of         that may be used in compliance with the algorithms’ own copyright
+      the progression of ALS patients using clinical trial data from the      statements. Method performance was assessed by root mean square
+      PRO-ACT data set (Online Methods and Supplementary Note 1).             deviation(r.m.s.deviation)andPearson’scorrelation(PC)tocompare
+
+      The challenge offered a $50,000 award for the most reliable and pre-    predictionsoftheALSFRSslopeagainsttheactualslopederivedfrom
+      dictive solutions.                                                      the data. Although the r.m.s. deviation can be directly interpreted as
+         Solvers were asked to use 3 months of ALS clinical trial informa-    estimationerrorinunitsofALSFRS,PCisusefultoassessthecorrect
+
+      tion (months 0–3) to predict the future progression of the disease      prediction of trends. For visual inspection of the performance see
+      (months 3–12). The progression of the disease was assessed by the       Supplementary Results 1 and Supplementary Figures 2 and 3.
+      slope of change in ALSFRS (a functional scale that ranges between         Solverteamsandtheirmethodswereassessedbasedontheirr.m.s.
+
+© 2015 Nature America, Inc. All rights reserved.s of longitudinal data for    deviation scores on the separate validation data set (Fig. 2), which
+      thedevelopmentandtrainingofalgorithms,andwereaskedtosubmit              was crucial to guarantee robustness (for differences between valida-
+      theiralgorithmtobeevaluatedonaseparatedatasetnotavailablefor            tion and leaderboard performance, see Supplementary Results 2,
+      the development or training of the algorithms.                          Supplementary Figs. 4–8 and Supplementary Table 9). The top six
+
+npg      For evaluation, algorithms were run by InnoCentive on the            teams (ranked at positions 1–6) exhibited an r.m.s. deviation lower
+      InnoCentiveservers.Algorithmswerefeddatafromthefirst3months             than the baseline method. The ten solvers used a variety of meth-
+      of a given patient’s participation in a clinical trial. Data from the   odological approaches, but it is interesting to observe that four out
+
+      subsequent 9 months were not supplied. The performance results          of the six top-ranking teams employed variants of the random forest
+      against a test data set were presented on a leaderboard. Finally, par-  machine learning approach. Two other approaches that ranked at
+      ticipantswereassessedonathird,fullyblindedandpreviouslyunseen           position 1 and 6 were based on Bayesian trees and nonparametric
+
+      validationsettopreventoverfitting.Theprizewasawardedaccording           regression, respectively. Simple regression methods (ranks 8 to 10)
+      to performance on this validation set (Fig. 1).                         performedsubstantiallyworsethanthebaselinemethod.Method7is
+
+
+
+      Figure 1 Challenge outline. (a) The data for      a                     b                                   c                 d
+      the challenge comprised 1,822 patients from               PRO-ACT           Validation
+      ALS clinical trials from the PRO-ACT data set.                            62(months 0–3)
+      Data types included demographics, clinical and          Demographic                                          Slope
+      family history information, laboratory tests and        Vital signs       91(months 0–12)                    months 3–12
+      vital signs. (b) We divided the data into three         Lab tests                                                              Prediction
+                                                              Family history      Leaderboard     algorithms                          True slope
+      subsets: training data provided to solvers in       n = 1,822 patientss   279(months 0–3)
+      full, leaderboard and validation data reserved
+      for the scoring of the challenge. Leaderboard           Patient records             Challenge                 Predictions    Blind assessment
+      and validation data were only available to
+      the challenge managers for the testing of the
+      algorithms submitted by the solvers. Algorithms were fed with data from the first 3 months to perform predictions, and evaluated based on the subsequent
+      9 months of data. (c) At the end of the challenge, solvers submitted their algorithms to be tested by the challenge organizers on the validation data set.
+
+      (d) The predictions obtained in c were then assessed by the judges for accuracy.
+
+
+      52                                                                      VOLUME 33    NUMBER 1     JANUARY 2015 nature biotechnology
+                                                                                                                                                AnAlysis
+
+
+
+
+       Figure 2 Performance of methods. (a,b) We
+                                                                                          a                          b                      c
+       compared the approaches of the ten teams                Aggregate of teams 1 + 2                    71%
+       that submitted executable R code in the final           Team 1: Bayesian trees
+       phase of the challenge and a baseline approach                                                   26%
+                                                               Team 2: Random forest
+       designed by the challenge organizers. All the           Team 3: Random forest
+       solvers’ algorithms had to be compatible with           Team 4: Random forest                       3%
+
+       R version 2.13.1. The teams are numbered                Team 5: Random forest
+       according to their ranking in r.m.s. deviation          Team 6: Nonpar. regression
+                                                               Baseline: Support vector regr.
+       performance (a) or Pearson Correlation (b).
+       They are colored blue if they performed better          Team 7: Prediction of mean
+       than, and gray if they performed worse than,            Team 8: Linear regression
+                                                               Team 9: Multivariate regr.                     ... 0.89
+       the baseline. In addition, an aggregate of
+       the predictions of teams 1 and 2 is shown.              Team 10: Linear regression                     ... 1.30
+                                                                                                          Better               Better                  Better
+       Whiskers indicate bootstrapped s.d. (inset). The                                  0.50   0.55   0.60              0.1  0.2 0.3  0.4        5    10   15   20
+       frequency with which methods were ranked first                                  r.m.s. deviation (1/month)          Correlation         Trial size reduction [%]
+
+       is estimated across different bootstrap samples
+       of patients. Teams 1 and 2 were ranked first in 71% and 26%, respectively, of the bootstrap samples (percentage rounded to the nearest integer). (d) By
+       simulation, we estimated to what extent clinical trials can be reduced in size by each of the participating approaches corresponding to their improved
+
+       prediction of disease progression.
+
+
+
+       a naive predictor that calculates the average slope of the training set            Thetwotop-performingmethodsaswellasthebaselinealgorithm
+
+       patients and predicts the value of this slope for any further patients.         were then applied to predict the disease progression of patients in
+       Wewillrefertotheresultingdeviationasbaser.m.s.deviationbecause                  the full PRO-ACT data set. The algorithms maintained their
+
+       it provides a good estimate for the difficulty of prediction of a given         ability to predict disease progression reliably (r.m.s. deviations:
+       patient set, thus achieving a PC of 0. Except for this method, the              team 1, 0.544; team 2, 0.559; baseline, 0.559; Supplementary
+
+       performance rankings determined using r.m.s. deviation and those                Results 3 and Supplementary Figs. 9 and 10). That performance
+
+       determined using PC were quite consistent.                                      was slightly lower than during the challenge can be explained by the
+          Inaddition,weemployedbootstrappingtoassesstherobustnessof                    greater variability in data across a larger number of trials, which also
+
+       performance (Online Methods). Here, we evaluated the probability                increased the base r.m.s. deviation from 0.566 to 0.610.
+
+       that a given method would achieve the best overall performance on                  Besides the selection of an appropriate predictive approach, per-
+       different subsets of patients. Teams 1 and 2 achieved the best r.m.s.           formance was also influenced by the processing of the clinical mea-
+
+       deviation in 71% and 26%, respectively, of the patient samples gen-             surements.Staticfeatures(thosewithonevalueperpatient,e.g.,gender
+
+       erated by bootstrapping (Fig. 2b). We thus concluded that the algo-             or age) could be exploited as is. In contrast, the remaining features
+       rithms of these two teams provide both the most robust and the most             were‘time-resolved’andcouldnot,therefore,beincorporateddirectly
+
+       reliable predictions. Therefore, teams 1 and 2 were declared the best           into standard machine learning frameworks because time points and
+
+       performers of the challenge and received an award of $20,000 each.              number of measurements varied between patients. Generally, teams
+       Team 3 (ref. 15) won a third place prize of $10,000. As in previous             converted each type of time-resolved data per patient into a constant
+                                                     16
+       installments of the DREAM challenges            , the aggregation of pre-       number of static features by applying various statistics. For instance,
+© 2015 dictions across teams 1 and 2 further reduced the prediction error.             linearregressionwasappliedtorepresentasetofmeasurementsbythe
+
+       Bootstrappingfurtherallowedustoestimatethatastatisticallysignifi-               slope and intercept (e.g., baseline method). Another approach was to
+
+       cant improvement over the baseline algorithm would correspond to                selectdesignatedmeasurementsasfeatures,suchastheminimumand
+npg    an r.m.s. deviation of 0.5, which was not achieved by any method.               maximum of the values. The latter approach was successfully applied
+
+
+
+
+        a                                      b                                  c                                       d    0
+                                                                                       0
+                                                  0.7
+                                                                                                             Slow                                      Slow
+                                                               Clinicians
+                                                  0.6                                −0.5                                    −0.5
+
+                                                                                                          Medium
+                                                  0.5                                                                                            Medium
+                                                                                     −1.0                                    −1.0
+          40                                                                       ∆ALSFRS (1/month)                        ∆ALSFRS (1/month)
+          30                                      0.4  Median              2                     Fast
+                                                       clinician                                                                                      Fast
+          20                                    r.m.s. deviation (1/montMethods  1   −1.5                                    −1.5                    Predicted slow
+         A10FRS                                   0.3                                        Predicted fastedicted slow                 Predicted fast
+
+                                                       0    0.2    0.4   0.6   0.8        −1.0   −0.8    −0.6   −0.4               −1.2  −1.0   −0.8  −0.6   −0.4
+                5  10 15  20                                    Correlation            Predicted ∆ALSFRS: method 1 (1/month)   Predicted ∆ALSFRS: median clinician (1/month)
+              Time (months)
+
+       Figure 3 Prediction and classification by algorithms and clinicians. (a) ALSFRS slopes were partitioned into 14 clusters of commonly occurring disease
+       progression profiles via k-means. Clusters predominantly contain slow (black), average (gray) or fast patients (red). Patients closest to the center of
+
+       each cluster were selected to yield 14 representative patients. (b) Performance of 12 clinicians (red, “A” indicates the performance of their aggregated
+       predictions) and two algorithms (blue) is assessed based on r.m.s. deviation (ordinate) and Pearson’s correlation (abscissa). Here, r.m.s. deviation
+
+       and correlation are calculated based on the 14 representative patients. (c,d) The slope predictions (abscissa) as generated by algorithm 1 (c) and the
+       median clinician regarding r.m.s. deviation (d). Individual patients were classified as slow (−), medium (o) or fast (+) according to the true progression
+
+       (ordinate). The predicted classifications were assessed relative to a threshold (dashed line). Patients left or right of the threshold are assumed to be
+       predicted fast or slow, respectively. Circles highlight incorrectly classified patients (d).
+
+
+
+
+       nature biotechnology VOLUME 33                 NUMBER 1      JANUARY 2015                                                                                  53
+       AnAlysis
+
+
+
+
+        a                                           b                                       c                                  d
+                                                       0.30
+        Time from onset    1  1   2  1  1   1  1.2                                            1.2             Patient 136474       1.0                Patient 134770
+        ALSFRS             3  2   1  2      3  2.2                           Creatinine                                                         ALSFRS
+        Time from diagnosis   4      5  8      5.7     0.25                                   1.0                                  0.8
+        Blood pressure     2  3         16 14 69.0                                                         Phosphorus              0.6
+        Uric acid             19     3  11    10.7     0.20                                   0.8            ρ = 0.92
+        Weight             5  7  20           10.7                 Phosphorus  Pulse                                               0.4
+        Pulse                 6         18    12.0     0.15                                   0.6    Creatinine                    0.2            Creatinine
+        ALSFRS_Q           4  12 24     3  18 12.2   Probability                              0.4     ρ = 0.87                                     ρ = 0.03
+        Site of onset         25 10         2 12.3     0.10                                                                         0
+        Phosphorus               15     10    12.5                                           R0.2tivPulseue                     Re–0.2ve value             Pulse
+        Age                   5  29         6 13.3     0.05                                        ρ = 0.57                            Phosphorus         ρ = 0.92
+        Gender            14     18           16.0                                              0                 ALSFRS          –0.4  ρ = –0.43
+        Creatine kinase          21     14    17.5
+        Creatinine               17     19    18.0                        0
+        Teams              1  2   3  4  5   6 Mean         –0.–80.60.40.2   0.20.40.60.8              100 200300   400 500                  100 200    300  400
+
+                                                                     Correlation                      Time after onset (days)               Time after onset (days)
+
+       Figure 4 Analysis of predictive features. (a) The heat map depicts the features that were identified (ranked from 1–30, illustrated by colors from blue to
+       yellow) by at least two of the algorithms among their 30 most predictive. The column termed mean is the average across the top six solvers. ALSFRS_Q
+       denotes the usage of at least one of the individual ALSFRS questions in contrast to the usage of just their sum, ALSFRS. Three features not previously
+
+       reported in the literature, phosphorus, creatinine and pulse, are analyzed in the remaining panels. (b) The probability of correlation between a feature
+       and ALSFRS distributed across patients. (c,d) For two example patients, the time progression of these predictive features. Note: to show different
+       measures in one diagram, we normalized them to relative values based on quartiles (Online Methods).
+
+
+
+
+       by the best-performing team 1. Notably, this min/max approach rep-              into14clusters,reflectingcommonlyoccurringALSFRStimecourses.
+       resented the time-resolved data in a more robust way than the linear            Clusters were distinguished by both their intersect (ALSFRS score
+
+       regression approach, which apparently suffered from the relatively              at time 0) and the shape of their progression curves (Fig. 3a). Based
+       few data points available. The treatment of features was also what              on these 14 distinct, disease-progression patterns, we selected 14
+
+       distinguishedthefourmethodsbasedonrandomforestvariants,that                     representative patients, that is, the centroid of each cluster.
+       is, they used specific approaches for feature selection, missing value             Subsequently, 12 clinicians from top ALS clinics from seven coun-
+
+       imputation or feature summary statistics.                                       tries were asked to estimate the future disease progression of these
+          To be useful clinically, algorithms should be able to maintain               representative patients (Supplementary Results 4, Supplementary
+
+       predictability with limited data that have either (i) fewer features            Fig. 11, Supplementary Table 10 and Supplementary Data 1),
+
+       (ii) or cover less than 3 months. Therefore, we tested the effects              using the exact same data provided to the algorithms. The two best-
+       of (i) by using only the five most-predictive features and (ii) by              performing algorithms substantially outperformed all clinician
+
+       limiting the time periodofinformationavailabletothealgorithms to                predictions, indicated by both higher PC and lower r.m.s. deviation
+       the first month of data. For both the best-performing algorithm and             (Fig.3b).Inaddition,thealgorithmsalsooutperformedtheaggregate
+
+       the baseline methods, performance did not substantially deteriorate             of all the clinicians’ predictions. The rate of progression predicted
+       (Supplementary Results 3 and Supplementary Figs. 9 and 10).                     by the best-performing algorithm (team 1’s)—in contrast to the rate
+
+                                                                                       predicted by the clinicians—and the actual rate of disease progres-
+© 2015 Predictions facilitate reduction in clinical trial size                         sion across the 14 cases, were well-correlated (Fig. 3c). These results
+
+       ALS clinical trials serve to evaluate the effect of a given drug treatment      suggest that the prediction algorithms might prove useful in helping
+       on disease progression, with ALSFRS and ALSFRS-R scores serving as              clinicians to assess patient disease progression.
+
+npg    commonoutcomemeasures.ThegreatvariabilityinALSdiseaseprogres-                      Inadditiontoanalgorithm’spredictiveaccuracy,itiscrucialthatit
+
+       sionhinderstheabilitytodetecteffectsofagiventreatment,necessitating             providesabroadassessmentofpatientprogression,thatis,thatitcan
+       larger and more costly clinical trials. The ability to more accurately          correctlyclassifyagivenpatientashavinganaveragediseaseprogres-
+
+       predict the expected disease progression for a given patient (without           sion, or having an unusually slow or fast disease course. Therefore,
+       treatment intervention) can therefore reduce the number of patients             we analyzed both the algorithm- and clinician-based predictions to
+
+       needed by increasing the ability to detect a drug’s effect on disease (less     determine to what extent slow and fast progressors were correctly
+       obscured by the inherent disease variability). To quantify the potential        classified. Three patients showing an ALSFRS slope of less than
+
+       trial size reduction engendered by use of the algorithms, we simulated          −1.1 points/month were considered fast, seven patients with a slope
+       trials(OnlineMethods).Weestimatedthattrialsizecouldbereducedby                  greaterthan−0.5points/monthwereconsideredslow,andtheremain-
+
+       upto20.4%usingtheaggregatedpredictionsofteams1and2(Fig.2d).                     ing four patients were considered average.
+       As the average cost per patient in an ALS clinical trial is $30,000                On this limited subset of patients, the best algorithm (team 1’s)
+
+       (L.A.WhiteandD.Kerr,personalcommunication),foraphase3,1,000-                    discriminated perfectly between slow and fast-progressing patients
+
+       patienttrial,thiswouldtranslateintoa$6-millionreductionincost.                  (Fig. 3c,d). In contrast, the rate of progression predicted by a typical
+                                                                                       clinician showed substantially less correlation to the true rate and
+
+       Comparison between algorithms and clinicians                                    manypatientsweremisclassified.Onaverage,cliniciansmisclassified
+       ALS prognostic prediction is challenging. Clinicians often feel                 35% of the patient cases (Supplementary Results 4, Supplementary
+
+       they lack the necessary tools to provide their patients with accurate           Fig. 11 and Supplementary Table 10).
+       prognostic information. Thus, we aimed to evaluate whether the
+
+       ALS prediction algorithms could help clinicians by comparing their              Predictive features
+       predictive performance.                                                         To assess the importance of each feature for the different algorithms,
+
+          Therefore, we selected a relatively small but representative subset          welookedatthepredictivefeaturesastheywererankedbythetopsix
+       of patients. Using k-means clustering, we divided the 1,822 patients            best-performing algorithms. We focused on the features that at least
+
+
+
+
+       54                                                                              VOLUME 33      NUMBER 1      JANUARY 2015 nature biotechnology
+                                                                                                                                 AnAlysis
+
+
+
+      two solvers included within the top 30 predictive features. Sixteen        By simulation, we estimated that predictions by the winning algo-
+      such features were identified (Fig. 4a). The list includes several fea- rithms could lead to a 20% reduction in population size for an ALS
+      tures previously reported to predict ALS progression, including time    clinicaltrial.Thisreductionstemsfromchangesintrialdesign.When
+
+      from onset, age, forced vital capacity (FVC), site of onset, gender,    planningclinicaltrials,variabilitybetweenthepatientsisestimatedto
+      weight 17–20, as well as uric acid concentration in blood, a feature    plan for a sufficient trial size to capture the effect of the drug beyond
+      that has only been suggested recently as a predictor . In addition,     that variability. An algorithm that gives more information about the
+      the challenge was successful in identifying nonstandard predictive      patients,andtherebyreducestheinterpatientvariability,canfacilitate
+
+      features, opening the door to new insights into ALS disease mecha-      a reduction in trial size. Furthermore, a reduction of the estimated
+      nisms. These were pulse, blood pressure as well as the concentration    magnitude could also affect the number of medical sites required
+      of creatine kinase, creatinine and phosphorus.                          by a trial, leading to further cost savings. Prognostic methods could
+         We further assessed these features by determining the correlation,   also lead to improvements in trial effectiveness, so assessing the
+
+      over time, between the relevant feature and the ALSFRS score, for       financial implications of incorporating predictive algorithms into
+      each subject (Fig. 4b–d). Notably, for creatinine the distribution of   clinical trial design is not straightforward. If we limit the effect of
+      correlations across the patients was skewed toward higher correla-      a more quantitative understanding of disease heterogeneity only to
+      tions, indicating a subset of patients that exhibit an unusually high   calculating the number of patients needed, we estimate that predic-
+
+      correlationbetweenchangesincreatinineandALSFRSscore.Thiswas             tions enable a 20% reduction in population size of a phase 3 trial,
+      also found, to a lesser extent, for creatine kinase, which is correlatedresulting in a $6-million dollar reduction in costs. These financial
+      with creatinine. This suggests that these features may be especially    benefits need to be weighed against the potential costs of providing
+      predictive for specific subgroups of patients and therefore might be    alead-inperiodwherepatientsaretrackedbeforethestartofthetrial
+
+      useful biomarkers of the disease. A similar trend was not found for     to determine their expected progression and other factors that affect
+      pulse, phosphorus or blood pressure (Supplementary Results 5 and        the trial, such as patient drop-out or limited survival. The finding
+      SupplementaryFigs.12and13), forwhich furtherdetailed analysis,          that the algorithms maintain their predictability using just 1 month
+      beyond the scope of this study, is needed to explore their potential    of information (Supplementary Results 3), and the fact that the
+
+      predictive properties.                                                  performance of the algorithms remained robust when tested on
+                                                                              the larger and more diverse full PRO-ACT data set demonstrates the
+      DISCUSSION                                                              power of crowdsourcing, where a challenge with a monetary award
+      The current lack of robust approaches for estimating the future         of $50,000 can potentially reduce the costs of multiple future clini-
+
+      disease progression of ALS patients represents a major obstacle for     cal trials by millions of dollars. The algorithms are currently being
+      the testing of novel therapeutic approaches in clinical trials and the  further tested and validated on proprietary ALS trial data.
+      understandingofdiseasemechanisms.AsALSisarapidlyprogressing             Furthermore, efforts are underway to transform the algorithms into
+      disease, the accurate estimation of progression is very important for   a ready-to-use software tool for evaluation and future application in
+
+      patient care and making decisions regarding clinical interventions      clinics and in clinical trials.
+      and assistive technology.                                                  To further assess the ability of the winning algorithms to help
+         The unique global challenge presented here brought together the      clinicians in accurately determining the prognosis of their patients,
+      efforts of 37 participating teams to develop tools to predict disease   we directly compared the algorithms’ predictions with the estimates
+
+© 2015 Nature America, Inc. All rights reserved.l trials and clinicians, and  of 12 leading ALS clinicians. For all 14 patient cases examined, the
+      to identify new predictive features that can provide new insights into  algorithms outperformed all of the clinicians and the aggregate of
+      disease processes and could provide important biomarkers.               the clinicians by a substantial margin. Clearly, predicting disease
+         ThePRO-ACTplatform,thelargestexistingALSclinicaltrialdataset,        prognosis based solely on an anonymized data set in the absence
+npg
+      hasprovidedanunprecedentedopportunitytoincreaseourunderstanding         of a clinical encounter certainly cannot truly reflect the wealth of
+      oftheALSpatientpopulationandthenaturalhistoryofthedisease       21.     information that can be gleaned by an experienced clinician through
+         The crowdsourcing approach had several advantages. First, the        clinical observation. However, these results demonstrate how a pre-
+      challenge attracted new minds and new perspectives to a problem         dictive algorithm could prove helpful to clinicians when advising
+                                                             22
+      largelyunknownoutsidetheALSresearchcommunity .Second,the                patients.Asthepatientpopulationparticipatinginclinicaltrialsisnot
+      format of the challenge allowed blinded side-by-side comparisons of     fullyrepresentativeofthepatientpopulationseenintheclinic      23,steps
+      differentpredictionmethods,testedonadatasetthesolversneversaw           are being taken to directly test the utility of these algorithms in a
+      and to which the algorithms had never been exposed. This allowed a      clinical setting.
+
+      better assessment of the robustness of the solutions.                      Another important goal of the ALS Prediction Prize challenge
+         Notably, the algorithmscouldbedividedintotwogroups based on          was to validate features that had previously been suggested to be
+      their performance, with teams using tree-based ensemble regression      predictive in small studies and to identify novel predictive features.
+      techniques, such as random forest or Bayesian additive regression,      Overall,15differentfeatureswereidentifiedbymorethanonesolver.
+                                                                                                                               17,18,24–33
+      almost always outperforming teams using simple regression. These        Several were features reported in the literature          , including
+      results suggest that tree-based ensemble regression techniques are      age, site of disease onset, gender, the slope of disease progression so
+      likely suitable for clinical data in general, beyond the scope of ALS   far, past ALSFRS slope, and past FVC slope, thus serving as valida-
+      and are therefore of broad general importance for analysis of clinical  tion of both the features and the algorithms. Unfortunately for many
+
+      trial information in the context of clinical trials as well as clinical of the patients in PRO-ACT, FVC information was not available or
+      health records. In addition, robust processing of the time-resolved     other key features required to calculate FVC were missing. Weight,
+      clinical measurements seemed to be the key to achieving the overall     which has been disputed as a predictor in the ALS literature   19,34,,5
+      most-predictive results, where simple summary statistics performed      was found to be predictive. Specific ALSFRS questions were found
+
+      best. This may be due to the limited number of time points available    to be predictive by the different teams, but with no consensus over
+      and the intrinsic noise, issues prevalent in medical data.              certainquestionsbeingmorepredictiveofthetotalscorethanothers.
+
+
+      nature biotechnology VOLUME 33            NUMBER 1     JANUARY 2015                                                                        55
+       AnAlysis
+
+
+
+                                                                                  20
+       Notably,thechallengealsovalidatesthepredictivevalueofuricacid .                  1. Drigo, D. et al. The incidence of amyotrophic lateral sclerosis in Friuli Venezia
+       Higher than average uric acid concentrations have also been shown                   Giulia, Italy, from 2002 to 2009: a retrospective population-based study.
+                                                                                           Neuroepidemiology 41, 54–61 (2013).
+       to correlate with slower progression in Parkinson’s disease, dementia            2. Johnston, C.A. et al. Amyotrophic lateral sclerosis in an urban setting: a population
+                                    36–39                                                  based study of inner city London. J. Neurol. 253, 1642–1643 (2006).
+       and Huntington’s disease           , suggesting a common pathological
+       mechanism or by-product across neurodegenerative processes, and                  3. Kiernan, M.C. et al. Amyotrophic lateral sclerosis. Lancet 377, 942–955 (2011).
+                                                                                        4. Miller, R., Mitchell, J., Lyon, M. & Moore, D. Riluzole for amyotrophic lateral
+       clinicaltrialsbasedonincreasinguricacidhavealreadybeeninitiated                     sclerosis (ALS)/motor neuron disease (MND). Cochrane Database Syst. Rev.
+       for several central nervous system–related conditions. The fact that                CD001447 (2007).
+                                                                                        5. Cedarbaum, J.M. & Stambler, N. Performance of the amyotrophic lateral sclerosis
+       the algorithms still identified uric acid as a predictor supports past              functional rating scale (ALSFRS) in multicenter clinical trials. J. Neurol. Sci. 152,
+       findings . Similarly, the challenge was able to support the predic-                 S1–S9 (1997).
+
+       tive power of creatinine   40,4,whichwasnotonlyidentifiedby several              6. Cedarbaum, J.M. et al. The ALSFRS-R: a revised ALS functional rating scale that
+                                                                                           incorporates assessments of respiratory function. J. Neurol. Sci. 169, 13–21 (1999).
+       different algorithms, but was also found to be highly correlated with            7. Grossman, I. et al. Alzheimer’s disease: diagnostics, prognostics and the road to
+       the changes in ALSFRS as the disease progresses over time. Further                  prevention. EPMA J. 1, 293–303 (2010).
+                                                                                        8. Tangri, N. et al. A predictive model for progression of chronic kidney disease to
+       features of interest include creatine kinase, whose levels highly cor-              kidney failure. J. Am. Med. Assoc. 305, 1553–1559 (2011).
+       relate with creatinine levels, suggested to be predictive of prognosis           9. Cutter, G.R. et al. Development of a multiple sclerosis functional composite as a
+
+       in ALS  42,43. Pulse and blood pressure, which at first glance may be               clinical trial outcome measure. Brain 122, 871–882 (1999).
+       surprising predictive features for ALS, are supported by a body of               10. Romero, K. et al. The coalition against major diseases: developing tools for an
+                                                                                           integrated drug development process for Alzheimer’s and Parkinson’s diseases. Clin.
+       literature suggesting sympathetic dysfunction in ALS          44–47. Further        Pharmacol. Ther. 86, 365–367 (2009).
+                                                                                        11. Ontaneda, D., LaRocca, N., Coetzee, T. & Rudick, R. Revisiting the multiple sclerosis
+       research and studies are needed to assess the potential of these fea-               functional composite: proceedings from the national multiple sclerosis society
+       tures and elucidate their involvement in ALS pathophysiology.                       (NMSS) task force on clinical disability measures. Mult. Scler. 18, 1074–1080
+
+          In summary, the ALS prediction prize brought new minds to the                    (2012).
+       field of ALS and demonstrated the benefits of crowdsourcing in fos-              12. Rogers, J.A. et al. Combining patient-level and summary-level data for Alzheimer’s
+                                                                                           disease modeling and simulation: a beta regression meta-analysis. J. Pharmacokinet.
+       tering new approaches in ALS research. The best-performing algo-                    Pharmacodyn. 39, 479–498 (2012).
+       rithms in this challenge have the potential to reduce the population             13. Marbach, D. et al. Wisdom of crowds for robust gene network inference.
+                                                                                           Nat. Methods 9, 796–804 (2012).
+       size needed to measure a drug effect by 20% and have enabled the                 14. R Core Team. R: A Language and Environment for Statistical Computing
+
+       identification of several nonstandard, potential predictive features                (R Foundation for Statistical Computing, Vienna, Austria, 2013).
+       that might shed new lightondiseasepathways.Lastly,thealgorithms                  15. Hothorn, T. & Jung, H.H. RandomForest4Life: a random forest for predicting ALS
+                                                                                           disease progression. Amyotroph. Lateral Scler. Frontotemporal Degener. 15,
+       couldaidcliniciansintheirjudgmentduringevaluationofthepatients                      444–452 (2014).
+       andtherebyimprovethecareofALSpatients.Thealgorithmsarenow                        16. Costello, J. & Stolovitzky, G. Seeking the wisdom of crowds through challenge-based
+                                                                                           competitions in biomedical research. Clin. Pharmacol. Ther. 93, 396–398
+       being tested in clinical settings.                                                  (2013).
+
+                                                                                        17. Magnus, T. et al. Disease progression in amyotrophic lateral sclerosis: predictors of
+       METHODS                                                                             survival. Muscle Nerve 25, 709–714 (2002).
+                                                                                        18. del Aguila, M., Longstreth, W., McGuire, V., Koepsell, T. & Van Belle, G. Prognosis
+       Methods and any associated references are available in the online                   in amyotrophic lateral sclerosis: a population-based study. Neurology 60, 813–819
+       version of the paper.                                                               (2003).
+                                                                                        19. Paganoni, S., Deng, J., Jaffa, M., Cudkowicz, M.E. & Wills, A.M. Body mass index,
+                                                                                           not dyslipidemia, is an independent predictor of survival in amyotrophic lateral
+       Note: Any Supplementary Information and Source Data files are available in the
+       online version of the paper.                                                        sclerosis. Muscle Nerve 44, 20–24 (2011).
+                                                                                        20. Paganoni, S. et al. Uric acid levels predict survival in men with amyotrophic lateral
+© 2015 Nature America, Inc. All rights reserved.                                           sclerosis. J. Neurol. 259, 1923–1928 (2012).
+       ACKNOWLEDGMENTS                                                                  21. Gomeni, R. & Fava, M. The pooled resource open-access, ALSCTC amyotrophic
+       We are grateful to the following people for their important assistance with this    lateral sclerosis disease progression model. Amyotroph. Lateral Scler. Frontotemporal
+       manuscript: the pharmaceutical companies which provided data to the PRO-ACT         Degener. 15, 119–129 (2014).
+       data set that enabled this entire endeavor, the Bowen family and D. Lautman for  22. Lakhani, K.R. et al. Prize-based contests can provide solutions to computational
+npg
+       their generous support for this project, R. Betensky from the Harvard School        biology problems. Nat. Biotechnol. 31, 108–111 (2013).
+       of Public Health for her statistical advice and contributions to the earliest stage. Chiò, A. et al. ALS clinical trials: do enrolled patients accurately represent the ALS
+       of developing the challenge, L. Reinhold from InnoCentive for her support and       population? Neurology 77, 1432–1437 (2011).
+                                                                                        24. Czaplinski, A., Yen, A.A., Simpson, E.P. & Appel, S.H. Predictability of disease
+       management of the challenge, our challenge sponsors, Nature, The Economist and      progression in amyotrophic lateral sclerosis. Muscle Nerve 34, 702–708 (2006).
+       Popular Science, the clinicians who participated in the clinicians’ assessment an25. Pastula, D.M. et al. Factors associated with survival in the national registry of
+       follow-on discussions about the results, L.A. White and D. Kerr from Biogen Idec    veterans with ALS. Amyotroph. Lateral Scler. 10, 332–338 (2009).
+       for their assistance with estimating the financial impact of the algorithms and, of
+                                                                                        26. Qureshi, M.M. et al. Analysis of factors that modify susceptibility and rate of
+       course, the solvers who participated in the challenge and the patients who inspired progression in amyotrophic lateral sclerosis (ALS). Amyotroph. Lateral Scler. 7,
+       this effort.                                                                        173–182 (2006).
+                                                                                        27. Fujimura-Kiyono, C. et al. Onset and spreading patterns of lower motor neuron
+                                                                                           involvements predict survival in sporadic amyotrophic lateral sclerosis. J. Neurol.
+       AUTHOR CONTRIBUTIONS                                                                Neurosurg. Psychiatry 82, 1244–1249 (2011).
+       R.K., N.Z., R.N., J.H., D.S., O.H., M.C., G.S. and M.L.L. designed the challenge.28. Qureshi, M. et al. Medications and laboratory parameters as prognostic factors in
+       R.K. and J.H. prepared the data and baseline algorithm, A.S. helped with data
+       preparation. N.Z. managed the challenge. L.W., G.L., L.F., L.M., G.E., M.G.-W.,     amyotrophic lateral sclerosis. Amyotroph. Lateral Scler. 9, 369–374 (2008).
+                                                                                        29. Zoccolella, S. et al. Analysis of survival and prognostic factors in amyotrophic lateral
+       T.H., J.v.L., J.H.M., T.M., B.S., L.T. and R.V. submitted algorithms. D.S., L.W.,   sclerosis: a population based study. J. Neurol. Neurosurg. Psychiatry 79, 33–37
+       G.L., L.F. and L.M. contributed further analysis on challenge performance.          (2008).
+       R.K. and N.Z. analyzed the results and wrote the paper.                          30. Turner, M.R. et al. Pattern of spread and prognosis in lower limb-onset ALS.
+                                                                                           Amyotroph. Lateral Scler. 11, 369–373 (2010).
+                                                                                        31. Kollewe, K. et al. ALSFRS-R score and its ratio: a useful predictor for
+       COMPETING FINANCIAL INTERESTS
+       The authors declare competing financial interests: details are available in the onlineS-progression. J. Neurol. Sci. 275, 69–73 (2008).
+                                                                                        32. Traynor, B., Zhang, H., Shefner, J., Schoenfeld, D. & Cudkowicz, M. Functional
+       version of the paper.                                                               outcome measures as clinical trial endpoints in ALS. Neurology 63, 1933–1935
+                                                                                           (2004).
+                                                                                        33. Vender, R.L., Mauger, D., Walsh, S., Alam, S. & Simmons, Z. Respiratory systems
+       Reprints and permissions information is available online at http://www.nature.com/  abnormalities and clinical milestones for patients with amyotrophic lateral sclerosis
+       reprints/index.html.                                                                with emphasis upon survival. Amyotroph. Lateral Scler. 8, 36–41 (2007).
+
+
+
+
+
+
+       56                                                                               VOLUME 33      NUMBER 1      JANUARY 2015 nature biotechnology
+                                                                                                                                                AnAlysis
+
+
+
+
+
+       34. Paganoni, S., Deng, J., Jaffa, M., Cudkowicz, M.E. & Wills, A.M. What does body Chen, X. et al. An exploratory study of serum creatinine levels in patients with
+          mass index measure in amyotrophic lateral sclerosis and why should we care?      amyotrophic lateral sclerosis. Neurol. Sci. 35, 1591–1597 (2014).
+          Muscle Nerve 45, 612 (2012).                                                 42. Chahin, N. & Sorenson, E.J. Serum creatine kinase levels in spinobulbar
+       35. Reich-Slotky, R. et al. Body mass index (BMI) as predictor of ALSFRS-R score    muscular atrophy and amyotrophic lateral sclerosis. Muscle Nerve 40, 126–129
+
+          decline in ALS patients. Amyotroph. Lateral Scler. Frontotemporal Degener. 14,   (2009).
+          212–216 (2013).                                                              43. Rafiq, M., Lee, E., Bradburn, M., McDermott, C. & Shaw, P. Elevated creatine
+       36. Ascherio, A. et al. Urate as a predictor of the rate of clinical decline in Parkinsone suggests better prognosis in patients with amyotrophic lateral sclerosis.
+          disease. Arch. Neurol. 66, 1460–1468 (2009).                                     J. Neurol. Neurosurg. Psychiatry 84, e2 (2013).
+
+       37. Auinger, P., Kieburtz, K. & Mcdermott, M.P. The relationship between uric acid. Murata, Y., Harada, T., Ishizaki, F., Izumi, Y. & Nakamura, S. An abnormal
+          levels and Huntington’s disease progression. Mov. Disord. 25, 224–228 (2010).    relationship between blood pressure and pulse rate in amyotrophic lateral sclerosis.
+       38. de Lau, L.M., Koudstaal, P.J., Hofman, A. & Breteler, M. Serum uric acid levels Acta Neurol. Scand. 96, 118–122 (1997).
+          and the risk of Parkinson disease. Ann. Neurol. 58, 797–800 (2005).          45. Baltadzhieva, R., Gurevich, T. & Korczyn, A.D. Autonomic impairment in amyotrophic
+
+       39. Euser, S., Hofman, A., Westendorp, R. & Breteler, M.M. Serum uric acid and      lateral sclerosis. Curr. Opin. Neurol. 18, 487–493 (2005).
+          cognitive function and dementia. Brain 132, 377–382 (2009).                  46. Kandinov, B., Drory, V.E., Tordjman, K. & Korczyn, A.D. Blood pressure measurements
+       40. Ikeda, K., Hirayama, T., Takazawa, T., Kawabe, K. & Iwasaki, Y. Relationships   in a transgenic SOD1–G93A mouse model of amyotrophic lateral sclerosis.
+          between disease progression and serum levels of lipid, urate, creatinine and ferritintroph. Lateral Scler. 13, 509–513 (2012).
+                                                                                       47. Pavlovic, S. et al. Impairment of cardiac autonomic control in patients with
+          in Japanese patients with amyotrophic lateral sclerosis: a cross-sectional study.
+          Intern. Med. 51, 1501–1508 (2012).                                               amyotrophic lateral sclerosis. Amyotroph. Lateral Scler. 11, 272–276 (2010).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+© 2015 Nature America, Inc. All rights reserved.
+
+
+
+
+npg
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       nature biotechnology VOLUME 33                 NUMBER 1      JANUARY 2015                                                                                 57
+       ONLINE METHODS                                                                 Incontrast,Pearson’scorrelationρisarelativemeasurethatevaluateshowwell
+       General setup. The goal of the challenge was to predict disease progression    a prediction method is able to recover ALSFRS trends across patients. Better
+       in ALS. Participants were tasked to use the first 3 months of clinical informa-predictions lead to a higher value of the correlation, up to 1.0 for the perfect
+       tion (months 0–3 from the beginning of the trial), to predict the change in    prediction. It is calculated by
+
+       ALSFRS over months 3 to 12 (with no overlap between the two time periods).                                           cov(S,P)
+       ALSFRS drops by one point per month in average patients. We chose to focus                                    rS,P =  s s
+       on ALSFRS because it is a common primary outcome measure in ALS clinical                                                S P
+       trials, and a measure that reflects a variety of the patient’s everyday functiowhere cov is the covariance of S and P and σ and σ are the s.d. of
+                                                                                                                                       S        P
+       Other important factors, such as patient survival, were not chosen because     S and P, respectively.
+       survivalisapointmeasureandreflectsparametersbeyonddiseaseprogression
+       (such as the patient’s decision regarding tracheotomy and gastrostomy, and     Aggregation of predictions. Given a variety of different predictive methods,
+
+       the patient’s background diseases).                                            aggregation aims to combine their divergent predictions resulting in a sin-
+         Partoftheclinicaldatawastime-resolved(suchasALSFRS,functionalvital           gle prediction that is often more accurate than any of the underlying indi-
+       capacity, vital signs and laboratory tests) and part was static (such as gendervidual ones. Here, we aggregated predictions across teams participating in
+       demographics and family history of ALS). The challenge used a subset of the    the challenge. For a given patient, each prediction contributes an estimate of
+
+       PRO-ACT data set comprising 1,822 patients, derived from four clinical tri-    the future ALSFRS slope. The aggregate ALSFRS slope for that patient is then
+       als, completed in the past 15 years. ALSFRS was shown to be independent of     calculated as the average of the ALSFRS values predicted by the algorithms
+       the effective date of trial. All of the subject records used in the challenge  to be aggregated.
+       included12monthsofcompletedassessmentandcontainedeitherALSFRSor
+                                                                              49
+       ALSFRS-R scores. Atassi et al. calculated basic statistics for the database .  Bootstrapping. In the course of this challenge, a single set of predictions was
+         The data records were subdivided into a training (n = 918), a test (n = 279) obtained from each participating team, so that the application of one of the
+       and a validation set (n = 625 unique patient records). For the development     above-mentioned scoring schemes results in a single performance estimate
+       and training of computational approaches, solvers received full access to the  per team. In order to approximate the empirical performance distribution
+
+       training data set (challenge phase 1). So that the performance of the solvers’ for each team, and thus to obtain the expected variance of the performance,
+       algorithms on the test and validation sets could be assessed, teams had to     we applied bootstrapping. For each team-specific bootstrap, 100 bootstrap
+       submit R code to the challenge manager, who then ran the code on the data      samplesweregeneratedbysampling(fromthevalidationset,n=625patients)
+       set,consistingofonly3monthsofinformation.Duringthecourseofthechal-             withreplacement,sothatsomepatientsappearseveraltimesaspredictiontar-
+
+       lenge,attheirdiscretion,solverscoulduploadtheiralgorithmstobeevaluated         getswhereasothersmightbeomitted.Subsequently,theperformance scoring
+       byInnoCentiveblindlyandautomaticallyonthetestdataandtheresultswere             metricr.m.s.deviationwascalculatedforeachofthebootstrapsamplestoesti-
+       shownonaleaderboard(challengephase2).Althoughtheperformanceonthe               mate the bootstrapped average µ and s.d. σ. Thereby, we described improve-
+
+       test set had no influence on the ultimate determination of best performer,     ments over the baseline approach base in units of the z-score. We regard the
+       the leaderboard served to provide important feedback to the solvers. During    r.m.s. deviatiothresht a z-score of z = 2 (corresponding to a P-value of 0.02)
+       the last phase of the challenge (challenge phase 3), the test set was provided as a significant improvement in performance.
+       to the solvers. They then had to submit their final code, which was again
+                                                                                                             RMSD         = m    −zs
+       assessedblindlyandautomaticallyagainstthenever-before-seensetofsubject                                      thresh    base     base
+       records comprising the separate validation set.
+                                                                                      Clustering and selection of representative patients. We aimed to select a
+       Assessment.Computingtheactualslopes.Thegoalofthechallengewastopre-             small number of between 10 and 20 representative patients to facilitate the
+
+       dict the expected decline of the value of the ALSFRS (slope) during months 3   manual estimation of disease progression by clinicians. Therefore, we par-
+© 2015 Nature America, Inc. All rights reserved.estions,eachcontributingavalue        titioned the ALS profiles of patients by performing k-means clustering 100
+       between 0 and 4. For patients where only ALSFRS-R (12 questions) was avail-    times using k = 25, the Euclidian distance metric and randomly placed initial
+       able, we discarded two questions not contained in ALSFRS. This was done to     centroids. Out of the 100 k-means runs, the one with the smallest average
+
+       simplify the prediction task, although it may remove some information. See     distance of patients to the centroids was selected and clusters with less than
+npg    Supplementary Note 1 for more details. Subsequently, we removed ALSFRS         ten members were discarded. One patient was selected from each cluster that
+       and ALSFRS-R values for measurements where not all 10 required questions       wasclosesttotheclustercentroid.K-meanswasappliedtoamatrixCof1,822
+
+       were available, resulting in a final scale ranging from 0 to 40.               patients by 20 months, so that the element i,jontains the ALSFRS value of
+         To select subjects eligible for prediction, we removed all subject records   patient i at month j. As the time points of obtaining the ALSFRS values did
+       with fewer than two visits during the first 3 months. To determine the slope,  not match across patients, we linearly interpolated the ALSFRS values at the
+       weassignedthefirstvisitaftermonththreeofparticipationintheclinicaltrial        beginning of each month for the construction of C.
+
+       as m1. If there were visits through month 12, we assigned the first such visit
+       aftermonth12asm2.Otherwise,iftherewereonlyvisitsthroughtheeleventh             Classificationofpatients.Toassesstheusefulnessofapredictionalgorithm,it
+       month we use the final visit as m2. If there was no such visit, the subject wasshouldbeabletocorrectlyclassifypatientswithunusuallysloworfastdisease
+       removed from consideration. The slope is then calculated as                    courses. Using the following approach we compared the computed slopes to
+
+                                                                                      thosepredictedbyalgorithmsorclinicianstoassesstheirperformanceregard-
+                            slope = ALSFRS(m2)− ALSFRS(m1)                            ing patient classification. In a first step, we defined patients with computed
+                                             m2−m1                                    ALSFRS slopes of less than −1.1 ALSFRS points/months as fast and greater
+                                                                                      than −0.5 ALSFRS points/months as slow. Patients in between these extremes
+
+       Performance assessment. Two ALSFRS values were available for each patient,     weredefinedasaverage.Insteptwo,wecalculatedthemedianpredictedslopes
+       namelys iromtheactualslopeandp fromilopeprediction.Toassessthepre-             of the average patients. Patients with an ALSFRS of less than or more than
+       dictionperformance,thesetsofcomputedslopesSandpredictedslopesPwere             this median slope were assumed to be classified as fast or slow, respectively.
+       compared across patients using the r.m.s. deviation as well as the Pearson’s   Subsequently, we obtained the number of classification errors, that is, slow
+
+       correlation.Ther.m.s.deviationmeasuresabsolutedeviationsbetweenNcor-           patients misclassified as fast, or fast patients misclassified as slow.
+       responding slope pairs so that smaller values correspond to a smaller predic-
+       tion error by                                                                  Heatmap of feature correlations. The ranking of the features were provided
+                                               N
+                                 RMSD =     1     |s − p |                            by the submitting solvers. Only features found by at least two solvers to be
+                                            N  ∑    i   i                             in the top 30 of the most predictive features were further analyzed. Different
+                                              i= 1                                    processing variants of the time-resolved features (e.g., average, slope) were
+
+
+
+       nature biotechnology                                                                                                                  doi:10.1038/nbt.3051
+       grouped together. To assess the general importance of difference features, the          with the coefficients β …β1, we4ghting the terms corresponding to the
+       rankings were averaged across solvers.                                                  average slope, the treatment effect, the part of the intercept dependent on
+
+                                                                                               the slope, as well as the estimated future disease progression, respectively, as
+       Calculation of relative values. The various clinical measurements obtained              well as the random effect of   β1, bi, which was included to reduce the overall
+       during trials exhibit markedly different ranges and units. We normalize the             error e . We also estimated the same model except that we removed all the
+                                                                                                      ij
+       different measures to a common scale so that several of them can be shown in            terms containing slope . iet s b1 the standard error of the treatment effect
+       a single diagram. The normalized measures are referred to as relative values.           β2in the model with slope and i be th2 standard error of β without it2
+       A measure is normalized by subtracting its Quartile Q1 and dividing by the              Then the percent reduction in sample size is proportional to the reduction
+
+       differenceofthequartilesQ3-Q1toobtainrelativevalues.Thereby,themiddle                   in variance given by
+       50% of the measurements of each feature are scaled to a common range.
+                                                                                                                                100*(1−(s /s ) ) 2
+                                                                                                                                           1   2
+       Estimation of the clinical trial size reduction. Two important parameters
+       maydecidewhethertheeffectivenessofadrugtreatmentcanbedemonstrated,                      Treatment codes were simulated at random. Due to the large number
+       (i) the number of patients included in a clinical trial and (ii) the accuracy of        of patients in the sample, different choices of treatment codes had a
+
+       the estimated disease progression in comparison to the disease progression              negligible effect.
+       observed under drug treatment. A reduced trial size leads to an increased
+       variance in treatment effect quantification and thereby reduces the statisti-           Ethics statement. In all of the trials included in the PRO-ACT data set,
+
+       cal power of tests employed for demonstrating drug effectiveness. Here, we              study protocols were approved by the participating medical centers and
+       determinedtheparticulartrialsizereductionsuchthattheresultingincreased                  all participating patients gave informed consent. De-identified data from
+       variancewascompensatedbythereducedvariancestemmingfromthepredic-                        these trials were donated to the PRO-ACT data set for research purposes
+
+       tionsofthefuturediseaseprogression.Thus,therequiredsizeofclinicaltrials                 only and under the explicit conditions that Prize4Life and all users of the
+       can be reduced in proportion to the accuracy of these predictions.                      data would maintain the anonymity of subjects and not attempt to discover
+          Forthispurpose,wesimulatedclinicaltrialsforeachmethod,firstusingthe                  the identity of any subject. In the rare cases where donated data were not
+
+       method’s slope predictions as covariates in the data analysis and ignoring the          already completely anonymized, donated data were further anonymized
+       predictions in a second simulation. The simulation was performed by fitting             following the HIPAA de-identification conventions for personal health
+       linear random effects models, routinely used to describe treatment effects on           information: any potential patient initials and/or dates of birth were
+
+       theprogressionoftheALSFRSslopeinmostcurrentclinicaltrials.Thesetting                    removed, new randomized subject numbers were created, and wherever
+       of the simulation was a placebo-controlled trial where the treatment, which             possible, trial-specific information was removed in the merging of data
+       has unknown clinical effects, was compared to the placebo arm.                          sets, including trial center identity and location, trial dates, or other identify-
+
+          The model was parameterized for the time interval between 3 and                      ing information.
+       12 months, thus modeling the future disease progression after a 3 month
+       lead-in period as assumed during the competition. Suppose slope was the   i
+
+       slope prediction from the model and treatment was a iariable which is zero
+       for the control group and one for the treatment group. We then modeled the
+       ALSFRS value a detijmined for patient i during a clinical examination at
+                                                                                               48. Miller, R.G. et al. Phase II screening trial of lithium carbonate in amyotrophic lateral
+       time point j by                                                                            sclerosis: examining a more efficient trial design. Neurology 77, 973–979
+                      a = (b +b )*time +b (time *treatment )                                      (2011).
+                       ij     1    i       ij   2      ij            i                         49. Atassi, N. et al. The PRO-ACT Database: Design, initial analyses, and predictive
+                            +b *slope +b (time *slope )+intercept +e
+                               3       i    4      iij      i            i   ij                   features. Neurology doi:10.1212/WNL.0000000000000951 (8 October 2014).
+© 2015 Nature America, Inc. All rights reserved.
+
+
+
+
+npg
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       doi:10.1038/nbt.3051                                                                                                                       nature biotechnology

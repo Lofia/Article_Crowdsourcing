@@ -1,0 +1,712 @@
+   Crowdsourcing the Verification of Relationships in Biomedical Ontologies
+
+
+           Jonathan M. Mortensen, B.S., MarkA. Musen, PhD, Natalya F. Noy, PhD
+                        Stanford Center for Biomedical Informatics Research
+
+                        Stanford University, Stanford, CA 94305-5479 U.S.A.
+
+
+Abstract
+Biomedical ontologies are often large and complex, making ontology development and maintenance a challenge. To
+address this challenge, scientists use automated techniques to alleviate the difficulty of ontology development. How-
+
+ever, for many ontology-engineering tasks, human judgment is still necessary. Microtask crowdsourcing, wherein
+human workers receive remuneration to complete simple, short tasks, is one method to obtain contributions by hu-
+mans at a large scale. Previously, we developed and refined an effective method to verify ontology hierarchy using
+
+microtask crowdsourcing. In this work, we report on applying this method to find errors in the SNOMED CT CORE
+subset. By using crowdsourcing via Amazon Mechanical Turk with a Bayesian inference model, we correctly verified
+86% of the relations from the CORE subset of SNOMED CT in which Rector and colleagues previously identified
+
+errors via manual inspection. Our results demonstrate that an ontology developer could deploy this method in order
+to audit large-scale ontologies quickly and relatively cheaply.
+
+
+Crowdsourcing Ontology Development                                            1
+Biomedical ontologies underpin many methods and systems in biomedicine.        With their growing use and develop-
+ment, the size and complexity of biomedical ontologies is also increasing rapidly. The National Center for
+Biomedical Ontology’s (NCBO) BioPortal has over 320 ontologies as of this writing and many of these ontologies
+                                                                                                         2
+have thousands and even tens of thousands of terms; several ontologies have more than 100,000 terms. As ontolo-
+gies become larger, their development and maintenance becomes more difficult and more error prone. For example,
+Rector, Ceusters, and others have identified significant errors in SNOMED CT and the National Cancer Institute
+                  3,4                                                                                       5
+Thesaurus (NCIt).    In fact, entire journal issues have focused on auditing ontologies and terminologies. Ontolo-
+gies, such as SNOMED CT, are mandated for representing meaningful use of Electronic Health Records (EHRs).
+Ontologies have become a standard tool for data integration in life sciences. ICD-11 is being developed as an ontol-
+
+ogy. With the wide-spread and growing use of ontologies in healthcare and life sciences, quality assurance of the
+ontology content becomes increasingly important.
+
+To combat development challenges, researchers have devised automated methods for tasks such as ontology crea-
+
+tion, alignment, and verification. Yet, these methods cannot begin to solve the challenges of ontology engineering
+and thus require humans to supplement them. A recent development, microtask crowdsourcing, allows one to break
+down complex tasks into simple, short tasks for humans to complete. Workers, usually in an online marketplace,
+
+complete these tasks for a small fee. Researchers have shown that with properly designed methods, crowdsourcing
+performs extremely well, especially on tasks that only humans can currently solve. For instance, researchers have
+used crowdsourcing for editing text and finding objects in images. 6,7Thus, we see microtask crowdsourcing as one
+
+method to obtain human judgment at the large scale necessary for maintaining the growing biomedical ontologies.
+
+Previously, we developed crowdsourcing methods for both ontology verification and alignment. For alignment, we
+                                                                8
+suppleme9,10 a well performing alignment algorithm, AROMA , from the Ontolo11 Alignment Evaluation Initiative
+(OAEI)     with verification of the algorithm’s output using microtasking. Using the ontologies from OAEI 2007,
+AROMA generated candidate matches with a precision of 0.35 (i.e., 35% of the alignments the algorithm suggested
+were truly correct). To improve these results, we created microtasks for these mappings where workers verified the
+
+correctness of the generated mappings. With the worker verifications, we increased precision to 0.75 with no change
+in recall.1In another study, we developed a hierarchy-verification task where crowd workers determined if short
+statements representing the ontology hierarchy are True or False. When performing the hierarchy-verification task
+                                                           12
+on the Common Anatomy Reference Ontology (CARO),             a reference ontology for anatomy, workers were 81%
+accurate on average, performing similarly to experts (i.e., volunteers NCBO mailing list and the Open Biomedical
+Ontology anatomy mailing list).  13The success of these studies indicates that crowdsourcing can indeed assist with
+
+ontology-engineering tasks.
+
+
+
+
+
+
+
+
+                                                       1020
+Considering the need for scalable verification of biomedical ontologies and the success of our initial work, we asked
+
+the following question: Can we rediscover the errors that experts previously identified in biomedical ontologies by
+using crowdsourced ontology verification? Specifically, we used our hierarchy-verification crowdsourcing method
+to audit a subset of the SNOMED CT hierarchy that Rector and colleagues had previously identified as containing
+       3
+errors. In the 2011 study by Rector and colleagues, the authors manually validated the CORE Problem List subset
+of SNOMED CT after classification with SNOROCKET, and found a number of errors (e.g.,Diabetes classified as a
+Disorder of the Abdomen).
+
+
+In this work, we make the following contributions:
+     1.  A novel Bayesian inference model that aggregates the responses of individual crowd workers to a single re-
+
+         sponse with a credibility interval and a performance-tuning parameter. Users can optimize the model to
+         detect confidently correct or incorrect relations.
+     2.  An evaluation of the hierarchy-verification task in using crowdsourcing to identify errors in SNOMED CT.
+     3.  A base framework upon which to develop a crowdsource-based ontology verification system.
+
+
+Background
+
+
+Crowdsourcing
+Defined as “the act of taking a job traditionally performed by a designated agent (usually an employee) and out-
+sourcing it to an undefined, generally large group of people in the form of an open call,” crowdsourcing has become
+                                              14,15
+a promising method to solve complex tasks.        Many fields have successfully used crowdsourcing in tasks such as
+large-scale identification of objects in images, automatic editing of documents, and content curation. There are
+online platforms that enable crowdsourcing, such as Amazon’s Mechanical Turk, CrowdFlower, oDesk, and Houdi-
+
+ni. The basic workflow of crowdsourcing in all of these platforms is similar. First, a “requester” (a human or
+computer) creates a task for “workers” to complete and posts that task on a platform of her choice. Generally, a re-
+quester also specifies certain characteristics a worker must meet to perform the task. Next, workers find the task,
+
+complete it, and return the results to the requester. If the results meet a requester’s approval criteria, she then com-
+pensates the worker. In most cases, a larger automated system generates many tasks, most of which are
+“microtasks”—small tasks that workers can complete quickly and easily for low cost. Systems then combine the
+                                                                      16
+results that the workers produced using various statistical methods.     For example, in a hypothetical setup, a set of
+workers each independently determines if there is a face in an image. A system then aggregates the results by a
+method (e.g., majority voting) to determine the presence of a face in the image. Crowdsourcing holds promise to
+
+solve problems that are currently not amenable to automation quickly and effectively.
+
+Most crowdsourcing methods use a variety of techniques to filter and find users that perform best at solving the giv-
+
+en task and have proper domain knowledge for that task. One method to select workers is through qualification tests.
+Qualification tests are sets of questions (or tasks) with known correct answers that a worker must first complete to
+show he can complete an assigned task. For example, an image identification qualification test would show users
+
+images where the requester already knows that there is a specific object in the image. If a worker performs well on
+this test, the requester assumes the worker will perform well on the main image-identification tasks. Requesters also
+use qualification tests to identify workers with the proper domain knowledge for a task. For example, if a task re-
+quires knowledge of biology, a requester may administer a test that only those with biology knowledge can complete
+
+easily.
+
+Managing Data
+
+There are efforts to apply crowdsourcing to manage structured data, such as those in databases or on the semantic
+web. Linott and colleagues have developed GalaxyZoo and Zooniverse, a higly successful system in which citizen
+scientists help manage and categorize vast amounts of scientific data   1. Von Ahn and colleagues developed “games
+
+with a purpose” wherein workers (gamers) play a game to help categorize images, to label songs, and to describe
+concepts. 18Researchers have successfully applied this idea to ontology engineering tasks such as ontology align-
+ment and annotation.  19,20Sarasua et al.11 used microtask crowdsourcing to improve the performance of ontology
+
+alig21ent algorithms. In the Linked Open Data efforts, ZenCrowd helped link concepts and entities via crowdsourc-
+ing.  There is a clear opportunity to apply crowdsourcing to other areas of ontology development and maintenance.
+
+
+
+
+
+
+
+
+
+                                                         1021
+Hierarchy-Verification Task
+Biomedical ontologies predominantly use hierarchical relationships. Subclass relations constitute over 80% of on-
+tology relations in more than two thirds of the 296 public BioPortal ontologies, with over 50% of these ontologies
+
+using only subclass relations. By verifying the correctness of subclass relations, we will complete a large portion of
+the ontology verification task. Thus, we focused on this task first.
+
+In previous work, we developed, tested, and refined a hierarchy verification task. In this task, workers verify hier-
+
+archical relationships in an ontology. Specifically, we presented workers with a short statement that describes a
+relationship between two concepts and we then asked the users to verify if the statement is True or False. For exam-
+ple, we might ask a worker to answer the following True or False statement, based on a relation in an ontology that
+the class Heart is a subclass of a class Organ:
+
+         Heart is a kind of Organ.
+
+For this study, we used the CARO ontology and we showed that workers who passed a biology qualification test, on
+average, performed similarly to domain experts in terms of accuracy of their responses. Furthermore, we showed
+
+that worker performance depends on task formulation. We determined how to best formulate a question (presented
+in the above example), how to add appropriate context by providing workers with concept definitions, and how to
+screen workers through domain-specific qualification tests.
+
+
+Auditing SNOMED CT
+In 2011, Rector and colleagues performed a non-exhaustive, ad hoc audit on the CORE Problem List Subset of
+SNOMED CT. The authors used SNOROCKET, an OWL 2 EL reasoner, to compute the inferred hierarchy, and
+then manually inspected this hierarchy. The authors found major errors for concepts related to myocardial infarction,
+
+diabetes, and hypertension. In this brief audit, they identified approximately seven inferred hierarchy relations that
+were in error (Table 1). They then suggested repairs for these errors and revisions to the SNOMED CT anatomy
+schema. For example, the authors found that Hypertensive Renal Disease was classified as Hyperten-
+sion/Hypertensive Disorder. Hypertensive renal disease is actually a complication caused by Hypertension, not a
+
+kind of Hypertension. They suggested the ontology be revised to differentiate hypertension and hypertensive com-
+plications. Finally, they concluded that SNOMED CT contains systematic errors in its hierarchy, and requires quality
+assurance and correction. In this work, we apply crowdsourcing methods, building off our hierarchy-verification
+task, to reproduce some of the results of Rector and colleagues through crowdsourcing.
+
+                                                                                               3
+                Table 1: Relations used in this experiment, based on errors found by Rector et al.
+
+
+                           Child                                           Parent
+
+
+                                                    True
+       Diabetes Mellitus                                Disorder of Carbohydrate Metabolism
+
+       Pneumonia                                        Lung Consolidation
+       Hypertensive Disorder, systemic arterial         Disorder of Cardiovascular system
+
+       Myocardial Infarction                            Structural Disorder of the Heart
+       Graves' Disease                                  Autoimmune endocrine disease
+
+       Chronic Intracranial Subdural Hematoma           Intracranial Hemorrhage
+       Aortic Valve Structure                           Heart Part
+
+                                                    False
+
+       Neuropathy                                       Disorder of soft tissue
+       Diabetes Mellitus                                Disorder of abdomen
+
+       Optic Disc Swelling                              Eye Swelling
+       Graves' Disease                                  Immune Hypersensitivity Disorder
+
+       Hypertensive Disorder, systemic arterial         Disorder of soft tissue
+       Papilledema                                      Neuropathy
+
+       Hypertensive Renal Disease                       Hypertensive Disorder, systemic arterial
+
+
+
+
+                                                     1022
+Methods
+
+
+Overview
+We extracted a subset of relations from SNOMED CT that we knew to be correct or incorrect, using the work by
+Rector and colleagues as the basis. We then translated these relations to statements for crowd workers to verify. We
+submitted these statements as hierarchy verification tasks to Amazon’s Mechanical Turk for consideration after
+
+crowd workers had passed various qualification tests. After retrieving worker responses for each task, we aggregated
+responses using a Bayesian inference model that combines worker responses based on the frequency of their True
+and False answers. We measured worker performance by comparing their aggregate responses to a reference of cor-
+rect responses.
+
+
+Ontology and Ground Truth
+We obtained 14 relations from the SNOMED CT CORE Problem List Subset (Aug. 2010). We used seven relations
+
+that Rector and colleagues determined to be incorrect (False). These relations are also presented in Rector et al. We
+then selected seven relations between concepts related to the first seven that were not in error (True). Table 1 pre-
+sents the relations and whether the relation is correct.
+
+
+Base Task
+We translated each of the relations in Table 1 to a statement that a crowd worker could verify as True or False. In
+addition to the statement, we provided definitions from the Unified Medical Language System (UMLS) for the two
+
+concepts in the relation. Finally, we 22nstructed the verification statements in the form “A is a kind of B”, where A
+and B are concepts. In previous work,    we determined that this positive, indicative form provides the best worker
+performance. Figure 1 provides an example of a single task as presented to a worker.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  Figure 1: Example task presented to a worker.
+
+Crowdsourcing Platform
+
+After we created the tasks, we uploaded them to a crowdsourcing platform. For our work, we chose Amazon’s Me-
+chanical Turk. Amazon Mechanical Turk provides many APIs to create and upload tasks programmatically. Once a
+task is uploaded, interested workers select and complete it. This platform is also one of the most popular systems,
+giving us access to a large number of workers. Our method is applicable to most platforms.
+
+
+Worker qualification
+Qualification tests screen workers to ensure that those completing a task have the appropriate knowledge. We have
+
+previously shown that the type of qualification test required can significantly affect worker performance on a task.
+For this experiment, we used three qualification tests, each with 7 questions: Biology, Medicine, and Ontology. To
+pass, a worker must correctly answer 4 questions. The biology test contains questions similar to those found on a
+high-school biology test. The Medicine test contains questions sampled from an older medical board exam practice
+
+manual. The ontology test contains questions developed by the first author, JM, teaching staff for the biomedical
+ontology course taught at Stanford University. Figure 2 presents example questions from each qualification test.
+Amazon Mechanical Turk automatically manages these qualification tests.
+
+
+
+
+
+                                                      1023
+                Figure 2: Examples of Ontology, Biology, and Medicine qualifications, respectively
+
+
+Combining Worker Responses
+The power of crowdsourcing lies in the aggregate response of the crowd, not in individual responses of any worker.
+For example, a simple way to aggregate responses from multiple workers is majority voting: if a requester asks mul-
+tiple workers to perform the same task, then the aggregate response is the response that the majority selects. To have
+
+more flexibility in model performance (i.e., sensitivity and specificity) than simple majority voting, we developed a
+more general Bayesian Inference model to aggregate worker responses. This model uses the frequency of worker’s
+True and False answers to generate a single final answer. Specifically, our model uses a beta distribution and a con-
+jugate Jeffrey’s prior that gives the probability that a statement for each ontology relation is True. In practice, we
+
+counted the number of True responses (S) and total responses (N) for each task. Using S and N as α and β parame-
+ters, respectively, for a Beta distribution, we obtained the probability of a statement being True above a tunable
+threshold. Above a given threshold, if the probability that a statement is True is greater than 0.5, we mark that state-
+ment as True, else it is False. Majority voting is a special case of this model where the threshold is 0.5. Figure 3
+
+gives an example of this Bayesian inference method. If one thresholds the model at 0.5, it becomes majority voting.
+
+Measuring Performance
+We compared worker performance using accuracy and area under the receiver operating characteristic curve (AUC).
+
+The receiver operating characteristic curve (ROC) provides a summary of a binary classifier’s performance (speci-
+ficity and sensitivity) at various thresholds. The AUC is a single summary statistic for the ROC. In this work, our
+Bayesian inference model is indeed a binary classifier, determining if a statement is True or False. Specifically, we
+selected various thresholds between zero and one and determined the aggregate worker response for all statements at
+
+that threshold. We then compared the aggregated responses with the known answers from Rector et al. and
+SNOMED CT (Table 1) and measured accuracy, sensitivity, and specificity. Using sensitivity and specificity at each
+threshold, we created a ROC and calculated the AUC. Finally, we used Fisher’s exact test to determine if worker
+performance differed significantly from random.
+
+
+
+
+
+
+                                                      1024
+Figure 3: Example of the Bayesian inference model with no responses, 4 worker responses, followed by 8. The
+threshold is fixed at 0.5 (i.e., majority voting). (a) Jordan’s prior where a statement is equally likely to be True or
+False. (b) The model updated with 4 responses, two false and two true. It is equally likely the statement is true or
+false. (c) The model with 8 total responses, 6 True and 2 False. After receiving 4 additional True responses, the
+model shifts toward True and more of the distribution is above the threshold.
+
+
+Worker Remuneration
+Depending on whether or not we required the workers to pass a qualification test, we paid them $0.02 or $0.03 for
+each task that they completed. Each task consisted of verifying 1 relation as True or False. We created 14 tasks total.
+
+
+Results
+On the Amazon Mechanical Turk platform, we requested 40 responses for each relation/task (14 tasks total) per
+qualification type. Table 2 presents the number of responses we received and the median time until a worker submit-
+ted a task response from its creation on Mechanical Turk. A worker completed a task in 12.3 seconds on average
+
+(from starting a task to completing it). The overall median waiting time to receive a task response was 59.34 minutes
+(3.83 min without qualifications). In total, we paid $37.24, with some workers skipping tasks.
+
+     Table 2: Number of workers who responded to each task (verification statement), by qualification type.
+
+
+                           Qualification Minimum      Maximum      Median
+                           Type          Worker       Worker       Time
+
+                                         Task         Task         to   Receive
+                                         Responses    Responses    Response
+                                         (out of 40)  (out of 40)  (minutes)
+
+
+                           Biology                 40            40      174.73
+
+                           Medicine                23            24        328.1
+
+                           None                    40            40         3.83
+
+
+                           Ontology                 9            10      381.07
+
+
+After receiving responses, we aggregated them by using the statistical methods we developed earlier. Table 4 sum-
+marizes aggregated performance on 14 relations by qualification type. One might consider comparing performance
+to majority voting, but, because our model is more general, the AUC metric already includes the special case of ma-
+jority voting. For reference, we provide average individual worker performance in Table 3, using two different
+
+methods to calculate accuracy. In the first, we only measure worker performance based on the tasks to which they
+responded. In the second, we compare performance across all tasks, assuming that questions a worker skipped would
+have been incorrect 50% of the time. This second method helps control for the unknown biases of workers skipping
+tasks. Qualification questions did not seem to vary our method’s performance. However, our aggregation method
+
+clearly performed better in comparison to averaged worker responses. Furthermore, our method performed statisti-
+cally better than random.
+
+
+
+
+
+                                                  1025
+Table 3: Average performance of workers before aggregation. We compute accuracy in two ways. (1) We only
+measure worker performance on tasks to which they responded. (2) We measure performance across all tasks.
+For questions a worker skipped, we assumed 50% were correct, given random selection.
+
+
+                            Qualification  Average Accuracy   Average Accuracy
+
+                            Type           on all tasks       on all tasks given
+                                           performed
+
+                            Biology                     0.659             0.627
+
+                            Medicine                    0.620             0.621
+
+                            None                        0.708             0.613
+
+
+                            Ontology                    0.643             0.643
+
+
+    Table 4: Method performance using Bayesian Inference model. *Significance via fisher’s exact test, p<0.05.
+
+                                 Qualification    AUC     Maximum
+
+                                 Type                     Accuracy Across
+                                                          Thresholds
+
+                                 Biology            0.847           0.857*
+
+                                 Medicine           0.847             0.786
+
+
+                                 None               0.878           0.857*
+
+                                 Ontology           0.847           0.857*
+
+
+Discussion
+Our method successfully verifies over 85% of the relations in the test set. Furthermore, it performs better than aver-
+age worker performance. With this method, qualification tests do not have a significant effect on worker
+
+performance. We believe that the reason the workers without qualification did as well as the workers who had to
+pass the qualification test was because we provided enough context for the questions. Specifically, the UMLS defini-
+tions provided enough details about the concepts to enable workers to determine the hierarchy relationship. Indeed,
+our earlier work demonstrated that without the context, the qualification requirements had significant effect on the
+
+accuracy of the responses. This result shows that when we provide enough context, we may not need qualification
+requirements. Thus, one can remove qualification tests and still maintain performance using this method. The lack of
+qualification has the benefit of earlier responses, as workers complete non-qualification tasks earlier than those tasks
+with qualifications (Table 2).
+
+
+Unexpectedly, workers who passed the medicine qualification (MD) were not as accurate as others. This result might
+indicate that these experts relied on intuition instead of the definitions that we provided as part of the question form.
+Another explanation for this result is the small number of relations to verify. With more relations, those who quali-
+
+fied as MDs may approach or exceed the general performance. Additionally, the performance disparity might
+indicate that one or more relations were poorly stated and needed further review. Those who passed the ontology
+qualification tests performed well. We suggest that the ontology qualification test selected workers who were able
+
+reason about the definitions and the concepts presented.
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                  1026
+Threshold selection
+A user can tune this method for the type of performance she desires by selecting a proper threshold. For example, a
+
+user could select a threshold to confidently find errors (true negatives) for an expert to fix. In other words, such a
+threshold would enable the crowd to identify the problems in the hierarchy that the requester can then pass to a do-
+main expert. Alternatively, a user may wish to quantify the overall quality of the ontology by determining how many
+relations are correct (true positives). One could design a system to select programmatically the optimal threshold.
+
+First, a user would specify which type of relations is of more interest: correct relations (true positives) or incorrect
+relations (true negatives). A system would select a pre-defined threshold corresponding to the selected relation type.
+Next, she would run the method on a subset of an ontology. The user would note which relations the system correct-
+ly predicted. Using these data, the system could then refine threshold selection to optimize true negatives or true
+
+positives. Finally, with the threshold selected, the method provides additional information about relations such as
+the certainty they are True or False (e.g. 90% certain a relation is True).
+
+
+Cost
+In this study, we paid $37.24 to verify 14 statements from SNOMED CT. This cost overestimates true cost of verify-
+ing these 14 relations at least by a factor of 4 because we had four sets of experiments—one for each qualification
+type. Currently, we estimate between 5 and 10 non-spam responses will be necessary to verify a relation. At the
+
+payment rate of $0.02 per response, the total cost is $0.10-$0.20 per relation. SNOMED CT contains approximately
+600,000 relations. Thus, it would cost between $60,000 to $120,000 to verify all of the SNOMED CT relations. It
+would likely cost more for an expert to do the same task. Additionally, the cost benefits of a verified version of
+
+SNOMED CT likely outweigh the initial cost to verify it. Finally, one might verify only the most commonly used
+portions of an ontology, drastically reducing cost. In the future, we will examine methods to dynamically price tasks
+to reduce overall cost.23We will also determine the minimum number of responses and minimum cost necessary to
+have some level of certainty (e.g., 90%) of a relation being True or False.
+
+
+Controlling for Spam or Malicious Responses
+Many crowdsourcing methods address spam responses, where users just pick random responses in order to get paid.
+Applying spam filters did not significantly affect our methods performance. However, spam reduction will become
+
+more important as we develop methods to decrease the number of needed responses. One way to remove spam is by
+weighting user responses based on a confidence they are providing a good answer. For example, we could assign
+more weight to workers that agree with the majority response. In turn, this method will down-weight those responses
+
+from users who likely provide spam. Such weighting has the additional benefit that the method will converge on a
+useful result more quickly. In future work, we will add weighting in an effort to increase confidence in the aggregat-
+ed response and also reduce the number of responses necessary to reach confidence.
+
+
+Framework for an ontology verification system
+This method serves as a base framework for an ontology verification system. In the future, we will examine how to
+automatically prioritize relations for verification, to generate task verification statements, to provide definitions, and
+
+select the optimal performance threshold. Such a system could be integrated directly into an ontology development
+environment such as Protégé. For example, a user, having entered their Amazon credentials, could select relations,
+either manually or by some predefined characteristic, for automatic verification. After verification, Protégé would
+present the user a list of errors in their ontology, sorted by confidence. The user could then revise their ontology or
+
+ask for more worker responses.
+
+Conclusions
+
+
+Given the growth and ubiquity of biomedical ontologies, a scalable method to audit and verify large-scale biomedi-
+cal ontologies is very important. In this work, we described a method to do so in a high-performance, cost effective
+way by using crowdsourcing and Bayesian inference. We then showed that this method could nearly recapitulate
+
+errors that Rector and colleagues found in the CORE Problem List Subset of SNOMED CT. This method could be a
+component of a system for auditing an ontology that generates verification microtasks and determines the optimal
+verification parameters based on user preferences. Finally, we described how one might integrate our method into an
+ontology development environment to allow users to rapidly audit their ontology. Such methods are becoming espe-
+
+cially important with the increased use of ontologies in medicine, for example, as controlled vocabularies for EHRs,
+and in life sciences for data integration.
+
+
+
+
+
+
+                                                        1027
+Acknowledgments
+This work has been supported in part by Grant GM086587 from the National Institute of General Medical Sciences
+and by The National Center for Biomedical Ontology, supported by grant HG004028 from the National Human Ge-
+
+nome Research Institute and the National Institutes of Health Common Fund. JMM is supported by National
+Library of Medicine Informatics Training Grant LM007033.
+
+
+References
+
+1.      Bodenreider O, Stevens R. Bio-ontologies: current trends and future directions. Briefings in Bioinformatics.
+
+        2006;7(3):256–74.
+
+2.      Noy NF, Shah NH, Whetzel PL, Dai B, Dorf M, Griffith N, et al. BioPortal: ontologies and integrated data
+
+        resources at the click of a mouse. Nucleic Acids Research. 2009;10.1093/na.
+
+3.      Rector AL, Brandt S, Schneider T. Getting the foot out of the pelvis: modeling problems affecting use of
+
+        SNOMED CT hierarchies in practical applications. Journal of the American Medical Informatics
+        Association. 2011 Apr ;18(4):432–40.
+
+
+4.      Ceusters W, Smith B, Goldberg L, Werner Ceusters, Barry Smith, Louis Goldberg. A terminological and
+        ontological analysis of the NCI Thesaurus. Methods of information in medicine. 2005;44(4):498.
+
+
+5.      Geller J, Perl Y, Halper M, Cornet R. Special Issue on Auditing of Terminologies. Journal of Biomedical
+        Informatics. 2009 Jun;42(3):407–11.
+
+
+6.      Bernstein M, Little G, Miller R, Hartmann B, Ackerman M, Karger D, et al. Soylent: a word processor with
+        a crowd inside. The 23d annual ACM symposium on user interface software and technology. ACM; 2010. p.
+        313–22.
+
+
+7.      Von Ahn L, Dabbish L. Labeling images with a computer game. Proceedings of the 2004 conference on
+        Human factors in computing systems - CHI ’04. New York, New York, USA: ACM Press; 2004;6(1):319–
+
+        26.
+
+
+8.      David J. AROMA results for OAEI 2009.
+
+9.      Euzenat J, Meilicke C, Stuckenschmidt H, Shvaiko P, Trojahn C. Ontology Alignment Evaluation Initiative:
+
+        six years of experience. Journal on data semantics XV. 2011;158–92.
+
+10.     Euzenat J, Isaac A, Meilicke C, Shvaiko P, Stuckenschmidt H, Šváb O, et al. Results of the Ontology
+
+        Alignment Evaluation Initiative 2007. 2nd International Workshop on Ontology Matching (OM-2007) at
+        ISWC 2007. 2007.
+
+
+11.     Sarasua C, Simperl E, Noy NF. CrowdMAP: Crowdsourcing Ontology Alignment with Microtasks. 11th
+        International Semantic Web Conference (ISWC). Boston, MA: Springer; 2012.
+
+
+12.     Haendel MA, Neuhaus F, Osumi-Sutherland D, Mabee PM, Mejino JL V, Mungall CJ, et al. CARO-the
+        common anatomy reference ontology. Anatomy Ontologies for Bioinformatics. 2008;327–49.
+
+
+13.     Noy NF, Mortensen JM, Alexander PR, Musen MA. Mechanical Turk as an Ontology Engineer? Using
+        Microtasks as a Component of an Ontology Engineering Workflow. Web Science. 2013.
+
+
+14.     Quinn AJ, Bederson BB. Human computation: a survey and taxonomy of a growing field. Annual
+        Conference on Human Factors in Computing Systems (CHI 2011). Vancouver, BC: ACM; 2011. p. 1403–
+        12.
+
+
+
+
+
+                                                      1028
+15.     Howe J. Crowdsourcing: Why the Power of the Crowd Is Driving the Future of Business. 2008 Aug 26
+
+
+16.     Ipeirotis P, Provost F, Wang J. Quality management on Amazon Mechanical Turk. ACM SIGKDD
+        Workshop on Human Computation. 2010. p. 64–7.
+
+
+17.     Raddick MJ, Bracey G, Gay PL, Lintott CJ, Cardamone C, Murray P, et al. Galaxy Zoo: Motivations of
+        Citizen Scientists. 2013 Mar 27;41. Available from: http://arxiv.org/abs/1303.6886
+
+
+18.     Von Ahn L, Dabbish L. Designing games with a purpose. Commun. ACM. New York, NY, USA: ACM;
+        2008 Aug;51(8):58–67.
+
+
+19.     Siorpaes K, Hepp M. OntoGame: Weaving the Semantic Web by Online Games. In: Bechhofer S, Hauswirth
+        M, Hoffmann J, Koubarakis M, editors. The Semantic Web: Research and Applications SE - 54. Springer
+        Berlin Heidelberg; 2008. p. 751–66.
+
+
+20.     Siorpaes K, Hepp M. Games with a Purpose for the Semantic Web. IEEE Intelligent Systems. 2008
+        May;23(3):50–60.
+
+
+21.     Demartini G, Difallah DE, Cudré-Mauroux P. ZenCrowd: leveraging probabilistic reasoning and
+
+        crowdsourcing techniques for large-scale entity linking. 21st World Wide Web Conference WWW2012.
+        Lyon, France; 2012. p. 469–78.
+
+
+22.     Mortensen JM, Noy NF, Musen MA, Alexander PR. Crowdsourcing Ontology Verification. International
+        Conference on Biomedical Ontologies. 2013.
+
+
+23.     Waterhouse TP. Pay by the Bit: An Information-Theoretic Metric for Collective Human Judgment. Proc
+        CSCW. ACM New York, NY, USA; 2013. p. 623–38.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                    1029

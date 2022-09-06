@@ -1,0 +1,585 @@
+Ranking and combining multiple predictors without
+
+
+labeled data
+
+
+Fabio Parisi a,1, Francesco Strino  a,1, Boaz Nadler , and Yuval Kluger       a,c,2
+
+aDepartment of Pathology, Yale University School of Medicine, New Haven, CT 06520; Department of Computer Science and Applied Mathematics,
+Weizmann Institute of Science, Rehovot 76100, Israel; and New York University Center for Health Informatics and Bioinformatics, New York University
+
+Langone Medical Center, New York, NY 10016
+
+Edited by Peter J. Bickel, University of California, Berkeley, CA, and approved December 17, 2013 (received for review November 1, 2012)
+
+In a broad range of classification and decision-making problems,        actions, raise several interesting questions. How should the de-
+one is given the advice or predictions of several classifiers, of       cision maker proceed to identify who, among the advisers, is the
+unknown reliability, over multiple questions or queries. This scenario  most reliable? Moreover, is it possible for the decision maker to 
+
+is different from the standard supervised setting, where each           cleverly combine the collection of answers from all of the advisers
+classifier’s accuracy can be assessed using available labeled data,     and provide even more accurate answers?
+and raises two questions: Given only the predictions of several            In statistical terms, the first question corresponds to the
+                                                                        problem of estimating prediction performances of preconstructed
+classifiers over a large set of unlabeled test data, is it possible to
+(i) reliably rank them and (ii) construct a metaclassifier more accu-   classifiers (e.g., the advisers) in the absence of class labels.
+rate than most classifiers in the ensemble? Here we present a           Namely, each classifier was constructed independently on a po-
+                                                                        tentially different training dataset (e.g., each adviser trained on
+spectral approach to address these questions. First, assuming con-
+ditional independence between classifiers, we show that the off-        his/her own using possibly different sources of information), yet
+diagonal entries of their covariance matrix correspond to a rank-one    they are all being applied to the same new test data (e.g., list of
+                                                                        queries) for which labels are not available, either because they
+matrix. Moreover, the classifier s can be ranked using the leading      are expensive to obtain or because they will only be available in
+eigenvector of this covariance matrix, because its entries are pro-
+portional to their balanced accuracies. Second, via a linear ap-        the future, after the decision has been made. In addition, the
+                                                                        accuracy of each classifier on its own training data is unknown.           APPLIED
+proximation to the maximum likelihood estimator, we derive the          This scenario is markedly different from the standard supervised             MATHEMATICS
+Spectral Meta-Learner (SML), an unsupervised ensemble classifier
+whose weights are equal to these eigenvector entries. On both           setting in machine learning and statistics. There, classifiers are
+                                                                        typically trained on the same labeled data and can be ranked, for
+simulated and real data, SML typically achieves a higher accuracy       example, by comparing their empirical accuracy on a common
+than most classifiers in the ensemble and can provide a better          labeled validation set. In this paper we show that under standard
+
+starting point than majority voting for estimating the maximum          assumptions of independence between classifier errors their
+likelihood solution. Furthermore, SML is robust to the presence of      unknown performances can still be ranked even in the absence of
+small malicious groups of classifiers designed to veer the ensemble     labeled data.
+                                                                           The second question raised above corresponds to the problem
+prediction away from the (unknown) ground truth.
+                                                                        of combining predictions of preconstructed classifiers to form a
+spectral analys|classifier balanced accura|unsupervised learning|       metaclassifier with improved prediction performance. This prob-
+                                                                        lem arises in many fields, including combination of forecasts in
+cartel| crowdsourcing
+                                                                        decision science and crowdsourcing in machine learning, which
+                                                                        have each derived different approaches to address it. If we had
+    very day, multiple decisions are made based on input and            external knowledge or historical data to assess the reliability of
+E   suggestions from several sources, either algorithms or ad-          the available classifiers we could use well-established solutions
+visers, of unknown reliability. Investment companies handle their
+                                                                        relying on panels of experts or forecast combinations (11–14). In
+portfolios by combining reports from several analysts, each pro-
+viding recommendations on buying, selling, or holding multiple
+stocks (1, 2). Central banks co mbine surveys of several pro-             Significance
+
+fessional forecasters to monitor rates of inflation, real gross do-
+mestic product growth, and unemployment (3–6). Biologists study           A key challenge in a broad range of decision-making and clas-
+                                                                          sification problems is how to rank and combine the possibly
+the genomic binding locations of proteins by combining or ranking         conflictingsuggestions of several advisersof unknown reliability.
+the predictions of several peak detection algorithms applied to
+large-scale genomics data (7). Physician tumor boards convene             We provide mathematical insights of striking conceptual sim-
+                                                                          plicity that explain mutual relationships between independent
+a number of experts from different disciplines to discuss patients        advisers. These insights enable the design of efficient, robust,
+whose diseases pose diagnostic and therapeutic challenges (8).
+                                                                          and reliable methods to rank the advisers’ performances and
+Peer-review panels discuss multiple grant applications and make           construct improved predictions in the absence of ground truth.
+recommendations to fund or reject them (9). The examples above            Furthermore, these methods are robust to the presence of small
+describe scenarios in which several human advisers or algorithms
+                                                                          subgroups of malicious advisers (cartels) attempting to veer the
+provide their predictions or answers to a list of queries or ques-        combined decisions to their interest.
+tions. A key challenge is to improve decision making by combining
+                                                                        Author contributions: F.P., F.S., B.N., and Y.K. designed research, performed research,
+these multiple predictions of unknown reliability. Automating
+this process of combining multiple predictors is an active field        analyzed data, and wrote the paper.
+of research in decision science ( cci.mit.edu/research ), medicine      The authors declare no conflict of interest.
+                                                                        This article is a PNAS Direct Submission.
+(10),business(refs.11and12and      www.kaggle.com/competitions),
+and government (www.iarpa.gov/Programs/ia/ACE/ace.html and              Freely available online through the PNAS open access option.
+www.goodjudgmentproject.com), as well as in statistics and ma-          1F.P. and F.S. contributed equally to this work.
+
+chine learning.                                                         2To whom correspondence should be addressed. E-mail: yuval.kluger@yale.edu.
+  Such scenarios, whereby advisers of unknown reliability pro-          This article contains supporting information online at www.pnas.org/lookup/suppl/doi:10.
+vide potentially conflicting opinions, or propose to take opposite      1073/pnas.1219097111/-/DCSupplemental.
+
+
+
+www.pnas.org/cgi/doi/10.1073/pnas.1219097111                                            PNAS  | January 28, 2014 vol. 111 | no. 4| 1253–1258
+our problem such knowledge is not always available and thus                 We represent an instance and class label paiðrX;YÞ∈X × −1;1 f     g
+these solutions are in general not applicable. The oldest solution       as a random vector with probability density function pðx;yÞ, and
+that does not require additional information is majority voting,         with marginals p ðxÞ and p ðyÞ:
+                                                                                           X          Y
+whereby the predicted class label is determined by a rule of                In the present study, we measure the performance of a binary
+majority, with all advisers assigned the same weight. More re-           classifier f by its balanced accuracy π, defined as
+cently, iterative likelihood maximization procedures, pioneered
+by Dawid and Skene (15), have been proposed, in particular in
+                                                                                            sensitivity+specificity   1
+crowdsourcing applications (16–23). Owing to the nonconvexity                           π =            2            = 2ψ +ηÞ;              [1]
+of the likelihood function, these techniques often converge only
+to a local, rather than global, maximum and require careful
+                                                                         where ψ and η are its sensitivity (fraction of correctly predicted
+initialization. Furthermore, there are typically no guarantees on        positives) and specificity (fraction of correctly predicted nega-
+the quality of the resulting solution.                                   tives). Formally, these quantities are defined as
+   In this paper we address these questions via a spectral analysis
+that yields four major insights:
+                                                                           ψ =Pr½fðXÞ=Y Y =1j;           and   η=Pr½fðXÞ=Y Y = j1▯: [2]
+1. Under standard assumptions of independence between clas-
+
+   sifier errors, in the limit of an infinite test set, the off-diagonal
+   entries of the population covariance matrix of the classifiers        Assumptions.  In our analysis we make the following two assump-
+   correspond to a rank-one matrix.                                      tions: (i) The S unlabeled instances x ∈ k are independent and
+                                                                         identically distributed realizations from the marginal distribution
+2. The entries of the leading eigenvector of this rank-one matrix
+   are proportional to the balanced accuracies of the classifiers.       p XxÞ and (ii) the M classifiers are conditionally independent, in
+   Thus, a spectral decomposition of this rank-one matrix provides       the sense that prediction errors made by one classifier are inde-
+   a computationally efficient approach to rank the performances pendent of those made by any other classifier. Namely, for all
+
+   of an ensemble of classifiers.                                        1≤i≠j≤M, and for each of the two class labels, with           a ia j
+3. A linear approximation of the maximum likelihood estimator            f −1;1 g
+   yields an ensemble learner whose weights are proportional to
+                                                                             ▯                     ▯  ▯                       ▯          ▯  ▯
+   the entries of this eigenvector. This represents an efficient,          Pr fiðXÞ=a ;fiðjÞ=a     jY =Pr½f   iXÞ=a   ij▯·Pr f  jðXÞ=a   jY :
+   easily constructed, unsupervised ensemble learner, which we
+   term Spectral Meta-Learner (SML).                                                                                                       [3]
+
+4. An interest group of conspiring classifiers (a cartel) that mali-     Classifiers that are nearly conditionally independent may arise,
+   ciously attempts to veer the overall ensemble solution away
+   from the (unknown) ground truth leads to a rank-two covari-           for example, from advisers who did not communicate with each
+                                                                         other, or from algorithms that are based on different design
+   ance matrix. Furthermore, in contrast to majority voting,             principles or independent sources of information. Note that
+   SML is robust to the presence of a small-enough cartel whose
+   members are unknown.                                                  these assumptions appear also in other works considering a set-
+                                                                         ting similar to ours (15, 23), as well as in supervised learning, the
+   In addition, we demonstrate the advantages of spectral ap-            development of classifiers (e.g., Naïve Bayes), and ensemble
+
+proaches based on these insights, using both simulated and real-         methods (24).
+world datasets. When the independence assumptions hold ap-
+proximately, SML is typically better than most classifiers in the        Ranking of Classifiers
+ensemble and their majority vote, achieving results comparable
+                                                                         To rank the M classifiers without any labeled data, in this paper
+to the maximum likelihood estimator (MLE). Empirically, we find          we present a spectral approach based on the covariance matrix of
+SML to be a better starting point for computing the MLE that             the M classifiers. To motivate our approach it is instructive to
+consistently leads to improved performance. Finally, spectral
+                                                                         first study its asymptotic structure as the number of unlabeled
+approaches are also robust to cartels and therefore helpful in           test data tends to infinity, jDj=S→∞. Let Q be the M ×M
+analyzing surveys where a biased subgroup of advisers (a cartel)         population covariance matrix of the M classifiers, whose entries
+may have corrupted the data.
+                                                                         are defined as
+
+Problem Setup                                                                                     h            ▯          ▯i
+For simplicity, we consider the case of questions with yes/no                              qij=E ðf ðiÞ−μ Þ fiðXÞjμ       j  ;             [4]
+answers. Hence, the advisers, or algorithms, provide to each
+
+query only one of two possible answers, either +1 (positive) or          where E denotes expectation with respect to the density pðx;yÞ
+−1 (negative). Following standard statistical terminology, the           and μ =E½f ðXi▯.
+advisers or algorithms are called “binary classifiers,” and their               i
+answers are termed “predicted class labels.” Each question is               The following lemma, proven in SI Appendix, characterizes the
+                                                                         relation between the matrix Q and the balanced accuracies of the
+represented by a featuMe vector x contained in a feature space X.        M classifiers:
+   In detail, let f i i=1 be M binary classifiers of unknown re-
+liability, each providing predicted class labels f ixkÞ to a set of S
+                    S                                                    Lemma 1.   The entries qijf Q are equal to
+instances D=fx g k  k=1⊂X, whose vector of true (unknown) class
+labels is denoted by y=ðy ;..1 ;y Þ.Se assume that each classi-                          ▯                 2
+fier i : X →f−1;1g was trained in a manner undisclosed to us                        q  =             ▯1−μ  i ▯▯      ▯      i=j            [5]
+using its own labeled training set, which is also unavailable to us.                  ij    ð2πi−1Þ 2π −1j     1−b  2    otherwise
+
+Thus, we view each classifier as a black-box function of unknown
+classification accuracy.                                                 where b∈ð−1;1Þ is the class imbalance,
+   Using only the predictions of the M binary classifiers on the
+unlabeled set D and without access to any labeled data, we                                    b=Pr½Y =1▯−Pr½Y = −1▯:                       [6]
+
+consider the two problems stated in the introduction: (i) Rank
+the performances of the M classifiers and (ii) combine their             The key insight from this lemma is that the off-diagonal entries
+predictions to provide an improved estimate y=ðy ;... ;y Þ of  ^         of Q are identical to those of a rank-one matrix R=λvv         T with
+                                                         1      S
+the true class label vector y.                                           unit-norm eigenvector v and eigenvalue
+
+
+1254  | www.pnas.org/cgi/doi/10.1073/pnas.1219097111                                                                                  Parisi et al.
+                                   M                                     of the likelihoods of the S individual instances, where the likeli-
+                        ▯     2▯  X             2                        hood of a labely for an instance x is
+                    λ= 1−b       ·     ð2πi−1Þ :                  [7]
+                                   i=1
+                                                                                                                  M
+                                                                                        Lðf 1xÞ;... ;fMðxÞ;yÞ= ∏ Prðf ðxÞiyÞ:             [10]
+Importantly, up to a sign ambiguity, the entries of v are propor-                                                i=1
+tional to the balanced accuracies of the M classifiers,
+                                                                         As shown in SI Appendix, the MLE can be written as a weighted
+
+                            vi∝ð2π −iÞ:                           [8]    sum of the binary labels f ðiÞ∈ −1f1 , wgth weights that depend
+                                                                         on the sensitivities ψ ind specificities η if the classifiers. For an
+Hence, the M classifiers can be ranked according to their bal-           instance x,
+
+anced accuracies by sorting the entries of the eigenvector v.
+   Although typically neither Q nor v is known, both can be es-                          yðMLÞ = argmax Lðf ð1Þ;... ;f ðMÞ;yÞ
+timated from the finite unlabeled dataset D. We denote the                                           y
+                                                ^                                                        M                   !            [11]
+corresponding sample covariance matrix by Q. Its entries are                                            X
+                                                                                               =sign        i ðxÞlogαi+logβ i  ;
+                      1   XS ▯           ▯▯          ▯                                                  i=1
+               qij             fixkÞ−μ ^i  fjðxkÞ−μ^ j;
+                    S−1   k=1
+                                                                         where
+             P
+where μ^ i  S   kfiðk Þ: Under our assumptions, Q is an unbiased                                   ψ η              ψ  ð1−ψ   Þ
+estimate of Q,e .,.   E½Q▯=Q. Moreover, the variances of its off-                        αi=         i i     ; β i=   i      i :          [12]
+                                                                                              ð1−ψ  iÞð1−η  i        ηið1−η  i
+diagonal entries are given by
+                            ▯       ▯
+           h  i   ▯     2▯         2       ▯                ▯            Eq. 11 shows that the MLE is a linear ensemble classifier, whose
+                   1−μ  i  · 1−μ   j    qij         S−2                  weights depend, unfortunately, on the unknown specificities and
+       Var q^ij =                     +     4μ i j        qij :   [9]    sensitivities of the M classifiers.
+                         S−1            S           S−1
+                                pﬃﬃﬃ                                        The common approach, pioneered by Dawid and Skene (15),
+In particular, q^ −q =Oð1= SÞ and asymptotically Q→Q as     ^            is to look for all S labels and M classifier specificities and sen-          APPLIED
+                  ij  ij                                                 sitivities that jointly maximize the likelihood. Given an estimate
+S→∞. Hence, for a sufficiently large unlabeled set D, it should                                                                                         MATHEMATICS
+be possible to accurately estimate from Q the eigenvector v and          of the true class labels, it is straightforward to estimate each
+consequently the ranking of the M classifiers.                           classifier sensitivity and specificity. Similarly, given estimates of
+                                                            ^            ψ and η , the corresponding estimates of y are easily found via
+   One possible approach is to construct an estimate R of the              i       i
+rank-one matrix R and then compute its leading eigenvector.              Eq. 11. Hence, the MLE is typically approximated by expectation
+               ^                                                         maximization (EM) (18–21, 23).
+Given that E½Q▯=Q, for all i≠j we may estimate r =q , aij weij              As is well known, the EM procedure is guaranteed to increase
+only need to estimate the diagonal entries of R. A computa-
+                                                                         the likelihood at each iteration till convergence. However, its key
+tionally efficient way to do this, by solving a set of linear equa-      limitation is that owing to the nonconvexity of the likelihood
+tions, is ▯as▯d on the following observation: Upon the change of         function the EM iterations often converge to a local (rather than
+variables r ij=e  i·e , we have for all i≠j,
+                                                                         global) maximum.
+                    ▯  ▯             ▯  ▯                                   Importantly, the EM procedure requires an initial guess of the
+                 log ij▯−t i−tj=log  ▯qij−t i−t j0:                      true labels y. A common choice is the simple majority rule of all
+
+                                                                         classifiers. As noted in previous studies, majority voting may be
+Hence, if we knew q we could find the vector t by solving the            suboptimal, and starting from it, the EM procedure may con-
+                       ij                                                verge to suboptimal local maxima (23). Thus, it is desirable, and
+above system of equations. In practice, because we only have
+access to q we thus look for a vector t with small residual error        sometimes crucial, to initialize the EM algorithm with an esti-
+            ij                                                           mate y that is close to the true label y.
+in the above MðM −1Þ=2 equations. We then estimate the di-                  Using the eigenvector describ ed in the previous section,
+agonal entries by r iixpð2t Þ aid proceed with eigendecompo-
+sition of R. Further details on this and other approaches to             we now construct an initial guess that is typically more ac-
+                                                                         curate than majority voting. To this end, note that a Taylor
+estimate v appear in SI Appendix.
+   Next, let us briefly discuss the error in this approach. First, be-   expansion of the unknown coefficients          α iand β ii Eq. 12
+causeQ→Q as S→∞, it follows thatt→t and consequentlyR→R.       ^         around ðψ    iηiÞ=ð1=2;1=2Þ gives, up to second-order terms,
+                                                                         Oððψ   −1=2Þ ;ðη −1=2Þ ;ðψ − 1=2Þ·ðη −1=2ÞÞ,
+Hence, asymptotically we perfectly recover the correct rpﬃﬃﬃng of              i           i            i            i
+theM classifiers. BecauseR is rank-one,R−R=O ð1= SÞ and both
+                                                                                   α i≈1+4ðψ +η i1Þ=i+4ð2π −1Þ;      i         βi≈1:      [13]
+R and R are symmetric, as shown inSI Appendix, the leading eigen▯   ▯
+vector is stable to small perturbations. In particular v,−v=O    1pﬃﬃ.
+                                                                 λ S     Hence, combining Eq. 13 with a first-order Taylor expansion of
+Finally, note that if all classifiers are better than random and the     the argument inside the sign function in Eq. 11, around ðψ ;η Þi  i
+class imbalance is bounded away from ±1, then we have a large            ð1=2;1=2Þ yields
+
+spectral gap with λ=OðMÞ.                                                                                                  !
+                                                                                                         XM
+SML                                                                                       yðMLÞ ≈sign        fiðk Þð2πi−1Þ :              [14]
+                                                                                           k
+Next, we turn to the problem of constructing a metalearner                                               i=1
+expected to be more accurate than most (if not all) of the M
+classifiers in the ensemble. In our setting, this is equivalent to       Recall that by Lemma 1 up to a sign ambiguity the entries of the
+                                                                         leading eigenvector of R are proportional to the balanced accu-
+estimating the S unknown labels y ;... ;1      S  by combining the
+labels predicted by the M classifiers.                                   racies of the classifiers, i ∝ð2π i1Þ. This sign ambiguity can be
+   The standard approach to this task is to determine the MLE            easily resolved if we assume, for example, that most classifiers
+ ðMLÞ
+y     of the true class labels y for all of the unlabeled instances      are better than random. Replacing 2π −1 in iq. 14 by the ei-
+(15). Under the assumption of independence between classifier            genvector entries v oi an estimate of R yields a novel spectral-
+errors and between instances, the overall likelihood is the product      based ensemble classifier, which we term the SML,
+
+
+
+Parisi et al.                                                                                 PNAS  | January 28, 2014|  vol. 111| no. 4 | 1255
+                                 M         !                                                     2         2
+                  ðSMLÞ         X                                                       λ1=λ Pos α+λ siC β                    [18]
+                 ^k     =sign      fiðk Þ·vi :             [15]                         λ2=λ Pin α+λ cCs β 2
+                                i=1
+
+                                                                   and eigenvectors
+Intuitively, we expect SML to be more accurate than majority
+voting as it attempts to give more weight to more accurate               ▯                            ▯
+classifiers. Lemma S2 in SI Appendix provides insights on the        e1i=   ð2πi−1Þcosα  i∈P     e2i=   ð2π i−1Þsinα  i∈P  ; [19]
+                                                                            ð2ξi−1Þsinβ  i∈C            ð2ξi−1Þcosβ  i∈C
+improved performance achieved by SML in the special case
+when all algorithms but one have the same sensitivity and spec-
+ificity. Numerical results for more general cases are described in where
+
+Simulations, where we also show that empirically, on several real         ▯     2▯X   ▯      ▯ 2      ▯    2▯ X  ▯       ▯2
+data problems, SML provides a better initial guess than majority      λP= 1−b          2πj−1 ; λ =C1−b            2ξ j−1      [20]
+voting for EM procedures that iteratively estimate the MLE.                        j∈P                        j∈C
+
+
+Learning in the Presence of a Malicious Cartel                     and, with k1=2π c1, k =2 =λC,  P
+Consider a scenario whereby a small fraction r of the M classi-
+                                                                                               !                 0    qﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃﬃ
+fiers belong to a conspiring cartel (e.g., representing a junta or an                                              2k1  1−k  2
+interest group), maliciously designed to veer the ensemble so-      α=  1arctan    ▯  k1 2 ▯     ;     β =arctan @           1A :
+lution toward the cartel’s target and away from the truth. The          2        k 1−2k   2 −1           2         1−k 2 −2k 2
+                                                                                  2       1                                  1
+possibility of such a scenario raises the following question: How
+sensitive are SML and majority voting to the presence of a car-
+tel? In other words, to what extent can these methods ignore, or   As an illustrative example of Theorem 1, consider the case where
+                                                                   the cartel’s target is unrelated to the truth, i.c., π =1=2. In this
+at least substantially reduce, the effect of the cartel classifierscase α=β =0, so λ   =λ , λ =λ and
+without knowing their identity?                                                      1    P  2   C
+  To this end, let us first introduce some notation. Let the M                    ▯                    ▯
+                                                                                    2π i1  i∈P           0       i∈P
+classifiers be composed of a subset P of ð1−rÞM “honest” clas-                e1i                  e2i=                :      [21]
+sifiers and a subset C of rM malicious cartel classifiers. The                      0           C  ∈     2ξi−1  i∈C
+honest classifiers satisfy the assumptions of the previous section:
+                                                                   Next, according to Eq. 15 SML weighs each classifier by the
+Each classifier attempts to correctly predict the truth with a
+balanced accuracy π i and different classifiers make independent   corresponding entry in the leading eigenvector. Hence, if the
+errors. The cartel classifiers, in contrast, attempt to predict    cartel’s target is orthogonal to the truth cπ =1=2) and λP>λ C
+                                                                   SML asymptotically ignores the cartel (SI Appendix, Fig. S3). In
+a different target labeling, T. We assume that conditional on
+both the cartel’s target and the true label, the classifiers in thecontrast, regardless ofcπ , majority voting is affected by the cartel,
+                                                                   proportionally to its fraction size r. Hence, SML is more robust
+cartel make independent errors. Namely, for all i;j∈C, and for     than majority voting to the presence of such a cartel.
+any labels aiaj;Y;T ∈ −f;1   g
+
+   ▯                  ▯     ▯                    ▯         ▯ ▯     Application to Simulated and Real-World Datasets
+Pr f iXÞ=a ;i jXÞ=a   jT;Y =Pr½f  iðXÞ=a  ij▯·Pr f jXÞ=a   jT :    The examples provided in this section showcase strengths and
+
+                                                           [16]    limitations of spectral approaches to the problem of ranking and
+                                                                   combining multiple predictors without access to labeled data.
+Similarly to the previous sections, we assume that the prediction  First, using simulated data of an ensemble of independent clas-
+errors of cartel and honest classifiers are also (conditionally)   sifiers and an ensemble of independent classifiers containing one
+
+independent.                                                       cartel, we confirm the expected high performance of our ranking
+  The following lemma, proven in SI Appendix, expresses the        and SML algorithms. In the second part we consider the pre-
+entries of the population covariance matrix Q in terms of the      dictions of 33 machine learning algorithms as our ensemble of
+
+following quantities: the balanced accuracies of the M classifiers,binary classifiers and test our spectral approaches on 17 real-world
+the balanced accuracy πc of the cartel’s target with respect to thedatasets collected from a broad range of application domains.
+truth, and the balanced accuracies ξ  of the rM cartel members
+                                    j                              Simulations.We simulated an ensemble of M = 100 independent
+relative to their target.
+                                                                   classifiers providing predictions for S = 600 instances, whose
+Lemma 2.  Given ð1−rÞM honest classifiers and rM classifiers of    ground truth had class imbalance b = 0. To imitate a difficult
+                                                                   setting, where some classifiers are worse than random, each
+a cartel C, the entrieijq of Q satisfy
+       8                                                           generated classifier had different sensitivity and specificity cho-
+       >               1−μ  2                   i=j                sen at random such that its balanced accuracy was uniformly
+       >              ▯     i▯▯      ▯                             distributed in the interval ½0:3;0:8▯. We note that classifiers that
+       <      ð2πi−1Þ 2π j1 1−b     2        i∈P;j∈P
+   qij                    ▯       ▯▯     ▯              ;  [17]    are worse than random may occur in real studies, when the
+       >  ð2πi−1Þð2π c1Þ 2ξ −1j     1−b 2    i∈P;j∈C               training data are too small in size or not sufficiently represen-
+       :              ▯      ▯▯      ▯                             tative of the test data. Finally, we considered the effect of
+              ð2ξi−1Þ 2ξ j1    1−b  2        i∈C;j∈C               a malicious cartel consisting of 33% of the classifiers, having
+
+                                                                   their own target labeling. More details about the simulations are
+where b∈ð−1;1Þ is the class imbalance, as in Eq. 6.                provided in SI Appendix.
+  Next, the following theorem shows that in the presence of        Ranking of classifieWe constructed the sample covariance ma-
+a single cartel the off-diagonal entries of Q correspond to a rank-
+                                                                   trix, corrected its diagonal as described in SI Appendix, and
+two matrix. We conjecture that in the presence of k independent    computed its leading eigenvector v. In both cases (independent
+cartels, the respective rank is ðk+1Þ.                             classifiers and cartel), with probability of at least 80%, the
+
+                                                                   classifier with highest accuracy was also the one with the largest
+Theorem 1.  Given ð1−rÞM honest classifiers and rM classifiers     entry (in absolute value) in the eigenvector v, and with proba-
+belonging to a cartel,0 <r <1, the off-diagonal entries of Q corre-bility >99% its inferred rank was among the top five classifiers
+spond to a rank-two matrix with eigenvalues                        (SI Appendix,Fig.S4). Note that even if the test data of sizeS = 600
+
+
+
+1256 | www.pnas.org/cgi/doi/10.1073/pnas.1219097111                                                                      Parisi et al.
+          Independent classifiers                  Cartel (33% of classifiers)
+
+
+     1.0                                       1.0
+
+     0.9                                       0.9
+     0.8                                       0.8
+
+     0.7                                       0.7
+
+     0.6                                       0.6
+     0.5                                       0.5
+                                                                                   Fig. 1.Balanced accuracy of several cla▯ ▯fiers: the classifier f
+                                            Balanced accuracy                      with largest eigenvector entry, i =argmjxj; majority voting;
+                                                                                   SML; and iMLE starting from SML or from majority voting. (Left)
+   Balanced accuracy              SML                                      SML     One hundred independent classifiers; (Right) 67 honest classifiers
+                        SML  Voting                               SML  Voting
+               max[v]ting                               max[v]oting                and 33 belonging to a cartel with target balanced accuracy of
+                                 iMLE                                      iMLE    0.5. The boxplots represent the distribution of balanced accura-
+                            iMLE                                      iMLE         cies of 3,000 independent runs.
+
+
+
+were fully labeled, identifying the best-performing classifier would    algorithm had access and was trained on different subsets of the
+still be prone to errors, because the estimated balanced accuracy       labeled data (SI Appendix).
+                            pﬃﬃﬃ
+has itself an error of Oð1= SÞ:                                            Fig. 2 and SI Appendix, Figs. S6–S8 show the results of dif-
+Unsupervised ensemble learning.  Next, for the same set of simu-        ferent metaclassifiers on these datasets. Let us now interpret
+lations we compared the balanced accuracy of majority voting
+                                                                        these results and explain the apparent differences in balanced
+and of SML. We also considered the predictions of these two             accuracy between different approaches, in light of our theoretical
+metalearners as starting points for iterative EM calculation of         analysis in the previous section.
+the MLE (iMLE). As shown in Fig. 1, SML was significantly
+                                                                           In datasets where our assumptions are approximately satisfied,
+more accurate than majority voting. Furthermore, applying an            we expect SML, iMLE initialized with SML, and iMLE initial-
+EM procedure with SML as an initial guess provided relatively
+small improvements in the balanced accuracy. Majority voting, in        ized with majority voting to exhibit similar performances. This is          APPLIED
+                                                                        the case in the ACS data (Fig. 2, Left), and in all datasets in SI            MATHEMATICS
+contrast, was less robust. Moreover, in the presence of a cartel,       Appendix, Fig. S6. We verified that in these datasets Eq. 3 indeed
+computing the MLE with majority voting as its starting point
+exhibited a multimodal behavior, sometimes converging to a lo-          holds approximately (SI Appendix, Table S3). In addition, in all
+                                                                        these datasets, the corresponding sample covariance matrix of
+cal maxima with a relatively low balanced accuracy.                                                                      ^          ^
+   A more detailed study of the sensitivity of SML and majority         the 33 classifiers was almost rank-one with λ ð1Þ=TraceðRÞ>0:8.
+voting and their respective iMLE solutions versus the size of              SI Appendix, Fig. S7 and Fig. 2, Center correspond to datasets
+                                                                        where the median performance of the classifiers was only slightly
+a malicious cartel with π c =0:5 is shown in SI Appendix, Fig. S5.
+As expected, the average balanced accuracy of all methods               above 0.5, with some classifiers having poor, even worse than
+decreases as a function of the cartel’s fraction r, and once the        random balanced accuracy. Interestingly, in these datasets, the
+
+cartel’s fraction is too large all approaches fail. In our simu-        covariance matrix between classifiers was far from being rank-
+lations, both SML and iMLE initialized with SML were far more           one (similar to the case when cartels were present). The relative
+robust to the size of the cartel than either majority voting or         amount of variance captured by the first two leading eigenvalues
+                                                                            P              P
+iMLE initialized with majority voting. With a cartel size of 20%,       λ 1    λjand λ =2     λjwas, on average, 51.4% and 15.0%, re-
+SML was still able to construct a nearly perfect predictor, whereas     spectively. In these datasets, SML seems to offer a clear ad-
+the balanced accuracy of majority voting and iMLE initialized with
+                                                                        vantage: Initializing iMLE with SML rather than with majority
+majority voting were both far from 1. Interestingly, in our simu-       voting avoids the poor outcomes observed in the NYSE, AMEX,
+lations, iMLE using SML as starting condition showed no signif-         and PNS datasets.
+icant improvement relative to the average balanced accuracy of
+                                                                           Finally, the datasets in SI Appendix, Fig. S8 and in Fig. 2, Right
+SML itself.                                                             are characterized by very sparse (ENRON) or high-dimensional
+
+Real Datasets. We applied our spectral approaches to 17 different       (LASTFM) feature spaces X. In these datasets, some instances
+datasets of moderate and large sizes from medical, biological,          were highly clustered in feature space, whereas others were iso-
+                                                                        lated. Thus, in these datasets many calssifiers made identical errors.
+engineering, financial, and sociological applications. Our en-
+semble of predictions was composed of 33 machine-learning                  Remarkably, even in these cases, iMLE initialized with SML
+methods available in the software package Weka (25) (Materials          had an equal or higher median balanced accuracy than iMLE
+
+and Methods). We split each dataset into a labeled part and an          initialized with majority voting. This was consistent across all
+unlabeled part, the latter serving as the test data D used to           datasets, indicating that the SML prediction provided a better
+evaluate our methods. To mirror our problem setting, each               starting point for iMLE than majority voting.
+
+
+
+
+                             0.57                      
+  0.75                       0.56                       0.75
+                               0.55                        0.70                      Fig. 2. Comparison between SML, iMLE from SML or from
+   0.70                        0.54                                                  majority voting, the best inferred predictor, and the median
+                                                           0.65                      balanced accuracy of all ensemble predictors on real-world
+   0.65                        0.53                                                  datasets. The ACS dataset (Left) approximately satisfied our
+                               0.52                        0.60
+   0.60                        0.51                        0.55                      assumptions. In the NASDAQ dataset (Center) many predictors
+  Balanced accuracy           Balanced accuracy          Balanced accuracy           had poor performances. For the LASTFM data (Right), the
+                                                                                     predictors did not satisfy the conditional independence as-
+               ACS                      NASDAQ                      LASTFM           sumption. In all cases iMLE starting from SML had equal or
+
+                 SML              iMLE             iMLE                              higher balanced accuracy than iMLE starting from majority
+                                        SML              Voting                      voting. The boxplots represent the distribution of balanced
+                 Best inferred predictor           Ensemble median                   accuracies over 30 independent runs.
+
+
+
+Parisi et al.                                                                                PNAS  | January 28, 2014| vol. 111| no. 4 | 1257
+Summary and Discussion                                                                Third, the quality of predictions may also be improved by
+
+In this paper we presented a spectral-based statistical analysis for               taking into consideration instance difficulty, discussed, for ex-
+
+the problems of unsupervised ranking and combining of multiple                     ample, in refs. 18 and 23. These studies assume that some
+predictors. Our analysis revealed that under standard indepen-                     instances are harder to classify correctly, independent of the
+
+dence assumptions the off-diagonal of the classifiers covari-                      classifier used, and propose different models for this instance
+ance matrix corresponds to a rank-one matrix, whose eigenvector
+                                                                                   difficulty. In our context, both very easy examples (on which all
+entries are proportional to the classifiers balanced             accuracies.       classifiers agree) and very difficult ones (on which classifier
+Our work gives a computationally efficient and asymptotically
+                                                                                   predictions are as a good as random) are not useful for ranking
+consistent solution to the classical problem posed by Dawid and
+                                                                                   the different classifiers. Hence, modifying our approach to in-
+Skene (15) in 1979, for which to the best of our knowledge only                    corporate instance difficulty is a topic for future research.
+nonconvex iterative likelihood maximization solutions have
+                                                                                      Finally, our work also provides insights on the effects of
+been proposed (18, 26 –29).
+   Our work not only provides a principled spectral approach for                   a malicious cartel. The study of spectral approaches to identify
+                                                                                   cartels and their target, as well as to ignore their contributions, is
+unsupervised ensemble learning (such as our SML), but also
+raises several interesting questions for future research. First, our               of interest owing to its many potential applications, such as
+                                                                                   electoral committees and decision making in trading.
+proposed spectral-based SML has inherent limitations: It may be
+suboptimal for finite samples, in particular when one classifier is
+                                                                                   Materials and Methods
+significantly better than all others. Furthermore, most of our
+analysis was asymptotic in the limit of an infinitely large unla-                  Datasets and Classifiers. We used 17 datasets for binary classification prob-
+
+beled test set, and assuming perfect conditional independence                      lems from science, engineering, data mining, and finance (SI Appendix, Table
+between classifier errors. A theoretical study of the effects of a                 S1). The classifiers used are described in ref. 30 or are implemented in the
+
+finite test set and of approximate independence between classi-                    Weka suite (25) (SI Appendix, Table S2).
+fiers on the accuracy of the leading eigenvector is of interest. This
+
+is particularly relevant in the crowdsourcing setting, where only                  Statistical Analysis and Visualization. Statistical analysis and visualization were
+few entries in the prediction matrix f ðx Þ are observed. Although                 performed using MATLAB (2012a; The MathWorks) and R (www.R-project.
+                                            i  k
+an estimated covariance matrix can be computed using the joint                     org). Additional information is provided in SI Appendix.
+observations for each pair of classifiers, other approaches that
+
+directly fit a low-rank matrix may be more suitable.                               ACKNOWLEDGMENTS. We thank Amit Singer, Alex Kovner, Ronald Coifman,
+   Second, a natural extension of the present work is to multiclass                Ronen Basri, and Joseph Chang for their invaluable feedback. The Wisconsin
+
+or regression problems where the response is categorical or                        breast cancer dataset was collected at the University of Wisconsin Hospitals by
+continuous, instead of binary. We expect that in these settings                    Dr. W. H. Wolberg and colleagues. F.S. is supported by the American–Italian
+                                                                                   Cancer Foundation. B.N. is supported by grants from the Israeli Science Foun-
+the covariance matrix of independent classifiers or regressors is                  dation and from Citi Foundation. Y.K. is supported by the Peter T.     Rowley
+
+still approximately low-rank. Methods similar to ours may im-                      Breast Cancer Research Projects (New York State Department of Health) and
+prove the quality of existing algorithms.                                          National Institutes of Health Grant R0-1 CA158167.
+
+
+
+ 1. Tsai C-F, Hsiao Y-C (2010) Combining multiple feature selection methods for sto17. Karger D R, Oh S, Shah D (2011) Iterative learning for reliable crowdsourcing systems.
+   prediction: Union, intersection, and multi-intersection approaches. Decis Support SarXiv:1110.3564v4.
+   50:258–269.
+                                                                                   18. Whitehill J, et al. (2009) Whose vote should count more: Optimal integration of labels
+ 2. Zweig J(January8, 2011) Making senseof market fors. allStreetJournalAvailableat   from labelers of unknown expertise. Adv Neural Inf Process Syst 22:2035–2043.
+   http://online.wsj.com/news/articles/SB10001424052748703675904576064320900295678.19. Smyth P, Fayyad U, Burl M, Perona P, Baldi P (1994) Inferring ground truth from
+   Accessed January 2, 2014.
+                                                                                      subjective labelling of venus images. Advances in Neural Information Processing
+ 3. European Central Bank Survey of professional forecasters. Available at www.ecb.intSystems, eds Tesauro G, Touretzky DS, Leen TK (Neural Information Processing Sys-
+   stats/prices/indic/forecast/html/index.en.html. Accessed December 29, 2013.        tems Foundation, Denver), pp 1085–1092.
+ 4. Federal Reserve Bank of Philadelphia Survey of professional forecasters. Available at
+   www.philadelphiafed.org/research-and-data/real-time-center/survey-of-professional-. Sheng VS, Provost F, Ipeirotis PG (2008) Get another label? Improving data quality
+                                                                                      and data mining using multiple, noisy labelers. Proceedings of the 14th ACM SIGKDD
+   forecasters/. Accessed December 29, 2013.
+ 5. Monetary Authority of Singapore Survey of professional forecasters. Available at  International Conference on Knowledge Discovery and Data Mining (Assoc Com-
+   www.mas.gov.sg/news-and-publications/surveys/mas-survey-of-professional-fore-      puting Machinery, New York), pp 614–622.
+                                                                                   21. Welinder P, et al. (2010) The multidimensional wisdom of crowds. Advances in Neural
+   casters.aspx. Accessed December 29, 2013.
+ 6. Genre V, Kenny G, Meyler A, Timmermann AG (2010) Combining the forecasts in the   Information Processing Systems 23, eds Lafferty J, Williams C, Shawe-Taylor J, Zemel R,
+   ECB survey of professional forecasters: Can anything beat the simple average? (Sociallotta A, (Neural Information Processing Systems, La Jolla, CA), pp 2424–2432.
+   Science Research Network, Rochester, NY), SSRN Scholarly Paper ID 1719622.      22. Yan Y, et al. (2010) Modeling annotator expertise: Learning when everybody knows
+
+ 7. Micsinai M, et al. (2012) Picking ChIP-seq peak detectors for analyzing chromatin a bit of something. Proceedings of the 13th International Conference on Artificial
+   modification experiments. Nucleic Acids Res 40(9):e70.                             Intelligence and Statistics, pp 932–939.
+ 8. Wright FC, De Vito C, Langer B, Hunter A; Expert Panel on Multidisciplinary Can23. Raykar VC, et al. (2010) Learning from crowds. J Mach Learn Res 11:12971322.
+
+   Conference Standards (2007) Multidisciplinary cancer conferences: A systematic r24. Dietterich TG (2000) Ensemble methods in machine learning. Lecture Notes in Com-
+   view and development of practice standards. Eur J Cancer 43(6):1002–1010.          puter Science (Springer, Berlin), Vol 1857, pp 1–15.
+ 9. Cole, S, et al. (1978) Peer review in the national science foundation: Phase on25. Witten IH, Frank E, Hall MA (2011) Data Mining: Practical Machine Learning Tools and
+   a study (Office of Publications, National Academy of Sciences, Washington, DC).
+                                                                                      Techniques (Morgan Kaufmann, Burlington, MA).
+10. Margolin AA, et al. (2013) Systematic analysis of challenge-driven improvements26. Jin R, Ghahramani Z (2003) Learning with multiple labels. Advances in Neural In-
+    molecular prognostic models for breast cancer. Sci Transl Med 5:181.              formation Processing Systems, eds Becker S, Thrun S, Obermayer K (MIT, Cambridge,
+11. Linstone H, Turoff Me (1975) Delphi Method: Techniques and Applications (Addison–
+                                                                                      MA), Vol 15, pp 897–904.
+    Wesley, Reading, MA).                                                          27. Lauritzen SL (1995) The EM algorithm for graphical association models with missing
+12. Stock JH, Watson MW (2006) Forecasting with many predictors. Handbook of Eco-
+    nomic Forecasting , eds Elliott G, Granger C, Timmermann A (Elsevier, New York),  data. Comput Stat Data Anal 19(2):191–201.
+    Vol. 1, pp 515–554.                                                            28. Snow R, O’Connor B, Jurafsky D, Ng AY (2008) Cheap and fast—but is it good?:
+                                                                                      Evaluating non-expert annotations for natural language tasks. Proceedings of the
+13. Timmermann A (2006) Forecast combinations. Handbook of Economic Forecasting,
+    eds Elliott G, Granger C, Timmermann A (Elsevier, New York), Vol. 1, pp 135–196.  Conference on Empirical Methods in Natural Language Processing (Assoc Computa-
+14. Degroot MH (1974) Reaching a concensus. J Am Stat Assoc 69:118–121.               tional Linguistics, Stroudsburg, PA), pp 254–263.
+                                                                                   29. Walter SD, Irwig LM (1988) Estimation of test error rates, disease prevalence and
+15. Dawid AP, Skene AM (1979) J R Stat Soc Ser C Appl Stat 28:20–28.
+16. Karger DR, Oh S, Shah D (2011) Budget-optimal crowdsourcing using low-rank matrix relative risk from misclassified data: A review. J Clin Epidemiol 41(9):923–937.
+    approximations. Proceedings of the IEEE Allerton Conference on Communication,  30. Strino F, Parisi F, Kluger Y (2011) VDA, a method of choosing a better algorithm with
+    Control, and Computing (IEEE, New York), pp 284–291.                              fewer validations. PLoS ONE 6(10):e26074.
+
+
+
+
+
+
+
+
+
+1258  |  www.pnas.org/cgi/doi/10.1073/pnas.1219097111                                                                                                 Parisi et al.

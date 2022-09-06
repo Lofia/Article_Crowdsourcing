@@ -1,0 +1,1016 @@
+Substance Abuse: Research and Treatment
+
+
+
+
+                                                                                               Open Access
+
+                                                                                         Full open access to this and
+Me T hodo Logy                                                                          thousands of other papers at
+                                                                                          http://www.la-press.com.
+
+
+cellular phone-Based Image Acquisition and Quantitative
+
+Ratiometric Method for Detecting cocaine and Benzoylecgonine
+
+for Biological and Forensic Applications
+
+
+                 1                       1                   1                     1                     2
+Brian A. Cadle , Kristin C. Rasmus , Juan A. Varela , Leah S. Leverich , Casey e. o’Neill , Ryan K.
+Bachtell  2and donald C. Cooper       1,2
+1                                 2
+ Institute for Behavioral genetics. department of Psychology and Neuroscience, University of Colorado, Boulde▯r. 1480
+30th St. Boulder, Co 80303. Correspondence author email: dcooper@colorado.edu
+
+
+
+
+Abstract: Here we describe the first report of using low-cost cellular or web-based digital cameras to image and quantify standardized
+rapid immunoassay strips as a new point-of-care diagnostic and forensics tool with health applications. Quantitative ratiometric pixel
+density analysis (QRPDA) is an automated method requiring end-users to utilize inexpensive (∼ $1 USD/each) immunotest strips, a
+commonly available web or mobile phone camera or scanner, and internet or cellular service. A model is described whereby a central
+computer server and freely available IMAGEJ image analysis software records and analyzes the incoming image data with time-stamp
+
+and geo-tag information and performs the QRPDA using custom JAVA based macros (http://www.neurocloud.org). To demonstrate
+QRPDA we developed a standardized method using rapid immunotest strips directed against cocaine and its major metabolite, benzo-
+ylecgonine. Images from standardized samples were acquired using several devices, including a mobile phone camera, web cam, and
+scanner. We performed image analysis of three brands of commercially available dye-conjugated anti-cocaine/benzoylecgonine (COC/
+BE) antibody test strips in response to three different series of cocaine concentrations ranging from 0.1 to 300 ng/ml and BE concentra-
+
+tions ranging from 0.003 to 0.1 ng/ml.This data was then used to create standard curves to allow quantification of COC/BE in biological
+samples.Across all devices, QRPDAquantification of COC and BE proved to be a sensitive, economical, and faster alternative to more
+costly methods, such as gas chromatography-mass spectrometry, tandem mass spectrometry, or high pressure liquid chromatography.
+The limit of detection was determined to be between 0.1 and 5 ng/ml. To simulate conditions in the field, QRPDA was found to be
+robust under a variety of image acquisition and testing conditions that varied temperature, lighting, resolution, magnification and con-
+
+centrations of biological fluid in a sample. To determine the effectiveness of the QRPDA method for quantifying cocaine in biological
+samples, mice were injected with a sub-locomotor activating dose of cocaine (5 mg/kg; i.p.) and were found to have detectable levels of
+COC/BE in their urine (160.6 ng/ml) and blood plasma (8.1 ng/ml) after 15–30 minutes. By comparison rats self-administering cocaine
+in a 4 hour session obtained a final BE blood plasma level of 910 ng/ml with an average of 62.5 infusions. It is concluded that automated
+QRPDAis a low-cost, rapid and highly sensitive method for the detectionof COC/BE with health, forensics, and bioinformatics applica-
+tion and the potential to be used with other rapid immunotest strips directed at several other targets. Thus, this report serves as a general
+
+reference and method describing the use of image analysis of lateral flow rapid test strips.
+
+Keywords: diagnostic, point-of-care, rapid test strip, cellular phone, self-administration, crowdsourcing
+
+
+
+
+Substance Abuse: Research and Treatment 2010:4 21–33
+
+This article is available from http://www.la-press.com.
+
+© the author(s), publisher and licensee Libertas Academica Ltd.
+
+
+This is an open access article. Unrestricted non-commercial use is permi▯tted provided the original work is properly cited.
+
+
+Substance Abuse: Research and Treatment 2010:4                                                                       21
+Cadle et al
+
+
+Introduction                                                of cocaine has consequences in the work place. In
+The concepts of “e-health” and “m-health,” or               2002, drug and alcohol abuse related problems cost
+electronic and mobile health, refer to the use of           U.S. businesses approximately $128.6 billion in
+                                                            lost productivity.10Illegal drugs are used by about
+technology and mobile devices to improve the avail-
+ability and quality of health care. In recent years,        9.8 million employees in the United States, so
+these ideas have seen a reemergence as ways of              employers are likely to employ one or more people
+providing health care in developing countries. In           with a drug problem.  11 According to the US Postal
+particular, increases in availability and coverage of       Service, employees who tested positive on their pre-
+                                                            employment drug tests are 77% more likely to be
+cellular phones in developing countries make them
+an attractive option for the development of mobile          discharged within the first three years of employ-
+health services. These phones have considerable             ment and are absent from work 66% more often
+computational power, connectivity, and the ability          than those who tested negative.   11While a positive
+                                                            drug test cannot be used to prove impaired perfor -
+to take digital photographs, all of which provide   1–4
+valuable tools for scientists, doctors and patients.        mance, nor can it be used to infer intoxication, it
+This widespread interconnectivity allows for new            does function as an objective measure of recent drug
+point-of-care diagnostics and “crowdsourcing” in            use. Subjects who tested positive for cocaine were
+the developing world. Crowdsourcing refers to the           over three times more likely to be heavy users after
+                                                            leaving their job than those who tested negative, and
+act of outsourcing jobs traditionally held by employ-
+ees or workers to a group of people or community.           they were twice as likely to be involuntarily sepa-
+So far, the concept of crowdsourcing has mostly             rated from their jobs. Identifying cocaine use in the
+been applied to research, education, and other areas        workplace via drug testing may initiate an employ-
+using advanced technology.    5,6However, in medi-          ees’ search for treatment and prevent the loss of
+                                                            productivity.
+cine, crowdsourcing has the potential to shift the
+responsibilities of data collection and storage from a         Many tests exist which detect the presence of
+centralized hospital or laboratory to the patient and/      cocaine and its metabolites. These tests vary in sev-
+or caregiver. In communities where there may be             eral factors, including sensitivity, ease of use, and
+                                                            cost. Inexpensive antibody-based test strips, which
+many patients but few hospitals or clinics, crowd-
+sourcing using “smart” cellular phones provides a           cost around $2–10 a test and are most commonly
+way to easily collect, transmit, and organize data.         used in urine tests, use dye-conjugated monoclonal
+In this paper, we describe a quantitative ratiometric       or polyclonal antibodies directed against cocaine
+pixel density analysis (QRPDA), which that utilizes         and/or its metabolites.12,1These test strips are easy
+                                                            to use and provide a signal that can be detected with
+low-cost cameras, immunoassays, and automatic
+quantification to provide a new point-of-care tool          the naked eye (Fig. 1). Signal bands provide a quali-
+for the analysis of lateral flow rapid test strip assays.   tative positive or negative result with a National
+QRPDA can be applied to point-of-care diagnostics           Institute for Drug Abuse (NIDA) designated BE
+and a variety of substances, such as drugs of abuse,        sensitivity cutoff of 300 ng/ml. 14Quantitative tech-
+                                                            niques, such as gas chromatography-mass spectrom-
+water contaminants, and infectious agents. To dem-
+onstrate its usefulness for quantifying lateral flow        etry (GCMS) or tandem mass spectrometry (MS/
+test strips we used QRPDA to quantify cocaine and           MS), are the most sensitive detectors of drug con-
+benzoylecgonine levels in biological fluids.                centration with detection levels of less than 10 ng/
+                                                            ml.15,16However, these methods are costly in time
+   An inexpensive method for quantifying cocaine
+using rapid test strips is useful because cocaine is        and equipment, and they require special organic
+secondonlytomarijuanaasthemostcommonlyused                  solvent extraction protocols and personal expertise.
+illicit drug in the United States. Cocaine is second to     Immunoassays are commonly used for large scale
+marijuana as the most commonly used illicit drug            drug screening, while quantitative tests are reserved
+                                                            for cases when confirmation is necessary or exact
+in the United States, with7–99 million adults using
+it in the previous month.    Such wide spread usage         levels of a drug must be known.
+
+
+
+22                                                                          Substance Abuse: Research and Treatment 2010:4
+                                                                                               Rapid test strip image analysis
+
+
+                            Protein-drug conjugate
+                            Protein-only control
+
+                            Drug-specific antibody-dye conjugate
+                            Non-specific antibody-dye conjugate
+                                                                         Computer or mobile
+                   A                                                       phone camera
+                      H2O +   H             +            + 2O
+
+
+
+                      Sample            Test     Control
+
+
+                   B
+
+                      H 2 +                   +          H2O+
+
+
+
+                      Sample           Test      Control
+
+
+
+                   C
+
+                      H2O +   H               +         +  2 +
+
+                                                                                 Pixel intensity
+
+                      Sample          Test       Control
+
+Figure 1. Test strip immunoassay system. A) Liquid samples are placed on the test strip sample area, where capillary action draws the fluid along with dye
+conjugated antibodies across a test area and control area. If no drugs (blue hexagons) are present, dye will bind at both locations, causing two bands to
+appear. B)At intermediate doses, drug-dye binding is incomplete, resulting in a light test band which varies in intensity according to the drug concentration.
+A camera and image analysis software can then quantify the relative intensity of the two bands. c) If drugs are present at sufficient concentrations, they
+completely bind the drug specific dye and prevent a band from appearing in the test area at all.
+
+
+
+
+Methods                                                            by adding ddH    20 to the bottle to create a stock solu-
+                                                                   tion that was later diluted with additional ddH       0 into
+generation of cocaine and Be                                                                                            2
+                                                                   the desired amounts and applied to cocaine test strips.
+standard curves
+In order to quantify COC/BE levels in unknown                      Concentrations from each standard curve were tested
+                                                                   in triplicate, and the results were plotted in IGOR Pro
+samples, a series of known concentrations were made
+to generate a standard curve. Unknown samples                      5.03 (Wavemetrics, Inc.). An exponential curve was
+                                                                   used to fit the COC and BE data and tau calculated
+are compared to the standard curve, which allows                                                    -t/tau
+                                                                   as per the equation f(x) = x   0e    , where x i0 the ini-
+quantification. Cocaine immunoassay strips were                    tial value, t equals time and tau equals the decay con-
+obtainedfromCraigMedicalDistribution(Vista,CA),
+                                                                   stant that governs the rate of decay of the curve.As a
+Medimpex United, Inc. (Bensalem, PA) and Q Test,
+Inc.(Linden,NJ).FortheCraigMedicalcocainestan-                     control, two samples (10 and 20 ng/ml cocaine) were
+                                                                   quantified by QRPDA and then verified by GC/MS
+dard curve, five concentrations of cocaine solution (0,
+3, 5, 10, and 30 ng/ml) were made by weighing out                  analysis (Chematox Laboratory, Boulder, CO).
+
+powdered cocaine hydrochloride and adding double
+
+distilled water (ddH   2O). For the Medimpex cocaine               Image analysis
+curve,fourcocainestandardswerecreated(0,0.1,0.5,                   Image analysis was performed using the free National
+
+5 ng/ml). For the Q Test curve, six cocaine standards              InstitutesofHealth(NIH)developedimageprocessing
+were created (0, 5, 10, 20, 50, 100 ng/ml). For the                software, ImageJ.   17 Images were cropped for analysis
+
+Craig Medical benzoylecgonine standard curve, eight                ofthecolloidalgoldpigmentedcontrolandtestbands,
+concentrations of BE hydrate (Sigma) were made (0,
+                                                                   and the background was with a rolling ball radius of
+0.003, 0.005, 0.01, 0.02, 0.03, 0.05, and 0.1 ng/ml)               25 pixels. Next, a rectangular window was placed
+
+
+
+
+Substance Abuse: Research and Treatment 2010:4                                                                              23
+Cadle et al
+
+such that it overlapped both colored bands and the         CinemaWebcam, or Sprint HTC 3.2 Megapixel Camera
+
+pixel density of the selected area plotted to produce a    Phone. The maximum resolution varied among the vari-
+graph with two peaks representing the colored bands        ous devices (Dino Lite, 64× 480 pixels; Kodak ESP-7,
+on the test strip. Horizontal lines were drawn con-        3470 × 2536 pixels; Lifecam, 1289× 720 pixels; HTC
+necting the base of each peak to create an enclosed        camera, 2048× 1536 pixels). Data was plotted in Igor
+space and the area underneath each peak determined.        PRO 5.03 and fit to exponential curves as above.
+Pixel density ratios (PDR) were expressed as the area
+
+under the control peak divided by the area under the       Testing effects of time delay between
+test peak. For standard curves, ratios were then nor-      assay and analysis
+malized to ddH 20 controls by dividing each value by
+the ddH 20 ratio.                                          Itispossiblethatthepassageoftimebetweenapplying
+                                                           a sample to the test strip and taking a photograph of
+Automatic web based quantification                         it affects the results of a QRPDA test. To test the
+The ability to transmit an image and receive results in    effects of the passage of time on the pixel density
+minutes is crucial for an effective point-of-care tool. To ratio, a series of 5 cocaine standards (0, 3, 5, 10, and
+                                                           30 ng/ml) were created as above and applied to Craig
+that end, we created a program which automates image
+analysis.ImageJallowsuserstocreatemacros,textfiles         Medical test strips in triplicate. Images of each test
+which contain code that results in a specific application  strip were taken using the Dino-Lite AM211 Micro-
+or output from the program.Acustom macro was writ-         scope at 1 hour, 20 hours, and 30 days and quantified.
+ten which automatically performed the ratio quantifica-    Data was plotted in Igor PRO 5.03 and fit to exponen-
+tion process detailed in the section above. This custom    tial curves as above.
+
+macro can be found at: http://neurocloud.org under the
+software and protocol downloads tab. The macro sub-        Testing the limits of photo resolution
+tracts the background, selects the signal bands, plots the It is possible that images taken at different resolu-
+pixel density ratio of the bands, draws lines enclosing    tions may yield different results. To test the effects
+eachpeak,andmeasurestheareaunderneatheachpeak.             of resolution on pixel density ratio, a 0 and 10 ng/ml
+Area output can be automatically set to export results
+                                                           cocaine sample was applied to Craig Medical test
+into a spreadsheet program or text file.                   strips and scanned using the Kodak ESP-7 scanner at
+   We also describe a web based method whereby             various resolutions (75, 150, 200, 300, and 600 dots
+cocaine test strip images are uploaded and results         per inch, or DPI) and then quantified as described
+of the ImageJ pixel density analysis are obtained.         above.
+After receiving an uploaded image from the client,
+ImageJ analysis through a PHP command executes
+                                                           Biological fluid effects and comparison
+a command-line code. When run in a command-line            The addition of various amounts of biological fluids
+fashion, the ImageJ program can receive arguments          may affect test results. To test this, samples of
+which specify the file to open and the macro to run.       10ng/mlcocaineweremadeasabove.C57/BL6 mice
+                                                           were anesthetized with isoflurane and decapitated
+Testing QRPdA with a variety of image                      and trunk blood collected. Blood was spun in a cen-
+
+acquisition devices                                        trifuge at 7000 rpm for 15 minutes and blood plasma
+As a useful point-of-care and crowdsourcing tool, it is    collected. Blood plasma was added to the 10 ng/ml
+important that QRPDA achieve similar results using a       cocaine samples to create various concentrations
+variety of devices to acquire images. To test the effects  of blood plasma (0, 2, 10, and 25% blood plasma).
+of using different devices on the pixel density ratio, a   Samples were then applied to cocaine test strips
+                                                           from Craig Medical, photographed at 1 hour using
+series of 5 cocaine standards (0, 3, 5, 10, and0g/ml)
+were created and applied to Craig Medical test strips      the Dino-Lite AM211 Microscope, and quantified as
+in triplicate. Images of each test strip were taken using  described above.
+one of the following devices: Dino-Lite AM211 digital        Dependingonhowthecocaineisadministeredand
+microscope, Kodak ESP-7 Scanner, Microsoft Lifecam         metabolized, different biological fluids may contain
+
+
+24                                                                        Substance Abuse: Research and Treatment 2010:4
+                                                                                   Rapid test strip image analysis
+
+
+different levels of COC/BE. To compare COC/BE              were individually housed in wire cages with food and
+levels in blood serum and urine, mice were intraperi-      wateravailableadlibitum.MaleC57/BL6miceweigh-
+toneally injected with 5 mg cocaine/kg body weight.        ing 22–28 g were group housed (2–5) in plastic cages
+After 15 or 30 minutes, animals were anesthetized          with food and water available ad libitum. Experiments
+withisoflurane,decapitated,andurineandtrunkblood           were conducted during the light cycle of a 12:12 hour
+
+collected. Blood was collected in a capillary tube and     light:dark cycle (lights on at 0700 hours) in accor-
+spuninacentrifugeat7000rpmfor15minutestocol-               dance with guidelines established by the University of
+lect blood plasma. Blood plasma was diluted 1:50 in        ColoradoAnimal Use and Care Committee.
+ddH  0 and urine diluted 1:500 in ddH 0 to provide
+a quantifiable signal. Samples were applied to test        Quantifying cocaine levels following
+
+strips and quantified using the BE standard curve to       animal self-administration
+determine the concentration in each sample.                We tested whether QRPDA has utility as a method
+                                                           of quantifying COC/BE levels in animals used in
+Temperature tests                                          drug research. Cocaine self-administration or need
+Temperature variation may affect test results. To test     injection are both procedures commonly used in
+
+the effects of temperature, we performed the QRPDA         drug research labs. For self-administration, animals
+test at different temperatures (4.5–32.2 °C), samples      are placed in an apparatus and allowed to intrave-
+of 0 and 10 ng/ml cocaine were created and applied         nously administer cocaine at will by pressing a lever.
+to Craig Medical test strips. Tests were performed         Rats were allowed to self-administer cocaine as
+in triplicate and the results quantified as described      previously described.18Rats received 0.5 mg cocaine/
+
+above. Next, samples of 0 and 10 ng/ml cocaine were        kg body weight per infusion, with 100 µl per infusion
+created and applied to Craig Medical test strips after     delivered over 5 seconds on a fixed ratio 1 schedule
+heating the sample or the test strip only, or both the     (1 lever press equals one infusion). On the 11th day
+strip only and sample. Tests were performed in tripli-     of self-administration, 15 minutes after the end of
+cate and quantified as above.                              the session, blood was collected from the lateral tail
+
+                                                           vein of the six rats which self-administered the most
+Camera magnification tests                                 cocaine. Blood was collected in a capillary tube and
+The magnification or the distance between the camera       spun in a centrifuge at 7000 rpm for 15 minutes.
+and test strip could have effects on the final pixel den-  Blood serum was then collected from each capillary
+sity ratio. We tested this by applying ddH 0 to Craig      tube and diluted at a concentration of 1:50 serum to
+                                          2
+Medical test strips and taking images using the Sprint     ddH 20.This served to create enough liquid to apply to
+HTC 3.2 Megapixel camera phone at various heights          the test strip (130 µl) and diluted the serum to a con-
+(5.5, 8, 18, 30, and 60 cm) at 1 hour and quantifying      centration that would create a quantifiable signal on
+as described above.                                        the test strip. Image analysis was performed on each
+                                                           assay as described above and the signal band ratio
+
+Testing background illumination                            plotted on the BE standard curve (See discussion) to
+Photos of test strips may be taken under many dif-         obtain the concentration in each sample.
+ferent lighting conditions. We tested this by applying
+ddH  0 to Craig Medical test strips and taking images      Using QRPdA to for a pharmacokinetic
+    2                                                      model of cocaine self-administration
+using the Sprint HTC 3.2 Megapixel camera phone at                                                            19
+1 hour at various levels of background illumination.       Cocaine and BE metabolism data from Sun and Lau
+The luminosity (51, 75, 100, and 154 average lumi-         was entered into IGOR Pro 5.03 and a curve fit to
+nosity) was determined usingAdobe Photoshop CS3,           the data to provide the metabolism rates for both
+and signal bands were quantified as described above.       COC and BE following a 2 mg cocaine/kg body
+                                                           weight i.v. injection. A pharmacokinetic model was
+
+experimental animals                                       then created which used these metabolism rates to
+Male Sprague–Dawley rats weighing 275–325 g                calculate the COC, BE, and combined COC and
+(Charles River Laboratories, Kingston, NY, USA)            BE levels in an animal after repeated infusions to
+
+
+Substance Abuse: Research and Treatment 2010:4                                                              25
+Cadle et al
+
+simulate a self-administration session. The pattern of   to cocaine compared to those from Craig Medical
+rat self-administration for the four hour session was    and the Q Test strips approximately 3 times less
+
+simulated by introducing a random value between          sensitive to cocaine compared to those from Craig
+1 and 20 minutes from a Gaussian distribution with a     Medical. 10 and 20 ng/ml cocaine samples sent off
+standard deviation set to be 2. The Gaussian distribu-   for GCMS analysis returned slightly higher results
+tion is achieved using a Box-Muller transformation       than the QRPDA method (14 and 30 ng/ml versus
+of uniform random numbers. These parameters pro-         11 and 21 ng/ml, respectively), possibly due to the
+ducedsimulatedinfusionintervalsthatmatchedactual         extraction process necessary in GCMS analysis.
+rat responses. After adjusting the infusion intervals
+
+such that the average interval and standard deviation    effects of image acquisition device
+matched the average rat self-administration data, the    and time delay
+per infusion BE and COC blood serum levels were          To assess whether using different devices to acquire
+adjusted to match the level of BE measured after a       the images affected the final pixel density ratio, four
+4 hr session (910 ng/ml). To reflect the increased sen-  devices were used to capture images from a single
+sitivity for BE on the test strips, COC levels were first
+                                                         set of assay strips. Data from each device was fit to
+divided by 250 prior to combining COC levels with        an exponential curve. The tau for the scanner curve,
+BE levels to create the average combined COC/BE          mobile phone curve, webcam curve, and Dino-Lite
+curve (Fig. 9). The model was run 100 times and the      curve were 7.793, 6.872, 7.298, and 7.007, respec-
+average number of infusions and average COC/BE           tively (Fig. 4).
+levels calculated. Finally, self-administration timing      Next, images of a single set of concentrations were
+data from a rat self-administration session was run in   taken at 1 hour, 20 hours, and 30 days to assess the
+the model to confirm its accuracy.
+                                                         effects of a time delay on the results of the image
+                                                         analysis. Each time point was fit to an exponential
+Results                                                  curve with a tau of 7.05, 11.248, and 11.841, for
+Cocaine and benzylecgonine standard                      1 hour, 20 hours, and 30 days. The passage of time
+curves                                                   results in an increase in the pixel density ratio. How-
+                                                         ever, the magnitude of this increase diminishes over
+Each COC and BE standard provided colored                time. Comparing tau scores, the 1 hour and 20 hour
+signal bands (Fig. 2) which were quantified and
+used to create a standard curve. For the test strips     time points are 62.68% similar, whereas the 20 hour
+obtained from Craig Medical, an exponential func-        and 30 day are 94.99% similar. Therefore, the Craig
+tion provided the best fitting curve for both the        Medical test strips taken at the 20 hours time -point
+COC and BE data with a tau of 6.324 and 0.017,           yields a stable pixel density ratio.
+
+respectively (Fig. 3). Sensitivity for COC ranged        effects of image resolution
+from 3 to 30 ng/ml, whereas sensitivity for BE
+ranged from 0.003 to 0.1 ng/ml. Thus, the Craig          QRPDA was stable across a range of resolutions.
+Medical test strips were 250 times more sensi-           Across all resolutions (75–600 DPI), the ddH20 sam-
+tive towards BE than COC. This is contrary to the        ples provided a pixel density ratio ranging from 1.20
+cross-reactivity listed by the manufacturer, which       to 1.25, with an average of 1.24 and an average SEM
+lists an equal cross-reactivity for both BE and          of 0.07 (Fig. 5). Across all resolutions, the 10 ng/ml
+                                                         cocaine samples provided a pixel density ratio rang-
+COC. For the test strips obtained from Medimpex
+and Q Test, an exponential function provided the         ing from 0.41 to 0.45, with an average of 0.43 and an
+best fitting curve for both sets of data with a tau      average SEM of 0.10.
+of 19.84 and 0.38, respectively. Cocaine sensitiv-
+ity for Medimpex test strips ranged from 0.1 to 2        Influence of biological fluid on QRPDA
+ng/ml, whereas sensitivity for Q Test strips ranged      Spiking a 10 ng/ml sample of cocaine with vari-
+from 5 to 100 ng/ml. Thus, the Medimpex test             ous amounts of mouse blood plasma (0, 2, 10,
+
+strips were approximately 10 times more sensitive        and 25%) provided pixel density ratios ranging
+
+
+26                                                                      Substance Abuse: Research and Treatment 2010:4
+                                                                                                                              Rapid test strip image analysis
+
+
+
+                                    A        B
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                        1
+
+
+                                                                                                                           2
+
+
+
+
+
+
+Figure 2. Antibody Test Strip Analysis. A) example of a photo of a test strip used for image analysis prior to background subtraction. The black rectangle
+displays the area selected for pixel density ratio analysis. 1, control band. 2, test band. B) The pixel density of the area in the black rectangle in a was
+graphed and a line drawn under each peak to create an enclosed area. The area was then quantified and the area under peak 2 divided by the area under
+
+peak 1 to yield the pixel density ratio. 1,2 as in a.
+
+
+
+
+
+from 0.28 to 0.39, with an average of 0.33 and an                                        Temperature tests
+
+average SEM of 0.04 (Fig. 6). We conclude that                                           For the 3 temperature conditions tested (4.5, 22.8,
+
+the addition of blood plasma up to 25% does not                                          and 32.2 °C), ddH            0 samples provided pixel density
+                                                                                                                     2
+significantly alter pixel density ratio. It should be                                    ratios of 1.03, 1.35, and 1.64, respectively, with an
+
+noted that for all experiments in this paper using                                       average SEM of 0.11 (Fig. 7). The 10 ng/ml cocaine
+
+blood plasma, sample concentrations did not rise
+                                                                                         samples provided pixel density ratios of 0.10, 0.33,
+
+above 4%.                                                                                and 0.44 with an average SEM of 0.04. Therefore,
+
+
+
+
+
+                                        A                                             C
+                                           1.0                                           1.0
+                                                          Craig medical
+                                           0.8            strips - cocaine               0.8           Medimpex strips
+
+                                           0.6                                           0.6
+
+                                           0.4                                           0.4
+
+                                          P0.2l density ratio                            0.2
+                                                                                        Pixel density ratio
+
+                                                                                         0.0
+                                              0     5 1   0 1   5     20   25    30         0 1           2       3 4           5
+                                                       Concentration (ng/ml)                         Concentration (ng/ml)
+
+                                        B  1.0                                        D
+                                                                                        1.0
+                                                           Craig medical                                 Q test strips
+                                           0.8              strips - BE                 0.8
+
+                                           0.6                                          0.6
+
+                                           0.4                                          0.4
+
+                                          P0.2l density ratio                          Pixel density ratio
+
+                                                                                        0.0
+                                                                                            0 5    0   100   150   200   250   300
+                                              0.00   0.02   0.04   0.06   0.08   0.10
+                                                       Concentration (ng/ml)                         Concentration (ng/ml)
+
+Figure 3. Craig medical, medimpex, and Q test standard curves. A) To allow quantification of cocaine and BE in unknown samples, standard curves were
+
+created. First, a series of cocaine standards (0, 3, 5, 10, and 30 ng/ml) were created and applied to test strips obtained from Craig Medical in triplicate.
+20 hours after applying the standards to the strip, images of each strip were taken using a Dino-Lite microscope, quantified in ImageJ, and the results
+plotted on a curve using IgoR Pro 5.03. B) To determine if the test strips have the same sensitivity towards cocaine and Be, a series of Be standards
+
+(0, 0.003, 0.005, 0.01, 0.02, 0.03, 0.05, and 0.1 ng/ml) were created and applied to Craig Medical test strips in triplicate. Results were obtained and plotted
+as in a. Craig Medical Test strips were able to detect Be levels approximately 300 times lower than that of cocaine. c) different brands may have different
+
+sensitivities to CoC/Be. To test this, strips were obtained from Medimpex United, Inc. Four cocaine standards (0, 0.1, 0.5, and 5 ng/ml) were created and
+applied to test strips in triplicate. Results were quantified and plotted as in a. Medimpex test strips were approximately 30 times more sensitive to cocaine
+
+than the Craig Medical test strips. D) As in c, except using Q Test strips and seven cocaine standards (0, 5, 10, 20, 50, 100, and 300 ng/ml). Results
+indicate that Craig Medical test strips are approximately 3 times more s▯ensitive to cocaine than Q Test strips.
+
+
+
+
+
+Substance Abuse: Research and Treatment 2010:4                                                                                                                       27
+Cadle et al
+
+
+           A
+              1.0                                                    pictures of a test strip using a mobile phone camera,
+                                 Kodak scanner                       optimal PDR stability occurs between 18 and 30 cm.
+              0.8                Sprint mobile phone camera
+              0.6                Sony web cam                           Todeterminehowdifferentlevelsofbackgroundillu-
+                                                                     mination affects the pixel density ratio, photos of a test
+              0.4                                                    strip were taken at several levels of lighting (154, 100,
+             Pixel density ratio
+              0.2                                                    75, and 51 average luminosity, as measured by Photo-
+                                                                     shop CS3).These photos resulted in pixel density ratios
+                  0    5 1  0 1   5   20    25   30
+           B             Concentration (ng/ml)                       of1.39,1.30,1.63,and1.23,respectively,withSEMsof
+              1.0                                                    0.07, 0.10, 0.11, and 0.40. Luminosities of less than 154
+                                       30 days
+              0.8                      20 hours                      required turning off lights in the room, while the average
+              0.6                      1 hour                        luminosity of 51 was almost complete darkness.
+
+              0.4
+             Pixel density ratio                                     Blood plasma and urine comparison
+              0.2
+                                                                     To make a direct comparison of COC/BE levels in
+                  0    5 1  0 1   5   20    25   30                  urine and blood plasma, mice were injected with
+                         Concentration (ng/ml)
+                                                                     5 cocaine mg/kg body weight and their COC/BE
+Figure 4. effects of image acquisition device and time on pixel densilevels quantified at 15 and 30 minutes. There were
+ratio.A) effects of using four image acquisition devices on the pixel density
+ratio. Four instruments (dino-Lite microscope, Kodak scanner, Microsono significant differences between mice at 15 and
+set of cocaine standards at 1 hour and quantified. Each device had no sig-nutes, and they grouped (n = 6). Mice had a
+nificant effect on the final pixel density ratio.B) effects of the passage of
+time prior to image analysis on the pixel density ratio. Images of a single set.90 to 11.55 ng/ml COC/BE in blood
+of cocaine standards were taken using the dino-Lite microscope at 1 hour,m samples with an average of 8.12 ng/ml. Urine
+20 hours, and 30 days and quantified. Data points omitted for clarity.
+                                                                     samples contained between 98.00 and 233.50 ng/ml
+                                                                     COC/BE, with an average of 160.58 ng/ml. Overall,
+                                                                     urine was found to contain approximately 24 times
+
+lower temperatures lower the PDR, while higher                       more COC/BE than blood plasma samples.
+temperaturesraiseit.Temperatureaffectedthecocaine
+signal more, with the cold water sample being 76%
+                                                                     Rat self-administration results
+as large as the room temperature water signal, com-                  To verify QRPDA’s utility for measuring drug metab-
+pared to the cold cocaine signal being only 31% as
+                                                                     olites, we quantified the blood plasma of rats under-
+large as the room temperature cocaine signal. Heating                going self-administration of cocaine. Rats (n = 6)
+the sample and test strip independently demonstrated
+                                                                     self-administered an average of 31.25 mg cocaine/
+that the increase in PDR came entirely from heating                  kg body weight over the entire session in an aver-
+the strip and not from heating the sample (Data not
+                                                                     age of 62.5 infusions and had an average quantified
+shown).                                                              blood plasma level of COC/BE of 910 ng/ml. Rats
+
+                                                                     pressed the active lever significantly more than the
+Effect of camera magnification and                                   inactive lever (P < 0.003), having pressed the active
+background illumination                                              lever an average of 107.83 times versus an average of
+
+To determine how magnification affects pixel density                 3.5 times for the inactive lever.
+ratio, and thus the optimal distance or magnification
+
+to use, photos of a test strip were taken at several dis-            Self-administration modeling
+tances (60, 30, 18, 8, and 5.5 cm away) using a Sprint               As a proof of concept, we created a program which
+
+HTC 3.2 megapixel camera phone. At both 60 and                       modeled a rat self administering cocaine using the
+5.5 cm, the pictures were unquantifiable, because at                 results obtained from the QRPDAtechnique.An expo-
+
+60 cm the picture is too small and at 5.5 cm shadows                 nential curve with a tau of 20.59 provided the best
+fromthecamerainterferedwiththepixeldensityratio.                     fit for the cocaine metabolism curve while a sigmoi-
+At the remaining distances, 30, 18, and 8 cm, pictures               dal curve with a half maximum at 125.6minutes fit
+
+provided a PDR of 1.33, 1.34, and 1.53 respectively,                 the BE metabolism data best (Fig. 9). After running
+with an average SEM of 0.06 (Fig. 8). When taking                    the cocaine modeling program 100 times, simulating
+
+
+
+28                                                                                    Substance Abuse: Research and Treatment 2010:4
+                                                                                                                Rapid test strip image analysis
+
+
+
+                                  1.6
+                                                        - H2O                               - COC (10 ng/ml)
+
+                                  1.4
+
+
+                                  1.2
+
+                                    1
+
+
+                                  0.8
+
+
+                                  0.6
+                                Pixel density ratio
+
+                                  0.4
+
+
+                                  0.2
+
+                                  0.0
+
+                                          75     150      200     300     600 7     5      150 2    00     300 6    00
+
+                                                                        Resolution (DPI)
+
+Figure 5. Images acquired at different resolutions do not affect pixel density ratio. Changes in resolution had no significant effect on pixel density ratio, Inset
+shows the standard curve across a range of cocaine concentrations. The rectangle shows the 10 ng/ml data point that was characterized as shown in the
+black bars.
+
+note: QRPdA analysis produces similar results across a wide range of resolutions (d▯ots per inch, dPI).
+
+
+
+
+100self-administrationsessions,themodelreturnedan                              across rats was 910 ng/ml. Average combined scaled
+
+averageof64.56infusions with a standard deviationof                            BE/COC levels at the end of the session were 920 ng/
+19.39 infusions.This is comparable to the real rat data,                       ml.To account for the increased sensitivity towards BE
+
+in which animals took an average of 62.5infusions                              we divided the COC curve by 250 prior to adding the
+
+with a standard deviation of 22.5infusions. Average                            curves together to create the COC/BE curve. BE levels
+
+BE and COC levels at the end of the session were both                          were found to be 99.6% similar to the combined scaled
+
+910 ng/ml. This data is again comparable to the real                           BE/COC levels. Thus, BE levels alone were represen-
+
+rat data, in which the average BE blood serum level                            tative of the combined BE/COC levels.
+
+
+
+                                1.4
+                                                                              - COC (10 ng/ml)
+
+                                1.2
+
+
+
+                                  1
+
+
+                                0.8
+
+
+
+                                0.6
+
+
+                              Pixel density ratio
+                                0.4
+
+
+                                0.2
+
+
+
+                                0.0
+                                            H2O                 0                 2  1               0  2           5
+
+                                                                     Percent blood serum
+
+Figure 6. Blood plasma/h 02concentration does not alter pixel density ratio. Samples of 10 ng/ml cocaine were spiked with varying amounts of blood
+plasma to create four concentrations (0, 2, 10, and 25% blood plasma). These concentrations were then applied to test strips and quantified.
+
+
+
+
+Substance Abuse: Research and Treatment 2010:4                                                                                                    29
+Cadle et al
+
+
+                             2
+                                               - HO                                           - COC (10 ng/ml)
+                                                 2
+                           1.8
+
+
+                           1.6
+
+                           1.4
+
+
+                           1.2
+
+                             1
+
+
+                           0.8
+
+                        Pix0.6density ratio
+
+
+                           0.4
+
+
+                           0.2
+
+                           0.0
+
+                                      4.5            22.8           32.2            4.5            22.8           32.2
+
+                                                                    Temperature (C°)
+
+Figure 7. Temperature effects on measured pixel density ratio. effect of performing QRPdA tests under three different temperature conditions, cold
+(4.5 °C), room temperature (22.8 °C), and hot (32.2 °C). White bars, h 0. Black bars, 10 ng/ml cocaine.
+                                                                  2
+
+
+
+
+Discussion                                                                 health care, bioinformatics, and forensics appli-
+                                                                           cations. Foremost, QRPDA represents a powerful
+In this paper, we provide the first description of a
+technique that uses low cost immunoassay strips,                           tool for developing countries where resources and
+
+a mobile phone camera, and automated image                                 trained personnel are limited. Immunoassay test
+
+analysis to create an assay with many possible                             stripsandcellphonesarerelativelyinexpensiveand
+
+
+
+
+                             A
+
+                              Distance (cm):3           0   1                     8    8
+
+
+
+
+
+
+
+
+
+                              PDR/SEM:           1.33/0.07                  1.34/0.08                 1.53/0.08
+
+                             B
+
+                              Luminosity:      154                 100                 75                  51
+
+
+
+
+
+
+
+                              PDR/SEM:     1.39/0.07          1.30/0.09           1.63/0.11           1.23/0.40
+
+
+Figure 8. Optimal magnification and lighting. A) Effects of magnification on pixel density ratio. Images of a test strip were taken using the Sprint HTC
+3.2 megapixel camera phone at various distances and quantified. Results indicate significant changes in pixel density ratio at very close distances (less
+than 8 cm). Additional images were taken at 60 and 5.5 cm but were unquantifiable. Average luminosity of these pictures was 111. B) effects of luminosity
+
+on pixel density ratio. Several images of a test strip were taken using the Sprint hTC 3.2 megapixel camera phone at varying levels of background illumina-
+tion. Results indicate a significant effect at very low levels of light (average luminosity of less than 75) and increased standard error of the mean (SEM).
+
+
+
+30                                                                                            Substance Abuse: Research and Treatment 2010:4
+                                                                                                       Rapid test strip image analysis
+
+
+
+                      A                                                 C
+                        0.15
+
+                        0.12                                               1.5
+
+                        0.09
+                                                                           1.0
+                        0.06
+
+                        0.03                                               0.5
+
+                        0.00                                               0.0
+                       Serum concentration (µg/ml)                        Serum concentration (µg/ml)
+                             0 5     0      100     150     200                0 5     0 1    00     150     200
+                                          Minutes                                           Minutes
+                      B                                                 D
+
+
+                        1.5                                                1.5
+
+
+                        1.0                                                1.0
+
+
+                        0.5                                                0.5
+
+
+                       Serum concentration (µg/ml)                        Serum concentration (µg/ml)
+                            0 5     0      100    150     200                 0 5     0 1     00     150     200
+                                         Minutes                                           Minutes
+
+Figure 9. Pharmacokinetic model of Cocaine (CoC) and Benzoylecgonine (Be) using QRPdA analysis. A) CoC (red) and Be (blue) metabolism rates.
+These rates determined how much each infusion (0.5 mg cocaine/kg body weight) increased blood serum levels and how quickly each drug was metabo-
+lized. B) Blood CoC levels were simulated by running the model 100 times consecutively. The gray lines represent each individual run of the model, while
+the red line highlights one example for clarity. The black line represents the average cocaine level across all 100 modeled sessions. c) Projected Be
+blood serum levels after running the model 100 times. As in B, each gray line represents one run of the model. The blue line highlights one example trace
+
+and the black line represents the average across all 100 sessions. The dashed green line represents the combined CoC and Be averages after the CoC
+average has been divided by 250 to account for the test strip’s increased sensitivity towards Be. D) output of the self administration model using real rat
+timing data from the eleventh day of self administration. The CoC (red) and Be (blue) curves in this graph were generated by replacing the random number
+generators with infusion timing data from a real rat self administration session. each dash on the line above the graph indicates one infusion. The rat took
+64 infusions and had an estimated Be blood serum level of 880 ng/ml at the end of the 4 hour session.
+
+
+require no special training to use. Combined with                        unique identifier can be used on the test strip or tem-
+
+automated image analysis, this allows health care                        plate to provide information about the strip, such as
+
+workersto“crowdsource”assaysanddatacollection                            the lot number, calibration curves and quality control
+to individuals. Results can be photographed by                           checks.
+
+individuals, transmitted to a central server for                            It is important to note that this technique does
+
+archiving and analysis, and the results sent back                        have some limitations. Some substances may have
+within minutes. Newer phones even automatically                          cross reactivity that interferes with the immunoas-
+
+tag photos with coordinates, allowing health care                        say test strip. For example, the drugs pyrilamine and
+workers to track results geographically.
+                                                                         metoclopramide interfere with COC/BE test strips.
+    As a proof of concept, we used anti-COC/BE                           Inconsistencies in test strip sensitivity also pose a
+
+immunoassay test strips to quantify COC/BE levels                        problem, requiring the use of only a single brand or
+in rodents after injections or self-administration of                    the creation of multiple standard curves.
+
+cocaine. In addition, we tested the effects of a vari-                      QRPDA has many possible applications. Future
+
+ety of parameters on QRPDAresults, including using                       directions involve adapting the technique for use
+different devices to acquire images, the passage of                      with a variety of immunoassay test strips. Many
+
+time, magnification, lighting, resolution, tempera-                      immunoassay test strips exist which test for anything
+
+ture, and the addition of biological fluids to samples.                  from drugs of abuse to water contaminants and
+Overall the assay proved robust, providing consistent                    infectious aganes, such as infectious agents, such as
+                                                                                                   20
+results across several different parameters. We also                     bacteria or parasites.       The need for quality control
+
+designed a printable template to further assist uni-                     qualityandforinfectiousagentsisofparticularimpor-
+form image acquisition (Fig. 10). A barcode or other                     tance in developing countries. In summary, QRPDA
+
+
+
+Substance Abuse: Research and Treatment 2010:4                                                                                         31
+Cadle et al
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 10. A Premade Template for Test Strip Photography and Identification (Actual Size). To assist with uniform picture acquisition and automatic
+quantification outside a laboratory setting, a printable template was designed. The template provides a space for the test strip, an identification number,
+barcode, notes and a fingerprint. The test strip space is designed to ensure proper placement of the test window, while the outside lines and boundaries
+be used to track results without spreading sensitive personal informatio▯n.se of an identification number or thumbprint provides unique identifiers that can
+
+
+
+is an innovative, easy to use, and low cost method            consideration by any other publication and has not been
+
+with many applications in health care and research.           published elsewhere. The authors and peer reviewers
+                                                              of this paper report no conflicts of interest. The authors
+Acknowledgments                                               confirm that they have permission to reproduce any
+
+We would like to thank Andrew Hannum for                      copyrighted material.
+assistance using IMAGEJ. This work was sup-
+ported by grants from the National Institute of Drug
+                                                              1. Breslauer DN, Maamari RN, Switz NA, Lam WA, Fletcher DA. Mobile
+Abuse (K01-DA017750-05-Cooper; R01 DA024040-                     Phone Based Clinical Microscopy for Global Health Applications. PLoS
+Cooper).                                                         One. 2009;4(7):e6320.
+                                                              2. BraunRP,VecchiettiJL,ThomasL,etal.Telemedicalwouldcareusinganewgenera-
+Disclosures                                                      tion of mobile telephones: a feasibility study. Arch Dermatol. 2005;141(2):254–8.
+                                                              3. GollolRajuN,AnthonyJ,JamadagniRS,IstepanianR,SuriJ,LaxminarayanS.
+This manuscript has been read and approved by                    Status of mobile computing in health care: an evidence study. Conf Proc
+all authors. This paper is unique and is not under               IEEE Eng Med Biol Soc. 2004;5:3274–7.
+
+
+32                                                                             Substance Abuse: Research and Treatment 2010:4
+                                                                                                       Rapid test strip image analysis
+
+
+
+ 4. Granot Y, Ivorra A, Rubinsky B. A new concept for medical imaging cen14. Craig Medical Distribution, Inc. 2009. http://www.craigmedical.com/
+    tered on cellular phone technology. PLoS One. 2008;3(4):e2075.          cocaine.html
+ 5. Ekins S, Williams AJ. Reaching out to collaborators: crowdsourcing fo15. Brunet BR, BarnesAJ, Scheidwiler KB, Mura P, Huestis Ma. Development
+    pharmaceutical research. Pharm Res. 2010;27(3):393–5.                   of a solid-phase extraction gas chromatography-mass spectrometry method
+ 6. Oprea TI, Bologa CG, Boyer S, et al. A crowdsourcing evaluation of the  for the simultaneous quantification of methadone, heroin, cocaine and
+    NIH chemical probes. Nat Chem Biol. 2009;5(7):441–7.                    metabolites in sweat. Anal Bioanal Chem. 2008;392(1–2):115–27.
+ 7. Substance Abuse and Mental Health Services Administration. Results fr16. Duncan WP, Deutsch DG. The use of GC/IR/MS for high-confidence iden-
+    the 2008 National Survey on Drug Use and Health: National Findings      tification of drugs. Clin Chem. 1989;35(7):1279–81.
+
+    (Office of Applied Studies, NSDUH series H-36, HHS Publication No.   17. Abramoff, MD, Magelhaes, PJ, Ram, SJ. “Image Processing with ImageJ”.
+    SMA09-4434). Rockville, MD. 2009.                                       Biophotonics International. 2004;11(7):36–42.
+ 8. O’BrienMS,AnthonyJC.Riskofbecomingcocainedependent:epidemiolog-      18. Bachtell R, Self D. Effects of adenosine A2 A receptor stimulation on
+    ical estimates for the United States, 2000–2001.Neuropsychopharmacology.cocaine-seeking behavior in rats. Psychopharmacology. 2009;206(3):
+    2005;30(5):1006–18.                                                     469–78.
+ 9. Gawin FH. Cocaine addiction: psychology and neurophysiology. Science.19. Sun L, Lau CE. Simultaneous pharmacokinetic modeling of cocaine and
+    1999;251(5001):1580–6.                                                  its metabolites, norcocaine and benzoylecgonine, after intravenous and oral
+10. Office of National Drug Control Policy.The Economic Costs of DrugAbuse  administration in rats. Drug Metab Dispos. 2001;29(9):1183–9.
+    in the United States, 1992–2002. Washington, DC: Executive Office of 20. Murray CK, Bennett JW. Rapid diagnosis of Malaria. Interdiscip Perspect
+    President (Publication No. 207303) 2002.                                Infect Dis. 2009;2009:415953.
+11. Normand J, Salyards S. An empirical evaluation of preemployment drug
+
+    testing in the United States Postal Service: interim report of findings. NIDA
+    Res Monogr. 1989;91:111–38.
+12. KrasowskiMD,PizonAF,SiamMG,GiannoutsosS,IyerM,EkinsS.Using
+    molecular similarity to highlight the challenges of routine immunoassay-plemental Information
+    based drug of abuse/toxicology screening in emergency medicine. BMC  The code for both the automatic image analysis macro
+    Emerg Med. 2009;9:5.
+13. Moeller KE, Lee KC, Kissack JC. Urine drug screening: practical guide forself-administration model can be found at:http://
+    clinicians. Mayo Clin Proc. 2008;83(1):66–76.                        neurocloud.org
+
+
+
+
+
+
+
+
+
+                                                                              publish with Libertas Academica and
+
+                                                                            every scientist working in your field can
+                                                                                              read your article
+
+
+                                                                           “I would like to say that this is the most author-friendly
+                                                                               editing process I have experienced in over 150
+                                                                                   publications. Thank you most sincerely.”
+
+
+                                                                            “The communication between your staff and me has
+                                                                             been terrific. Whenever progress is made with the
+
+                                                                              manuscript, I receive notice. Quite honestly, I’ve
+                                                                               never had such complete communication with a
+                                                                                                     journal.”
+
+
+                                                                             “LA is different, and hopefully represents a kind of
+                                                                              scientific publication machinery that removes the
+                                                                                 hurdles from free flow of scientific thought.”
+
+
+                                                                           Your paper will be:
+
+                                                                                  •      Available to your entire community
+                                                                                         free of charge
+                                                                                  •      Fairly and quickly peer reviewed
+
+                                                                                  •      yours! you retain copyright
+
+
+                                                                                         http://www.la-press.com
+
+
+
+
+Substance Abuse: Research and Treatment 2010:4                                                                                         33

@@ -1,0 +1,785 @@
+Alignment-Free Design of Highly Discriminatory
+
+
+Diagnostic Primer Sets for Escherichia coli O104:H4
+
+
+Outbreak Strains
+
+                        1 .                       2.                              3                 3                2
+Leighton Pritchard * , Nicola J. Holden              , Martina Bielaszewska , Helge Karch , Ian K. Toth
+1Information and Computational Sciences, James Hutton Institute, Dundee, Scotland, United Kingdom, 2Cellular and Molecular Sciences, James Hutton Institute,
+
+Dundee, Scotland, United Kingdom, 3Institute for Hygiene and the National Consulting Laboratory for Hæmolytic Uræmic Syndrome, University of Munster, Munster,
+Germany
+
+
+
+    Abstract
+
+    Background: An Escherichia coli O104:H4 outbreak in Germany in summer 2011 caused 53 deaths, over 4000 individual
+    infections across Europe, and considerable economic, social and political impact. This outbreak was the first in a position to
+
+    exploit rapid, benchtop high-throughput sequencing (HTS) technologies and crowdsourced data analysis early in its
+    investigation, establishing a new paradigm for rapid response to disease threats. We describe a novel strategy for design of
+    diagnostic PCR primers that exploited this rapid draft bacterial genome sequencing to distinguish between E. coli O104:H4
+    outbreak isolates and other pathogenic E. coli isolates, including the historical hæmolytic uræmic syndrome (HUSEC) E. coli
+
+    HUSEC041 O104:H4 strain, which possesses the same serotype as the outbreak isolates.
+
+    Methodology/Principal Findings: Primers were designed using a novel alignment-free strategy against eleven draft whole
+    genome assemblies of E. coli O104:H4 German outbreak isolates from the E. coli O104:H4 Genome Analysis Crowd-Sourcing
+
+    Consortium website, and a negative sequence set containing 69 E. coli chromosome and plasmid sequences from public
+    databases. Validation in vitro against 21 ‘positive’ E. coli O104:H4 outbreak and 32 ‘negative’ non-outbreak EHEC isolates
+    indicated that individual primer sets exhibited 100% sensitivity for outbreak isolates, with false positive rates of between 9%
+    and 22%. A minimal combination of two primers discriminated between outbreak and non-outbreak E. coli isolates with
+
+    100% sensitivity and 100% specificity.
+
+    Conclusions/Significance: Draft genomes of isolates of disease outbreak bacteria enable high throughput primer design
+    and enhanced diagnostic performance in comparison to traditional molecular assays. Future outbreak investigations will be
+
+    able to harness HTS rapidly to generate draft genome sequences and diagnostic primer sets, greatly facilitating
+    epidemiology and clinical diagnostics. We expect that high throughput primer design strategies will enable faster, more
+    precise responses to future disease outbreaks of bacterial origin, and help to mitigate their societal impact.
+
+
+  Citation: Pritchard L, Holden NJ, Bielaszewska M, Karch H, Toth IK (2012) Alignment-Free Design of Highly Discriminatory Diagnostic Primer Sets for Escherichia
+  coli O104:H4 Outbreak Strains. PLoS ONE 7(4): e34498. doi:10.1371/journal.pone.0034498
+
+  Editor: Jason E. Stajich, University of California Riverside, United States of America
+  Received November 17, 2011; Accepted March 1, 2012; Published April 5, 2012
+
+  Copyright: ß 2012 Pritchard et al. This is an open-access article distributed under the terms of the Creative Commons Attribution License, which permits
+  unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
+  Funding: This work was supported by the Scottish Government Rural and Environment Science and Analytical Services Division (RESAS). The funders had no role
+  in study design, data collection and analysis, decision to publish, or preparation of the manuscript.
+
+  Competing Interests: The authors have declared that no competing interests exist.
+
+  * E-mail: leighton.pritchard@hutton.ac.uk
+  . These authors contributed equally to this work.
+
+
+
+Introduction                                                        technology, and the contributions of many labs to this effort,
+                                                                    practical difficulties in tracking the source of the outbreak resulted
+
+  The German O104:H4 outbreak of Summer 2011 was notable            in significant social and political impact across several continents,
+for several reasons. It represented in many ways a ‘worst-case’     highlighting a critical need for rapid generation of accurate
+scenario of an emerging pathogen with novel epidemiology and        diagnostics that can be used in the field, in public health outbreaks.
+
+pathological characteristics, and is representative of the increasing The ability of diagnostic techniques such as real-time quanti-
+burden of food-borne disease from contaminated fresh produce        tative PCR (qPCR) to deliver sensitive and quantifiable results is
+[1]. A number of outbreak isolates were characterised very soon     dependent on the availability of primer sets that distinguish a
+
+after the outbreak by high-throughput sequencing technologies,      target organism or organisms from non-target organisms.
+and several draft genomes were placed in a public repository as     Typically, design of discriminatory primer sets is rationally guided
+part of a landmark open-source analysis [2–4]. The early            in the sense that primers are chosen to amplify genes or other
+availability of reference and isolate genome sequences greatly      defined sequences demonstrated to be common to target
+
+facilitated the identification of distinguishing sequence differencesrganisms but divergent, or absent, in non-target organisms
+of outbreak isolates and elucidation of its evolutionary history    [6,7]. Frequently used sequences include intergenic transcribed
+[2,5]. However, despite the intensive and timely application of thisspacer regions, ribosomal DNA, ‘housekeeping’ genes and
+
+
+
+      PLoS ONE | www.plosone.org                                 1                          April 2012 | Volume 7 | Issue 4 | e34498
+                                                                                       Highly Specific Diagnostic Primer Design Using HTS
+
+
+
+virulence genes, e.g. Shiga-like toxins for E. coli [8–11]. Several   sequence by concatenating contigs (in arbitrary ordering and
+
+high-throughput variants of this approach to diagnostic primer        orientation) using a spacer sequence [23]. These sequences
+design have been described, and these may be characterised as the     constituted the ‘positive’ sequence set for primer set generation.
+identification of potentially discriminatory sequences, followed by     A set of 31 completely sequenced E. coli and E. fergusonii
+
+primer design against those sequences [12–17]. Here we                genomes were downloaded from GenBank (ftp://ftp.ncbi.nlm.nih.
+demonstrate an alternative, alignment-free strategy for primer        gov/genomes/Bacteria/) for use as the ‘reference’ or ‘negative’
+design that exploits incomplete and unordered draft genome            sequence set during primer set generation. Accession numbers for
+
+sequences to identify candidate primer sets that discriminate         all sequences are given in Supplementary Methods S1. Addition-
+between arbitrary subgroups of sequenced bacteria, without the        ally, all refseq_genomic database sequences beneath the Escherichia
+need to pre-screen for discriminatory sequence prior to primer        taxonomic level (TaxID: 561) at the NCBI on 6/7/2011 were used
+
+design. This approach can be characterised as the bulk design of      as the online screening database.
+primers to all input genome sequences, followed by classification of
+the discriminatory ability and specificity of those primers to        Primer prediction
+
+predefined groups of input sequences. The outputs of the strategy       Diagnostic primers were designed to the genome sequences
+are the sets of primers that are specific to each predefined group of indicated above using a computational pipeline that implements
+sequences. The alignment-free strategy avoids limitations resulting   the design strategy outlined schematically in Figures 1 and 2. This
+
+from the need to identify a conserved signature of significant        strategy can be implemented in several ways, using a choice of
+length and common to all targets, prior to primer design, and         broadly equivalent software tools. Our specific implementation is
+enables the simultaneous design of primers to discriminate            described in detail in Supplementary Methods S1, and in
+
+between several (potentially overlapping) groupings of sequences.     Supplementary Figure S1. The Python scripts and configuration
+  The primers designed using this strategy are intended to be         file used for this study are available at https://github.com/
+highly discriminatory, and to separate, where possible, closely       widdowquinn/find_differential_primers.
+
+related strains or isolates. Traditionally, methods used in a clinical  Our pipeline takes as input a set of whole or draft genome
+diagnostic setting first identify bacteria to species level using     sequences. Each input sequence is assigned one or more labels.
+microbiology techniques (typically selective agar and biochemical     These labels (groups I-V in Figure 1) denote membership of a
+tests), followed by discrimination to the serotype level (e.g. by
+                                                                      class, and may be based on any criterion or grouping for which
+serotyping agglutination tests). For epidemiological analysis,        one wishes to generate a diagnostic set of primers. An input
+isolates will typically be compared in more detail using techniques   genome sequence may be assigned multiple labels, indicating
+that exploit changes at the DNA level, most usually of
+                                                                      different groups to which one might wish to design diagnostic
+‘housekeeping’ genes. Such techniques would include multi-locus       primers. This permits members of any class to be further
+sequence typing (MLST) and multi-locus enzyme electrophoresis         subclassified, for example as a nested hierarchy to represent
+(MLEE) [18,19] although, in general, these methods do not             taxonomic assignments in which individual sequences may be
+
+provide a sufficient level of discrimination to distinguish closely   labelled with both the name of the genus and the species (and
+related isolates. Instead, techniques based on variable regions of    pathovar, biovar or other subclass; Figure 1). This enables
+DNA, such as pulsed field electrophoresis (PFGE), random              simultaneous design of primers that distinguish between multiple
+
+amplified polymorphic DNA (RAPD) or multi-locus variable-             potentially overlapping groups of sequences, such as sets of primers
+number tandem-repeat (VNTR) analysis are typically used               that distinguish between bacterial genera, and (distinct) sets of
+[20,21]. Over and above these typing techniques, pathogenicity        primers that distinguish between species within a single genus.
+
+factors are also frequently included in the identification, e.g. the    A large number (typically 1000 or more, for a bacterial
+Shiga toxin type for VTEC [22].                                       chromosome) of plausible primer sequence sets, compliant with
+  We used our design strategy to generate several primer sets that    thermodynamic or structural parameters specified when running
+
+discriminate in silico between outbreak isolates of E. coli O104:H4   the pipeline, such as melting temperature (m )or3 9 GC content, is
+and other E. coli isolates, including the historical and serotypicallydesigned to each input genome sequence. These primer sets are
+identical hæmolytic uræmic syndrome (HUSEC) E. coli HU-               expected, by definition, to amplify a region of the genome to which
+
+SEC041 O104:H4 strain. We validated these potentially discrim-        they were designed. The predicted primer sets may then be filtered
+inatory primer sets against a bank of 21 ‘positive’ E. coli O104:H4   to exclude those that lie wholly or partially outwith gene coding
+outbreak and 32 ‘negative’ non-outbreak EHEC isolates in vitro.       regions, so to focus on genomic regions that are more likely to be
+
+Our results showed that individual primers exhibited 100%             evolutionarily stable. The surviving primer sets are tested in silico
+sensitivity and 82–94% specificity for outbreak isolates, with false  for their ability to amplify each of the other input genome
+positive rates of between 9% and 22% for non-outbreak isolates.       sequences. Primer sets are retained as being potentially diagnostic
+However, a minimal combination of two primers was able to             of a class of sequences only if they are predicted in silico to amplify
+
+discriminate between outbreak and non-outbreak E. coli isolates       a similarly-sized amplicon product from all genomes from the
+with 100% sensitivity and 100% specificity.                           input set which share that label, but not from those genomes that
+                                                                      do not possess the label. These primers may then be screened
+
+Materials and Methods                                                 against a larger set of sequences that do not belong to the
+                                                                      predicted class, and discarded if they exhibit significant sequence
+Genome sequences                                                      similarity. The primer sets that survive this screen are the output of
+
+  Eleven draft assemblies of nine E. coli isolates sampled from the   the pipeline, and are considered to be potentially diagnostic of
+2011 German O104:H4 outbreak were downloaded from the E.              members of the class, pending experimental validation.
+coli O104:H4 Genome Analysis Crowdsourcing site (https://               For this study, our ‘positive’ sequence set contained eleven draft
+
+github.com/ehec-outbreak-crowdsourced/BGI-data-analysis/wiki;         assemblies of nine E. coli O104:H4 German outbreak isolates
+see Supplementary Methods S1), including two assemblies for each      downloaded from the E. coli O104:H4 Genome Analysis Crowd-
+of the TY2482 and LB226692 isolates [2,4]. A single pseudochro-       Sourcing   Consortium    website  [2,4]  labelled  as  ‘outbreak
+
+mosome sequence was compiled where necessary for each draft           O104:H4’, and the ‘negative’ genome set comprised 69 E. coli
+
+
+       PLoS ONE | www.plosone.org                                  2                           April 2012 | Volume 7 | Issue 4 | e34498
+                                                                                         Highly Specific Diagnostic Primer Design Using HTS
+
+
+
+                                                                       I–V on the basis of a nested hierarchical relationship). Primer sets are
+                                                                       designed to all positive sequences in bulk (.1000 primer sets, black
+                                                                       markers), and tested for cross-hybridisation in silico. Primer sets that
+                                                                       amplify only members of a prescribed class (indicated by coloured
+
+                                                                       markers, one for each class; black markers indicate non-specific primers)
+                                                                       but do not amplify negative examples are retained as being potentially
+                                                                       diagnostic of that class. Predicted discriminatory primers are validated
+                                                                       against bacterial isolates that were not part of the training set. An
+                                                                       expected mock PCR result is indicated for primers specific to group II
+                                                                       against individual samples belonging to classes II, IV and V. A detailed
+
+                                                                       description of the method is given in Supplementary Methods.
+                                                                       doi:10.1371/journal.pone.0034498.g001
+
+
+                                                                       chromosome and plasmid sequences downloaded from the public
+
+                                                                       databases at NCBI [24,25], labelled as ‘not outbreak O104:H4’.
+                                                                       Contigs from the draft bacterial genomes assembled by HTS were
+                                                                       combined in arbitrary order into a single pseudochromosome
+
+                                                                       sequence using a standard spacer sequence [23].
+                                                                         One thousand thermodynamically plausible primers were
+                                                                       predicted across the whole genome or pseudochromosome for all
+
+                                                                       members of the positive ‘outbreak O104:H4’ sequence set using
+                                                                       ePrimer3 [26,27]. To save time, primers were not designed to the
+
+                                                                       ‘negative’ genome set. To enhance the expected evolutionary
+                                                                       stability of primer sets, predicted primers that did not amplify
+                                                                       within predicted coding sequences (CDS) on a chromosome were
+
+                                                                       discarded. CDS prediction was carried out using the Prodigal [28]
+                                                                       genecaller where required, otherwise existing CDS annotations
+                                                                       from public annotations were used. The primer sets located within
+
+                                                                       predicted CDS were tested in silico for their ability to produce
+                                                                       amplicons of a desired size range from all members of the positive
+
+                                                                       and negative sequence sets using PrimerSearch, to identify
+                                                                       potential cross-amplification [27]. We retained only primer sets
+                                                                       that amplified sequences of approximately 100 bp length from all
+
+                                                                       members of the ‘outbreak O104:H4’ set, but did not amplify
+                                                                       members of the ‘negative’ sequence set. The surviving discrimi-
+                                                                       natory primer pairs and their amplified sequences were filtered
+
+                                                                       again using BLAST [29] to exclude those primers that may not be
+                                                                       specific to the targets on the basis of sequence similarity to the set
+
+                                                                       of E. coli sequences contained in the NCBI RefSeq database [25].
+                                                                       On a desktop machine (8-core Mac Pro, 32GB RAM, OSX 10.6)
+                                                                       the entire pipeline took approximately 90 hours, of which all but
+
+                                                                       two hours were spent on the PrimerSearch step for detection of
+                                                                       cross-amplification.
+
+
+                                                                       Primer evaluation
+                                                                         The optimum annealing temperature for the complete primer
+
+                                                                       set was first determined to be 58uC, using the sequenced E. coli
+                                                                       isolate LB226692 as a positive control between 54uC and 58uC.
+
+                                                                       Group1 (outbreak) and group 2 (non-outbreak) bacterial isolates
+                                                                       were screened with each primer set under the determined
+                                                                       optimum conditions. PCR reactions of 25 ml contained 500 nM
+
+                                                                       of each primer pair, 800 mM dNTPs, 16 buffer solution, 16
+                                                                       enhancer solution, 2 mM MgCl2, 0.5 units/mL peqGOLD Taq
+                                                                       polymerase (peqlab Gold PCR kit, peqlab ltd., Germany) and 1 ml
+
+                                                                       DNA (,100 pg). Standard cycling conditions were used: one cycle
+                                                                       of 94uC for 5 minutes; 30 cycles of 94uC for 30 seconds, 58uC for
+
+                                                                       1 minute, 72uC for 1 minute; one cycle of 72uC for five minutes.
+                                                                       Products were resolved on a 1% agarose gel in tris-acetate-EDTA
+                                                                       (TAE) buffer at 16concentration, alongside a 100 bp ladder. The
+
+                                                                       images were captured under standard conditions in a gel
+                                                                       documentation system (AlphaImager, Labtech) at 300 dpi and
+Figure 1. Schematic diagram of the primer design process. A            saved in TIFF format. Image manipulations (combination of
+training set of whole (complete or draft) genome sequences is divided
+into positive and negative sequence groups. Members of the positive    multiple gel results into a single figure) were carried out using
+sequence group are placed into classes as appropriate (here as classes Adobe Illustrator.
+
+
+
+       PLoS ONE | www.plosone.org                                   3                           April 2012 | Volume 7 | Issue 4 | e34498
+                                                                                  Highly Specific Diagnostic Primer Design Using HTS
+
+
+
+                                                                Figure 2. Flowchart of the primer design process. The locations
+                                                                of input training set sequence files, and their classifications, are read
+                                                                from a configuration file. Input sequences comprising several smaller
+                                                                sequences (e.g. contigs of a draft genome) are concatenated using a
+                                                                spacer sequence. Locations of coding sequences (CDS) are obtained
+
+                                                                from a GenBank file if available, or predicted using a genecaller. A large
+                                                                number (.1000) of primers is then designed to each input sequence.
+                                                                Primers that lie within CDS are tested in silico for their ability to cross-
+                                                                amplify other members of the training set, and compared against a
+                                                                larger set of off-target sequences to discard non-specific primers. The
+                                                                surviving primers are classified according to their ability to amplify
+
+                                                                specific classes of sequence from the training set. A more detailed
+                                                                flowchart of the pipeline is given in Supplementary Figure S1.
+                                                                doi:10.1371/journal.pone.0034498.g002
+
+
+                                                                Results
+
+                                                                Primer design
+
+                                                                   Seven non-degenerate primer sets were predicted using the
+                                                                strategy outlined in Figure 1 to be capable of discriminating
+                                                                between the positive outbreak and negative non-outbreak E. coli
+
+                                                                sequence sets in silico (Supplementary Table S1). On filtering these
+                                                                primers against the RefSeq database [30], three primer sets (0237,
+
+                                                                0396 and 0781) were found to have sequence similarity either to
+                                                                the impB gene on the pEC_Bactec b-lactamase plasmid or a
+                                                                hypothetical protein in at least one other recently sequenced non-
+
+                                                                outbreak (O127:H6) E. coli isolate. The remaining four primer sets
+                                                                (three overlapping: 0220, 0376, and 0393; and 0901) amplify two
+                                                                regions within a putative prophage gp20 transfer protein. The
+
+                                                                predicted amplicon for the 0393 primer set encompassed only
+                                                                sequence that would have been amplified from a combination of
+                                                                0220 and 0376 pairs. Hence, of these sets, only 0393 was carried
+
+                                                                forward for validation.
+                                                                   Five primer sets (0237, 0393, 0396, 0781, 0901) were taken
+                                                                forward for experimental validation of their discriminatory ability
+
+                                                                under standard PCR conditions. Validation took place against two
+                                                                groups of pathogenic E. coli: group 1 was a ‘positive’ set comprising
+                                                                21 clinical O104:H4 isolates from the recent German outbreak,
+
+                                                                collected from Universita¨tsklinikum Mu¨nster [31]; group 2 was a
+                                                                ‘negative’ set and comprised 28 HUSEC isolates from the
+                                                                Universita¨tsklinikum Mu¨nster collection [32], and four additional
+
+                                                                EPEC and/or HUSEC isolates (Supplementary Table S2). The
+                                                                sequenced outbreak isolate LB226692 [3] served as a positive
+                                                                control.
+
+                                                                   Each of the primer sets exhibited 100% sensitivity for the 21
+                                                                ‘positive’ outbreak isolates in group 1, with 82–94% specificity,
+                                                                and false discovery rates between 9% and 22% (Figure 3; Table 1;
+
+                                                                Supplementary Table S3). It was possible, using a minimal
+                                                                combination of two primer sets (e.g. 0393 and 0237) to
+                                                                discriminate between the 21 outbreak O104:H4 isolates and all
+
+                                                                32 non-outbreak E. coli isolates in our validation dataset with
+                                                                absolute sensitivity and specificity. Thus, on the basis of draft
+                                                                bacterial genome sequences, our strategy rapidly generated a bank
+
+                                                                of PCR primers that were able to discriminate absolutely between
+                                                                the recent German outbreak E. coli O104:H4 isolates and other E.
+                                                                coli, including a historical isolate with the same serotype.
+
+
+                                                                Discussion
+
+                                                                   The E. coli O104:H4 outbreak in the summer of 2011 caused
+
+                                                                significant loss of life and incurred financial and political
+                                                                consequences affecting countries on more than one continent. At
+                                                                that time, the discriminatory primer set for E. coli O104:H4
+
+                                                                comprised a bank of four primers, targeted to specific functional
+                                                                sequences: the O-antigen (rfbO104), the flagellar locus (fliC H4), the
+                                                                tellurite resistance gene (terD), and the toxin gene stx2, which was
+
+
+
+PLoS ONE | www.plosone.org                                   4                            April 2012 | Volume 7 | Issue 4 | e34498
+                                                                                                  Highly Specific Diagnostic Primer Design Using HTS
+
+
+
+
+                                                                                Table 1. Statistical performance metrics for diagnostic primer
+
+                                                                                sets.
+
+
+
+                                                                                Primer set:              393       901      781      396      237
+
+                                                                        :   P   T11 121212 22
+
+                                                                       :    P   F       3  4 2 2   6
+
+                                                                         :  N   T71 129303 23
+
+                                                                       :    N   F       0  0 0 0   0
+
+                                                                                Sensitivity (recall):    1.00      1.00     1.00     1.00     1.00
+
+                                                                                Specificity:             0.91      0.88     0.94     0.94     0.82
+                                                                                PPV (precision):         0.88      0.84     0.91     0.91     0.78
+
+                                                                                FPR:                     0.09      0.12     0.06     0.06     0.18
+
+                                                                                FDR:                     0.13      0.16     0.09     0.09     0.22
+
+                                                                                F-measure:               0.93      0.91     0.95     0.95     0.88
+
+                                                                                The confusion matrix counts (TP: true positive; FP: false positive; TN: true
+
+                                                                                negative; FN: false negative) derived from the experimental validation tests
+                                                                                against unseen isolates of E. coli are presented. No false negatives were
+                                                                                identified by any individual primer set. Derived performance measures are also
+                                                                                indicated (PPV: positive predictive value; FPR: false positive rate; FDR: false
+                                                                                discovery rate; F-measure: 26recall6precision/(recall+precision)). All primer sets
+
+                                                                                amplify all positive examples, and have specificity between 82–94%, with 9–
+                                                                                22% false discovery rate.
+                                                                                doi:10.1371/journal.pone.0034498.t001
+
+
+                                                                               was unique amongst our negative set of validation bacteria in that
+                                                                               a positive result was seen with all primer sets other than 0237. This
+
+                                                                               result is indicative of differences in the TEM-1 plasmid harbouring
+                                                                               CTX-M-15 on the Tn3 transposon. It is notable that primer set
+
+                                                                               0237 also amplifies four HUSEC isolates and two additional E. coli
+                                                                               O104 isolates (Figure 3; Table 1).
+
+                                                                                 Rapid generation of draft genome sequences for bacterial
+                                                                               pathogens involved in disease outbreaks presents an opportunity
+
+                                                                               for the generation of powerful discriminatory diagnostics that has
+                                                                               not previously been available. There have been several proposals
+
+                                                                               for strategies to exploit such data for diagnostic primer design,
+                                                                               each of which involves the pre-identification of sequence regions
+
+                                                                               common to a set of target sequences, and the design of primers
+
+                                                                               that amplify those regions [12–17]. A recent such study has used
+                                                                               draft genome sequences to design discriminatory primers to
+
+                                                                               outbreak O104:H4 isolates [17]. Our strategy avoids limitations of
+                                                                               these methods in the following key ways.
+
+                                                                                 Methods such as KPATH [16] that depend on the construction
+                                                                               of consensus regions from whole genome multiple alignments are
+
+                                                                               particularly computationally intensive due to the whole genome
+Figure 3. PCR amplicons from the E. coli clinical isolates,                    alignment step. This has a heavy scaling penalty when more than a
+
+grouped by primer set. Composite (negative) images from multiple               small number of genomes are aligned that is avoided by methods
+agarose gels have been aligned          against the matching isolate           such as TOFI, Insignia, and ssGeneFinder, by the use of pairwise
+designation (left hand column) and below the primer names (top
+                                                                               genome alignment or progressive sequence subtraction, which is
+row). The image has been split so that Group 1 isolates are located in         computationally more efficient [12,13,15,17]. However, as has
+the top section, Group 2 isolates in the second and the positive and
+negative controls at the bottom. The HUSEC isolates within Group 2 are         been noted elsewhere [12], TOFI and Insignia are limited in their
+bounded by dashed lines and E. coli HUSEC041 indicated in red font.            application, by design. Insignia restricts the design of primers to
+
+doi:10.1371/journal.pone.0034498.g003                                          sequences that are already present in the server’s database, and
+
+                                                                               TOFI is only capable of designing features for microarray-based
+unable to discriminate the historical HUSEC041 isolate from the                diagnostic assays [13,15].
+
+outbreak strain [3,22,33]. The primers designed in this study                    The ssGeneFinder package uses progressive alignment and
+improve on this, as fewer primers are required to distinguish with             subtraction of regions of similarity to off-target sequence in order
+
+greater specificity between outbreak and non-outbreak strains,                 to restrict primer design to potentially discriminatory regions of
+including the historical HUSEC041 O104:H4 strain.                              the target sequences [17]. Similarly, TOPSI identifies common
+
+   At the time of writing, the E. coli O104:H4 outbreak isolate                regions of target genomes that are not shared with off-target
+reservoir remains to be determined, but our primer sets support                genomes to design primer sequences that are predicted to amplify
+
+recent conclusions that the sequenced outbreak E. coli LB226692                only target sequences [12]. By contrast, our strategy is alignment-
+isolate belongs to the HUSEC complex [2,3,5,33]. HUSEC041                      free in that no genome alignment takes place prior to primer
+
+
+
+
+       PLoS ONE | www.plosone.org                                          5                               April 2012 | Volume 7 | Issue 4 | e34498
+                                                                                          Highly Specific Diagnostic Primer Design Using HTS
+
+
+
+design. This has two advantages over pairwise alignment. It             sequence, or fail to identify any possible target class, may result in
+
+eliminates a computationally intensive step from the pipeline, and      a shorter run time at this step.
+it enables the simultaneous design of primers that discriminate           Primer validation in vitro against isolates that were not used in
+between several subclasses of input sequence.                           the primer design process is an essential step to establish the
+
+   For example, consider a set of input sequences that comprises        efficacy of the designs, regardless of the primer design strategy. Ho
+several isolates of two species within the same genus (‘Bacterium       et al., who also designed discriminatory primers to E. coli O104:H4
+alpha’ and ‘Bacterium beta’), and a set of related isolates that are notusing ssGeneFinder, described three primer pairs that were
+
+from that genus (‘Anabacterium spp.’). In order to design primer sets   validated in vitro on a collection of 65 E. coli isolates, 25 culture-
+that discriminate at the genus level and positively identify each       negative stool samples, and 7 environmental soil samples, but the
+species, a method that relies on genome alignment to generate a         nature and pathogenic or clinical relevance of those isolates is
+
+consensus sequence specific to each target group would need to be       otherwise unclear [17]. We applied a more comprehensive and
+applied three times: once to generate primers specific to the genus,    rigorous validation test to our primer sets, using a robust bank of
+and twice more to generate primers that target each species. By         serotyped outbreak and non-outbreak clinical E. coli isolates, and
+
+avoiding pairwise genome alignment and generating a single large        were able to establish that our predicted primers could be used to
+set of thermodynamically plausible and potentially discriminatory       discriminate between isolates from different outbreaks, but with
+primers (a relatively cheap process, computationally) we are able       the same serotype. Some differences in the intensity of the PCR
+
+to test each primer for the ability to discriminate between arbitrary   bands were evident, although the vast majority were strongly
+groupings of the input sequences on a single application of the         positive, indicative of a high concentration of amplified product.
+method. We have applied our strategy successfully to the draft          There was evidence of low specificity binding, in particular with
+genomes of 25 bacterial isolates for simultaneous design of primers     primer set 0781. Although it is not always possible to circumvent
+
+that discriminate between six species within a single bacterial         such issues with PCR, and quantitative (q)PCR could be used to
+genus, and that distinguish members of the genus from non-              define the response more precisely, our use of conventional PCR
+members of the genus, in a single pass (LP, unpublished data).          showed clear differences in the ‘positive’ and non-specific signals
+
+   Alignment-based methods typically require substantial similarity     that were deemed ‘negative’ (Fig. 2).
+between target sequences in order to raise potentially discrimina-        PCR-based methods for diagnostic identification of bacterial
+tory primer predictions. This is not the case for our alignment-free    isolates on a large scale are likely to remain a robustly useful
+
+method, which may help eliminate another limitation of those            technology, even in a potential future of very cheap bacterial
+methods: the difficulty of designing signatures for viral genomes.      genome sequencing. Arguably, high-throughput sequencing is
+These are small and highly variable, posing a particular problem        already the most economic approach to typing a bacterium and,
+
+for whole genome alignment [12,14]. We have as yet no data for          given current trends of increasing pervasiveness and falling cost of
+the design of primers to viral sequences using our approach, but a      the technology, this is unlikely to change. However, high-
+comparison with alignment-based methods would potentially be            throughput sequencing technology is not yet sufficiently wide-
+
+informative, as for short sequences our strategy encompasses the        spread or cheap to enable rapid sequencing of each bacterial
+possibility of exhaustive design and explicit in silico cross-          isolate, every suspected case of infection, or all samples collected
+amplification testing of thermodynamically plausible primers. This      from every potential source of infection. In situations such as the
+
+may reveal diagnostic primer sets, or panels, that would not be         tracking of a disease outbreak, or prophylactic screening, there will
+found when focusing on aligned regions of high sequence                 remain a place for molecular diagnostic tests on economic grounds
+similarity.                                                             alone, as costs (and downstream analysis effort) for diagnostic PCR
+
+   The central limitation of alignment-based primer design              test of a bacterial sample are likely to remain favourably
+methods is their reliance on the presence of a conserved signature      comparable that of sequencing for some time to come.
+of sufficient length to which primers may be designed. If such a          The increasing global footprint and reducing cost of high-
+
+region is shared by some, but not all, sequences in the target set,     throughput sequencing is, however, an extremely important
+that region is excluded from consideration for primer design. This      component of the potential future applicability of our strategy
+is a particular issue for the design of primer sets to draft or         for primer design, which rests on the availability of a sufficient
+incomplete bacterial genome sequences, as regions of potentially        number of well-chosen example genome sequences. The E. coli
+
+high discriminatory capacity may be eliminated because of a single      O104:H7 outbreak was highly unusual in this regard, as there
+low-quality or incomplete sequence [12]. Our alignment-free             already existed a large number of publicly available reference
+approach does not exclude these regions so that, where it arises        genome sequences, and high-throughput sequencing was rapidly
+
+that one or more incomplete or low-quality sequences would              applied to generate a reasonable number of genomes for outbreak
+prevent alignment methods from identifying a consensus region for       isolates. This fortunate situation might not have occurred in 2011
+primer design, it would still be possible to identify primers, or sets  for an outbreak of any other pathogenic bacterium that had not
+
+of primers, that amplify only members of the target sequence set.       been the focus of a great deal of historical sequencing effort. We
+   Our implementation of the primer design strategy for this study      expect that future outbreaks of bacterial contamination and
+suffered from known scaling issues associated with the Primer-          infection will be in a better position to exploit modern sequencing
+
+Search software chosen for the in silico cross-validation prediction    technologies, both for outbreak strains and for reference strains
+step. Of the total 90 hour running time, 88 hours was spent on this     held in bacterial collections. A future $10–$50 bacterial genome
+calculation (see Supplementary Figure S2). Our primer design            sequence may in this way underpin the design of extremely
+
+strategy is modular, and it would be possible to exchange the           inexpensive and rapid, but robust, PCR-based diagnostic tests for
+PrimerSearch package for any equivalent, faster approach that           application ‘in the field’.
+identified potential cross-amplification. We identified no direct         By our method, the predicted specificity of diagnostic PCR
+
+replacement for this package during the study, but alternative          primers is determined by the size, coverage and composition of the
+algorithms based on established approaches to short read mapping        training and screening sequence sets used to generate them, and
+(e.g. [34–36]), or that exclude candidate primer sets from              by the nature of the differences between the classes one aims to
+
+consideration at the first indication that they amplify an off-target   distinguish. The purpose of diagnostic primer sets such as those
+
+
+       PLoS ONE | www.plosone.org                                    6                            April 2012 | Volume 7 | Issue 4 | e34498
+                                                                                            Highly Specific Diagnostic Primer Design Using HTS
+
+
+
+designed in this study is to classify previously unseen samples,         monitoring of primer specificity as new sequences become
+
+ideally with a quantifiable degree of confidence, but classifications    available.
+can be drawn along arbitrary lines that may or may not coincide             Our results demonstrate that timely sequencing of representa-
+with taxonomic class or biochemical capability. Where the                tive isolates of disease outbreak bacteria enables high throughput
+
+differences between classes are such that they cannot be detected        diagnostic primer design that exceeds the discriminatory capabil-
+using PCR primers, such as for genomes with extremely low                ities achieved using restricted sets of known ‘housekeeping’ genes,
+
+sequence diversity, the approach described here is inappropriate.        or contributors to virulence, that typically characterise molecular
+Previous applications of our primer design strategy have,                assays. In combination with the genome-wide alignment-free
+unsurprisingly, failed when attempting to discriminate between
+                                                                         diagnostic primer design strategy described here, the rapid
+nearly clonal isolates of the same bacterial species (LP,                sequencing of representative O104:H4 outbreak isolates enabled
+unpublished data).
+                                                                         precise molecular diagnostics to be designed that were targeted
+   Horizontal gene transfer is a key contributor to the evolutionary     directly to the outbreak isolates.
+dynamics of pathogenic bacteria [1,37,38], and has particular
+implications for the ability to generate diagnostic primers specific
+                                                                         Supporting Information
+to a novel outbreak. Where an emergent pathogen has obtained
+virulence factors in this manner, it may be distinguished from its       Figure S1     Flowchart of the primer design process. Flowchart
+
+close phylogenetic relatives by primers that amplify the laterally       indicating steps implemented in the find_differential_primers.py
+acquired region. However, such primers will likely produce false         Python primer prediction script, and the effects of major
+
+positives against the bacteria from which the region was acquired,       command-line options.
+if applied in isolation. Careful choice of training classes, screening   (EPS)
+database, validation strains, and the use of panels of several
+                                                                         Figure S2     Flowchart of the primer design process for O104:H4
+diagnostic primers (perhaps specific to different classes) can help
+overcome this issue. On a practical level, although all primer sets      specific primers, indicating the number of primers retained at, and
+                                                                         timings for, each step.
+designed in this study were predicted to be specific to outbreak
+O104:H4 isolates, we found in experimental validation that a             (EPS)
+combination of at least two primer sets was required for absolute
+                                                                         Table S1     Primers designed to amplify E. coli O104:H4 outbreak
+specificity. (Cross)-validation is a key step in the production of any   isolates.
+classifier, and is especially important here, where the background
+                                                                         (DOC)
+variation is likely to be great in comparison with the sequences
+chosen for the training and primer discovery step.                       Table S2      Strains used in the experimental validation of
+                                                                         predicted diagnostic PCR primers.
+   Training and screening sequence datasets are necessarily
+incomplete and biased, as they cannot reasonably contain                 (DOC)
+sequences for every isolate that is known or may be encountered
+                                                                         Table S3     Experimental validation results for predicted diagnos-
+in the field, and nor can they encompass the full range of variation     tic primer sets.
+across bacteria. The rate of addition of complete and draft
+                                                                         (DOC)
+sequences to the public databases is however very rapid, and offers
+an opportunity for continued monitoring of primer specificity in         Methods S1
+silico as new sequences become publicly available. Identification of     (DOC)
+
+potential off-target amplification against newly published sequenc-
+es in silico may be automated to flag a need for revision of primer      Acknowledgments
+
+specificity, and possible primer redesign. Subsequent to the             We thank Nadine Brandt for technical support.
+experimental validation of the predicted primers in this study,
+
+the complete sequence of a novel E. coli isolate (UMNF18;                Author Contributions
+GenBank CP002890.1) that was unavailable during our training
+and validation process was entered into public repositories. This        Conceived and designed the experiments: LP NJH IKT. Performed the
+
+genome exhibits in silico potential off target amplification by the      experiments: LP NJH MB HK IKT. Analyzed the data: LP NJH.
+four primers that target the gp20 transfer sequence (0220, 0376,         Contributed reagents/materials/analysis tools: LP NJH HK MB. Wrote
+                                                                         the paper: LP NJH MB HK IKT.
+0393, and 0901), highlighting the necessity for continued
+
+
+References
+
+1.  Holden N, Pritchard L, Toth IK (2009) Colonization outwith the colon: plantsng D, Zhang L, Wang D, Suo B, Shi X (2010) A PCR Method for the
+    as an alternative environmental reservoir for human pathogenic enterobacteria.tion of Listeria Monocytogenes Based on a Novel Target Sequence
+    FEMS Microbiology Reviews 33: 689–703. doi:10.1111/j.1574-               Identified by Comparative Genomic Analysis. J Food Safety 30: 832–847.
+    6976.2008.00153.x.                                                       doi:10.1111/j.1745-4565.2010.00245.x.
+2.  Rohde H, Qin J, Cui Y, Li D, Loman NJ, et al. (2011) Open-source genomic Zhu D-S, Zhou M, Fan Y-L, Shi X-M (2009) Identification of New Target
+    analysis of Shiga-toxin-producing E. coli O104:H4. N Engl J Med 365: 718–724.ences for PCR Detection of Vibrio Parahaemolyticus by Genome
+    doi:10.1056/NEJMoa1107643.                                               Comparison. J Rapid Meth Aut Mic 17: 67–79. doi:10.1111/j.1745-
+3.  Mellmann A, Harmsen D, Cummings CA, Zentz EB, Leopold SR, et al. (2011)  4581.2009.00158.x.
+    Prospective Genomic Characterization of the German Enterohemorrhagic 8.  Grisham MP, Pan YB, Richard EPJ (2007) Early detection of Leifsonia xyli subsp
+    Escherichia coli O104:H4 Outbreak by Rapid Next Generation Sequencing    xyli in sugarcane leaves by real-time polymerase chain reaction. Plant Dis 91:
+    Technology. PLoS ONE 6: e22751. doi:10.1371/journal.pone.0022751.        430–434. doi:10.1094/PDIS-91-4-0430.
+4.  E. coli O104:H4 Genome Analysis Crowdsourcing - GitHub (n.d.) E. coli9.  Schaad N, Schaad YB (2007) A high throughput membrane BIO-PCR
+
+    O104:H4 Genome Analysis Crowdsourcing - GitHub. githubcom. Availa-       technique for ultra-sensitive detection of Pseudomonas syringae pv. phaseolicola.
+    ble:https://github.com/ehec-outbreak-crowdsourced/BGI-data-analysis/wiki.Plant Pathol.
+    Accessed 27 June 2011.                                               10. Schaad NW, Opgenorth D, Gaush P (2002) Real-Time Polymerase Chain
+5.  Rasko DA, Webster DR, Sahl JW, Bashir A, Boisen N, et al. (2011) Origins ofaction for One-Hour On-Site Diagnosis of Pierce’s Disease of Grape in Early
+    the E. coli strain causing an outbreak of hemolytic-uremic syndrome in   Season Asymptomatic Vines. Phytopathology 92: 721–728. doi:10.1094/
+    Germany. N Engl J Med 365: 709–717. doi:10.1056/NEJMoa1106920.           PHYTO.2002.92.7.721.
+
+
+
+       PLoS ONE | www.plosone.org                                     7                             April 2012 | Volume 7 | Issue 4 | e34498
+                                                                                                           Highly Specific Diagnostic Primer Design Using HTS
+
+
+
+
+11. Tsen HY, Jian LZ (1998) Development and use of a multiplex PCR system for         25. NCBI Reference Sequence (RefSeq) Database (n.d.) NCBI Reference Sequence
+     the rapid screening of heat labile toxin I, heat stable toxin II and shiga-like toxin (RefSeq) Database. ncbi.nlm.nih.gov. Available:http://www.ncbi.nlm.nih.gov/
+     I and II genes of Escherichia coli in water. J Appl Microbiol 84: 585–592.            RefSeq. Accessed 6 September 2011.
+
+12. Vijaya Satya R, Kumar K, Zavaljevski N, Reifman J (2010) A high-throughput        26. Rozen S, Skaletsky H (2000) Primer3 on the WWW for general users and for
+     pipeline for the design of real-time PCR signatures. BMC Bioinformatics 11:           biologist programmers. Methods Mol Biol 132: 365–386.
+     340. doi:10.1186/1471-2105-11-340.                                               27. Rice P, Longden I, Bleasby A (2000) EMBOSS: The European molecular
+
+13. Vijaya Satya R, Zavaljevski N, Kumar K, Bode E, Padilla S, et al. (2008) In silico     biology open software suite. Trends Genet 16: 276–277.
+     microarray probe design for diagnosis of multiple pathogens. BMC Genomics 9:     28. Hyatt D, Chen G-L, Locascio PF, Land ML, Larimer FW, et al. (2010) Prodigal:
+     496. doi:10.1186/1471-2164-9-496.
+14. Phillippy AM, Mason JA, Ayanbule K, Sommer DD, Taviani E, et al. (2007)                prokaryotic gene recognition and translation initiation site identification. BMC
+                                                                                           Bioinformatics 11: 119. doi:10.1186/1471-2105-11-119.
+     Comprehensive DNA signature discovery and validation. PLoS Comp Biol 3:          29. Altschul S, Madden T, Schaffer A, Zhang J, Zhang Z, et al. (1997) Gapped
+     e98. doi:10.1371/journal.pcbi.0030098.
+15. Phillippy AM, Ayanbule K, Edwards NJ, Salzberg SL (2009) Insignia: a DNA               BLAST and PSI-BLAST: a new generation of protein database search
+                                                                                           programs. Nucleic Acids Res 25: 3389–3402.
+     signature search web server for diagnostic assay development. Nucleic Acids Res  30. NCBI RefSeq Database (n.d.) NCBI RefSeq Database. Available:http://www.
+     37: W229–34. doi:10.1093/nar/gkp286.
+16. Slezak T, Kuczmarski T, Ott L, Torres C, Medeiros D, et al. (2003)                     ncbi.nlm.nih.gov/RefSeq. Accessed 6 September 2011.
+                                                                                      31. Bielaszewska M, Mellmann A, Zhang W, Ko¨ck R, Fruth A, et al. (2011)
+     Comparative genomics tools applied to bioterrorism defence. Brief Bioinfor-           Characterisation of the Escherichia coli strain associated with an outbreak of
+     matics 4: 133–149.
+17. Ho C-C, Yuen K-Y, Lau SKP, Woo PCY (2011) Rapid identification and                     haemolytic uraemic syndrome in Germany, 2011: a microbiological study.
+                                                                                           Lancet Infect Dis 11: 671–676. doi:10.1016/S1473-3099(11)70165-7.
+     validation of specific molecular targets for detection of Escherichia coli O104:H32. Mellmann A, Bielaszewska M, Ko¨ck R, Friedrich AW, Fruth A, et al. (2008)
+     outbreak strain by use of high-throughput sequencing data from nine genomes.
+     J Clin Microbiol 49: 3714–3716. doi:10.1128/JCM.05062-11.                             Analysis of collection of hemolytic uremic syndrome-associated enterohemor-
+18. Maiden MCJ (2006) Multilocus sequence typing of bacteria. Annual Review of             rhagic Escherichia coli. Emerging Infect Dis 14: 1287–1290. doi:10.3201/
+                                                                                           eid1408.071082.
+     Microbiology 60: 561–588. doi:10.1146/annurev.micro.59.030804.121325.
+19. Tibayrenc M (2009) Multilocus enzyme electrophoresis for parasites and other      33. Cheung MK, Li L, Nong W, Kwan HS (2011) 2011 German Escherichia coli
+     pathogens. Methods Mol Biol 551: 13–25. doi:10.1007/978-1-60327-999-4_2.              O104:H4 outbreak: whole-genome phylogeny without alignment. BMC Res
+
+20. Gu¨rtler V, Mayall BC (2001) Genomic approaches to typing, taxonomy and                Notes 4: 533. doi:10.1186/1756-0500-4-533.
+     evolution of bacterial isolates. Int J Syst Evol Micr 51: 3–16.                  34. Li R, Yu C, Li Y, Lam T, Yiu S, et al. (2009) SOAP2: an improved ultrafast tool
+21. Lindstedt B-A, Heir E, Gjernes E, Kapperud G (2003) DNA fingerprinting of              for short read alignment. Bioinformaticsdoi:10.1093/bioinformatics/btp336.
+
+     Salmonella enterica subsp. enterica serovar typhimurium with emphasis on phage   35. Campagna D, Albiero A, Bilardi A, Caniato E, Forcato C, et al. (2009) PASS: a
+     type DT104 based on variable number of tandem repeat loci. J Clin Microbiol           Program to Align Short Sequences. Bioinformaticsdoi:10.1093/bioinformatics/
+     41: 1469–1479.                                                                        btp087.
+
+22. E. coli O104 PCR primer white paper (n.d.) E. coli O104 PCR primer white          36. Homer N, Merriman B, Nelson SF (2009) BFAST: An Alignment Tool for
+     paper. klinikumuni-muensterde.                                                        Large Scale Genome Resequencing. PLoS ONE 4: e7767. doi:10.1371/
+23. Reinhardt JA, Baltrus DA, Nishimura MT, Jeck WR, Jones CD, et al. (2009) De            journal.pone.0007767.
+
+     novo assembly using low-coverage short read sequence data from the rice          37. Toth IK, Pritchard L, Birch PRJ (2006) Comparative genomics reveals what
+     pathogen   Pseudomonas syringae pv. oryzae. Genome Res 19: 294–305.                   makes an enterobacterial plant pathogen. Annu Rev Phytopathol 44: 305–336.
+     doi:10.1101/gr.083311.108.                                                            doi:10.1146/annurev.phyto.44.070505.143444.
+24. NCBI Bacterial Genome Sequence FTP Index (n.d.) NCBI Bacterial Genome
+                                                                                      38. Pallen MJ, Wren BW (2007) Bacterial pathogenomics. Nature 449: 835–842.
+     Sequence FTP Index. ncbinlmnihgov. Available:ftp://ftp.ncbi.nlm.nih.gov/              doi:10.1038/nature06248.
+     genomes/Bacteria. Accessed 6 September 2011.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        PLoS ONE | www.plosone.org                                                8                                  April 2012 | Volume 7 | Issue 4 | e34498

@@ -1,0 +1,997 @@
+     Copyedited by: TRJ                                            MANUSCRIPT CATEGORY:REVIEW
+
+
+
+
+
+
+
+                                                                                                       Vol. 28 no. 9 2012, pages 1193–1201
+             BIOINFORMATICS                                          REVIEW                               doi:10.1093/bioinformatics/bts116
+
+
+
+             Systems biology                                                                     Advance Access publication March 14, 2012
+
+
+             Industrial methodology for process veriﬁcation in research
+
+             (IMPROVER): toward systems biology veriﬁcation
+
+                              1,†                   2,†                       1,†                   1                     3
+             Pablo Meyer          , Julia Hoeng        , J. Jeremy Rice           Raquel Norel , Jörg Sprengel , Katrin
+                     2                     2                             3                    1,∗                            2,∗
+             Stolle , Thomas Bonk , Stephanie Corthesy , Ajay Royyuru                             , Manuel C. Peitsch            and
+                                        1,∗
+             Gustavo Stolovitzky
+             1IBM Computational Biology Center, Yorktown Heights, 10598 NY, USA, Phillip Morris Products SA, Research and
+                                                                 3
+             Development, 2000, Neuchâtel, Switzerland and IBM Life Sciences Division,8802, Zurich, Switzerland
+             Associate Editor: Jonathan Wren
+
+
+
+             ABSTRACT                                                        efforts. This uses algorithmic analyses to interpret the data and
+             Motivation: Analyses and algorithmic predictions based on high- mathematicalmodelsarebuilttopredictyetunmeasuredstatesofthe
+
+             throughput data are essential for the success of systems biology inlogical system. However, algorithms and models are not unique
+             academic and industrial settings. Organizations, such as companiesd the determination of the right algorithm and model leading to the
+                                                                             true interpretation of the natural phenomena under study becomes a
+             and academic consortia, conduct large multi-year scientiﬁc studies
+             that entail the collection and analysis of thousands of individualndamental question that falls within the realm of the philosophy
+             experiments, often over many physical sites and with internal andf science.
+                                                                               Popper postulated (Popper, 1959) that a hypothesis, proposition,
+             outsourced components. To extract maximum value, the interested
+             parties need to verify the accuracy and reproducibility of data theory or in the case of systems biology a model, is ‘scientiﬁc’
+             and methods before the initiation of such large multi-year studies.y if it is falsiﬁable. In Popper’s thesis, a theory can be proven
+                                                                             wrong by producing evidence that is inconsistent with the theory. In
+             However, systematic and well-established veriﬁcation procedures do
+             not exist for automated collection and analysis workﬂows in systemstrast, a theory cannot be proven correct by evidence because
+             biology which could lead to inaccurate conclusions.             other evidence, yet to be discovered, may exist that will falsify
+                                                                             the theory. Conversely, according to the veriﬁcationist school, a
+             Results: We present here, a review of the current state of systems
+             biology veriﬁcation and a detailed methodology to address its   scientiﬁc statement is signiﬁcant only if it is a statement of logic
+             shortcomings. This methodology named ‘Industrial Methodology    (such as a mathematical statement deduced from axioms) or if the
+                                                                             statement can be veriﬁed by experience (Ayer, 1936). Statements
+             for Process Veriﬁcation in Research’ or IMPROVER, consists on
+             evaluating a research program by dividing a workﬂow into smallerthat do not meet these criteria of being either analytic or empirically
+             building blocks that are individually veriﬁed. The veriﬁcation oferiﬁable are judged to be non-sensical.
+                                                                               The McGraw-Hill Concise Dictionary of Modern Medicine©
+             each building block can be done internally by members of the
+             research program or externally by ‘crowd-sourcing’ to an interested02) deﬁnes veriﬁcation as: ‘The process of evaluating a system,
+             community. www.sbvimprover.com                                  component or other product at the end of its development cycle
+                                                                             to determine whether it meets projected performance goals’
+             Implementation: This methodology could become the preferred
+             choice to verify systems biology research workﬂows that are     (http://medical-dictionary.thefreedictionary.com/veriﬁcaForn).
+             becoming increasingly complex and sophisticated in industrial andystems biology, a fundamental question to address is how to
+                                                                             verify the correctness of a model that integrates vast amounts
+             academic settings.
+             Contact: gustavo@us.ibm.com                                     of data into a representation of reality. These data are not only
+                                                                             high-dimensional but noisy given the biological variability, sample
+             Received on November 16, 2011; revised on February 8, 2012;
+             accepted on March 5, 2012                                       preparation inconsistencies and measurement noise inherent to
+                                                                             the sensor instrumentation. While the concept of veriﬁcation
+                                                                             may be applied to different contexts with slightly different
+
+             1   BACKGROUND AND PHILOSOPHY OF                                meanings, here we always use veriﬁcation as checking for the
+                                                                             truth or correctness of either data (i.e. whether the data represents
+                 SYSTEMS BIOLOGY VERIFICATION                                what we wish to measure) or the correctness of a theory’s
+
+             1.1  What is veriﬁcation?                                       predictions.
+             In the past two decades molecular biology has experienced an
+
+             increase in the amount and diversity of data that are produced t1.2  Crisis in peer-review/slow and low throughput
+             answer key scientiﬁc questions. Systems biology has emerged as a
+             new paradigm for the integration of experimental and computationale quality of a scientiﬁc prediction or the accuracy of a scientiﬁc
+                                                                             model is the subject of rigorous scrutiny, usually by the researchers
+             ∗
+              To whom correspondence should be addressed.                    themselves or by colleagues in the peer-review process that is at the
+             †The authors wish it to be known that, in their opinion, the ﬁrsheart of scientiﬁc publishing (Spier, 2002). As stated by the editors
+             should be regarded as joint First Authors.                      of the journal Science (Alberts et al., 2008),
+
+
+
+             © The Author(s) 2012. Published by Oxford University Press.
+
+             This is an Open Access article distributed under the terms of the Creative Commons Attribution Non-Commercial License (http://creativecommons.org/licenses/
+             by-nc/3.0), which permits unrestricted non-commercial use, distribution, and reproduction in any medium, provided the original work is properly cited.
+
+
+
+
+[12:41 9/4/2012 Bioinformatics-bts116.tex]                                                                                       Page: 1191193–1201
+     Copyedited by: TRJ                                                   MANUSCRIPT CATEGORY:  REVIEW
+
+
+
+
+
+
+
+           P.Meyer et al.
+
+
+
+             peer review is under increasing stress […]The growth of scientiﬁc   practices in research evaluation that go far beyond simple indexing
+
+             publishing is placing a burden on the entire scientiﬁc enterprise.  and content annotation (as in PubMed, for example). The journal
+             Papers today are more interdisciplinary, use more techniques,       PLoS ONE and now even mainstream sites likeTwitter have become
+
+             and have more authors. Many have large volumes of data and          places where manuscripts are publicly criticized (Mandavilli, 2011).
+             supplementary material.                                             We think that these changes in research evaluation, while valuable,
+                                                                                 will not have sufﬁcient rigor and consistency for the needs of
+           Thecomingofageofsystemsbiologyanditscomputationalmethods
+           such as data-interpreting algorithms are challenging the peer-review  research workﬂows veriﬁcation.
+
+           process as large numbers of simultaneous predictions are generated,
+           but only a small minority is tested. In the best cases, a very small  2   COMMUNITY APPROACHES FOR SCIENCE
+           sampling of predictions are veriﬁed using sound experimental assays
+                                                                                     VERIFICATION
+           and methods and then are presented as representative conﬁrmation
+           of the soundness of the entire set of predictions. Typically, this    2.1   Community consensus as criteria of science
+                                                                                       done right
+           veriﬁcation method lacks sufﬁcient rigor, objectivity and a clear
+           characterization of the relative strengths and weaknesses of the      A natural evolution of allowing community feedback has been
+           algorithms (Dougherty, 2010; Jelizarow et al., 2010; Mehta et al.,    the development of crowd-sourcing, a modality of distributed
+
+           2004).                                                                problem-solving. Challenges are broadcasted to potential interested
+             The same lack of rigor in veriﬁcation of model predictions          stakeholders (solvers) in the form of an open call for participation.
+           can be found in many areas of science where complex systems
+                                                                                 Participants submit solutions for the challenges, and the best
+           are measured, analyzed and modeled. For example, in systems           solutions are typically chosen by the crowd-sourcer (the entity
+           biology, high-throughput data are collected and analyzed together     that broadcasted the challenge). The top performing participants
+
+           with insufﬁcient veriﬁcation. Speciﬁcally, false positive and, equallyare sometimes rewarded either with monetary awards, prizes,
+           important, false negative rates, are rarely considered a requisite    certiﬁcates or with recognition. We think that such directed
+           for veriﬁcation of the analysis for publication. Consider that        community approaches could complement and enhance the peer-
+
+           the ﬁrst experimentally-generated, genome-wide interactomes in        review process. Most importantly, we think that these could serve
+           yeast (Gavin et al., 2006; Ito et al., 2001; Uetz and Hughes,         as a tool to verify the scientiﬁc results and fulﬁll the ultimate goal of
+           2000) showed minimal overlap, generating some concerns within         scientiﬁc research that is to advance our understanding of the natural
+
+           the scientiﬁc community that the data and methodologies were          world (Meyer et al., 2011).
+           unreliable. Later work showed that high quality interactome maps         Community-based approaches to verify scientiﬁc research can be
+
+           could be generated by including controls and quality standards        considered a more focused attempt to tap the consensus building
+           in data collection, careful veriﬁcation of all interacting pairs      that historically occurs in scientiﬁc progress. Kuhn understood
+           and validation tests using independent, orthogonal assays (Dreze      progress in science as an eminently social process, in which the
+
+           et al., 2010). Similarly, Genome-WideAssociation Studies (GWAS)       scientiﬁc worldview is dominated by the paradigm embraced by
+           generate a high rate of false positives as correlations are found     the scientiﬁc community at any given time (Kuhn, 1962). When
+           for single nucleotide polymorphisms with no direct effect on the      the number of anomalies accumulated under the current paradigm
+
+           phenotype. The community responded by deﬁning a quality-control       generates distrust, the community may adopt a new paradigm that
+           process and software package for analysis (Purcell et al., 2007).     now guides how research is conducted. In this view, the scientiﬁc
+           Similar problems are found in other ﬁelds including protein structure
+                                                                                 community, and not just nature itself, needs to be taken into account
+           prediction (Moult et al., 1995), prediction of docking between        when considering what is accepted as ‘veriﬁed science’. For our
+           proteins (Wodak and Mendez, 2004), text mining from scientiﬁc         purposes, we abbreviate the typical deﬁnition of veriﬁcation given
+
+           literature (Hirschman et al., 2005) and biological network inference  in the ﬁrst paragraph to: ‘science done right’, where the ‘right’refers
+           (Stolovitzky et al., 2007). In these cases the response has been to   to the accepted best practices of the scientiﬁc community or similar
+           set up community-based efforts, as discussed below.                   criteria. Accepted best practices means that there is a consensus in
+
+                                                                                 the community as to the proper collection and analysis of a data
+           1.3   Proposed community approaches for science                       modality. Obviously, a modality must already be accessible to a
+
+                 veriﬁcation                                                     wide community for the consensus to form. For newly developed
+           The difﬁculties in verifying complex science with traditional         modalities, crowd-sourcing provides a means to a rapid consensus
+                                                                                 as to the best collection and analysis methodologies.
+           methods is driving changes in the methods of evaluation.
+           Advances in web technology (called web 2.0) have allowed
+                                                                                 2.2   Summary of community approaches for
+           communities to stay tightly in touch to develop their interests,
+           even when they are geographically dispersed. The journal Nature             veriﬁcation in other ﬁelds
+           developed in 2006 an experiment allowing an online public             Recent practices involving a new form of research quality control
+
+           review of manuscripts that in parallel were undergoing peer-review    have become well-established during the last decade and a half.
+           (http://www.nature.com/nature/peerreview/). Faculty of 1000 is an     These efforts have merged the need of scientiﬁc veriﬁcation
+           annotation service that allows researchers to locate outstanding or   of methods used in research, with the widespread practice of
+
+           inﬂuential papers from the whole body available that can completely   crowd-sourcing, to create a sort of collaboration-by-competition
+           overwhelm the individual. Faculty of 1000 has domain experts cull,    communities. The practice of this idea has been sufﬁciently well-
+
+           rate and summarize both the importance of the paper’s ﬁndings         established to become the business model of for-proﬁt companies.
+           and context within the ﬁeld and hence is a good example of new        In this section, we summarize three relevant community-based
+
+
+
+           1194
+
+
+
+
+
+
+
+[12:41 9/4/2012 Bioinformatics-bts116.tex]                                                                                                     Page: 11941193–1201
+      Copyedited by: TRJ                                                      MANUSCRIPT CATEGORY:   REVIEW
+
+
+
+
+
+
+
+                                                                                                                                                  IMPROVER
+
+
+
+
+               Table 1. Additional information for the eight community-based efforts described in the paper. The last row describes other efforts not discussed in the main
+               text
+
+
+               Name             Domain and Regularity                                                                    Website
+
+               KDD Cup          Knowledge discovery and machine learning in various domains.                             http://www.sigkdd.org
+
+                                Knowledge Discovery and Data Mining. Every year since launch in 1997.
+               InnoCentive      The name mixes Innovation and Incentive.                                                 http://www.innocentive.com/
+                                Crowd-sourcing for problems of commercial interest.
+
+                                Founded in 2001. New challenges are released on a rolling schedule.
+               Netﬂix Prize     The name comes from the sponsoring company, Netﬂix.                                      http://www.netﬂixprize.com//index
+
+                                Prediction of user ratings for ﬁlms, based on previous ratings.
+                                Only challenge so far, released in 2006, lasted 3 years to complete.
+               CASP             Critical Assessment of Techniques for Protein Structure Prediction.                      http://predictioncenter.org/
+
+                                Protein 3D structure prediction assessment.
+                                Every 2 years since 1994.
+               CAPRI            Critical Assessment of PRedicted Interactions. Assessment of predictions of              http://www.ebi.ac.uk/msd-srv/capri
+
+                                protein–protein docking or protein-DNA interaction from 3D structure.
+                                Goes by Round 22 since 2001. Starts whenever an experimentalist offers an adequate target.
+                                Predicted structures are submitted 6–8 weeks later.
+
+               DREAM            Dialogue for Reverse Engineering Assessments and Methods.                                http://www.the-dream-project.org/
+                                Assessment of quantitative modeling in systems biology.
+                                Every year since 2006.
+
+               BioCreAtIve      Assessment of Information Extraction Systems in Biology. Evaluating text mining          http://www.biocreative.org
+                                and information extraction systems applied to the biological literature.                 http://biocreative.sourceforge.net
+                                Every 2 years beginning in 2004.
+
+               FlowCAP          Flow Cytometry Critical Assessment of Population Id Methods.                             http://ﬂowcap.ﬂowsite.org/
+                                Evaluation of automated analysis of ﬂow cytometry data.                                  http://groups.google.com/group/ﬂowcap
+
+                                Only one iteration on 2010, second one on planning phase.
+
+               Others efforts TunedIT: http://tunedit.org/, RGASP-RNAseq Genome Annotation Assessment Project: www.sanger.ac.uk/PostGenomics/encode/RGASP.html Pittsburgh brain
+               competition: http://pbc.lrdc.pitt.edu/ CAMDA Critical Assessment of Microarray Data Analysis: http://camda.bioinfo.cipf.es/camda2011/ Genome Access Workshop evaluation
+
+               of statistical genetics approaches: http://www.gaworkshop.
+
+
+               veriﬁcation approaches with overlapping objectives but different                past movie preferences. The results were measured against
+
+               focus areas. Some relevant details of these efforts are listed in               the predictions proposed by Cinematch, the algorithm then
+               Table 1.                                                                        used by Netﬂix for customer preference prediction. In 2009,
+
+                                                                                               the $1M Grand Prize was awarded, and the description of the
+                   • Knowledge Discovery and Data Mining Cup (KDD Cup)                         best performing algorithm (if not the source code) was made
+
+                      is an annual competition organized by the Association                    publicly available.
+                      for Computing Machinery (ACM) Special Interest Group
+
+                      on Knowledge Discovery and Data Mining, the leading                2.3   Summary of community approaches for
+                      professional organization of data miners (Fayyad, 1996).
+                                                                                               veriﬁcation in the bio-sciences
+                      KDD goals are to achieve a better understanding and analysis
+                      of data in many knowledge domains, such as medical                 In this section, we summarize ﬁve different veriﬁcation approaches
+                                                                                         in the bio-sciences, with overlapping objectives but different
+                      informatics, consumer recommendations, diagnostics from            scientiﬁc focus. A summary of these efforts is listed in Table 1.
+                      imaging data and Internet user search query categorization.
+
+                                                                                             • CASP (CriticalAssessment of protein Structure Prediction) is
+                   • InnoCentive, a spin-off of Eli Lilly, was founded in 2001 to              used to objectively test structure prediction methods against
+                      match problems in need of solutions with problem solvers.
+                                                                                               experimentally found structures in a worldwide-community
+                     The main entry point of InnoCentive is a web portal where                 context (Moult et al., 1995; Moult, 1996; Shortle, 1995). Even
+                      solutions to scientiﬁc and business problems are solicited
+                                                                                               though the primary goal of CASPis to advance the methods of
+                      on behalf of organizations seeking innovations. An example               predicting protein 3D structure from its amino acid sequence,
+                      of a recent challenge is ‘Solutions to Respond to Oil Spill
+                                                                                               the pioneering efforts started by CASP have inspired other
+                      in the Gulf of Mexico’. InnoCentive works with seekers to                similar collaboration-by-competition challenges, such as
+                      design the challenge, score/judge solutions and manage the
+                                                                                               those listed below.
+                      intellectual property transfer. There is usually a cash award to
+                      the winning solver.                                                    • CAPRI (Critical Assessment of PRediction of Interactions)
+                                                                                               is a community-wide experiment designed on the model of
+
+                   • Netﬂix Prize was a competition to produce a better algorithm              CASP (Wodak and Mendez, 2004). Both CASP and CAPRI
+                      tosubstantiallyimprovetheaccuracyofpredictionsabouthow                   are blind prediction experiments that rely on the willingness
+
+                      much a customer is going to enjoy a movie based on their                 of structural biologists to provide unpublished experimental
+
+
+
+                                                                                                                                                        1195
+
+
+
+
+
+
+
+
+[12:41 9/4/2012 Bioinformatics-bts116.tex]                                                                                                            Page: 1195 1193–1201
+      Copyedited by: TRJ                                                    MANUSCRIPT CATEGORY:   REVIEW
+
+
+
+
+
+
+           P.Meyer et al.
+
+
+
+
+                 structures as targets. CAPRI is a blind test of the ability of    in predictive models, to identify progress over time, to reveal
+                 protein–protein docking algorithms to predict the mode of         bottlenecks that stymie progress and to show where effort may best
+
+                 association of two proteins based on their 3D structure.          be focused.
+                                                                                      For all these efforts, clear ‘gold standards’ and metrics are
+               • DREAM (the Dialogue for Reverse Engineering Assessment            necessary to quantify and score the entries of the participants. Three
+
+                 and Methods) is a community-based effort whose goal is            kinds of gold standards are commonly used. In one case, evoking the
+                 to help improve the state of the art in the experimental          classical machine learning paradigm, some of the data is released as
+                 design, application and assessment of systems biology
+                                                                                   a training set whereas the remainder of the data is withheld as a gold
+                 models. DREAM organizers do this through annual reverse-          standard test set. The second case consists of using an established
+                 engineering and modeling challenges and conferences (Prill        method, a technology or a database accepted by the community as a
+                 et al., 2010; Stolovitzky et al., 2007; Stolovitzky et al.,
+                                                                                   reference. The third case consists of combining numerous datasets,
+                 2009). The challenges, based on either new or pre-existing        algorithms or techniques, to get a closer estimate of the ground truth.
+                 but obfuscated datasets, test participants in biological network
+                                                                                   A complication is that gold standard datasets are typically hard to
+                 inference and model predictions. Overall, a handful of best-      obtain, and in many cases, are presently unobtainable in biology.
+                 performer teams are identiﬁed in each challenge, while some       For example, in protein structure prediction or macromolecular
+                 teams make predictions equivalent to random.As observed in
+                                                                                   interactions, unpublished experimental structures can be hard to
+                 many DREAM challenges, the aggregation of the predictions         obtain, depending on the willingness of structural biologists to
+                 of all the teams improves the predictive power beyond that of     share their pre-publication data. On the other hand, the complete
+
+                 any single method (G.Stolovitzky, personal communication),        connectivity of a signaling network in a cell may be unobtainable
+                 providing a sort of community wisdom that truly gives             with today’s technology. Therefore, gold standards for signaling
+                 meaning to the notion of collaboration by competition.
+                                                                                   networks are lacking. There are solutions to this, however, such as
+                                                                                   requesting participants to train their network models to be consistent
+               • BioCreAtIve is the Critical Assessment of Information             with measured levels of phospho-proteins provided in a training set,
+                 Extraction   systems   in  Biology.   Patterned   on   CASP,
+                                                                                   while testing the resulting models on their ability to predict levels of
+                 BioCreAtIve is a community-wide project for assessing the         phospho-proteins under previously unseen perturbations provided in
+                 application of information retrieval, information extraction
+                 and text mining to the biomedical literature. An example          the test set (Prill et al., 2011).
+                                                                                      Establishing a performance metric for scoring a challenge is
+                 of a BioCreAtIve task is the recognition of gene names            another far-from-trivial task, which is central to challenge design.
+                 in sentences. Tasks are released biannually, with associated
+                                                                                   There is no unique or perfect scoring metric. The three main steps
+                 workshops for dissemination of the methods applied to the         involved in evaluation are: (i) identiﬁcation of a suitable metric
+                 tasks by the participating researchers. Results and level
+                 of participation in BioCreAtIve I and II are detailed in          (such as the area under the ROC and root mean square between
+                                                                                   predictionandmeasurement);(ii)simulationofanulldistributionfor
+                 (Hirschman et al., 2005; Morgan, Lu et al., 2008), where          the chosen metric by evaluation of randomly sampled predictions;
+                 the lessons learned and the remaining opportunities in this
+                                                                                   and (iii) assignment of a P-value for a prediction with respect to the
+                 important area of systems biology are also discussed.             null distribution for the metric.
+
+               • FlowCAP is a community-based effort to develop new                   The choice of a useful scoring metric involves complexities that
+                 methods for ﬂow cytometry applications. The motivation for        may not be as straightforward as one’s intuition might suggest.
+                                                                                   Consider the case of CASP in which participants’ predictions are
+                 the project comes from the rapid expansion of ﬂow cytometry
+                 applications that have outpaced the functionality of traditional  compared with measured 3D structures. Early experience with
+                                                                                   matching only α-carbon position rather than side chains led to
+                 analysis tools used to interpret ﬂow cytometry data. Hence,       artifacts and over-ﬁtting that were later addressed by more complex
+                 scientists are faced with the daunting prospect of manually
+                 identifying interesting cell populations in 20 dimensional data   metrics than in averaged structure similarities over multiple spatial
+                                                                                   scales (Ben-David et al., 2009).
+                 from a collection of millions of cells. For this reason a reliable
+                 automated approach to ﬂow cytometry analysis is becoming             The invariance of the metric under different transformations of
+                                                                                   the data is another issue to take into account when scoring. For
+                 essential. FlowCAP is a community-based project to assess         example, when testing a model prediction that spans a large dynamic
+                 the interpreting ﬂow cytometry data and automated ‘gating’
+                 of single-cell multi-variate data compared with gold standards    range (such is the case in phosphoproteomics and gene expression
+                                                                                   measurements), a root mean square of the differences between
+                 based on manual gating.
+                                                                                   predicted and measured variables may depend on the scale of
+                                                                                   interest. For example, the sum of differences squared in linear scale
+           2.4   Lessons from community approaches for                             could overemphasize the difference over the large scales, whereas
+                 veriﬁcation in the biosciences
+                                                                                   the sum of differences squared after log transforming the data
+           The discussion in the previous section supports the notion              ampliﬁes the differences at the smaller values of the predictions.The
+
+           that different communities have embraced crowd-sourcing and             results of such different measures of proximity could yield different
+           collaborative-competition as an aid toward science veriﬁcation and      bestperformers.Thus,aggregationofmetricsplaysanimportantrole
+           problem solving. The value of these efforts is well-demonstrated        to balance the different biases imposed when choosing a metric.
+
+           by the level of acceptance by their respective communities. The            Even in the simple case of binary classiﬁcation, metrics such
+           main goals of approaches such as CASP or DREAM are, within              as area under the ROC curve, may be misleading if the positive
+
+           their respective areas of focus, to determine the state of the art      and negative sets are very unbalanced, and it may need to be
+
+
+
+           1196
+
+
+
+
+
+
+
+[12:41 9/4/2012 Bioinformatics-bts116.tex]                                                                                                         Page: 11961193–1201
+     Copyedited by: TRJ                                                   MANUSCRIPT CATEGORY:  REVIEW
+
+
+
+
+
+
+                                                                                                                                          IMPROVER
+
+
+
+
+              complemented with the area under the precision recall curve            A
+              (Davis and Goadrich, 2006; Stolovitzky et al., 2007). Other typical
+
+              performance metrics involve the correlation between the predicted
+              values and the gold standard values. Potential correlation methods
+
+              include rank correlation, linear correlation, correlation of the log-
+              values and mutual information.
+                 Combined community predictions can yield meta-predictions that
+
+              are robust and often more accurate than any of the individual
+              predictions. In CASP, Meta-servers that poll the results of automatic
+
+              servers are among the best performers. Similar observations have
+              been made for some of the DREAM challenges (Marbach et al.,
+              2010; Prill et al., 2010).
+                                                                                     B
+                 Lessons from DREAM suggest that in the absence of ﬁrst
+              principle understanding, algorithms should be simple to avoid over-
+
+              ﬁtting to a particular dataset. In general, there is no one-size-ﬁts-all
+              algorithm, as the DREAM results have shown that the best algorithm
+              depends on the subtleties of the data or on the system studied. For
+
+              example, gene network reconstruction algorithms that may work
+              very well in prokaryotes do not translate to eukaryotes, and data
+
+              based on gene deletions have to be treated differently than data
+              based on gene overexpression in network inference tasks.
+                 The community-wide acceptance of these crowd-sourcing
+
+              methodologies can be thought of in the context of the discussions
+              between veriﬁcationists and falsiﬁcationists on when a theory is
+
+              correct or not. Instead of choosing between validation and refutation Fig. 1. Organization of a research workﬂow by decomposition into building
+              the option is ﬁnding a practical solution that is accepted by the     blocks amenable to veriﬁcation. (A) Research pipelines are indicated by the
+              community. Of course, this acceptance is not arbitrary as the         gray arrows, whereas the orange blocks are the more speciﬁc building blocks
+                                                                                    necessarytoexecutethepipeline.Aconcatenationofresearchpipelinesforms
+              scientiﬁc community is the guardian of rigor and good science.
+              The community acceptance of the efforts described here gives          a research workﬂow. Each of the building blocks in this diagram can be
+                                                                                    veriﬁed by the challenges indicated by the black arrows emerging from the
+              credibility to the use of the same techniques and challenges to check orange blocks. (B) Example of a research pipeline including the challenges
+              theories, hypothesis and models. How we can use this credibility to   discussed in Section 3. For the internal challenge example, levels of RNA
+              implement a methodology to verify systems biology results will be
+                                                                                    extracted from tissue or cells are measured with 2 different technologies,
+              discussed next.                                                       one of which is used as reference. For the external challenge example, gene
+                                                                                    expression data from patients and control subjects are used to test whether a
+
+                                                                                    disease signature can be extracted and veriﬁed.
+              3    PROCESS OF VERIFICATION IN INDUSTRIAL
+                                                                                    unknown input–output functions. The development of appropriate
+                   RESEARCH
+                                                                                    scoring metrics is a key element to the veriﬁcation methodology that
+              3.1   IMPROVER methodology: research workﬂow and                      helps identify the strength or weakness of a building block when a
+                    building blocks
+                                                                                    precise knowledge of an input–output relationship is not possible.
+              Among the lessons that we extracted from the community                The veriﬁcation can be done internally by members of a research
+
+              approaches described in the previous section, the notion that         group, or externally by crowd-sourcing to an interested community.
+              challenges can be used for science veriﬁcation is paramount. In this  IMPROVER is, therefore, a mix of internal/non-public as well as
+              section, we embrace that concept and present a methodology for        external/public assessment tests or challenges.
+
+              process veriﬁcation that can be used in industrial research workﬂows     The concepts of research workﬂow and building blocks are
+              and other settings. We call this methodology IMPROVER, for            clariﬁed in Figure 1. The chain resulting from linking together the
+
+              Industrial Methodology for Process Veriﬁcation in Research.           building blocks is a research ‘pipeline’ (Fig. 1A). The integration
+              IMPROVER evaluates the robustness of a research workﬂow               of several pipelines forms a research workﬂow. Note that there
+              by dividing it into building blocks that are relatively small and     is no unique way of parceling a research pipeline into modules
+
+              veriﬁable (Meyer et al., 2011). A building block is the small         and building blocks. In general, however, any decomposition
+              functional unit of a research pipeline that has a deﬁned input        will ultimately have some interdependence on natural functional
+
+              (data, samples or materials), resulting in a deﬁned output (data      boundaries and the ability to isolate and verify the building block.
+              analyses, samples, high-throughput data or materials). Functionally,  In order to be veriﬁed, a research building block has to be recast into
+              a building block is a discrete research operation at the small        a challenge (similar to the challenges of the crowd-sourcing efforts
+
+              end of the scale that is amenable to veriﬁcation. Similar divide      discussed in the previous section), that may be assessed internally or
+              and conquer approaches are employed in other ﬁelds. Typically,        broadcasted externally to stakeholders in the interested community.
+
+              however, building blocks are developed around rigidly deﬁned          In both cases, the challenge construction has critical features such
+              criteria in which the output is a known function of the input. In     as producing the gold standard datasets that will be used as an
+              contrast, IMPROVER building blocks need to accommodate a priori       anchor against which to compare the predictions of a challenge
+
+
+
+
+                                                                                                                                                1197
+
+
+
+
+
+
+
+[12:41 9/4/2012 Bioinformatics-bts116.tex]                                                                                                    Page: 11971193–1201
+     Copyedited by: TRJ                                                     MANUSCRIPT CATEGORY:  REVIEW
+
+
+
+
+
+
+           P.Meyer et al.
+
+
+
+
+           output, and the scoring methodology to assess the performance of        to the experimenter. In general, the IMPROVER internal challenge
+           the predictions.                                                        contribution to a research workﬂow will result in an understanding
+             Although IMPROVER has some commonalities with other                   of the limitations of the methodology used in a pipeline. This
+
+           crowd-sourcing methods, fundamental differences exist. Here we          understanding could be used to improve the results expected from
+           brieﬂy highlight the differences between DREAM and IMPROVER.            a building block, thus increasing the robustness and value for the
+
+           DREAM is a forum to organize the academic systems biology               larger research pipeline.
+           research community around challenges.These challenges are chosen
+           by the DREAM organizers in collaboration with the community
+                                                                                   3.3   External challenges/the ﬁrst IMPROVER
+           and are mostly structured to tackle independent problems in
+           systems biology, with no speciﬁc link between challenges. DREAM               challenges
+           challenges are widely advertised to the community, and its results      An external challenge can be designed to achieve multiple goals
+
+           are publicly announced. Conversely, IMPROVER challenges are             when aimed at verifying a building block within a pipeline.
+           designed following the interests of a research organization. These      First, a public challenge invites novel approaches to a problem,
+
+           challenges, in turn, are designed to verify building blocks that work   not considered by the internal researchers. Second, a blended
+           synergistically in a research workﬂow. Challenges performed to          prediction aggregated from the entire community of predictions is
+           verify these building blocks can help the organization determine        often more accurate than any individual prediction (G.Stolovitzky,
+
+           a way forward with respect to a previously laid plan: if the task       personal communication). Third, the public discourse centered on
+           that a building block was supposed to perform at a given level of       a challenge, including conference presentations and papers on the
+           accuracy is not veriﬁed, then the building block has to be modiﬁed.     best-performing methods, can rapidly build a consensus in the
+
+           If a building block is veriﬁed, then its outcomes can be trusted with   community as to which approaches are the most fruitful for a given
+           a higher degree of conﬁdence. Examples of building block tasks          task. Fourth, if despite wide participation, no single team manages
+
+           and possible challenges to verify them are shown in Figure 1B.          to achieve a good performance at solving the challenge, then the
+           IMPROVER can pose its challenges internally, that is within the         building block can be considered as non-veriﬁed, increasing the risk
+           organization, or externally, to a wide community.                       of failure of that building-block’s pipeline.
+
+                                                                                     Wide participation by the community is particularly important.
+                                                                                   While ﬁnancial incentives are only one approach to increase
+           3.2   Internal challenges
+                                                                                   participation, other incentives could be just as attractive, including
+           An organization will use internal assessment challenges to verify       the opportunity to verify the algorithm predictions against newly
+           in-house data generation, analysis and interpretation, either because   collected experiments, ‘bragging rights’ for the best algorithm, the
+
+           of proprietary concerns or because the scope does not require           ability to publish and to drive the ﬁeld for purely academic interests.
+           a community effort. An IMPROVER challenge internal to an                  We illustrate the concept of an IMPROVER external challenge
+           organization could help researchers identify building blocks that       using as an example the search for robust signatures to perform
+
+           need either improvement or replacement with a new technology.           diagnosis of diseases based on commonly available transcriptomics
+           As it will be described for external challenges, internal assessment    data. There are examples of gene expressions signature in use today,
+
+           challenges should be scored by an objective third party, who will       such as Oncotype DX and MammaPrint, two FDA approved tests
+           not participate in the challenge but that could be from another         that provide prognostic value and can guide treatment in subsets
+           group within the same company or institution.An internal challenge      of breast cancer patients (Paik et al., 2004; van de Vijver et al.,
+
+           could be designed to evaluate the quality of data used for an           2002). While diagnostic signatures exist in limited cases, the wide
+           external challenge. While data production can be ensured by             availability of high-throughput transcriptomics data makes plausible
+           Good Laboratory Practices (OECD 1998), the robustness of the            the discovery of diagnostic signatures for a multitude of diseases.
+
+           technology used to collect the data may evolve in time, and therefore   The community has recognized the need for robust genomic and
+           the quality of the data collection process itself may need to be        gene expression signatures as important enablers for personalized
+
+           veriﬁed (exempliﬁed by the ‘Noise Level in Gene Expression Data’        medicine, as patients could directly beneﬁt from treatments tailored
+           challenge in Fig. 1B).                                                  to the individual (Subramanian and Simon, 2010).
+             Consider that an organization must decide if the output data from       While there has been a clear need for diagnostic signatures, efforts
+
+           theGeneTitanSystemforgeneexpressionproﬁlingfromAffymetrix               to discover such signatures in commonly available transcriptomics
+           is of sufﬁcient quality to consider its adoption. This technology       data have generally fallen short of expectation. There are many
+
+           allows researchers to process hundreds of samples in one experiment     reports in the literature in which the lists of differentially
+           with minimal hands-on time, thus considerably increasing gene           expressed genes purported to distinguish between two biological
+           expression proﬁling throughput. An internal challenge is then           conditions showed little overlap when the data were taken from
+
+           constructed to compare the Gene Titan platform with the more            different cohorts or when experiments were performed in different
+           established standard using Affymetrix single cartridge technology.      laboratories with different platforms (Ioannidis, 2005). Hence, the
+           A ﬁrst veriﬁcation challenge could consist of proﬁling a gold           discovered signatures do not generalize and perform poorly when
+
+           standard mRNA references sample, containing known quantities            classifying datasets other than the ones used to develop the methods.
+           of spiked RNA. These reference samples, when hybridized on              Even with good control over data collection and patient selection,
+
+           both technology arrays, would allow for the comparison of the           signature discovery can be inhibited by inherent variability in gene
+           sensitivities and error levels of both technologies. What is essential  expression. One proposed method to discover robust classiﬁers in
+           here is that the assessment be done by an objective third party who     spite of inherent variability is to separate ‘driver genes’ from the
+
+           knows the composition of the reference sample that is unknown           ‘passenger genes’ (Lim et al., 2009). The driver genes (sometimes
+
+
+
+           1198
+
+
+
+
+
+
+
+[12:41 9/4/2012 Bioinformatics-bts116.tex]                                                                                                        Page: 11981193–1201
+      Copyedited by: TRJ                                                     MANUSCRIPT CATEGORY:   REVIEW
+
+
+
+
+
+
+
+                                                                                                                                                IMPROVER
+
+
+
+               referred to as master regulators) are upstream controllers that are
+
+               proposed to be better indicators of disease state than the downstream
+               regulated genes that can show more inherent variability.
+                 The ﬁrst set of IMPROVER challenges, termed the Diagnostics
+
+               Signature Challenge, addresses the problem of diagnostics from
+               transcriptional data in a biomedical context. (This challenge is
+
+               being organized at the time of this writing.) The need to ﬁnd
+               biomarkers that stratify a population into segments characterized
+
+               by a given phenotype is felt not just in biomedicine but also
+               in other contexts such as the pharmaceutical industry, where a
+               similar IMPROVER challenge could be deployed. We consider four
+
+               prevalent diseases: multiple sclerosis (MS), psoriasis, lung cancer
+               and chronic obstructive pulmonary disease. The building block
+
+               that this challenge is designed to verify is ‘Find Gene Expression
+               Signature’(Fig. 1B). In other words, what needs to be veriﬁed is the
+               hypothesisthattranscriptomicsdatacontainsenoughinformationfor            Fig. 2. Schematic diagram of MS Disease signature challenge organization.
+                                                                                        A dataset with both gene expression and corresponding clinical diagnoses
+               the determination of these human disease states. In a context such       or prognosis forms the basis of the challenge. The test data contains the
+               as the pharmaceutical industry, a test of validity of the notion of
+                                                                                        gene expression data generated only and is transmitted to the participants
+               transcriptomics-based signatures would be a pre-requisite to attain      via a web portal. There are three participants shown, the actual challenges
+               the research pipeline goal of ﬁnding a product (such as a drug)          could involve many more. The participants generate predictions-based gene
+               tailored for each individual (Fig. 1B).                                  signatures that are submitted back via the website.Atrusted party will blindly
+
+                 We will now describe the operational steps for the Diagnostic          score and rank the prediction by comparing to the gold standard dataset that
+               Signature Challenge taking out of the four diseases, MS as an            contains both the gene expression data and actual clinical outcomes.
+
+               example. MS is an inﬂammatory disease, believed to be an
+               autoimmune disease that affects the central nervous system. The          is deﬁned as the fraction of correct positive set predictions, and
+
+               trigger of the autoimmune process in MS is unknown, but it is            recall is the proportion of correct positive set predictions out of all
+               believed that MS occurs as a result of some combination of genetic,      patients in the positive set. Other metrics for binary classiﬁcation
+               environmental and infectious factors (Compston and Coles, 2008),         assessment will also be evaluated.Teams will be ranked according to
+
+               and possibly other factors such as vascular problems (Minagar            their overall performance based on those metrics. Figure 2 illustrates
+               et al., 2006). The symptoms of the disease result from inﬂammation,      how the MS disease signature challenge will be organized in order
+
+               swelling and lesions on the myelin and in 85% of patients start          to verify through the IMPROVER methodology whether a robust
+               with a relapse-remitting stage of MS (RRMS). Finding a robust            MS gene signature can be found. A diagnostic signature for those
+               genetic signature would be of great importance, as diagnosis by          phenotypes can be accepted as existing, and the building block
+
+               a neurologist usually involves ruling out other nervous system           ‘Find a Transcriptomics-based signature for control versus RRMS’
+               disorders with invasive and expensive tests (NINDS Multiple              veriﬁed, only if there is at least one participating team who classiﬁed
+
+               Sclerosis Information Page, http://www.ninds.nih.gov/disorders/          in the correct class a statistically signiﬁcant number of subjects.
+               multiple_sclerosis/multiple_sclerosis.htm) and recently drugs can        A subsequent veriﬁcation of the molecular signature discovered
+               delay the progression of MS when RRMS, is diagnosed early on             by the best performer could be further tested by evaluating its
+
+               (Rudick et al., 2006).                                                   performance in a similar, but biologically independent dataset.
+                 IMPROVER organizers will procure from the public literature,           Finally, if no team managed to distinguish the RRMS patients from
+
+               a training set of gene expression data from peripheral blood             healthy donors from PBMC transcriptomics data, then we can assert
+               mononuclear cells (PBMCs) corresponding to MS and healthy                that the building block failed veriﬁcation, and an alternative way of
+
+               patients (Fig. 2). In this challenge, the test set corresponds to an     classiﬁcation should be explored.
+               unpublished cohort of 129 samples whose labels will be hidden from         If the building block was veriﬁed, an obvious by-product of the
+               the participants. This set of samples obtained from patients that were   challenge is the identiﬁcation of the best diagnostic signature and the
+
+               determined as healthy or RRMS by a physician will constitute the         corresponding discovery algorithm for each of the diseases. Other
+               gold standard. A wealth of additional useful gene expression data        expected advantageous outcome of the IMPROVER challenge is
+
+               is also available through databases such as the Gene Expression          that it enables a fair comparison of competing methods, as the
+               Omnibus or ArrayExpress. Participants can use the training set,          IMPROVER format requires blind prediction by the participants
+               open literature information and any other publicly available data.       and blind scoring of the submissions (Fig. 2). This approach will
+
+               With this data at hand, participants will generate the transcriptomics-  alleviatemanyoftheproblemsthatproduceoverestimationofresults
+               based molecular signature that can differentiate between healthy and     when the authors of an algorithm compare their own method with
+
+               RRMS patients. Participants will be asked to submit for each sample      other existing methods (Norel et al., 2011). For example, over-
+               a conﬁdence of the prediction to belong to the RRMS class. The           ﬁtting and information leakage between training and test datasets
+               conﬁdence of the classiﬁcation should have a value between 1 and
+                                                                                        are two common pitfalls that can be avoided. A ﬁnal advantage
+               0, 1 being the most conﬁdent and 0 the least conﬁdent.                   of the methodology is that it allows for an assessment of the
+                 After predictions from participants are collected via website          performance of submissions across both participants and diseases.
+
+               submissions, the results will be scored using metrics such as the        This will provide an unparalleled opportunity to assess whether the
+               Area Under the Precision versus Recall (AUPR) curve. Precision           diagnostic signature discovery approaches can be applied across
+
+
+
+                                                                                                                                                      1199
+
+
+
+
+
+
+
+
+[12:41 9/4/2012 Bioinformatics-bts116.tex]                                                                                                          Page: 11991193–1201
+      Copyedited by: TRJ                                                      MANUSCRIPT CATEGORY:   REVIEW
+
+
+
+
+
+
+
+           P.Meyer et al.
+
+
+
+
+           different diseases. Such a controlled assessment is harder to reach          Extrapolating the idea of using challenges for veriﬁcation of
+
+           with traditional scientiﬁc approaches, as it requires a wide variety      scientiﬁc results, we propose the IMPROVER methodology to
+           of participants using different methodologies on the same data and        assess the performance of a research workﬂow in contexts such
+           scored under the same metrics.                                            as industrial research. A main concept in IMPROVER is the
+
+                                                                                     formalization of a process to determine a go or no-go decision for
+                                                                                     the research pipeline in an industrial context (internal and external
+           3.4    Gold standard and metrics of performance
+                                                                                     challenges), as well as better methods inspired by the community
+           A foremost concern in designing a challenge for IMPROVER is to            participation (external challenges). If the results are positive, that is,
+           obtain a gold standard dataset against which a set of predictions
+                                                                                     ifthepipelinepassesallthechallengesandthereisactivecommunity
+           can be scored in order to verify a building block. While designing        participation, then the credibility of the data, analysis and of the
+           a challenge to verify a building block, the possibility exists that a
+                                                                                     subsequent results would be enhanced in the eyes of the scientiﬁc
+           gold standard cannot be deﬁned or is considered suboptimal as an          community and regulatory agencies.
+           adequate database, unpublished good quality data or an accessible
+                                                                                        The challenge-based approach creates a metric for comparison
+           expert in the ﬁeld is unavailable. In this case, the rationale behind     between possible solutions to a challenge designed to verify a
+           the challenge has to be altered and the challenge must be redesigned      building block. Superior performance by one methodology could
+
+           before the building block can be veriﬁed. Redesigning a challenge         promote acceptance by the community of the best performer
+           can be laborious as it might imply obtaining data for a new gold          methodology as a reference standard. IMPROVER could offer a
+           standard and change assumptions that simpliﬁed the underlying
+                                                                                     complement and enhancement to the peer-review process in which
+           biology and favored a good challenge formulation.                         the results of a submitted paper are measured against benchmarks
+              A building block can be considered as veriﬁed if the predictions
+                                                                                     in a double-blind challenge, a process that can well be called
+           made within the challenge are close enough to the known gold              challenge-assisted peer-review. The IMPROVER approach could
+           standard. For each challenge, a quantitative metric of performance
+                                                                                     be applied to a variety of ﬁelds where the outputs of a research
+           must be deﬁned. Like the gold standard, the performance metric is         project are fed into the input of other projects, such as is the case in
+           central and should be an integral part of the challenge formulation.
+                                                                                     industrial research and development, and where the veriﬁcation of
+           This performance metric can also be used to assign a risk that            the individual projects or building blocks is elusive, as is the case
+           the veriﬁcation was a ﬂuke (e.g. computing a P-value). It is also         in systems biology.
+
+           possible that a challenge results in lack of veriﬁcation: none of the
+           participating teams could ﬁnd an acceptable solution to the problem.
+              There is generally no a priori reason why one metric should be         ACKNOWLEDGEMENTS
+
+           better than the others. As a rule of thumb, aggregating the several       We thank Robert J. Prill and Alberto de la Fuente for useful
+           metrics into one overall metric may have advantages and provide
+                                                                                     discussions and Hugh Browne and Jennifer Galitz McTighe for a
+           lessarbitraryperformancemetric.Inothercases,however,thenature             careful reading of the manuscript.
+           of the problem guides the choice of metric. For example, the large
+
+           dynamic range of gene expression data suggest a performance metric        Funding: IBM and PMI authors performed this work under a joint
+           in which the values are represented in logarithmic scale.                 research collaboration funded by PMI.
+
+                                                                                     Conﬂict of Interest: none declared.
+
+
+           4    CONCLUSION AND FUTURE DIRECTIONS
+           The great opportunities made possible by the emergence of high-           REFERENCES
+
+           throughput data in all realms of science and technology have              (2002) SEGEN JC. McGraw-Hill Concise Dictionary of Modern Medicine .
+           also resulted in the problem of extracting knowledge from these              McGraw-Hill.
+
+           massive datasets. The proliferation of algorithms to analyze this data    Alberts,B. et al. (2008) Reviewing peer review. Science, 321,15.
+           creates the conundrum of choosing the best algorithms among the           Ayer,A.J. (1936) Language, Truth, and Logic. Oxford University Press.
+                                                                                     Ben-David,M. et al. (2009) Assessment of CASP8 structure predictions for template
+           multiple existing ones. Crowd-sourcing efforts that take advantage           free targets. Proteins, 77 (Suppl. 9), 50–65.
+           of new trends in social networking have ﬂourished.These initiatives,      Compston,A. and Coles,A. (2008) Multiple sclerosis. Lancet, 372, 1502–1517.
+                                                                                     Davis,J. and Goadrich,M. (2006) The relationship between Precision-Recall and ROC
+           summarized in Section 2, match discipline-speciﬁc problems with
+           problem solvers, who are motivated by different incentives to                curves. In Proceedings of the 23rd International Conference on Machine learning.
+                                                                                        ACM, Pittsburgh, Pennsylvania, pp. 233–240.
+           compete and show that their solution is the best. In this way, the        Dougherty,E.R. (2011)Validation of gene regulatory networks: scientiﬁc and inferential.
+           best method available to solve a given problem can be found in an            Brief Bioinform., 12, 245–252.
+           unbiased context.                                                         Dreze,M. et al. (2010) High-quality binary interactome mapping. Methods Enzymol.,
+
+              Interestingly, these crowd-sourcing methodologies also have an            470, 281–315.
+           epistemological value, shedding light to the question of when a           Fayyad,U. et al. (1996)The KDD process for extracting useful knowledge from volumes
+                                                                                        of data. Commun. ACM, 39, 27–34.
+           theory is correct or not. Instead of tasking a researcher to self-assess  Gavin,A.C.etal.(2006)Proteomesurveyrevealsmodularityoftheyeastcellmachinery.
+           (a process suspect of biases) the truth of a model or methodology, the       Nature, 440, 631–636.
+
+           alternative is ﬁnding how it fares in an unbiased and rigorous test.      Hirschman,L. et al. (2005) Overview of BioCreAtIvE: critical assessment of
+           The community acceptance of the efforts described in the ﬁrst part           information extraction for biology. BMC Bioinformatics, 6 (Suppl. 1), S1.
+                                                                                     Ioannidis,J.P.A. (2005) Microarrays and molecular research: noise discovery? Lancet,
+           of this article gives some credibility to the use of similar approaches      365, 454–455.
+           to verify the sometime elusive results attained in systems biology        Ito,T. et al. (2001) A comprehensive two-hybrid analysis to explore the yeast protein
+
+           research.                                                                    interactome. In Proc. Natl Acad. Sci. USA, 98, 4569–4574.
+
+
+
+           1200
+
+
+
+
+
+
+
+[12:41 9/4/2012 Bioinformatics-bts116.tex]                                                                                                            Page: 1200 1193–1201
+       Copyedited by: TRJ                                                                       MANUSCRIPT CATEGORY:        REVIEW
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                  IMPROVER
+
+
+
+
+
+                   Jelizarow,M. et al. (2010) Over-optimism in bioinformatics: an illustration.              Paik,S. et al. (2004) A multigene assay to predict recurrence of tamoxifen-treated,
+
+                      Bioinformatics, 26, 1990–1998.                                                             node-negative breast cancer. New Engl. J. Med., 351, 2817–2826.
+                   Kuhn,T. (1962) The structure of scientiﬁc revolutions. University of Chicago Press.       Popper,K.R. (1959) The Logic of Scientiﬁc Discovery. Routledge Classics.
+
+                   Lim,W.K. et al. (2009) Master regulators used as breast cancer metastasis classiﬁer.      Prill,R.J. et al. (2010) Towards a rigorous assessment of systems biology models: the
+                      Pac. Symp. Biocomput., 504–515.                                                            DREAM3 challenges. PLoS One,     5, e9202.
+
+                   Mandavilli,A. (2011) Peer review: trial by Twitter. Nature, 469, 286–287.                 Prill,R.J. et al. (2011) Crowdsourcing network inference: the DREAM predictive
+                   Marbach,D. et al. (2010) Revealing strengths and weaknesses of methods for gene               signaling network challenge. Sci. Signal., 4, mr7.
+
+                      network inference. In Proc. Natl. Acad. Sci. USA, 107, 6286–6291.                      Purcell,S. et al. (2007) PLINK: a tool set for whole-genome association and population-
+                   Mehta,T. et al. (2004)Towards sound epistemological foundations of statistical methods        based linkage analyses. Am. J. Hum. Genet., 81, 559–575.
+
+                      for high-dimensional biology. Nat. Genet., 36, 943–947.                                Rudick,R.A. et al. (2006) Natalizumab plus interferon beta-1a for relapsing multiple
+                   Meyer,P. et al. (2011)Veriﬁcation of systems biology research in the age of collaborative     sclerosis. New Engl. J. Med., 354, 911–923.
+
+                      competition. Nat. Biotech., 29, 811–815.                                               Spier,R. (2002)The history of the peer-review process.Trends Biotechnol., 20, 357–358.
+                   Minagar,A. et al. (2006) Multiple sclerosis as a vascular disease. Neurol. Res., 28,      Stolovitzky,G. et al. (2007) Dialogue on reverse-engineering assessment and methods.
+
+                      230–235.                                                                                   Ann. NY. Acad. Sci., 1115, 1–22.
+                   Morgan,A.A. et al. (2008) Overview of BioCreative II gene normalization. Genome           Stolovitzky,G. et al. (2009) Lessons from the DREAM2 challenges. Ann.NY. Acad. Sci.,
+
+                      Biol., 9Suppl2  ,S3.                                                                       1158, 159–195.
+                   Moult,J. et al. (1995) A large-scale experiment to assess protein structure prediction    Subramanian,J. and Simon,R. (2010) What should physicians look for in evaluating
+
+                      methods. Prot. Struct. Func. Bioinform., 23, ii–iv.                                        prognostic gene-expression signatures? Nat. Rev. Clin. Oncol., 7, 327–334.
+                   Moult,J. (1996) The current state of the art in protein structure prediction. Current     Uetz,P. and Hughes,R.E. (2000) Systematic and large-scale two-hybrid screens. Curr.
+
+                      Opinion in Biotechnology, 7, 422–427.                                                      Opin. Microbiol., 3, 303–308.
+                   Norel,R. et al. (2011) The self-assessment trap: can we all be better than average? Mol.  van de Vijver,M.J. et al. (2002) A gene-expression signature as a predictor of survival
+
+                      Syst. Biol., 7, 537.                                                                       in breast cancer. New Engl. J. Med., 347, 1999–2009.
+                   Organisation for Economic Cooperation and Development (1998) OECD Good                    Wodak,S.J. and Mendez,R. (2004) Prediction of protein-protein interactions: the
+
+                      Laboratory Practice - Principles and Guidance for Compliance Monitoring, OECD              CAPRI experiment, its evaluation and implications. Curr. Opin. Struct. Biol., 14,
+                      press.                                                                                     242–249.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                          1201
+
+
+
+
+
+
+
+
+
+
+[12:41 9/4/2012 Bioinformatics-bts116.tex]                                                                                                                                              Page: 1201  1193–1201

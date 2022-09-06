@@ -1,0 +1,1273 @@
+                                                                                      ORIGINAL RESEARCH ARTICLE
+                                                                                                    published: 05 March 2012
+ COMPUTATIONAL NEUROSCIEN                              EC                                       doi: 10.3389/fncom.2012.00008
+
+
+
+Tracking replicability as a method of post-publication open
+
+ evaluation
+
+
+ Joshua K. Hartshorne* and Adena Schachner
+
+ Department of Psychology, Harvard University, Cambridge, MA, USA
+
+
+ Edited by:
+ Nikolaus Kriegeskorte, Medical   Recent reports have suggested that many published results are unreliable.To increase the
+ Research Council Cognition and Brainiability and accuracy of published papers, multiple changes have been proposed, such
+                                  as changes in statistical methods.We support such reforms. However, webelieve that the
+ Sciences Unit, UK
+ Reviewed by:                     incentive structure of scientiﬁc publishing must change for such reforms to be successful.
+ Nikolaus Kriegeskorte, Medical   Under the current system, the quality of individual scientists is judged on the basis of their
+ Research Council Cognition and Brnumberofpublicationsandcitations,withjournalssimilarlyjudgedvianumbersofcitations.
+ Sciences Unit, UK
+ Alexander Walther, Medical Researchither of these measures takes into account the replicability of the published ﬁndings,
+                                  as false or controversial results are often particularly widely cited. We propose tracking
+ Council Cognition and Brain Sciences
+ Unit, UK                         replications as a means of post-publication evaluation, both to help researchers identify
+ *Correspondence:                 reliable ﬁndings and to incentivize the publication of reliable results. Tracking replications
+ Joshua K. Hartshorne, Department requires a database linking published studies that replicate one another. As any such data-
+ Psychology, Harvard University, 33
+ Kirkland Street, Cambridge, MA   base is limited by the number of replication attempts published, we propose establishing
+ 02138, USA.                      an open-access journal dedicated to publishing replication attempts. Data quality of both
+
+ e-mail: jharts@wjh.harvard.edu   the database and the afﬁliated journal would be ensured through a combination of crowd-
+                                  sourcing and peer review. As reports in the database are aggregated, ultimately it will be
+                                  possible to calculate replicability scores, which may be used alongside citation counts to
+
+                                  evaluate the quality of work published in individual journals. In this paper, we lay out a
+                                  detailed description of how this system could be implemented, including mechanisms for
+
+                                  compiling the information, ensuring data quality, and incentivizing the research community
+                                  to participate.
+
+                                  Keywords: replication, replicability, post-publication evaluation, open evaluation
+
+
+ IMPROVING THE QUALITY OF PUBLISHED RESEARCH                         In the present paper, we ﬁrst discuss evidence that the rate of
+ The current system of conducting, reviewing, and publishing sci-  replicability of published studies is low,including novel data from
+
+ entiﬁc ﬁndings – while enormously successful – is by no means     a survey of researchers in psychology and related ﬁelds. We pro-
+ perfect.Peerreview,theprimaryvettingprocedureforpublication,      pose that this low replicability stems from the current incentive
+ isoftenslow,contentious,anduneven(Mahoney,1977;Coleetal.,         structure, in which replicability is not systematically considered
+
+ 1981; Peters and Ceci, 1982; Eysenck and Eysenck, 1992; Newton,   in measuring paper, researcher, and journal quality. As a result,
+ 2010). Incorrect use of inferential statistics leads to publicationhe current incentive structure rewards the publication of non-
+ of spurious ﬁndings (Saxe et al., 2006; Baayen et al., 2008; Jaeger,plicable ﬁndings,complicating the adoption of needed reforms.
+
+ 2008;Kriegeskorteetal.,2009;Vuletal.,2009;Wagenmakersetal.,       Thus, we outline a proposal for tracking replications as a form of
+ 2011). Publication biases, such as the bias against publishing nullost-publication evaluation,and using these evaluations to calcu-
+ results (e.g., Easterbrook et al., 1991; Ioannidis, 2005b; Boffettaateametricof replicability.Indoingso,weaimnotonlytoenable
+
+ et al., 2008), lead to distortions in the published record, hamper-esearchers to easily ﬁnd and identify reliable results, but also to
+ ing both informal reviews and formal meta-analyses. Numerous      improve the incentive structure of the current system of scien-
+ valuable proposals have been offered as to how to improve the sys-tiﬁc publishing, leading to widespread improvements in scientiﬁc
+
+ tem in order to enable researchers to better identify high-qualitypractice and increased replicability of published work.
+ research, including those in the present special issue.
+    There are many considerations that go into determining
+                                                                   WHY MIGHT WE EXPECT LOW REPLICABILITY?
+ researchquality,butperhapsthemostfundamentalisreplicability.      Many aspects of current accepted practice in psychology, neuro-
+ Recently, numerous reports have suggested that many published     science, and other ﬁelds necessarily decrease replicability. Some
+ resultsacrossarangeofscientiﬁcdisciplinesdonotreplicate(Ioan-
+                                                                   of the most common issues include a lack of documentation
+ nidis et al., 2001; Jennions and Møller, 2002b; Lohmueller et al.,of null ﬁndings; a tendency to conduct low-powered studies;
+ 2003;Ioannidis,2005a;Boffettaetal.,2008;FergusonandKilburn,       failure to account for multiple comparisons; data-peeking (with
+ 2010). However, because replication attempts are not tracked and  continuation of data collection contingent on current signiﬁcance
+
+ are often not reported, there is no systematic way for researcherslevel);andapublicationbiasinfavorofsurprising(“newsworthy”)
+ to know which results in the literature have been replicated.     results.
+
+
+
+ Frontiers in Computational Neuroscience                www.frontiersin.org                          March 2012 | Volume 6 | Article 8 | 1
+Hartshorne and Schachner                                                                                                Tracking replicability
+
+
+
+
+LACK OF PUBLICATION OR DOCUMENTATION OF NULL FINDINGS                    All else being equal, low statistical power would increase the
+Null results are less likely to be published than statistically sig-  proportion of signiﬁcant results that are spurious. For instance,
+niﬁcant ﬁndings. This has been extensively documented in the          suppose researchers are investigating a hypothesis that is equally
+
+medical literature (Dickersin et al., 1987, 1992; Easterbrook et al., likely to be true or false (the prior likelihood of the null hypoth-
+1991; Callaham et al.,1998; Misakian and Bero,1998; Olson et al.,     esis is 50%), using methods with statistical power=0.8. In this
+2002; Dwan et al., 2008; Sena et al., 2010), with additional reports  case, 6% of signiﬁcant results will be false positives (True pos-
+
+in political science (Gerberg et al., 2001), ecology and evolution    itives: 0.5×0.8=0.4; False positives: 0.5×0.05=0.025; Ratio:
+(Jennions and Møller, 2002a), and clinical psychology (Coursol        0.025/0.425=0.059). If Power=0.2, this increases to 20%. If the
+and Wagner,1986; Cuijpers et al.,2010). There appear to be fewer      prior likelihood of the null hypothesis is 90% (i.e., if an effect
+comprehensivestudiesof publicationbiasinnon-clinicalpsychol-          would be surprising, or when data-mining), the false positive rate
+
+ogy, although evidence of this bias has been documented in a few      will be 69% (for additional discussion,seeYarkoni,2009;for other
+speciﬁcliteratures(Fieldetal.,2009;FergusonandKilburn,2010).          problemsassociatedwithsmallpower,seeTverskyandKahneman,
+   Preferential publication of signiﬁcant effects necessarily biases  1971).
+
+the record. Consider cases in which multiple labs all test the same
+question,or in which the same lab repeatedly tests the same ques-     FAILURE TO ACCOUNT FOR MULTIPLE COMPARISONS
+tion while iteratively reﬁning the method. By chance alone, some      If one tests for 10 different possible effects in each experiment,
+of theexperimentswillresultinpublishablestatisticallysigniﬁcant       the chance of ﬁnding at least one signiﬁcant at the p =0.05 level
+                                                                                                                   10
+effects; the likelihood that a ﬁnding may be spurious is masked by    evenwhennoeffectactuallyexistsis1−0.95 =0.4.Sinceexper-
+the fact that the null results are not published.                     iments with large numbers of comparisons are often entirely
+   The signiﬁcance-bias also leads to the overestimation of real      exploratory, where there is no strong a priori reason to believe
+
+effects. Measurement is probabilistic: the measured effect size in    that any of the investigated effects exist,the false positive rate may
+a given experiment is a function of the true effect size plus some    approach 100% for data-mining studies with large datasets.
+random error. In some experiments, the measured effect will be
+larger than the true effect, and in some it will be smaller. Suppose  DATA-PEEKING AND CONTINGENT STOPPING OF DATA COLLECTION
+
+the statistical power of the experiment is 0.8 (a particularly high   Many researchers compile and analyze data prior to testing a full
+level of power for studies in psychology; see below). This means      complement of subjects. There is nothing wrong with this,so long
+that the effect will be statistically signiﬁcant only if it is in the as the decision to stop data collection is made independent of the
+
+top 80% of its sampling distribution. Twenty percent of the time,     resultsof thesepreliminaryanalyses,orsolongastheﬁnalresultis
+when the effect is – by chance – relatively small, the results will   then replicated with the same number of subjects. Unfortunately,
+be non-signiﬁcant. Thus, given that an effect was signiﬁcant, the     the temptation to stop running participants once signiﬁcance is
+measured effect size is probably larger than the actual effect size,  reached – or to run additional participants if it has not been
+
+and subsequent measurements will ﬁnd smaller effects due to the       reached – is difﬁcult to resist. This data-peeking and contingent
+familiar phenomenon of regression to the mean. The lower the          stopping has the potential to signiﬁcantly increase the false posi-
+statistical power, the more the effect size will be inﬂated.          tive rate (Feller, 1940; Armitage et al., 1969; Yarkoni and Braver,
+
+                                                                      2010).Evenif thenullhypothesisistrue,aresearcherwhotestsfor
+                                                                      signiﬁcance after every participant has a 25% chance of ﬁnding
+LOW-POWER, SMALL EFFECT SIZE                                          a signiﬁcant result with 20 or fewer participants (if the under-
+A number of ﬁndings suggest that the statistical power in psy-        lying distribution is normal; the analogous numbers are 19.5%
+
+chology and neuroscience experiments is typically low. According      for exponential distributions and 11% for binomial distributions;
+to multiple meta-analyses, the statistical power of a typical psy-    Armitage et al.,1969). This issue may be mitigated by use of alter-
+chology or neuroscience study to detect a medium-sized effect         native statistical tests, such as Bayesian statistics (Edwards et al.,
+
+(deﬁned variously as r =0.3, r =0.4, or d =0.5) is approximately      1963), but such statistics have not been widely adopted.
+0.5orbelow(Cohen,1962;SedlmeierandGigerenzer,1989;Kosci-
+ulek and Szymanski, 1993; Bezeau and Graves, 2001). In applied        NEWSWORTHINESS BIAS
+psychology, power for medium effects is closer to 0.7, though it      Researchers are more likely to submit – and editors more likely to
+
+remains low for small effects (Chase and Chase,1976; Mone et al.,     accept – “newsworthy” or surprising results. Spurious results are
+1996; Shen et al., 2011). Nonetheless, many effects of interest in    likely to be surprising, and thus are likely to be over-represented
+psychology are small and thus typical statistical power may be        in published reports. Consistent with this claim,there is some evi-
+
+quite low. Field et al. (2009) report an average power of 0.2 in a    dencethathighlycitedpapersarelesslikelytoreplicate(Ioannidis,
+meta-analysis of 68 studies of craving in addicts and attentional     2005a)andthatpublicationbiasaffectshigh-impactjournalsmore
+bias. In a heroic meta-analysis of 322 meta-analyses in social psy-   severely (Ioannidis, 2005a; Munafò et al., 2009).
+chology,Richardetal.(2003)reportthattheaverageeffectsizewas
+
+r =0.21. To achieve power of 0.8 would require the average study      HOW REPLICABLE ARE PUBLISHED STUDIES?
+to have 173 participants (in terms of medians: r =0.18, N =237),      Several studies have found low rates of replicability across multi-
+already far larger than typical sample size. Nearly 1/3 of the effect plescientiﬁcﬁelds.Ioannidis(2005a)foundthatof 34highlycited
+
+sizes reported were r =0.1 or less, requiring N =772 to achieve       clinical research studies for which replication attempts had been
+power of 0.8.                                                         published, seven (20%) did not replicate. Boffetta et al. (2008)
+
+
+
+Frontiers in Computational Neuroscience                    www.frontiersin.org                             March 2012 | Volume 6 | Article 8 | 2
+Hartshorne and Schachner                                                                                                Tracking replicability
+
+
+
+
+report a number of cases in which reports of signiﬁcant cancer        consideration in the awarding of grants, hiring, and tenure. Jour-
+risk factors did not replicate. Recent studies have reported that     nals are similarly judged in terms of citation counts, which are
+relativelyfewgeneticassociationlinkscanbereplicated(Ioannidis         compiled to calculate journal impact factors. Unfortunately,these
+
+et al., 2001, 2003; Hirschhorn et al., 2002; Lohmueller et al., 2003; metrics of quality tend to disincentivize taking additional steps to
+Trikalinos et al., 2004).                                             ensure the reliability of published ﬁndings, for several reasons.
+   Likewise,severalstudieshavefoundthatinitialreportsof effect           Firstly, eliminating false positives means publishing fewer
+
+size are often exaggerated. This has been noted in medicine (Ioan-    papers, since null results are difﬁcult to publish. Second, ensur-
+nidis et al., 2001, 2003; Trikalinos et al., 2004; Ioannidis, 2005a;  ing that effect sizes are not inﬂated means reporting results with
+but see Gehr et al., 2006), with similar declines in effect size      smaller effect sizes, which may be seen as less interesting or less
+reported in ecological and evolutionary biology (Jennions and         believable. Third, as discussed above, spurious results are more
+
+Møller, 2002a,b). In the most extreme example, Dewald et al.          likely to be surprising and newsworthy. Thus, eliminating spuri-
+(1986) reanalyzed the datasets underlying published studies in        ous results disproportionately eliminates publications that would
+economicsandwereunabletofullyreplicatetheanalysesforseven             be widely cited and published in top journals.
+
+of nine (78%).                                                           These drawbacks are compounded by the fact that many of
+   Less is known about replication rates in psychology and neu-       the improved practices that ensure replicability take time and
+roscience. In a series of ﬁve meta-analyses of fMRI studies,Wager     resources. Learning to use new statistical methods often requires
+and colleagues estimated that between 10 and 40% of activation        substantialeffort.Increasinganexperiment’sstatisticalpowermay
+
+peaksarefalsepositives(Wageretal.,2007,2009).Whilethereseem           require testing more participants. Eliminating stopping of data
+to be few systematic surveys within psychology, some published        collection contingent on signiﬁcance level (data-peeking) also
+effects are known not to replicate, such as the initial ﬁnding that   means erring on the side of testing more participants. Perhaps the
+
+violent video games increase violent behavior (Ferguson and Kil-      best insurance against false positives is pre-publication replication
+burn, 2010), various claims about the relationship between birth      by the authors. All these strategies take time.
+order and personality (Ernst and Angst, 1983; Harris, 1998; but          Inaddition,thereisrelativelylittlecostassociatedwithpublish-
+see:KristensenandBjerkedal,2007;Hartshorneetal.,2009),anda            ing unreliable results, as failures to replicate are rarely published
+
+rangeof gene/environmentinteractions(FlintandMunafo,2009).            and not systematically tracked. As a result, knowledge of the
+   In order to add to our knowledge of replicability rates in psy-    replicability of results mainly travels via word-of-mouth, through
+chologyandrelateddisciplines,wesurveyed49researchersinthese           speciﬁc personal interactions at conferences and meetings. There
+
+disciplines, who reported a total of 257 attempted replications of    are obvious concerns about the reliability of such a system, and
+publishedstudies(fordetails,seeAppendix).Only127(49%)fully            there is little evidence that this system is particularly effective. We
+replicated the original ﬁndings. This low rate was not driven by a    are aware of several cases in which a researcher invested months
+small number of researchers attempting a large number of poor         or years into unsuccessfully following up on a well-publicized
+
+quality replications: both the mean and median replication suc-       effect from a neighboring subﬁeld, only to later be told that it
+cess rates were 50%, with 77% of researchers reporting at least       is“well-known”that the effect does not replicate.
+one attempted replication. Thus, the results of this survey suggest      Moreover, even when a failure-to-replicate is published, the
+
+that replication rates within psychology and related disciplines are  results often go unnoticed. For example, a meta-analysis by
+undesirably low, in accordance with the low rates of replicability    Maraganore et al. (2004) concluded that UCHL1 is a risk-factor
+found in many other ﬁelds.                                            for Parkinson’s Disease. Subsequent more highly powered meta-
+                                                                      analyses overturned this result (Healy et al., 2006). Nonetheless,
+
+INCENTIVES IN PUBLICATION                                             Maraganore et al. (2004) has been cited 70 times since 2007
+As reviewed above, a number of factors promote low replicability      (Google Scholar, May 10, 2011), much to the dismay of the senior
+rates across a range of ﬁelds. These problems are reasonably well     authorof thestudy(Ioannidis,2011).Evenpapersretractedbythe
+
+known, and in many cases solutions have been proposed, such as        authors remain in circulation. In 2001, two papers were retracted
+use of different statistical methods and self-replication prior to    yKanRuio(            Ruggiero and Marx, 1999; Ruggiero et al.,
+publication. However, in spite of these solutions, evidence sug-      2000). Nonetheless, 10 of the 22 citations to these papers were
+gests that replicability remains low and thus that the proposed       made in 2003 or later (Google Scholar, April 25, 2011). Similarly,
+
+solutions have not been widely adopted. Why would this be the         though Lerner requested the retraction of Lerner and Gonzalez
+case?Weproposethattheincentivestructureof thecurrentsystem            (2005) in 2008, the paper has been cited ﬁve times in 2010–2011
+diminishes the ability and tendency of researchers to adopt these     (Google Scholar,April 25, 2011).
+
+solutions. Namely, current methods of judging paper, researcher,         It follows that researchers who take additional steps to ensure
+and journal quality fail to take replicability into account, and in   the quality of their data will ultimately spend more time and
+effect incentivize publishing spurious results.                       resources on each publication and, all else equal, will end up with
+                                                                      fewer,less-often-citedpapersinlower-qualityjournals.Inthesame
+
+QUANTIFYING RESEARCH QUALITY                                          way,journalsthatadoptmorestringentpublicationstandardsmay
+There are three primary quantitative criteria by which researchers    drive away submissions, particularly of the surprising, newswor-
+are judged: their number of publications, the impact factor of the    thy ﬁndings that are likely to be widely cited. Certainly, the vast
+
+journalsinwhichthepublicationsappear,andthenumberof cita-             majority of researchers and editors are internally motivated to
+tions those papers receive. These quantitative values are a major     publish real, reliable results. However, we also cannot continue
+
+
+
+Frontiers in Computational Neuroscience                   www.frontiersin.org                             March 2012 | Volume 6 | Article 8 | 3
+Hartshorne and Schachner                                                                                                Tracking replicability
+
+
+
+
+practicing science without jobs, grants, and tenure. This situation   variety of methods; we suggest crowd-sourcing from the scientiﬁc
+sets up a classic Tragedy of the Commons (Hardin, 1968): While        community, as outlined below.
+it is in everyone’s collective interest to adopt strategies to improve   For replications to be tracked, they must be reported. As dis-
+
+replicability, the incentives for any individual researcher run the   cussed above, many replication attempts remain unpublished.
+other direction.                                                      Thus, Replication Tracker would be paired with an online, open-
+                                                                      access journal devoted to publishing Brief Reports of replication
+
+ESCAPING THE TRAGEDY OF THE COMMONS                                   attempts. After a streamlined peer review process, these Brief
+Individuals can solve the Tragedy of the Commons by adopting          Reports would be published and connected to the papers they
+common rules or changing incentive structures. To give a recent       replicate via RepLinks in the Replication Tracker.
+example,Jaeger (2008),Baayen et al. (2008),and others convinced          This system will ultimately form a rich dataset, consisting of
+
+many language processing researchers to switch from ANOVAs to         RepLinks between attempted replications and the original ﬁnd-
+mixed effects models, in part by convincing editors and reviewers     ings. Each RepLink’s ratings would indicate the type and strength
+to insist on it. In this case, collective action motivated widespread ofevidenceoftheﬁndings.Theseratingswouldbeaggregated,and
+
+adoption of an improved method of analysis.                           usedtocomputestatisticsonreplicability.Forinstance,thesystem
+   In a similar way, collective action is needed to solve the prob-   could summarize the data for each paper in terms of a Replicabil-
+lem of low replicability: Because the incentive structure of the      ity Score [e.g.,15 attempted replications,Replicability Score: +1.7
+current system penalizes any member of the community who is           (Partial Replication), Strength of Evidence: 4 (Strong)], much as
+
+an early adopter of reforms, an organized community change is         citation indices score papers based on citation counts (e.g., cited
+needed.Insteadofmaintainingasysteminwhichindividualincen-             by 15). These numbers would allow researchers to both get an ini-
+tives (publish as often as possible) run counter to the goals of the  tial impression of a ﬁnding’s replicability at a glance, and quickly
+
+group (maintain the integrity of the scientiﬁc literature), we can    clickthroughtotheoriginalsourcesforfurtherdetail.Inaddition,
+change the incentives by placing value on replicability directly. To  Replicability Scores could be aggregated for each journal, which
+do this, we propose tracking the replicability of published stud-     could be used alongside the existing Impact Factor to evaluate the
+ies, and evaluating the quality of work post-publication partly on    quality of journals.
+
+this basis. By tracking replicability, we hope to provide concrete
+incentives for improvements in research practice, thus allowing       STRUCTURE AND CONTENT OF RepLiNKs
+the widespread adoption of these improved practices.                  RepLinksmust,minimally,linkareplicationattemptwithitstarget
+
+                                                                      paper,notewhethertheﬁndingwasreplicationornon-replication,
+REPLICATION TRACKER: A PROPOSAL                                       and note the strength of evidence for this ﬁnding.
+Below,we lay out a proposal for how replications might be tracked        There are many factors that enter into these decisions. For
+via an online open-access system tentatively named Replication        instance, a particular attempted replication may have investigated
+
+Tracker. The proposed system is not yet constructed; our aim in       all of the ﬁndings in the target paper, or may have only attempted
+this proposal is to spur necessary discussion on the implementa-      to replicate some subset. The ﬁndings may be more similar or
+tion of such a system. We ﬁrst describe the core components of        less similar as well: All effects may have successfully replicated, or
+
+such a system. We then discuss in more depth issues that arise,       none; or some ﬁndings may have replicated while others did not.
+such as motivating participation, aggregating information, and        In addition, whether a replication serves as strong evidence of the
+ensuring data quality.                                                replicability or non-replicability of the original ﬁnding depends
+                                                                      on the extent of similarity of the methods used, and whether the
+
+CORE ELEMENTS OF THE REPLICATION TRACKER                              attempt had high or low statistical power.
+In a system such as Google Scholar, each paper’s reference is pre-       We propose capturing these issues in two ratings. The ﬁrst rat-
+sented alongside the number of times that paper has been cited,       ing, termed the Type of Finding rating, would take into account
+
+and each paper is linked to a list of the papers citing that target   two factors: Whether all or only a subset of the target papers’
+paper. Replication Tracker would function in a similar manner,        ﬁndings were investigated; and whether all, none, or some of the
+except that it would be additionally indexed by specialized cita-     attempted replications were successful. On this Type of Finding
+tions that link papers based on one attempting to replicate the       scale,−2woulddenoteatotalnon-replication(allﬁndingsinvesti-
+
+other. Thus, each paper’s reference would appear alongside not        gated;none replicated);−1 a partial non-replication (some subset
+only a citation count, but an attempted replication count and         of ﬁndings investigated; none of those investigated replicated); 0
+information about the paper’s replicability.                          would denote mixed results (of the ﬁndings investigated, some
+
+   ReplicationTracker’sattemptedreplicationcitationsaretermed         replicated, and others did not); 1 a partial replication (some sub-
+Replication Links (henceforth RepLinks). Each RepLink is tagged       set of ﬁndings investigated; all of those investigated replicated);
+with metadata, answering the question: To what extent are these       and2at   otal replication (all ﬁndings investigated; all replicated).
+ﬁndings strong evidence that the target paper does or does not           The second rating would be a Strength of Evidence rating,
+
+replicate? This metadata takes the form of two numerical ratings:     scored on a 1–5 scale. This rating would take into account the
+a Type of Finding Score, running from +2 (fully replicated) to −2     remaining two factors: the extent to which the methods are sim-
+(fully failed to replicate); and a Strength of Evidence Score, run-   ilar between the target paper and the RepLinked paper, and the
+
+ning from 1 (weak evidence) to 5 (strong evidence). These ratings,    power of the replication attempt. Thus a score of 5 reﬂects a
+as well as the RepLinks themselves, could be produced through a       high-powered attempt with as-close-as-possible methods, while 1
+
+
+
+Frontiers in Computational Neuroscience                    www.frontiersin.org                             March 2012 | Volume 6 | Article 8 | 4
+Hartshorne and Schachner                                                                                               Tracking replicability
+
+
+
+
+reﬂects a low-powered attempt with relatively dissimilar methods.    across multiple papers to determine aggregate replicability across
+When a replication attempt is extremely low-power or uses sub-       a literature, an individual researcher’s publications, or a journal.
+stantially different methods, it would not be assigned a RepLink        Aggregates need not be mere averages. How to best aggre-
+
+at all.                                                              gate ratings across multiple raters is an active area of research
+                                                                     in machine learning (Albert and Dodd, 2004; Adamic et al., 2008;
+                                                                     Snowetal.,2008;Callison-Burch,2009;Welinderetal.,2010).Type
+WHO CREATES AND RATES REPLINKS?
+The ratings described above involve a number of difﬁcult deter-      of Finding ratings for an individual RepLink may be weighted by
+minations. Given that no two studies can have exactly identical      their associated Strength of Evidence scores, as well as how many
+                                                                     thumbs-up they have received.
+methods, how similar is similar enough? How does one deter-             Inaddition,ratingsfromcertainuserswouldbeweightedmore
+mine whether a study has sufﬁcient statistical power, given that
+the effect’s size is itself under investigation?                     heavily than others, as is done in many rating aggregation algo-
+                                                                     rithms (e.g., Snow et al., 2008). There are many mechanisms
+   To make these determinations, we turn to those individuals        for doing so, such as downgrading the authority of users whose
+most qualiﬁed to make them: researchers in the ﬁeld. Crowd-
+sourcing has proven a highly effective mechanism of making           RepLinksarefrequentlyﬂaggedasirrelevant,andassigninggreater
+empiricaldeterminationsinavarietyof domains(Giles,2005;Law           authority to moderators. The best system of weighting and aggre-
+                                                                     gating RepLinks is an interesting empirical question. We see no
+et al.,2007;vonAhn and Dabbish,2008;vonAhn et al.,2008;Bed-          reason it must be set in stone from the outset; the best algorithms
+erson et al.,2010;Yan et al.,2010; Doan et al.,2011; Franklin et al.,
+2011). Researchers would form the user base of the system, and       may be determined through new research in machine learning. To
+                                                                     that end, the raw rating dataset would be made available to those
+any user could submit a RepLink,as well as a Type of Finding and     working in machine learning and related ﬁelds.
+Strength of Evidence score for a RepLink. When submitting these
+materials, users could also optionally comment on each RepLink,
+providing a more detailed description of how the methods or          A NOTE ON CONVERGING RESULTS
+                                                                     Only strict replications, not convergent data from different meth-
+results of the RepLinked paper differed from the target paper, or    ods, will be tracked in the proposed system. This may seem
+offering interpretations of discrepancies. These comments would
+be optionally displayed alongside each users’ individual ratings,    counter-intuitive, since tracking converging results is crucial for
+                                                                     determiningwhichtheoriesaremostpredictive.However,thegoal
+for readers looking for additional detail (Figure 4).                of the proposed system is not to directly evaluate which theories
+   The system also utilizes multiple moderators. These modera-
+tors would take joint responsibility for tending the RepLinks and    are right, but to determine which results are right – that is, which
+Brief Reports (see below) on papers in their subﬁelds. Moderators    patternsof dataarereliable.Considerthatwhileconvergingresults
+                                                                     may suggest that the original ﬁnding replicates, diverging results
+would be scientists, and could be invited (e.g., by the founding     may only indicate that the differences in the methodologies were
+members), although anyone with publications in the ﬁeld could
+applytobeamoderator.                                                 meaningful. For this reason, we focus solely on tracking strict
+                                                                     replications. We believe that evaluating the complex theoretical
+   In submitting and rating RepLinks, researchers may disagree       implications of a large body of data is best handled by researchers
+with one another as to the correct Type of Finding or Strength
+of Evidence ratings for a given RepLink, or may disagree as to       themselves (i.e., when writing review papers), and is likely not
+whether two papers are sufﬁciently similar as to qualify as a repli- feasible with an automated system.
+
+cation attempt. Users who agree with an existing rating may easily   AUTHENTICATION AND LABELING OF AUTHORS’ RATINGS AND
+second it with a thumbs-up, while users who disagree with the
+existing ratings may submit their own additional ratings. Users      COMMENTS
+                                                                     Registering for the system and submitting RepLinks would not
+who believe that the papers in question do not qualify as repli-     require authenticating one’s identity. However, authors of papers
+cations may ﬂag the RepLink as irrelevant (RepLinks that have
+been ﬂagged a sufﬁcient number of times would no longer be           couldchoosetohavetheiridentitiesauthenticatedinordertohave
+                                                                     commentsontheirownpapersbemarkedasauthorcommentaries
+used to calculate Replicability Scores, though these suppressed      (many RepLinks will almost certainly be submitted by authors, as
+RepLinks would be visible under certain search options). These       they are most invested in the issues involved in replication of their
+ratings would be combined together using crowd-sourcing tech-
+niques to determine the aggregate Type of Finding and Strength       own studies).
+                                                                        Identity authentication could be accomplished in multiple
+of Evidence scores for a given RepLink (see below).                  ways. For instance, a moderator could use the departmental web-
+
+                                                                     site to verify the author’s email address and send a unique link
+AGGREGATION, AUTHORITY, AND MACHINE LEARNING                         to that email address. Clicking on that link would enable the user
+Data must be aggregated by this system at multiple levels. First,    to set up an authenticated account under the users’ own name.
+multipleratingsforagivenRepLinkmustbecombinedintoaggre-              Moderator’s identities could be authenticated in a similar manner.
+
+gate Type of Finding and Strength of Evidence ratings for that
+RepLink. Second, where a single target paper has been the sub-       SELECTION OF MODERATORS
+ject of multiple replication attempts, the different RepLinks must   Although any user can contribute to Replication Tracker,modera-
+
+be aggregated into a single Replicability Score and Strength Score   torsplayseveraladditionalkeyroles.First,theyevaluatesubmitted
+for that target paper. In the same way, scores may be combined       Brief Reports, and submit the initial RepLinks for any accepted
+
+
+
+Frontiers in Computational Neuroscience                   www.frontiersin.org                             March 2012 | Volume 6 | Article 8 | 5
+Hartshorne and Schachner                                                                                               Tracking replicability
+
+
+
+
+Brief Report. Similarly, when new RepLinks are submitted, mod-       attempt (based on the criteria discussed above). In the latter case,
+eratorsarenotiﬁedandcanﬂagirrelevantRepLinksorsubmittheir            authors of Brief Reports could appeal the decision, which would
+ownratings.Thus,itisimportantthat(a)thereareenoughmoder-             then be reviewed by two other moderators. On acceptance, the
+
+ators,and (b) the moderators are sufﬁciently qualiﬁed. In the case   Brief Report would be published online in static form with a DOI,
+of moderator error, the Replication Tracker contains numerous        much like any other publication, and thus be part of the citable,
+ways by which other moderators and users can override the erro-      peerreviewedrecord.TheappropriateRepLinkswouldbelikewise
+
+neoussubmission(submittingadditionalRepLinkscores;ﬂagging            added to Replication Tracker.As with any RepLink,these could be
+the erroneous RepLink, etc.). In order to recruit a sufﬁcient num-   suppressed if ﬂagged as irrelevant a sufﬁcient number of times
+ber of moderators, we suggest allowing existing moderators to        (see above). Thus, while publication in Brief Reports is perma-
+invite additional moderators as well as allowing researchers to      nent (barring retractions),incorporation into Replication Tracker
+
+apply to be moderators. Moderators could be selected based on        is always potentially in ﬂux – as is appropriate for a post-review
+objectiveconsiderations(numberof publications,yearsof service,       evaluation process.
+etc.),subjective considerations (by a vote of existing moderators),
+
+or both.                                                             THE EXPERIENCE OF USING REPLICATION TRACKER: A STEP-BY-STEP
+                                                                     GUIDE
+RETRACTIONS
+The Replication Tracker system is also ideally suited to tracking    As in any literature database, users would begin by using a search
+                                                                     function (either simple or advanced) to locate a paper of inter-
+retractions. Retractions may be submitted by users as a spe-         est (Figure 1). This search would bring up a list of references, in
+cially marked type of RepLink, which would require moderator
+approval before posting. Retracted studies would appear with         a format similar to Google Scholar. However, in addition to the
+                                                                     citation count provided by Google Scholar,the system would pro-
+the tag RETRACTED in any search results, and automatically be        vide three additional values: The number of replication attempts
+excluded from calculations of Replicability Scores. As a safeguard   documented, the paper’s Replicability Score, and the Strength of
+against incorrect ﬂags, any time a study is ﬂagged as retracted, all
+other moderators would be notiﬁed,and the ﬂag could be revoked       Evidence score (Figure 2). As described above, the Replicability
+                                                                     Score would hold a value from −2o     t   +2, with negative val-
+if found inaccurate.                                                 ues denoting evidence of non-replication, zero denoting mixed
+
+BRIEF REPORTS                                                        ﬁndings, and positive values evidence of successful replication.
+                                                                        Theuserwouldthenclickonareferencefromthelisttobringup
+The efﬁcacy of Replication Tracker is limited by the number of       moredetailedinformationaboutthattargetpaper(Figure3).The
+published replication attempts. As discussed above, both success-    target paper’s reference would appear at the top of the page,along
+ful replications and null results are difﬁcult to publish, and often
+remain undocumented. Thus, we propose launching an open-             with the number of attempted replications documented, Replic-
+                                                                     ability Score for that paper, and the Strength of Evidence score.
+access journal that publishes all and any replication attempts of    Below these aggregate measures would be a list of the RepLinks,
+suitable quality.
+   Unlike full papers elsewhere, these Brief Reports would consist   represented by a citation of the RepLinked paper, the aggregate
+                                                                     Type of Finding score and Strength of Evidence score for that
+of the method and results section only. This greatly reduces the     RepLink, and the number of users who have rated that RepLink.
+cost of either writing or reviewing the report. The Brief Report     An additional button would allow users to add their own ratings
+must also be submitted with one or more RepLinks, specifying
+what exactly is being replicated. Particularly for non-replications, or ﬂag the RepLink as irrelevant.
+                                                                        Information about each RepLink could be expanded, to show
+authors of Brief Reports can use the comments on the RepLinks        each individual rating along with that users’associated comments,
+to discuss why they think the replication failed (low-power in the
+original study, etc.).                                               if any (Figure 4). Users could agree with an existing rating via a
+                                                                     thumbs-up button. Ratings and comments would be labeled with
+   Review of Brief Reports would be handled by moderators.           the username of the poster;for authenticated accounts,they could
+When a Brief Report is submitted, all moderators of that sub-
+ﬁeld would be automatically emailed with a request to review         optionally be labeled with the individuals’ real name. Comments
+the proposed post. The review could then be “claimed” by any         by authors who have chosen to authenticate their account under
+                                                                     their real names would be labeled as such.
+moderator. If no one claims the post for review within a week,
+the system would then automatically choose one of the relevant
+moderators, and ask if they would accept the request to review;      ISSUES FOR FURTHER DISCUSSION
+
+if they decline, further requests would be made until someone        The Replication Tracker would serve several functions. First, it
+agreed to review. Authors would not be able to be the sole mod-      would enable a new way of navigating the literature. Second,
+erator/reviewer for replications of their own work. As in the PLoS   we believe it would motivate researchers to conduct and report
+model, the moderator could evaluate the Brief Report alone or        attemptedreplications,helpingcorrectbiasesintheliteraturesuch
+
+solicit outside review(s).                                           as the ﬁle-drawer problem. Third, it will vastly improve access to
+   The presumption of the review process would be acceptance.        andcommunicationregardingreplicationattempts.Perhapsmost
+Brief Reports would be returned for revision when appropriate,as     importantly, it would help incentivize and reward costly efforts to
+
+in the case of using inappropriate statistical tests; but would only ensure replicability pre-publication,helping to mitigate a Tragedy
+be rejected if the paper does not actually qualify as a replication  of the Commons in scientiﬁc publishing.
+
+
+
+Frontiers in Computational Neuroscience                   www.frontiersin.org                             March 2012 | Volume 6 | Article 8 | 6
+Hartshorne and Schachner                                                                                                                         Tracking replicability
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  FIGURE 1 | Replication tracker: search window. Much like any other paper index, ReplicationTracker would allow the user to search for papers by author,
+  keyword, and other typical search terms.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  FIGURE 2 | Replication tracker: example search results. Results of a search       whether the ﬁnding successfully replicates or fails to replicate (“Replicability
+
+  query list relevant papers, along with number of citations and information        Score”), and a summary statistic of the strength of the evidence.These
+  about the paper’s replicability.This information consists of the number of        numbers are derived from RepLinks, data which is crowd-sourced from users
+
+  attempted replications reported to the system, a summary statistic of             and moderators (Figure 3).
+
+
+
+
+
+
+
+
+
+Frontiers in Computational Neuroscience                                www.frontiersin.org                                       March 2012 | Volume 6 | Article 8 | 7
+Hartshorne and Schachner                                                                                                                       Tracking replicability
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  FIGURE 3 | Replication tracker: search results expansion,                        (“replication type”) and strength of the evidence is noted.These are
+
+  showing RepLinks for a target paper. Each RepLink represents an                  determined by aggregating determinations made by individual users
+  attempted replication. Again, the degree of success of the replication           (Figure 4).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  FIGURE 4 | Replication tracker: expansion of a RepLink, showing ratings by individual readers, which are summarized in Figure 3. Users are also able to
+  add comments, explaining their determinations, or ﬂag posts as irrelevant, prompting review by moderators.
+
+
+
+
+
+
+
+
+
+
+
+Frontiers in Computational Neuroscience                               www.frontiersin.org                                       March 2012 | Volume 6 | Article 8 | 8
+Hartshorne and Schachner                                                                                                Tracking replicability
+
+
+
+
+   However, in addition to these potential beneﬁts, tracking, and     WHAT IS THE RIGHT UNIT OF ANALYSIS?
+publishing replication attempts raises non-trivial issues, and has    Because each paper may include multiple ﬁndings that differ in
+the potential for unintended consequences. We consider several        replicability,thereisagoodargumenttobemadethatwhatshould
+
+such concerns below and discuss how these concerns may be             betrackedisthereplicabilityof agivenresult.Weproposetracking
+addressed or allayed.                                                 the replicability of papers instead, for several reasons.
+                                                                         The ﬁrst reason is one of feasibility. We believe that tracking
+
+GETTING THE SYSTEM OFF THE GROUND                                     each ﬁnding separately would be infeasible, as what counts as an
+The usefulness of the database for tracking replicability will be a   individual ﬁnding may be subjective,and the vast number of units
+function of the amount of replication information added to it in      of analysis even within a single paper becomes prohibitive. An
+the form of RepLinks, metadata information, and Brief Reports.        intermediatelevelwouldbetotrackindividualexperiments.How-
+
+This will require considerable participation by a broad swath of      ever, publication formats do not always include separate headings
+the research community. Because researchers are more likely to        foreachindividualexperiment(e.g.,Nature,CurrentBiology),and
+contribute to a system that they already ﬁnd useful, an important     even a single experiment may include multiple components with
+
+determinerof successwillbetheabilitytoachieveacriticalmassof          differences in replicability.
+such information. We have considered several ways of increasing          Secondly,even organizing the system at the level of experiment
+the likelihood that the system quickly reaches critical mass.         will not allow an aggregated replicability score to capture every
+   First,thereshouldbeaconsiderablenumberof foundingmem-              nuance of the scientiﬁc literature. It will always be necessary for
+
+bers,so that a wide range of researchers are engaged in the project   thereadertoexaminewritteninformationformoredetail,includ-
+prior to launch. This will not only help with division of labor, but  ing the full text of the RepLinked papers. For these detail-oriented
+will also help clarify the many design decisions that go into creat-  readers, the proposed system provides a novel way to navigate
+
+ing the details of the system. The more diverse the founding group    through published work (by following RepLinks to ﬁnd and read
+is,the more likely the ﬁnal system will be acceptable to researchers  papers with attempted replications) and an efﬁcient way to view
+in multiple ﬁelds and disciplines. This paper serves as a ﬁrst step   comments on each of these papers (Figure 4).Suchasystemis
+in starting the needed dialog.                                        most intuitive and navigable when organized at the level of the
+
+   Second,wesuggestconcentratingonﬁrstreachingcriticalmass            paper itself.
+for a few select subﬁelds of psychology and neuroscience, instead
+of simultaneously attempting to obtain critical mass in all ﬁelds of  ARE SUFFICIENT NUMBERS OF REPLICATIONS CONDUCTED?
+
+science at once. In order to reach critical mass within the ﬁrst few  The rate of published replications appears to be low: For instance,
+subﬁelds,we suggest that prior to the public launch of Replication    over a 20-year period,only 5.3% of 701 publications in nine man-
+Tracker,founding members conduct targeted replicability reviews       agement journals included attempts to replicate previous ﬁndings
+of speciﬁc literatures within those subﬁelds,writing RepLinks and     (Hubbardetal.,1998).WhilewebelieveReplicationTrackerwould
+
+soliciting Brief Reports during the process. These data would be      leadtoincreasednumbersof publishedreplications,wemustcon-
+used to write review papers, which would be published in tradi-       sider whether Replication Tracker would be useful if the number
+tional journals. These review papers would be useful publications     of published replications remains low. Certainly,many papers will
+
+in and of themselves and would help demonstrate the empirical         simply never be replicated, and many others will only have one
+value of tracking replications. This would help recruit additional    reported replication attempt.
+founders, moderators and funding – all while major components            We do not believe these issues undermine the utility of Repli-
+are added to the database. Only once enough coverage of the liter-    cation Tracker for several reasons. First, the ﬁndings which are of
+
+atures within those subﬁelds has been achieved would Replication      broadest interest to the community are likely the very same ﬁnd-
+Tracker be publically launched.                                       ings for which the most replications are attempted. Thus, while
+   In addition to tracking published replications, the proposed       manylow-impactpapersmaylackreplicationdata,thesystemwill
+
+system attempts to ameliorate the ﬁle-drawer problem by allow-        be most useful for the papers where it is most needed. Secondly,
+ing researchers to submit Brief Reports of attempted replications.    even low numbers of replications are often sufﬁcient: because
+Several previous attempts have been made to publish null results      spurious results are unlikely to replicate, even only a handful of
+andreplicationattempts(e.g.,JournalofArticlesinSupportof the          successful replications signiﬁcantly increases the likelihood that a
+
+NullHypothesis;JournalofNegativeResultsinBiomedicine)often            given ﬁnding is real (Moonesinghe et al., 2007). Finally, we note
+with low rates of participation (JASNH has published 32 papers        that even sparse replicability data is useful when aggregating over
+since its launch in 2002). Nonetheless, we believe several aspects    large numbers of papers, for instance, when producing aggregate
+
+of our system would motivate increased participation. Firstly, the    Replicability Scores for journals. Similarly, it would be possible to
+format of Brief Reports signiﬁcantly decreases the time commit-       aggregate across studies within individual literatures or using par-
+ment of preparation, as the Reports consist of the method and         ticular methods. For these aggregate scores, sparse data does not
+results section only. Second, these Brief Reports will not only be    present a problem.
+
+citable, but will also be highly ﬁndable, as they will be RepLinked
+to the relevant published papers. Thus we expect these Reports        WOULD TRACKING REPLICABILITY STIFLE NOVEL SCIENTIFIC FIELDS?
+to have some value, perhaps equivalent to a conference paper or       Commenters on the present paper have suggested that since new
+
+poster. We believe that the combination of lesser time investment     ﬁelds may still be designing the details of their methods, and may
+and increased value will lead to increased rates of submission.       belesssureofwhataspectsofthemethodarenecessarytocorrectly
+
+
+
+Frontiers in Computational Neuroscience                    www.frontiersin.org                             March 2012 | Volume 6 | Article 8 | 9
+Hartshorne and Schachner                                                                                                  Tracking replicability
+
+
+
+
+measure the effects under investigation, their initial results may     particular will be much more likely to be subject to replication
+appear less replicable. In this case, using replicability scores as a  attempts; since some replications even of real effects will fail,
+measure of paper, researcher, and journal quality – one of our         high-proﬁle papers may be unfairly denigrated. This issue is com-
+
+explicit aims – could potentially stiﬂe new ﬁelds of enquiry.          poundedif typicalstatisticalpowerinthatliteratureislow,making
+   Thisisanimportantconcerniftrue.Wedonotknowofanysys-                 replication improbable.
+tematic empirical data that would adjudicate the issue. However,          These issues can be dealt with directly in Replication Tracker,
+
+we suspect that other factors may systematically increase replica-     by appropriately weighing this probabilistic information. Recall
+bility in new lines of inquiry. For example,young ﬁelds may focus      that Replication Tracker provides both a Replicability Score, indi-
+on larger effects, with established ﬁelds focusing on increasingly     cating whether existing evidence suggests that the target paper
+subtle effects over time (cf Taubes and Mann,1995). Additionally,      replicates, as well as a Strength of Evidence Score. A single non-
+
+in the case that subtle methodological differences prevent replica-    replication – particularly one with only mid-sized power – is not
+tion of results, Replication Tracker may actually aid researchers in   strong evidence for non-replicability, and this should be reﬂected
+identifying the relevant issues more quickly, spurring growth of       intheStrengthScore.Replicationattemptswithlow-powershould
+
+the novel ﬁeld.                                                        not be RepLinked at all. If 8 of 10 replication attempts succeed –
+   Weadditionallynotethatitisnotourintentionthatreplicability          consistent with statistical power of 0.8 – that should be counted as
+becomethesolecriteriabywhichresearchqualityismeasured,nor              strong evidence of replicability.
+dowethinkthatislikelytohappen.Newﬁeldsarelikelytogenerate
+
+excitement and citations, which will produce their own momen-          WILL TYPE II ERROR INCREASE?
+tum. The goal is that replicability rates be considered in addition.
+                                                                       Finally, we must consider whether the changes people will make
+WOULD REPLICATION TRACKER UNDERESTIMATE REPLICABILITY?                 to their work will actually lead to an increased d (ability to detect
+                                                                       true effects) or whether these changes will simply result in a trade-
+Commenters on the present paper have also suggested several            off: researchers may eliminate some false positives (Type I error)
+waysinwhichReplicationTrackermightunderestimatereplicabil-
+ity. Underestimating the replicability of a ﬁeld could undermine       only at the expense of increasing the false negative rate (Type II
+both scientists’ and the public’s conﬁdence in the ﬁeld, leading to    error). It is an open question whether ﬁelds like psychology and
+                                                                       neuroscience are currently at an optimal balance between Type I
+decreased interest and funding.
+                                                                       andTypeIIerror,andReplicationTrackerwouldhelpprovidedata
+Null effect bias                                                       to adjudicate this issue. Moreover, some of the potential reforms
+Researchers may be more motivated to submit non-replications           would almost certainly increase d   ▯, like conducting studies with
+to the system as Brief Reports,while successful replications would     greater statistical power.
+
+languishinﬁle-drawers.Wesuspectthatthisproblemwoulddisap-
+pear as the system gains popularity: Researchers typically attempt
+replications of effects that are crucial to their own line of work     LIMITATIONS TO EVALUATION BY TRACKING REPLICATIONS
+                                                                       Replicability is a crucial measure of research quality;however,cer-
+and will ﬁnd it useful to report those replications in order to have   tain types of errors cannot be detected in by such a system. For
+their own work embedded in a well-supported framework. More-
+over, many replication attempts are conducted by the authors of        instance,datamaybemisinterpreted,oraﬂawedmethodof analy-
+the original study, who will be intrinsically motivated to report      sis may be repeatedly used. Thus, while tracking replicability is an
+                                                                       importantcomponentof post-publicationassessment,itisnotthe
+successful replications in support of their own work. Nonetheless,     only one needed. We have suggested presenting replicability met-
+this is an issue that should be evaluated and monitored as Repli-
+cation Tracker is introduced, so that adjustments can be made as       rics side-by-side with citation counts (Figure 2). Similarly, other
+                                                                       post-publicationevaluations,suchasthosedescribedwithinother
+necessary.                                                             papers in this Special Topic, could be presented alongside these
+
+Unskilled replicators                                                  quantitative metrics.
+Another concern is that if on average the researchers that tend to        While it is tempting to try to build a single system to track mul-
+conduct large numbers of strict replications are less skilled than     tiple aspects of research quality, we believe that constructing such
+                                                                       a system will be extremely difﬁcult,as different data structures are
+the original researchers,this could lead to non-replications due to
+unknownerrors.If thisisthecase,thisissuecouldbecompensated             required to track each aspect of research quality. The Replication
+forintwoways.First,asReplicationTrackerandBriefReportsraise            Tracker system, as currently envisioned, is optimized for tracking
+                                                                       replications: The basic data structure is the RepLink,a connection
+the proﬁle of replication, more skilled researchers may begin to
+conduct and report more replications. Second,as discussed above,       between a published paper and a replication attempt of its ﬁnd-
+there are numerous machine learning techniques to identify the         ings. In contrast, to determine the truth value of a particular idea
+most reliable sources of information. These techniques could be        or theory, papers should be rated on how well the results justify
+                                                                       the conclusions and linked to one another on the basis of theoret-
+appliedtomitigatethisissue,bydiscountingreplicationdatafrom
+usersthathavenotbeenreliablesourcesof informationinthepast.            ical similarity, not just strict methodological similarity. As such,
+                                                                       we think that such information is likely best tracked by an inde-
+Spurious non-replications                                              pendent system, which can be optimized accordingly. Ultimately,
+
+Since the statistical power to detect an effect is never 1.0, even     results from these multiple systems may then be aggregated and
+true effects sometimes do not replicate. High-proﬁle papers in         presented together on a single webpage for ease of navigation.
+
+
+
+Frontiers in Computational Neuroscience                     www.frontiersin.org                             March 2012 | Volume 6 | Article 8 | 10
+Hartshorne and Schachner                                                                                                                     Tracking replicability
+
+
+
+
+
+CONCLUSION                                                                        and tracking citations have complementary strengths and weak-
+In conclusion, we propose tracking replication attempts as a key                  nesses: Inﬂuential results may not be replicable. Replicable results
+
+method of identifying high-quality research post-publication. We                  maynotbeinﬂuential.Otherpost-publicationevaluations,suchas
+argue that tracking and incentivizing replicability directly would                those described within other papers in this Special Topic,could be
+
+allow researchers to escape the current Tragedy of the Com-                       presented alongside these quantitative metrics.Assembling replic-
+mons in scientiﬁc publishing, thus helping to speed the adop-                     ability data alongside other metrics in an open-access Web system
+
+tion of reforms. In addition, by tracking replicability, we will be               should allow users to identify results that are both inﬂuential and
+
+able to determine whether any adopted reforms have successfully                   replicable,thusmoreaccuratelyidentifyinghigh-qualityempirical
+increased replicability.                                                          work.
+
+    No measure of research quality can be perfect; instead, we aim
+to create a measure that is robust enough to be useful. Citation                  ACKNOWLEDGMENTS
+
+countshaveprovenveryusefulinspiteofthemetrics’manyﬂawsas                          The ﬁrst author was supported through the National Defense Sci-
+measuresofapaper’squality(forinstance,paperswhicharewidely                        ence and Engineering Graduate Fellowship (NDSEG) Program.
+
+criticized in subsequent literature will be highly cited). We do not              Many thanks to Tim O’Donnell, Manizeh Khan, Tim Brady,
+
+propose replacing citation counts with replicability measures, but                Roman Feiman, Jesse Snedeker, and Susan Carey for discussion
+rather augmenting the one with the other. Tracking replicability                  and feedback.
+
+
+
+REFERENCES                                  turk,”inProceedingsof the2009Con-     Dwan, K., Altman, D. G., Arnaiz, J.          CrowdDB: answering queries with
+Adamic, L. A., Zhang, J., Bakshy, E., and   ference on Empirical Methods in Nat-     A., Bloom, J., Chan, A.-W., Cronin,       crowdsourcing. Paper Presented at
+   Ackerman, M. S. (2008). “Knowl-          ural Language Processing, Singapore,     E., Decullier, E., Easterbrook, P. J.,    the SIGMOD 2011,Athens.
+
+   edge sharing and yahoo answers:          286–295.                                 Von Elm, E., Gamble, C., Ghersi,      Gehr, B. T., Weiss, C., and Porz-
+   everyone knows something,”in Pro-     Chase, L. J., and Chase, R. B. (1976). A    D., Ioannidis, J. P., Simes, J., and      solt, F. (2006). The fading of
+   ceedings of the 17th International       statistical power analysis of applied    Williamson, P. R. (2008). Systematic      reported effectiveness. A meta-
+   Conference on World Wide Web,Bei-        psychological research. J. Appl. Psy-    review of the empirical evidence of       analysis of randomised controlled
+
+   jing.                                    chol. 61, 234–237.                       study publication bias and outcome        trials. BMC Med. Res. Methodol. 6,
+Albert, P. S., and Dodd, L. E. (2004). A Cohen, J. (1962). The statistical power     reporting bias. PLoS ONE 3, e3081.        25. doi:10.1186/1471-2288-6-25
+   cautionary note on the robustness        of abnormal-social psychological         doi:10.1371/journal.pone.0003081      Gerberg, A. S., Green, D. P., and Nick-
+
+   of latent class models for estimat-      research. J. Abnorm. Soc. Psychol. 65,Easterbrook, P. J., Berlin, J. A., Gopalan,  erson, D. (2001). Testing for publi-
+   ing diagnostic error without a gold      145–153.                                 R., and Matthews, D. R. (1991).           cation bias in political science. Polit.
+   standard. Biometrics 60, 427–435.     Cole, S. Jr., Cole, J. R., and Simon, G.    Publication bias in clinical research.   Anal. 9, 385–392.
+
+Armitage, P., McPherson, C. K., and         A. (1981). Chance and consensus in       Lancet 337, 867–872.                  Giles, J. (2005). Internet encyclope-
+   Rowe, B. C. (1969). Repeated signif-     peer review. Science 214, 881–886.    Edwards, W., Lindman, H., and Sav-           dias go head to head. Nature 438,
+   icance tests on accumulating data.    Coursol, A., and Wagner, E. E. (1986).      age, L. J. (1963). Bayesian sta-          900–901.
+   J. R. Stat. Soc. Ser. A Stat. Soc. 132,  Effect of positive ﬁndings on sub-       tistical inference for psycholog-     Hardin,   G.   (1968).  The    tragedy
+
+   235–244.                                 mission and acceptance rates: a note     ical research. Psychol. Rev. 70,          of the commons. Science       162,
+Baayen,R.H.,Davidson,D.J.,andBates,         on meta-analysis bias. Prof. Psychol.    193–242.                                  1243–1248.
+   D. M. (2008). Mixed-effects model-       Res. Pr. 17, 136–137.                 Ernst, C., and Angst, J. (1983). Birth   Harris, J. R. (1998). The Nurture
+
+   ing with crossed random effects for   Cuijpers, P., Smit, F., Bohlmeijer, E.,     Order: Its Inﬂuence on Personality.      Assumption: Why Children Turn out
+   subjects and items. J. Mem. Lang.59,     Hollon, S. D., and Andersson,            New York: Springer-Verlag.                the Way That They Do.NewY ork:
+   390–412.                                 G. (2010). Efﬁcacy of cognitive-      Eysenck,H.J.,andEysenck,S.B.(1992).          Free Press.
+
+Bederson, B. B., Hu, C., and Resnik,        behavioral therapy and other psy-        Peer review: advice to referees and   Hartshorne, J. K., Salem-Hartshorne,
+   P. (2010). “Translation by interac-      chological treatments for adult          contributors. Pers. Individ. Dif. 13,     N.,   and   Hartshorne,    T.   S.
+   tivecollaborationbetweenmonolin-         depression: meta-analytic study of       393–399.                                  (2009).  Birth  order   effects in
+   gualusers,”inProceedingsofGraphics       publication bias. Br. J. Psychiatry   Feller, W. (1940). Statistical aspects of    the formation of long-term rela-
+
+   Interface, Ottawa, 39–46.                196, 173–178.                            ESP. J. Parapsychol. 4, 271–298.          tionships. J. Individ. Psychol. 65,
+Bezeau,S.,andGraves,R.(2001).Statis-     Dewald, W. G., Thursby, J. G., and       Ferguson, C. J., and Kilburn, J. (2010).     156–176.
+   ticalpowerandeffectsizesof clinical      Anderson, R. G. (1986). Replica-         Much ado about nothing: the mises-    Healy, D. G., Abou-Sleiman, P. M.,
+
+   neuropsychology research. J. Clin.       tion in empirical economics: the         timation and overinterpretation of        Casas, J. P.,Ahmadi, K. R., Lynch, T.,
+   Exp. Neuropsychol. 23, 399–406.          journal of money, credit and bank-       violent video game effects in east-       Gandhi, S., Muqit, M. M., Foltynie,
+Boffetta, P., Mclaughlin, J. K., Vec-       ing project. Am. Econ. Rev. 76,          ern and western nations: comment          T.,Barker,T.,Bhatia,K.P.,Quinn,N.
+
+   chia, C. L., Tarone, R. E., Lipworth,    587–603.                                 on Anderson et al. (2010). Psychol.       P., Lees, A. J., Gibson, J. M., Holton,
+   L., and Blot, W. J. (2008). False-    Dickersin, K., Chan, S., Chalmers, T. C.,   Bull. 136, 174–178.                       J. L.,Revesz,T.,Goldstein,D. B.,and
+   positive results in cancer epidemi-      Sacks, H. S., and Smith, H. (1987).   Field,M.,Munafo,M.R.,andFranken,I.          Wood, N. W. (2006). UCHL1 is not
+
+   ology: a plea for epistemological        Publication bias and clinical trials.    H. A. (2009). A meta-analytic inves-      a Parksinon’s disease susceptibility
+   modesty. J. Natl. Cancer Inst. 100,      Control. Clin. Trials 8, 343–353.        tigation of the relationship between      gene. Ann. Neurol. 59, 627–633.
+   988–995.                              Dickersin,K.,Min,Y.-I.,andMeinert,C.        attentional bias and subjective crav- Hirschhorn, J. N., Lohmueller, K.
+Callaham, M. L., Wears, R. L., Weber,       L. (1992). Factors inﬂuencing pub-       ing in substance abuse. Psychol. Bull.    E., Byrne, E., and Hirschhorn, K.
+
+   E. J., Barton, C., and Young, G.         lication of research results: follow-    135, 589–607.                             (2002). A comprehensive review of
+   (1998). Positive-outcome bias and        up of applications submitted to two   Flint, J., and Munafo, M. R. (2009).         genetic association studies. Genet.
+   other limitations in the outcome of      institutional review boards. J. Am.      Replication and heterogeneity in          Med.4, 45–61.
+
+   researchabstractssubmittedtoasci-        Med. Assoc. 267, 374–378.                gene x environment interaction        Hubbard, R., Vetter, D. E., and Little,
+   entiﬁcmeeting.JAMA 280,254–257.       Doan, A., Ramakrishnan, R., and             studies. Int. J. Neuropsychopharma-       E. L. (1998). Replication in strategic
+Callison-Burch, C. (2009).“Fast, cheap,     Halevy, A. Y. (2011). Crowdsourc-        col. 12, 727–729.                         management: scientiﬁc testing for
+
+   and creative: evaluating translation     ing systems on the world-wide web.    Franklin, M., Kossmann, D., Kraska,          validity, generalizability, and useful-
+   quality using Amazon’s mechanical        Commun. ACM 54, 86–96.                   T., Ramesh, S., and Xin, R. (2011).       ness.Strateg.Manage.J.19,243–254.
+
+
+
+
+Frontiers in Computational Neuroscience                              www.frontiersin.org                                     March 2012 | Volume 6 | Article 8 | 11
+Hartshorne and Schachner                                                                                                                           Tracking replicability
+
+
+
+
+
+Ioannidis, J. P. A. (2005a). Contra-          susceptibility to common disease.          discrimination. Pers. Soc. Psychol. B. Wager, T. D., Lindquist, M., and
+   dictedandinitiallystrongereffectsin        Nat. Genet. 33, 177–182.                   26, 1271–1283.                             Kaplan, L. (2007). Meta-analysis
+
+   highly cited clinical research. J. Am.  Mahoney, M. J. (1977). Publication         Saxe, R., Brett, M., and Kanwisher,           of functional neuroimaging data:
+   Med. Assoc. 294, 218–228.                  prejudices: an experimental study of       N. (2006). Divide and conquer: a           current   and   future   directions.
+Ioannidis, J. P. A. (2005b). Why most         conﬁrmatory bias in the peer review        defenseoffunctionallocalizers.Neu-         Soc.  Cogn.   Affect. Neurosci.   2,
+
+   publishedresearchﬁndingsarefalse.          system.Cognit.Ther.Res.1,161–175.          roimage 30, 1088–1096.                     150–158.
+   PLoSMed.2,e124.doi:10.1371/jour-        Maraganore,D.M.,Lesnick,T.G.,Elbaz,        Sedlmeier,P.,andGigerenzer,G.(1989).      Wager, T. D., Lindquist, M. A., Nichols,
+   nal.pmed.0020124                           A., Chartier-Harlin, M.-C., Gasser,        Do studies of statistical power have       T. E., Kober, H., and van Snellen-
+
+Ioannidis,J.P.A.(2011).Meta-research:         T., Kruger, R., Hattori, N., Mel-          an effects on the power of studies?        berg, J. X. (2009). Evaluating the
+   the art of getting it wrong. Res. Syn.     lick, G. K., Quattrone, A., Satoh, J.-     Psychol. Bull. 105, 309–316.               consistency and speciﬁcity of neu-
+   Methods 1, 169–184.                        I., Toda, T., Wang, J., Ioannidis, J.   Sena, E. S., Worp, H. B. V. D., Bath,         roimaging data using meta-analysis.
+
+Ioannidis, J. P. A., Ntzani, E. E.,           P. A., de Andrade, M., Rocca, W.           P. M. W., Howells, D. W., and              Neuroimage 45, S210–S221.
+   Trikalinos, T. A., and Contopoulos-        A., and the UCHL1 Global Genet-            Macleod, M. R. (2010). Publication     Welinder, P., Branson, S., Belongie, S.,
+   Ioannidis, D. G. (2001). Replica-          ics Consortium. (2004). UCHL1 is           bias in reports of animal stroke           and Perona, P. (2010). The multi-
+
+   tion validity of genetic association       a Parkinson’s disease susceptibility       studies leads to major overstatement       dimensional wisdom of the crowds.
+   studies. Nat. Genet. 29, 306–309.          gene. Ann. Neurol. 55, 512–521.            of efﬁcacy. PLoS Biol. 8, e1000344.        Paper Presented at the Advances in
+Ioannidis, J. P. A., Trikalinos, T. A.,    Misakian, A. L., and Bero, L. A. (1998).      doi:10.1371/journal.pbio.1000344
+                                                                                                                                    Neural Information Processing Sys-
+   Ntzani, E. E., and Contopoulos-            On passive smoking: comparison of       Shen, W., Kiger, T. B., Davies, S. E.,        tems 2010,Vancouver.
+   Ioannidis, D. G. (2003). Genetic           published and unpublished studies.         Rasch,R.L.,Simon,K.M.,andOnes,         Yan, T., Kumar, V., and Ganesan,
+
+   associations in large versus small         J. Am. Med. Assoc. 280, 250–253.           D.S.(2011).Samplesinappliedpsy-            D. (2010). “Crowdsearch: exploiting
+   studies: an empirical assessment.       Mone, M. A., Mueller, G. C., and              chology: over a decade of research         crowds for accurate real-time image
+   Lancet 361, 567–571.                       Mauland, W. (1996). The percep-           ni ir.         J. Appl. Psychol. 96,        search on mobile phones,” in Pro-
+
+Jaeger, T. F. (2008). Categorical data        tions and usage of statistical power       1055–1064.                                 ceedingsof the8thInternationalCon-
+   analysis:away fromANOVAs (trans-           in applied psychology and man-          Snow, R., O’Conner, B., Jurafsky, D.,         ference on Mobile Systems, Applica-
+   formation or not) and towards logit        agement research. Pers. Psychol. 49,       and Ng, A. Y. (2008). “Cheap and           tions, and Services, San Francisco.
+
+   mixed models. J. Mem. Lang. 59,            103–120.                                   fast – but is it good? Evaluating non- Yarkoni, T. (2009). Big correlations
+   434–446.                                Moonesinghe, R., Khoury, M. J., and           expert annotations for natural lan-        in  little studies:  inﬂated   fmri
+Jennions, M. D., and Møller, A. P.            Janssens, C. J. W. (2007). Most pub-       guage tasks,” in Proceedings of the        correlations reﬂect low statistical
+
+   (2002a). Publication bias in ecol-         lished research ﬁndings are false-but      2008 Conference on Empirical Meth-         power-commentary on Vul et al.
+   ogy and evolution: an empirical            a little replication goes a long way.      ods in Natural Language Processing         (2009). Perspect. Psychol. Sci. 4,
+   assessment using the “trim and ﬁll”        PLoS Med. 4, e28. doi:10.1371/jour-        Edinburgh, 254–263.                        294–298.
+
+   method. Biol.Rev.Camb.Philos.Soc.          nal.pmed.0040028                        Taubes, G., and Mann, C. C. (1995).       Yarkoni, T., and Braver, T. S. (2010).
+   77, 211–222.                            Munafò, M. R., Stothart, G., and Flint,       Epidemiologyfacesitslimits.Science         “Cognitive neuroscience approaches
+Jennions, M. D., and Møller, A. P.            J. (2009). Bias in genetic associa-        269, 164–169.                              to individual differences in working
+
+   (2002b). Relationships fade with           tion studies and impact factor. Mol.    Trikalinos, T.   A.,  Ntzani,   E.  E.,       memory and executive control: con-
+   time: a meta-analysis of temporal          Psychiatry 14, 119–120.                    Contopoulos-Ioannidis, D. G., and          ceptual and methodological issues,”
+
+   trends in publication in ecology and    Newton, D. P. (2010). Quality and peer        Ioannidis, J. P. A. (2004). Estab-         in Handbook of Individual Differ-
+   evolution.Proc. Biol. Sci.269,43–48.       review of research: an adjudicating        lishment of genetic associations for       ences in Cognition: Attention, Mem-
+Kosciulek, J. F., and Szymanski, E.           role for editors. Account. Res. 17,        complex diseases is independent of         ory, and Executive Control, eds A.
+
+   M. (1993). Statistical power analy-        130–145.                                   early study ﬁndings. Eur. J. Hum.          Gruzka, G. Matthews, and B. Szy-
+   sis  of   rehabilitation counseling     Olson, C. M., Rennie, D., Cook, D.,           Genet. 12, 762–769.                        mura (NewYork: Springer),87–108.
+   research. Rehabil. Couns. Bull. 36,        Dickersin, K., Flanagin, A., Hogan,     Tversky, A., and Kahneman, D. (1971).
+
+   212–219.                                   J. W., Zhu, Q., Reiling, J., and Pace,     Belief in the law of small numbers.    Conﬂict of Interest Statement:     The
+Kriegeskorte, N., Simmons, W. K., Bell-       B. (2002). Publication bias in edi-        Psychol. Bull. 76, 105–110.            authors declare that the research was
+   gowan, P. S. F., and Baker, C. I.          torial decision making. JAMA 287,       von Ahn, L., and Dabbish, L. (2008).      conducted in the absence of any com-
+
+   (2009). Circular analysis in systems       2825–2828.                                 General techniques for designing       mercial or ﬁnancial relationships that
+   neuroscience: the dangers of double     Peters,D. P.,and Ceci,S. J. (1982). Peer-     games with a purpose. Commun.          could be construed as a potential con-
+   dipping. Nat. Neurosci. 12, 535–540.       review practices of psychological          ACM 51, 58–67.                         ﬂict of interest.
+
+Kristensen, P., and Bjerkedal, T. (2007).     journals: the fate of published arti-   von Ahn, L., Maurer, B., McMillen, C.,
+   Explaining the relation between            cles, submitted again. Behav. Brain        Abraham, D., and Blum, M. (2008).      Received: 30 May 2011; paper pending
+   birth order and intelligence. Science      Sci. 5, 187–195.                           reCAPTCHA: human-based charac-         published: 10 October 2011; accepted:
+
+   316, 1717.                              Richard,F.D.,Bond,C.F.Jr.,andStokes-          terrecognitionviawebsecuritymea-       30 January 2012; published online: 05
+Law, E., von Ahn, L., Dannenberg, R.,         Zoota, J. J. (2003). One hundred           sures. Science 321, 1465–1468.         March 2012.
+   andCrawford,M.(2007).TagATune:             years of social psychology quantita-   Vul, E., Harris, C., Winkielman, P.,       Citation: Hartshorne JK and Schachner
+
+   a game for sound and music anno-           tively described. Rev. Gen. Psychol. 7,    and Pashler, H. (2009). Puzzlingly     A (2012) Tracking replicability as a
+   tation. Paper Presented at the ISMIR,      331–363.                                   high correlations in fMRI studies      method of post-publication open evalu-
+
+   Vienna.                                 Ruggiero, K. M., and Marx, D. M.              of emotion, personality, and social    ation. Front. Comput. Neurosci. 6:8. doi:
+Lerner,J.S.,andGonzalez,R.M.(2005).           (1999). Less pain and more to              cognition. Perspect. Psychol. Sci. 4,  10.3389/fncom.2012.00008
+   Forecasting one’s future based on          gain: why high-status group mem-           274–290.                               Copyright © 2012 Hartshorne and
+
+   ﬂeeting subjective experiences. Pers.      bers blame their failure on discrim-    Wagenmakers, E.-J., Wetzels, R., Bors-    Schachner. This is an open-access article
+   Soc. Psychol. B. 31, 454–466.              ination. J. Pers. Soc. Psychol. 77,        boom, D., and van der Maas, H.         distributed under the terms of the Cre-
+Lohmueller, K. E., Pearce, C. L., Pike,       774–784.                                   L. (2011). Why psychologists must      ative Commons Attribution Non Com-
+
+   M., Lander, E. S., and Hirschhorn, J.   Ruggiero, K. M., Steele, J., Hwang, A.,       change the way they analyze their      mercial License, which permits non-
+   N. (2003). Meta-analysis of genetic        and Marx, D. M. (2000). Why did I          data: the case of psi: Comment on      commercial use, distribution, and repro-
+   association studies supports a con-        get a ‘D’? The effects of social com-      Bem, 2011. J. Pers. Soc. Psychol. 100, duction in other forums, provided the
+
+   tribution of common variants to            parisons on women’s attributions to        426–432.                               original authors and source are credited.
+
+
+
+
+
+
+
+
+Frontiers in Computational Neuroscience                                 www.frontiersin.org                                       March 2012 | Volume 6 | Article 8 | 12
+Hartshorne and Schachner                                                                                                   Tracking replicability
+
+
+
+
+APPENDIX
+SURVEY METHODS AND RESULTS
+
+We contacted 100 colleagues directly as part of an anonymous Web-based survey. Colleagues of the authors from different institutions
+were invited to participate, as well as the entire faculty of one research university and one liberal arts college. Forty-nine individuals
+completed the survey: 26 faculty members,9 post-docs,and 14 graduate students. Thirty-eight of these participants worked at national
+
+research universities. Respondents represented a wide range of sub-disciplines: clinical psychology (2), cognitive psychology (11), cog-
+nitive neuroscience (5),developmental psychology (10),social psychology (6),school psychology (2),and various inter-subdisciplinary
+areas.
+
+   The survey was presented using Google Forms. Participants ﬁlled out the survey at their leisure during a single session. The full text
+of the survey, along with summaries of the results, is included below. All research was approved by the Harvard University Committee
+on the Use of Human Subjects, and informed consent was obtained.
+
+
+Part 1: Demographics
+Your research position: graduate student, post-doc, faculty, other (26 faculty, 9 post-docs, and 14 graduate students).
+
+Your institution: national university, regional university, small liberal arts college, other (38 national university, 4 regional university, 5
+small liberal arts college, 2 other).
+Your subﬁeld (cognitive, social, developmental, etc.; There is no standard set of subﬁelds. Use your own favorite label): ________
+
+   (11 cognitive psychology,10 developmental psychology,6 social psychology,5 cognitive neuroscience,2 school psychology,2 clinical
+psychology, 13 multiple/other).
+
+
+Part 2: completed replications
+In this section, you will be asked about your attempts to replicate published ﬁndings. When we say “replication,” we mean:
+   -a study in which the methods are designed to be as similar as possible to a previously published study. There may be minor differences in
+
+the method so long as they are not expected to matter under any existing theory. However, a study which uses a different method to make a
+similar or convergent theoretical point would be more than a replication. If you attempted to replicate the same ﬁnding several times, each
+attempt should be counted separately.
+
+   Given this deﬁnition...
+   1) Approximately how many times have you attempted to replicate a published study? Please count only completed attempts – that is,
+   those with at least as many subjects as the original study. ________
+
+   Total: 257; Mean: 6; Median: 2; SD: 11
+   (3 excluded:“NA,”“too many to count,”“50+”)
+   2) How many of these attempts fully replicated the original ﬁndings? ____
+
+   Excluding those excluded in (1):
+   Total: 127; Mean: 4; Median: 1; SD: 7
+   3) How many of these attempts partially replicated the original ﬁndings? ____
+
+   Excluding those excluded in (1):
+   Total: 77; Mean: 2; Median: 1; SD: 5
+   4) How many of these attempts failed to replicate any of the original ﬁndings? ___
+
+   Excluding those excluded in (1):
+   Total: 79; Mean: 2; Median: 1; SD: 4
+   5) Please add any comments about this section here: _____
+
+   [comments]
+
+Part 3: aborted replications
+
+In this section, you will be asked about attempted replications that you did not complete (e.g., tested fewer participants than were tested in
+the original study).
+   1) Approximately how many times have you started an attempted replication but stopped before collecting data from a full sample of
+
+   participants? ____
+   Total: 48; Mean: 1; Median: 0; SD: 3
+   [3 excluded:“a few,”“countless,”(lengthy discussion)]
+
+   2) Of these attempts, how many were stopped because the data thus far failed to replicate the original ﬁndings? ____
+   Excluding those excluded in (1):
+   Total: 38; Mean: 2; Median: 0.5; SD=4
+
+   3) Of these attempts, how many were stopped for another reasons (please explain)? ___
+   [comments]
+   4) Please add any comments about this section here.
+
+   [comments]
+
+
+
+Frontiers in Computational Neuroscience                     www.frontiersin.org                              March 2012 | Volume 6 | Article 8 | 13
+Hartshorne and Schachner                                                                                                      Tracking replicability
+
+
+
+
+Part 4: ﬁle-drawers
+   1) Approximately how many experiments have you completed (collected the full dataset) but, at this point, do not expect to publish? ____
+   Total: 1312 (one participant reported“1000”); Mean: 31; Median: 3.5; SD: 154
+
+   (6 excluded:“many,”“ton,”“countless,”“30–50%?”2 unreadable/corrupted responses)
+   2) Of these, how many are not being published because they did not obtain any statistically signiﬁcant ﬁndings (that is, they were null
+
+   results)? ___
+   Excluding those excluded in (1):
+
+   Total: 656 (one participant reported“500”); Mean: 17; Median: 2; SD: 81
+   3) Please add any comments about this section here: ___
+   [comments]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Frontiers in Computational Neuroscience                      www.frontiersin.org                               March 2012 | Volume 6 | Article 8 | 14

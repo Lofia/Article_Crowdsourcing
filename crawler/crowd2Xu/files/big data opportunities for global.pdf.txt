@@ -1,0 +1,378 @@
+Policy Forum
+
+
+
+Big Data Opportunities for Global Infectious Disease
+
+
+Surveillance
+
+
+Simon I. Hay     1,2*, Dylan B. George , Catherine L. Moyes , John S. Brownstein                    3
+
+1Spatial Ecology and Epidemiology Group, Department of Zoology, University of Oxford, Oxford, United Kingdom, 2Fogarty International Center, National Institutes of
+Health, Bethesda, Maryland, United States of America, 3Department of Pediatrics, Harvard Medical School and Children’s Hospital Informatics Program, Boston Children’s
+Hospital, Boston, Massachusetts, United States of America
+
+
+
+
+
+Where Are the Diseases of     
+                 sample of locations where the disease has        To complete the process illustrated in
+                                               been observed [10,11]. In the ecological      Figure 1, a range of epidemiologically
+Clinical Significance?
+                                               literature this is described as identifying   relevant environmental covariates are also
+  It is perhaps surprising to state that we    the fundamental niche of the target           assembled. These covariates, such as
+have an extremely poor knowledge of the
+                                               organism [12,13]. In our application it is    temperature and rainfall, must cover the
+global distribution of the vast majority of    the fundamental niche of an infectious        area over which prediction is desired.
+infectious diseases [1]. A review of all       disease. It is rare for any organism or       Statistical techniques are then used to
+infectious diseases of clinical significance
+                                               disease to fully exploit all of the environ-  characterise points of presence and pseu-
+has revealed it would be of public health      mental space that is available to it, due to ado-absence against the range of covariates
+benefit to map about half of these             whole host of evolutionary, biogeograph-      assembled [8,9]. In this instance we
+conditions; yet, astonishingly, only 2%
+                                               ical and ecological factors, so to help guide favoured the Boosted Regression Tree
+(seven of 355) have been mapped compre-        the mapping process we use evidence-          technique due to favourable comparative
+hensively [2]. This geographical ignorance     based expert knowledge to demark the          reviews of performance, statistical flexibil-
+frustrates a variety of clinical, epidemio-
+                                               crude global limits of a disease—its          ity, and community support evidenced by
+logical, and public health aspirations.        definitive extent or realised niche.          well documented and freely available R-
+  Here we argue that this information gulf
+has serious implications for global public       Figure 1 shows the process used to          code [19,20]. These relationships are then
+                                               generate a continuous data layer of disease   used to predict the probability that the
+health surveillance and that too little        risk, in this example dengue. The process     disease occurs at each location and
+attention is given to spatial epidemiology
+in international preparedness planning.        starts with records of disease occurrence     thereby generate a risk map with a
+                                               obtained from the literature [14], web        quantified measure of uncertainty.
+Stated simply, how can we gauge the risk       reports [3], and GenBank [15] that are           Canonically, the output risk surface is
+posed by new infectious disease outbreaks
+if we have only the crudest understanding      used to define the definitive extent of the   where the mapping process ends, which
+                                               disease [16] and to populate a database of    further compounds the problem of the
+of their natural geographical range? Ad-       occurrence points where the disease has       paucity of infectious disease mapping. This
+ditionally, how do we prioritise useful
+intelligence in the growing deluge of Big      been reported. Because it is rare for         is in part due to the very labour intensive
+                                               disease absence to be recorded, a common      nature of assembling (most often from the
+Data [3–5] if the contemporary geograph-
+ical distribution of these infectious disease  practice in niche mapping and modelling       peer-reviewed literature, for example, over
+                                               is to infer absences [17,18]. The definitive  2,000 published articles contributed data
+threats is unknown? We suggest that it         extent and occurrence point data are used     to the latest map of malaria vectors [21])
+should be a policy priority to improve the
+ability to triage spatially, infectious diseaseto infer plausible pseudo-absence points      and then geo-positioning the required
+                                               for further analysis [9].                     information. Usually, trained analysts do
+outbreak alerts [6,7].
+
+How Do We Map Infectious
+
+Diseases?                                      Citation: Hay SI, George DB, Moyes CL, Brownstein JS (2013) Big Data Opportunities for Global Infectious
+                                               Disease Surveillance. PLoS Med 10(4): e1001413. doi:10.1371/journal.pmed.1001413
+  To explore the factors hindering prog-       Published April 2, 2013
+ress, we need to consider how traditional
+                                               This is an open-access article, free of all copyright, and may be freely reproduced, distributed, transmitted,
+methods are used to map disease. We            modified, built upon, or otherwise used by anyone for any lawful purpose. The work is made available under
+illustrate this in Figure 1 using a schematic  the Creative Commons CC0 public domain dedication.
+of the cartographic process applied recent-    Funding: SIH is funded by a Senior Research Fellowship from the Wellcome Trust (#095066). SIH also
+
+ly to map dengue [8,9]. The objective is to    acknowledges support from the RAPIDD program of the Science & Technology Directorate, Department of
+make a continuous map of the entire            Homeland Security, and the Fogarty International Center, National Institutes of Health (http://www.fic.nih.gov).
+geographical range of a disease from a         CLM is funded by a Wellcome Trust grant (#091835). JSB is supported by funding from the National Institutes
+                                               of Health National Library of Medicine grants G08 LM009776 and R01 LM010812. The funders had no role in
+                                               study design, data collection and analysis, decision to publish, or preparation of the manuscript.
+                                               Competing Interests: Since submitting this article, Epidemico has been formed by Boston Children’s Hospital
+The Policy Forum allows health policy makers   to handle licensing of HealthMap data for commercial companies. JB holds an equity stake in Epidemico. The
+around the world to discuss challenges and     authors declare that no other competing interests exist.
+opportunities for improving health care in their
+societies.                                     * E-mail: simon.hay@zoo.ox.ac.uk
+                                               Provenance: Not commissioned; externally peer reviewed.
+
+
+
+PLOS Medicine | www.plosmedicine.org                               1                        April 2013 | Volume 10 | Issue 4 | e1001413
+                                                                                           Big Data [24] and are emulated here.
+  Summary Points                                                                           Each part of this mapping process can be
+
+     Systems to provide static spatially continuous maps of infectious disease risk        radically improved with a Big Data
+  N                                                                                        approach, and the extent of the Big Data
+     and continually updated reports of infectious disease occurrence exist but to-        challenge is highlighted in Table 1. These
+     date the two have never been combined.
+  N  Novel online data sources, such as social media, combined with epidemiolog-           challenges are discussed in turn.
+     ically relevant environmental information are valuable new data sources that             It is well established that a huge amount
+                                                                                           of novel data are being generated that will
+     can assist the ‘‘real-time’’ updating of spatial maps.
+  N  Advances in machine learning and the use of crowd sourcing open up the                make important contributions to temporal
+     possibility of developing a continually updated atlas of infectious diseases.         public health surveillance [5,22]. The
+                                                                                           secondary use of passive search query
+  N  Freely available dynamic infectious disease risk maps would be valuable to a          and micro-blogging data as well as actively
+     wide range of health professionals from policy makers prioritizing limited
+     resources to individual clinicians.                                                   collected crowd-sourced data for disease
+                                                                                           surveillance has been well documented
+                                                                                           and validated for major public health
+
+this manually, so capacity for update and                                                  events, including influenza and dengue
+refinement is limited by human resources.
+
+Moreover, our strong perception of dis-
+ease maps as static is clearly flawed
+because disease risk can change rapidly
+in space and in time and since knowledge
+
+about the distribution of diseases now
+improves daily [3–5,22,23], risk maps
+become quickly outdated.
+
+
+Can We Use Big Data
+
+Approaches to Routinely Map
+All of These Infectious
+Diseases?
+
+
+  The process described above provides a
+continuous risk map in space that is static
+in time. Conversely HealthMap (www.
+healthmap.org) provides continually up-
+
+dated disease occurrence points but not
+continuous spatial data. Can we conceive
+of spatially continuous risk maps being
+
+updated in ‘‘real-time’’—as frequently as
+new occurrence data are assimilated? The
+conceptual bridge of imagining spatial
+modelling as a continuous process in time
+
+is achieved simply by linking the output
+risk map back to the data inputs to create a
+feedback loop. This is important as it
+
+facilitates the novel step of spatial triage of
+new occurrence information (see below)
+and critically, the potential for multiple
+iterations of the map with continuous
+
+improvement by adding a machine learn-
+ing element. This conceptual shift towards
+evolving maps, in combination with the
+
+increased availability of novel digital data
+sources [5,22], is now dissected in the
+context of ‘‘Big Data.’’
+  Big Data is a term used to describe
+
+information assemblages that make con-        Figure 1. A schematic overview of the process of predicting spatial disease risk. The
+ventional data, or database, processing       definitive extent of infectious disease occurrence at the national level (red is certain presence,
+problematic due to any combination of         green is certain absence) [16] is combined with assemblies of known occurrence, presence points
+                                              (red dots), to generate putative pseudo-absence points (blue dots). The presence and pseudo-
+their size (volume), frequency of update      absence data are then used in the analyses, with selected environmental covariates to predict
+(velocity), or diversity (variety) [24]. Thesedisease risk, formally the probability of occurrence of the target disease. In this example a risk map
+‘‘volume, velocity, and variety’’ descriptors
+have proven useful themes with which to       of dengue is shown, shaded from low probability of occurrence in blue to high probability of
+                                              occurrence in red [8]. The arrows represent data flows.
+explore opportunities and challenges of       doi:10.1371/journal.pmed.1001413.g001
+
+
+PLOS Medicine | www.plosmedicine.org                              2                       April 2013 | Volume 10 | Issue 4 | e1001413
+epidemics [22,23,25]. Though these data        ral surveillance by facilitating early warn-   improve our understanding of the factors
+sources demonstrate significant noise and      ing of epidemiologically relevant environ-     that promote disease diversity [31] and
+require continual model fine tuning, the       mental changes.                                emergence [32]. Third, a comprehensive
+
+sheer volume of health outcome related           Perhaps the most important develop-          atlas of contemporary distributions would
+searches and personal accounts presents        ment in relation to Big Data is the            be of considerable benefit to improve future
+incredible new opportunities to monitor                                                       assessments of the burden of disease [33].
+                                               conceptual move from static to improving
+population health in real time. It is less     and evolving risk maps. Taking further our     The audience for risk maps that are
+well appreciated that this information         example of dengue mapping (Figure 1),          continuous in time and space includes
+
+could also be used to build definitive         the first evidence-based risk map generat-     agencies who need to prioritise limited
+extents and databases on the occurrence        ed can be used to help triage the              resources and respond to changing disease
+of many diseases [2]. The volume, veloc-       information content of new reports before      patterns, public and private R&D pipelines
+
+ity, and variety of occurrence information     running the next map iteration. For            who need to assess value and plan research
+from these sources will increase rapidly       example, disease reports located nearby        strategy, logistics groups who need to
+and transform our ability to create geo-       existing records and with a high-predicted     optimise the roll out of new interventions/
+
+graphical baselines for a range of diseases.   probability of occurrence are not alarm-       treatments, and clinicians who want to
+These novel data sources come with issues      ing; we expect the disease to occur here       accurately diagnose infectious diseases in
+of reliability so it is important that the                                                    local populations and returning travellers.
+                                               from the history of reporting and the
+machine learning process is calibrated for     suitability of the environment. Further-          We have already argued that this
+known reporting bias and the triage            more, such reports will not substantially      mapping ambition is made tractable by
+process assigns a weighting to each data                                                      automating many of the laborious steps in
+                                               alter the risk map and are thus of low
+point as a measure of reliability. This        priority to analysts. Conversely, a disease    primary data acquisition and positioning.
+weighting is an integral part of the niche     outbreak far away from observed occur-         The   Big   Data   revolution  is  already
+
+mapping techniques used and feeds into         rence is alarming, and more so if it occurs    underway and harnessing the useful infor-
+the measure of uncertainty output for each     in an area biologically suitable for the       mation in these new data sources will
+location. An increasing proportion of these    disease. It should be investigated and, if     involve collaborations with computer sci-
+
+new data are geo-positioned at source.         verified, contribute to improving next         entists at the forefront of machine learning
+Moreover, machine learning approaches          iterations of the map. It is easy to imagine   and with those who have had success in
+to automate geo-positioning of disease                                                        engaging communities [27]. The evidence
+                                               how these automated learning processes,
+reports [26], especially when combined         supervised by expert analysts, could be        shows that motivating people to devote
+with human oversight and crowdsourcing         deployed in tandem for all diseases of         some of their ‘‘cognitive surplus’’ to crowd
+(outsourcing tasks online to volunteers)                                                      sourcing is possible, so long as the products
+                                               concern, transforming our spatial intelli-
+[27,28], can further radically lower the       gence, surveillance, and preparedness.         and benefits are immediately available to
+logistical barriers to positioning this infor-                                                all for the common good. We have seen
+mation.                                                                                       the rise of crowdsourcing influenza sur-
+                                               The Challenges Ahead
+  In the era of satellite sensors, a diversity                                                veillance with participatory systems such
+of epidemiologically relevant environmen-        The biggest obstacles to incorporating a     as Flu Near You in the United States
+                                               continuous spatial mapping component to
+tal information can be sourced globally at                                                    (www.flunearyou.org) and Influenzanet in
+daily intervals [29]. Big Data volume,         routine biosurveillance will be demonstrat-    the EU (www.influenzanet.eu), which now
+velocity, and variety challenges are in-       ing the feasibility and sustainability of this boast nearly 100,000 volunteers com-
+
+volved in moving from the traditional          undertaking and engaging the audience.         bined. From the outset all infectious
+processing of synoptic averages of covar-      We have focussed here on applications for      disease data and derived maps should be
+iates to harnessing a wider variety of         biosurveillance but it is important to         made freely available to ensure engage-
+
+temporally rich information that can be        emphasise the wider audiences. First, one      ment. This will also facilitate the uptake of
+matched in time with the new occurrence        should never underestimate the value of        new resources and their consideration by
+information. This closer temporal match-       risk maps in helping to illustrate the extent  policy makers. Once the primary invest-
+
+ing of disease outbreaks with covariates       of a public health problem [30]. Second,       ment in the software platform is complete,
+may improve the accuracy of mapping            addressing the paucity of spatial informa-     and the community established, sustain-
+models, allowing for the possibility of        tion on infectious disease distributions will  ability increases because demands for user
+
+seasonally tailored geographic baselines       transform our understanding of their envi-     inputs decrease as the software learns and
+and may help improve traditional tempo-        ronmental determinants and help radically      the mapped outputs become increasingly
+
+
+
+  Table 1. An assessment of the challenges of using Big Data in disease mapping.
+
+
+                                                                    Pseudo-Absence
+
+                       Definitive Extent     Occurrence Point       Point             Environmental Covariates     Risk Prediction
+
+  Volume (scale)       +++                   +++                    +                 +++                          +++
+  Velocity (frequency) +++                   +++                    ++                +++                          +++
+
+  Variety (diversity)  ++                    ++                     +                 +                            +
+
+  The potential Big Data challenges in each stage of an iterative mapping process are highlighted in the table. The columns represent each of the mapping stages defined
+  in Figure 1. The rows reflect the volume, velocity, and variety descriptors of data contributions. The future Big Data challenge in relation to infectious disease risk
+  mapping is as follows: low (+), medium (++), and high (+++).
+  doi:10.1371/journal.pmed.1001413.t001
+
+
+
+PLOS Medicine | www.plosmedicine.org                                3                        April 2013 | Volume 10 | Issue 4 | e1001413
+stable. The ultimate vision is to democra-              Pigott are thanked for comments on the                 Contributed to the writing of the manuscript:
+tise the platform by providing the code to              manuscript. Samir Bhatt is also thanked for            SIH DBG CLM JSB. ICMJE criteria for
+
+all interested authorities.                             providing the figure.                                  authorship read and met: SIH DBG CLM
+                                                                                                               JSB. Agree with manuscript results and conclu-
+
+                                                                                                               sions: SIH DBG CLM JSB.
+Acknowledgments                                         Author Contributions
+
+Samir Bhatt, Oli Brady, Andrew Farlow, Pete             Conceived and designed the experiments: SIH.
+
+Gething, Ros Howes, Jane Messina, and David             Wrote the first draft of the manuscript: SIH.
+
+
+References
+
+
+ 1. Wertheim HFL, Horby P, Woodall JP (2012)            13. Southwood TRE (1977) Habitat, templet for          24. O’Reilly Radar Team (2012) Planning for big
+    Atlas of human infectious diseases. Oxford:             ecological strategies? Presidential address to          data: A CIO’s handbook to the changing data
+    Wiley-Blackwell.                                        British Ecological Society, 5 January 1977.             landscape. Dumbill E, editor. 1st edition. Sebas-
+ 2. Hay SI, Battle KB, Pigott DM, Smith DL, Moyes           J Anim Ecol 46: 337–365.                                topol (California): O’Reilly Media Inc.
+
+    CL, et al. (2013) Global mapping of infectious      14. Rogers DJ, Wilson AJ, Hay SI, Graham AJ (2006)     25. Chan EH, Sahai V, Conrad C, Brownstein JS
+    disease. Philos Trans R Soc Lond B 368:                 The global distribution of yellow fever and             (2011) Using web search query data to monitor
+    20120250.                                               dengue. Adv Parasitol 62: 181–220.                      dengue epidemics: a new model for neglected
+ 3. Brownstein JS, Freifeld CC, Reis BY, Mandl KD       15. Benson DA, Karsch-Mizrachi I, Clark K, Lipman           tropical disease surveillance. PLoS Negl Trop Dis
+
+    (2008) Surveillance sans frontieres: internet-based     DJ, Ostell J, et al. (2012) GenBank. Nucleic Acids      5: e1206. doi:10.1371/journal.pntd.0001206.
+    emerging infectious disease intelligence and the        Res 40: D48–D53.                                   26. Hale SA, Gaffney D, Graham M (2012) Where in
+    HealthMap project. PLoS Med 5: e151.                16. Brady OJ, Gething PW, Bhatt S, Messina JP,              the world are you? Geolocation and language
+
+    doi:10.1371/journal.pmed.0050151.                       Brownstein JS, et al. (2012) Refining the global        identification in Twitter. Oxford: University of
+ 4. Lyon A, Nunn M, Grossel G, Burgman M (2011)             spatial limits of dengue virus transmission by          Oxford. pp. 1–8.
+    Comparison of web-based biosecurity intelligence        evidence-based consensus. PLoS Negl Trop Dis 6:    27. Kamel Boulos MN, Resch B, Crowley DN,
+    systems: BioCaster, EpiSPIDER and HealthMap.            e1760. doi:10.1371/journal.pntd.0001760.                Breslin JG, Sohn G, et al. (2011) Crowdsourcing,
+
+    Transbound Emerg Dis: doi: 10.1111/j.1865-          17. Stokland JN, Halvorsen R, Stoa B (2011) Species         citizen sensing and Sensor Web technologies for
+    1682.2011.01258.x.                                      distribution modelling. Effect of design and            public and environmental health surveillance and
+ 5. Salathe´ M, Bengtsson L, Bodnar TJ, Brewer DD,          sample size of pseudo-absence observations. Ecol        crisis management: trends, OGC standards and
+
+    Brownstein JS, et al. (2012) Digital epidemiology.      Model 222: 1800–1809.                                   application examples. Int J Health Geogr 10: 67.
+    PLoS Comput Biol 8: e1002616. doi:10.1371/          18. Chefaoui RM, Lobo JM (2008) Assessing the          28. Shirky C (2010) Cognitive surplus. Creativity and
+    journal.pcbi.1002616.                                   effects of pseudo-absences on predictive distribu-      generosity in a connected age. London: Allen
+ 6. Chan EH, Brewer TF, Madoff LC, Pollack MP,              tion model performance. Ecol Model 210: 478–            Lane, Penguin Books. 242 p.
+
+    Sonricker AL, et al. (2010) Global capacity for         486.                                               29. Scharlemann JPW, Benz D, Hay SI, Purse BV,
+    emerging infectious disease detection. Proc Natl    19. Elith J, Graham CH, Anderson RP, Dudik M,               Tatem AJ, et al. (2008) Global data for ecology
+    Acad Sci U S A 107: 21701–21706.                        Ferrier S, et al. (2006) Novel methods improve          and epidemiology: a novel algorithm for temporal
+
+ 7. Mondor L, Brownstein JS, Chan E, Madoff LC,             prediction of species’ distributions from occur-        Fourier processing MODIS data. PLoS One 3:
+    Pollack MP, et al. (2012) Timeliness of nongov-         rence data. Ecography 29: 129–151.                      e1408. doi:10.1371/journal.pone.0001408.
+    ernmental versus governmental global outbreak       20. Elith J, Leathwick JR, Hastie T (2008) A working   30. Dorling D (2007) Worldmapper: the human
+    communications. Emerg Infect Dis 18: 1184–              guide to boosted regression trees. J Anim Ecol 77:      anatomy of a small planet. PLoS Med 4: e1.
+
+    1187.                                                   802–813.                                                doi:10.1371/journal.pmed.0040001.
+ 8. Simmons CP, Farrar JJ, van Vinh Chau N, Wills       21. Sinka ME, Bangs MJ, Manguin S, Rubio-Palis Y,      31. Guernier V, Hochberg ME, Guegan JF (2004)
+    B (2012) Dengue. N Engl J Med 366: 1423–1432.           Chareonviriyaphap T, et al. (2012) A global map         Ecology drives the worldwide distribution of
+ 9. Bhatt S, Gething PW, Brady OJ, Messina JP,              of dominant malaria vectors. Parasit Vectors 5:         human diseases. PLoS Biol 2: e141. doi:10.1371/
+
+    Farlow AW, et al. (2013) The global distribution        69.                                                     journal.pbio.0020141.
+    and burden of dengue. Nature. In press.             22. Brownstein JS, Freifeld CC, Madoff LC (2009)       32. Jones KE, Patel NG, Levy MA, Storeygard A,
+10. Rogers DJ (2006) Models for vectors and vector-         Digital disease detection - harnessing the Web for      Balk D, et al. (2008) Global trends in emerging
+
+    borne diseases. Adv Parasitol 62: 1–35.                 public health surveillance. N Engl J Med 360:           infectious diseases. Nature 451: 990–993.
+11. Pfeiffer DU, Robinson TP, Stevenson M, Stevens          2153–2157.                                         33. Murray CJL, Vos T, Lozano R, Naghavi M,
+    KB, Rogers DJ, et al. (2008) Spatial analysis in    23. Signorini A, Segre AM, Polgreen PM (2011) The           Flaxman AD, et al. (2012) Disability-adjusted life
+    epidemiology. Oxford: Oxford University Press.          use of Twitter to track levels of disease activity      years (DALYs) for 291 diseases and injuries in 21
+
+    142 p.                                                  and public concern in the US during the                 regions, 1990–2010: a systematic analysis for the
+12. Hutchinson GE (1957) Concluding remarks. Cold           influenza A H1N1 pandemic. PLoS One 6:                  Global Burden of Disease Study 2010. Lancet
+    Spring Harbor Symp Quant Biol 22: 415–427.              e19467. doi:10.1371/journal.pone.0019467.               380: 2197–2223.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PLOS Medicine | www.plosmedicine.org                                            4                             April 2013 | Volume 10 | Issue 4 | e1001413

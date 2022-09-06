@@ -1,0 +1,1654 @@
+Quantifying the Impact and Extent of Undocumented
+
+
+Biomedical Synonymy
+
+                  1,2                 1,2                          3                     3,4                       1,2,3,5
+David R. Blair      , Kanix Wang        , Svetlozar Nestorov , James A. Evans               , Andrey Rzhetsky             *
+
+1Institute for Genomics and Systems Biology, University of Chicago, Chicago, Illinois, United States of America, 2Committee on Genetics, Genomics, and Systems Biology,
+University of Chicago, Chicago, Illinois, United States of America, 3Computation Institute, University of Chicago, Chicago, Illinois, United States of America, 4Department
+of Sociology, University of Chicago, Chicago, Illinois, United States of America, 5Departments of Medicine and Human Genetics, University of Chicago, Chicago, Illinois,
+United States of America
+
+
+
+    Abstract
+
+    Synonymous relationships among biomedical terms are extensively annotated within specialized terminologies, implying
+    that synonymy is important for practical computational applications within this field. It remains unclear, however, whether
+
+    text mining actually benefits from documented synonymy and whether existing biomedical thesauri provide adequate
+    coverage of these linguistic relationships. In this study, we examine the impact and extent of undocumented synonymy
+    within a very large compendium of biomedical thesauri. First, we demonstrate that missing synonymy has a significant
+    negative impact on named entity normalization, an important problem within the field of biomedical text mining. To
+
+    estimate the amount synonymy currently missing from thesauri, we develop a probabilistic model for the construction of
+    synonym terminologies that is capable of handling a wide range of potential biases, and we evaluate its performance using
+    the broader domain of near-synonymy among general English words. Our model predicts that over 90% of these
+    relationships are currently undocumented, a result that we support experimentally through ‘‘crowd-sourcing.’’ Finally, we
+
+    apply our model to biomedical terminologies and predict that they are missing the vast majority (.90%) of the
+    synonymous relationships they intend to document. Overall, our results expose the dramatic incompleteness of current
+    biomedical thesauri and suggest the need for ‘‘next-generation,’’ high-coverage lexical terminologies.
+
+
+  Citation: Blair DR, Wang K, Nestorov S, Evans JA, Rzhetsky A (2014) Quantifying the Impact and Extent of Undocumented Biomedical Synonymy. PLoS Comput
+  Biol 10(9): e1003799. doi:10.1371/journal.pcbi.1003799
+
+  Editor: K. Bretonnel Cohen, University of Colorado School of Medicine, United States of America
+  Received December 18, 2013; Accepted June 26, 2014; Published September 25, 2014
+
+  Copyright: ß 2014 Blair et al. This is an open-access article distributed under the terms of the Creative Commons Attribution License, which permits unrestricted
+  use, distribution, and reproduction in any medium, provided the original author and source are credited.
+
+  Funding: This work was supported by NIH grants 1P50MH094267, U01HL108634-01, and GM007281. The funders had no role in study design, data collection and
+  analysis, decision to publish, or preparation of the manuscript.
+  Competing Interests: The authors have declared that no competing interests exist.
+
+  * Email: arzhetsk@medicine.bsd.uchicago.edu
+
+
+
+Introduction                                                        language processing results to justify the computational over-
+                                                                    head.
+  Most words and phrases in E nglish possess synonyms—                 Within the field of biomedical text mining, several studies have
+expressions that share close or identical meaning within a
+                                                                    demonstrated that manually curated terminologies, and thus
+restricted cultural co ntext [1]. For example, trait and phenotype  thesauri, are dispensable for particular tasks [6], specifically
+are often used interchangeably wit hin the genetics literature [2], named-entity recognition (NER) [7,8]. This is not terribly
+but not within general English, while the converse is true of
+                                                                    surprising, as the goal of NER is to simply find mentions of
+adjectives blue and sad. Synonymous relationships play a variety    diseases, drugs, genes, etc. in free text, but not to determine which
+of roles within natural language. For example, an entire            disease, drug, or gene to which the mention refers. In our personal
+sentence may be rendered incomprehensible upon encountering
+                                                                    experience, however, identification of the precise object being
+a rare, previously unseen word. Knowing a single synonym for        mentioned, or named-entity normalization (NEN), crucially
+such a word, however, even if dist antly related, enables at least  depends on thorough documentation of synonymy, an observation
+partial comprehension of the sentence’s meaning. Thus,
+                                                                    supported, for example, by its extensive use within the BioCreative
+synonyms can be seen as a simple, concise way of encoding           gene name normalization challenge [9]. Named-entity normali-
+the semantics of individual word s[3],whichmakesthemuseful          zation is absolutely critical for integrating text-mined knowledge
+for artificial intelligence applications. Much like their human
+                                                                    with other biomedical datasets. For example, tasks that utilize
+counterparts, computer programs that parse natural language         clinical records to uncover off-label drug usages [10] or to find
+must rely on a finite set of ‘‘known ’’ synonymous relationships,   novel genetic associations [11,12] inherently depend on the
+so deficiencies in their thesauri could have a profound impact on
+                                                                    identification of specific named entities. Nevertheless, relatively
+their ability to process human communication. While intuitively     little effort has been devoted to the general problem of biomedical
+important, synonymy has enjoyed relatively little attention from    named entity normalization [13,14]. Furthermore, although gene
+the text mining and natural language processing communities.        name normalization has been extensively studied within the
+
+Synonymy is extensively documented within many large                literature [9,15–20], the systematic evaluation of other specific
+computational lexico ns [4,5], but it is not immediately obvious    biomedical NEN tasks remains in its infancy [21–23]. Finally,
+whether inclusion of synonyms sufficiently improves natural         given its widespread use within NEN algorithms, it is surprising
+
+
+
+PLOS Computational Biology | www.ploscompbiol.org                 1                 September 2014 | Volume 10 | Issue 9 | e1003799
+                                                                                                    Synonymy Matters for Biomedicine
+
+
+
+                                                                    these select few may be very useful, the remaining relationships are
+  Author Summary
+                                                                    either irrelevant (never used in natural language) or redundant
+  Automated systems that extract and integrate information          (such as an obvious spelling variant). To evaluate the utility of
+  from the research literature have become common in                documented synonymy, we first examined its impact on the
+  biomedicine. As the same meaning can be expressed in
+                                                                    normalization of disease names. We constructed a large terminol-
+  many distinct but synonymous ways, access to compre-              ogy of Diseases and Syndromes using the UMLS Metathesaurus [5]
+  hensive thesauri may enable such systems to maximize              (see Materials and Methods), asking whether removing synonyms
+  their performance. Here, we establish the importance of           from this terminology significantly impacted the performance of
+  synonymy for a specific text-mining task (named-entity
+                                                                    four of normalization algorithms [21,24] (see Table 1 and
+  normalization), and we suggest that current thesauri may          Supporting Information Text S1 for details). We evaluated this
+  be woefully inadequate in their documentation of this             procedure using two gold standard corpora generated indepen-
+  linguistic phenomenon. To test this claim, we develop a
+  model for estimating the amount of missing synonymy.              dently of our study: the NCBI and Arizona Disease Corpora,
+                                                                    abbreviated NCBI and AZDC, respectively [25,26]. To ensure
+  We apply our model to both biomedical terminologies and           that our analyses were not biased by a few commonly occurring
+  general-English thesauri, predicting massive amounts of
+  missing synonymy for both lexicons. Furthermore, we               diseases, we restricted our analysis to unique mentions only.
+  verify some of our predictions for the latter domain                Not surprisingly, we observed that synonymy was broadly useful
+                                                                    for disease name normalization, accounting for 20–40% of task
+  through ‘‘crowd-sourcing.’’ Overall, our work highlights the
+  dramatic incompleteness of current biomedical thesauri,           recall (see Table 1) while having only a slight, positive impact on
+  and to mitigate this issue, we propose the creation of            precision (see Figure S1). Even algorithms that explicitly account
+  ‘‘living’’ terminologies, which would automatically harvest       for synonymy during use, like MetaMap [24] and pairwise-
+  undocumented synonymy and help smart machines enrich              Learning-to-Rank (pLTR) [21], benefited substantially from
+
+  biomedicine.                                                      thorough synonym annotation. To our knowledge, gold-standard
+                                                                    corpora for general biomedical terminologies do not exist, so it is
+                                                                    difficult to extend these results to other domains within biomed-
+
+that the impact of synonymy on this task and text mining in         icine. To further evaluate the importance of synonymy for named-
+general remains under examined.                                     entity normalization, we constructed a terminology for Pharma-
+  In this study, we quantify the importance of synonymy for         cological Substances (see Materials and Methods), and we repeated
+
+named-entity normalization within the field of biomedicine. More    our normalization experiment on a random sample of 35,000
+specifically, we evaluated the performance of several general-      unique noun phrases isolated from MEDLINE (see Materials and
+purpose NEN algorithms, both with and without synonymy, on          Methods). We used MetaMap (due to high precision on the
+two gold-standard disease name normalization corpora. We found
+                                                                    previous task) to map noun phrases to this terminology with and
+that every algorithm, even one that explicitly attempts to learn    without synonymy. Once again, we observed that synonymy was
+synonymy during training [21], is detrimentally affected by         responsible for retrieving a significant fraction of the identified
+missing synonymous relationships. To quantify the extent of the     concepts (approximately 30%, see Figure S2). Although the lack of
+
+missing synonymy problem within biomedicine, we developed a         a gold standard renders true assessment of the increase in recall
+statistical model capable of inferring the number of synonymous     impossible, we note that precision remained constant (or even
+relationships missing from a set of manually annotated thesauri     increased, see Figure S1) in our previous experiment as synonyms
+
+while simultaneously accounting for a wide range of potential       were added back to the Diseases and Syndromes terminology.
+biases. To investigate the validity of our approach, we applied the Assuming that this trend applies to Pharmacological Substances,
+model to the much broader domain of general-English near-           the increase in recall due to synonymy should have a strictly
+
+synonymy, and we demonstrated that the vast majority of these       positive impact on normalization performance, suggesting that our
+relationships are currently undocumented. To verify this result     results obtained using gold-standard corpora apply to other and
+experimentally, we developed a ‘‘crowd-sourcing’’ pipeline to       possibly all sublanguages of biomedicine.
+uncover novel examples of high-quality near-synonyms. Finally,
+                                                                      Although synonymy as a whole appears to be useful for
+we applied our statistical model to two biomedical sub-domains      biomedical named-entity normalization, it is still possible that a
+(Diseases and Syndromes and Pharmacological Substances) and         large fraction of synonymous relationships are redundant and/or
+estimated that the vast majority of their synonymous relationships  unimportant. If this were true, current terminologies could be
+
+(.90%) are likely undocumented. Overall, this work quantitatively   made much leaner by removing useless and/or redundant
+measures the impact and extent of synonymy within biomedicine       synonyms. It is very difficult to broadly assess the importance of
+and highlights the need for more sophisticated approaches towards   synonyms, as the measurement is highly task and context
+
+detecting, cataloging, and utilizing synonymous relationships.      dependent. Therefore, we will address this issue more extensively
+                                                                    in the Discussion. Synonym redundancy, on the other hand, can
+Results                                                             be directly estimated from the normalization results described in
+
+                                                                    the previous paragraph, at least with respect to the corpora and
+Documented Synonymy Significantly Improves                          algorithms considered here. We computed the extent of redun-
+Biomedical Named-Entity Normalization                               dancy in the biomedical terminologies by removing random
+  Although synonymy is not necessarily important for every          fractions of synonyms and subsequently re-computing concept
+
+biomedical text-mining task [6–8], we believe that it is absolutely recall. If each synonym encodes unique information, recall for a
+critical for some, especially named entity normalization. It does   particular corpus and algorithm should increase linearly with the
+not appear, however, that biomedical thesauri have been             fraction of included synonymy. Alternatively, if redundant
+
+constructed according to any systematic standards or consistency,   synonyms are present, then the recall rate should increase sub-
+suggesting that a considerable fraction of documented synonymy      linearly (see Supporting Information Text S1 for details). We did
+may be of low utility. For example, it is possible that only a few  in fact observe sub-linear increases in concept recall (see Figures
+
+common synonyms are ever used in biomedical text, and while         S1 and S2), indicative of redundancy in documented synonymy.
+
+
+PLOS Computational Biology | www.ploscompbiol.org                2                  September 2014 | Volume 10 | Issue 9 | e1003799
+                                                                                                        Synonymy Matters for Biomedicine
+
+
+
+
+  Table 1. The effects of missing synonymy on disease name normalization.
+
+
+
+  Algorithm               Corpus         % Recall Due to Syn.       % Recalled Concepts with Red. Syn.         Red. Syn. Fraction
+
+  Boolean Search          AZDC           29%                        46%                                        12.2%
+
+                                                                                                               (8.4%, 16.5%)
+
+  Boolean Search          NCBI           30%                        37%                                        7.0%
+
+                                                                                                               (4.7%, 9.5%)
+  MetaMap                 AZDC           35%                        54%                                        21.1%
+
+                                                                                                               (15.6%, 27.0%)
+
+  MetaMap                 NCBI           33%                        46%                                        12.2%
+
+                                                                                                               (8.7%, 16.2%)
+  Cosine Similarity       AZDC           37%                        20%                                        5.6%
+
+                                                                                                               (3.6%, 7.8%)
+
+  Cosine Similarity       NCBI           38%                        37%                                        12.9%
+
+                                                                                                               (9.5%, 16.6%)
+  pLTR                    AZDC           31% (Avg.)                 <0%                                        <0%
+
+                                                                                                               (0%, 0%)
+
+  pLTR                    NCBI           23% (Avg.)                 39%                                        3.2%
+
+                                                                                                               (2.1%, 4.4%)
+
+  This table indicates the total fraction of recall attributable to synonymy (third column) for four different normalization algorithms (first column) and two different gold-
+  standard corpora (second column). The fourth column indicates the fraction of concepts in the third column whose recall depended on redundant synonyms, and the
+  fifth column provides the fraction of the total number of synonyms predicted to be redundant for the recalled concepts (mean plus 95% confidence interval).
+
+  doi:10.1371/journal.pcbi.1003799.t001
+
+
+We directly estimated the fraction of redundant synonymous             respectively), and they likely represent a lower bound on the true
+relationships with respect to each corpus and algorithm, as            error rates due to missing synonymy. This is because such errors
+
+effective redundancy depends on the method employed (some              require annotators to recognize a synonym not contained within a
+methods are able to internally generate more extensive spelling        large, complex terminology, a task that is likely difficult even for
+
+and lexical variation than others [13,21], see Supporting              domain experts.
+Information Text S1 for details). We found that most concepts            If undocumented synonyms of high utility exist, the question
+
+whose recall depended on synonymy were not paired with                 arises, ‘‘How many?’’ This is difficult to answer, as current
+redundant synonyms (see Table 1, Column 4). Furthermore, only          biomedical terminologies provide no indication of synonym
+
+a minor fraction of the synonymous relationships associated with       quality. Our analysis from the previous section suggests that a
+these concepts were predicted to be redundant (see Table 1,            non-negligible fraction of documented synonyms are useful and
+
+Column 5 and Supporting Information Text S1 for more details).         thus, one approach to quantifying the extent of the problem is to
+Overall, these results suggest that synonymy is useful for             estimate the total number of synonyms missing from terminolo-
+
+biomedical named-entity normalization and that current termi-          gies, a considerable fraction of which should be useful. To estimate
+nologies are not saturated with redundant information, highlight-      the extent of undocumented synonymy, we examined the overlap
+
+ing the potential for additional high-value synonyms to further        between several distinct biomedical terminologies, which we
+improve performance.                                                   isolated from the UMLS Metathesaurus [5]. Assuming that the
+
+                                                                       terminologies were constructed approximately independently from
+A Probabilistic Model for Inferring the Extent of                      one another (detailed assumptions and justifications provided
+
+Undocumented Synonymy                                                  below), the overlap in concepts and synonyms across thesauri
+  Based on the analysis we described in the preceding section, we      should be informative of the missing portion.
+
+are convinced that synonymy is important for named-entity                In Figure 1A, we depict the concept overlap for ten
+normalization. Furthermore, assuming that our conclusions are          terminologies [5,27–35] annotating Diseases and Syndromes.
+
+correct, there is much room to improve current biomedical              The concentric rings in the figure illustrate all of the possible N-
+thesauri. The analysis just described, however, does not prove that    way intersections among vocabularies (N=2,3,..,10), with the
+
+high-utility synonyms are missing from the terminologies, nor does     outermost ring indicating the vocabularies themselves, the next
+it indicate how many terms are missing. With respect to the former     ring depicting all possible two-way intersections, the third all
+
+question, we manually curated the normalization errors made by         three-way intersections and so on, until we reach the center of the
+MetaMap in our prior analysis of disease names, and, consistent        plot, which depicts the overlap among all ten vocabularies.
+
+with previous observations [21], found that a substantial fraction     Colored bars within each ring indicate the identity of intersecting
+of its errors (14% for the AZDC corpora and 34% for NCBI)              vocabularies (colors) and the extent of their overlapping
+
+could be traced back to missing synonyms. Moreover, approxi-           information. Precisely, the height of the bars corresponds to the
+mately half of these same normalization errors were committed by       observed overlap among the terminologies, divided by their
+
+all of the other algorithms (examples are listed in Table S1). These   maximum possible overlap (for example, see Figure 1A, right
+rates were generally comparable to the magnitude of errors caused      panel). Therefore, if a colored bar extends through the full width
+
+by ambiguous terms (26% and 38% for AZDC and NCBI                      of its concentric ring, then the smallest of the N intersected
+
+
+
+PLOS Computational Biology | www.ploscompbiol.org                   3                  September 2014 | Volume 10 | Issue 9 | e1003799
+                                                                                                        Synonymy Matters for Biomedicine
+
+
+
+terminologies is perfectly nested within all of the others. Most of      To estimate the amount of synonymy missing from these
+the intersections illustrated in Figure 1A are tiny, and this          terminologies, we extended a statistical framework originally
+
+becomes more evident as the number of intersected dictionaries         developed for estimating the number of unobserved species from
+increases (Figure 1A, left panel). This suggests that the pool of      samples of randomly captured animals [38–40]. In its simplest
+concepts used to create these terminologies is much larger than        form, our approach assumes that each of the terminologies
+
+the set currently documented, as there is little repetition in         mentioned in Figure 1 was constructed by independently sampling
+annotated information. The situation appears even more                 concept-to-term (or synonymous) relationships from some large,
+
+dramatic for synonyms associated with these concepts, as the           unobserved population. In the parlance of the ‘‘missing species’’
+overlap among annotated terms is far less (Figure 1B). Although        problem, these concept-to-term relationships represent the ‘‘spe-
+terms technically represent a superset of synonyms (synonymy           cies,’’ and their occurrence within biomedical language represent
+
+only exists whenever two or more terms are paired with the same        the ‘‘population.’’ The model assumes that these species were
+concept), large numbers of missing terms directly imply large          ‘‘captured’’ by the annotators who constructed the biomedical
+numbers of missing synonyms. Furthermore, the same trends are          terminologies, and once a concept-to-term relationship was
+
+readily apparent for the set of terminologies documenting              captured once or more, it was included in the resource. Given
+Pharmacological Substances [5,27,28,30–32,35–37] (Figure 1C            that the total population of relationships is very large and rate of
+
+and 1D, respectively). Overall, these results imply that biomedical    ‘‘capture’’ for any particular relationship is necessarily very small,
+thesauri are missing a vast amount of synonymy, although the           this process of annotating concept-to-term relationships can be
+true magnitude of the problem remains uncertain.                       effectively modeled using a Poisson process [40]. By modeling all
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 1. Very little information is shared across multiple biomedical terminologies. (A) The panel on the left illustrates the overlap
+among the concepts annotated by the terminologies documenting Diseases and Syndromes. The figure itself is composed of ten concentric rings,
+
+with the outermost ring (k=1) indicating the colors assigned to each dataset. The next ring (k=2) displays the overlap in concepts among all pairwise
+comparisons, arranged in clockwise order starting with the intersection (MSH, NCI). The extent in overlap was computed by dividing the number of
+co-occurring annotations by the maximum possible number given the sizes of the terminologies being intersected (percent maximum overlap). This
+information is displayed within the concentric ring using bi-colored bars, whose heights depict the percent maximum overlap for the terminologies
+indicated by the colors. The panels on the right illustrate this idea by enlarging a section of the original figure, highlighting a particular intersection
+(NCI, CHV), and explaining how the colored bar translates into the percent maximum overlap. The remaining concentric rings (k=3…10) display the
+                                                                                          ▯▯
+overlap extent for all higher order intersections (3-way, 4-way, etc.), with each ring containingcolored bars. (B) This figure illustrates the
+                                                                                            k
+overlap among terms annotated to each concept for the same ten datasets depicted in (A). (C, D) These panels show the overlap in concepts (C) and
+terms (D) for the Pharmacological Substances terminologies. Note that only the ten largest datasets were included in each panel for the sake of clarity.
+doi:10.1371/journal.pcbi.1003799.g001
+
+
+PLOS Computational Biology | www.ploscompbiol.org                   4                  September 2014 | Volume 10 | Issue 9 | e1003799
+                                                                                                         Synonymy Matters for Biomedicine
+
+
+
+concept-to-term annotations in each thesaurus, we were able to         concepts (or headwords with respect to general-English synonymy)
+compute the expected number of synonyms missing from all them          and terms (synonyms in general-English). Therefore, we hypoth-
+(see Materials and Methods for mathematical details). Further-         esize that some aspects of our statistical method’s performance,
+
+more, because a concept annotated with zero concept-to-term            including its ability to detect and account for annotation
+relationships is effectively missing from the combination of           variability, should translate across domains. Additionally, gener-
+terminologies, this approach enabled us to estimate the number         al-purpose thesauri necessarily include fragments of more special-
+
+of undocumented concepts.                                              ized vocabularies (e.g., genetics, molecular biology, physics,
+  In the previous description, we made a subtle but critical           astronomy and so on), so their coverage has practical ramifications
+
+assumption: each thesaurus was constructed by independently            for many domains, including biomedicine. We acknowledge,
+sampling concept-to-term relationships. It is well known that          however, that there are differences between general-English and
+thesauri annotate lexical relationships according to potentially       biomedical synonymy. Importantly, such differences enabled us to
+
+unique goals and biases [3], and such practices could potentially      perform a more thorough analysis of missing synonymy in general-
+explain a fraction of the reduced overlap observed in Figure 1.        English. First, the dataset consists only of individual words and not
+Furthermore, some concepts and synonyms may have been easier           phrases, so it is much easier to measure the linguistic properties of
+
+to notice and annotate than others. For example, it could have         various annotations (ex: word length, frequency, etc.) in order to
+been more difficult to find synonyms for very rare concepts. As a      determine whether our method captures specific biases. Second,
+result, one might expect these entries to be infrequently replicated   knowledge of general-English synonymy is collectively held by
+
+across terminologies. This and other examples call into question       millions of people and documents, allowing us to experimentally
+our independent sampling assumption, as they suggest widespread        verify some of our method’s predictions.
+correlation in the annotation rates of concept-to-term relation-
+                                                                          We carried out our analysis by combining the annotations
+ships. To account for a range of potential biases, we extended our     provided by eight typeset dictionaries and one digital thesaurus.
+statistical model by assuming that concepts and terms belong to        The typeset dictionaries [41–48] represent some of the most
+
+distinct classes, which are in turn associated with unique             widely used synonym references, while WordNet [4] is a digital
+annotation rates (see Supporting Information Text S1 for details).     thesaurus popular within the artificial intelligence community. In
+By design, this mixture modeling approach enabled us to capture        Figures 2A and 2B, we depict the overlap among headwords (i.e.
+
+correlation structure that exists among annotations, both within       concepts) and synonym pairs (i.e. terms) that were annotated by
+and across terminologies.                                              the nine dictionaries in this study. The overlap of annotated
+  To illustrate, imagine that we have two terminologies (denoted       headwords appears fairly high for these thesauri (Figure 2A), while
+
+T 1nd T ),2each annotating two distinct concepts (C and 1 ).    2      the overlap among their synonyms is substantially lower
+Imagine that C 1s rare while C 2s common. Furthermore, assume          (Figure 2B). After fitting our annotation model to the nine
+that both terminologies have sparsely annotated synonyms for C         thesauri, we predicted that only 30% of headwords are missing
+                                                                 1
+but many shared synonyms for C . Our 2ierarchical mixture              from the combined dataset (see Figure 2C), although we note that
+model could account for this bias by assigning these two concepts      the annotation of headwords for general-purpose thesauri appears
+to distinct classes, one of which was easier to annotate (the
+                                                                       to be heavily biased towards words of higher frequency (see Figure
+common concept class) while the other was very difficult (the rare     S3). By contrast, our method predicted that 93% of near-
+concept class). The resulting difference in annotation rates would     synonymous relationships are currently undocumented, with the
+
+explain the observed differences in overlap patterns for the two       majority belonging to previously documented headwords (86%,
+concepts while simultaneously explaining annotation correlations       see Figure 2D, blue vs. red bars).
+observed across both terminologies. Now, assume that there is a           Our analysis also predicted that general-English near-synonymy
+
+third concept (C 3, which is also quite common and thus shares         is extremely pervasive: each headword, on average, was predicted
+many annotations across T an1 T . It2could also be assigned to         to have about 200 near-synonyms, although the variance in
+the common concept class, and thus, the annotation patterns for        number of synonyms was predicted to be large (<4610     4). Because
+
+these two concepts would correlate as well. In this example, we        ‘‘missing species’’ estimators systematically underestimate richness
+used concept frequency as the explanation for why some concepts        [39] and the English language is currently undergoing exponential
+are easier to annotate than others, but biases could be caused by a    growth [49], the extent of undocumented synonymy predicted by
+
+multitude of factors, such as semantic granularity or hyper/           our model is likely a severe underestimate of reality. If we
+hyponymous relationships. For this reason, we found that the           extrapolate our results to more realistic estimates for the number
+mixture modeling approach accounted for annotation biases much
+                                                                       of English headwords [49] (see Supporting Information Text S1
+better than explicitly including word frequency or any other           for details), the extent of near-synonymy in the language is likely to
+particular property as a confounder in the analysis. The mixture       be at least an order of magnitude larger than the prediction
+model is simply more flexible at capturing all observed variability.
+                                                                       generated by our model (see Figure 2E).
+In the following section, we illustrate the effectiveness of our          Beyond providing insight into the extent of near-synonymy
+approach for capturing widespread annotation variability by            among simple English words, this analysis allowed for a more
+applying it to general-English near-synonymy. Because this
+                                                                       critical scrutiny of our statistical approach to latent synonym
+linguistic domain is widely accessible to non-experts, it enabled      inference. For example, we observed that the number of synonyms
+us to verify some of our modeling predictions experimentally.          annotated per general English headword was highly variable and
+
+                                                                       its distribution was multimodal (Figure 2F, in gray). Our mixture
+Undocumented Near-Synonymy within General English                      modeling approach captured this variation quite well (Figure 2F,
+
+  To evaluate our statistical approach for inferring undocumented      in blue), especially in comparison to more standard approaches,
+synonymy, we applied it to a compendium of near-synonymous             like unimodal Geometric or Log-Gaussian models (Figure 2F, in
+relationships among general-English words. Although biomedical         red and green). Furthermore, as noted in the previous section, the
+
+and general-English synonymy are not equivalent, their docu-           terminologies analyzed in Figure 2 were likely constructed
+mentation and storage patterns are quite similar. Both are             according to their authors’ own unique preferences and biases.
+contained in key-value structures consisting of manually curated       We predicted, for example, that general-English thesauri would be
+
+
+
+PLOS Computational Biology | www.ploscompbiol.org                   5                   September 2014 | Volume 10 | Issue 9 | e1003799
+                                                                                                         Synonymy Matters for Biomedicine
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 2. Most near-synonymous relationships among general English words are undocumented. The overlap among the (A) headwords
+and (B) synonymous relationships annotated within nine general-English thesauri. (C) The number of known (above x-axis) and undocumented
+(below x-axis) headwords belonging to each of the ten, headword-specific mixture model components (see Supporting Information Text S1). (D) The
+number of known (above x-axis) and undocumented (below x-axis) synonymous relationships belonging to each mixture component. The blue bars
+
+indicate undocumented relationships paired to known headwords while the red bars indicate undocumented relationships paired to latent
+
+
+
+
+PLOS Computational Biology | www.ploscompbiol.org                    6                  September 2014 | Volume 10 | Issue 9 | e1003799
+                                                                                                        Synonymy Matters for Biomedicine
+
+
+
+headwords. (E) The number of synonymous relationships is shown as a function of the total number of headwords in the English language. The width
+of the line indicates the 99% confidence interval for the estimate (see Supporting Information Text S1). (F) The distribution over the number of
+synonyms annotated per headword (gray) is compared to the theoretical distribution obtained using best-fitting statistical annotation model (blue).
+The R2-value indicates the fraction of variance in synonym number explained by the model. For reference, log-Gaussian and geometric models were
+fit to the data as well (red and green, respectively), although their quality of fit was several thousand orders of magnitude worse than the best fitting
+annotation model (according to marginal likelihood). (G) Box-whisker plots depicting the mean relative word frequencies (1,000 bootstrapped re-
+
+samples) for each of the ten headword-specific mixture components. For reference, the probability of headword annotation, marginalized over all
+possible synonym pairs, is plotted in green. (H) The three curves indicate the expected fraction of undocumented synonymy that would be
+discovered upon repeatedly and independently constructing additional lexical resources (x-axis) identical to the complete dataset (blue), WordNet
+only (red), and WordNet plus Webster’s New World (green).
+doi:10.1371/journal.pcbi.1003799.g002
+
+
+constructed with a bias for writing over reading, following from the   (positive controls) and randomly generated null examples (negative
+observation that thesauri are typically used to add richness and       controls). We then asked another round of Turkers to validate
+
+variety while composing text. In support of this hypothesis, we        these proposed synonyms along with positive and negative
+found that headwords in our dictionaries tended to be shorter and      controls. Finally, we applied a simple, probabilistic model of
+more frequent than non-headwords (see Figure S3A and S3B,              agreement in the validation process [50–52] to the Turker-
+
+respectively). Although we did not specifically encode this bias into  generated validation data and computed a posterior probability of
+our statistical framework, our mixture-modeling approach cap-          accuracy for each proposed synonym. This process enabled the
+tured it well (see Figure 2G). Our method also captured other          identification of novel synonyms that were most like the positive
+
+types of bias and variability present within the thesauri (e.g., a     and least like the negative controls. In other words, it calibrated
+preference for certain parts-of-speech, see Figure S4A), as the        the near-synonymy obtained from the Turkers so that it closely
+annotation rates for different mixture components varied consid-       matched that from existing thesauri. On average, Turker
+
+erably across terminologies (Figure S4A and S4B). Finally, we note     evaluators correctly identified true negatives 93% of the time
+that the continual production and conglomeration of manually           and true positives 67% of the time.
+curated thesauri is unlikely to be a fruitful strategy for collecting    The harvesting experiments proved very successful, generating
+
+undocumented general-English near-synonymy. It would require           thousands of potentially novel near-synonym pairs in only a few
+approximately 2000 independently collected, WordNet-sized              hours and for a total cost of less than $500. Our amateur linguists
+dictionaries to unearth 90% of the undocumented relationships          proved proficient at identifying previously documented examples
+
+(Figure 2H). Thus, alternative strategies will be necessary to         of near-synonymy, achieving a mean accuracy of <83%
+uncover a considerable fraction of undocumented English near-          (Figure 3A). The combined performance of the crowd-sourcing
+synonymy. In the following section, we utilize one such approach       system was even more impressive: a simple classifier constructed
+
+to uncover previously undocumented English near-synonyms.              using a model of the validation process [52] was able to distinguish
+                                                                       correct synonymous relationships from incorrect ones with an area
+Experimental Validation of Undocumented English                        under the receiver operating characteristic curve (AUC) of 0.962
+
+Near-Synonymy                                                          (Figure 3B and 3C). After selecting a conservative classification
+  Our statistical analyses predicted ubiquitous undocumented           threshold (posterior probability (PP).0.9, false positive rate ,2%,
+                                                                       true positive rate <65%, see Figure 3C and 3D), we generated a
+synonymy among common English words. But do such missing
+relationships truly exist, and if so, are they of sufficient semantic  list of 707 high-quality, near-synonymous relationships mapping to
+similarity to necessitate inclusion in English thesauri? We sought to  a total of 214 previously undocumented headwords (provided in
+                                                                       Dataset S4). For example, the noun phenotype was discovered to
+answer these questions and validate some of our predictions
+concerning undocumented near-synonymy by uncovering rela-              be a near-synonym of trait (PP.0.99), and the adverb unhealthily
+tionships not annotated in our combined dataset. Because we            was paired to destructively (PP.0.99), hazardously (PP.0.96), and
+                                                                       badly (PP.0.90). Not all likely candidates of near-synonymy
+predicted so much missing synonymy, we reasoned that it should
+be relatively straightforward to uncover examples. The analysis        survived this conservative filtering, although the apparent quality
+performed in the previous section, however, suggested that             of the relationships strongly correlated with their inferred posterior
+                                                                       probabilities of accuracy (see Figure 3D). For example, many
+examining more manually curated thesauri was unlikely to be
+the most productive approach. Instead, we developed a targeted,        proposals suggested by more than one Turker were not ultimately
+‘‘crowd-sourcing’’ system for near-synonym discovery and valida-       accepted (66%), but these were typically strong examples of hypo-
+                                                                       or hypernymy (e.g., tribromide: anion). Correspondingly, 44% of
+tion, and we used this method to test whether such relationships
+were ubiquitous and potentially of sufficient quality to justify       the synonyms recommended by multiple Turkers made the final
+inclusion into lexical resources.                                      cut, more than double the 21% acceptance rate for those proposed
+                                                                       a single time.
+  To perform this experiment, we first generated a random list of
+300 undocumented, provisional headwords, sampled from Wiki-              To assess the quality our discovered synonymous relationships,
+pedia, including ‘‘phenotype’’, ‘‘unhealthily’’, and ‘‘instinctual’’   we examined their semantic similarity within a corpus of nearly 5
+                                                                       million English Wikipedia articles. Specifically, we measured the
+(see Materials and Methods for details). We then presented this list
+to workers on the Amazon Mechanical Turk service (Turkers) and         semantic similarity among novel, true positive, and true negative
+asked them to suggest novel synonyms. The notion of near-              synonym pairs by comparing the normalized information content
+                                                                       of their shared linguistic contexts to those obtained from a null
+synonymy within English is complex [1], so rather than attempting
+to provide a precise definition of the relationship, we instead relied background (see Supporting Information Text S1) [53]. We found
+on Turkers’ preconceived notions of ‘‘synonymy.’’ To ensure that       that random synonym pairs (true negatives) had an average
+their definitions aligned with those used by existing thesauri, we     semantic similarity of .62, while previously documented synonyms
+
+performed a crowd-sourced validation experiment that mixed the         (true positives) had an average similarity score of 4.62 (Figure 3E
+harvested relationships with known, high-quality pairings (see         and 3F). Importantly, the novel synonym pairs validated by our
+Materials and Methods) obtained from the thesauri in our dataset       pipeline had an average semantic similarity score of 3.65, and
+
+
+
+PLOS Computational Biology | www.ploscompbiol.org                   7                  September 2014 | Volume 10 | Issue 9 | e1003799
+                                                                                                       Synonymy Matters for Biomedicine
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PLOS Computational Biology | www.ploscompbiol.org                  8                  September 2014 | Volume 10 | Issue 9 | e1003799
+                                                                                                       Synonymy Matters for Biomedicine
+
+
+
+
+Figure 3. Undocumented, general-English headwords and near-synonyms can be acquired experimentally. (A) The distribution over
+the inferred accuracies of the annotators validating harvested synonyms. (B) The true positive rate (blue) and false discovery rate (red) of the
+validation process as a function of the posterior probability of annotation accuracy. Diagnostic statistics were computed using known and random
+pairings. (C) The Receiver-Operator-Characteristic curve for the statistical model of the validation process, computed using known and random
+pairings. (D) The distribution over the posterior log-odds in favor of annotation accuracy for the novel synonym-headword pairings, annotated with
+exemplar pairings (rejected in red and accepted in blue). (E) The distributions over semantic similarity scores for the true negative (red), true positive
+(green), and novel synonym pairs (blue). (F) Bootstrapped (10,000 re-samples) distributions over the average semantic similarity scores for each group
+
+of pairings, computed using the data depicted in (E).
+doi:10.1371/journal.pcbi.1003799.g003
+
+
+many pairs had scores that were in the top 1% of those obtained       [5,54,55], especially with respect to information harvested from
+by true positive relationships (Figure 3E). This result strongly      free text. Due to the enormous amount of lexical and syntactic
+suggests that at least a fraction of undocumented but easily          variation within natural language, most terminologies have made
+
+discoverable relationships are potentially of very high quality.      extensive efforts to document synonymy. This work has not been
+                                                                      made in vain. In our experiments, synonymy contributed
+The Vast Majority of Biomedical Synonymy Is                           substantially to the successful normalization of disease names,
+                                                                      increasing overall recall by 20–40%, depending on the algorithm
+Undocumented
+  Having evaluated and validated the performance of our statistical   and corpus (see Table 1). The lack of gold standard corpora makes
+                                                                      this normalization experiment difficult to replicate in other
+methodology on the general-English dataset, we applied it to the      biomedical sub-domains, but we showed that the total number
+biomedical terminologies described in the previous sections. The
+resulting estimates of undocumented synonymy were very high (see      of recalled concepts associated with Pharmacological Substances
+Table S5 for a summary of our statistical inference results). Our     also depended strongly on available synonyms (see Supplemental
+                                                                      Figure S2). This anecdotal evidence suggests that similar trends are
+model predicted that approximately 60% of the concepts and 90%
+of the synonyms specific to Diseases and Syndromes are presently      likely to characterize biomedical terminologies in general.
+missing from the combined dataset (see Figure 4A and 4C).                These results, of course, do not automatically imply that all
+                                                                      synonyms documented within these terminologies are useful: some
+Furthermore, nearly half of the presently undocumented synonyms
+belong to concepts currently absent from any terminology              fraction of them could be redundant or simply unimportant. Our
+(Figure 4C, in red). Finally, we predicted that, on average, each     analyses indicate that, at least for the corpora and algorithms
+                                                                      examined, synonymous redundancy is minimal (see Table 1 and
+concept in the domain of Diseases and Syndromes maps to about
+5.85 synonyms, indicating that synonymy is far more prevalent than    Supporting Information Text S1). The notion of ‘‘importance,’’
+present vocabularies suggest (each concept currently possesses only   however, merits a special discussion. At first glance, one might
+                                                                      think that the best measurement for a synonym’s importance
+1.15 documented synonyms on average). With respect to the             would be its marginal frequency within some large text corpus, but
+domain of Pharmacological Substances, the results are similar but
+far more extreme: 95% of concepts and 99% of synonyms are             we doubt that this is the case. First, synonyms are context-specific,
+presently missing from the combined data set (Figures 4B and 4D,      and therefore, the overall frequency of a synonym without
+                                                                      consideration of its various contexts can be misleading. With
+respectively). In contrast with Diseases and Syndromes, the vast
+majority of Pharmacological Substances synonyms are associated        respected to named-entity normalization, the more relevant metric
+with undocumented concepts (Figure 4D, red and blue bars), with       is likely the estimated frequency with which a synonym maps to a
+                                                                      particular concept in natural language, conditional on the
+each concept predicted to have only 3.18 synonyms on average.
+Thus, it appears that synonymy is more pervasive with respect to      occurrence of the concept. Performing such a measurement for
+Diseases and Syndromes.                                               every relationship annotated within some thesaurus would clearly
+                                                                      require a very large corpus, possibly even the entirety of some
+  The amount of synonymy we predict in the biomedical domain
+pales in comparison to its pervasiveness in general-English, where    linguistic domain. Second, the information content carried by a
+the average word possesses nearly 200 synonyms. This should not       synonym is inversely related to its frequency. By focusing only on
+                                                                      commonly occurring terms, one would invariably miss the rare
+be particularly surprising, as aspects of languages common to more
+domains of human life should have richer synonymy (i.e. a higher      events that may provide the most insight. Furthermore, determin-
+expected number of synonyms per concept). Individuals from            ing the ‘‘importance’’ of any particular synonymous relationship
+                                                                      using small corpora and a single text-mining task is an ill-posed
+numerous cultural backgrounds speak English, and the meanings         problem. The utility of synonymy is highly task dependent, so it
+they assign to common words can be subtle and highly variable. As
+a whole, this causes such words to become semantically imprecise      would be ill advised to deem a relationship ‘‘unimportant’’ after
+and increases the odds that their meanings overlap those of other     such a limited evaluation. Thus, it is unwise to make universal
+                                                                      claims regarding the overall of utility of documented synonymy
+terms, generating a web of enriched synonymy. Moreover, it is
+important to note that most general-English words are much older      given the current study. Nevertheless, based on the normalization
+than biomedical terms, providing more opportunity for their           experiments, we have little reason to believe that our results will
+                                                                      not generalize to larger corpora and more nuanced tasks.
+semantics to evolve and overlap. As the biomedical lexicon
+becomes used by more sub-cultures, however, it is likely that its        Beyond named-entity normalization, synonymy has much
+terms will acquire new shades of meaning and become less              broader implications for natural language processing in general
+                                                                      [56]. For example, we have proposed that one mechanism for the
+semantically precise. Overall, this suggests that the gulf in
+synonym richness currently observed between biomedical and            genesis of synonymy is that it arises from the fusion of diverse
+general-English terms may attenuate over time.                        ‘‘functional linguistic niches,’’ each drawing on a shared lexicon.
+                                                                      In its extreme form, this ‘‘narrow field—poor synonymy, broad
+
+Discussion                                                            field—rich synonymy’’ theory predicts that within narrow
+                                                                      subcultures, such as a community of closely interacting biomedical
+  Terminologies and ontologies have become critical for the           researchers, specialized terms may be used precisely. As more
+
+analysis and cross-linking of various types of biomedical data        people from different subcultures enter the conversation, however,
+
+
+PLOS Computational Biology | www.ploscompbiol.org                  9                  September 2014 | Volume 10 | Issue 9 | e1003799
+                                                                                                        Synonymy Matters for Biomedicine
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 4. Biomedical terminologies are likely missing the vast majority of domain-specific, synonymous relationships. The numbers
+of undocumented concepts and synonyms specific to each biomedical sub-domain were estimated using a hierarchical mixture model in order to
+capture annotation variability that occurred within and across terminologies (10 concept components, each with 4 synonym components, see
+
+Materials and Methods and Supporting Information Text S1). In panels (A) and (B), the number of documented concepts per component (green,
+above x-axis) is compared to the estimated number of undocumented concepts per component (blue, below x-axis): (A) Diseases and Syndromes and
+(B) Pharmacological Substances. In panels (C) and (D), the number of documented synonyms per mixture component (green, above x-axis) is
+compared to the estimated number of undocumented synonyms, which come in two flavors, undocumented synonyms paired to documented
+concepts (blue, below x-axis) and undocumented synonyms paired to undocumented concepts (red, below x-axis).
+doi:10.1371/journal.pcbi.1003799.g004
+
+
+
+discourse becomes more ambiguous and synonymy more com-                  Given its potential positive impact on named-entity normaliza-
+
+monplace. At the same time, disjoint communities may use               tion and text mining in general, we believe that documentation of
+concepts and phrases that appear dissimilar but are actually very      lexical and syntactic variation within biomedical terminologies is a
+close in meaning. For example, the Black–Scholes equations used        critical problem within the field. Although other types of lexical
+
+in quantitative finance [57,58] and approximations to the Wright-      relationships may be equally or even more important for various
+Fisher process from population genetics [59] are intimately            text-mining tasks (e.g., hypo/hypernymy, meronymy), we have
+connected to physical models of diffusion, but this may not be         demonstrated that deficiencies in synonymy levy a clear and
+
+evident to a physicist listening to an economics or genetics lecture.  quantifiable toll on normalization recall. The question then
+Uncovering such deep isomorphisms between concepts and ideas           becomes ‘‘How much synonymy is missing, and how should we
+
+from distinct domains is one of the ‘‘Holy Grails’’ of text mining,    go about collecting and storing it?’’ We used statistical modeling to
+but at present, such powers are only available to the most broadly     predict that the vast majority (.90%) of synonymous relationships
+educated human researchers. We believe more thorough docu-             are currently missing from the biomedical terminologies that we
+
+mentation of synonymy represents a first step toward the               investigated. With respect to collection and storage, it seems
+automated discovery of deep semantic relationships that link           unlikely that manual annotation and documentation of concept-
+disparate realms of knowledge.                                         synonym pairs with no indication of quality will be able to face the
+
+
+
+PLOS Computational Biology | www.ploscompbiol.org                  10                  September 2014 | Volume 10 | Issue 9 | e1003799
+                                                                                                        Synonymy Matters for Biomedicine
+
+
+
+enormity of the challenge. For perspective, our statistical model      example, a named entity recognition and normalization tool like
+
+predicts that the ‘‘true’’ Pharmacological Substances terminology      MetaMap [24] could encounter an unknown term, store various
+should contain close to 2.5 million concepts and nearly 8 million      similarity measurements it inherently computes from corpora, and
+synonyms.                                                              then provide this data back to the terminology in a structured
+
+  Thus, we believe that current biomedical terminologies have          format. The automated terminology could then integrate this term
+substantial room for improvement with respect to the acquisition,      into its knowledge base. That way, when the term is subsequently
+storage, and utilization of synonymy. Most importantly, these          encountered in another context, perhaps even by a different
+
+lexical resources must move well beyond fixed dictionaries of          computational tool, more and more knowledge concerning its
+manually curated annotations. Instead, they should become              linguistic relationships and contexts would accumulate and
+‘‘living’’ databases, constantly evolving and expanding like search    become available to all within the community. Ultimately, this
+
+engines that index the enormity of the changing web. Such              would ensure that the terminology evolves with the linguistic
+databases could initially integrate well-established core terminol-    domain it was intended to document.
+ogies, like the Metathesaurus [5], but should ultimately be much         Perhaps most importantly, ‘‘next generation’’ lexical terminol-
+
+broader in scope. Indeed, a distributed lexical database should        ogies should be readily accessible to a wide range of computational
+contain multiple linguistic relationships, and each of the proposed    tools and researchers, as their growth and performance will be
+associations should be assigned a unique and consistent measure-       inextricably tied to ease of use. This can be partially accomplished
+
+ment of its quality or evidentiary support. This value, computed       by developing a suite of software tools tuned to a specific database,
+using a combination of expert evaluations and automated analyses       similar to the MetaMap [24] and MetamorphoSys [5] software
+conducted over an ever-expanding corpus of natural language,           programs that accompany the UMLS Metathesaurus. We believe
+
+should be updated in real time. By assigning such measurements to      that a truly successful ‘‘living’’ terminology, however, must be
+relationships, the terminology should never appear bloated to          simple and transparent enough to transcend the use of specialty
+individuals interested in only the highest quality associations. This  software. This may prove the most difficult challenge faced in the
+weighted, networked approach to lexical terminologies is similar in
+                                                                       development of these resources, and we imagine that its solution
+principle to the functional gene networks globally curated,            will require new crowd-sourcing, natural language modeling, and
+annotated, and used within the genomics community [60–63].             distributed computing technologies that facilitate the integration of
+Instead of modeling relationships among genes, however, the            diverse information into a networked whole. The development of
+
+nodes of these lexical networks would represent terms or concepts      this technology is not unlike the sequencing of the human genome
+and the weighted (hyper)-edges would encode linguistic relation-       in scale and importance. A vast library of linguistic relationships
+ships. Because of the sheer magnitude of linguistic knowledge that     among an ever expanding collection of words and phrases would
+
+these resources must entail, they should take advantage of memory      allow a quantum leap in machine reading, understanding and
+efficient representations, such as storing some fraction of synonyms   intelligence, with applications relevant not only to biomedicine but
+using statistically weighted rules or patterns [64].                   all fields of science and scholarship.
+
+  To some extent, lexical resources with similar goals are already
+being actively developed. For example, the UMLS Metathesaurus          Materials and Methods
+[5], NCBO BioPortal [54], and BioLexicon [55] all the combine
+
+numerous independent terminologies and store multiple linguistic       Constructing the Biomedical Terminologies
+relationships. Consistent with our vision of automatic knowledge         The two biomedical terminologies used in this study, Diseases
+acquisition from free text, developers of the BioLexicon used          and Syndromes and Pharmacological Substances, were extracted
+
+computational methods to uncover novel term variants for gene          from the UMLS Metathesaurus [5]. The Metathesaurus is a large
+and protein named entities [55]. In fact, automatic acquisition of     collection of over 100 vocabularies documenting a variety of
+synonymous relationships from natural language is not a new idea       linguistic relationships among biomedical concepts, which in turn
+
+[65–67], and numerous researchers have developed general-              link into a single, semantic network. Similar to the key-value
+purpose, automated synonym extraction algorithms for the               structure of traditional dictionaries, the Metathesaurus is orga-
+biomedical domain [56,64]. These efforts are steps in the right        nized around a set of concepts (keys), each of which is associated
+direction, but we feel that they fall short of our vision for ‘‘next   with one or more linguistic terms (values). When multiple terms
+
+generation’’ terminologies in several ways. First, although            are assigned to a single concept, such variants represent distinct
+relatively thorough, these databases do not systematically annotate    encodings of the same linguistic entity. Therefore, whenever a
+the quality of their documented linguistic relationships. In our       Metathesaurus key is annotated with two or more phrases (values),
+
+opinion, this greatly decreases their potential utility, both from an  those phrases are synonymous with each other. Consistent with
+efficiency (i.e., very long search times) and efficacy (i.e., results  previous work [13,68,69], we identified a set of technical phrases
+obtained may be of dubious quality) standpoint. Second, current        in the Metathesaurus that were representative of artificial
+
+resources are largely static and do not adapt to newly acquired        machine-readable sublanguages (such as database-specific encod-
+knowledge or the expanding linguistic environment. Thus, they          ings) rather than natural language. Previous studies found that
+remain distinct from our envisioned ‘‘living’’ terminologies.          removing these specialized terms improved information extraction
+
+  For a terminology to be ‘‘living’’ requires a number of essential    from natural text [22,68]. Therefore, prior to isolating the
+attributes. First, it needs a large, dedicated community of users and  terminologies, we subjected the Metathesaurus to the rule-based
+experts heavily invested in maintaining its quality and relevance.     filtering outlined in [68]; see the Supporting Information Text S1
+
+Second, the terminology must be able to evolve by identifying and      for details. To perform the annotation overlap analysis described
+repairing its deficiencies. Many of these deficiencies, such as gaps   in the main text, we used the metadata provided by the
+in coverage or inconsistencies in logical structure, could be          Metathesaurus in order to determine the vocabularies of origin
+
+identified automatically using statistical methods similar to those    for each concept-term pair. After processing, the Diseases and
+utilized in the present work. To be most effective, however, ‘‘next    Syndromes dataset (Dataset S1) incorporated 59,265 concepts
+generation’’ terminologies should be designed with computational       paired with 127,431 terms derived from 14 vocabularies (see Table
+
+tools and corpora that extend and repair them in real time. For        S2). The Pharmacological Substances dataset (Dataset S2)
+
+
+PLOS Computational Biology | www.ploscompbiol.org                  11                  September 2014 | Volume 10 | Issue 9 | e1003799
+                                                                                                     Synonymy Matters for Biomedicine
+
+
+
+contained 122,266 concepts aligned with 198,270 terms harvested      abbreviations in each corpus using the tool developed in [77], as
+
+from 11 vocabularies (see Table S3). To recast the datasets as       we wished to mitigate errors due to abbreviations resolvable using
+concepts and synonyms, one term from each annotated set was          current technology. After abbreviation resolution, we isolated all
+assigned as the preferred term (in accordance with the UMLS          disease mention-concept pairs from each corpus, as we were
+
+designations), also known as the headword (consistent with the       focusing on disease name normalization. Finally, in order to
+general-English thesauri), while the remaining were treated as       prevent a few common disease names from dominating our results,
+synonyms.                                                            we restricted our analyses to the set of all unique concept-mention
+                                                                     pairs.
+
+The General English Headword-Synonym Dataset                           Following pre-processing, each corpus was evenly split into
+  We constructed the general English synonym dataset by              testing and training sets, although only one of the algorithms
+                                                                     included in this study required training [21]. We evaluated the
+digitizing 8 hard-copy thesauri [41–48] and combined them with
+the digital WordNet [4], as described previously [70]. Similar to    effects of synonymy on named-entity normalization by comparing
+the biomedical terminologies, the general English dataset follows a  recall, precision, and the F1-measure (harmonic mean of precision
+                                                                     and recall) for four algorithms before and after removing
+key-value structure, but instead of annotating concepts with terms,
+this dataset explicitly assigns lists of synonyms to specific Englishsynonymy, using the testing set only. The four normalization
+words, which we call headwords. This direct enumeration of           algorithms implemented in this study were: Boolean search,
+                                                                     MetaMap [13], cosine similarity, and pairwise Learning-to-Rank
+synonymy among specific words implies that these relationships
+possess an inherent directionality, which in turn suggests that this (pLTR, as described in [21]). Implementation and training (if
+phenomenon is not bidirectional, at least according to all of the    applicable) of these algorithms is described in more detail in the
+                                                                     Supporting Information Text S1. Note that some concepts
+print dictionaries included in our analysis. WordNet is the only     annotated within the corpora were not included in the Diseases
+exception, as it explicitly assumes synonymy is bidirectional [4].
+Implied directionality in most thesauri reflects the subtle nature ofand Syndromes terminology—the annotators used a more
+near-synonymy in natural language [1,71] and the complicated         expansive definition of the sub-domain—so recall and precision
+                                                                     were evaluated only with respect to those mentions whose concepts
+notions that underlie thesaurus construction [3]. To account for
+synonym-headword directionality in our downstream analyses, we       were included in this terminology. To assess the effects of synonym
+treated each headword-synonym pair and its potential inverse as      coverage on concept recall for Pharmacological Substances,w  e
+                                                                     compared the total number of concepts recovered by MetaMap
+distinct entities. After parsing each dictionary and joining the     [13] from a large corpus of free text before and after removing all
+resulting annotations by headword, the subsequent synonym
+compendium was subjected to thorough post-processing in order        synonyms from the terminology. Our corpus of free text was
+                                                                     constructed by randomly sampling 35,000 unique noun phrases
+to remove word phrases and linguistic variation caused by            from the abstracts contained within the MEDLINE database [78].
+differences in conjugation [72]. The full compendium, with words
+replaced by numerical keys (in accordance with copyright law), is    Noun phrases were isolated from free text using the OpenNLP
+                                                                     software suite [79].
+provided as Dataset S3. In total, this file contains over one million  To determine the fraction of redundant synonyms for a
+unique synonym pairs mapping to just over 53,000 headwords (see
+Table S4).                                                           particular algorithm and corpus, we randomly removed fractions
+                                                                     of synonyms from the terminology of interest and re-computed the
+                                                                     number recalled terms (see Figure S1). Assuming that each disease
+Wikipedia Corpus Generation and Analysis
+  To examine the properties of general English headwords and         name mention maps to only one, non-redundant concept-to-term
+                                                                     relationship, then the number of recalled concepts should decrease
+their synonyms in free text, we constructed a large corpus using     linearly with the fraction of removed synonyms. If such mentions
+Wikipedia (downloaded in October 2011). Part-of-speech infor-        actually map to multiple concept-to-term annotations, however,
+mation was assigned to this corpus using the Stanford Tagger
+                                                                     then the number of recalled concepts will actually decrease at a
+(model: left3words-wsj-0-18.tagger) [73], and headword/synonym       non-linear rate. In fact, the fraction of redundant concept-to-term
+word frequencies were estimated using a Dirichlet-Multinomial        annotations (and thus synonyms) can be estimated from changes in
+smoothing model [74,75]. To estimate semantic similarity among
+                                                                     concept recall that occur as different fractions of synonyms are
+synonym pairs, we computed the normalized information content        randomly removed from the terminology. These estimates are
+of their shared contexts [53] and compared this value to a null      provided in Table 1, but details concerning the estimation
+background distribution. Details concerning this procedure are
+                                                                     (including assumptions and limitations) are described in the
+provided in the Supporting Information Text S1.                      Supporting Information Text S1.
+
+Assessing the Effects of Synonymy on Biomedical
+                                                                     Estimating the Extent of Undocumented Synonymy
+Concept Normalization                                                  As discussed in the main text, we extended a parametric, model-
+  To assess the effects of synonymy on disease name normaliza-       based solution to the ‘‘missing species’’ problem in order to
+tion, we used two expertly-annotated gold-standard corpora
+                                                                     compute estimates for the true numbers of concepts and synonyms
+[25,26]. The AZDC corpus [26] was constructed using nearly           belonging to particular biomedical sublanguages. Essentially,
+3,000 sentences isolated from 793 biomedical abstracts, and its      solutions to the ‘‘missing species’’ problem attempt to predict the
+disease name mentions were mapped to the UMLS Metathe-
+                                                                     true number of species in some environment of interest given an
+saurus. The NCBI corpus [25] builds upon the previous dataset by     incomplete sub-sample [38–40]. Below, we outline the mathemat-
+performing a more thorough annotation of these same 793              ical details concerning our model and how it can be used to
+abstracts, although the version we obtained was annotated using      estimate the quantities of interest. The following description can
+
+the MEDIC terminology [76] rather than the UMLS. We                  be seen as a sequence of three interconnected parts. First, we
+replaced the MEDIC annotations with UMLS concepts by                 describe how the process of annotating synonyms for a single
+aligning the database identifiers included within both terminolo-    concept can be modeled using a Poisson process. Second, we
+
+gies. Consistent with previous studies [21], we expanded the         describe how Bayes’ Theorem can be used in conjunction with this
+
+
+PLOS Computational Biology | www.ploscompbiol.org                12                  September 2014 | Volume 10 | Issue 9 | e1003799
+                                                                                                Synonymy Matters for Biomedicine
+
+
+
+Poisson model to generate a prediction for the number of         where P(S’DS,h) indicates the probability of annotating S’ terms at
+synonyms missing with respect to this concept. Third, we briefly                      ~
+                                                                 least once and P(rDS’h) represents the probability of samplir, r
+outline how this approach can be extended to infer the total     conditional on S’. Based on the descriptions ofr and S’ given
+number of synonyms missing from an entire thesaurus. Further
+details concerning the approach, including its extension to      above, the first term on the right-hand-side is simply the
+                                                                 probability that S’ concept-to-term relationships are sampled at
+multiple dictionaries and the inclusion of mixture components,   least once, which corresponds to the following binomial model
+are relegated to the Supporting Information Text S1.
+                                                                 [80]:
+  To begin, imagine that a lexicographer annotated the terms
+associated with some concept of interest by ‘‘sampling’’ them from                    ▯▯
+                                                                                        S   ▯ ▯    S{S’  ▯ ▯       S’
+the ‘‘environment.’’ The precise definition of ‘‘sampling’’ is             P(S’DS,h)~        ph(0)     | 1{p (h)    :
+irrelevant, but one can imagine that the complex process of                             S’
+detecting concept-to-term relationships from linguistic experience
+                                                                 The second term on the right-hand-side corresponds to a
+depends on a series of probabilistic events (e.g., coming across a
+particular article; having a conversation with a certain scientist,ltinomial distribution (with an infinite number of categories)
+                                                                 [80]. To see this, note that, after marginalizing the Poisson
+etc), not unlike the capturing of biological species. Thus, accorsampling rates out of the model, the probabilities assigned to
+to this analogy, the corpus of natural language specific to a
+lexicographer’s domain of interest represents the ‘‘environment.’’lements of r with the same value (denoted k) are equivalent:
+
+Let rjdenote the number of times that relationship j was sampled
+by some lexicographer, and let lj indicate the Poisson process-                    !               !         ph(k)
+                                                                           P(r jkD h ,S’)~P(r kkD h ,S’)~           ,
+sampling rate for this relationship. The sampling probability                                              1{p (h)
+associated with the jth concept-to-term relationship is:
+                                                                 where the denominator in the previous equation re-normalizes the
+
+                             lrjexp½{l ▯                         sampling probability to account for the fact that each elemenr in r
+                   P(rjDlj)~  j         j:                       must be greater than 0. Letkf denote the number of relationships
+                                  rj                             that were sampled k times:
+
+
+As discussed in the main text, this equation implicitly assumes that                         S’
+the total number of occurrences of relationship j in the language of                        X    ▯ ▯
+interest (i.e. the ‘‘species population’’) is infinite. Obviously, this is             fk~      d rj~k ,
+                                                                                            j~1
+an approximation, but given that these ‘‘populations’’ are very
+large and the sampling probabilities are very small, this should where d(X) is 1 if X is true and 0 otherwise. Then,
+
+a reasonable assumption.
+  To extend this model to the full set of synonymous relationships                             K
+associated with some concept, let S denote the total number of                                     1 ▯ ▯p (k)   fk
+                                                                             P(rr,S’DSh)~(S’!)P          h        ,
+terms that map to this concept (indicating S{1 synonyms),                                     k~1 fk! 1{p  ~(0)
+including those that were not annotated by the lexicographer. In                                           h
+
+the parlance of the ‘‘missing species problem,’’ S denotes the   where K denotes the largest sampling count ir and the factorials
+unobserved total number of species in the environment, and       correspond to the multinomial coefficient (i.e. accounting for the
+ultimately, we will describe how to infer this value given an    fact that the elements ofr with the same value are statistically
+
+incomplete sample derived from the annotations. To do so, we firsindistinguishable).
+define the vectorr~Sr 1r 2... ,j ,...S’{1,S’T, which indicates      With our probability model for the annotation data fully
+
+the number of times each relationshipjrwas sampled, given that   specified, we can now describe our approach for estimating the
+they were each sampled at least once. This distinction is        total number of synonymous relationships missing from some
+important, as a relationship that is never sampled (r cannot     annotated set, denoted S{S’. This value can be estimated from
+                                                 j
+appear in the terminology. Thus, the length of the vector rr,    the probability distribution over the total number of terms
+denoted S’, indicates the number relationships annotated by the  associated with the concept of interest, conditional on the observed
+                                                                                                                 ~
+lexicographer, and thus, S§S▯▯                                   data and the model parameters (denoted P(SDS’,rrh)). To derive
+                               ~                                 this distribution, we apply Bayes Theorem and note that:
+  To simplify the model, let gjl denote the generating (prior)
+distribution for the Poisson process sampling rates. By marginal-
+                   ▯▯                                                                                  ~
+izing each l over g l Dh , we can reduce the dimensionality of                      ~   ~    X P(r,S’DSh)P(S)
+            j         j                                                         P(SDr,S’h)~             ~      :
+our model by expressing it only in terms of the parameters defining                             P(rr,S’DSh)P(S)
+                     ▯▯                                                                       S
+the prior distribution gjh :h
+                                                                 Thus, to estimate S, we must specify both the data likelihood
+                                                                          ~
+                         ?                                       (P(r,S’DSh), defined in the preceding paragraph) and a prior
+                  ▯▯     ð         ▯▯                            distribution for the total number of terms paired to the concept of
+                p~ rj ~    P(rjDj )g j D dlj:
+                  h                                              interest (P(S)). The data likelihood defined above and in the
+                         0                                       preceding paragraph depends on the sampling count vectorr, but
+                                                                 in practice, we never actually observe the precise number of times
+With this notation in place, the full probability model for the
+                                                                 each relationship was sampled, only whether it was sampled at
+relationship-sampling vector can be decomposed into:             least once (rj=0). To account for this fact, we can simply
+                                                                                                  ~
+                                                                 marginalize the likelihood r,S’DSh) over all possible valuesr.f r
+              P(rr,S’DSh)~P(S’DS,hh)|P(rrDS’h),                  Based on the factorization outlined in the previous paragraph, this
+
+
+
+PLOS Computational Biology | www.ploscompbiol.org             13                 September 2014 | Volume 10 | Issue 9 | e1003799
+                                                                                           Synonymy Matters for Biomedicine
+
+
+
+is trivial, yielding the following likelihood for observing S’
+annotated concept-to-term relationships:                                            !         "   #
+                                                                ▯!▯                   N             w{1      ▯ ▯   w
+                                                               PS ’,N’DS,N,w,h ~            |                 phðÞ    |
+                              X                                                    N{N’          wzN’{N
+         P(S’DSh)~P(S’DS,hh)|    P(rrDSh)h                                       2                                  3
+                              rr[R                                                  N’  !
+                     !                                                                   Si  ▯ ▯       Si▯ ▯   Si{Si
+                      S  ▯ ▯         ▯ ▯                                         4 P          1{p hðÞ    phðÞ       5,
+                 ~        p~(0)S{S’| 1{p (0~   S:                                  i~1  S’i
+                     S’    h               h
+
+                                                              where the first multiplication factor (a binomial coefficient)
+By coupling this likelihood with a simple prior distribution, accounts for the number of ways to select N’ annotated concepts
+easily specify the desired posterior distribution over the true
+                                                              from a total pool of N, the second factor in square brackets
+number concept-to-term relationships. For example, assuming thaccounts for the probability of failing to annotate w synonymous
+the true number of terms paired to each concept is geometricalrelationships (marginalized ove r all possible assignments to the
+                        S{1
+distributed (P(S)~c(1{c)   ), the posterior distribution for S is: undocumented concepts), an dthetrfctoiesovd
+                                                              the probability of annotating the   N’ observed concepts.
+
+                                                              Extending the previous equation to multiple independent
+       ~       P(S’DS,h)P(S)                                  dictionaries is straightforwar d, illustrated in the Supporting
+ P(SDS’h,c)~  X                                               Information Text S1.
+                 P(S’DS,h)P(S)
+                                                                By coupling the previous likelihood with a joint prior
+             S~S’                                             distribution for the unknown quantities of interest (denoted
+               !                                                ~
+               S   ▯ ▯            S’z1  ▯ ▯         S{S’      P(S,N,w), see Supporting Information Text S1 for details), the
+           ~        1{p h(0)ð1Þ{c     | p h0)ð1Þ{c      :     model outlined above can be used to derive a posterior distribution
+               S’
+                                                              for the true number of terms paired with the documented concepts
+At this point, the expectation of the posterior distribution can usede total number of concepts specific to the linguistic domain
+
+to estimate the total number terms that were not annotated forof interest (N), and the number of concept-to-term relationships
+some concept of interest, given by:                           associated with the undocumented concepts (w). In practice,
+                                                              however, this requires knowledge of the relationship sampling
+
+                       h i                                    rates (h Þ ) and the parameters defining the prior distribution
+             S Missing SDS’,hh,c {S’                          over the number of undocumented concepts and terms. To
+
+                                                              circumvent this issue, we jointly inferred the numbers of
+                    ~ ph(0)ð1Þ{c ðÞ’z1  {S’:                  undocumented concepts and terms along with the unknown
+                        1{p ~(0)ð1Þ{c                         parameters using an approximate, Bayesian approach [81,82].
+                            h
+                                                              Details concerning this procedure are provided in the Supporting
+In practice, the previous posterior is not very usefulhunless Information Text S1.
+and c are known. Otherwise, there are three unknown
+                                                                Finally, as discussed in the main text, the sampling model
+parameters in a model with only one observation, rendering    outlined above assumes that the concept-to-term relationships,
+joint inference intractable. To overcome this difficulty, we 1both within and across concepts, were sampled from the linguistic
+
+assumed that the sampling probabilitieshp0) were correlated   domain at equivalent rates. This assumption is somewhat artificial
+across concepts annotated by the same dictionary and 2) jointland restrictive, as the terminologies included in this study were
+modeled the annotations provided by multiple, independent
+                                                              likely constructed according to their own unique preferences,
+dictionaries. Given these assumptions, we were able to construbiases, and perhaps even definitions of synonymy. To formally
+global likelihood for all of the synonymous relationships     account for such variability, we extended the above model by
+
+documented by a set of terminologies. This in turn enabled us allowing the sampling rateshpÞð0to vary across terminologies,
+to estimate the total number of undocumented relationships    concepts, and terms. Consistent with previous applications [83],
+
+specific to the linguistic domain of interest while simultaneowe found that the mixture modeling approach successfully
+providing enough information to estimate the unknown param-   captured the variation we observed both within and across
+eters p(0) and c.                                             different terminologies. Details concerning the mixture model, its
+      h
+  To derive this likelihood with respect to a single dictionary,ference, and resulting estimates of undocumented synonymy are
+let Si denote the number of concept-to-term relationships thatprovided in the Supporting Information Text S1. A summary of
+
+were annotated (observed in the terminology) with respect to thee modeling results is provided in Table S4.
+ith concept, and similarly, letiSenote the true number of
+
+terms for this concept. Assume that a total of N’ concepts werCrowd Sourcing Undocumented General English
+annotated in the terminology, such that   S’~SS’  ,S’ ,... ,  Synonymy
+                                                 1  2
+S’N’{1,SN’T denotes the full vector of observed relationships.  To find potentially undocumented headwords of high-quality,
+                                                    !         we passed all of the words contained within our Wikipedia corpus
+To correctly specify a probab ility model for the vector S’,wethrough several filters (including a large English dictionary [84]),
+must also consider those con cepts whose terms were not
+annotated within the terminology (i.eS’~0). Let N denote      removing proper nouns, misspelled words and those words
+                                       i                      annotated as headwords in our general English dataset. We then
+the true number of concepts in the linguistic domain, andwlet
+denote the total number of concept-to-term relationships      randomly sampled 300 of these putative undocumented head-
+                                                              words for downstream analysis. In order to harvest previously
+associated with the  N{N’ undocumented concepts. The          undocumented synonymous relationships, we turned to the
+likelihood for the observed data S’ and N’nditional on fixed
+                                       ,                      Amazon Turk web service and hired a work force of general-
+N, w and h,si:                                                English speakers. To ensure that our work force included only
+
+
+
+PLOS Computational Biology | www.ploscompbiol.org          14               September 2014 | Volume 10 | Issue 9 | e1003799
+                                                                                                    Synonymy Matters for Biomedicine
+
+
+
+highly-qualified ‘‘Turkers,’’ we only allowed individuals with      the posterior probability thres hold values for various true and
+
+an IP address in the United States to complete our task, and we     false positive rates. In the end, we reported our results with
+further required that each Turker have an approval rating of at     respect to a false discovery rate of 2%. The full table of
+least 85%.                                                          candidate synonym pairs and vali dation results is provided in
+
+   We conducted our harvesting experiment by posting a set of       Dataset S4.
+100 Human Intelligence Tasks (HITs), where each task
+consisted of a random group of three candidate headwords.
+                                                                    Supporting Information
+Within each HIT, we asked the Turkers to provide at least five
+novel synonyms for the group of three headwords. In our             Dataset S1    The general-English near-synonymy data-
+instructions to Turkers, we specifically emphasized that only       set. Each line in the file provides a headword, its annotated
+                                                                    synonyms, and a binary array that indicates the annotating
+single-word answers were allowed and the parts-of-speech of
+the headword and synonym must match. Because the notion of          dictionaries for each pair. The dictionaries are listed according to
+synonymy is somewhat vague and open to interpretation               their order in the binary array (column-wise) on the first line of the
+                                                                    file. Note, headwords and synonyms have been replaced by
+[1,71], we did not explicitly provide Turkers with a precise
+definition of the relationship, re lying instead on their individ-  integers in accordance with copyright law.
+ual intuitions and self-imposed definitions. To ensure that         (ZIP)
+
+Turkers’ definitions of synonymy were consistent with those         Dataset S2     The Diseases and Syndromes synonym
+used by established dictionaries, we incorporated positive and      dataset. The format of this file is identical to that of Dataset
+negative controls into our subsequent validation stage (see
+                                                                    S1. See Supporting Information Text S1 for the processing
+below for details). After each HIT was completed three times,       procedures that resulted in this dataset.
+we automatically filtered the candidate synonym pairs for           (ZIP)
+mismatched parts-of-speech and misspellings using the SPE-
+CIALIST lexicon [84] and the iS pell word list, respectively.       Dataset S3    The Pharmacological Substances synonym
+
+After filtering, we obtained a total of 2,871 entirely novel,       dataset. The format of this file is identical to that of Dataset S1.
+candidate synonymous relationships.                                 See Supporting Information Text S1 for the processing procedures
+   We validated the harvested synonymous relationships by           that resulted in this dataset.
+
+combining them with positive and negative controls and              (ZIP)
+subjecting them to an additional crowdsourcing experiment.          Dataset S4     The headwords and harvested synonym
+For a positive control, we selected the top 5,000 synonym pairs
+                                                                    pairs obtained from the crowd-sourcing experiment.
+from our dataset previously determined to be highly inter-          Each line in the file contains a provisional a headword, its part-of-
+changeable in written English text [70]. For a negative control,    speech, its harvested synonyms, and their associated posterior
+we generated a set of 5,000 synonymous relationships by
+                                                                    probabilities computed from the validation experiment.
+randomly shuffling lists of headwords and synonyms with             (ZIP)
+identical parts-of-speech. We conducted the validation exper-
+ientbnigeachHITarandomtnknowne                                      Figure S1    Missing synonymy negatively affects disease
+                                                                    name normalization. To test the importance of synonymy for
+pairings, ten random pairings, and ten harvested pairings. For
+each of the 30 synonym pairs, we asked Turkers a simple true-       named entity normalization, we removed random subsets of
+false question: ‘‘Do you think that A is a synonym of B (given      synonyms from the Diseases and Syndromes terminology (x-axes
+                                                                    indicate the fraction remaining) and computed recall (blue),
+B’s part of speech     C)?’’ With respect to the harvesting
+experiment, we set higher criter ia for our validation Turkers.     precision (red), and their harmonic average (F1-measure, green)
+In addition to being located within the US, they had to have        (y-axis) for four normalization algorithms (bottom) applied to two
+                                                                    disease name normalization gold-standard corpora (left). Error
+completed more than 100 HITs with an approval rating of
+95% or higher. To prevent poorly performing Turkers from            bars represent twice the standard error of the estimates,
+biasing our results, we removed all responses in which the          computed from five replicates. Numerical results are presented
+corresponding Turker did not annotate the known and random          in Table 1, and a description of the methodology is provided in
+
+pairings at a performance level significantly better than           the Materials and Methods and the Supporting Information Text
+random (T-test, p.0.05 after correcting for multiple testing);      S1.
+all rejected HITs were re-posted for another round of               (TIF)
+
+validation by a different Turker.                                   Figure S2    Recall of normalized Pharmacological Sub-
+   After conducting the experiment, we evaluated each candi-
+date synonym pair by computing the posterior probability that it    stances depends on synonymy. The fraction of the total
+                                                                    number of recalled concepts returned by MetaMap (y-axis) upon
+represented a true relationship. We computed these probabil-        removing a subset of the synonyms contained within the
+ities by applying a statistical m odel of the validation process
+[50–52] to the Turker-generated synonym data. We fit the            Pharmacological Substances terminology (x-axis indicates fraction
+                                                                    remaining). The evaluation corpus consisted of 35,000 unique
+model using the PyAnno software package [85], which provided        noun phrases isolated from MEDLINE (see Materials and
+the posterior probability that e ach synonym pair represented a
+true relationship, conditional on the data and underlying model     Methods for details).
+                                                                    (TIF)
+parameters. Ultimately, the positive and negative controls
+allowed us to evaluat e the quality of modeling predictions. As     Figure S3    Headword selection bias in general-English
+described in the main text, a simple binary classifier constructed  thesauri. (A) The empirical distribution over stemmed word
+
+from the posterior validation pr obabilities identified synony-     length shown for headwords (blue) and non-headwords (synonyms
+mous relationships harvested from the dictionaries with an area     only, red). The inset panel depicts bootstrapped estimates (1000 re-
+under of the receiver-operating -characteristic curve of 0.962.     samples) for the mean values of these two distributions. (B):
+
+Using the known and random pairings as a guide, we estimated        Relative word frequency of headwords (blue) and non-headwords
+
+
+PLOS Computational Biology | www.ploscompbiol.org                15                 September 2014 | Volume 10 | Issue 9 | e1003799
+                                                                                                                Synonymy Matters for Biomedicine
+
+
+
+
+(synonyms only, red). In both cases, a Student’s T-test for a               Table S3      The sources for the Pharmacological Sub-
+                                                      216                   stances dataset. Summary statistics for the ten thesauri used to
+difference in means produced a p-value ,2.2610            .
+(TIF)                                                                       construct the Pharmacological Substances terminology.
+
+Figure S4     Bias and variability captured by the anno-                    (PDF)
+
+tation mixture model. (A) The distributions over parts-of-                  Table S4      The sources for the general-English dataset.
+                                                                            Summary statistics for nine thesauri used to construct the general-
+speech across the ten headword co mponents specified within the
+best-fitting mixture model. (B): The probability of headword                English near-synonym terminology.
+                                                                            (PDF)
+annotation, marginalized over all possible numbers and classes
+of synonyms, for the complete set of nine, general-English
+                                                                            Table S5      Estimates for the extent of undocumented
+thesauri.                                                                   synonymy for the three terminologies included in this
+
+(TIF)                                                                       study. This table provides the lower bound on the log-evidence
+                                                                            for the best fitting annotation mixture models specific to each
+Table S1      Examples of missing synonyms annotated
+within the gold-standard disease name normalization                         lexical domain. Moreover, it provides the fraction of headwords/
+                                                                            concepts and synonym pairs/terms predicted to be undocumented
+corpora. The first column indicates the term mentioned in the
+                                                                            within each dataset. Values in parenthesis indicate the 99%
+text, while the second column provides the annotated concept.
+The third column indicates the corpus of origin. Algorithms                 credible intervals for the estimates.
+                                                                            (PDF)
+considered in this study did not properly normalize any
+examples provided here presumably because the synonym was                   Text S1     Supplemental materials and methods.
+
+not provided in the complete disease name terminology.                      (PDF)
+(PDF)
+
+                                                                            Author Contributions
+Table S2     The sources for the Diseases and Syndromes
+dataset. Summary statistics for the thirteen thesauri used to               Conceived and designed the experiments: DRB KW JAE AR. Performed
+
+construct the Diseases and Syndromes terminology.                           the experiments: DRB KW SN. Analyzed the data: DRB KW SN.
+                                                                            Contributed reagents/materials/analysis tools: SN. Wrote the paper: DRB
+(PDF)                                                                       JAE AR.
+
+
+
+References
+
+ 1. Cruse DA (1986) Lexical semantics. Cambridge [Cambridgeshire]; New York:17. Huang M, Liu J, Zhu X (2011) GeneTUKit: a software for document-level gene
+    Cambridge University Press.                                                 normalization. Bioinformatics 27: 1032–1033. doi:10.1093/bioinformatics/
+ 2. Schofield PN, Gkoutos GV, Gruenberger M, Sundberg JP, Hancock JM (2010)     btr042.
+    Phenotype ontologies for mouse and man: bridging the semantic gap. Dis ModelKrauthammer M, Rzhetsky A, Morozov P, Friedman C (2000) Using BLAST
+                                                                                for identifying gene and protein names in journal articles. Gene 259: 245–252.
+    Mech 3: 281–289. doi:10.1242/dmm.002790.
+ 3. Wilks Y, Slator BM, Guthrie LM (1996) Electric Words: Dictionaries,     19. Hirschman L, Yeh A, Blaschke C, Valencia A (2005) Overview of BioCreAtIvE:
+    Computers, and Meanings. MIT Press. 314 p.                                  critical assessment of information extraction for biology. BMC Bioinformatics 6
+ 4. Fellbaum C (1998) WordNet: an electronic lexical database. Cambridge        Suppl 1: S1. doi:10.1186/1471-2105-6-S1-S1.
+    (Massachusetts); London: MIT Press.                                     20. Fundel K, Gu¨ttler D, Zimmer R, Apostolakis J (2005) A simple approach for
+                                                                                protein name identification: prospects and limits. BMC Bioinformatics 6 Suppl
+ 5. Bodenreider O (2004) The Unified Medical Language System (UMLS):
+    integrating biomedical terminology. Nucleic Acids Res 32: D267–D270.        1: S15. doi:10.1186/1471-2105-6-S1-S15.
+ 6. Zeng QT, Redd D, Rindflesch T, Nebeker J (2012) Synonym, Topic Model and21. Leaman R, Dog˘an RI, Lu Z (2013) DNorm: disease name normalization with
+    Predicate-Based Query Expansion for Retrieving Clinical Documents. AMIA     pairwise learning to rank. Bioinformatics 29: 2909–2917. doi:10.1093/bioinfor-
+                                                                                matics/btt474.
+    Annu Symp Proc 2012: 1050–1059.                                         22. Kang N, Singh B, Afzal Z, Mulligen EM van, Kors JA (2012) Using rule-based
+ 7. Jonnalagadda S, Cohen T, Wu S, Gonzalez G (2012) Enhancing clinical concept
+    extraction with distributional semantics. J Biomed Inform 45: 129–140.      natural language processing to improve disease normalization in biomedical text.
+    doi:10.1016/j.jbi.2011.10.007.                                              J Am Med Inform Assoc: amiajnl–2012–001173. doi:10.1136/amiajnl-2012-
+ 8. Jonnalagadda S, Cohen T, Wu S, Liu H, Gonzalez G (2013) Using Empirically   001173.
+                                                                            23. Jimeno A, Jimenez-Ruiz E, Lee V, Gaudan S, Berlanga R, et al. (2008)
+    Constructed Lexical Resources for Named Entity Recognition. Biomed          Assessment of disease named entity recognition on a corpus of annotated
+    Informatics Insights 6: 17–27. doi:10.4137/BII.S11664.                      sentences. BMC Bioinformatics 9: S3. doi:10.1186/1471-2105-9-S3-S3.
+ 9. Lu Z, Kao H-Y, Wei C-H, Huang M, Liu J, et al. (2011) The gene
+    normalization task in BioCreative III. BMC Bioinformatics 12: S2. doi:10.1186/onson AR (2001) Effective mapping of biomedical text to the UMLS
+    1471-2105-12-S8-S2.                                                         Metathesaurus: the MetaMap program. Proc AMIA Annu Symp AMIA Symp:
+                                                                                17–21.
+10. Jung K, LePendu P, Chen WS, Iyer SV, Readhead B, et al. (2014) Automated25. Dog˘an RI, Lu Z (2012) An Improved Corpus of Disease Mentions in PubMed
+    Detection of Off-Label Drug Use. PLoS ONE 9: e89324. doi:10.1371/           Citations. Proceedings of the 2012 Workshop on Biomedical Natural Language
+    journal.pone.0089324.
+11. Denny JC, Bastarache L, Ritchie MD, Carroll RJ, Zink R, et al. (2013)       Processing. BioNLP ’12. Stroudsburg, PA, USA: Association for Computational
+                                                                                Linguistics. pp. 91–99. Available: http://dl.acm.org/citation.cfm?id=2391123.
+    Systematic comparison of phenome-wide association study of electronic medica2391135. Accessed 17 March 2014.
+    record data and genome-wide association study data. Nat Biotechnol 31: 126. Leaman R, Miller C, Gonzalez G (2009) Enabling recognition of diseases in
+    1110. doi:10.1038/nbt.2749.                                                 biomedical text with machine learning: corpus and benchmark. Proc 3rd Int
+12. Blair DR, Lyttle CS, Mortensen JM, Bearden CF, Jensen AB, et al. (2013) A
+    nondegenerate code of deleterious variants in Mendelian loci contributes to Symp Lang Biol Med: 82–89.
+                                                                            27. Stearns MQ, Price C, Spackman KA, Wang AY (2001) SNOMED clinical
+    complex disease risk. Cell 155: 70–80. doi:10.1016/j.cell.2013.08.030.      terms: overview of the development process and project status. Proc AMIA
+13. Aronson AR (2001) Effective mapping of biomedical text to the UMLS          Annu Symp AMIA Symp: 662–666.
+    Metathesaurus: the MetaMap program. Proc AMIA Annu Symp AMIA Symp:      28. De Coronado S, Haber MW, Sioutos N, Tuttle MS, Wright LW (2004) NCI
+    17–21.                                                                      Thesaurus: using science-based terminology to integrate cancer research results.
+14. Tsuruoka Y, McNaught J, Ananiadou S (2008) Normalizing biomedical terms
+                                                                                Stud Health Technol Inform 107: 33–37.
+    by minimizing ambiguity and variability. BMC Bioinformatics 9: S2.      29. Hamosh A, Scott AF, Amberger JS, Bocchini CA, McKusick VA (2005) Online
+    doi:10.1186/1471-2105-9-S3-S2.                                              Mendelian Inheritance in Man (OMIM), a knowledgebase of human genes and
+15. Morgan AA, Lu Z, Wang X, Cohen AM, Fluck J, et al. (2008) Overview of       genetic disorders. Nucleic Acids Res 33: D514–D517. doi:10.1093/nar/gki033.
+    BioCreative II gene normalization. Genome Biol 9: 1–19. doi:10.1186/gb-230. Fact SheetMedical Subject Headings (MeSHH) (n.d.). Available: http://www.
+
+    9-s2-s3.                                                                    nlm.nih.gov/pubs/factsheets/mesh.html. Accessed 19 September 2013.
+16. Hakenberg J, Gerner M, Haeussler M, Solt I, Plake C, et al. (2011) The G31. AA Consumer Health Vocabulary Source Information (n.d.). Available: http://
+    library for local and remote gene mention normalization. Bioinformatics 27: www.nlm.nih.gov/research/umls/sourcereleasedocs/current/CHV/. Accessed
+    btr455. doi:10.1093/bioinformatics/btr455.                                  19 September 2013.
+
+
+
+PLOS Computational Biology | www.ploscompbiol.org                        16                   September 2014 | Volume 10 | Issue 9 | e1003799
+                                                                                                                             Synonymy Matters for Biomedicine
+
+
+
+
+32. AB National Drug File Source Information (n.d.). Available: http://www.nlm.      62. Lee I, Date SV, Adai AT, Marcotte EM (2004) A probabilistic functional
+     nih.gov/research/umls/sourcereleasedocs/current/VANDF/. Accessed 19 Sep-            network of yeast genes. Science 306: 1555–1558. doi:10.1126/science.1099511.
+     tember 2013.                                                                    63. Liu J, Ghanim M, Xue L, Brown CD, Iossifov I, et al. (2009) Analysis of Drosophila
+
+33. WHO | International Classification of Diseases (ICD) (n.d.). WHO. Available:         Segmentation Network Identifies a JNK Pathway Factor Overexpressed in Kidney
+     http://www.who.int/classifications/icd/en/. Accessed 18 April 2014.                 Cancer. Science 323: 1218–1222. doi:10.1126/science.1157669.
+34. Barnett GO, Cimino JJ, Hupp JA, Hoffer EP (1987) DXplain. An evolving
+                                                                                     64. McCrae J, Collier N (2008) Synonym set extraction from the biomedical
+     diagnostic decision-support system. JAMA J Am Med Assoc 258: 67–74.                 literature by lexical pattern discovery. BMC Bioinformatics 9: 1–13.
+35. Hubbard SM, Martin NB, Blankenbaker LW, Esterhay RJ Jr, Masys DR, et al.             doi:10.1186/1471-2105-9-159.
+     (1986) The Physician Data Query (PDQ) cancer information system. J Cancer
+                                                                                     65. Crouch CJ, Yang B (1992) Experiments in Automatic Statistical Thesaurus
+     Educ Off J Am Assoc Cancer Educ 1: 79–87. doi:10.1080/08858198609527818.            Construction. Proceedings of the 15th Annual International ACM SIGIR
+36. Liu S, Wei Ma, Moore R, Ganesan V, Nelson S (2005) RxNorm: prescription              Conference on Research and Development in Information Retrieval. SIGIR
+     for electronic drug information exchange. IT Prof 7: 17–23. doi:10.1109/
+                                                                                         ’92. New York, NY, USA: ACM. pp. 77–88. Available: http://doi.acm.org/10.
+     MITP.2005.122.                                                                      1145/133160.133180. Accessed 10 April 2014.
+37. McDonald CJ, Huff SM, Suico JG, Hill G, Leavelle D, et al. (2003) LOINC, a       66. Curran JR (2002) Ensemble Methods for Automatic Thesaurus Extraction. IN
+     universal standard for identifying laboratory observations: a 5-year update. Clin
+                                                                                         PROC. CONFERENCE ON EMPIRICAL METHODS IN NATURAL
+     Chem 49: 624–633.                                                                   LANGUAGE PROCESSING. pp. 222–229.
+38. Bunge J, Fitzpatrick M (1993) Estimating the Number of Species: A Review.        67. Grefenstette G (1993) Automatic Thesaurus Generation from Raw Text using
+     J Am Stat Assoc 88: 364–373. doi:10.2307/2290733.
+39. Mao CX, Colwell RK (2005) Estimation of Species Richness: Mixture Models,            Knowledge-Poor Techniques. IN MAKING SENSE OF WORDS. NINTH
+                                                                                         ANNUAL CONFERENCE OF THE UW CENTRE FOR THE NEW OED
+     the Role of Rare Species, and Inferential Challenges. Ecology 86: 1143–1153.
+40. Fisher RA, Corbet AS, Williams CB (1943) The Relation Between the Number             AND TEXT RESEARCH.
+     of Species and the Number of Individuals in a Random Sample of an Animal        68. Hettne KM, van Mulligen EM, Schuemie MJ, Schijvenaars BJ, Kors JA (2010)
+                                                                                         Rewriting and suppressing UMLS terms for improved biomedical term
+     Population. J Anim Ecol 12: 42. doi:10.2307/1411.
+41. Laird C, Agnes M (1999) Webster’s New World. Cleveland: Wiley.                       identification. J Biomed Semant 1: 5. doi:10.1186/2041-1480-1-5.
+42. Rodale JI, Urdang L, LaRoche N (1986) The synonym finder. New York, NY:          69. Xu R, Musen MA, Shah NH (2010) A Comprehensive Analysis of Five Million
+                                                                                         UMLS Metathesaurus Terms Using Eighteen Million MEDLINE Citations.
+     Warner Books.
+43. Waite M, Hawker S (2009) Oxford paperback dictionary and thesaurus/edited            AMIA Annu Symp Proc AMIA Symp AMIA Symp 2010: 907–911.
+     by Maurice Waite, Sara Hawker. Oxford; New York: Oxford University Press.       70. Yao L, Divoli A, Mayzus I, Evans JA, Rzhetsky A (2011) Benchmarking
+                                                                                         Ontologies: Bigger or Better? PLoS Comput Biol 7: e1001055. doi:10.1371/
+44. Devlin J (1987) A dictionary of synonyms and antonyms. Warner Books, Inc.
+45. Scholastic dictionary of synonyms, antonyms, and homonyms. (2001). New               journal.pcbi.1001055.
+     York: Scholastic Reference.                                                     71. Hirst G (1995) Near-Synonymy and the Structure of Lexical Knowledge. In
+                                                                                         AAAI Symposium on Representation and Acquisition of Lexical Knowledge:
+46. Spooner A, Spooner A (1999) The Oxford dictionary of synonyms and
+     antonyms. Oxford: Oxford University Press.                                          Polysemy, Ambiguity, and Generativity. pp. 51–56.
+47. Kipfer BA, editor (1993) 21st Century Synonym and Antonym Finder. San Val.       72. Porter MF (1997) Readings in information retrieval. In: Sparck Jones K, Willett
+
+     520 p.                                                                              P, editors. San Francisco, CA, USA: Morgan Kaufmann Publishers Inc. pp.
+48. Merriam-Webster editor (2006) The Merriam-Webster Thesaurus. 1st ed.                 313–316. Available: http://dl.acm.org/citation.cfm?id=275537.275705. Ac-
+     Merriam Webster Mass Market. 772 p.                                                 cessed 8 August 2012.
+
+49. Michel J-B, Shen YK, Aiden AP, Veres A, Gray MK, et al. (2011) Quantitative      73. Toutanova K, Klein D, Manning CD, Singer Y (2003) Feature-Rich Part-of-
+     analysis of culture using millions of digitized books. Science 331: 176–182.        Speech Tagging with a Cyclic Dependency Network. In Proceedings of HLT-
+     doi:10.1126/science.1199644.                                                        NAACL 2003. pp. 252–259.
+
+50. Dillon WR, Mulani N (1984) A Probabilistic Latent Class Model for Assessing      74. Chen SF (1998) An Empirical Study of Smoothing Techniques for Language
+     Inter-Judge Reliability. Multivar Behav Res 19: 438–458. doi:10.1207/               Modeling.
+     s15327906mbr1904_5.                                                             75. Wallach H (2008) Structured topic models for language University of
+51. Albert PS, McShane LM, Shih JH (2001) Latent class modeling approaches for
+                                                                                         Cambridge.
+     assessing diagnostic error without a gold standard: with applications to p53    76. Davis AP, Wiegers TC, Rosenstein MC, Mattingly CJ (2012) MEDIC: a
+     immunohistochemical assays in bladder tumors. Biometrics 57: 610–619.               practical disease vocabulary used at the Comparative Toxicogenomics Database.
+52. Rzhetsky A, Shatkay H, Wilbur WJ (2009) How to get the most out of your curation
+                                                                                         Database J Biol Databases Curation 2012: bar065. doi:10.1093/database/
+     effort. PLoS Comput Biol 5: e1000391. doi:10.1371/journal.pcbi.1000391.             bar065.
+53. Lin D (1998) An Information-Theoretic Definition of Similarity. In Proceedings
+     of the 15th International Conference on Machine Learning. Morgan Kaufmann.      77. Sohn S, Comeau DC, Kim W, Wilbur WJ (2008) Abbreviation definition
+                                                                                         identification based on automatic precision estimates. BMC Bioinformatics 9:
+     pp. 296–304.                                                                        402. doi:10.1186/1471-2105-9-402.
+54. Noy NF, Shah NH, Whetzel PL, Dai B, Dorf M, et al. (2009) BioPortal:
+     ontologies and integrated data resources at the click of a mouse. Nucleic Acids 78. MEDLINEH/PubMedH Resources Guide (n.d.). Available: http://www.nlm.
+                                                                                         nih.gov/bsd/pmresources.html. Accessed 23 September 2013.
+     Res 37: W170–W173. doi:10.1093/nar/gkp440.                                      79. Buyko E, Wermter J, Poprat M, Hahn U (n.d.) Automatically adapting an NLP
+55. Thompson P, McNaught J, Montemagni S, Calzolari N, Gratta R del, et al.
+     (2011) The BioLexicon: a large-scale terminological resource for biomedical text    core engine to the biology domain. Available: http://citeseerx.ist.psu.edu/
+                                                                                         viewdoc/summary?doi=10.1.1.107.9116. Accessed 23 September 2013.
+     mining. BMC Bioinformatics 12: 397. doi:10.1186/1471-2105-12-397.               80. Chao A, Bunge J (2002) Estimating the Number of Species in a Stochastic
+56. Henriksson A, Moen H, Skeppstedt M, Daudaravicius V, Duneld M (2014)
+     Synonym extraction and abbreviation expansion with ensembles of semantic            Abundance Model. Biometrics 58: 531–539.
+                                                                                     81. Attias H (2000) A Variational Bayesian Framework for Graphical Models. In
+     spaces. J Biomed Semant 5: 6. doi:10.1186/2041-1480-5-6.                            Advances in Neural Information Processing Systems 12. MIT Press. pp. 209–
+57. Black F, Scholes MS (1973) The Pricing of Options and Corporate Liabilities.
+     J Polit Econ 81: 637–654.                                                           215.
+                                                                                     82. Wainwright MJ, Jordan MI (2008) Graphical Models, Exponential Families, and
+58. Merton RC (1973) Theory of Rational Option Pricing. Bell J Econ Manag Sci
+     4: 141–183. doi:10.2307/3003143.                                                    Variational Inference. Found Trends Mach Learn 1: 1–305. doi:10.1561/
+59. Kimura M (1964) Diffusion Models in Population Genetics. J Appl Probab 1:            2200000001.
+                                                                                     83. Li-Thiao-Te´ S, Jean-Jacques D, Ste´phane R (2012) Bayesian model averaging
+     177–232. doi:10.2307/3211856.
+60. Lee I, Blom UM, Wang PI, Shim JE, Marcotte EM (2011) Prioritizing candidate          for estimating the number of classes: applications to the total number of species
+     disease genes by network-based boosting of genome-wide association data.            in metagenomics. J Appl Stat 39: 1489–1504. doi:10.1080/
+     Genome Res 21: 1109–1121. doi:10.1101/gr.118992.110.                                02664763.2012.658358.
+
+61. Gilman SR, Iossifov I, Levy D, Ronemus M, Wigler M, et al. (2011) Rare De        84. NLM (n.d.) {2008AA} Documentation - Specialist Lexicon and Lexical Tools.
+     Novo Variants Associated with Autism Implicate a Large Functional Network of    85. Welcome to pyAnno’s documentation! — pyanno 2.0 documentation (n.d.).
+     Genes Involved in Formation and Function of Synapses. Neuron 70: 898–907.           Available: http://docs.enthought.com/uchicago-pyanno/. Accessed 24 Septem-
+
+     doi:10.1016/j.neuron.2011.05.021.                                                   ber 2013.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PLOS Computational Biology | www.ploscompbiol.org                               17                      September 2014 | Volume 10 | Issue 9 | e1003799

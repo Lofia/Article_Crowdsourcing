@@ -1,0 +1,645 @@
+                                                                                                                                  27
+
+                                                                                           ©2014                   IMIAandSchattaueGrmbH
+
+
+
+
+
+BigDataUsagePatternsintheHealthCare
+
+Domain:AUseCaseDrivenApproachAppliedto
+
+
+theAssessmentofVaccinationBenefitsandRisks
+
+ContributionoftheIMIAPrimaryHealthcareWorkingGroup
+
+            1               1          2             3        1          4            1
+H.Liyana1e ,S.deLusignan ,S-T.Liaw ,C.Kuziemsky , F.Mold , P.Krause ,D.Fleming ,
+S.Jones
+1 ClinicalInformatics&HealthOutcomesresearchgroup,DepartmentofHeaĐlthCarePolicyand
+  Management,UniversityofSurrey,Guildford,Surrey,UK
+2 SchoolofPublicHealth&CommunityMedicine,UNSWMedicineAustralia,NSW,Australia
+3 Telfer School of Management, University of Ottawa, Ottawa, Ontario, CanadĐa
+4
+  DepartmentofComputing,UniversityofSurrey,Guildford,Surrey,UK
+
+
+
+ Summary                                      BigDataforAssessing                          data which cannot be processed using con -
+ Background:Generallybenefitsandrisksofvaccinescanbedeter-                                 ventional, largely relational data processing
+ minedfromstudiescarriedoutaspartofregulatorycompliance,fol-efitsandRisks:                 techniques. The complexity of the data is
+                                                                                           often important in characterising datasets
+ lowedbysurveillanceofroutinedata;howeverthereAUseCaseDrivenApproach                       as big data. Big data is characterised by
+ morelongtermeventsthatrequirenewmethods.Bigdatagenerated                                  IBM according to four dimensions: volume,
+ byincreasinglyaffordablepersonalisedcomputingIntroductionasive                            velocity, variety, and veracity (Box 1) [4].
+ computingdevicesisrapidlygrowingandlowcost,hiThe rapidly reducing cost of data storage andBig data processing methods address issues
+ computingmakestheprocessingofthesedatainexpenthe increasing bandwidth of communication
+ Objectiv:eTodescribehowbigdataandrelatedanalynetworks have enabled large volumes of data  such as data volume and heterogeneity in
+ odsmightbeappliedtoassessthebenefitsandrisksoto be mobilised easily. Due to the proliferationge datasets [5, 6].
+ Method:Wereviewedtheliteratureontheuseofbigdaof social media and cloud computing, the
+ toimprovehealth,appliedtogenericvaccineusecascollection, storage, and processing of data haseBigDataAdvantage
+ illustratebenefitsandrisksofvaccination.Wedefinedausecase
+
+ astheinteractionbetweenauserandaninformationsystemtomuch easier allowing large datasets toThe literature suggests that cloud-ba-sed pro
+ achieveagoal.Weusedfluvaccinationandpre-schoolchildhooded and managed in a cost effective cessing of petabytes of data can be achieved
+ immunisationasexemplars.                     manner [1]. It has been reported that the totat a fraction of the time and cost when adopt
+ Results: Wereviewedthreebigdatausecasesrelevanttoassess-ted in the last two years exceeds ing big data processing methods [11]. Whilst
+                                              amassed throughout the entire history of the the wave of big data technologies will not
+ ingvaccinebenefitsandrisks:(i)Bigdataprocessidigital age [2].This extended the boundaries resolve the plethora of data issues that exist
+ sourcing,distributedbigdataprocessing,andpreddata processing and introduced a new perspec in the health care information ecosystem
+ (ii)Dataintegrationfromheterogeneousbigdatasotive of data analytics embedded in the concep(the system of processing and filtering data
+ increasingrangeofdevicesinthe“internetofthingof “Big Data”. A quantitative definition of  between data recording and utilisation) [7],
+ Real-timemonitoringforthedirectmonitoringofep“Big Data” is difficult as the “big” volume imethods for harnessing big data are con  -
+ asvaccineeffectsviasocialmediaandotherdatasourelative to the time of the definition. Datasets
+ Conclusions:Bigdataraisesnewethicaldilemmas,thoughits                                     sidered to offer the potential to take a big
+ analysismethodscanbringcomplementaryreal-timecapabilitiesfore “Big Data” now, may not be  step forward in improving the quality and
+ monitoringepidemicsandassessingvaccinebenefit-riskbalance. in the very near future, due toefficiency of health care delivery [8].
+                                              technological advancements [3].This is some
+ Keywords                                     what in contrast to our conventional-approach
+ Populationsurveillance;medicalrecordsystems,computerized;designs where data requirements
+ informationscience;immunization;publichealth are set to answer a specific research question.thod
+                                                                                           1 Overview
+ YearbMedInform2014:27-35                     ProcessingBigData                            We have followed an evidence-based
+ http://dx.doi.org/10.15265/IY-2014-0016
+ PublishedonlineAugust15,2014                 In terms of the nature of data, big da-ta conapproach for developing use cases. This
+                                              sists of large bodies of unstructured or raw method has been developed based on a
+
+                                                                                                     IMIAYearbookofMedicalInformatics2014
+28
+
+Liyanageetal.
+
+
+
+
+bottom-up approach for model creation by
+
+Regnell et al. [13].The process started with
+a rapid literature analysis to select use cases
+that captured common usages of big data
+in health care potentially relevant to assess
+the benefits and risks of vaccines. Publica
+tions were identified and key information
+was extracted, focusing specifically on use
+
+cases of big data.These use cases were then
+evaluated to assess their potentiality to im
+prove research methods of assessing vaccine
+benefits and risks.
+
+
+2 SearchStrategy
+The literature analysis employed is suited
+
+to the exploratory reviews of emerging
+technologies in a given domain. It relies
+on the fact that there are common usage
+patterns of techniques in the same domain.
+Therefore, a sample of actual uses of big
+data in the domain of interest is sufficient
+for determining the generic usage patterns
+
+(known here as use cases).
+   We searched PUBMED, Medline, Scopus,
+Web of Science, and the Cochrane Database
+for publications related to big data in health
+care. We focused on health care databases,    Fig. 1 AdaptedPRISMAflowdiagram
+using simple search strings. An adapted
+PRISMA flow chart is shown in Fig. 1. We
+included papers which focused primarily on    Table 1 Evidencetableusedforbuildingthegeneralisedusecases
+
+conceptual or practical uses of big data in
+health care research.This includes instances   Generalisedusecases        Bigdatainhealthcareusecases Vaccinespecificusecases
+where big data has been used to highlight                                 (References)
+the volume of data. Electronic searches were   1.Bigdataprocessing        Distributeddataprocessing:  41,42,43,44
+performed retrospectively to select papers                                28,29,30,31,32
+published between January 2005 and Decem -                                Predictiveanalysis:
+ber 2013. Search was limited to the English
+                                                                          33,34,35,36,37
+language. The number of articles from all                                 Crowdsourcing:
+searches totalled 485, with 219 being dupli                               38,39
+cations Due to big data being a relatively new 2.Dataintegrationof        45,46,47,48,49,50,51        52,53,54,55,56,57,58,59,60
+concept, no limits were set/placed regarding     heterogeneousbigdatasources
+the type of papers.As such we included any     3.Real-time monitoring     61,62,63,64,65,66           67,68,69,70,71,72,73,74,75,76,77,78,79
+review and report on this topic.
+   Abstracts were reviewed for applications
+of big data methods in health care. Key infor
+                                                 We identified the nature of the dataset    3 GeneralisedUseCaseModels
+mation from each publication was extracted
+to form a summary (which we refer to as a     (if provided), the field of the study within  Use cases are commonly applied in t-he dis
+use case instance).After the screening pro    health care, the particular methods used      cipline of software engineering to capture
+cess, we grouped the use case instances that  for manipulating data, and relevance to       scenarios of how various systems are used in
+have common utilisation patterns of big data. vaccine research. We used “word clouds”       practice [10]. Our group has the experience
+Groups were then analysed separately to       to indicate the key areas where research of developing use cases to support complex
+build the generalised use cases we describe   has been conducted and the methods            research questions [11, 12]. Use cases pro
+                                              used [9].                                     vide a mechanism of describing the usage
+in the next section.
+
+IMIAYearbookofMedicalInformatics2014
+                                                                                                                            29
+
+                                     BigDataUsagePatternsintheHealthCareDomain:AUseCaseDrivenApproachAppliedtoĐtheAssessmentofVaccinationBenefitsandRisks
+
+
+
+
+                                                                                          massive amounts of data that could not be
+                                                                                          readily processed on a single computer or
+                                                                                          recruited into a traditional study;
+                                                                                          (2) To integrate data that can emanate
+                                                                                          from a much wider range of observations
+
+                                                                                          than would generally be used in medical
+                                                                                          research; novel sources of data might
+                                                                                          provide new insights into vaccine benefits
+                                                                                          and risks. Our focus is on the short and
+                                                                                          long term, local and systemic AE fol-
+                                                                                          lowing influenza vaccination and febrile
+                                                                                          seizures after pre-school immunisations.
+                                                                                          (3) To provide real time monitoring, not
+                                                                                          daily or weekly, but “as it happens”. It may
+                                                                                          be much faster to report about effective
+                                                                                          ness and adverse events. This mig-ht pro
+Fig. 2 WordcloudoffieldsinhealthcarerepresentedbyliteraturesearchresuĐlts
+                                                                                          vide greater insights into the reactogenicity
+                                                                                          of different preparations and adjuvants.
+of a system and its associated processes. Into gain more immediate feedback about local
+this approach, specific uses of big data werand short termAEFI. Of particular interest
+evaluated and generalised to identify big dais the role of adjuvants [21].
+usage patterns (i.e. use cases) commonly      Pre-school childhood vaccinations are    Results
+encountered in the health care domain.      usually combination preparations. Making   The overall result of our analysis was that most
+                                            the separation of the responses to vacci   studies looked at how big data and associated
+                                            nation and AEFI is challenging. Passive    methods can be leveraged to enhance standard
+4 VaccineBenefitsandRisksUseCases           reporting ofAEFI has limitations [22]; and data manipulation methods in different areas
+We are involved in a number of programmes   it appears that both patients and medical  of studies in health care.A summary of the
+that aim to assess the benefits and risks of vac                                       big data methods discussed in the publications
+cination within the Royal College of Generalrecords under-report febrile seizures that
+                                            are possibleAEFIs [23].                    are highlighted in a word cloud (Fig. 3). In the
+Practitioners (RCGP) Research and Surveil     The scope of this paper is to explore howword cloud, “exploration of data” (including
+lance Centre (RSC) [14,15], which has a longnew types of use cases might be developed  data mining and pattern analysis) was the
+term interest in the monitoring of influenzautilising big data; we will not be addressingst emphasised. This is an ubiquitous part
+[16, 17, 18]. We studied the overall benefitthese approaches to vaccine research. The  of any work with big data, and it is essentially
+for two use-case vaccine programmes: influ  purposes of these use cases are threefold: the process of hypothesis generation or early
+enza and pre-school childhood immunisation,   (1) To demonstrate that by using big     hypothesis testing. We have therefore not
+with a focus on specific adverse events (AE)  data techniques, it is possible to processreated a use case around this activity.
+following immunisation (AEFI) .
+   This type of research is challenging.
+For example, it may not be clear whether
+a flu-like illness is vaccine preventable.
+Influenza is hard to diagnose precisely and
+
+to differentiate from other viral upper respi
+ratory and flu-like illnesses without virology,
+which is not carried out in routine practice.
+Flu vaccines are available from a number of
+sources (e.g. vaccination against flu in the
+workplace or school), and it can be hard to
+precisely attribute risk to vaccines; influenza
+vaccine composition varies every year, and
+in addition, different vaccine preparations
+are available each year. Controversy remains
+about possible long termAEFI, in particular
+
+Guillain Barré Syndrome [19, 20]. To date
+only telephone surveys have been conducted  Fig. 3 Wordcloudofbigdatamethodsrepresentedbyliteraturesearchresults
+
+                                                                                                 IMIAYearbookofMedicalInformatics2014
+30
+
+Liyanageetal.
+
+
+
+
+   We have generalised the usage of big data  ods may indeed have limitations whenstructure for collecting and processing data
+and associated methods into three main usehandling the scale of datasets associate     are now readily available. At present, any
+cases (Table 2).                              with big data.                           individual with internet access can launch
+                                            • Predictive analyticsT :his method of     thousands of clusters which could process
+
+Table 2 Searchstringsforliteraturereview      analysis uses various statistical and dattarabytes of data within a few hours. This
+                                              mining techniques to analyse historicaw  l ould have taken many months and large
+   Database       SearchString                and present data in order to predict futaumreounts of money in the prior to utility
+                                              outcomes. Predictive analytics is alreac dymputing era, in which computational capa
+   1.PUBMED       “Bigdata”                   demonstrating its usefulness in applica  bilities can be leased on a pay-per-use basis.
+   2.MEDLINE      “Bigdata”                   tions that enable a smarter prediction Cloud services nowadays are configured with
+   3.Scopus       “Bigdata”AND“health*”       of health care outcomes by combiningthe MapReduce framework to facilitate big
+                                              clinical, insurance and public datasets. data processing.
+   4.Webofscience “Bigdata”AND“health*”       supports “intelligent case management” Big data processing methods can accel    -
+   5.Cochrane     “Bigdata”
+                                              which involves the development of pro    erate research in vaccines. There have been
+                                              grams that can have a higher impact on   several proof-of-concept studies for using
+1  UseCase1:BigDataProcessing                 patient behaviour [31, 32]. We have foundbig data processing methods to improve
+                                              evidence for the use of these methodsefficiency in the vaccine development pro  -
+Data generation in health care systems has    in secondary care for purposes ranging   cess.A method for conducting phylogenetic
+now reached exabyte levels (1 exabyte = 1     from reducing readmissions to predicting analysis has been proposed. This method
+billion gigabytes) [24,B25i].data technol     clinical outcomes in patients admitted touses a cloud-based Hadoop framework (an
+ogists have a growing collection of big data  surgical intensive care units [33, 34, 35].plementation of the MapReduce frame  -
+processing techniques and we have found     • Crowdsourcing   T:his involves recruitingwork) to analyse evolutionary relationships
+evidence that some of these techniques have   large numbers of people who collabo -    between viruses [40]. Codon analysis is
+been used within health care applications.
+We describe the more widely used big data     ratively collect, filter, and analyse larused in the process of vaccine development
+                                              amounts of data for a common purpose.    and an accelerated method for conducting
+processing methods.                           Using the internet as the medium of this analysis using MapReduce aggregation
+• Distributed big data processing: Conven     participation, thousands of people parhas been proposed [41]. There have been
+   tional data processing techniques do not   ticipate in completing a small part of a initiatives to use big data for computational
+   scale to meet processing requirements of   problem (often offered in multiplicitymodelling of infectious diseases.
+   big data. MapReduce is a distributed data  for the purpose of validation). Gamified Vaccine efficacy trials also generate large
+   processing method often used to process    approaches (i.e. regular tasks built as volumes of data that could potentially be
+   big data. This method adopts a two-step    computer games) have been developed      classified as big data.A vaccine efficacy trial
+   approach where the problem is first split  for aiding the diagnosis or the labellingfor vaccination against seasonal influenza
+   into many homogenous sub-problems
+                                              biomedical images [36]. In HIV research, was conducted during the 2008-2009 season
+   (‘map’step) and then outputs of sub-prob   crowdsourcing has been used to identify  and involved over 43,000 participants. The
+   lems are combined to generate the overall  important genes using 500 billion subsetsanalysis of the data collected during such
+   output (‘reduce’step) [26]. A cloud-based  related to HIV biology [37].             trials could benefit from the use of big data
+   implementation of MapReduce has been                                                methods [42].
+   used to analyse electrophysiological dataImplications for vaccine research: Vaccines
+   in epilepsy clinical research [27].The inavailable on the market are effective against
+   creased sensitivity of cardiac imaging anonly a limited number of circulating strains.
+   radiology equipment results in multiple  Genetic variations of viruses (i.e. antigenic
+   terabytes of data being produced eachdrift) result in regular reformulations of
+
+   year and frameworks such as MapReduce    vaccines [38]. This process is costly and
+   have been used for proof-of-concept time consuming and has a direct impact
+   studies in this area [28]. This process specifically during pandemic outbreaks.This
+   ing method is also commonly used inwas evident in the pandemic outbreak of the
+   complex biological data processing H1N1 virus (InfluenzaA (H1N1) virus is the
+   operations such as genome sequencing     subtype of influenzaA virus that is the most
+   which required large computation ca common cause of human influenza) where
+   pabilities [29]. Evidence exists that bigvaccines were made available only after the
+   data processing outperforms conventional first wave of the pandemic [39].
+   techniques to support the increased size   Crowdsourcing and cloud computing
+
+   of datasets [30]. Current statistical metservices which provide a dedicated infra   Fig. 4 Bigdataprocessingusecasediagram
+
+IMIAYearbookofMedicalInformatics2014
+                                                                                                                            31
+
+                                     BigDataUsagePatternsintheHealthCareDomain:AUseCaseDrivenApproachAppliedtoĐtheAssessmentofVaccinationBenefitsandRisks
+
+
+
+
+2 UseCase2:DataIntegrationofHetero-           Social media has proven to be an ef Specific use case development – Effective  -
+geneousBigDataSources                      fective source of unstructured but relevan ntess of community flu vaccination in older
+                                           information. Twitter is frequently used fopreople and Guillain Barré Syndrome as
+Health care data sources used for decision sentiment studies as the data reflects a laagpossible lateAE following influenzaA
+making are no longer restricted to clini   collection of personalised contributions vaccinationT   :he focus of how we would
+cal databases [43]. Accommodating this     from individuals. A vaccines sentiment harness these technologies for this use
+heterogeneity often leads to better service
+improvements and policy development. It    study usingTwitter data was conducted ac    nadse would be to gain further insights into
+is important that health care specific technetwork clusters with strong sentiment bicausrrent dilemmas about effectiveness of flu
+niques such as record linkage, and cohort  were identified.These associations have a  vlaccination in the community. Whilst, if the
+creation, are adopted appropriately when   lowed the study of individuals and groups istrain is correct, effectiveness in residential
+using big data sources. The majority of thethe rich context of their lives, and the sthomes is proven, this is not known for com
+data (80%) in these sources is unstructuredof disease spreading at an individual personunity transmission [54-57]. A particular
+and includes medical data such as radiolog level [51].Although apart from the medical research focus would be whether children,
+ical images, clinic notes, operative reports,terature, it has been shown during disas and contact with children who might be
+                                           ters such as the Japan Earthquake or Bostonvectors of disease, will reduce community
+and pathologic slides [44, 45].The nationalMarathon Bombing that people are moving    cases in areas where childhood vaccination is
+cyber infrastructure of the United States  to social media like Twitter as their mainpiloted.A recent Cochrane review flags some
+has progressively improved to support the
+integration of various big data sources,   communication tool. Social media toolsof the limitations, and possible funding and
+particularly for biomedical research [46]. may become better sources of contextualpublication bias of research into childhood
+There also has been an effort to integrate medical data than patient record systems.  vaccines to date [58]. Long term histories
+biomedical data sources in Japan [47].ThereInsurance claims data has been utilised as and insights into the life events of those
+is evidence of integrating big data sources inseful data source for measuring vaccine with Guillain Barré Syndrome may provide
+studies related to mental health [48]. Examcoverage. It has been effectively used byadditional insights into this condition, and
+ples of data sources used include pervasivesystems such as PRISM (Post-licensure into what might contribute to individual
+device usage data, patient workflows and   rapid immunization safety monitoring susceptibility.
+sensor readings. The Cancer GenomeAtlas    program) which is associated with the
+                                           FDA’s Mini-sentinel project. This program
+is a publicly accessible website which actscurrently holds data of about 107 million  3 UseCase3:Real-timeMonitoring
+as a portal to multiple big data sources and                                          Present day medical devices generate data at
+includes genomic data, tissue slide images individuals collected through three health
+and clinical outcomes data [49]. Evidence  insurance organisations [52]. This system  a rapid rate which is challenging especially
+demonstrates a stream of work focusing     conducts an active surveillance through a  when real-time responses are expected. Sim
+on frameworks developing service-models    distributed claims-based database.         ilarly, when decisions need to be taken from
+based on the aggregation of data from perva   Telephone triage data can also be a     aggregated data sources such as social me
+sive computing devices (wearable bo   -dy seneful data source, and a proof-of-concept dia, data needs to be processed in real-time
+sors, body function monitors), lifestyle dataudy for surveillance of Influenza-type   in order to benefit from the relevance of the
+(diet, sleep), mobility data (smartphones, diseases has been conducted [53].          insights generated from the data. Evidence in
+tablets) and clinical data. Such aggregation
+
+helps build an understanding of the overall
+lifestyle and not only medical conditions,
+thereby leading to better preventive care.
+
+Implications for vaccine rese  :Trcs use
+case emphasises the importance of explor
+ing novel data sources that might provide a
+better understanding about the effectiveness
+of vaccines. Most accessible and growing
+data sources are available on the internet
+which has resulted in novel concepts such
+as “Infodemiology” or “Infoveillance”.
+They refer to public health data analysis by
+using the internet as the main medium which
+primarily involves aggregating information
+                                           Fig. 5 Dataintegration
+sources such as social media, websites and of heterogeneous big data
+web blogs [50].                            sourcesusecasediagram
+
+                                                                                                IMIAYearbookofMedicalInformatics2014
+32
+
+Liyanageetal.
+
+
+
+
+our review demonstrates real-time monitoring
+as a significant use case in health care. In
+pharmacovigilance, once drugs are approved
+and available in the market, it is required to
+monitorAEs to ensure that drugs are perform
+ing as expected.AEs are generally captured by
+
+Adverse Event Reporting Systems and efforts
+are being made to move towards real-time
+surveillance of these events. Spontaneous
+reporting systems (SRS) are currently in use
+for drug safety monitoring [59].
+   We have also observed an increasing                                                                         Fig. 6 Real-time mo-ni
+trend in incorporating social media as a data                                                                  toringusecasediagram
+source for supporting clinical data in health
+care applications and policy development.
+The micro blogging service Twitter has so     “Google flu trends” uses a novel approacSpecific use case development – Febrile
+far been the most adopted social media     to surveillance in which it uses internet  convulsions as a possibleAEFI and local
+                                           search query data to predict trends in the reactogenicity: We would explore the de-
+service [60, 61]. Social media data has been
+proven to be more insightful in assessing  spreading of infectious diseases [68]. Thisvelopment of a specific use case around two
+patient satisfaction about the quality of carelication has the advantage of being ableareas. Firstly, febrile convulsions as a possible
+than conventional methods for collecting   to access data which cannot usually be     AE following pre-school immunisation, and
+feedback from forms and surveys [62].The   integrated by public health programs due   secondly around local reactivity to immunisa
+HealthMap application uses social media    to various complexities [69]. This system  tions.There are limitations in current reporting
+data and other online web sources to per   identifies flu activity about two weeks earsystems forAEFI surveillance, they vary in
+form infectious disease surveillance on a  than conventional systems and is available method and by manufacturer [77]. We believe
+global scale [63]. Twitter and similar microore than sixteen countries.Twitter data hait would be possible to explore rates of febrile
+blogging services are increasingly used forbeen used to predict flu trends in a similaconvulsions in children, before and after vac
+public health analysis [64].               manner [70]. During the InfluenzaA H1N1    cination, and between different surveillance
+                                           pandemic, Twitter has been used to track   systems. We feel that local reactogenicity
+
+Implications for vaccine research: Sponta  levels of disease activity and public concewould also be amenable to this type of research
+neous reporting systems have traditionally in the United States [71]. Further evidenceand it maybe possible to pick up signals about
+been used for monitoring vaccine safety.   in the usage of Twitter for analysing publiactivity and disturbed nights after immunisa
+In addition, the Simplified Periodic Safetyhealth indicates the potential for vaccine tion.Additionally, video and picture evidence
+Update Reports (S-PSUR) and results from   surveillance [72].                         might also be readily collected.
+observational cohort studies are used as data  Signal detection is an important aspect
+sources for assessing vaccine safety. Thereof vaccine surveillance.A signal comprises
+is variability in the availability of exposureormation from one or more sources which
+data in different countries and there are iniggests a new potentially causal associationscussion
+tiatives to develop multinational automatedbetween an intervention and an event (either PrincipalFindings
+platforms for achieving this goal [65].    adverse or beneficial) [73]. Traditionally There is a growing evidence-base for using big
+   Surveillance ofAEFI is important to detectgnals are detected using the review of   data in health care and this has enabled gener
+
+potential vaccine AEs. These AEs may not   individual and aggregated clinical reports.alising essential use cases for big data in health
+have been identified during the prelicensureowever, this process is rapidly moving to care. By using big data approaches, our use
+phase and can potentially be serious. The  wards real-time signal detection through theases potentially allow us to more efficiently
+VENICE (Vaccine European New Integrated    development of adverse-event monitoring    achieve that goal through processing, integra
+Collaboration Effort) project was carried outstems [74].                              tion and monitoring. Current data collection,
+with the intention of harmonising the mon     Systems conducting active surveillance  storage, and analysis approaches are too rigid
+itoring of AEs across Europe [66]. With thewill require leveraging non-clinical data  to support timely vaccination monitoring.This
+advent of big data technology there is a trendrces to effectively detect adverse events.Adence-based approach based on use cases
+moving from passive to active surveillance new wave of biosecurity intelligence systemsocussed on assessing vaccine benefits and
+methods and reaching novel data sources in has effectively used web-based data sourcesrisks. It is likely that all three areas described
+cluding data from screening during h  -ospital this purpose [75].The M-Eco system has in these use cases, processing, integration, and
+
+isation, general practice networks, dispensing,essfully trialled the usage of social-media-time monitoring might have a role in future
+over-the-counter sales and social media [67].ta for signal detection [76].            monitoring vaccine benefits and risks.
+
+IMIAYearbookofMedicalInformatics2014
+                                                                                                                           33
+
+                                    BigDataUsagePatternsintheHealthCareDomain:AUseCaseDrivenApproachAppliedtoĐtheAssessmentofVaccinationBenefitsandRisks
+
+
+
+
+2  ApplyingUseCasestoVaccineBenefits       we currently lack a deep understanding,    of any big data solution in health care, and
+andRisksMonitoringUsingaSeasonalVac-       especially from outside the developed worldthe necessary legislation needs to be adopt
+cineandaPreventiveVaccineasExemplars       with its largely temperate climate.        ed to ensure that big data is not misused.
+                                                                                      Effort should be taken to keep individual
+The benefits and risks of vaccines vary basUse Case 3: Real-time monitoring           identities from being identified during big
+on the at risk group they are administered Real-time monitoring considerations might  data processing workflows. However, there
+and according to an individual disease. We use
+influenza, a seasonal and epidemic infection,ovide insights into any short term side-efs the possibility that this may result in data
+as one example and the combined diphtheria fects from seasonal immunisation, a-  nd enduplication during the integration of big data
+tetanus and pertussis triple (DTP3) vaccineable spatial and temporal patterns ofAEs tosources and affect the usefulness of big data.
+given as standard immunisation to children as described. However, real-time monitoring   Legislation in the USA such as HIPAA
+                                           may have a greater role if it allows to hig(Health Insurance Portability and Account
+another. On a worldwide basis, we still knolight emerging epidemics and disease spra  eailityAct) do not cover data storage outside
+relatively little about the burden of diseaaround normal social activities – such aso tfehealth care systems. Much of these big data
+from influenza [78, 79]. By extrapolating dstart of the school term (which is associawtell not be personal data and not subject to
+from high-income countries, the World Healtwith a rise in viral illness in the RCGP RESur),pean legislation, and control may remain
+Organisation (WHO) estimates that annual   Christmas (where there is usually a lull),uandder the responsibility and ethics of system
+influenza epidemics result in around 3 to 5from travels, or purchases of relevant ovedr-signers and owners [86]. However, this is
+million clinically significant cases and about
+300K to 500K deaths worldwide each year.   the-counter medications [15, 82-84].       a critical concern for those looking to use
+The WHO Global Influenza Surveillance and                                             big data generated and available from online
+Response System (GISRS) carries out the vi                                            sources. Community driven health data re
+rological analysis of around 1 million possible                                       positories may not be as private as consumers
+                                           3 ImplicationsofFindings                   assume [87].The ownership of data generated
+flu samples, though mainly in the developedThe publicly available health data has the through big data analytics is also constantly
+world. There were about 350 million doses  capability to improve the current methods ofubjected to debate. Most online services
+of flu vaccine administered in 2006 rising assessing benefits and risks of vaccines.Thise free and user agreements generally state
+to around 900 million doses by 2009 [80].  would be contingent on the demonstration   that the owner of the service can use the data
+This is a territory for big data methodologthat data applications used elsewhere in healthected from the application. It is necessary
+Global immunisation data provided by the                                              to regulate data available online (especially
+WHO suggest that 111 million children have care could be applied to vaccines. There
+received the DTP3 vaccine in 2012 [81].At  is certainly an interest for more real-timehealth-related data). Intermediate processors
+this scale, this is another ideal candidate forications to monitor the effectiveness ofhat enforce governance restrictions may be
+exploring big data technologies.           vaccines due the capabilities of big data pro effective method to handle privacy and
+                                           cessing methods and the lower cost of utilityhical concerns of big data [88].
+                                           computer services on the cloud. In order to
+Use case 1: Big data processing            get the maximum benefit of big data infra
+Crowdsourcing might be a very good way to  structures, vaccine-specific data processing LimitationsoftheMethod
+monitor infectious diseases if self testingmethods need to be optimised.This may startThe main limitation of this method is that
+other validated tools could be incorporatedwith the real-time collection of data from the search did not exhaustively review data
+into the case detection process. Crowdsourcpeople who are also part of current WHO    sources that may be categorised as big data
+ing might also provide valuable insights in(and/or regional) surveillance systems. Thisut not explicitly labelled as such. However,
+transmission. Distributed data processing                                             we feel we have identified a sufficient sample
+and predictive analysis might enhance our  will be challenging to future-proof as there is
+ability to predict the spread of epidemics likely to be an exponential growth of data genbig data scenarios to capture the essential
+                                           erated from connected devices and evolving use cases.
+and the emergence of new viral illnesses,  systems such as the Internet ofThings (IoT)
+and improve the search for factors associatin the near future.The IoT is being explored
+with increased benefits and risks of vaccinas a mechanism for disaster monitoring [85].
+                                           Such applications may well be applicable toConclusions
+Use case 2: Data integration of heteroge   monitoring epidemics                       Big data is a promising advance that has the
+neous big data sources                                                                capability of improving care, and specifically
+Potential benefits for vaccine research may                                           help the assessment of the benefits and risks
+come from the linking of benefits and risks tothicalAspectsofUsingBigData             of vaccines beyond what can be achieved
+genotype, biomarkers, and to a whole range As the adoption of big data increases, therby just using data from a limited number
+of other “infomarkers.” These movement     are increased concerns about the ethical usof health care sources. There are still many
+
+data may provide insight into the mechanismof health data. Privacy and security needs issues related to integration and interoper
+of infectious diseases spreading, about which be considered as a primary considerationability of data that we have not addressed.
+
+                                                                                               IMIAYearbookofMedicalInformatics2014
+34
+
+Liyanageetal.
+
+
+
+
+
+Ethical and governance issues about big data      12.Leppenwell E, de Lusignan S,Vicente MT, Micha2012 Dec 4;51(6):516-8.
+methods, especially in health care, are still to     lakidis G, Krause P,Thompson S, et al. Develop26.Schadt EE, Linderman MD, Sorenson J, Lee L,
+                                                     a survey instrument to assess the readiness of   Nolan GP. Computational solutions to large-scale
+be resolved.This new paradigm of handling            primary care data, genetic and disease registries data management and analysis. Nat Rev Genet
+big data requires a mind shift in order to           to conduct linked research: TRANSFoRm Inter 2010 Sep;11(9):647-57.
+effectively leverage the technologies.There          national Research Readiness (TIRRE) survey 27.Sahoo SS, Jayapandian C, Garg G, Kaffashi F,
+is a requirement for novel methods to be             instrument. Inform Prim Care 2012;20(3):207-16.Chung S, BozorgiA, et al. Heart beats in the cloud:
+                                                  13.Regnell B,Andersson M, Bergstrand J.A hierarchidistributed analysis of electrophysiological ‘big
+developed to make the most of big data. Not -        cal use case model with graphical representation.data’using cloud computing for epilepsy clinical
+withstanding these limitations, monitoring of        In: Engineering of Computer-Based Systems,       research. J Am Med Inform Assoc 2014 Mar-
+vaccines benefits and risks is one area where        1996. Proceedings., IEEE Symposium and Work Apr;21(2):263-71.
+                                                     shop. IEEE 1997;270-7.                        28.Narula J. Are We Up to Speed?: From Big Data
+big data methods, by removing previous            14.Fleming DM, Miles J. The representativeness of to Rich Insights in CV Imaging for a Hypercon
+limitations on data volumes, sources, im    -        sentinel practice networks. J Public Health (Oxf)nected World. JACC Cardiovasc Imaging 2013
+mediacy, and processing power, can benefit.          2010;32(1):90-6.                                 Nov;6(11):1222-4.
+                                                  15.Fleming DM, Elliot AJ. Lessons from 40 years’ 29. Mudunuri US, Khouja M, Repetski S,Ve-nkatara
+                                                     surveillance of influenza in England and Wales.  man G, Che A, Luke BT, et al. Knowledge and
+Acknowledgements                                     Epidemiol Infect 2008 Jul;136(7):866-75.         Theme Discovery across Very Large Biological
+This paper is an academic exercise by the         16.Pebody R,Andrews N, McMenamin J, Durnall H,      Data Sets Using Distributed Queries:A Prototype
+Primary Health Care Informatics Working              Ellis J, Thompson CI, et al. Vaccine effectivenessombining Unstructured and Structured Data.
+                                                     of 2011/12 trivalent seasonal influenza vaccine  2013 Dec 2;8(12):e80503.
+Group of IMIA. This paper and its contri    -        in preventing laboratory-confirmed influenza in0.Simpson SE, Madigan D, Zorych I, Schuemie MJ,
+butions is the work of volunteers.                   primary care in the United Kingdom: evidence of  Ryan PB, Suchard MA. Multiple self-controlled
+                                                                                                                                               -
+                                                     waning intra-seasonal protection. Euro Surveill  case series for large-scale longitudinal observation
+                                                     2013 Jan 31;18(5).                               al databases. Biometrics 2013 Dec;69(4):893-902.
+References                                        17.Fleming DM,Andrews NJ, Ellis JS, Bermingham   31.Fox B. Using big data for big impact. How predic
+1. Buyya R,Yeo CS,Venugopal S, Broberg J, Brandic    A, Sebastianpillai P, Elliot AJ, et al. Estimatingive modeling can affect patient outcomes. Health
+   I. Cloud computing and emerging IT platforms:     influenza vaccine effectiveness using routinel3  Manag Technol 2012 Jan;33(1):32.
+   Vision, hype, and reality for delivering computingcollected laboratory data. J Epidemiol Community. Fox B. Using big data for big impact. Leveraging
+   as the 5th utility. Future Generation computer    Health 2010 Dec;64(12):1062-7.                   data and analytics provides the foundation for
+   systems 2009;25(6):599-616.                    18.Fleming DM, Verlander NQ, Elliot AJ, Zhao H,     rethinking how to impact patient behavior. Health
+2. IBM - Bringing big data to the enterprise - What  Gelb D, Jehring D, et al. An assessment of the   Manag Technol 2011 Nov;32(11):16.
+   is big data? -Australia. 2013. IBM - Bringing big effect of statin use on the incidence of acute33.de Lissovoy G. Big data meets the electronic medi
+                                                     respiratory infections in England during winters cal record: a commentary on “identifying patients
+   data to the enterprise - What is big data? -Austra1998-1999 to 2005-2006. Epidemiol Infect 2010    at increased risk for unplanned readmission”. Med
+   [ONLINE]Available at: http://www-01.ibm.com/      Sep;138(9):1281-8.                               Care 2013 Sep;51(9):759-60.
+   software/au/data/bigdata/. [Accessed 29 Decembe19.Polakowski LL, Sandhu SK, Martin DB, Ball R,  34.Choi M, Lee J, Ahn MJ, KimY. Nursing critical
+   2013].                                            Macurdy TE, Franks RL, et al. Chart-confirmed    patient severity classification system predicts
+3. Ward JS, BarkerA. Undefined By Data:A Survey      guillain-barre syndrome after 2009 H1N1 influ    outcomes in patients admitted to surgical intensive
+   of Big Data Definitions. 2013;1309.5821.          enza vaccination among the Medicare population,care units: use of data from clinical data repository.
+4. IBM. The Big Data and Analytics Hub. URL:         2009-2010.Am J Epidemiol 2013;178(6):962-73.Stud Health Technol Inform 2013;192:1063.
+   http://www.ibmbigdatahub.com/infographic/four- 20.Dodd CN, Romio SA, Black S, Vellozzi C, An35.Celi LA, Mark RG, Stone DJ, Montgomery RA.
+   vs-big-data                                       drews N, Sturkenboom M, et al; Global H1N1 GBS   “Big data” in the intensive care unit. Closing the
+5. Dong X, Bahroos N, Sadhu E, Jackson T,            Consortium. International collaboration to assess data loop. Am J Respir Crit Care Med 2013 Jun
+   Chukhman M, Johnson R, Boyd A, Hynes D.           the risk of Guillain Barré Syndrome following    1;187(11):1157-60.
+   Leverage Hadoop Framework for Large Scale         Influenza A (H1N1) 2009 monovalent vaccines.  36.Mavandadi S, Dimitrov S, Feng S,Yu F,Yu R,
+                                                     Vaccine 2013 Sep 13;31(40):4448-58.              Sikora U, et al. Crowd-sourced BioGames: man
+   Clinical Informatics Applications. AMIA Summits21.Huang WT, Chang CH, Peng MC.Telephone mon-       aging the big data problem for next-generation
+   Transl Sci Proc 2013;2013:53.                     itoring of adverse events during an MF59-®-ad    lab-on-a-chip platforms. Lab Chip 2012 Oct
+6. DemchenkoY, Grosso P, de Laat C. Membrey,         juvanted H5N1 influenza vaccination campaign 21;12(20):4102-6.
+   P. Addressing Big Data Issues in Scientific Data  in Taiwan. Hum Vaccin Immunother. 2014        37.Bushman FD, Barton S, BaileyA, Greig C, Malani
+   Infrastructure. Proceedings of International      Jan;10(1):100-3.                                 N, Bandyopadhyay S, et al. Bringing it all togeth
+   Conference on Collaboration Technologies and   22.ParrellaA, Gold M, Braunack-MayerA, Baghurst     er: big data and HIV research. AIDS 2013 Mar
+   Systems 2013;48-55.                               P, Marshall H. Consumer reporting of adverse     13;27(5):835-8.
+7. Neff G. Why Big Data Won’t CureBU   igs.Data      events following immunization (AEFI): Identify38.Krammer F, Palese P. Universal influenza virus
+   2013;1(3):117-23.                                 ing predictors of reporting anAEFI. Hum Vaccin vaccines: need for clinical trials. Nat Immunol
+8. Murdoch TB, Detsky AS. The inevitable ap -        Immunother 2014 Jan 9;10(3).                     2013 Dec 18;15(1):3-5.
+   plication of big data to health care. JAMA     23.Ackerson BK, Sy LS,Yao JF, Craig Cheetham T,  39.Racaniello, V. Virology blog. http://www.virol
+   2013;309(13):1351-2.
+                                                     Espinosa-RydmanAM, JonesTL, et al.Agreement      ogy.ws/2010/12/09/pandemic-influenza-v   -ac
+9. Wordle Word Clouds. URL: http://www.wordle.net    between medical record and parent report for     cine-was-too-late-in-2009/ (9 December 2010).
+10.Leffingwell D, Widrig D. Managing software re     evaluation of childhood febrile seizures. VaccineHung CL, Lin CY. Open reading frame phylo-
+   quirements: a use case approach.Addison-Wesley    2013 Jun 12;31(27):2904-9.                       genetic analysis on the cloud. Int J Genomics
+   Professional; 2003.                            24.Newman HB, Ellisman MH, Orcutt JA. Data-inten    2013;2013:614923.
+11.de Lusignan S, Cashman J, Poh N, Michalakidis     sive e-science frontier research. Communicatio41.Radenski A, Ehwerhemuepha L. Speeding-up
+   G, Mason A, Desombre T, et al. Conducting re      of theACM 2003:46(11):68-77.                     codon analysis on the cloud with local MapReduce
+   quirements analyses for research using routinely5.Müller H, HanburyA,Al Shorbaji N. Health inforaggregation. Information Sciences2013
+   collected health data: a model driven approach.   mation search to deal with the exploding amoun42.Eggleston M, Grefenstette J, Burke D. Using big
+   Stud Health Technol Inform 2012;180:1105-7.       of health information produced. Methods Inf Meddata for computational modeling of infectious
+
+
+IMIAYearbookofMedicalInformatics2014
+                                                                                                                                                35
+
+                                           BigDataUsagePatternsintheHealthCareDomain:AUseCaseDrivenApproachAppliedtoĐtheAssessmentofVaccinationBenefitsandRisks
+
+
+
+
+
+   diseases. In: 141st APHA Annual Meeting,           healthy children. Cochrane Database Syst Rev   77.Guo B, Page A, Wang H, Taylor R, McIntyre P.
+   2013; 276179. URL: https://apha.confex.com/        2012 Aug 15;8:CD004879.                           Systematic review of reporting rates of adverse
+   apha/141am/webprogram/Paper276179.html.        59.Shah NH. Translational bioinformatics embraces     events following immunization: an international
+43.Liyanage H, Liaw ST, Kuziemsky C, Terry AL,        big data.Yearb Med Inform 2012;7(1):130-4.        comparison of post-marketing surveillance pro
+   Jones S, Soler JK, et al. The Evidence-base for60.Bartlett C, Wurtz R. Twitter and Public Health. J  grams with reference to China. Vaccine 2013 Jan
+   Using Ontologies and Semantic Integration Meth Public Health Manag Pract 2013 Dec 18. [Epub          11;31(4):603-17.
+   odologies to Support Integrated Chronic Disease    ahead of print]                                8. Simonsen L, Spreeuwenberg P, Lustig R, Taylor
+   Management in Primary and Ambulatory Care:     61.Denecke K, Krieck M, Otrusina L, Smrz P,           RJ, Fleming DM, Kroneman M, et al; GLaMOR
+
+   Realist Review. Contribution of the IMIA Primary   Dolog P, Nejdl W, et al. How to exploit twitter   Collaborating Teams. Global mortality estimates
+   Health Care Informatics WG.Yearb Med Inform        for public health monitoring? Methods Inf Med     for the 2009 Influenza Pandemic from the GLaM
+   2013;8(1):147-54.                                  2013;52(4):326-39.                                OR project: a modeling study. PLoS Med 2013
+44.Seth Grimes, “Unstructured Data and the 80 Per 62.Greaves F, Ramirez-Cano D, Millett C, Darzi A,     Nov;10(11):e1001558.
+   cent Rule: Investigating the 80%”. Clarabridge,    Donaldson L. Harnessing the cloud of patient ex79.Dawood FS, IulianoAD, Reed C, Meltzer MI, Shay
+   Bridgepoints; 2008 Q3.                             perience: using social media to detect poor qualitDK, Cheng PY, et al. Estimated global mortality as
+45.Green DE, Rapp EJ. Can big data lead us to big     healthcare. BMJ Qual Saf 2013 Mar;22(3):251-5.    sociated with the first 12 months of 2009 pandemic
+   savings? Radiographics 2013 May;33(3):859-60.  63.Hay SI, George DB, Moyes CL, Brownstein JS.        influenza A H1N1 virus circulation: a modelling
+46.Leduc R,Vaughn M, Fonner JM, Sullivan M, Wil       Big data opportunities for global infectious diseaseudy. Lancet Infect Dis 2012 Sep;12(9):687-95.
+   liams JG, Blood PD, et al. Leveraging the national surveillance. PLoS Med 2013;10(4):e1001413.       Erratum in: Lancet Infect Dis 2012 Sep;12(9):655.
+   cyberinfrastructure for biomedical research. JA64.Paul MJ, Dredze M.You Are WhatYou Tweet:        80.World Health Organisation (WHO). Report
+   Med InformAssoc 2014 Mar-Apr;21(2):195-9.          Analyzing Twitter for Public Health. ICWSM        of the second WHO consultation on the
+47.Morita M, IgarashiY, Ito M, ChenYA, Nagao C,       2011 July;                                        global action plan for influenza vaccines
+   SakaguchiY, et al. Sagace: a web-based search  65.Eurosurveillance editorial team. ECDC in collab    (GAP), Geneva, Switzerland, 12–14 July
+   engine for biomedical databases in Japan. BMC      oration with theVAESCO consortium to develop a    2011. URL: http://whqlibdoc.who.int/publica
+   Res Notes 2012 Oct 31;5:604.                       complementary tool for vaccine safety monitoring  tions/2012/9789241564410_eng.pdf
+48.Mohr DC, Burns MN, Schueller SM, Clarke G,         in Europe. Euro Surveill. 2009 Oct 1;14(39). pii:.WHO | Immunization surveillance, assessment
+   Klinkman M. Behavioral Intervention Technol        19345.                                            and monitoring. 2014. WHO | Immunization sur
+   ogies: evidence review and recommendations     66.Zanoni G, Berra P, Lucchi I, FerroA, O’Flanagan    veillance, assessment and monitoring. [ONLINE]
+
+   for future research in mental health. Gen Hosp     D, Levy-Bruhl Det al. Vaccine adverse event       Available at: http://www.who.int/immunization/
+   Psychiatry 2013 Jul-Aug;35(4):332-8.               monitoring systems across the European Union      monitoring_surveillance/en/. [Accessed 05 De
+49.Robbins DE, GrünebergA, Deus HF, Tanik MM, countries: time for unifying efforts.Vaccine 2009         cember 2013].
+   Almeida JS. A self-updating road map of The        May 26;27(25-26):3376-84.                      82.Dailey L, Watkins RE, PlantAJ.Timeliness of data
+   Cancer GenomeAtlas. Bioinformatics 2013 May    67.Crawford NW, Clothier H, Hodgson K, Selvaraj       sources used for influenza surveillance. JAm Med
+   15;29(10):1333-40.                                 G, Easton ML, Buttery JP.Active surveillance for  InformAssoc 2007 Sep-Oct;14(5):626-31.
+50.Eysenbach G. Infodemiology and infoveillance: adverse events following immunization. Expert       83.GoldenbergA, Shmueli G, Caruana RA, Fienberg
+   framework for an emerging set of public health Rev Vaccines 2013 Dec 18.                             SE. Early statistical detection of anthrax outbreaks
+   informatics methods to analyze search, commu68.Carneiro HA, Mylonakis E. Google trends: a web-       by tracking over-the-counter medication sales. Proc
+   nication and publication behavior on the Internet. based tool for real-time surveillance of disease  NatlAcad Sci USA 2002Apr 16;99(8):5237-40.
+   J Med Internet Res 2009 Mar 27;11(1):e11.          outbreaks. Clin Infect Dis 2009;49(10):1557-64.84.OhkusaY, Shigematsu M,Taniguchi K, Okabe N.
+51.Salathé M, Khandelwal S.Assessing vaccination  69.JalaliA, Olabode OA, Bell CM. Leveraging Cloud     Experimental surveillance using data on sales of
+   sentiments with online social media: implications  Computing toAddress Public Health Disparities:    over-the-counter medications--Japan, November
+   for infectious disease dynamics and control. PLoS  AnAnalysis of the SPHPS. Online J Public Health   2003-April 2004.MMWR Morb Mortal Wkly Rep
+   Comput Biol 2011 Oct;7(10):e1002199.               Inform 2012;4(3).                                 2005Aug 26;54 Suppl:47-52.
+52.Baker MA, Nguyen M, Cole DV, Lee GM, Lieu      70.Achrekar H, GandheA, Lazarus R,Yu SH, Liu B.    85.Yang L, Yang SH, Plotnick L. How the Internet of
+   TA. Post-licensure rapid immunization safety mon   Predicting flu trends using twitter data. In: Com things technology enhances emergency response.
+   itoring program (PRISM) data characterization. puter Communications Workshops (INFOCOM Technological Forecasting And Social Change
+   Vaccine 2013 Dec 30;31 Suppl 10:K98-K112.          WKSHPS), 2011 IEEE Conference 2011. p. 702-7.
+                                                                                                        2013;80(9):1854-67.
+53.Espino JU, Hogan WR, Wagner MM. Telephon7e1.Signorini A, Segre AM, Polgreen PM. The use of        86.de Lusignan S, Chan T, Theadom A, Dhoul N.
+   triage: a timely data source for surveillance of   twitter to track levels of disease activity and puThe roles of policy and professionalism in the
+   influenza-like diseases. AMIA Annu Symp Proc concern in the U.S. during the InfluenzaA H1N1 protection of processed clinical data: a literature
+   2003:215-9.                                        pandemic. PLoS One 2011;6: e19467.                review. Int J Med Inform 2007Apr;76(4):261-8.
+54.Gross PA, HermogenesAW, Sacks HS, Lau J, L-    7e2.Love B, Himelboim I, HoltonA, Stewart K.Twitter87.Steinbrook R. Personally controlled online health
+   vandowski RA.The efficacy of influenza vaccine in  as a source of vaccination information: Content data-the next big thing in medical care? N Engl J
+   elderly persons.A meta-analysis and review of thedrivers and what they are sayinA g.m J Infect       Med 2008Apr 17;358(16):1653-6.
+   literature.Ann Intern Med 1995;123(7):518-27. Control 2013:41(6):568-70.                          88.Liyanage H, Liaw ST, de Lusignan S.Accelerating
+55.Jefferson T, Rivetti D, RivettiA, Rudin M, Di P73.CIOMS. PracticalAspects of Signal Detection in the development of an information ecosystem in
+   etrantonj C, DemicheliV. Efficacy and effectivenessPharmacovigilance. CIOMS; 2010,                   health care, by stimulating the growth of safe
+   of influenza vaccines in elderly people: a syst74.Iskander JK, Miller ER, Chen RT. The role of       intermediate processing of health information
+   review. Lancet 2005;366(9492):1165-74.             the Vaccine Adverse Event Reporting system        (IPHI). Inform Prim Care 2012;20(2):81-6.
+56.Rivetti D, JeffersonT,Thomas R, Rudin M, Rivetti   (VAERS) in monitoring vaccine safety. Pediatr
+   A, Di Pietrantonj C, et al. Vaccines for preventingAnn 2004 Sep;33(9):599-606.
+   influenza in the elderly. Cochrane Database Sys75.LyonA, Nunn M, Grossel G, Burgman M. Com  -     Correspondenceto:
+   Rev 2006 Jul 19;(3):CD004876.                      parison of web-based biosecurity intelligence  SimondeLusignan
+57.Jefferson T, Di Pietrantonj C, Al-Ansary LA,       systems: BioCaster, EpiSPIDER and HealthMap.   ClinicalInformatics&HealthOutcomesresearchgroup
+   Ferroni E, Thorning S, Thomas RE. Vaccines         Transbound Emerg Dis 2012 Jun;59(3):223-32.    DepartmentofHealthCarePolicyandManagement
+                                                  7                                                  UniversityofSurrey
+   for preventing influenza in the elderly. Cochrane. Denecke K, Krieck M, Otrusina L, Smrz P,       GUILDFORD
+   Database Syst Rev 2010 Feb 17;(2):CD004876.        Dolog P, Nejdl W, et al. How to exploit twitter
+58.JeffersonT, RivettiA, Di Pietrantonj C, Demicheli  for public health monitoring? Methods Inf Med  Surrey GU2 7XH, UK
+   V, Ferroni E.Vaccines for preventing influenza in  2013;52(4):326-39.                             E-mail:s.lusignan@surrey.ac.uk
+
+
+                                                                                                                IMIAYearbookofMedicalInformatics2014

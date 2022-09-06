@@ -1,0 +1,739 @@
+Boutros et al. Genome Biology 2014, 15:462
+
+http://genomebiology.com/2014/15/9/462
+
+
+
+
+ OPINION
+
+
+
+
+Toward better benchmarking: challenge-based
+
+
+methods assessment in cancer genomics
+
+Paul C Boutros , Adam A Margolin , Joshua M Stuart, Andrea Califano and Gustavo Stolovitzky             8*
+
+
+
+  Abstract                                                    requires significant care in design and execution. The
+                                                              maturity of bioinformatics as a discipline has been
+  Rapid technological development has created an
+                                                              greatly advanced by the adoption of key principles that
+  urgent need for improved evaluation of algorithms for       guide robust method evaluation, including evaluator ob-
+  the analysis of cancer genomics data. We outline how        jectiveness (lack of bias), clearly defined scoring metrics
+  challenge-based assessment may help fill this gap by
+                                                              that align with real-world goals, and the public release of
+  leveraging crowd-sourcing to distribute effort and          gold-standard datasets and of the results and code of
+  reduce bias.                                                prediction algorithms. Challenge-based (also known as
+
+                                                              ‘competition-based’) method assessment is an increas-
+                                                              ingly popular mechanism for benchmarking [1,2]. In this
+Computational biology comprises three inter-connected         type of study an impartial group of scientists organizes a
+activities: algorithm development, validation through
+benchmarking, and application. In the biomedical sci-         ‘challenge’ that is based on a carefully curated dataset.
+                                                              This dataset is typically split into a training dataset, a
+ences, benchmarking occupies a central and indispens-         validation dataset (which might be used in real-time
+able role as it maps algorithms from the space of
+theoretical possibilities to the realm of practical value.    leaderboards, typically implemented as a table that re-
+                                                              ports the comparative performance of the methods
+Critically, this process attributes specific probabilities    under development), and a gold standard (or test) data-
+to an algorithm ’s discovery of biologically relevant
+knowledge (measured by the sensitivity of the algo-           set that is withheld from challenge participants and used
+                                                              for final evaluation (Figure 1). Following algorithm de-
+rithm) while not overwhelming the researcher with             velopment on the training dataset and real-time feed-
+incorrect predictions (quantified by the algorithm spe-
+cificity). Benchmarking is, however, a complex task, re-      back to participants based on the validation dataset and
+                                                              reported in the leaderboard, the challenge organizers
+quiring the creation of comprehensive gold standards          can objectively evaluate the quality of final submitted
+and the design of sophisticated validation strategies
+that may require additional experimental data. Indeed,        predictions using a gold-standard dataset. Such a design
+                                                              closely reflects the actual difficulties faced by real-world
+as the use of computational methods in biomedical             users trying to determine whether an algorithm general-
+research becomes widespread, the need for appropriate
+benchmarking projects, especially those involving commu-      izes to unseen cases.
+                                                                When flawed, benchmarking can lead to the emer-
+nity participation, is substantially growing (Table 1). In    gence of suboptimal standards that may be applied to
+particular, the rapidly increasing size of whole-genome       many large datasets, imposing an immense cost to the
+molecular profile datasets from large sample repositories
+                                                              community and creating misleading results. Conversely,
+underscores the importance of benchmarking; it has be-        the acceptance of knowledge without robust benchmark-
+come virtually impossible to validate algorithmic predic-     ing can lead to the adoption of inaccurate conventions.
+tions that are based on such large datasets systematically.
+                                                              For example, during the 1990s, it was generally accepted
+  Benchmarking is not a matter of simply running a few        that the number of loci coding for proteins in the hu-
+algorithms on a few datasets and comparing the results.       man genome was 100,000, a number that was based on
+Drawing generalizable conclusions from the exercise
+                                                              unverified hypotheses [3]. When the human genome was
+                                                              finally sequenced in 2000, the total number of coding
+8 Correspondence: gustavo@us.ibm.com                          loci was found to be a factor of 5 lower. Similarly, a de-
+ IBM Computational Biology Center, TJ Watson Research Center, Kitchawan
+Road, Yorktown Heights, NY 10598, USA                         sign error in the early implementation of the GC Robust
+Full list of author information is available at the end of the article
+                               © 2014 Boutros et al.; licensee BioMed Central Ltd. The licensee has exclusive rights to distribute this article, in any medium,
+                               for 12 months following its publication. After this time, the article is available under the terms of the Creative Commons
+                               Attribution License (http://creativecommons.org/licenses/by/4.0), which permits unrestricted use, distribution, and
+                               reproduction in any medium, provided the original work is properly credited. The Creative Commons Public Domain
+                               Dedication waiver (http://creativecommons.org/publicdomain/zero/1.0/) applies to the data made available in this article,
+                               unless otherwise stated.
+Boutros et al. Genome Biology 2014, 15:462                                                                                      Page 2 of 10
+
+http://genomebiology.com/2014/15/9/462
+
+
+
+
+
+Table 1 Non-comprehensive list of important and current challenge efforts and platforms
+
+Challenge                Scope                Assessment type          Organizers                 Website
+
+Assemblathon1&2          Sequence assembly    Objective scoring        UC Davis Genome Center     http://assemblathon.org/
+CAFA                     Protein function     Objective scoring        Community collaboration    http://biofunctionprediction.org/node/8
+
+                         prediction
+
+CAGI                     Systems biology      Objective scoring        UC Berkley/University of   http://genomeinterpretation.org/
+                                                                       Maryland
+
+CAPRI                    Protein docking      Objective scoring        Community collaboration    http://www.ebi.ac.uk/msd-srv/capri/
+
+CASP                     Structure prediction Objective scoring        Community collaboration    http://predictioncenter.org/
+ChaLearn                 Machine learning     Objective scoring        ChaLearn Organization      http://www.chalearn.org/
+
+                                                                       (non-for profit)
+
+CLARITY                  Clinical genome      Objective scoring and    Boston Children’s Hospital http://www.childrenshospital.org/research-
+                         interpretation       evaluation by judges                                and-innovation/research-initiatives/clarity-
+                                                                                                  challenge
+
+DREAM                    Network inference    Objective scoring        Community collaboration & https://www.synapse.org/#!Challenges:
+                         and systems biology                           Sage Bionetworks           DREAM
+
+FlowCAP                  Flow cytometry       Objective scoring        Community collaboration    http://flowcap.flowsite.org/
+                         analysis
+
+IGCG-TCGA DREAM          Sequence analysis    Objective evaluation     Community collaboration & https://www.synapse.org/#!Synapse:
+Somatic Mutation Calling                                               Sage Bionetworks           syn312572
+
+IMPROVER                 Systems biology      Objective evaluation and Phillip Morris Internationahttps://sbvimprover.com/
+                                              crowd-verification
+
+Innocentive              Topics in various    Objective scoring and    Commercial platform        http://www.innocentive.com/
+                         industries           evaluation by judges
+
+Kaggle                   Topics in various    Objective scoring and    Commercial platform        http://www.kaggle.com/
+
+                         industries           evaluation by judges
+RGASP                    RNA-seq analyses     Objective scoring        European Bioinformatics    http://www.gencodegenes.org/rgasp/
+
+                                                                       Institute
+
+Sequence Squeeze         Sequence             Objective scoring and    Pistoia Alliance           http://sequencesqueeze.org/
+                         compression          evaluation by judges
+
+X-Prize                  Technology           Evaluation by judges     X-Prize Organization       http://www.xprize.org/
+                                                                       (non-for-profit)
+
+The challenges were chosen based on relevance to cancer genomics or the representativeness of a type of challenge. Different challenges specialize in specific
+areas of research (see ‘Scope’), and may use different assessment types such as objective scoring against a gold standard, evaluation by judges, or community
+consensus (‘crowd-verification’). Organizers can be researchers from specific institutions (such as universities or hospitals), a group of diverse researchers from
+academia and industry collaboratthe challenge organization (community collabo, t-for-profit associaitons, or commercial platofrms that run challenges as their
+business model (such as Innocentive and Kaggle)n.iItiatives such as CAFA, CAGI, CAPRI, CASP, ChaLaern, DREAM, FlowCAP and IMPROVER organize sevelrachallenges each
+year, and only the generic project is listle, with the exception of DREAM, for which we aolsshow the IGCG-TCGA DREAM Somatic Mutation Cainllg Challenge
+because of its relevance to this paper. More information about these efforts can be found on the listed websites.
+
+
+
+
+Multi-Array (GCRMA) algorithm, which was revealed                         One concern in algorithm benchmarking and validation
+by systematic benchmarking of network reconstruction                    is that computational biology algorithms are often devel-
+
+analyses, may have led to the publication of thousands                  oped and evaluated by the same researchers. This creates
+of papers that contain incorrect mRNA abundance pro-                    an inherent conflict of interest, where objective assessment
+
+files before the error was detected and corrected [4]. As               of accuracy is polluted by the fact that the developers be-
+
+a third example, in 2006, a group of Duke University re-                come simultaneously judge, jury and executioner of the val-
+searchers published a pair of high-impact papers claim-                 idity of their own work. This can result in biases in study
+
+ing accurate prediction of the prognosis of lung cancer                 design and over-optimistic pe     rformance estimates, whether
+patients and of chemotherapy-sensitivity in lung, breast                intentional or unintentional [6]. For instance, the use of
+
+and ovarian cancers. Attempts to reproduce those claims                 non-blinded data in the evaluation by methods developers
+
+ensued almost immediately, with most of the results fall-               of their own protein structure prediction methods led, in
+ing short of replication because of a combination of pro-               the early’ 80s, to the false belief that protein structure pre-
+
+gramming and data-entry errors, and possible fraud [5].                 diction was essentially a solved problem. Not until 1994,
+
+Proper objective benchmarking by a neutral third-party on               when double-blinded data were used in the first Workshop
+private validation data helps to resolve quickly or to detect           on the Critical Assessment of Protein Structure Prediction
+
+many of the issues associated with these kinds of studies.              (CASP), was a very different picture revealed [7].
+Boutros et al. Genome Biology 2014, 15:462                                                                    Page 3 of 10
+http://genomebiology.com/2014/15/9/462
+
+
+
+
+
+                             Challenge open phase                       Final evaluation phase
+
+
+
+                                               Validation set                          Test set
+                      Training set             (leaderboard)                      (final evaluation)
+
+
+                                     Periodic                          Final
+
+                                   submissions                     submissions      Final scoring,
+                                                                                   comparison and
+                                                  Scoring                              ranking
+
+
+                                                                                               Best
+
+
+                                                                                               Runner
+                                                                                               up
+
+
+                                                  Optimized                                    ….
+                    Participants
+                    algorithms                   algorithms
+
+
+  Figure 1 Typical design of a crowd-sourced challenge. A dataset is split into a training set, a validation (or leaderboard set) and the test set
+  (or gold standard). Participants have access to the challenge input data and the known answers for just the training set. For the validation and
+  test sets only, the challenge input data are provided but the answers to the challenge questions are withheld. In the challenge open phase,
+  participants optimize their algorithms by making repeated submissions to predict the validation set answers. These submissions are scored and
+  returned to the participants who can use the information to improve their methods. In the final evaluation phase, the optimized algorithms are
+  submitted and evaluated against the final test set (the gold standard), and the resulting scores are used to compute the statistical significance
+
+  and the ranking of the participating algorithms.
+
+
+
+
+  Challenge-based benchmarking efforts, such as CASP          Challenge design and dynamics
+[8-10], CAFA [11] and DREAM [12,13], among others             Over the past few years, an established challenge-based
+(Table 1), offer a robust fr amework for algorithm            design paradigm has emerged in which portions of a pri-
+
+evaluation. These efforts have proven the value of en-        vate (that is, not globally released) dataset are made pub-
+gaging both active challenge leaders and motivated al-        licly available according to a predefined schedule. Such a
+
+gorithm developers to improve their work in a forum           dataset provides increased user engagement based on
+that has high visibility and rapid feedback.                  continuous feedback; an opportunity for participants to
+
+  We believe that challenge-based methods assessment          refine and improve their methods on the basis of results
+will play an increasingly important role in standardizing     obtained throughout the challenge; and multiple inde-
+and optimizing the analysis of cancer genomics data,          pendent rounds of validation, which can be used to as-
+
+and its broader adoption will drive progress in both          sess the consistency and robustness of results. After the
+algorithm development and biological discovery. Con-          initial training dataset is made publicly available, a real-
+
+versely, failing to exploit challenge-benchmarking as a       time leaderboard can be generated in which the per-
+fundamental validation methodology for cancer genom-          formance of different algorithms is evaluated against a
+ics algorithms may result in lost opportunities to trans-     withheld private portion of the data (Figure 1). Previous
+
+late results derived from best-in-class methods into          research has shown that the provision of real-time feed-
+patient care.                                                 back is among the most important factors in ensuring
+
+  Here, we provide our perspective on the growing use         user engagement in crowd-sourcing projects [14]. (Here,
+of challenge-based methods to benchmark algorithms in         we use the term crowd-sourcing in the sense that a com-
+cancer genomics. We outline the different types of prob-      munity of tens to hundreds of researchers are engaged
+
+lems faced and some of the key considerations that need       in working on the same problem. In other contexts,
+to be explored to determine whether a challenge might         crowd-sourcing activities may engage different numbers
+
+be successful, and to provide suggestions for challenge       of participants.) After a period of time in which several
+organization and execution. Finally, we look to the fu-       iterations of the leaderboard can be posted, one of the
+ture and consider how challenge-based assessment may          participating groups is declared the best performer in
+
+change in the coming decade.                                  this initial phase of the challenge, either on the basis of
+Boutros et al. Genome Biology 2014, 15:462                                                                   Page 4 of 10
+
+http://genomebiology.com/2014/15/9/462
+
+
+
+
+their position on the leaderboard or because they were the    subset of the private dataset, optimally a subset that is
+first to reach some pre-specfiied performance level. The      not used in the final evaluation. The latter condition is
+challenge may include multipel rounds of assessment based     sometimes not feasible (for example, when the number
+
+on different portions of the private data. A final round is   of patients available to predict clinical outcomes is lim-
+typically invoked in which methods are rated against a        ited), in which case the leaderboard will be based on
+withheld evaluation dataset to determine the overall chal-    data that are also used for the final scoring. If this is
+
+lenge winner (Figure 1). The most robust validation set       the case, limiting the number of submissions can re-
+is often reserved for this final evaluation - often with      duce over-fitting.
+larger sample size, newly generated data or prospective         While most challenges share some common design
+
+validation designed on the basis of challenge results.        principles, each research area has its own unique charac-
+Each participating team submits a small number (for           teristics that require customized experimental designs
+example, one to five) of independent predictions made         and consideration of risks and benefits. Indeed, the util-
+
+by their algorithm(s), which are scored and ranked to         ity of organizing a challenge to help advance a particular
+determine a winner. Finally, the public release of all of     research area depends on a balance between challenge-
+the data kept private throughout the challenge, along         based benchmarking advantages and limitations, as well
+
+with the predictions and ideally source code from each        as consideration of the potential barriers for participa-
+group, provides a long-term resource to spur further          tion (Table 2). In the sections below, we highlight three
+development of new and improved methods.                      research areas in which rapid development of new algo-
+
+  The collection of algorithm source code allows de-          rithms has led to a concomitant need for benchmarking:
+velopers to share insights that promote future im-            accurate identification of tumor-specific genomic alter-
+provements. If required as part of the final submission,      ations, association of clinical data with genomic profiles
+
+this code can also be used to ensure objective scoring        (that is, biomarkers) and identifying network-biology
+and verification of reproducibility. In the 2012 Sage         features that underlie cancer phenotypes.
+Bionetworks-DREAM Breast Cancer Prognosis Chal-
+
+lenge, participants were required to submit their             Analyzing genome assembly and structural variants
+models as open source R-code [15] that was visible to         Technologies for identifying cancer-related somatic alter-
+all participants and executed by an automated system          ations from genomic or transcp iri dataarigdvanc
+
+to generate the results reported on the leaderboard.          extremely rapidly. In only 6 yars, next-generation sequen-
+This was enabled by Synapse [16], a software platform         cing (NGS) has rapidly progressed from the measurement
+that supports scientific challenges as well as large dis-     of millions of short sequences (of around 25 bp) to that
+
+tributed collaborations , such as those in the TCGA           of hundreds of millions of longer segments (of around
+Pan-Cancer consortium [17.] Planned challenges, such as       100 bp). This creates an urgent need for on-going
+the RNA-seq follow-up to the ICGC-TCGA DREAM Som- benchmarking studies as old algorithms become rap-
+
+atic Mutation Calling (SMC) Challenge, are considering the idly out-dated and new algorithmic approaches are
+use of cloud-computing soluto ins to provide a central com-   required to handle new technologies and new scales of
+puting facility and a harness upon which contestant code is data. Small-scale studies haveresulted in dramatic discord-
+
+directly run. This will inherently force the deposition of ance when different researchers apply their algorithms to
+complete analysis workflows, which can be run routinely the same genomic data (Figure 2) [19-21]. These studies
+on new datasets. Further, this approach would help to have shown that accuracy and generalizability vary dramat-
+
+standardize application programming interfaces and file ically across samples and regions of the genome. The con-
+formats, such that multiple ag lorithms use similar inputs    stantly shifting landscape presented by rapidly evolving
+and produce easily comparable outputs. This vision of technologies and tools fuels the urgency in the need to
+
+interoperability is shared by any practitioners in the field  identify the best-performing methods objectively and to re-
+and has most recently been championed by the Global evaluate them frequently, and to identify particularly error-
+Alliance for Genomics And Health [18].                        prone aspects of existing tumor genome analysis methods
+
+  Several criteria should be used to help participants        [22]. Several non-cancer-focused challenge-based bench-
+limit over-fitting to the training data. Over-fitting is a    marking efforts are on-going, including the Assemblathon
+known peril in statistics, occurring when a predictive        benchmarking of de novo sequence assembly algorithms
+
+model has enough flexibility in its parameters that           [23] and the CLARITY Challenge for standardizing clinical
+optimization effectively leads to ‘memorization’ of the       genome sequencing analysis an d reporting [24] (Table 1).
+training data and an inability to generalize to unseen          Challenge-based benchmarking of methods for som-
+
+cases. The most common way to help participants avoid         atic variant detection in cancer faces several unique hur-
+over-fitting, while enabling the testing of their models,     dles. First, genomic sequence is inherently identifiable
+is to provide leaderboard scoring that is based on a          [25], and is thus considered personal health information
+Boutros et al. Genome Biology 2014, 15:462                                                                                       Page 5 of 10
+
+http://genomebiology.com/2014/15/9/462
+
+
+
+
+
+Table 2 Some advantages and limitations of challenge-based methods assessment, along with barriers to participation
+in them
+
+Advantages                              Limitations                                     Participation barriers
+
+Reduction of over-fitting               Narrower scope compared to                      Incentives not strong enough to promote participation
+                                        traditional open-ended research
+
+Benchmarking individual methods         Ground truth needed for objective scoring       No funding available to support time
+                                                                                        spent participating in challenges
+
+Impartial comparison across             Mostly limited to computational approaches      Fatigue resulting from many ongoing challenges
+methods using same datasets
+
+Fostering collaborative work,           Requires data producers to share                Time assigned by organizers to solve a
+including code sharing                  their data before publication                   difficult challenge question may be too short
+
+Acceleration of research                Sufficient amount of high-quality               Lack of computing capabilities
+                                        data needed for meaningful results
+
+Enhancing data access and impact        Large number of participants not                New data modality or datasets that are
+                                        always available                                too complex or too big poses entry barrier
+
+Determination of problem solvability    Challenge questions may not be                  Challenge questions not interesting or impactful enough
+                                        solvable with data at hand
+
+Tapping the ‘Wisdom of Crowds’          Traditional grant mechanisms not                Cumbersome approvals to acquire sensitive datasets
+                                        adequate to fund challenge efforts
+
+Objective assessment                    Difficulties to distribute datasets
+                                        with sensitive information
+
+Standardizes experimental design
+
+
+
+(PHI) in many countries. This places a burden on challenge               be ameliorated by gamifying the problem, that is, using
+
+contestants to acquire ethicsapproval from the appropriate               game tools that require puzzlesolving or geometric think-
+authorities, such as dbGaP in the USA or ICGC in Canada.                 ing to engage users in genomics problems [26,27]. Gamifi-
+
+Second, because of the inherent complexity of both the                   cation may not be possible or appropriate, however,
+
+data and file formats, it may be difficult for researchers               because it may require sacrificing domain-specific prior
+from other fields to acquire sufficient domain knowledge to              knowledge that is essential to the correct solution. Third,
+
+compete effectively against domain experts. This point may               thesizeoftherawgenomicdata            necessary to perform these
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Figure 2 Different researchers studying the same data may arrive at discordant conclusions. Benchmarking becomes essential as a way
+
+  to separate true findings from spurious ones. (Illustration by NatasStolovitzky-Brunner© inspired by the parable of the six blind men and
+  the elephant).
+Boutros et al. Genome Biology 2014, 15:462                                                              Page 6 of 10
+
+http://genomebiology.com/2014/15/9/462
+
+
+
+
+challenges creates a‘big-data’ problem. For example, the   clinical potential, but the optimal approach to predicting
+ICGC-TCGA DREAM SMC Challenge [28] (Table 1) in- such biomarkers de novo remains poorly understood and
+volved transmitting over 10 TB of data to every contestant, controversial. Indeed, it is widely known that inferred
+
+so that each had a copy of the 15 tumor-normal whole- biomarkers are highly sensitive to factors such as choice
+genome pairs. Two different solutions to this problem are of algorithm and data pre-processing methods [34-37].
+to provide access to high-speed, cloud-based download        Nevertheless, developing challenges to benchmark
+
+technologies (such as GeneTorrent or Aspera) or to provide biomarker discovery problems is relatively straightfor-
+co-location of computers and data in a hosted environment ward. Participants are given training data in which
+[29]. The latter solution has the advantage of providing features (for example, genome-wide mRNA transcript
+
+implementations of the bes-tperforming algorithms in a     abundance) are paired with outcome (for example, patient
+form that is more readily redistributed to the community, survival) data. Participants are given only the features for
+as well as allowing more ‘democratized’ participation for  the test set and asked to predict the outcome data using a
+
+groups that do not have large in-house computing re- model inferred from the training data. Alternatively, par-
+sources. Nevertheless, this solution also has disadvantages: ticipants may submit trained models as executable code to
+cloud-computing may require a dditional overhead expend-   be run on the test data, thus allowing the test feature data
+
+iture for groups that are familiar with developing methods to be hidden from participants [15]. Model results are
+within their local computing environments; many re- scored on the basis of the correspondence between pre-
+searchers have access to in-use computing options subsi-   dicted and measured outcome data from the test set.
+
+dized by their institution and have limited incentive to     Prediction challenges have been employed in many do-
+transfer their analysis to the cloud; and access permissions mains outside of biomedical research [38]. Because
+for some datasets can hinder redistribution through cloud biomarker-based challenges fit the setup of the classic su-
+
+platforms. Furthermore, the assessment of predictions is pervised machine-learning paradigm, they attract new ideas
+challenging becausethe ground-truth for genetic alterations and participation from the broader machine-learning com-
+is unknown. The SMC Challenge employs two strategies munity. Benchmarking in bioma        rker discovery is crucial,
+
+for evaluation. The first involves anin silico method for  however, as outlined by the case of the retracted Duke
+simulating cancer genomes called BAMSurgeon, which was study on chemotherapy selection noted above.
+developed to allow the comparison of methods predictions     Two key difficulties exist in the creation of bench-
+
+against a synthetic groundt-ruth (work by Ewing and col-   marking challenges for biomarker discovery. First, the
+leagues). In the second strategy, targeted deep-sequencing ideal datasets for biomarker-discovery challenges are
+allows prospective validation of a large number of predicted uniquely defined, especially when data were collected
+
+mutations, chosen by an algorithm that most accurately from large cohorts requiring long-term follow-up or
+computes false-positive and f alse-negative rates across   expensive standardized treatment protocols (such as
+submissions. It is unclear how important it is for pro-    clinical trials). These datasets can potentially lead to
+
+spective validation data to be orthogonal to that used     high-impact publications or concerns over the intellec-
+by the original challenge participants. Verification in    tual property of the data-generating groups. Second, the
+TCGA projects typically relies on deep sequencing          potential size of patient cohorts is currently limiting for
+
+using the same technology, but on selected targets and     many biomarker-development questions. If the amount
+with the construction of new sequencing libraries. This    of data available is inadequate, they may not generate
+approach assumes that most errors are randomly dis-        enough statistical power to distinguish the performance
+
+tributed and/or associated with only a small fraction of   of the top-ranked groups accurately. These factors also
+reads.Themoreorthogonalt      he validation technology,    complicate the ability to obtain independent datasets for
+the more this assumption is relaxed. Nevertheless, the     final method assessment. Despite these problems, several
+
+error profile of the final evaluation dataset is crucial,  successful challenges pertainingto diagnostics, prognostics
+and there are currently no error-free approaches to        and treatment outcomes have been conducted, including
+generating this gold-standard data for NGS.                teAQIdy,tIPOVRCllno
+
+                                                           Diagnostic Signatures [40], the Sage Bionetworks DREAM
+Finding genomic biomarkers that are associated             Breast Cancer Prognostics hallenge [15], and the DREAM
+with phenotype                                             AMLTreatment Outcome Challenge [41].
+
+Once a set of somatic variants have been identified from
+genomic interrogation of patient-derived samples, one of   Inferring biological networks underlying cancer
+the most common analyses is to attempt to develop bio-     phenotypes
+
+markers that can predict patient survival, response to     Identifying the relationship s between biological (tran-
+therapy or other outcomes [30-33]. The development of      scriptional and signaling) networks and cancer onset
+genomic-based personalized medicine has immense            and progression is another potential area for challenge
+Boutros et al. Genome Biology 2014, 15:462                                                                    Page 7 of 10
+
+http://genomebiology.com/2014/15/9/462
+
+
+
+
+benchmarking. Network analysis involves several as-           to reflect some of the underlying assumptions of the system
+pects, including the coherent modeling of different           they attempt to emulate. Ind eed, the most common ques-
+types of alteration and dysregulation events and their        tion about simulations is how well they reflect experimental
+
+integration into a unified network-based model [42-44].       samples [49].
+One of the major problems with organizing challenges in         Second, for systems that are difficult to benchmark dir-
+this area is that the underlying cellular regulatory networks ectly, such as the structure of a biological network, charac-
+
+are mostly unknown, especially in complex systems such        teristics of the systems can be evaluated instead. These
+mammalian tumor cells. So howcan a challenge be orga-         might include the effects of the systems’ perturbation or
+nized when a pre-known gold-standard network cannot be        other phenomena, such as the identification of the net-
+
+defined? Several strategies employed by the DREAM pro-        works that best predict patient outcomes.
+ject include using synthetic biology networks [13]i,n silico    Third, the results of a study can be validated after
+networks [45], and experimentally assessed bacterial net-     the challenge is completed by additional experimental
+
+works [46]. An alternative strategy is to evaluate methods    work, either on the same sample or on others. This has
+on the basis of their ability to predict the response of a sys-he advantage of directly addressing the predictions
+tem to a set of perturbations, such as drugs or receptor li-  made by challenge participants, but has the disadvan-
+
+gands, as surrogates for predicting the underlying network    tage of introducing a time lag between challenge com-
+connectivity [47]. The introduction of ingenious surrogates   pletion and the availability of full results. In addition,
+to the gold standard has enabled the formulation of other     the effort and cost of follow-up validation may be pro-
+
+network reverse-engineering challenges, such as the 2013      hibitive given the resources available to the challenge
+HPN-DREAM Breast Cancer Network Inference Chal-               organizers.
+lenge [48]. In this challenge, participants were asked to       For genomic studies, wet-lab validation can be both time-
+
+submit predicted signaling networks that were activated       consuming and expensive. For example, the MAQC study
+by a set of stimuli in four breast cancer cell lines. These   considered approximately 20,000 genes on microarray
+networks were scored on the basis of their ability to         platforms, but only validatedapproximately 1,000 (5%) by
+
+identify the set of proteins that are downstream of a         real-time PCR as a gold standard [50]. Because of this cost,
+given phosphoprotein. The predicted protein set was           both in terms of time and money, it is critical that a good
+compared to an experimentally determined set of pro-          validation be sufficiently reprsentative, providing similar
+
+teins (the surrogate gold standard), defined as those         levels of statistical power for assessing the accuracy of each
+proteins whose phosphorylation levels were affected by        group. In the context of somatic mutation calling, this
+inhibiting that phosphoprotein. Further research on           means selecting calls that are unique to individual predic-
+
+benchmarking network-inference algorithms would be            tors as well as those common to multiple predictors. In-
+highly beneficial to help advance the field of network        deed, the validation techniques will often be experimentally
+biology, whose role in unraveling biological mechanisms       limited to a subset of results, leaving a bias in the distribu-
+
+in cancer is hard to overestimate.                            tion of what is tested. There is thus a clear need for re-
+                                                              search into the optimal selectin of validation candidates in
+The truth is hard to find                                     many biological settings. Further, validating a small subset
+
+From the previous discussion, it is clear that the single most(<10%) of results comes with the possibility, however small,
+crucial aspect in benchmarking is the definition and assem-   of producing an incorrect relative ordering of different
+bly of gold standards. A gold standard fundamentally de-      algorithms. In practice, a combination of synthetic and
+
+fines the problem under study, and it provides the limiting   real-world validation is best, and finding the right balance is
+resolution of error for the overall endeavor. As outlined in  challenge-dependent.
+this article, gold standards can be defined in several ways.    Finally, some very important elements of cancer gen-
+
+First, a single experiment can be performed with portions     omics are difficult to validate. For example, almost all
+of the resulting data used for training and evaluation. This  NGS analyses rely on sequence alignment as a first step.
+approach avoids experimental inconsistencies, but requires    It is, however, very difficult to benchmark the accuracy
+
+that a large selection of true results is generated prior to the an alignment algorithm on real tumor data, because
+challenge. Simulated datasets are ideal for this strategy     there is no obvious way to create a ground-truth dataset.
+but have been criticized as only partially representing a     Thus, rather than benchmarking the aligners, challenges
+
+biological system [49]. Whilevalidation of simulated data is  benchmark the results of entire pipelines such as those
+straight forward, because theground-truth is completely       for detecting somatic variants [28], which may incorpor-
+known, in most cases the value of benchmarking is per-        ate different aligners and different data pre-processing
+
+ceived to be in the ability to assess best-performing methods and statistical approaches. Similarly, it is of great interest
+when applied to real biological data as opposed to simulated  to infer cancer-driver genes. Unfortunately, the definition
+data. An important caveat is that the synthetic data may fail of a ‘driver gene’ (beyond simple statistical recurrence) is
+
+Boutros et al. Genome Biology 2014, 15:462                                                                                                             Page 9 of 10
+http://genomebiology.com/2014/15/9/462
+
+
+
+
+
+
+4.   Lim WK, Wang K, Lefebvre C, Califano A  C:omparative analysis of                27.  Lee J, Kladwang W, Lee M, Cantu D, Azizyan M, Kim H, Limpaecher A,
+     microarray normalization procedures: effects on reverse engineering                  Yoon S, Treuille A, Das R, Ete RNAPR:NA design rules from a massive
+     gene networks.Bioinformatics2007,23:i282–i288.                                       open laboratory.Proc Natl Acad Sci U S A2014,111:2122–2127.
+
+5.   Baggerly KA, Coombes KRD   : eriving chemosensitivity from cell lines:          28.  Boutros PC, Ewing AD, Ellrott K, Norman TC, Dang KK, Hu Y, Kellen MR,
+     forensic bioinformatics and reproducible research in high-throughput                 Suver C, Bare JC, Stein LD, Spellman PT, Stolovitzky G, Friend SH, Margolin
+     biology.Ann Appl Stat2009,3:1309–1334.                                               AA, Stuart JM:Global optimization of somatic variant identification in
+
+6.   Norel R, Rice JJ, Stolovitzky GT:he self-assessment trap: can we all be              cancer genomes with a global community challengN        e. t Genet2014,
+     better than average?Mol Syst Biol2011,7:537.                                         46:318–319.
+7.   Moult J, Pedersen JT, Judson R, Fidelis A: large-scale experiment to            29.  Dudley JT, Butte AJI:n silico research in the era of cloud computing.
+     assess protein structure prediction methodP    s.roteins1995,23:ii–v.                Nat Biotechnol2010,28:1181–1185.
+
+8.   Cozzetto D, Kryshtafovych A, Tramontano A   E: aluation of CASP8 model          30.  Lambin P, van Stiphout RG,StarmansMH,Rios-VelazquezE,NalbantovG,
+     quality predictions.Proteins2009,77:157–166.                                         Aerts HJ, Roelofs E, van Elmpt W, Boutros PC, Granone P, Valentini V,
+9.   Shi S, Pei J, Sadreyev RI, Kinch LN, Majumdar I, Tong J, Cheng H, Kim BH,            BeggAC,DeRuysscherD,DekkerA:          Predicting outcomes in radiation
+
+     Grishin NV:Analysis of CASP8 targets, predictions and assessment                     oncology - multifactorial decision support systems.Nat Rev Clin Oncol
+     methods.Database (Oxford)2009,2009:bap003.                                           2013, 10:27–40.
+10.  Tramontano A, Morea VA   : ssessment of homology-based predictions in           31.  Chin L, Gray JW:Translating insights from the cancer genome into
+                                                                                          clinical practice.Nature2008,452:553–563.
+     CASP5.Proteins2004,55:782.
+11.  Radivojac P, Clark WT, Oron TR, Schnoes AM, Wittkop T, Sokolov A, Graim K,      32.  Khleif SN, Doroshow JH, Hait WNA:ACR-FDA-NCI Cancer Biomarkers
+     Funk C, Verspoor K, Ben-Hur A, Pandey G, Yunes JM, Talwalkar AS, Repo S,             Collaborative consensus report: advancing the use of biomarkers in
+     Souza ML, Piovesan D, Casadio R, Wang Z, Cheng J, Fang H, Gough J, Koskinen P,       cancer drug developmentC    . lin Cancer Res2010,16:3299–3318.
+
+     Törönen P, Nokso-Koivisto J, Holm L, zCeotzto D, Buchan DW, Bryson K, Jones DT, 33.  van’t Veer LJ, Bernards R:Enabling personalized cancer medicine through
+     Limaye B,et al: A large-scale evaluation ofcoputational protein function             analysis of gene-expression patternsN.ature2008,452:564–570.
+     predictionN. at Methods2013,10:221–227.                                         34.  Starmans MH, Pintilie M, John T, Der SD, Shepherd FA, Jurisica I, Lambin P,
+
+12.  Prill RJ, Marbach D, Saez-Rodriguez J, Sorger PK, Alexopoulos LG, Xue X, Clarke      Tsao MS, Boutros PC:Exploiting the noise: improving biomarkers with
+     ND, Altan-Bonnet G, Stolovitzky GT:owards a rigorous assessment of systems           ensembles of data analysis methodologieG     s.enome Med2012,4:84.
+     biology models: the DREAM3 challengeP    s.LoS One2010,5:e9202.                 35.  Starmans MH, Fung G, Steck H, Wouters BG, LambinAP:simple but highly
+13.  Stolovitzky G, Prill RJ, Califano AL:essons from the DREAM2 challenges.              effective approach to evaluate the prognostic performance of gene
+
+     Ann N Y Acad Sci2009,1158:159–195.                                                   expression signatures.PLoS One2011,6:e28320.
+14.  Athanasopoulos G, Hyndman RJT:he value of feedback in forecasting               36.  Venet D, Dumont JE, Detours VM   : ost random gene expression signatures
+     competitions.Int J Forecast2011,27:845–  849.                                        are significantly associated with breast cancer outcomPeL.oS Comput
+
+15.  Margolin AA, Bilal E, Huang E, Norman TC, Ottestad L, Mecham BH,                     Biol 2011,7:e1002240.
+     Sauerwine B, Kellen MR, Mangravite LM, Furia MD, Vollan HK, Rueda OM,           37.  Boutros PC, Lau SK, Pintilie M, Liu N, Shepherd FA, Der SD, Tsao MS, Penn
+     Guinney J, Deflaux NA, Hoff B, Schildwachter X, Russnes HG, Park D, Vang             LZ, Jurisica I:Prognostic gene signatures for non-small-cell lung cancer.
+     VO, Pirtle T, Youseff L, Citro C, Curtis C, Kristensen VN, Hellerstein J, Friend     Proc Natl Acad Sci U S A2009,106:2824–2828.
+
+     SH, Stolovitzky G, Aparicio S, Caldas C, Børresen-Dale ASLy:stematic            38.  Bentzien J, Muegge I, Hamner B, Thompson DC:    Crowd computing: using
+     analysis of challenge-driven improvements in molecular prognostic                    competitive dynamics to develop and refine highly predictive models.
+     models for breast cancerS. ci Transl Med2013,5:181re181.                             Drug Discov Today2013,18:472–478.
+
+16. Synapse; [http://www.sagebase.org/synapse]                                       39.  Shi L, Campbell G, Jones WD, Campagne F, Wen Z, Walker SJ, Su Z, Chu TM,
+17.  Omberg L, Ellrott K, Yuan Y, Kandoth C, Wong C, Kellen MR, Friend SH,                Goodsaid FM, Pusztai L, Shaughnessy JD Jr, Oberthuer A, Thomas RS, Paules
+     Stuart J, Liang H, Margolin AAE:nabling transparent and collaborative                RS, Fielden M, Barlogie B, Chen W, Du P, Fischer M, Furlanello C, Gallas BD,
+
+     computational analysis of 12 tumor types within The Cancer Genome                    Ge X, Megherbi DB, Symmans WF, Wang MD, Zhang J, Bitter H, Brors B,
+     Atlas.Nat Genet2013,45:1121–1126.                                                    Bushel PR, Bylesjo M,et al: The MicroArray Quality Control (MAQC)-II
+18.  Global Alliance for Genomics and Health; [http://genomicsandhealth.org]              study of common practices for the development and validation of
+19.  Kim SY, Speed TPC : omparing somatic mutation-callers: beyond Venn                   microarray-based predictive models. Nat Biotechnol2010,28:827–838.
+
+     diagrams.BMC Bioinformatics2013,14:189.                                         40.  Tarca AL, Lauria M, Unger M, Bilal E, Boue S, Kumar Dey K, Hoeng J, Koeppl
+20.  O’Rawe J, Jiang T, Sun G, Wu Y, Wang W, Hu J, Bodily P, Tian L, Hakonarson           H, Martin F, Meyer P, Nandy P, Norel R, Peitsch M, Rice JJ, Romero R,
+     H, Johnson WE, Wei Z, Wang K, Lyon GL    J:ow concordance of multiple                Stolovitzky G, Talikka M, Xiang Y, Zechner C, IMPROVER DSC Collaborators:
+
+     variant-calling pipelines: practical implications for exome and genome               Strengths and limitations of microarray-based phenotype prediction:
+     sequencing.Genome Med2013,5:28.                                                      lessons learned from the IMPROVER Diagnostic Signature Challenge.
+21.  Alkan C, Coe BP, Eichler EEG: enome structural variation discovery and               Bioinformatics2013,29:2892–2899.
+                                                                                     41. Acute Myeloid Leukemia Outcome Prediction Challen;g[ehttps://www.synapse.
+     genotyping.Nat Rev Genet2011,12:363–376.
+22. Taking pan-cancer analysis globaN    l.at Genet2013,45:1263.                          org/#!Synapse:syn2455683]
+23.  Bradnam KR, Fass JN, Alexandrov A, Baranay P, Bechner M, Birol I, Boisvert S,   42.  Pujana MA, Han JD, Starita LM, Stevens KN, Tewari M, Ahn JS, Rennert G,
+     Chapman JA, Chapuis G, Chikhi R, Chitsaz H, Chou WC, Corbeil J, Del Fabbro           Moreno V, Kirchhoff T, Gold B, Assmann V, Elshamy WM, Rual JF, Levine D,
+
+     C, Docking TR, Durbin R, Earl D, Emrich S, Fedotov P, Fonseca NA,                    Rozek LS, Gelman RS, Gunsalus KC, Greenberg RA, Sobhian B, Bertin N,
+     Ganapathy G, Gibbs RA, Gnerre S, Godzaridis E, Goldstein S, Haimel M, Hall           Venkatesan K, Ayivi-Guedehoussou N, Solé X, Hernández P, Lázaro C,
+     G, Haussler D, Hiatt JB, Ho IYe,t al: Assemblathon 2: evaluating de novo             Nathanson KL, Weber BL, C sick ME, Hill DE, Offiet, al: Network modeling
+                                                                                          links breast cancer susceptibility and centrosome dysfunc   NtaiotnG.enet2007,
+     methods of genome assembly in three vertebrate species.
+     Gigascience2013,2:10.                                                                39:1338–1349.
+24.  Brownstein CA, Beggs AH, Homer N, Merriman B, Yu TW, Flannery KC,               43.  Taylor IW, Linding R, Warde-Farley D, Liu Y, Pesquita C, Faria D, Bull S, Pawson
+     Dechene ET, Towne MC, Savage SK, Price EN, Holm IA, Luquette LJ, Lyon E,             T, Morris Q, Wrana JL: ynamic modularity in protein interaction networks
+
+     Majzoub J, Neupert P, McCallie D Jr, Szolovits P, Willard HF, Mendelsohn NJ,         predicts breast cancer outcomeN. at Biotechnol2009,27:199–204.
+     Temme R, Finkel RS, Yum SW, Medne L, Sunyaev SR, Adzhubey I, Cassa CA,          44.  Vaske CJ, Benz SC, Sanborn JZ, Earl D, Szeto C, Zhu J, Haussler D, Stuart JM:
+     de Bakker PI, Duzkale H, Dworzy Ski P, Fairbrother W et, al: An international        Inference of patient-specific pathway activities from multi-dimensional
+
+     effort towards developing standards for best practices in analysis,                  cancer genomics data using PARADIGMB.ioinformatics2010,26:i237–i245.
+     interpretation and reporting of clinical genome sequencing results in           45.  Marbach D, Prill RJ, Schaffter T, Mattiussi C, Floreano D, Stolovitzky G:
+     the CLARITY challenge.Genome Biol2014,15:R53.                                        Revealing strengths and weaknesses of methods for gene network
+25.  Gymrek M, McGuire AL, Golan D, Halperin E, ErlichIY  d:entifying personal            inference.Proc Natl Acad Sci U S A2010,107:6286–6291.
+
+     genomes by surname inferenceS.cience2013,339:321–324.                           46.  Marbach D, Costello JC, Kuffner R, Vega NM, Prill RJ, Camacho DM, Allison
+26.  Good BM, Su AI:Games with a scientific purposeG. enome Biol2011,                     KR, Consortium D, Kellis M, Collins JJ, StolovitzkyW:isdom of crowds for
+     12:135.                                                                              robust gene network inferenceN    . at Methods2012,9:796–804.
+Boutros et al. Genome Biology 2014, 15:462                                                                                                        Page 10 of 10
+http://genomebiology.com/2014/15/9/462
+
+
+
+
+
+
+47.  Prill RJ, Saez-Rodriguez J, Alexopoulos LG, Sorger PK, Stolovitzky G:
+     Crowdsourcing network inference: the DREAM predictive signaling
+     network challenge. Sci Signal 2011, 4:mr7.
+
+48. HPN-DREAM breast cancer network inference challen;g[ehttps://www.synapse.
+     org/#!Synapse:syn1720047]
+49.  Maier R, Zimmer R, Kuffner RA: Turing test for artificial expression data.
+     Bioinformatics2013,29:2603–2609.
+
+50.  Canales RD, Luo Y, Willey JC, Austermiller B, Barbacioru CC, Boysen C,
+     Hunkapiller K, Jensen RV, Knight CR, Lee KY, Ma Y, Maqsodi B, Papallo A,
+     Peters EH, Poulter K, Ruppel PL, Samaha RR, Shi L, Yang W, Zhang L,
+
+     Goodsaid FM:Evaluation of DNA microarray results with quantitative
+     gene expression platformsN  . at Biotechnol2006,24:1115–1122.
+51.  Roberts ND, Kortschak RD, Parker WT, Schreiber AW, Branford S, Scott HS,
+     Glonek G, Adelson DL:A comparative analysis of algorithms for somatic
+
+     SNV detection in cancerB . ioinformatics2013,29:2223–2230.
+52.  Bell AW, Deutsch EW, Au CE, Kearney RE, Beavis R, Sechi S, Nilsson T,
+     Bergeron JJ, Group HTSWA  : HUPO test sample study reveals common
+
+     problems in mass spectrometry-based proteomicN      s.at Methods2009,
+     6:423–430.
+53. ‘t Hoen PA, Friedländer MR, Almlöf J, Sammeth M, Pulyakhina I, Anvar SY,
+     Laros JF, Buermans HP, Karlberg O, Brännvall M, GEUVADIS Consortium,
+
+     den Dunnen JT, van Ommen GJ, Gut IG, Guigó R, Estivill X, Syvänen AC,
+     Dermitzakis ET, Lappalainen TR: eproducibility of high-throughput mRNA
+     and small RNA sequencing across laboratorieN    s.at Biotechnol2013,
+
+     31:1015–1022.
+54.  Steijger T, Abril JF, Engstrom PG, Kokocinski F, Consortium R, Akerman M,
+     Alioto T, Ambrosini G, Antonarakis SE, Behr J, BertoneAPs:sessment of
+     transcript reconstruction methods for RNA-seq   N.at Methods2013,
+
+     10:1177–1184.
+55.  Ransohoff DF:Proteomics research to discover markers: what can we
+     learn from Netflix?Clin Chem2010,56:172–176.
+56.  Waters H:New $10 million X Prize launched for tricorder-style medical
+
+     device.Nat Med2011,17:754.
+
+
+  doi:10.1186/s13059-014-0462-7
+  Cite this article as: Boutros et al.: Toward better benchmarking: challenge-
+  based methods assessment in cancer genomicsG.enome Biology2014 15:462.

@@ -1,0 +1,1044 @@
+                                                                               Database, 2014, 1–13
+                                                                         doi: 10.1093/database/bau094
+                                                                                    Original article
+
+
+
+
+
+
+Original article
+
+
+Hybrid curation of gene–mutation relations
+
+
+combining automated extraction and
+
+crowdsourcing
+
+                    1,                      2               3                      3
+John D. Burger *, Emily Doughty , Ritu Khare , Chih-Hsuan Wei ,
+                       4                     1                            1
+Rajashree Mishra        , John Aberdeen , David Tresner-Kirsch ,
+Ben Wellner     1, Maricel G. Kann , Zhiyong Lu and     3
+                         1,
+Lynette Hirschman         *
+
+1The MITRE Corporation, Bedford, MA 01730, USA, Biomedical Informatics Program, Stanford
+                                   3
+University, Stanford, CA 94305, USA,ational Center for Biotechnology Information, National Library
+of Medicine, National Institutes of Health, Bethesda, MD 20894, USA and The University of Maryland,
+Baltimore County, Baltimore MD 21250, USA
+
+*Corresponding author: Tel: þ1 781 271 8784; Fax: þ1 781 271 2352; E-mail: john@mitre.org
+
+*Correspondence may also be addressed to Lynette Hirschman. Tel: þ1 781 271 7789; Fax: þ1 781 271 2780; E-mail:
+lynette@mitre.org
+
+Citation details: Burger,J., Doughty,E.K., Khare,R., et al. Hybrid curation of gene–mutation relations combining automated
+extraction and crowdsourcing. Database (2014) Vol. 2014: article ID bau094; doi:10.1093/database/bau094
+
+
+Received 25 June 2014; Revised 22 August 2014; Accepted 26 August 2014
+
+
+Abstract
+
+Background: This article describes capture of biological information using a hybrid ap-
+proach that combines natural language processing to extract biological entities and
+
+crowdsourcing with annotators recruited via Amazon Mechanical Turk to judge correct-
+ness of candidate biological relations. These techniques were applied to extract gene–
+
+mutation relations from biomedical abstracts with the goal of supporting production
+scale capture of gene–mutation–disease ﬁndings as an open source resource for person-
+
+alized medicine. Results: The hybrid system could be conﬁgured to provide good
+performance for gene–mutation extraction (precision ▯82%; recall ▯70% against an
+
+expert-generated gold standard) at a cost of $0.76 per abstract. This demonstrates that
+crowd labor platforms such as Amazon Mechanical Turk can be used to recruit quality
+
+annotators, even in an application requiring subject matter expertise; aggregated Turker
+judgments for gene–mutation relations exceeded 90% accuracy. Over half of the preci-
+sion errors were due to mismatches against the gold standard hidden from annotator
+
+view (e.g. incorrect EntrezGene identiﬁer or incorrect mutation position extracted), or in-
+complete task instructions (e.g. the need to exclude nonhuman mutations). Conclusions:
+
+The hybrid curation model provides a readily scalable cost-effective approach to
+
+
+
+
+VThe Author(s) 2014. Published by Oxford University Press.                                            Page 1 of 13
+This is an Open Access article distributed under the terms of the Creative Commons Attribution License (http://creativecommons.org/licenses/by/4.0/), which permits
+unrestricted reuse, distribution, and reproduction in any medium, provided the original work is properly cited.
+
+                                                                                      (page number not for citation purposes)
+Page 2 of 13                                                                          Database, Vol. 2014, Article ID bau094
+
+
+
+curation, particularly if coupled with expert human review to ﬁlter precision errors. We
+plan to generalize the framework and make it available as open source software.
+
+Database URL: http://www.mitre.org/publications/technical-papers/hybrid-curation-of-
+gene-mutation-relations-combining-automated
+
+
+
+
+
+Background                                                     in dbSNP or ClinVar) has the advantage in terms of cost
+                                                               (because the cost is borne by the researcher) and expertise
+The fields of translational medicine and personalized medi-
+cine rely on coupling information about an individual’s        (clearly the discovering researcher is in the best position to
+                                                               ensure accurate recording of the information). However,
+genotype (genetic make-up and genetic variations) with
+their phenotype (physical characteristics and state of         there are corresponding downsides: authors may not want
+                                                               to take the time to record their findings in detail, and they
+health/disease). Recent advances in low-cost rapid genomic
+sequencing methods now enable population studies linking       may not have the cross-disciplinary bioinformatics expert-
+genotype and phenotype. Several large-scale research activ-    ise to link findings to the underlying biological reference
+                                                               databases. For the capture of gene–mutation–disease rela-
+ities are underway, including the eMERGE Network (elec-
+tronic Medical Records and Genomics, http://emerge.mc.         tions, for example, the author must provide EntrezGene
+                                                               identifiers, mutation position information based on a refer-
+vanderbilt.edu/emerge-network), and the Personal Genome
+Project (1). This approach is making it possible to identify   ence genome, and the appropriate Medical Subject
+                                                               Headings (MeSH) or Unified Medical Language System
+a patient’s genetic variations that are associated with a par-
+ticular disease state or drug response. Similarly, new find-   (UMLS) term for the disease or phenotype. In an experi-
+ings in pharmacogenomics are enabling more precise             ment to compare author-contributed findings with expert
+                                                               curation in the MINT (Molecular INTeraction) database,
+dosing, for example, for warfarin (2). However, to make it
+possible to translate these associations into improved         author recall on curating protein–protein interaction was
+                                                               reported at 57% compared with curator recall of 87%,
+patient care, it is critical to have ‘an authenticated, well-
+annotated, curated, and freely accessible knowledge base       measured against a curated gold standard (11).
+                                                                  Expert curation is the norm for reference biological
+of genomic associations, risks, and warnings in machine-
+readable form’ (3). The focus of this research was to ex-      databases, such as for the Mouse Genome Informatics
+plore ways to create such a comprehensive, up-to-date,         (MGI) database (12) or TAIR (The Arabidopsis Informa-
+                                                               tion Resource) (13); expert curation of findings from the
+freely accessible knowledge base of genetic variations and
+associated phenotypes.                                         literature provides high-quality annotations, but through-
+                                                               put (and therefore coverage) is limited by cost (14). There
+
+                                                               are alternatives to these approaches, for example, auto-
+The curation problem                                           mated capture of information through bioinformatics
+
+There is an increasing volume of gene–mutation–disease in-     methods. MGI applies automated annotation of gene–
+                                                               protein function as a first pass, for cases where expert cur-
+formation being published in the biomedical literature. We     ation has not yet been done (these automated annotations
+estimate that there are >10000 new articles published each
+                                                               are labeled with a specific evidence category, to distinguish
+year that describe findings on the relation between genetic    them from the expert curated annotations). Another ap-
+mutations and phenotype or diseases. There are multiple
+repositories for this information, including OMIM (4),         proach that is gaining acceptance is crowdsourcing or com-
+                                                               munity-generated annotations (14, 15). These techniques
+dbSNP (5), HGVbase (6), HGMD (7), PharmGKB (8)and
+locus-specific databases (9). However, until recently, there   are being leveraged to collect data on drug interactions,
+                                                               drug adverse events and other complex relations reported
+have been few publicly available curated resources that cap-   in the literature. Other researchers (16) have experimented
+ture such findings. The recent creation of National Center
+                                                               with crowdsourcing to create gold standard datasets for
+for Biotechnology Information’s (NCBI’s) ClinVar database      evaluation of biomedical curation tasks.
+(10), launched in 2013, now provides a single public reposi-
+tory for such information. As of December 2013, ClinVar
+                                                               Scaling the curation process
+had >80 submitters and >60000 variations submitted.
+   There are currently two main approaches to capture          The goal of this research has been to create a scalable cost-
+
+computable genomic information: author-deposited data          effective curation process to capture complex information
+and expert curation. Author-deposited data (such as found      from the literature and make it available to the research
+Database, Vol. 2014, Article ID bau094                                                                        Page 3 of 13
+
+
+community in a timely fashion, at an acceptable level of ac-   of a gene and associate it with the appropriate EntrezGene
+
+curacy. We can posit throughput and cost goals; however, it    identifier. The mutations were extracted using the
+is more difficult to determine accuracy requirements, except   Extractor of Mutations system (Extractor of Mutations,
+
+by comparison with existing curation efforts.                  EMU) (20). Each candidate gene–mutation pair in an ab-
+   When depositing curated information into a database,        stract was then presented as highlighted mentions in a
+
+high precision is critical to avoid depositing incorrect infor-MEDLINE abstract and passed on to a crowd labor plat-
+mation. An early study on inter-curator agreement for          form, where workers were asked to judge whether the
+Gene Ontology (GO) curation (17) reported that expert          highlighted gene was associated with the highlighted muta-
+
+GO annotators achieved 91–100% precision, and at least         tion (Figure 1).
+72% recall, micro-averaged over results from three cur-           In this work, we made use of a crowdsourcing platform
+
+ators. A more recent study of curation by the Comparative      called Amazon Mechanical Turk (MTurk). MTurk is a
+Toxicogenomic Database (CTD) team (18) reported simi-          web-based labor market for what Amazon calls Human
+
+lar results on a complex curation task for disease–gene–       Intelligence Tasks (HITs). A typical HIT is a minimal prob-
+chemical relations from the literature: 91% of the inter-      lem instance that cannot be easily automated, such as cate-
+
+actions extracted by CTD biocurators were judged by the        gorizing a snippet of text or an image. Most HITs take a
+lead curator to be correct, with an average recall of 71%.     worker (or Turker) only a short time (seconds) to com-
+These results provide a target performance of at least 90%     plete, and workers are paid on a piecework basis. In 2011,
+
+precision at a recall of at least 70%. An alternate strategy   Amazon reported that 500000 Turkers from 190 countries
+would have been to optimize a semi-automated workflow          were registered on the service (21).
+
+for recall, followed by expert review to remove false posi-
+tives. This approach is revisited in the Discussion section.
+                                                               Methods
+   To achieve the goal of scalable, timely, cost-effective,
+accurate curation, our targets for the hybrid curation         Overall experimental design
+
+workflow were as follows:                                      We applied this framework to extract gene–mutation rela-
+
+• To provide accuracy comparable with expert curated           tions from titles and abstracts of articles from PubMed and
+  databases, namely, at least 90% precision with recall of     evaluated the results by comparison with an expert-curated
+
+  70% (17, 18);                                                gold standard of gene–mutation–disease relations. Building
+• To keep up with the volume of literature (▯10000 ab-         on results from an earlier experiment (22), we refined the
+
+  stracts per year or 200 abstracts per week);                 framework and enriched the gold standard for easier
+• To be affordable—we picked a cost of $1 per abstract as a    evaluation.
+  target for simple gene–mutation relations; full gene–muta-      A schematic of the framework is shown in Figure 2. The
+
+  tion–disease curation could be an order of magnitude         software combines multiple modules to support the follow-
+  more complex, but even a cost of $10 per abstract for full   ing functions: automated information extraction, using
+
+  curation would be an affordable price to pay to make the     the NCBI’s GenNorm and the University of Maryland
+  ﬁndings computable and reusable, compared with the cost      Baltimore County’s (UMBC’s) EMU; linkage of multiple
+
+  of publication for an open access article, often▯$1000.      mentions of each unique gene and each mutation; display
+                                                               of each candidate gene and mutation pair, highlighted in
+
+                                                               context in the abstract; crowdsourced relation judgment
+Approach—combining automated extraction                        (via Amazon MTurk); and evaluation against a gold
+                                                               standard.
+and curation
+                                                                  In the automated extraction phase, for the titles and ab-
+Our approach has been to combine automated extraction of       stracts of documents (in MEDLINE format), we identified
+the relevant biological entities, namely genes and mutations,
+                                                               and normalized as stand-off annotations:
+with crowdsourcing to elicit human judgments on the cor-
+rectness of associations betwn entities. The general strategy  1. mentions of genes, associated with EntrezGene ids,
+was to have high recall on the automatic entity extraction,       using NCBI’s GenNorm tool (this differs from the ini-
+
+followed by human judgment for all possible pairwise gene–-       tial experiment, which relied on NCBI-provided gene
+mutation combinations, with the final goal of high precision      annotations in gene2pubmed), and
+
+at the relation level, to supportdeposit of the extracted rela-2. mentions of mutations, identiﬁed and encoded as wild
+tions into an open source repository after expert review.         type, mutation type and position by a modiﬁed and
+
+   For this experiment, the genes were extracted using the        updated version of UMBC’s EMU tool (as in our initial
+augmented GenNorm system (19) to identify each mention            experiment).
+Page 4 of 13                                                                            Database, Vol. 2014, Article ID bau094
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 1. HIT design for the gene–mutation task.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 2. Schematic framework for hybrid curation.
+
+
+   We then integrated the output of the entity extraction       the context of the abstract (see Figure 1), and asked
+
+tools and the source signal (the text of the MEDLINE ab-        workers who have passed an initial qualifying exam to
+stract), grouped the text mentions by concept identifier        judge whether the candidate relation is accurate. For each
+
+into sets of unique mutations and genes and then took the       candidate relation, we obtained judgments from five
+cross product of mutation and gene concepts within each         Turkers.
+
+abstract, producing all potential gene–mutation pairs as           Finally, we evaluated the accuracy of the entity extrac-
+candidate relations.                                            tion and the relation judgments, as well as the combined
+
+   In the crowdsourcing phase, we used human judgment           accuracy across the full pipeline. The Turkers’ relation
+via the MTurk platform to filter the candidate relations        judgments were evaluated both individually and in aggre-
+
+down to those that are supported by the text of the             gate across each candidate according to a variety of aggre-
+abstract. We presented each concept pair as an MTurk            gation strategies. Each of these components is described in
+
+HIT, highlighting the gene and mutation mentions in             further detail below.
+Database, Vol. 2014, Article ID bau094                                                                         Page 5 of 13
+
+
+
+Data sources and gold standard
+                                                               Table 1. Corpus comparison for Experiment 1 vs. Experiment 2
+We used the curated gene–mutation–disease corpus
+described in Doughty et al.( 20) covering breast cancer and
+                                                               Experiment                                  #1       #2
+prostate cancer, augmented by additional curation to in-
+clude   abstracts  covering   autism   spectrum   disorder.    Number of Abstracts                          250      275
+                                                               Number of HITS                              1097     1078
+Abstracts were downloaded from the PubMed search en-           Number of genes (gold standard)              279      246
+gine using the MeSH terms ‘Mutation’ (for breast and
+                                                               Number of mutations (gold Standard)          586      452
+prostate cancer) or ‘Mutation AND Polymorphism/genetic’        Number of gene–mutation pairs (gold standard)586      444
+(autism spectrum disorder). The downloaded abstracts           Gene–mutation pairs per abstract                2.3     1.6
+
+were then further filtered to include only those in which
+the EMU mutation extraction tool identified at least one
+
+mutation mention, resulting in a corpus of 810 abstracts.
+   Curators with domain expertise then annotated the 810
+                                                               was searched for matches to a list of regular expressions,
+abstract corpus to create a gold standard. The curators        and each match in the text was parsed leveraging the in-
+identified human gene mutations mentioned in each ab-
+                                                               ternal component structure of the regular expression that
+stract and whether those mutations were mentioned in           identified it; second, the matches were filtered using a
+relation to one of the three diseases under study; the gold
+                                                               different group of regular expressions as a stop-list.
+standard included annotation for single nucleotide poly-       Substrings identified as mutations had surface representa-
+morphisms (SNPs) associated with disease in humans. All
+                                                               tions identifying them variously as nucleotide substitutions
+gene–mutation–disease relations were marked as coding or       (‘c.758C>T’), amino acid substitutions (‘Arg 117 His’) or
+noncoding; all mutations that did not involve human genes
+                                                               database identifiers (‘rs35490896’). EMU standardized
+were marked with a special code; each mutation position        compositionally    described   mutation    mentions    (e.g.
+was specified in terms of nucleotide or protein position
+                                                               ‘c.758C>T’) by parsing to extract the values of a wild
+within a reference gene. Although the initial curated data     type, a mutated type and an integer position for the muta-
+set created at UMBC covered gene–mutation–disease rela-
+                                                               tion. However, no standardization was performed for men-
+tions, the focus of the experiments described here was on      tions that used semantic identifiers of SNPs (e.g.
+the gene–mutation relations for SNPs within coding
+                                                               ‘rs35490896’). For cases where EMU detected pairs of mu-
+regions of human genes.                                        tant and wild-type nucleic acids or amino acids, it searched
+   At the outset, we split the corpus into three segments.
+                                                               the local environment for positional information; for
+For the initial experiment, we used a subset of 250 ab-        example, the phrase ‘T to C at position 59’ produced the
+stracts that had already been curated for genes in PubMed
+                                                               triple (T,C,59) of type ‘nucleotide’.
+because at that time we did not have access to an auto-           We made several adaptations in our use of EMU in the
+
+matic gene annotation tool. We then randomly split the         current experiment:
+remaining abstracts into two sets of 275 abstracts, one of
+                                                               • The version of EMU used in these experiments (version
+which was used in the experiment described here. The final
+set of 275 documents has been held in reserve for a future       1.19) was capable of identifying various types of muta-
+                                                                 tions, but this work focused on SNPs in coding regions;
+experiment. The remaining 10 abstracts were used for de-
+tailed debugging during development. Distributions for           the processing therefore ﬁltered out noncoding mutations
+                                                                 from EMU output by excluding mutations that had nega-
+genes and mutations are shown in Table 1. The differences
+between the two data sets in Table 1 were most likely            tive positional information or were explicitly stated to be
+                                                                 in introns or untranslated regions.
+owing to the way in which we chose the first set, which re-
+sulted in a bias toward more recent articles, leaving older    • EMU in its released versions identiﬁed only one mention
+                                                                 for each mutation concept within a document. The
+articles with fewer mutations per article, in the second set
+and third unused set.                                            downstream representation of candidate relations for
+                                                                 judgment by Turkers relied on identiﬁcation of all men-
+
+                                                                 tions, to highlight them in context. Accordingly, we
+                                                                 modiﬁed EMU to report multiple mentions for each mu-
+Extraction of base entities (genes, mutations)
+                                                                 tation concept, with stand-off annotation indicating the
+Mutations—extracted by EMU                                       text position of each mention.
+
+To identify and standardize mutation mentions in the tar-      • EMU was packaged with a postprocess ﬁlter that com-
+get documents, we used the EMU (20). EMU has a two-              pares mutation–gene candidate pairs against a reference
+
+step filter process to identify SNP mentions: first, the text    genome to determine whether the wild type and position
+Page 6 of 13                                                                          Database, Vol. 2014, Article ID bau094
+
+
+  are credible. Our experiments were designed with the in-     GenNorm output only if the whole or part of its long form
+
+  tent of high recall in the entity extraction phase, so we    corresponded to a human gene.
+  did not apply this postprocess.
+
+
+Genes—extracted by GenNorm                                     Building gene–mutation candidates
+
+In the initial experiment (22), we relied on gene metadata     The automatic extraction processes described above typic-
+present in the MEDLINE record (indexed by NCBI), and           ally identified mentions of multiple genes and mutations in
+found gene mentions (GMs) by projecting the indexed            each abstract, but we wished to show the human annota-
+
+genes into text using a database of gene names and simple      tors only one gene and one mutation at a time (albeit with
+heuristic string matching. However, for the current experi-    potentially multiple mentions of each). We automatically
+
+ment, we used a modified version of the GenNorm gene           grouped multiple mentions of the same gene in a single ab-
+tagger that operated directly on the text.                     stract using the gene ID assigned by GenNorm. Similarly,
+
+   GenNorm (19) is an algorithm for assigning NCBI             we grouped multiple mentions of the same mutation using
+Gene identifiers to gene and proteins mentioned in biomed-     the standardized form produced by EMU, namely, a triple
+
+ical text; it was a high-performing system as evaluated in     of hposition, wild type, mutant typei, where the wild and
+the BioCreative III Gene Normalization task in 2010 (23,       mutant types were either both nucleotides or both amino
+24). GenNorm consists of three modules for (i) finding         acids. One abstract contained a reference to a mutation via
+
+GMs, (ii) identifying and assigning organism information       a dbSNP reference id (e.g. ‘rs1234’). We ignored this refer-
+to GMs and (iii) normalizing mentions to NCBI Gene             ence in calculating our results, as dbSNP references are al-
+
+identifiers.                                                   ready associated with a specific gene in the dbSNP
+   For this study, the gene name lexicon used in the nor-      database. Finally, the cross product of all distinct genes
+
+malization module was downloaded from the NCBI Gene            and mutations found in an abstract was formed, resulting
+FTP site on 19 November 2012. Because this study only          in 1078 distinct gene–mutation items for the annotators.
+
+focused on mutations in human genes, we modified the
+species recognition module of GenNorm such that only
+                                                               Turking
+human genes were returned. Two additional steps were im-
+plemented to optimize results for this study:                  Just as in our earlier experiment (22), each item was pre-
+   First, a second gene tagger was included. The original      sented to the Turkers with all the mentions of the gene
+
+GenNorm uses AIIA-GMT (25) for recognizing GMs from            and mutation highlighted, to enable quicker annotation.
+a textual passage. To maximize recall, we added another        Figure 1 displays a screen shot of one such item as the
+
+system, GeneTuKit (26), to the GM module of GenNorm.           Turkers saw it. The Turker had to decide whether the high-
+Based on the benchmarking results on the BioCreative II        lighted gene and the highlighted mutation were described
+
+Gene Normalization task (27) test data, we observed ▯5%        in context as related to one another (‘Yes’ or ‘No’), with
+increase in recall.                                            an additional option for indicating that the annotations are
+
+   Second,   an   abbreviation  resolution   module   was      problematic in some way (‘Inconsistent annotation’). In
+included. Based on our error analysis of GM recognition        practice, this third option was rarely chosen (only 1.4% of
+results, we found that certain mentions identified by the      the responses).
+
+GM module were not human genes or proteins. For ex-               Because Turkers are not individually vetted for any par-
+ample, from the phrase ‘chloramphenicol acetyltransferase      ticular task, requesters use a variety of mechanisms to dis-
+
+(CAT)’, our system mistakenly recognized the abbreviation      courage poor performers from participating. The simplest
+‘CAT’ as a GM because it matched with the official symbol      approach is to require a specific minimum approval rating
+
+of the human gene ‘CAT catalase’ (NCBI Gene ID: 847),          on their previous work, whether for the same or other
+even though the associated full gene name ‘cloramphenicol      requestors; in this study we required Turkers with at least
+
+acetyltransferase’ does not refer to a human gene. To filter   95% rating on previous tasks. We also made use of a task-
+such false positives, we applied a biomedical abbreviation     specific pretest or qualifier, consisting of five sample HITs
+resolution tool, AB3P (28), which identifies pairs of long     with known answers, that Turkers had to pass (with four
+
+and short forms from sentences. For example, given the         of five, or 80%, correct) to work on our items. This was
+statement ‘Antagonists selective for estrogen receptor         similar in form to the item shown in Figure 1, and was
+
+alpha (ESR1)’, the tool would recognize the pair hestrogen     composed of five distinct candidate gene–mutation rela-
+receptor alpha, ESR1i. Using the AB3P output, we were          tions (the test items for the Qualifier are shown in
+
+able to validate the results of our normalization module as    Supplementary Appendix D). These were gleaned from our
+follows: a short form (and its identifier) was kept in the     initial experiment and were the five most predictive items
+Database, Vol. 2014, Article ID bau094                                                                           Page 7 of 13
+
+
+
+of Turker performance in that experiment measured by lin-        efficacy of this process. However, the automated system
+ear correlation.                                                 may have correctly recognized a gene and a mutation men-
+
+   We also used a more dynamic measure of Turker effi-           tion in an abstract, but could still assign the wrong concept
+cacy by injecting control items into the workflow.               ID to one or both. In this case, the Turkers may have cor-
+
+Approximately 20% of the items that each Turker per-             rectly identified an instance of the relation, even though it
+formed were drawn from a separate set of 99 items that           would ultimately be a mistake to deposit this relation into
+
+were also predictive of Turker performance in our initial        a database. Thus, we wished to evaluate these two quad-
+experiment. These were the successive items in the correl-       rants separately.
+
+ation ranking described above, chosen for a near-balance            As shown in Table 2, Quadrant 1 corresponded to the
+of positive and negative.                                        gene and mutation spans found by the automatic compo-
+
+   Finally, we used a common technique for quality con-          nents at the beginning of our pipeline. This quadrant could
+trol, namely, redundancy. We requested that five distinct        be evaluated using metrics designed for mention-level tag-
+
+Turkers complete each item, enabling voting and other            ging, as done for the gene name task in the first two
+more sophisticated response aggregation strategies, as we        BioCreative evaluations (29, 30), but we did not do so here
+
+describe below.                                                  because it would have required the preparation of a special
+                                                                 set of annotations that included all mentions of genes and
+
+                                                                 all mentions of mutations, regardless of their association to
+Evaluation methodology                                           a mutation or disease.
+
+The combined machine–human workflow discussed in this               Quadrant 2 represented the gene and mutation con-
+                                                                 cepts, and we were in fact interested in evaluating these be-
+article produced various kinds of artifacts at a number of
+distinct levels, and we were interested in evaluating these      cause they formed the basis for our ultimate interest, the
+                                                                 relations between them. We wished to understand, for in-
+separately and in different ways. The most obvious dimen-
+sion was that of entities vs. relations, where the entities of   stance, the degree to which errors in the entities affect
+                                                                 errors in the relation level. This evaluation corresponded
+interest included genes and mutations, and the relation we
+were after was the one that held between genes and muta-         to the determination of whether a particular gene or muta-
+                                                                 tion concept was mentioned in an abstract, and we used
+tions. Another important dimension was that of surface           the UMBC gold standard discussed above for this.
+text vs. underlying concepts. In our case, the concepts were
+                                                                 However, as the gold standard was curated for gene muta-
+represented by NCBI identifiers for genes, and the wild–         tions with possible association to disease, if there were
+mutant position triples for mutations. The gene–mutation
+                                                                 genes mentioned in the abstract that were not associated
+relation was then simply represented by tuples of gene and       with a mutation or disease, they would not appear in the
+mutation identifiers. Table 2 shows these two dimensions
+                                                                 gold standard. For these reasons, we focused on recall (and
+graphically.                                                     not on precision) for Quadrant 2 results (see Table 3), as
+   The distinction between Displayed Surface Text and
+                                                                 failure to capture a gene or mutation meant that the
+Concepts is worth making to better understand the mis-           Turkers would never see the candidate relation to pass
+takes made in different parts of our processing pipeline. In
+                                                                 judgment on it.
+particular, the Turkers only saw the representation of              Quadrant 3 corresponded to the task performed by the
+genes and mutations as highlighted in the text, and so
+                                                                 Turkers, namely, given sets of gene and mutation spans in
+should have been evaluated on what they were shown               an abstract, to judge whether the context indicated that the
+(Quadrant 3 in Table 2). Ultimately, we imagined this
+                                                                 relation in question held. We could not use the UMBC
+workflow depositing gene–mutation relations into a data-         gold standard for this because it was expressed in terms of
+base in terms of the underlying concepts (Quadrant 4 in
+                                                                 gene and mutation concept IDs. We undertook several ex-
+Table 2), and it was equally important to evaluate the           periments using staff from MITRE, UMBC and NCBI to
+
+                                                                 annotate subsets of the HITs shown to the Turkers,
+Table 2. Dimensions of possible evaluation                       independent of the gold standard, to provide a baseline
+
+                                                                 against which to compare the Turkers; this enabled us to
+Element of   Displayed surface textConcepts                      estimate Turker accuracy on this task; see Supplementary
+analysis     (Turker view)         (Database view)
+                                                                 Appendix A for the details of these experiments.
+Entities     1. Gene spans;        2. EntrezGene IDs;               Finally, Quadrant 4 was the relation concept represen-
+               mutation spans        mutation triple
+                                                                 tation. This was the end product of the workflow, from
+Relations    3. Judgments on entity4. Tuple of                   which the system would ideally deposit validated relations
+               spans in context      hgene ID, mutation triplei
+                                                                 into a database. We evaluated performance using the
+Page 8 of 13                                                                            Database, Vol. 2014, Article ID bau094
+
+
+Table 3. Precision and recall scores for gene and mutation      Table 4. Concept relation accuracy for the initial experiment
+
+identiﬁcation                                                   vs. the current study
+
+Element of     Gold     Candidates Correct Precision Recall                               Individual Turker results
+analysis       standard
+                                                                                          Experiment 1 %     Experiment 2 %
+
+Genes            246        582       222     0.381   0.902
+Mutations        452        497       395     0.795   0.874     Baseline system (all ‘NO’)      58.7              65.6
+Gene–mutation    444       1078       374     0.347   0.842     Average response                75.5              73.7
+                                                                Average 10þ Turker              70.7              68.1
+  pairs
+                                                                Average 100þ Turker             76.0              75.8
+                                                                Best Turker                     90.5              88.8
+                                                                Na¨ıve Bayes aggregate          84.5              85.3
+
+UMBC gold standard directly. If a hgene ID, mutation
+triplei was present in the gold standard for a particular ab-
+
+stract, we declared it to be correct, and otherwise it was in-  than the 36h recorded for our first experiment (22), per-
+correct. This quadrant provided the main results of the
+                                                                haps because of the timing of the December holidays.
+article, which are presented in the next section.
+
+                                                                Concept relation accuracy
+
+                                                                Table 4 shows the concept relation accuracy for the Turker
+Results                                                         judgments (corresponding to Quadrant 4 from Table 2) for
+
+Base entity extraction results                                  both the initial experiment (Expt 1) and the current experi-
+                                                                ment (Expt 2). The concept accuracies were evaluated
+We measured how well the preprocessing captured the
+                                                                using the UMBC Gold Standard. The per-Turker accura-
+relevant mutations and genes by comparing them against          cies were lower than the per-item accuracies owing to a
+the sets of mutations and genes that appeared in the gold
+                                                                number of poor-performing Turkers who submitted only a
+standard curated gene–mutation associations. Table 3            handful of judgments (seven Turkers submitted l<10 re-
+shows the actual number of entities in the 275 abstracts in
+                                                                sponses each). As we restrict our attention to those who
+our dataset, the number of candidates identified by
+                                                                performed larger amounts of work, we can see increases in
+GenNorm and EMU and the number that were correct.               performance. We also see that the results for Experiment 2
+From this we calculated precision and recall for the two
+                                                                were lower than those for Experiment 1, despite use of a
+types of entities. (For the reasons discussed in the            qualifying exam in Experiment 2 and careful selection of
+Evaluation Methodology section, these numbers should be
+                                                                control items. These findings led to several detailed error
+seen as close approximations to actual precision and recall,    analyses presented in the Discussion section.
+as there may have been a few mutations or genes not
+
+included in the gold standard used for scoring.) Note that      Aggregate results
+
+recall was higher than precision in both cases—in our pipe-     One way to compensate for the poor-performing Turkers
+line it was preferable to over-generate candidates, as we
+                                                                is to aggregate judgments on the same item—this was the
+relied on the Turkers to improve precision downstream.          main reason for requesting multiple judgments. There are a
+
+                                                                variety of possible mechanisms for such combination, and
+                                                                we explored several in previous work, with the most prom-
+End-to-end results
+                                                                ising being the Na¨ıve Bayes algorithm (31). Control item
+The experiment was posted to MTurk on 12 December               performance correlated roughly with test item performance
+
+2012, comprising 1354 items, of which 20% were controls         (see Supplementary Appendix B), so we used the former as
+
+drawn (with replacement) from the 99 items as described         the basis for each Turker’s Bayes factor. In brief, each
+above. Because we asked for five Turkers to respond to          Turker corresponded to a separate Naı¨ve Bayes feature,
+
+each item, we received 6770 judgments overall, from 24          with the Bayes factors calculated with respect to their ac-
+distinct Turkers. The most prolific Turker produced judg-       curacy on the control items. The first line of Table 5
+
+ments for all 1354 items, while the least prolific Turker       (85.3%) shows the accuracy resulting from combining all
+produced only one. Turkers were paid 7¢ per judgment,           five responses for each test item using Naı¨ve Bayes. By
+
+for a total cost of $521.29, including Amazon’s overhead        comparing this with the ‘average response’ line of Table 4
+charges. The last judgment was received almost exactly 11       (73.7%), we can see that aggregating provided a substan-
+
+days after posting. At >600 judgments per day, this was a       tial  improvement,    almost   12   points   of   accuracy.
+
+satisfactory throughput rate, although substantially slower     Essentially, Na¨ıve   Bayes   has   discovered   the  good
+Database, Vol. 2014, Article ID bau094                                                                       Page 9 of 13
+
+
+
+Table 5. Concept accuracy using Na¨ıve Bayes aggregation,     concept IDs were correct. We made several attempts to
+varying number of Turkers                                     construct this, with varying degrees of success. Our best at-
+
+                                                              tempt at a surface-level gold standard was accomplished
+Number of  5       4       3       2      1       Dynamic     by performing the Turker task ourselves on a subset of the
+Turkers
+                                                              items, notably those in which the aggregate Turker judg-
+Concept    85.3%   84.2%   82.7%   81.6%  74.3%    86.0%      ment disagreed with the UMBC gold standard at the con-
+  accuracy
+                                                              cept level. This was done by three authors (J.A., L.H.,
+Cost       $1.89   $1.51   $1.13   $0.75  $0.38    $0.97      R.K.); where all three authors agreed, we used this to
+
+                                                              rescore the surface relation results, but otherwise left the
+                                                              results as they were. Full details are provided in Supple-
+
+performers and weighted their contributions substantially     mentary Appendix A. (Note that this arguably provided an
+                                                              optimistic estimate, as it could only remove Turker-Gold
+more highly than the poor performers.
+   We incurred a substantial premium for this improve-        standard disagreements, not discover new ones).
+                                                                 Table 6 shows this estimate at surface accuracy, to-
+ment in performance, however, paying five times as much
+as the single Turker case for the opportunity to aggregate    gether with the concept accuracy from above for compari-
+                                                              son. We also show several other figures of merit. We can
+multiple responses. The remainder of Table 5 suggests the
+aggregate performance we would get from asking for fewer      see that from the perspective of what they were asked to
+                                                              do, the Turker aggregate performed well.
+and fewer judgments per item. We simulated this by simply
+removing the last Turker(s) to respond to each item. We
+
+can see that even with only double redundancy (n¼2) we        Surface and concept relation accuracy
+gained a great deal using response aggregation (81.6%).       Table 6 also shows the end-to-end concept relation accur-
+
+                                                              acy for the Turker judgments (corresponding to Quadrant
+                                                              4 from Table 2). The concept accuracies were evaluated
+Results for ‘active management’ simulations
+In addition to statically asking for a constant number of     using the UMBC Gold Standard. HIT recall computed re-
+                                                              call against the HITS corresponding to gold standard
+Turkers per item, as shown in Table 5, we also simulated
+managing the Turkers more dynamically. Based on control       entries; end-to-end recall computed recall against the entire
+                                                              gold standard (including relations not extracted in the
+item performance, we would ‘fire’ Turkers when they ap-
+peared to show little promise. In particular, Turkers who     automated processing).
+
+were performing below chance (50% for the control items)
+
+were good candidates for early dismissal. We simulated        Interannotator agreement
+this after the fact in the results below, although in separate
+                                                              We explored interannotator agreement among the most
+work we have experimented with automatically blocking
+poor Turkers dynamically while work is being performed.       prolific Turkers. Because the MTurk platform allowed
+                                                              Turkers to do as few or as many HITs as they liked, calcu-
+   We can see that the dynamic approach was almost as in-
+expensive as two Turkers per item, and accuracy was actu-     lating interannotator agreement over all Turkers who par-
+                                                              ticipated was not feasible. Thus, we calculated pairwise
+ally higher than the five Turker case (86%). This is because
+the Na¨ıve Bayes aggregation gave some nonzero weight         agreement and pairwise Cohen’s Kappa (32) for the three
+                                                              Turkers who did>1000 HITs. Pairwise raw agreement (%
+even to poor performers, while cutting those Turkers off
+early allowed us to ignore their contributions entirely.      of responses in common) and Cohen’s Kappa for each pair
+                                                              of Turkers appears in Table 7.
+
+
+
+Turker surface accuracy
+                                                              Discussion
+As explained in the preceding section, we wished to assess
+the various parts of our pipeline separately. In particular,  Comparing Turker performance in two
+                                                              experiments
+we wanted to distinguish between errors made at the sur-
+face judgment level by the Turkers (Quadrant 3) and errors    Following the completion of this second experiment, we
+
+at the final concept level (Quadrant 4). We used the          compared the concept relation accuracy for the Turker
+UMBC gold standard to assess the latter, but this was in      judgments for both the initial experiment and the current
+
+terms of concept IDs, which were invisible to the Turkers.    experiment, as shown in Table 4. To our surprise, despite
+To assess the Turker judgments directly, we would ideally     the more careful vetting of Turkers and more careful selec-
+
+have used a gold standard that ignored whether the            tion of control items, the concept accuracy of this second
+Page 10 of 13                                                                           Database, Vol. 2014, Article ID bau094
+
+
+
+Table 6. Surface and concept aggregate performance              relation that was correct at the surface level, even though
+                                                                the underlying representation at the concept level did not
+                        Surface level—       Concept level—
+                                                                match the gold standard because of erroneous position in-
+                        Quadrant 3           Quadrant 4         formation. The EMU output included a set of 120 muta-
+
+Accuracy                    90.6                  85.3          tions with ‘non-local’ position information. Of these, 82 of
+Precision                   83.6                  71.9          120 (68%) had incorrect positional information.
+HIT recall                  95.1                  94.3
+                                                                   Based on this analysis, we simulated disallowing the
+End-to-end recall           91.7                  78.8          processing of nonlocal mutations within EMU by removing
+
+                                                                the 226 HITS associated with the nonlocal mutations. We
+
+                                                                then rescored; the revised results, shown in the columns
+                                                                labeled ‘Loc Pos’ showed a HIT accuracy of 89.7%, with a
+Table 7. Pairwise agreement and Kappa for each pair of most
+proliﬁc Turkers                                                 precision of 82.3% (false positive rate of 17.7%) and HIT
+                                                                recall of 94.1% (false negative rate of 5.9%). However,
+
+                        A–B            A–C            B–C       end-to-end recall decreased substantially, from 78.8 to
+                                                                71.4% because of removal of a number of valid HITs.
+% Agreement             0.630          0.680          0.731
+Cohen’s Kappa           0.263          0.378          0.477
+                                                                Categorization of the remaining false positives
+
+                                                                We next undertook a detailed analysis of all the HITs
+                                                                where the aggregate Turker judgment differed from the
+
+experiment was comparable with the first experiment             gold standard, after removing the problematic mutations
+(84.5% for experiment 1 vs. 85.3% for experiment 2).            described above. We analyzed the remaining 68 false posi-
+
+These findings led us to do several detailed error analyses.    tives to identify other types of mismatches and information
+                                                                hidden from the Turkers. We identified a number of types
+
+                                                                of mismatch, including erroneous EntrezGene identifier
+Post hoc error analyses: false positives                        (21 occurrences), inclusion of nonhuman or noncoding
+
+Table 8 shows the gold standard vs. Turker judgments            mutations (23 and 11 occurrences, respectively), missing
+                                                                gold standard information (3 occurrences) and erroneous
+under two sets of conditions: first, for the full set of HITs,
+and in the adjacent column in parentheses, for a subset of      Turker judgments (10 occurrences). The details of this ana-
+
+HITS (explained below). For the full set of HITS, there         lysis are provided in Supplementary Appendix C.
+were 137 false positives of 487 (HITs where the aggregate          Overall, almost two-thirds of the false positives were
+
+Turker judgment was YES, but the gold standard said             the result of errors hidden from the Turkers (wrong gene
+NO), resulting in a precision of 71.9%, far below the 90%       concept identifier) or failure to give full instructions to
+
+precision that we deemed necessary for a production qual-       Turkers (to exclude nonhuman mutations). We concluded
+ity system.                                                     from this analysis that the aggregate Turker judgments
+
+   On further analysis, we noticed that many of the false       were surprisingly good, especially if judged in terms of sur-
+positives resulted from mismatches between the HIT              face relations. This was corroborated by our attempt to
+
+shown to the Turker (the Quadrant 3 Turker view,                measure Surface Relation Accuracy (Quadrant 3) as
+Table 2) and the concept level view of the gold standard        described in Table 6. Based on these results, we estimated
+
+(the Quadrant 4, Table 2) that was not visible to the           that aggregate Turker judgments were >90% accurate.
+Turkers.
+
+   Specifically there were a number of discrepancies owing      Categorization of false negatives
+to an incorrect mutation position value. This happened          Table 8 shows two recall figures. The first (higher) of these
+
+when EMU had to look for positional information that did        was the ‘HIT Recall’; this was the recall in terms of only
+not occur as part of a standard type of mutation expres-        those candidate relations that the Turkers were presented
+
+sion, as in ‘…T to C at position 59 resulting in substitution   with. The second (‘End-to-end recall’) measured the recall
+                                                                of the entire hybrid process, including both omissions due
+of Pro for Ser’. Here EMU correctly identified Pro and Ser
+as the mutant and wild-type amino acids, but picked up          to faulty extraction of genes or mutations, as well as incor-
+
+the closest number as the position (‘59’) that was incor-       rect Turker judgments. There were relatively few false-
+rect—it was the position at the nucleotide level, not at the    negative Turker judgments (on the order of 5–6%). The
+
+amino acid level. The position information that EMU             larger problem occurred during candidate entity extrac-
+found in this way was not highlighted when displaying the       tion, due to failure to extract gene identifiers or full muta-
+
+HIT; thus, the Turker may have seen a gene–mutation             tion information.
+Database, Vol. 2014, Article ID bau094                                                                             Page 11 of 13
+
+
+Table 8. Turker aggregate judgment vs. gold standard
+
+
+Na¨ıve Bayes      GoldStd YES              GoldStd NO               Total                    Percent                  Concept
+aggregate score                                                                                                       level Eval
+                  All HITs    Local Pos    All HITs    Local Pos    All HITs    Local Pos    All HITs    Local Pos
+
+
+Turker YES        350         (317)        137         (68)         487         (385)        71.9        (82.3)       Precision
+Turker NO         21          (20)         570         (447)        591         (467)        94.3        (94.1)       HIT recall
+
+Turker Total      371         (337)        707         (515)        1078        (852)        85.3        (89.7)       Accuracy
+TOTAL GOLD                                                          444         (444)        78.8        (71.4)       E2E recall
+
+
+
+
+   Of the 94 missing concept triples in Table 8 for the
+
+full set of HITs (444 gold standard triples—350 Turker
+
+‘YES’ responses), 43 were due to incorrect extraction of
+mutation position information and 37 were due to missing
+
+stop codon or synonymous mutations (neither of which are
+
+recognized by the version of EMU used for the
+experiment).
+
+
+
+Cost of curation
+
+
+The ultimate goal of this research was to develop an accur-
+ate, scalable, cost-effective method to capture gene–muta-
+
+tion relations (and ultimately gene–mutation–disease
+relations) in an open source repository. The initial results
+
+of both experiments showed promise in terms of through-
+                                                                  Figure 3. Concept accuracy for static and dynamic Turker pools, remov-
+put but fell short of the goal of 90% precision at >70% re-       ing mutations with nonlocal positions.
+call. However, when we revisited these results using only
+
+mutations extracted with local position information, we
+                                                                    tools could yield higher performance, which could lead
+saw that the precision improved to 82.3% with a recall of           to improvements in both precision and recall.
+71.4% (Table 8). Figure 3 shows the cost-accuracy trade-
+                                                                  • The adaptation of the current interface for use by expert
+offs for this more limited set of mutations, with the opti-
+                                                                    curators, including explicit representation of concept
+mal trade-off of 89.9% accuracy at a cost of $0.76                  level output;
+achieved by simulating removal of any Turker whose per-
+                                                                  • The cost of expert review to validate entries before
+formance fell below 50% accuracy on the control items.              archiving, with a workﬂow optimized for recall;
+   On the other hand, the system could be biased for high
+                                                                  • The cost of capturing more complex relations, e.g.
+recall with an expert curator inserted to review all judg-
+                                                                    gene–mutation–disease;
+ments before depositing these in a database. While this           • The ability to recruit and retain vetted Turkers to per-
+would add some element of cost, it is much faster to review
+                                                                    form these tasks;
+relations than to tag them de novo. The expert could use a        •
+                                                                    The ability to curate full text articles, as opposed to ab-
+version of the same interface, along with an explicit visual-       stracts. This latter is particularly important, as abstracts
+ization of the concept level information, specifically the
+                                                                    contain only a subset of genetic variants; the full text
+EntrezGene ID, gene symbol and gene name, also represen-            contains a much richer set of variants, and the supple-
+tation of the wild type and mutant type amino acid or nu-
+                                                                    mentary material contains even more (39). However, the
+cleotide and its position.
+                                                                    longer the text segment, the more challenging it becomes
+   These issues point to the need for further experimenta-          to show a useful context to the Turker for relation
+tion. Open issues include the following:
+                                                                    judgment.
+
+• Exploration of alternative mutation extraction and gene
+  normalization tools. For example, a recent paper by
+
+  Jimeno Yepes and Verspoor (33) compared open source             Conclusions
+
+  tools for automatic extraction of mutations, including          Overall, we concluded that the hybrid curation approach
+  (20, 34–38). Their results suggest that a combination of        was extremely promising: it met our goals in terms of cost
+Page 12 of 13                                                                                Database, Vol. 2014, Article ID bau094
+
+
+                                                                    M.G.K. by Urooj Aqeel, Veer Gariwala, Mitsu Shah, Nikhil
+and turnaround, but fell somewhat short on quality, with
+accuracy of just <90%, end-to-end recall at an acceptable           Yesupriya and Ye Sol Yun. Funding for open access charge: The
+                                                                    MITRE Corporation.
+71%, but precision still below the target of 90%.
+
+   Precision was hurt by discrepancies between instruc-             Conflict of interest: None declared.
+tions and aims of experts preparing the gold standard and
+
+the (rather simplified) instructions given to the Turkers. To
+
+mitigate this, we could explore several options. The first
+would be to do Turking in two stages: a first stage would
+                                                                    References
+be to judge the correctness of the mutation, and a second
+                                                                    1.  Ball,M.P., Thakuria,J.V., Zaranek,A.W. et al. (2012) A public
+stage could judge the correctness of the gene–mutation re-
+                                                                        resource facilitating clinical use of genomes. Proc. Natl. Acad.
+lation. An alternative option would be to experiment with               Sci. USA, 109, 11920–11927.
+exposing more explicit mutation information to the
+                                                                    2.  Perera,M.A., Cavallari,L.H., Limdi,N.A. et al. (2013) Genetic
+Turkers, and asking them to also validate the correctness               variants associated with warfarin dose in African-American indi-
+
+of the mutation.                                                        viduals: a  genome-wide   association study.  Lancet,  382,
+   If we wished to extend this approach to disease–gene–                790–796.
+
+mutation curation, we would need to adopt a similar                 3.  Chute,C.G. and Kohane,I.S. (2013) Genomic medicine, health
+                                                                        information  technology,  and  patient  care. JAMA,    309,
+approach, to break the problem down into smaller sub-
+components that could be separately judged; our early                   1467–1468.
+                                                                    4.  Amberger,J., Bocchini,C.A., Scott,A.F. et al. (2009) McKusick’s
+experiments on curation of the three-way disease–gene–
+                                                                        Online Mendelian Inheritance in Man (OMIM). Nucleic Acids
+mutation relations suggested that this task would be cogni-             Res., 37, D793–D796.
+tively too complex, with too many ways for a relation to
+                                                                    5.  Sherry,S.T., Ward,M.H., Kholodov,M. et al. (2001) dbSNP: the
+be incorrect.                                                           NCBI database of genetic variation. Nucleic Acids Res., 29,
+
+   Overall, we were pleasantly surprised that we were able              308–311.
+                                                                    6.  Thorisson,G.A.,  Lancaster,O.,  Free,R.C.   et  al.  (2009)
+to recruit Turkers with sufficient ability to handle this
+complex domain; and even though we were not able to                     HGVbaseG2P: a central genetic association database. Nucleic
+                                                                        Acids Res., 37, D797–D802
+measure Turker surface judgments directly, we estimated
+                                                                    7.  Stenson,P.D., Ball,E.V., Howells,K. et al. (2009) The Human
+that the surface accuracy of the aggregate judgments was                Gene Mutation Database: providing a comprehensive central
+around 90%.
+                                                                        mutation database for molecular diagnostics and personalized
+   Finally, we were encouraged by the rapid turnaround:                 genomics. Hum. Genomics, 4, 69–72.
+
+in the initial experiment, 250 abstracts in 36 h; in the se-        8.  Whirl-Carrillo,M., McDonagh,E.M., Hebert,J.M. et al. (2012)
+cond experiment, 275 abstracts in 11 days over the                      Pharmacogenomics    knowledge   for personalized  medicine.
+
+December holidays. Even more encouraging, if we were to                 Clinical Pharmacology and Therapeutics, 92, 414–417.
+                                                                    9.  Samuels,M.E. and Rouleau,G.A. (2011) The case for locus-spe-
+adopt an approach of only paying ‘good’ Turkers, we                     ciﬁc databases. Nat. Rev. Genet., 12, 378–379.
+could achieve 90% accuracy at a cost of only $0.76 per ab-
+                                                                    10. Landrum,M.J., Lee,J.M., Riley,G.R. et al. (2014) ClinVar: pub-
+stract—well below our target of $1 per abstract.                        lic archive of relationships among sequence variation and human
+
+                                                                        phenotype. Nucleic Acids Res., 42, D980–D985.
+                                                                    11. Leitner,F., Chatr-aryamontri,A., Mardis,S.A. et al. (2010) The
+
+Competing Interests                                                     FEBS Letters/BioCreative II.5 experiment: making biological in-
+                                                                        formation accessible. Nat. Biotechnol., 28, 897–899.
+The authors declare that they have no competing interests.
+                                                                    12. Smith,C.M., Finger,J.H., Hayamizu,T.F. et al. (2014) The mouse
+                                                                        Gene Expression Database (GXD): 2014 update. Nucleic Acids
+
+                                                                        Res., 42, D818–D824.
+Supplementary Data                                                  13. Li,D., Berardini,T.Z., Muller,R.J. et al. (2012) Building an efﬁ-
+
+Supplementary data are available at Database Online.                    cient curation workﬂow for the Arabidopsis literature corpus.
+                                                                        Database (Oxford), 2012, bas047.
+
+                                                                    14. Berardini,T.Z., Li,D., Muller,R. et al. (2012) Assessment of
+Funding                                                                 community-submitted ontology annotations from a novel data-
+
+This research has been partially funded by the Intramural Research      base-journal partnership. Database (Oxford), 2012, bas030.
+                                                                    15. Good,B.M. and Su,A.I. (2013) Crowdsourcing for bioinfor-
+Program of NIH, National Library of Medicine and by The
+National Institutes of Health (NIH) grant 1K22CA143148 to               matics. Bioinformatics, 29, 1925–1933.
+                                                                    16. Zhai,H., Lingren,T., Deleger,L. et al. (2013) Web 2.0-based
+M.G.K. (PI) and the American Cancer Society, ACS-IRG grant to
+M.G.K. (PI). The curation results reported in Supplementary             crowdsourcing for high-quality gold standard development in
+                                                                        clinical natural language processing. J. Med. Internet Res., 15,
+Appendix A (Returking of Random HITS) was performed at
+University of Maryland, Baltimore County, under the supervision of      e73.
+Database, Vol. 2014, Article ID bau094                                                                                       Page 13 of 13
+
+
+
+17. Camon,E.B., Barrell,D.G., Dimmer,E.C. et al. (2005) An evalu-       28. Sohn,S., Comeau,D.C., Kim,W. et al. (2008) Abbreviation deﬁn-
+
+    ation of GO annotation retrieval for BioCreAtIvE and GOA.               ition identiﬁcation based on automatic precision estimates. BMC
+    BMC Bioinformatics, 6 (Suppl 1), S17.                                   Bioinformatics, 9, 402.
+
+18. Wiegers,T.C., Davis,A.P., Cohen,K.B. et al. (2009) Text mining      29. Yeh,A., Morgan,A., Colosimo,M. et al. (2005) BioCreAtIvE
+
+    and manual curation of chemical-gene-disease networks for the           task 1A: gene mention ﬁnding evaluation. BMC Bioinformatics,
+    comparative     toxicogenomics     database    (CTD).     BMC           6 (Suppl 1), S2.
+
+    Bioinformatics, 10, 326.                                            30. Smith,L., Tanabe,L.K., Ando,R.J.N. et al. (2008) Overview of
+
+19. Wei,C.H.   and   Kao,H.Y. (2011)     Cross-species  gene   nor-         BioCreative II gene mention recognition. Genome Biol., 9 (Suppl
+    malization by species inference. BMC Bioinformatics, 12 (Suppl          2), S2.
+
+    8), S5.                                                             31. Bayes,M. and Price,M. (1763) An Essay towards solving a
+20. Doughty,E., Kertesz-Farkas,A., Bodenreider,O. et al. (2011)             Problem in the Doctrine of Chances. By the late Rev. Mr. Bayes,
+
+    Toward an automatic method for extracting cancer- and other             FRS communicated by Mr. Price, in a letter to John Canton,
+
+    disease-related point mutations from the biomedical literature.         AMFRS. Philos. Trans. (1683-1775), 53, 370–418.
+    Bioinformatics, 27, 408–415.                                        32. Cohen,J. (1960) A coefﬁcient of agreement for nominal scales.
+
+21. Paritosh,P., Ipeirotis,P., Cooper,M. et al. (2011) The computer is      Educ. Psychol. Meas., 20, 37–46.
+
+    the new sewing machine: beneﬁts and perils of crowdsourcing.        33. Yepes,A.J. and Verspoor,K. (2014) Mutation extraction tools
+    WWW’ 11, 325–326.                                                       can be combined for robust recognition of genetic variants in the
+
+22. Burger,J.D., Doughty,E., Bayer,S. et al. (2012) Springer Berlin         literature. F1000Research, 3, 18.
+
+    Heidelberg, Validating candidate gene-mutation relations in         34. Naderi,N. and Witte,R. (2012) Automated extraction and se-
+    MEDLINE abstracts via crowdsourcing. Data Integration Life              mantic analysis of mutation impacts from the biomedical litera-
+
+    Sci., 7348, 83–91.                                                      ture. BMC Genomics, 13 (Suppl 4), S10.
+23. Arighi,C.N., Roberts,P.M., Agarwal,S. et al. (2011) BioCreative     35. Hakenberg,J., Voronov,D., Nguyeˆn,V.H. et al. (2012) A
+
+    III interactive task: an overview. BMC Bioinformatics, 12 (Suppl        SNPshot of PubMed to associate genetic variants with drugs, dis-
+
+    8), S4.                                                                 eases, and adverse reactions. J. Biomed. Inform., 45, 842–850.
+24. Lu,Z.,   Kao,H.Y.,    Wei,C.H.    et  al.  (2011)   The   gene      36. Wei,C.H., Harris,B.R., Kao,H.Y. et al. (2013) tmVar: a text
+
+    normalization task in BioCreative III. BMC Bioinformatics, 12,          mining approach for extracting sequence variants in biomedical
+
+    S2.                                                                     literature. Bioinformatics, 29, 1433–1439.
+25. Hsu,C.N., Chang,Y.M., Kuo,C.J. et al. (2008) Integrating high       37. Baker,C.J.O. and Witte,R. (2006) Mutation mining—a pro-
+
+    dimensional bi-directional parsing models for gene mention tag-         spector’s tale. Inf. Syst. Front., 8, 47–57.
+    ging. Bioinformatics, 24, i286–i294.                                38. Caporaso,J.G., Baumgartner,W.A., Randolph,D.A. et al.(2007)
+
+26. Huang,M., Liu,J. and Zhu,X. (2011) GeneTUKit: a software for            MutationFinder: a high-performance system for extracting point
+
+    document-level    gene   normalization.   Bioinformatics,   27,         mutation mentions from text. Bioinformatics, 23, 1862–1865.
+    1032–1033.                                                          39. Yepes,A.J. and Verspoor,K. (2014) Literature mining of genetic
+
+27. Morgan,A.A., Lu,Z., Wang,X. et al. (2008) Overview of                   variants for curation: quantifying the importance of supplemen-
+
+    BioCreative II gene normalization. Genome Biol.,9(Suppl2),S3.           tary material. Database (Oxford), 2014, bau003.

@@ -1,0 +1,2613 @@
+                          Crowdseeding Conict Data
+
+
+                   Peter van der Windt     ▯       Macartan Humphreys
+
+
+                                      February 13, 2014
+
+
+
+
+
+                                           Abstract
+
+         Poor quality data about conict events can hinder humanitarian responses and
+      bias academic research. There is increasing recognition for the role new information
+
+      technologies can play in producing more reliable data faster. We piloted a novel data-
+      gathering system in the Democratic Republic of Congo in which villagers in a set
+      of randomly selected communities report on events in real time via SMS. We ▯rst
+
+      describe the data and assess its reliability. We then examine the usefulness of such
+      \crowdseeded" data in two ways. First, we implement a downstream experiment on
+      aid and conict and ▯nd evidence that aid can lead to fewer conict events. Second,
+
+      we examine conict di▯usion in Eastern Congo and ▯nd evidence that key dynamics
+      operate at very micro levels.  Both applications highlight the bene▯t of collecting
+      conict data via cell phones in real time.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ▯Corresponding author: pv2160@columbia.edu. We would like to thank Junior Bulabula, Ruth Carlitz,
+
+Simon Collard-Wexler, Yair Ghitza, Stefan Lehmeier, Steven Livingston, Neelanjan Sircar and Patrick
+Meier.  We also thank Tracy Longacre, Desire Cimerhe and Alain Kabeya for outstanding in-country
+work. Voix des Kivus has been presented at a number of occasions: 2009 International Conference for
+Conict Mapping, UNOCHA’s Coordination Meeting, 2010 Folke Bernadotte Conference, 2011 World Bank
+
+Workshop (Bukavu), Free University Berlin (2011), 2012 MPSA, the University of British Columbia (2012),
+and 2013 ISA (San Fransisco). We thank the participants at these meetings. The Voix des Kivus pilot
+project was funded by USAID and bene▯ted from support from the group’s learning network; we thank
+especially Borany Penh and John Berry. Thanks too to the IRC for their partnership on the larger study
+
+of the development interventions in Congo. Peter also thanks Wageningen University where part of this
+paper was written. Most of all we thank our 54 phone holders who, by sending thousands of SMS-messages,
+made it possible to learn about events that take place in Eastern Congo.
+
+
+                                               1
+1    Introduction
+
+Information technology is becoming increasingly visible as a means for gathering data on
+
+social trends. Web-based social networks are used to organize, mobilize and coordinate
+activities|from riots in London to regime change in the Middle East. Satellite imagery
+is used by the UNHCR to track population movements during conicts or droughts, and
+
+by the ICC to learn about the presence of mass-graves in Bosnia. And cell phones, com-
+bined with geo-mapping software, are used to create early-warning systems. Information
+
+technology is now also employed prominently in research. Satellite imagery has been used
+to study economic growth (Henderson et al., 2011, 2012), Twitter to learn about the Gaza
+Conict (Zeitzo▯ (2011)), and GIS data to assess many elements of conicts (Lujala, 2010;
+
+Raleigh and Hegre, 2009; Lujala et al., 2005; Weidmann et al., 2010; Raleigh et al., 2010).
+    Despite broad interest in understanding patterns of political violence, the development
+
+of micro-level measures remains weak. There have been improvements in data collection on
+violence but this data is typically at a high a level of aggregation. As Verwimp et al. (2009)
+argue: \At a fundamental level, conict originates from individuals’ behavior and their re-
+
+peated interactions with their surroundings, in other words, from its micro-foundations
+(p.307)." Recent work by Autesserre in the Democratic Republic of Congo (DRC) illus-
+
+trates the point: Although the war o▯cially came to an end in 2003, thousands of civilians
+still die each week. A plausible reason is that international interventions have focused at the
+regional and national levels; ignoring the local level where conicts over land and political
+                                                                                       1
+power became self-sustaining and autonomous from the national and regional tracks.
+    Micro-level conict data is normally collected by conducting surveys or interviews.
+However, obtaining such data in real-time using traditional approaches is di▯cult because
+
+conict events cluster in areas that have three characteristics. First, they are insecure,
+which limits the ability of researchers to visit them. Second, they are often physically
+
+hard-to-access (indeed di▯cult terrain is signi▯cantly related to a higher incidence of civil
+war (Fearon and Laitin, 2003)). Third, they may exhibit high levels of societal suspicion
+and distrust due to, for example, recent conict experiences or the inux of new, unknown
+
+people due to displacement. These characteristics can create di▯erent types of biases that
+a▯ect data quality.
+
+    First are selection biases. If areas are o▯-limits while conict events take place, re-
+searchers often access and enlist the cooperation of only a (non-random) fraction of the
+research populations. 2 Such selection biases may arise in subtle ways|for example, even
+
+if all areas are covered by a survey, security considerations may result in scheduling ad-
+justments so that di▯erent regions are only visited when it is safe to do so. Other biases
+obtain with recall data since testimonies are only taken from the living.
+
+    Second are risks of recall bias arising from the gathering of data after the conclusion
+   1
+    Autesserre (2009) and Autesserre (2010).
+   2Cohen and Arieli (2011) discuss how the populations in conict areas are hidden from and hard to
+reach for researchers, and argue how the \snowball surveying"-method works to access such populations.
+
+
+                                              2
+of conict. Coughlin (1990) provides an overview of the literature. While time cues might
+lessen this bias in some cases, De Nicola and Gin▯     e (2014) ▯nd evidence that the use of
+
+time cues can sometimes exacerbate the problem. One example is the problem of ‘telescop-
+ing’ where respondents run together several events and lose track of when they actually
+
+happened. The importance of prompt data collection then may depend on the number of
+events taking place.
+
+    Third are risks of reporting bias that may arise when sensitive questions are asked in
+settings characterized by distrust and suspicion. Trust has to be created to obtain high-
+
+quality responses. However, this is especially di▯cult in conict areas where data-collection
+is a one-o▯ activity. 3 And of course, reporting may also be biased because of deliberate
+                                        4
+attempts to manipulate information.
+    We seek to investigate how information technology can overcome the problems asso-
+
+ciated with the collection of conict data. To do so we piloted a \crowdseeding" system
+that collected information via SMS from pre-identi▯ed informants in randomly sampled
+
+locations. The project, Voix des Kivus, was implemented between 2009 and 2011 in the
+war-torn province of South Kivu in Eastern Democratic Republic of Congo. Large parts
+
+of the province are hard-to-access and although there is reasonable cell phone coverage,
+access to cell phone technology is limited.
+
+    In using cell phone technology we build o▯ the \crowdsourcing" approach pioneered
+by groups such as Ushahidi. Under crowdsourcing, anyone can send an SMS-message to a
+
+central platform in which messages are gathered, stored and visualized on a map. Though
+clearly a compelling system for \▯re alarm" monitoring, there are reasons to worry that
+                                                                      5
+the data generated through such systems is not representative.           Reporters might send
+incorrect information|for example they might over-report hardship|hoping for human-
+
+itarian intervention. The data may also be unrepresentative for more innocent reasons;
+only people with access to a cell phone (and who have heard about the project) can send
+
+messages. Furthermore, the system will only receive messages from people that are willing
+to pay the cost of an SMS.   6
+
+    The crowdseeding approach seeks to combine the strengths of crowdsourcing technolo-
+gies to generate detailed real time data, with the strengths of traditional approaches that
+
+   3
+    Various approaches to get at sensitive information in these environments have recently been developed.
+See for example Corstange (2008).
+   4Luyendijk (2009), for example, discusses how in the Middle East the actors provide neatly packaged
+story lines to media reporters. A more subtle way to inuence the data is for government or rebel groups
+
+to 5rant a researcher access to only certain areas, and deny it to others.
+    Berinsky et al. (2012), for example, ▯nd that information collected via Amazon’s Mechanical Turk|a
+particularly popular crowdsourcing system to collect data for experimental research in political science|is
+not representative of the wider population.
+   6A Ushahidi-based crowdsourcing platform was introduced in Congo in 2008 onwards to provide a
+
+platform to report on conict events. The system fell out of use with only a handful of messages being
+received, despite many ongoing events, thus illustrating the risks of a system that depends on possibly weak
+supply incentives.
+
+
+
+                                                3
+rely on known sources and representative samples. Like crowdsourcing, crowdseeding can
+alleviate some of the concerns regarding selection biases highlighted above. Rather than
+relying on discrete retrospective data gathering, these approaches rely on continuous in-
+
+formation ows from individuals in the conict region. Indeed even if an area is o▯-limits
+to a research team, SMS-messages can still be sent and received. Moreover, real-time data
+gathering removes concerns related to recall. Crowdseeding o▯ers additional advantages
+
+relative to crowdsourcing. First, by working with a random set of villages, data from a
+crowdseeding system renders data representative at the village level. Moreover, if the re-
+porters are pre-identi▯ed and given the means to provide information, risks of self-selection
+
+at the reporter level are reduced. And even in the event of (forced) displacements, the re-
+porter can continue providing information. Finally, crowdseeding may alleviate concerns
+associated with distrust since, by working with preselected reporters over extended peri-
+
+ods, the system allows both for the generation of trust and for a greater ability to verify
+received information. Repeated interactions can reduce the incentive for phone holders to
+send incorrect information and allows for ready auditing and veri▯cation of data.
+
+    In this paper we introduce data from the Voix des Kivus system and explore its utility
+in practice. In Section 2 we describe the set up and feasibility of the system. We then
+
+present the data in Section 3, describing the distribution of messages, and assessing the
+overall data quality (Section 3.1). In assessing data quality we also seek to unpack the
+\crowd," discussing how the data received depends on the identity of the senders (Sec-
+
+tion 3.2). Moreover, we compare the system’s data with the best available alternative: the
+ACLED dataset (Section 3.3). Section 4 provides two illustrations of the use of the data. In
+Section 4.1 we assess the e▯ects of a downstream experiment on aid and conict, exploiting
+
+additional data on the presence of a randomized development intervention in the region.
+Despite the small sample, we ▯nd evidence for a negative relationship between aid and
+conict in this set of villages. In Section 4.2 we use the data to assess the spatio-temporal
+
+distribution of violence events. Though identi▯cation is weaker for this analysis, the evi-
+dence is consistent with large local spillover e▯ects that decay at distances of around 50
+km. Both applications suggests that the assessments are highly sensitive to the timing of
+
+measurement in a way that often cannot be assessed from traditional conict data sources.
+We conclude in Section 5 by considering ethical and practical implications of a scaling up
+of this type of data system.
+
+
+
+2    The Voix des Kivus System
+
+The Voix des Kivus (literally \Voice of the Kivus") data collection system was piloted in
+
+the province of South Kivu in the war-torn East of the Democratic Republic of Congo over
+an 18 month period starting in August 2009. The pilot ran in eighteen villages spread over
+four territories: Kalehe (5), Mwenga (4), Uvira (3), and Walungu (6).   7 Villages 1-4 were
+
+   7The territory is the administrative unit below the province and above the chiefdom.
+
+
+
+                                             4
+selected purposely to ensure some conict and some non conict areas; villages 5-18 were
+selected using strati▯ed random sampling from these territories. Speci▯cally, villages were
+
+randomly selected strati▯ed by chiefdom and by the village’s treatment status of a large
+development project (we will discuss the latter in more detail in Section 4.1), taking village
+                                 8                                                         9
+population sizes into account.     Figure 1 shows the approximate area of operation.          The
+headquarters of Voix des Kivus was Bukavu|the capital city of South Kivu and also the
+
+city where most of the province’s NGOs are located.
+    Within these villages the Voix des Kivus system worked as follows. In each village we
+
+identi▯ed three reporters (\phone holders"): one representing the traditional leadership
+(the chief of the village or his appointee), one representing women’s groups (the head of
+                                                                                      10
+the women’s association or her appointee), and one elected by the community.
+    Holders were given a phone and trained on how to send messages to the system. They
+
+were provided with a codesheet that lists possible events that can take place in the village,
+organized in ten categories: (1) presence of military forces, (2) attacks on the village, (3)
+
+deaths related to armed combat, (4) local violence and property loss, (5) displacement, (6)
+health events, (7) natural disasters, (8) development and NGO activities, (9) social events
+                                                                             11
+and (10) special codes. An overview of these codes is given in Table 1.         Users could send
+a simple message containing one of these codes or they could send a standard \full text"
+
+message giving more particulars.
+    Phone holders automatically received weekly phonecredit that they could use freely,
+
+and were reimbursed for the number of messages sent. Remaining in the system required
+sending at least one message a week but this message could be blank.               Thus sending
+
+messages to the system was free but it was also voluntary|while users did not have to pay
+for each message, they did not get any marginal ▯nancial rewards for sending content either.
+
+On the receiving side was a standard cell phone linked to a laptop computer. With freely
+available software (FrontlineSMS and R), messages received were automatically ▯ltered,
+
+coded for content, cleaned to remove duplicates, and merged into a database. Graphs and
+tables were generated automatically and then mounted into bulletins with di▯erent levels
+
+of source identi▯ability. Translations of non-coded text messages (often from Swahili or
+
+   8The sampling frame and the code used to select the villages is available upon request.
+   9Note that to safeguard the safety of the phone holders the village names are omitted.Moreover,
+
+locations within chiefdoms have been scrambled and so the actual location of participating villages can not
+be inferred from the location of points on this map. We provided information about village location only
+to precleared organizations. We thank UNOCHA for the shape▯les used to construct this map.
+  10The idea behind these three reporters is that the chief is the go-to person for many a▯airs in a village
+ranging from land conict to marital disputes. The head of the women’s association, on the other hand,
+
+is often the go-to person for issues such as domestic violence. Finally, one person is elected to decrease
+concerns of capture. These reporters can also be selected randomly to obtain a representative sample within
+the village.
+  11All documents can be found on the project’s website: www.cu-csds.org/projects/event-mapping-in-
+
+congo/. This also includes the computer code to create bulletins and a \Voix des Kivus Implementation
+Guide" for organizations that want to set up a similar system.
+
+
+
+                                                5
+Figure 1: Map illustrating general area of Voix des Kivus operation. Squares denote ap-
+
+proximate location of Voix des Kivus villages, accurate only up to the level of the chiefdom.
+Solid (or hollow) squares denote villages that do (and do not) participate in the develop-
+ment project discussed in Section 4.1.
+
+
+
+                                             6
+one of the local languages into French and English) were undertaken manually.       12
+
+    Our ▯rst goal in implementing the pilot was to assess the feasibility of data collection of
+this form. Establishing feasibility was important in light of a number of obvious challenges.
+
+    A ▯rst concern was that capacity would be too weak for users to implement the project.
+Indeed, 19 of our 54 reporters had only primary level education and only two had received
+education beyond secondary school. This concern is likely to be present in many hard-to-
+
+access areas where conict takes place. We mitigated this concern through a (minimum)
+two-day training by the ▯eld coordinator and the use of relatively simple code books with
+
+pre-coded events. In fact, over the eighteen months of operation Voix des Kivus received|
+in addition to SMS-messages with codes|1,144 text-messages in Swahili or one of the
+
+local languages; this suggests that the code book, while useful, was not necessary for many
+holders.
+    A second concern was technical capacity. On the receiving side a cheap netbook, a
+
+phone and free software was su▯cient. However, things were di▯erent on the sending side.
+Phone-coverage was not a problem|of the eighteen villages no village had to be replaced
+
+after selection for lack of coverage. Electricity, however, was a problem with phone holders
+sometimes walking up to three hours to charge their phone. The problem was solved by
+
+purchasing $25 solar chargers and donating one to each Voix des Kivus village. These
+concerns exist for many phone-based projects that operate in a hard-to-access area, but in
+
+this case at least, turned out not to be important.
+    A third concern, however, is speci▯c to crowdseeding systems: would participation in
+the system produce security risks for phone holders? Over the course of eighteen months
+
+Voix des Kivus received thousands of messages many of which were sensitive, including in-
+formation on various types of abuses perpetrated by di▯erent actors. Because of the close
+
+connection between individual holders and the project, we were concerned that there could
+be reprisals against phone holders for sharing information. Beyond regular monitoring we
+
+used three strategies to address this concern. First, we operated in just four villages at
+▯rst and subsequent villages were added only after one year of careful monitoring. Sec-
+ond, the weekly bulletins were generated in two versions. One version contained sensitive
+
+information (with village identi▯ers), the other did not. The sensitive bulletins were only
+disseminated to a very restricted set of organizations. Public versions contained no village
+
+identi▯ers. Third, the system allowed phone holders to include a code (1-4) to a message
+to indicate the event’s level of sensitivity, and with whom the information was to be shared
+
+(\4" only with Voix des Kivus, \3" also with close partners, \2" also with MONUSCO, and
+\1" everybody).  13  We found that at no point did any user indicate any security concern
+
+  12While Voix des Kivus started as an academic exercise, such a system also has the potential to empower
+participating communities, and provide a basis for response to practitioners and policy advocates (Van der
+
+Windt (2013)). As a result, we set up a system in which each Monday a bulletin with event-information
+was produced and disseminated to organizations that had received clearance from Voix des Kivus and its
+phone holders. Many of these organizations are based in Bukavu and have the means to respond.
+  13From the introduction of these codes in August 2010 onwards the project received 3,214 event-messages.
+
+
+
+                                               7
+of any form arising from their participation in the project. However, although no concerns
+arose in our case, there are still general grounds for concerns for the security of the phone
+
+holders in a crowdseeding system because of the direct link between phone holders and the
+project. We return to this concern in the concluding section.
+
+
+
+3     The Data
+
+
+Voix des Kivus was launched in August 2009 and operated during the ▯rst twelve months
+
+in only four villages. Then from August 2010 onwards the pilot project was expanded to
+eighteen villages. The expansion over time is illustrated in the top left panel of Figure
+  14
+2.   The regular system continued through to January 2011 (the vertical line in Figure 2)
+but remained open for users to send messages|though without incentives for reporters|
+                        15
+through to July 2011.
+    The top right panel of Figure 2 shows the distribution of total event reports (dashed
+
+line) and conict event reports (solid line) over time, per village. Overall the system
+generated a relatively constant stream of messages over this period. As shown in the lower
+
+left panel of Figure 2, reporters exhibited relatively little fatigue | while di▯erent phone
+holders reported at di▯erent rates, they nevertheless reported at relatively constant rates
+           16
+over time.
+    In this short period the project received a total of 4,783 non-empty SMS messages. The
+
+phone holders sent messages about a total of 5,491 events of which 4,623 were unique|
+many village events were thus reported by more than one phone holder. Of these non-
+
+
+A total of 1,449 had a code that indicated the sensitivity of the message. Phone holders were willing to
+distribute the data widely, with 1,076 messages (or 74% of those messages that included a code) being
+designated for distribution to \everybody." Codes 2, 3 and 4 were used, respectively, 106, 92 and 175
+times. The majority of event-messages (1,765 or 55% of all event-messages), however, did not have a
+
+security code. Users suggested that this was not driven by a lack of understanding of the system, but by
+their preference to leave the decision with whom to share what data with the project.
+  14Dates that Voix des Kivus started: 1-Aug-09 (3x), 17-Aug-09, 10-Aug-10, 13-Aug-10 (2x), 9-Oct-10
+(2x), 26-Oct-10, 30-Oct-10, 1-Nov-10, 2-Nov-10 (2x), 4-Nov-10, 6-Dec-10, 8-Dec-10, 10-Dec-10. The village
+that started on 17-Aug-09 started later than expected because not enough people were present at the ▯rst
+
+general assembly. We had as rule that at least 40% of the village had to be present, be informed of the
+pilot project and give their consent.
+  15In fact, in January 2011 we sent a one-time $20 of phonecredit to the phone holders with the message
+that this phonecredit was for them to use in any way they want, that they would still be reimbursed for
+
+their messages and that we would continue to collect SMS messages and distribute the bulletins. However,
+we also told them that from that moment onwards they would no longer receive the weekly $1.5 nor would
+they receive any feedback from the system. As can be seen from the top panel in Figure 2, the result was
+a gradual decline in the messages sent from January 2011 onwards reaching zero by July 2011.
+  16
+    Reporting by one phone holder (the upper-line) is anomalous. We noticed after one month that messages
+by this reporter had been sent to the wrong phonenumber. The reporter had recorded his messages in a
+notebook however and subsequently uploaded them to the system (resulting in the steep slope in October
+2009).
+
+
+
+
+                                                8
+                                                                                             Number of Project Villages                                                                                                                        Average Number of Events by Village Month
+
+
+
+
+
+
+                                                                                                                                                                                                                        60
+
+
+
+
+                                                                                                                                                                                                                                                                                          Total events
+                                              18
+
+
+
+
+                                                                                                                                                                                                                                                                                          Conflict events
+
+
+
+
+                                              15
+
+
+
+
+
+                                                                                                                                                                                                                        40
+
+
+
+
+
+
+                                              11
+
+
+
+
+
+
+
+
+
+
+
+
+                                                 7
+
+                                                                                                                                                                                                                        20
+
+
+
+
+
+
+
+                                                 4
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                                           0
+
+
+
+
+
+
+
+
+                                                  aug09                           jan10                          jun10                   oct10                    feb11                   jun11                             aug09                           jan10                          jun10                   oct10                    feb11                    jun11
+
+
+
+
+
+
+
+
+
+                                                                         Reporter Stamina: Cumulative Messages                                                                                                                                                                     Internal Validation
+
+
+
+
+
+                                                                                                                                                                                      ●●
+                                                                                                                                                                                ●                                      0.5
+
+
+                                                                                                                                                                          ●●
+
+                                                                                                                                                                    ●●
+                                           500
+                                                                                                                                                              ●●
+
+
+
+
+                                                                                                                                                        ●●
+                                                                                                                                                                                ●●          ●●
+                                                                                                                                                              ●●    ●     ●                                            0.4
+                                                                                                                                                 ●●    ●●
+                                                                                                                                                 ●●
+                                                                                                                                           ●●                                                            ●
+                                           400                                                                                       ●●                                                     ●●●●   ●●●●
+                                                                                                                               ●●                                                     ●●
+                                                                                                                         ●●                ●                                    ●●
+                                                                                                                                                                                      ●●
+                                                                                                                   ●●                                                     ●●
+
+                                                                                                             ●●                                                     ●
+                                                                                                      ●●                                                                        ●●
+                                                                                                                                     ●●                                               ●●
+                                                                                                ●●
+                                                                                                                                                              ●●                ●●
+                                                                                          ●●                                   ●                                          ●●                                           0.3
+                                           300                                                                                                         ●●                 ●
+                                                                                    ●●                                   ●                                          ●
+
+                                                                                                                                                 ●●           ●●
+
+                                                                                                                   ●●                                   ●●
+                                                                              ●●                                                                                    ●
+                                                                                                                                           ●●                       ●                 ●
+                                                                                                             ●●                                                                 ●●
+                                                                                                                                                                          ●
+                                                                                                                                     ●           ●                  ●●    ●     ●●
+                                                                                                      ●●                                                            ●●                ●●    ●
+                                           200                                                                                 ●●                             ●●          ●●    ●●
+                                                                                                ●●                                         ●●           ●●    ●     ●
+                                                                                                                         ●           ●●          ●     ●●     ●●                      ●●                               0.2
+                                                                                                                               ●●          ●●           ●●
+                                                                                          ●●                       ●     ●                       ●
+                                                                                                                                     ●           ●●
+                                                                                    ●                       ●●     ●●          ●●          ●●
+                                                                                                            ●●           ●           ●●    ●●                 ●●                ●●
+                                                                                                      ●●●          ●           ●     ●
+                                                                        ●     ●                 ●           ●●           ●     ●     ●                                          ●●    ●           ●●     ●
+                                                                              ●           ●●    ●     ●            ●                                                ●●    ●     ●     ●●    ●            ●
+                                                                                    ●     ●●          ●     ●●           ●                             ●●     ●●    ●     ●     ●     ●●          ●●
+                                           100                          ●           ●           ●     ●            ●                             ●     ●●     ●           ●           ●     ●     ●●     ●
+                                                                                    ●     ●     ●                                    ●     ●●    ●     ●●                       ●●    ●●●   ●
+                                                                 ●●           ●     ●     ●●                 ●●          ●     ●●    ●                              ●     ●     ●●    ●●    ●     ●●     ●●
+                                                                              ●     ●           ●     ●      ●     ●     ●     ●                        ●     ●     ●     ●     ●     ●●●   ●●    ●●     ●
+                                                                        ●     ●           ●     ●     ●     ●●     ●                       ●     ●     ●      ●     ●     ●●    ●●    ●●    ●     ●●     ●             0.1
+                                                                 ●●     ●           ●           ●                              ●     ●     ●     ●     ●●     ●●    ●     ●     ●●    ●     ●     ●●
+                                                           ●      ●           ●     ●     ●     ●                  ●     ●     ●     ●     ●     ●     ●●     ●     ●     ●●    ●●    ●     ●     ●●
+                                                           ●     ●●     ●     ●     ●                 ●     ●●     ●     ●     ●           ●     ●     ●●     ●●    ●●    ●●    ●     ●     ●     ●      ●
+                                                           ●            ●     ●     ●     ●     ●     ●     ●●                       ●     ●     ●     ●●     ●●    ●     ●     ●●    ●     ●●           ●
+                                                           ●     ●●●    ●     ●     ●     ●     ●                              ●     ●     ●     ●●    ●●●●●● ●●    ●     ●     ●●    ●     ●●    ●●
+                                                           ●●    ●●     ●     ●     ●                                    ●●          ●●    ●     ●●    ●●●    ●●    ●●●   ●     ●     ●     ●●
+                                                           ●                                                                                     ●     ●      ●     ●     ●
+                                                 0
+
+
+
+
+
+
+
+                                                  aug09                           jan10                          jun10                   oct10                    feb11                   jun11                             aug09                           jan10                          jun10                   oct10                    feb11                    jun11
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 2: Top left panel shows the number of villages enrolled in the system over time; top
+
+
+
+
+
+
+
+
+
+right panel shows the average number of events per month by event type. Lower left panel
+
+
+
+
+
+
+
+
+
+shows reporter stamina|the cumulative number of events sent per reporter; this panel
+
+
+
+
+
+
+
+
+
+also indicates when reporters started and stopped sending messages. The lower right panel
+
+
+
+
+
+
+
+
+
+
+shows the level of \Internal Validation"|that is the share of messages sent that reported
+
+
+
+
+
+
+
+
+
+on events that were also reported by other reporters.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                                  9
+                                                 17
+empty SMS messages 1,144 were text-messages.        Table 1 provides summary information
+per event (where the unit of analysis is the village-month). Identical messages received
+
+from the same reporter within 30 minutes of each other, and identical messages received
+from di▯erent representatives in the same village within 24 hours of each other, are treated
+as single events. The table also reports the total number of messages sent per event. We
+
+▯nd a large concentration of messages reporting the presence of troops (685); the most
+common conict events include looting (233), within village conict (196) and kidnappings
+
+(134) | which in many cases involved forcing villagers to transport loads, in addition
+to frequent reports of conict-related deaths (274) and violence between villagers (126).
+Reports of sexual violence (99) indicate approximately equal numbers of men and women
+
+victims. Other major categories include outbreaks of diseases (275) and deaths due to
+disease (469), as well as crop failures (376).
+    Tables 2 and 3 show conditional correlations between these reported events. Speci▯cally,
+
+each table shows the bivariate relationships between the column event and the row event
+as estimated by OLS, accounting for village ▯xed e▯ects. In accounting for ▯xed e▯ects
+
+these numbers capture the \within village" correlation. Though we provide no causal
+interpretations, a number of patterns seen in Table 2 are worth highlighting. First, we
+see that the presence of troops is not itself a good predictor of conict related deaths
+
+though it is strongly related to other types of violence (a category that includes looting
+and forced labor). Reports of attacks are associated with all other conict and violent
+
+events, especially displacement, but are only weakly associated with health events and
+social events. Adverse health events are not directly associated with attacks, but they are
+associated with displacement, disasters and local violence. General development actions
+
+are associated with almost all events; and social activities (such as visits and meetings)
+are associated with all events except troop presence, attacks, and conict deaths. Overall,
+there is a clear clustering of bad things going together over time.
+
+    Table 3 focuses on the more disaggregated measures and reveals a number of striking
+correlations. First, presence by UN peacekeepers (MONUSCO) and government soldiers
+
+(FARDC) tends to be highly correlated; but while FARDC presence is also correlated
+with the presence of rebel or other identi▯ed groups, MONUSCO presence is not. This
+pattern could reect either a greater propensity of FARDC to engage with or to collaborate
+
+with rebel groups although it may also reect a greater di▯culty for reporters to positively
+identify FARDC troops. Second, we see that while presence by MONUSCO or rebel groups
+
+is generally associated with actions or attacks, this is not the case with FARDC whose
+presence is more common in the villages without necessarily being associated with actions.
+Third, we see that presence in itself is generally not strongly associated with civilian deaths
+
+| the exception being the correlation between rebel presence and male deaths. Actions
+by FARDC are very strongly associated with deaths, particularly women’s deaths. Actions
+by MONUSCO are not associated with deaths and actions by rebels or unidenti▯ed groups
+
+  17
+    This is based on the FrontlineSMS export of August 1, 2011.
+
+
+                                             10
+  Code     Event                                                                Mean     St. Dev.   Min.    Max.    Total
+
+    10     PRESENCE OF MILITARY FORCES                                           0.04      0.22       0       2       9
+    11     Presence of MONUSCO                                                   1.30      3.11       0       18     277
+
+    12     Presence of FARDC                                                     1.70      4.31       0       23     362
+    13     Presence of other armed groups                                        0.17      0.54       0       3       37
+
+    20     ATTACKS (use of violence by an external group)                        0.02      0.14       0       1       4
+    21     Attacks on village by MONUSCO                                         0.04      0.29       0       3       8
+    22     Attacks on village by FARDC                                           0.25      0.75       0       4       54
+
+    23     Attacks on village by rebel group                                     0.20      0.67       0       5       42
+    24     Attacks on the village by unknown group                               0.08      0.38       0       3       18
+
+    30     DEATHS RELATED TO ARMED COMBAT                                        0.08      0.62       0       8       16
+    31     Civilian deaths (man)                                                 0.42      1.21       0       12      89
+
+    32     Civilian deaths (woman)                                               0.43      1.63       0       16      92
+    33     Civilian deaths (child)                                               0.24      0.94       0       9       51
+    34     MONUSCO deaths                                                        0.01      0.14       0       2       2
+
+    35     FARDC deaths                                                          0.17      0.77       0       6       36
+    36     Other rebel group deaths                                              0.02      0.23       0       3       5
+
+    40     LOCAL VIOLENCE AND PROPERTY LOSS                                      0.03      0.24       0       3       6
+    41     Rioting                                                               0.35      1.22       0       9       74
+
+    42     Looting/property damage                                               1.09      2.40       0       19     233
+    43     Violence between villagers                                            0.19      0.81       0       9       41
+    44     Violence between villagers due to a land conict                      0.59      2.45       0       25     126
+
+    45     Domestic violence                                                     0.11      0.49       0       5       23
+    46     Ethnic violence                                                       0.02      0.14       0       1       4
+
+    47     Forced labor by FARDC                                                 0.28      0.97       0       8       60
+    48     Forced labor by other army groups                                     0.08      0.47       0       6       16
+
+    50     DISPLACEMENT                                                          0.00      0.07       0       1       1
+    51     Kidnapping by men in uniform                                          0.43      1.13       0       7       91
+    52     Kidnapping by rebel group                                             0.20      0.95       0       11      43
+
+    53     Arrival of Refugees or IDPs                                           0.15      0.56       0       4       33
+    54     Departure of villagers as IDPs                                        0.17      0.70       0       7       37
+
+    55     Disappearances                                                        0.03      0.17       0       1       6
+    56     Villagers were forced to move                                         0.05      0.33       0       3       10
+
+    57     Villagers decided themselves to move                                  0.02      0.22       0       3       4
+    60     HEALTH                                                                0.08      0.35       0       3       18
+
+    61     New outbreak of disease                                               1.29      2.39       0       16     275
+    62     Civilian death due to disease                                         2.20      3.33       0       21     469
+    63     Civilian death due to natural causes                                  0.34      1.63       0       22      73
+
+    64     Sexual violence against women                                         0.22      0.73       0       6       47
+    65     Sexual violence against men                                           0.24      1.60       0       18      52
+
+    70     NATURAL DISASTERS                                                     0.15      0.69       0       7       33
+    71     Flooding/heavy rain                                                   0.60      1.24       0       7      127
+
+    72     Large forest or village ▯re                                           0.51      1.52       0       12     108
+    73     Earthquake                                                            0.19      0.61       0       4       40
+    74     Drought                                                               0.17      0.50       0       3       36
+
+    75     Crop failure/plague                                                   1.77      3.12       0       24     376
+    80     DEVELOPMENT ACTIVITIES/ NGOs                                          0.66      1.30       0       7      140
+
+    81     Complaint against NGO                                                 0.20      0.61       0       4       42
+    85     Construction, reparation or rehabilitation of a school or health cente0.10      0.37       0       3       22
+
+    86     Construction, reparation or rehabilitation of a church or mosque      0.10      0.36       0       2       21
+    87     Other construction, reparation or rehabilitation                      0.49      1.69       0       12     105
+    88     Organization of security patrols                                      0.09      0.47       0       4       19
+
+    89     Work to improve agricultural productivity                             0.31      0.88       0       6       65
+    90     SOCIAL                                                                0.06      0.26       0       2       13
+
+    91     Funeral                                                               0.57      1.59       0       11     122
+    92     Wedding/Other celebrations                                            0.46      1.24       0       9       98
+
+    93     Visit or meeting organized by national or provincial authorities      0.12      0.52       0       5       26
+    94     Visit or meeting organized by territory authorities                   0.04      0.23       0       2       8
+    95     Visit or or meeting organized by the chiefdom or locality authorities 0.17      0.58       0       5       37
+
+    96     Visit or meeting organized by the representative of a political party 0.26      1.01       0       10      55
+    97     Visit or meeting organized by the King                                0.17      0.91       0       10      36
+
+    0      Nothing to report                                                     0.92      2.04       0       13     195
+    82     Practice message                                                      0.40      1.82       0       17      85
+
+    98     Unclassi▯able issue (followed by text)                                1.57      2.51       0       12     334
+    99     Security Alert                                                        0.40      1.00       0       8       85
+
+
+
+
+Table 1:     Voix des Kivus Code book & Summary Information. Mean, standard deviation, minimum and maximum
+
+are by village-month: a total of 213 observations. Events in the column \Total" add up to 5,491. When a text
+message could not be hand-coded to an event (e.g. \33"), it would be assigned to a category (e.g. \30"). Codes
+
+84-89 and 91-97 were introduced only during the expansion in August 2010. Before the expansion codes 98 and 99
+
+were 83 and 84, respectively.
+
+
+
+
+
+
+
+
+
+
+                                                             11
+                        Presence    Attacks/    Conict      Local     Displace-   Health    Disasters    Develop-    Social
+                                     Actions    Deaths     Violence      ment                              ment
+     Presence                         0.64        0.04       0.10        0.28        0.41       0.18        0.18       0.18
+
+                                     (0.00)      (0.60)     (0.01)      (0.08)      (0.00)     (0.08)      (0.16)     (0.12)
+     Attacks              0.11                    0.13       0.05         0.3        0.05       0.09        0.23       0.05
+                         (0.00)                  (0.00)     (0.00)      (0.00)      (0.19)     (0.05)      (0.00)     (0.34)
+     Conict.Deaths       0.05        0.91                   0.11        0.51       -0.06       0.20        0.71      -0.08
+
+                         (0.60)      (0.00)                 (0.00)      (0.01)      (0.56)     (0.10)      (0.00)     (0.53)
+     Local Violence       0.65        1.88        0.59                   1.71        1.07       2.37        2.22       2.32
+                         (0.01)      (0.00)      (0.00)                 (0.00)      (0.00)     (0.00)      (0.00)     (0.00)
+     Displacement         0.09        0.53        0.12       0.08                    0.25       0.12        0.44       0.23
+                         (0.08)      (0.00)      (0.01)     (0.00)                  (0.00)     (0.04)      (0.00)     (0.00)
+
+     Health               0.36        0.27       -0.04       0.14        0.72                   0.27        0.40       0.46
+                         (0.00)      (0.19)      (0.56)     (0.00)      (0.00)                 (0.01)      (0.00)     (0.00)
+     Disasters            0.14        0.37        0.11       0.26        0.29        0.23                   0.50       0.45
+                         (0.08)      (0.05)      (0.10)     (0.00)      (0.04)      (0.01)                 (0.00)     (0.00)
+
+     Development          0.09        0.67        0.29       0.17        0.73        0.23       0.35                   0.34
+                         (0.16)      (0.00)      (0.00)     (0.00)      (0.00)      (0.00)     (0.00)                 (0.00)
+     Social               0.11        0.16       -0.04       0.20        0.43        0.31       0.36        0.39
+                         (0.12)      (0.34)      (0.53)     (0.00)      (0.00)      (0.00)     (0.00)      (0.00)
+
+
+
+
+
+
+Table 2: Correlations between families of events reported by the Voix des Kivus pilot. Unit
+
+is the village-month; numbers are estimated \marginal e▯ects" of column reports on row
+
+reports given village ▯xed e▯ect; p values in parentheses. Data from month 16 to end of
+
+
+period. To simplify comparisons the \Development" category in this table excludes patrols
+
+(88) and complaints (81); the social category excludes funerals (91). Sexual violence (64
+
+and 65) are classed under \Local Violence", rather than \Health."
+
+
+
+
+
+
+are only strongly associated with women’s deaths.
+
+
+
+
+3.1      Data Quality
+
+
+Voix des Kivus was implemented to assess the feasibility of using crowdseeding to gather
+
+
+high-quality data. In the absence of a gold standard for conict event data it is di▯cult
+
+to formally validate the approach employed here. Nevertheless ▯ve considerations on data
+
+quality bear emphasis.
+
+
+     First, in its ▯rst year Voix des Kivus employed a ▯eld coordinator to visit each of the
+                                                                                                                              18
+phone holders at least once every two weeks to assess the quality of the messages sent.
+
+
+The coordinator would assess whether holders interpreted codes in the same way as the
+
+researchers, whether respondents employed the correct codes given the events they wished
+
+to report, and so on. Moreover, the ▯eld coordinator would verify whether events had
+
+
+actually taken place and whether there were other events that took place that were not
+
+reported. Throughout the pilot the coordinator found no instances of erroneous reports
+
+of major conict events (incursions, assaults or killings) but did ▯nd numerous instances
+
+
+where events were not communicated by one or all reporters, suggesting a vulnerability to
+
+Type II errors.
+
+
+   18
+     To do so Voix des Kivus would prepare a sheet with the messages sent by that phone holder in the
+
+preceding two weeks. For security reasons these were decoded in such a way that the information only
+
+made sense to our ▯eld coordinator.
+
+
+
+
+
+                                                               12
+                         MONUSCO        FARDC       Rebels    MONUSCO        FARDC       Rebel      Male     Female     Child
+                           Present      Present    Present      Actions      Actions    Actions    Deaths    Deaths    Deaths
+
+  MONUSCO Present                         0.53       0.23         1.10         0.08      0.31       0.06      0.02      0.01
+                                         (0.00)     (0.47)       (0.05)       (0.71)     (0.14)    (0.63)    (0.82)     (0.93)
+  FARDC Present              0.58                    0.57         1.34         0.20      0.33       0.04      -0.01     -0.08
+                            (0.00)                  (0.09)       (0.02)       (0.39)     (0.13)    (0.76)    (0.89)     (0.63)
+  Rebels Present             0.02         0.04                    1.13         0.11      0.13       0.06      0.01      0.01
+
+                            (0.47)       (0.09)                  (0.00)       (0.08)     (0.03)    (0.08)    (0.65)     (0.83)
+  MONUSCO Actions            0.03         0.03       0.36                      0.00      0.12       0.03      0.00      0.00
+                            (0.05)       (0.02)     (0.00)                    (0.89)     (0.00)    (0.15)    (0.85)     (1.00)
+  FARDC Actions              0.01         0.03       0.23         0.03                   0.11       0.14      0.15      0.21
+
+                            (0.71)       (0.39)     (0.08)       (0.89)                  (0.22)    (0.00)    (0.00)     (0.00)
+  Rebels Actions             0.06         0.06       0.3          0.87         0.12                 0.03      0.10      0.02
+                            (0.14)       (0.13)     (0.03)       (0.00)       (0.22)               (0.56)    (0.02)     (0.78)
+  Male Death                 0.03         0.02       0.42         0.61         0.47      0.09                 0.46      0.53
+
+                            (0.63)       (0.76)     (0.08)       (0.15)       (0.00)     (0.56)              (0.00)     (0.00)
+  Female Death               0.02        -0.01       0.14        -0.10         0.79      0.45       0.71                1.03
+                            (0.82)       (0.89)     (0.65)       (0.85)       (0.00)     (0.02)    (0.00)               (0.00)
+  Child Death                0.00        -0.02       0.04         0.00         0.41      0.03       0.31      0.40
+
+                            (0.93)       (0.63)     (0.83)       (1.00)       (0.00)     (0.78)    (0.00)    (0.00)
+
+
+
+
+
+Table 3: Correlations between conict related events reported by the Voix des Kivus pilot.
+
+Unit is the village-month; numbers are estimated \marginal e▯ects" of column reports on
+
+
+row reports given village ▯xed e▯ect; p values in parentheses. Data from month 16 to end
+
+of period.
+
+
+
+
+
+     Second, because Voix des Kivus distributed phones to three people per village we have
+
+
+a measure of internal validation. The bottom right panel of Figure 2 shows the share of
+
+events that were reported by at least two phone holders out of all events reported. We ▯nd
+
+
+that internal validation was around 30% at the outset but increased after the project start
+                                                                                                      19
+until August 2010|the moment the project expanded to more villages.
+
+     Third, we have a limited ability to compare event information received from the Voix
+
+
+des Kivus system with that from data from a survey we implemented in the same region in
+
+a similar period. In the latter we asked each village chief, how many events from a list of
+
+
+potential events had taken place in the village in the preceding month. Our survey villages
+                                                                                                                             20
+overlapped with just three Voix des Kivus villages during the lifespan of the project.
+
+We consider three ways of assessing the congruence of the survey and the Voix des Kivus
+
+
+data. First, we compare the average number of each type of event across villages under each
+
+approach. On average we ▯nd nearly twice as many reported events according to the survey.
+
+In particular, there were higher numbers of children’s deaths due to conict, citizen deaths
+
+
+due to natural causes, disease outbreaks, and funerals reported in the survey. Second,
+
+
+   19The improvements and subsequent decline in validation may in part result from our communications
+
+with phone holders. Consulting phone holders suggested that the low internal validation early on was in
+
+part due to phone holders informally adopting a division of labor where one would not send a message if
+
+they knew another had. In the early months with the ▯rst villages we encouraged holders not to do this
+
+and to report whether or not they thought others did also. This same messaging was not employed to the
+
+same extent with the later villages as they came online and we see a subsequent drop in the level of internal
+
+validation.
+   20
+     And we note that even for these three the survey took place during the ▯nal ‘voluntary’ phase in which
+
+payments were no longer being made to reporters (see Section 3).
+
+
+
+
+
+                                                              13
+despite the di▯erence in means, the correlation between these two measures of average
+incidence is 46% which is substantively large and statistically signi▯cant. This suggests
+
+that similar types of events get reported to the same relative extent under the two systems.
+Third, we generate measures of the average incidence of conict and nonconict events for
+                                                                                               21
+each of the three villages using each of the two data sources, yielding 12 data points.
+The correlation between the Voix des Kivus and survey estimates is low largely because of
+
+one outlying observation in which a village reported a much higher incidence of army visits
+under the Voix des Kivus system. If this outlier is dropped the correlation between the
+
+Voix des Kivus and the survey based measure is 95%. These correlations are encouraging
+although we note that survey measures are also subject to measurement error and bias,
+                                                                                      22
+and so on their own the correlations do not establish the reliability of the data.
+    Fourth, a problem for any data-collection method in conict areas, including surveys, is
+
+censorship. For example, informants might report fewer conict events precisely because of
+the presence of armed groups and high levels of conict. In practice our reporters provided
+detailed data on events even when troops were present or in the vicinity. Messages such
+
+as \FARDC passed by [Village Omitted] and shot with guns at 5:30 am" and \A FARDC
+soldier shot a woman" are not uncommon. And messages such as \FARDC kidnapped
+
+people who were then forced to transport things" and \FARDC kidnapped people to build
+a shelter for the soldiers" were received almost weekly by Voix des Kivus. In addition,
+
+we observe many instances in which there is simultaneous reporting of the presence of
+armed actors and adverse events of various kinds. Moreover, at no point did phone holders
+
+indicate to us that they felt a need to censor reports.
+    Finally, we note a concern of uneven reporter participation. The total quantity of
+
+messages sent varies substantially across villages; from month 16 onwards, total reporting
+varies from a low of 14 from one village to a high of 522 for another. Alongside this
+
+broad variation is a positive correlation between reports of events of many types (as seen
+in Tables 2 and 3). These patterns may reect true variation but they are also consistent
+                                                     23
+with variation in the overall activity of reporters.    As we demonstrate in the next section
+we ▯nd mixed evidence on di▯erential behavior by reporter type. Nevertheless, we believe
+
+that heterogeneity in propensities to report could be a fruitful focus of scrutiny in future
+applications.
+
+  21This yields data of the form: f1, 34, 9, 10g, f1, 5, 2, 27g and f0, 9, 7, 33g, denoting respectively the
+
+number of conict events and nonconict events measured by Voix des Kivus and the number of conict
+and nonconict events measured by the survey, by village.
+  22We also note that in this case since the chief was also involved with Voix des Kivus the comparison
+of systems involves comparing reports from the same actor, which may give rise to concerns that the two
+reports would be more similar than they would be if recorded from di▯erent subjects.
+  23
+    While positive correlations may be expected across many pairs of event types, we would expect a
+negative correlation at least for the incidence of ooding and of droughts. For this pair we do indeed ▯nd a
+negative correlation, though it is small in magnitude (▯0:02) and there are three village-months in which
+both events were reported.
+
+
+
+
+
+                                               14
+3.2    Source Dependence
+
+A crowdsourcing system receives information from an unidenti▯ed, anonymous public. A
+
+crowdseeding system, in contrast, makes use of identi▯able users. The ability to analyze
+the \crowd" in more detail and learn whether particular types of reporters provide di▯erent
+
+information is a signi▯cant bene▯t.
+    In the case of Voix des Kivus, a reporter’s position (chief, women’s representative or
+elected individual) is a natural starting point to di▯erentiate the crowd. We ▯nd that village
+
+chiefs sent substantially more messages than the women’s representative or the elected
+holder: respectively 11.71, 8.34 and 9.05 messages per person per month on average.       24
+
+    Subdividing the data by conict and non-conict events we ▯nd that around 30% of the
+messages sent concern conict events|with elected holders sending relatively the most.       25
+Regressing the number of conict events reported per month on the type of phone holder
+
+and the number of nonconict events reported in that month|with the chief as baseline and
+standard errors clustered at the village level|partially con▯rms this. We obtain estimates
+
+equal to 0.28 (0.62) and 1.56 (1.36) for the women’s representative and the elected holder
+respectively (standard errors in parentheses). These di▯erences in messaging by reporter-
+
+position are not statistically signi▯cant however.
+    Reporters may nevertheless di▯er in the types of events they report. A major task of
+the chief is to settle disputes among villagers (in particular those over land). Another is to
+
+be the village’s ▯rst point of contact for visitors such as migrants, government o▯cials, etc.
+In contrast, the head of the women’s association may be the go-to person for women that
+
+experience sexual violence or domestic violence. On the other hand, our three reporters
+are likely to be similarly aware of such events as funerals and weddings, and activities such
+
+as road repairs and construction of the school, because Congolese villages are small and
+these events are public. Table 4 in the Appendix presents the average number of messages
+sent per village-month by reporter type, where we also tests the di▯erence between them.
+
+On average, chiefs send more messages regarding land conict (code 44) than women rep-
+resentatives, but fewer than elected holders|only the ▯rst di▯erence is slightly signi▯cant.
+
+Chiefs|compared to elected phone holders|are statistically more likely to report the ar-
+rival of refugees and IDPs (53), and visits or meetings organized by the chiefdom or locality
+authorities (95) and by representative of a political party (96). We do not ▯nd that the
+
+women representatives report more domestic violence (45) or more sexual violence against
+women (64).
+
+    The crowd is not a random subset of the total population and in general what one
+learns likely depends on who one asks. Overall, however, our analysis suggests that in this
+
+  24There is also a large variation over time for these three types of phone holders, with standard deviations
+of respectively 14.14, 7.54, and 13.56.
+  25The share of conict events reported over total events reported is 0.27 (0.29), 0.32 (0.32), 0.34 (0.33)
+
+respectively for the chief, the women’s representative, and the elected phone holder (standard deviation in
+parentheses). On average they sent respectively 2.84 (5.94), 2.19 (2.50), 3.20 (7.45) messages concerning
+conict per month.
+
+
+                                              15
+data at least di▯erences in reporting across the three categories of reporters in the Voix
+des Kivus villages is relatively muted.
+
+
+
+3.3    Relation with ACLED data
+
+We close our discussion of data quality with a comparison of data from the system and data
+
+from what we believe is the best available alternative: the Armed Conict Location and
+Events (ACLED) dataset, which gathers together data on the speci▯c dates and locations
+
+of conict events, as well as ancillary information such as the types of event and the groups
+involved (Raleigh et al. (2010)).  26  The dataset is global in reach, and for the DRC the
+
+dataset contains 6,926 conict events since January 1, 1997.
+    Because conict clusters in isolated areas one bene▯t of a crowdseeding system is that
+
+it records conict events that otherwise would have gone unnoticed. To test this idea we
+compare the number of conict events reported to Voix des Kivus with the number of
+                                                                               27
+conict events reported by ACLED for the same region and time period.              The ACLED
+database reports 27 conict events divided over the following event types: battle with
+
+no change of territory control, battle with rebel control location, battle with government
+regaining territory, headquarters or base establishment, non-violent activity by a conict
+
+actor, rioting/protesting, violence against civilians, and non-violent transfer of location
+control. During this same period Voix des Kivus, on the other hand, reports a total of
+
+1,240 unique conict events, and this increases to 1,813 conict events if the presence
+of conict actors is included.  28  This di▯erence in number of conict events reported is
+
+particularly large considering that Voix des Kivus reports events for only 18 villages, while
+ACLED reports conict events for the whole area.
+
+    Alongside these quantitative di▯erences there may be qualitative di▯erences reecting,
+for example, the di▯erences in the sources upon which these data are based. The ACLED
+
+dataset derives information from a variety of sources, which include news reports, human-
+                                               29
+itarian agencies, and research publications.       Voix des Kivus, on the other hand, relies
+on reporting by individual reporters. To examine di▯erences, we focus on measures of
+                                             30
+who perpetrates violence against civilians.     This is a sensitive topic and di▯erent reports
+  26
+    ACLED data can be download freely at: http://www.acleddata.com/data/. The ▯le used has been
+last updated on January 1. 2013.
+  27That is, the period August 1, 2009 to December 31, 2010, and South Kivu’s territories of Kalehe,
+Walungu, Mwenga, and Uvira.
+  28
+    The column \Total" in Table 1 presents this result disaggregated by event type.
+  29The 27 events were sourced from Africa Research Bulletin, AFP, All Africa, Associated Press Newswires,
+Associated Press Newswires, BBC, and Reuters.
+  30ACLED collects information on the dyad characteristics of conict events subdividing the 27 events into:
+
+sole military action (1▯), military versus rebels (8▯), military versus political militia (1▯), military versus
+civilians (2▯), military versus other (1▯), sole rebel action (2▯), rebels versus political militia (2▯), rebels
+versus civilians (5▯), political militia versus civilians (4▯), political militia versus others (1▯). Violence
+against civilians corresponds closely to our de▯nition of attack on the villages (codes 21-24). ACLED has
+
+a total of eleven such events, while Voix des Kivus has 103.
+
+
+                                               16
+might under or over-report the importance of one actor or another. Both ACLED and
+Voix des Kivus separate out violence against civilians by perpetrator. The Voix des Kivus
+data indicates that FARDC is an important perpetrator of violence against civilians, being
+
+responsible for almost 50% of the attacks against civilians. ACLED, on the other hand,
+indicates that most violence against civilians is perpetrated by rebel groups, and less than
+                                                         31
+20% of the violence is initiated by government soldiers.    This number drops to 10% when
+analyzing the ACLED data for the whole period (totaling 239 attacks against civilians).      32
+
+The two datasets thus paint a very di▯erent picture when it comes to who perpetrates
+conict against civilians.
+
+
+
+4    Research Applications
+
+
+A system like Voix des Kivus provides rich data to learn about conict areas. Relationships
+between di▯erent event types can be analyzed as we did in Section 3. Particular use can
+
+be made of the data’s panel-component to learn about the dynamics of di▯erent events
+over time.33 Another interesting application of a phone-based system is to combine it with
+
+external data-sources, and use the data collected by phone as an outcome measure. The
+local United Nations o▯ces could provide historic information about patrol routes which
+can then be used to learn whether these patrols pacify a region or simply move violence
+
+by a rebel group from one area to another.    34 The data could be combined with satellite
+information about weather patterns to learn about the impact of, for example, rainfall
+
+on di▯erent types and levels of conict.      To learn about election violence, data could
+be collected from Congo’s National Election Committee on the location of voting booths
+
+(in November 2011 the presidential elections took place in Congo and was in some areas
+characterized by high levels of violence). Another possibility is to use a Voix des Kivus
+
+style system as a treatment in order to examine the e▯ects of transparency on conict
+outcomes of interest.
+
+    In this section we provide two applications, where Voix des Kivus data provides outcome
+data, to illustrate the utility of this kind of data for research. First, we try to assess the
+
+conict impact of development aid. Second, we use the data to learn about the temporal-
+spatial nature of conict. In both cases we highlight ways in which the conclusions we
+
+draw might di▯er from conclusions that we might draw using more traditional approaches.
+  31
+    Voix des Kivus: MONUSCO (6, 6%), FARDC (49, 48%), rebel (32, 31%), unknown (16, 15%). ACLED:
+MONUSCO (0, 0%), FARDC (2, 18%), rebel (6, 55%), unknown (3, 27%).
+  32Speci▯cally, this is the period February, 12, 1997 to December, 12, 2012. The breakdown by perpetrator
+is as follows: FARDC (25, 10%), Rebel (190, 80%), unknown (24, 10%).
+  33
+    See, for example, Zeitzo▯ (2011) who draws data on hourly conict intensity from Twitter and other
+so34al media to learn about the Gaza Conict (2008|2009).
+    This is an important question that we should also ask in Section 4.1 where we analyze the conict
+impact of a development program. Does this program decrease the level of violence, or is violence simply
+moved to another area? We do not answer this question in the paper. In Section 4.2 we do investigate the
+use of crowdseeding data to learn about conict di▯usion in more general.
+
+
+
+                                              17
+4.1    Application 1: The Conict Impact of Development Programs
+
+There is broad recognition that development and conict are closely related. Major de-
+
+velopment interventions focus on countries emerging from war and include reintegration,
+reconstruction, capacity building and other initiatives. It remains unclear however if and
+how these investments are e▯ective. It is expected that by improving the level of devel-
+
+opment, these projects could reduce risks of violence. Miguel et al. (2004), for example,
+▯nd that economic growth is strongly negatively related to civil conict. And De Ree
+
+and Nillesen (2009) argue that foreign aid is found to have a direct negative impact on
+the probability of an ongoing civil conict to continue.   35 On the other hand, the very
+introduction of development actors, ▯nancing, and projects could also increase violence.
+
+Nunn and Qian (2013), for example, suggest that U.S. food aid increases the incidence,
+onset and duration of civil conicts in recipient countries and related arguments have been
+
+made by Anderson (1999), De Waal (2009), and Polman (2011). There are multiple rea-
+sons why these relations|or opposite relations|may obtain. These include changing the
+resource(s) available for looting, changing the capacity of local communities to respond,
+
+changing the incentives of local communities to participate in violence, and increasing the
+extent to which communities are|or are believed to be|monitored by external actors.
+
+    Much of this development-conict literature is at the macro, often the national, level.
+Conict research at the micro-level, and in particular the impact of development aid on
+local levels of violence, is sparse and what does exist has up to recently been largely of
+                     36
+a descriptive nature.    This is not surprising because attempts to ▯nd out whether these
+aid programs actually have an impact on the level of violence face major identi▯cation and
+
+measurement challenges (for recent studies that seek to address the identi▯cation challenge
+at the micro level see Berman et al. (2011); Crost et al. (2012); Beath et al. (2011)).
+    This section shows how crowdseeded data can be coupled with a downstream exper-
+
+iment to address these problems at the micro level. Between 2007-2011 a DFID-funded
+randomized development intervention was implemented by the International Rescue Com-
+
+mittee and CARE International throughout Eastern Congo|including the province of
+South Kivu. The villages were selected into the development program by a public lottery|
+thus in expectation treatment and control villages are alike in all respects except for the
+
+intervention itself. The development project provided communities with ▯nancing of up to
+$70,000 to construct local projects such as school rooms or clinics|part of this money was
+
+received and managed by the communities directly. The intervention followed a \do no
+harm" approach | that is, the projects were implemented in a way that sought to ensure
+that they did not spark local conicts. During the selection of the Voix des Kivus villages
+
+we took account of the random assignment of this development intervention, stratifying our
+sample upon the villages’ treatment status in order to obtain balance between the number
+
+  35See also Collier (2003) and Bates (2009).
+  36In addition, little work exists that ties both levels together. See for a particular strong illustration of
+
+the disconnect between the micro and macro levels in the DRC: Autesserre (2010).
+
+
+                                             18
+of Voix des Kivus villages that had the development program and those that did not.
+
+    Even with a small sample such as we have, random assignment ensures that simple
+di▯erence in means provides an unbiased estimate of the treatment e▯ect. Of course with
+
+a small sample our power is weak and we can expect our estimates to be somewhat noisy,
+though this does not threaten unbiasedness (see for example Mutz and Pemantle (2011);
+
+Imai et al. (2008)).
+    The top line in Figure 3’s top left panel shows the estimated impact of development
+
+aid on the incidence of conict using simple di▯erences in means. The points are estimates
+calculated for each month, based upon village-month data for that month and the preceding
+two months. The gray area indicates the 95% con▯dence interval, where the standard errors
+                                                                                               37
+are clustered at the village level. The bottom line shows the corresponding p-values.
+Conict events are measured as the message-codes: 21-56, 64-65, and 99. Note that this
+
+construction separates the troop presence measures from the violent event measures. Two
+results stand out. First, we see that the magnitudes vary over time, with strong estimates
+
+of e▯ects in early periods which then decline and reemerge, though never to initial levels.
+Second, the data provides evidence of a positive impact of development aid: that is, villages
+
+with the development program have a lower level of conict incidence. Not only are the
+point estimates of the development impact consistently below the zero line, so are most of
+
+the 95% con▯dence intervals, which is reected in the fact that the majority of estimated
+p-values (13/22) are at or below 0.1.
+    A set of robustness checks, presented in the other three panels in Figure 3, give fur-
+
+ther con▯dence in these results. First, we provide results using a randomization inference
+procedure (Fisher, 1935).  38  We repeatedly randomly re-assigned our eighteen villages to
+
+the treatment and for each of these new re-assignments to treatment we calculated the
+distribution of possible estimated e▯ect under the null of no e▯ect. We then estimated how
+
+likely it is we would have obtained results as strong or stronger than we did under this null.
+These results are presented in the top right panel of Figure 3. using this approach we we
+
+▯nd 7/22 of the estimated p-values at or below 0.1, and 5/22 below 0.05. Note that in the
+early periods in which there are only 4 villages the p values from randomization inference
+
+can never drop below 0.25, correctly reecting the severely restricted set of permutations
+that are possible with this small set of cases. In later periods, where it is technically
+possible to have lower p values, these values drop to below standard thresholds.
+
+    In this ▯gure we also include shorter, thin lines that are estimated when we restrict our
+analysis to exclude the ▯rst four purposefully selected villages that entered the system.      39
+
+  37All p values in the analyses in this sub-section are based upon two-tailed tests given the uncertain
+
+ex38ctations over the direction of the average e▯ects of aid.
+    See also: Barrios et al. (2012), Small et al. (2008), and Ho and Imai (2006).
+  39These lines start at November 2010 for two reasons. First, as the bottom panel of Figure 2 illustrates,
+Voix des Kivus’ expansion was only gradually: three villages were added in August 2010, four during
+October 2010, etc. Second, the monthly estimates are based upon data from that month and the preceding
+
+two months.
+
+
+
+                                               19
+             Three Month Averages                                               Three Month: RI
+
+
+
+
+    0                ● ●          ● ● ●             ● ●           0                 ● ●         ● ● ●             ● ●
+                          ● ●   ●       ●         ●                                     ● ●   ●       ●         ●
+                              ●           ● ● ● ●                                           ●           ● ● ● ●
+           ●       ●                                                      ●       ●
+ −20                                                            −20
+
+
+                 ●                                                              ●
+
+ −40         ●                                                  −40         ●
+
+
+               ●                                                              ●
+ −60                                                            −60
+
+                                                         0.9                                                            0.9
+
+                                    ●
+                                                         0.7                                                            0.7
+
+                                  ●
+                                                                                    ● ●
+                                                      ●  0.5                                                            0.5
+
+                       ●                                                                          ●
+                     ●                ●                  0.3                                    ●                       0.3
+                                                                          ● ● ● ● ●     ● ● ●                       ●
+                                                                                              ●
+           ●                    ●       ●           ●                                               ●
+                   ●      ● ●             ● ●   ● ●      0.1                                          ●           ●     0.1
+             ● ● ●            ●               ●                                                         ● ● ● ● ●
+
+     aug09   dec09   apr10   aug10    dec10   apr11                aug09   dec09    apr10   aug10   dec10   apr11
+
+
+
+
+                Internal Validation                                              Cumulative: RI
+
+
+
+
+    0              ● ● ●  ● ● ● ● ● ● ● ●   ●   ● ● ● ●           0
+           ●                              ●   ●                                                     ● ●         ● ● ●
+                 ●                                                                              ● ●     ● ● ● ●
+             ●                                                            ●           ● ● ● ● ●
+ −20           ●                                                −20               ● ●
+                                                                                ●
+                                                                            ● ●
+
+
+ −40                                                            −40
+
+
+
+ −60                                                            −60
+
+                                  ●                      0.9                                                            0.9
+
+                                ●   ●
+                                                      ●  0.7                                                            0.7
+
+
+
+                                      ●                  0.5                                                            0.5
+
+                       ●
+                     ●                  ●                0.3                                                            0.3
+                                                                          ● ● ● ● ● ● ● ● ● ●
+                              ●                     ●                                         ● ●
+           ●       ●                                                                              ●
+                          ● ●             ● ● ● ● ●      0.1                                        ● ●                 0.1
+             ● ● ●                                                                                      ● ● ● ● ● ● ●
+
+     aug09   dec09   apr10   aug10    dec10   apr11                aug09   dec09    apr10   aug10   dec10   apr11
+
+
+
+
+
+Figure 3: Conict Impact of Development Aid. The top left panel shows estimated e▯ects
+
+
+(top black line) based on data for that month and the preceding two months, including 95%
+
+
+con▯dence intervals (gray area) and the corresponding p-values (bottom black line). The
+
+top right panel presents results of the randomization inference for the full sample and the
+
+
+restricted sample). The restricted sample drops the initial four villages. The bottom left
+
+
+panel presents results where conict events reported by one (two) individuals are weighted
+
+one-third (one-half) as much as those reports reported by three individuals. Based on ac-
+
+
+cumulated data over time, the bottom right panel shows results of randomization inference
+
+for the full sample and the restricted sample.
+
+
+
+
+
+                                                             20
+Surprisingly, we ▯nd that excluding the ▯rst four Voix des Kivus villages makes little
+di▯erence to our estimates. The estimates, con▯dence intervals and p-values are almost
+identical.
+
+    In a second robustness check we leverage the possibility for internal validation of crowd-
+seeded data. Recall that each event can be reported by one, two or all three of our reporters.
+
+Because we are more con▯dent that events reported by three individuals have taken place
+(or have been substantially important), we regard those conict events reported by one
+
+(two) individuals one-third (one-half) as much as those events reported by three individu-
+als. Results are presented in the bottom left panel in Figure 3. The overall results are very
+
+similar to those from the main analysis although the magnitudes (p values) are generally
+somewhat lower (higher). Finally, the lower right panel of the ▯gure shows comparable
+
+results for the cumulative e▯ects; here again p values fall as the sample expands; using the
+full sample the e▯ects are strongest though this in part reects the e▯ects induced by the
+
+▯rst set of villages. As shown by the thinner lines on the graph however the results are not
+very sensitive to dropping these units.
+
+    Figure 3 reports results for each month. Given this collection of ▯ndings can we conclude
+that the project led to less conict overall? That is, while in most periods the estimates
+
+are negative and statistically signi▯cant, there are periods in which the estimate is not
+signi▯cantly di▯erent from zero. This gives rise to a multiple comparisons problem. We
+again use randomization inference to address this problem.       40  Speci▯cally, we repeatedly
+
+randomly re-assigned our eighteen villages to the treatment to generate a distribution of
+estimated e▯ects for the entire period under the sharp null of no e▯ect for any unit.      41 We
+
+then assess how likely it is that we would have obtained results as strong or stronger than
+we did. We calculate a p-value of 0.01 for the full period and 0.04 for the restricted period.
+
+This cumulative evidence suggests that the positive e▯ect we estimate for the development
+project is unlikely due to chance even for this small sample.    42
+
+    This analysis has been implemented using a very small number of cases from a relatively
+small part of Congo, and we therefore do not pretend to make a general claim here for the
+
+relation between development aid and conict. Our goal here is to illustrate the promise of
+a real-time system such as Voix des Kivus. Our analysis points, we think, to an important
+
+advantage of real time data for the assessment of causal e▯ects. Existing studies of the
+e▯ects of development interventions often produce contradictory results. Yet, these studies
+
+di▯er on many dimensions of design, including the temporal lag between intervention and
+measurement. An analysis using real-time data allows one to measure the extent to which
+
+  40Other approaches to deal with the multiple comparisons problem include using an index of measures
+(the approach adopted by Kling et al. (2007) for example), statistical adjustments, such as the Bonferroni
+   ▯
+or Sid▯k corrections (see also Benjamini and Hochberg (1995) for methods to control the false discovery
+rate), or multi-level approaches (Gelman et al., 2009).
+  41Each regression is thus for the whole period under study.
+  42We highlight that this test assesses the sharp null of no e▯ect for any unit. The e▯ects we observe are
+consistent with a spillover e▯ect in which conict shifted from treated units to control units and we cannot
+
+rule out this possibility in the current analysis.
+
+
+                                               21
+the variance in estimated e▯ects depends on the timing of measurement. For example,
+
+measures of conict events that took place in the month prior to data collection might
+yield an estimated e▯ect with low variance. However, while this within-period variance is
+
+low, the across-period variance might be high: very di▯erent estimates might have been
+produced if data were gathered a month earlier or a month later. The top left panel in
+Figure 3 suggests the timing of measurement contributes a large share of the true variance in
+                                43
+estimates of treatment e▯ects.     For example, a researcher collecting data in October 2010
+(for that month and the preceding two months) would conclude that there is no impact of
+
+development aid (▯ = ▯0:9 and p = 0:74). On the other hand, if that same researcher had
+conducted her study three months earlier or three months later, she would have concluded
+
+that there is strong evidence in favor of development aid (▯ = ▯8:7, p = 0:02 and ▯ = ▯8:8,
+p = 0:07, respectively).
+
+
+4.2    Application 2: Spatial Clustering and Di▯usion of Conict
+
+Conict is often geographically clustered. One reason might be that geographically prox-
+
+imate units are similar to each other; another is that conict might \spill over" from one
+location to the next. Population ows may be one driver for di▯usion by facilitating the
+
+spread of arms, combatants, and ideologies conducive to conict (Kuran, 1998), altering an
+area’s ethnic composition (Buhaug, 2008), or exacerbate economic competition (Salehyan
+
+and Gleditsch, 2006; Van Acker, 2005; Claessens et al., 2013; Vlassenroot and Huggins,
+2005; Autesserre, 2009, 2010).  44
+    While initially limited to research on international conict (Starr and Most (1983),
+
+O’Loughlin (1986)), di▯usion-based explanations have since permeated cross-national stud-
+ies of civil war (Braithwaite, 2010; Buhaug, 2008). Disaggregated research on the local dy-
+
+namics of conict, however, is more sparse. One reason for this is the di▯culty of obtaining
+high-quality, dynamic data on conict at the micro-level. This is unfortunate because there
+
+is reason to believe that conict di▯usion can operate at a very micro-level. For example,
+in Eastern Congo most population movements take place within chiefdoms, with migrants
+moving to nearby villages often only several kilometers away. In this second application we
+
+illustrate the usefulness of crowdseeding data to learn about conict di▯usion at this micro-
+level. Moreover, we will also illustrate the usefulness of temporal ▯ne grain, by showing
+
+how data collected following a survey-based approach can bias conclusions about conict
+di▯usion.
+
+  43Analyzing both sources of variance directly we ▯nd that the variance in estimated e▯ects depends
+strongly on the timing of measurement. Starting from month 4, the variance in estimates of the treatment
+e▯ect over months 4-24 is 194; the average variance within each period however is just 12. Things settle
+
+down after month 6, but even still the variance in estimates over time (months 7|24) is 12 while the
+av44age variance is 11.
+    Another channel found to be important is the negative impact of conict on regional economic growth,
+which lowers the opportunity costs of rebellion in neighboring areas (Murdoch and Sandler, 2002).
+
+
+
+
+                                              22
+    Di▯usion has been an important force in the spread and sustaining of conict in Congo’s
+
+South Kivu province. The First Congo War (1996-7) and the Second Congo War (1998-
+2003) were plausibly a direct result of the 1994 Rwandan genocide, with an estimated
+                                          45
+inux of nearly 1.5 million Rwandans.         Internal migration rates are also high in the
+region. A survey conducted in 2007 in over 600 randomly-selected villages throughout
+
+Eastern Congo ▯nds that a full 71% of individuals in South Kivu had ed at least once at
+some point during the period 1996-2007 due to armed activities by organized armed groups
+           46
+or militias.  Table 1 corroborates the presence of forced movements also for our Voix des
+Kivus villages (codes 53, 54, 56).
+
+    Does conict di▯use in the South Kivu province?         We investigate the question by
+analyzing whether conict in a village in a given period is more likely if conict was higher
+
+in the previous period in neighboring villages. To estimate the magnitude and scope of
+
+such spillover e▯ects we pool our village-period data and model the di▯usion process with
+a simple spatial autoregressive model:
+
+                                         X
+                           y it▯ + ▯          yj;t▯1+ ▯y i;t▯1+ ▯it                        (1)
+
+                                       j2N(i)
+          P
+    where          yj;t▯1 is the spatial lag, which can be interpreted as a sum of the number
+             j2N(i)                                                              47
+of conict events in villages in i’s neighborhood, N(i), in the preceding period.   The term
+y     is the lagged dependent variable for village i, and ▯ is an error term|assumed to be
+ i;t▯1                                                     it
+independent and identically distributed.  48 Note that this equation does not include village
+                                                 49
+▯xed e▯ects, though these are examined below.
+    Equation 1 requires a choice about how a neighbor is de▯ned. Are only villages less
+
+than ten kilometers away neighbors, or are villages 40 kilometers away also neighbors?
+This decision can exert a signi▯cant inuence on the magnitude and scope of estimated
+
+di▯usion e▯ects (e.g. Anselin (2002), Zhukov and Stewart (2012)).
+    In South Kivu those individuals that migrate due to conict often only move a few kilo-
+
+meters from their village of origin|moving to the nearest safe village or to those villages
+with family. In 2012 one of the authors collected information about the migration histories
+
+of 8,199 adults in the Buhavu chiefdom|one of two chiefdoms in South Kivu’s territory of
+
+  45For historical roots, see Prunier (1997) and Prunier (2009).
+  46See: f link g. Such conict-induced migration has also been characteristic for the region in more recent
+
+years due to sustained rebel activity and military operations by the government such as the 2009 joint
+Congo-Rwanda military o▯ensive Umoja Wetu against the FDLR, followed by Kimia II and Amani Leo.
+  47Note that including this summation term means the results are sensitive to the number of villages in
+the data set, and thus controlling for temporal ▯xed e▯ects is important. This is not an issue in our analysis
+
+be48w because the number of villages is ▯xed for the period chosen for analysis.
+    The interpretation is that there is the own village lag e▯ect and also the \neighbor" lag e▯ect, and we
+are looking at the latter conditional on the former.
+  49Note that there are biases from estimating ▯xed e▯ects with lagged dependent variables, which disappear
+
+when the number of time periods is large (Nickell, 1981)
+
+
+
+                                              23
+Kalehe. 50 The data show that 92% of all movements that originated in the Buhavu chief-
+
+dom and were caused by conict|which totaled 4,431 movements|ended in a di▯erent
+village, but in the same chiefdom. Conict-induced migration is thus very local in South
+
+Kivu, and we might expect that conict di▯usion is as well. As a result, to test whether
+conict di▯usion operates at such a ▯ne-grained level we estimate the spatial autoregres-
+
+sive model multiple times, each time with a di▯erent de▯nition of neighbor. Speci▯cally,
+Equation 1 is estimated with a neighbor consecutively de▯ned as those villages inside the
+
+intervals 0 to f6-50g kilometers.
+    We also test directly the bene▯t of a crowdseeding system to collect very precise data
+on the timing of conict events. To do so we estimate Equation 1 twice: once where we
+
+do not leverage the temporal ▯ne-grain of the data, and once where we do. Speci▯cally,
+to learn about conict di▯usion a researcher might conduct a survey twice in our Voix des
+
+Kivus villages collecting in each survey the number of conict events that took place in the
+previous period. With both surveys taking place at di▯erent points of time, the conict
+
+events recorded in the ▯rst survey would constitute the baseline levels on the outcome
+variable for the subsequent period (y   i;t▯1 in Equation 1).  51 In contrast to such survey-
+
+style data, which collects data for two periods only, a crowdseeded dataset is more ▯ne-
+grained with information about the exact timing of events. To leverage this information
+                                                                                    52
+we undertake the same analysis but using village-week as the unit of analysis.         We now
+compare the results based upon these di▯erent datasets.
+    The ▯rst two panels in Figure 4 present the results for each type of analysis. The black,
+
+solid line indicates the estimated impact of conict in neighboring villages in the previous
+period on a village’s incidence of conict in this period, for a given de▯nition of neighbor;
+
+the gray areas indicate the 95% con▯dence interval. Results are from one-tailed tests (Does
+conict spill to the next village?).
+
+    The left panel presents results from estimating Equation 1 based on the \survey-style"
+data | that is data without temporal ▯ne grain, clustering the error at the village level.
+
+Two results stand out. First, conict in neighboring villages in the previous period is
+associated with fewer conict events in this period. Second, conict di▯usion appears to
+
+operate at the micro level. An additional conict event in a village less than 25 kilometers
+away decreases the number of conict events by 0.2; a result that is not only statistically,
+but also substantially signi▯cant. As we broaden the de▯nition of neighbor, and thus
+
+include more villages, the estimated magnitudes decreases. Given these results, a researcher
+might conclude that migrant spillovers have a positive impact on neighboring villages.
+
+Perhaps in anticipation of responses by peacekeepers or other armed groups, rebel groups
+
+  50This area includes ▯ve of our Voix des Kivus villages: the upper ▯ve villages in Figure 1.
+  51Speci▯cally, to simulate this setup in our data we group six months for which we have information from
+all villages (November-April, 2011) into two periods each consisting of those conict events that took place
+over three months.
+  52
+    Crowdseeded data can also be analyzed at a more ▯ne-grained level such as by day or|if the data
+allows it|hour. We do not do so in this paper.
+
+
+
+                                               24
+shun an area after attacking a village the previous period.
+
+
+            Survey Data                    Crowdseeding Data               Crowdseeding Data + FE
+
+ 0.2                                0.2                               0.2
+
+
+
+
+ 0.0                                0.0                               0.0
+
+
+
+
+−0.2                               −0.2                               −0.2
+
+
+
+
+
+
+     5  10 15 20 25 30 35 40 45 50      5  10 15 20 25 30 35 40 45 50      5 10 15 20 25 30 35 40 45 50
+
+
+
+Figure 4: Conict Di▯usion in South Kivu: By Type of Data Collected. The two left
+
+panels show results from estimating Equation 1 on respectively the survey-based data and
+the crowdseeded data, with errors clustered at the village level. The solid black lines
+
+indicate point estimates. Gray areas indicate 95% con▯dence intervals. The right panel
+
+presents results from estimating Equation 1 on crowdseeded data but now also controlling
+for village-level ▯xed e▯ects. For all three panels values at the x-axis are the number of
+
+kilometers below which a village is de▯ned as neighbor.
+
+
+    Results are very di▯erent, however, when the temporal variation provided by crowd-
+
+seeded data is taken into account. The center panel presents results from estimating exactly
+the same model but on the more ▯ne-grained data. We now ▯nd evidence for conict dif-
+
+fusion: that is, the point estimates are consistently above the zero line. We again ▯nd that
+previous conict in villages nearby have a larger impact than those villages further away.
+
+An additional conict event in a village less than ten kilometers away increases the number
+of conict events by 0.05; a result that is not only statistically, but also substantially signif-
+
+icant. The ▯gure illustrates clearly how this impact decreases as we broaden the de▯nition
+
+of neighbor, and quickly becomes non-signi▯cant. The point estimate for villages within
+50 kilometers is zero.
+
+    A weakness of both of these analysis is that they fail to distinguish between true
+di▯usion and common causes of conict among neighbors. While we assumed ▯                       itto be
+
+independent and identically distributed, variables such as the presence of a rebel group
+or a bad harvest might cluster and this might drive our results. Hegre et al. (2001), for
+
+example, ▯nds that the apparent clustering of civil war is fully explained by the clustering
+
+of domestic factors (mainly GDP per capita and regime type). We do not have information
+
+
+
+                                                   25
+about such factors for our Voix des Kivus villages. However, a major bene▯t of data that
+has variation over time is that it allows the researcher to estimate Equation 1 controlling
+for village-level ▯xed e▯ects.3 Results from doing so are reported in the right panel of
+
+Figure 4. We ▯nd that our point estimates almost double and that the con▯dence interval
+hits the zero bound only at 40 kilometers.
+
+    This application illustrates two points. First, it highlights the importance of getting
+the geographic level right. Conict dynamics might operate at the very micro-level ge-
+ographically (see also Schutte and Weidmann (2011)). Di▯usion that can be observed
+
+at a very ▯ne resolution may be invisible at a lower resolution. For this, crowdseeding
+data shares strengths with datasets such as ACLED that provide ▯ne geographic detail
+(a.o. Raleigh et al. (2010), Hegre et al. (2009), Buhaug et al. (2011), Weidmann and
+
+Ward (2010)), though it bene▯ts from a greater density of reported events. Second, the
+analysis illustrates the importance of temporal ▯ne grain. It illustrated how conclusions
+based on temporally coarse data can produce conclusions diametrically opposed to what is
+
+found with more ▯ne grained data. It is possible that e▯ects work at di▯erent registers|a
+more sophisticated model than that provided in Equation 1 might ▯nd for example that
+
+in the short run there is local di▯usion but in the longer run conict moves farther a▯eld.
+Assessing such dynamics, however, requires exactly the ▯ne grain illustrated above.
+
+
+5    Conclusion
+
+
+The past decade has seen much e▯ort to better understand the causes and consequences
+of violent conict. Much of the empirical analysis, however, makes use of data at high
+
+levels of aggregation (often the country and year level). It is therefore not surprising that
+in their survey of the civil war literature Blattman and Miguel (2010) argue that \a major
+goal of civil war researchers within both economics and political science in the coming
+
+years should be the collection of new data, especially extended panel micro-data sets..."
+Original micro-level data is normally collected by conducting surveys or interviews. The
+collection of conict data in particular faces a set of challenges because of the nature of
+
+the areas in which conict events take place. These events take place in insecure areas and
+are therefore often o▯-limits to researchers; and if data is gathered long after the fact, it
+
+may su▯er from various forms of recall and selection bias.
+    In this paper we investigated whether a SMS-based \crowdseeding" system can be used
+to obtain high-quality, micro-level panel data on conict. To address the question we
+
+piloted the Voix des Kivus system between 2009 and 2011 in the war-torn South Kivu
+province of the Democratic Republic of Congo. Phone holders were pre-selected from
+randomly sampled areas, provided cell phones and credit, and invited to provide regular
+
+  5Fixed e▯ects in the presence of a lagged dependent variable runs a risk of bias, especially for short
+
+panels (Arellano and Bond (1991)). An advantage of real time data however is that panels can quickly
+become longer than wide.
+
+
+
+                                            26
+reports to the system. This approach holds out the promise of multiple bene▯ts for data
+quality, which includes a claim to representativeness and the possibility to collect conict
+event data in real-time. By implementing such a crowdseeding system we hope to overcome
+
+the problems that come with current methods to collect data on conict.
+    A ▯rst objective in this research was to probe the feasibility of employing a crowdseeding
+approach to gathering high-quality data on conict events in real-time. We found that users
+
+had the capacity and willingness to engage at high levels, the technical implementation
+both at the village level and the processing level were smooth, and the costs required were
+relatively modest.
+
+    A second goal was to illustrate the use and bene▯ts of crowdseeding data. In a ▯rst
+application, we took advantage of exogenous variation resulting from the random imple-
+mentation of a development project to assess whether aid is associated with increased or
+
+reduced levels of violence. We implemented Voix des Kivus in such a way that some Voix
+des Kivus villages received the development project, and others not. Despite the small
+sample, we ▯nd evidence for a negative relationship between aid and conict. In a second
+
+application we exploit the ▯ne grain of the data to examine conict di▯usion patterns. We
+▯nd evidence that conict events shift from site to site but ▯nd that that evidence for
+
+di▯usion disappears at a resolution of about 50km. Critically, by exploiting the continuous
+nature of our data, both applications highlight the sensitivity of estimates to the timing of
+measurement in a way that cannot be assessed from traditional cross-sectional data.
+
+    Ultimately, however, the value of the system depends on the quality of the data that
+it generates. Our initial probes, using validation by our agent in the ▯eld, through cross-
+reporter comparison of reports, and through comparison with survey data, suggest that the
+
+data is capturing major trends faithfully. However, the data di▯ers both qualitatively and
+quantitatively from those from other sources. Comparisons with ACLED data for example
+suggest a greater volume of events and a higher attribution of conict events to Congolese
+
+government troops. Moreover, high correlations in the reporting of di▯erent types of events
+as well as large variation in the number of events reported by di▯erent areas suggest that
+accuracy may be a▯ected by uneven reporter engagement with the system. Given the
+
+promise of the system we believe that there is need now for more formal validation of data
+from crowdseeding, perhaps in conjunction with a validation of crowdsourced data, that
+would seek to assess rates of Type I and Type II errors relative to data systematically
+
+collected through intensive application of traditional methods.
+    We close with reections on the ethical implications of taking a project like this to
+
+scale. During the pilot project we faced no incidents that threatened the safety of the
+phone holders. However, things might be di▯erent if a project of this form were scaled up
+and attracted the interest of armed groups. For both humanitarian and research purposes
+
+a project such as Voix des Kivus becomes truly useful only when it is taken to scale; but
+those are precisely the conditions which might create the greatest risks. We did not assess
+these risks because we could not bear them ourselves. But given the importance and utility
+
+of the data these are risks that local and international groups operating in these regions
+
+
+                                             27
+might be prepared to bear.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                          28
+References
+
+
+Anderson, M. B. (1999). Do No Harm: How Aid Can Support Peace - or War. Lynne
+  Rienner, London.
+
+Anselin, L. (2002). Under the Hood: Issues in the Speci▯cation and Interpretation of
+
+  Spatial Regression Models. Agricultural Economics, 27(3):247{267.
+
+Arellano, M. and Bond, S. (1991). Some Tests of Speci▯cation for Panel Data: Monte Carlo
+  Evidence and an Employment Equations. Review of Economic Studies, 58(2):277{297.
+
+Autesserre, S. (2009). Hobbes and the Congo: Frames, Local Violence, and International
+
+  Intervention. International Organization, 63(2):249{280.
+
+Autesserre, S. (2010). The Trouble with the Congo. Local Violence and the Failure of
+  International Peacebuilding. Cambridge University Press, New York City.
+
+
+Barrios, T., Diamond, R., Imbens, G. W., and Koles▯ar, M. (2012). Clustering, Spatial Cor-
+  relations and Randomization Inference. Journal of the American Statistical Association,
+  107(498):578{591.
+
+Bates, R. H. (2009). Prosperity & Violence: The Political Economy of Development. W.
+
+  W. Norton & Company, New York City, 2nd edition.
+
+Beath, A., Fotini, C., and Enikolopov, R. (2011). Winning Hearts and Minds through
+  Development Aid: Evidence from a Field Experiment in Afghanistan. Working paper.
+
+
+Benjamini, Y. and Hochberg, Y. (1995). Controlling the False Discovery Rate: A Practical
+  and Powerful Approach to Multiple Testing. Journal of the Royal Statistical Society.
+  Series B (Methodological), 57(1):289{300.
+
+Berinsky, A. J., Huber, G. A., and Lenz, G. S. (2012). Evaluating Online Labor Markets for
+
+  Experimental Research: Amazon.com’s Mechanical Turk. Political Analysis, 20(3):351{
+  368.
+
+Berman, E., Shapiro, J. N., and Felter, J. H. (2011). Can Hearts and Minds Be Bought?
+
+  The Economics of Counterinsurgency in Iraq. Journal of Political Economy, 119(4):766{
+  819.
+
+Blattman, C. and Miguel, E. (2010). Civil War. Journal of Economic Literature, 48(1):3{
+
+  57.
+
+Braithwaite, A. (2010). Resisting Infection: How State Capacity Conditions Conict Con-
+  tagion. Journal of Peace Research, 47(3):311{319.
+
+
+
+
+                                           29
+Buhaug, H. (2008). Contagion or Confusion? Why Conicts Cluster in Space. International
+  Studies Quarterly, 52(2):215{233.
+
+Buhaug, H., Gleditsch, K. S., Holtermann, H., Ostby, G., and Tollefsen, A. F. (2011).
+
+  It’s the Local Economy, Stupid! Geographic Wealth Dispersion and Conict Outbreak
+  Location. Journal of Conict Resolution, 55(5):814{840.
+
+Claessens, K., Mudinga, E., and Ansoms, A. (2013). Land Grabbing by Local Elites in the
+  Territory of Kalehe, South Kivu, Eastern DRC. Working paper.
+
+
+Cohen, N. and Arieli, T. (2011). Field Research in Conict Environments: Methodological
+  Challenges and Snowball Sampling. Journal of Peace Research, 48(4):423{435.
+
+Collier, P. (2003). Breaking the Conict Trap: Civil War and Development Policy. Oxford
+
+  University Press, New York City.
+
+Corstange, D. (2008). Sensitive Questions, Truthful Answers? Modeling the List Experi-
+  ment with LISTIT. Political Analysis, 17(1):45{63.
+
+Coughlin, S. S. (1990). Recall Bias in Epidemiologic Studies. Journal of Clinical Epidemi-
+
+  ology, 43(1):87{91.
+
+Crost, B., Felter, J. H., and Johnston, P. (2012). Aid Under Fire: Development Projects
+  and Civil Conict. Working paper.
+
+
+De Nicola, F. and Gin▯e, X. (2014). How Accurate Are Recall Data? Evidence from Coastal
+  India. Journal of Development Economics, 106:52{65.
+
+De Ree, J. and Nillesen, E. (2009). Aiding Violence or Peace? The Impact of Foreign Aid
+
+  on the Risk of Civil Conict in Sub-Saharan Africa. Journal of Development Economics,
+  88(2):301{313.
+
+De Waal, A. (2009). Famine Crimes: Politics & the Disaster Relief Industry in Africa.
+  Indiana University Press, Bloomington.
+
+
+Fearon, J. D. and Laitin, D. D. (2003). Ethnicity, Insurgency, and Civil War. American
+  Political Science Review, 97(1):75{90.
+
+Fisher, R. A. (1935). The Design of Experiments. Oliver and Boyd, London.
+
+Gelman, A., Hill, J., and Yajima, M. (2009). Why We (Usually) Dont Have to Worry
+
+  About Multiple Comparisons. Working paper.
+
+Hegre, H., Ellingsen, T., Gates, S., and Gleditsch, N. P. (2001). Toward a Democratic Civil
+  Peace? Democracy, Political Change, and Civil War, 1816-1992. American Political
+
+  Science Review, 95(1):33{48.
+
+
+                                            30
+Hegre, H., Ostby, G., and Raleigh, C. (2009). Poverty and Civil War Events: A Disaggre-
+  gated Study of Liberia Poverty and Civil War Events. Journal of Conict Resolution,
+  53(4):598{623.
+
+
+Henderson, J. V., Storeygard, A., and Weil, D. N. (2012). Measuring Economic Growth
+  from Outer Space. American Economic Review, 102(2):994{1028.
+
+Henderson, V., Storeygard, A., and Weil, D. N. (2011). A Bright Idea for Measuring
+  Economic Growth. American Economic Review, 101(3):194{199.
+
+
+Ho, D. E. and Imai, K. (2006). Randomization Inference With Natural Experiments:
+  An Analysis of Ballot E▯ects in the 2003 California Recall Elections. Journal of the
+  American Statistical Association, 101(475):888{900.
+
+
+Imai, K., King, G., and Stuart, E. A. (2008). Misunderstandings Between Experimentalists
+  and Observationalists About Causal Inference. Journal of the Royal Statistical Society:
+  Series A, 171(2):481{502.
+
+
+Kling, J. R., Liebman, J. B., and Katz, L. F. (2007). Experimental Analysis of Neighbor-
+  hood E▯ects. Econometrica, 75(1):83{119.
+
+Kuran, T. (1998). Ethnic Dissimilation and Its International Di▯usion. In Lake, D. A. and
+
+  Rotchild, D., editors, The International Spread of Ethnic Conict: Fear, Di▯usion, and
+  Escalation, pages 35{60. Princeton University Press, Princeton.
+
+Lujala, P. (2010). The Spoils of Nature: Armed Civil Conict and Rebel Access to Natural
+
+  Resources. Journal Of Peace Research, 47(1):15{28.
+
+Lujala, P., Gleditsch, N. P., and Gilmore, E. (2005). A Diamond Curse? Civil War and a
+  Lootable Resource. The Journal of Conict Resolution, 49(4):538{562.
+
+Luyendijk, J. (2009). People Like Us: Misrepresenting the Middle East. Soft Skull Press,
+
+  New York City.
+
+Miguel, E., Satyanath, S., and Sergenti, E. (2004). Economic Shocks and Civil Conict:
+  An Instrumental Variables Approach. Journal of Political Economy, 112(4):725{753.
+
+
+Murdoch, J. C. and Sandler, T. (2002).      Economic Growth, Civil Wars, and Spatial
+  Spillovers. Journal of Conict Resolution, 46(1):91{110.
+
+Mutz, D. and Pemantle, R. (2011). The Perils of Randomization Checks in the Analysis
+  of Experiments. Working paper.
+
+
+Nickell, S. (1981). Biases in Dynamic Models with Fixed E▯ects. Econometrica, 49(6):1417{
+  1426.
+
+
+
+                                           31
+Nunn, N. and Qian, N. (2013). Aiding Conict: The Impact of U.S. Food Aid on Civil
+  War. NBER Working paper, 17794.
+
+O’Loughlin, J. (1986). Spatial Models of International Conicts: Extending Current The-
+
+  ories of War Behavior. Annals of the Association of American Geographers, 76(1):63{80.
+
+Polman, L. (2011). The Crisis Caravan: What’s Wrong with Humanitarian Aid? Picador,
+  New York City.
+
+Prunier, G. (1997). The Rwanda Crisis: History of a Genocide. Columbia University Press,
+
+  New York City.
+
+Prunier, G. (2009). Africa’s World War: Congo, the Rwandan Genocide, and the Making
+  of a Continental Catastrophe. Oxford University Press, Oxford.
+
+
+Raleigh, C. and Hegre, H. (2009). Population Size, Concentration, and Civil War. A
+  Geographically Disaggregated Analysis. Political Geography, 28(4):224{238.
+
+Raleigh, C., Linke, A., Hegre, H., and Karlsen, J. (2010). Introducing ACLED: An Armed
+
+  Conict Location and Event Dataset. Journal of Peace Research, 47(5):651{660.
+
+Salehyan, I. and Gleditsch, K. S. (2006). Refugees and the Spread of Civil War. Interna-
+  tional Organization, 60(02):335{366.
+
+Schutte, S. and Weidmann, N. B. (2011). Di▯usion Patterns of Violence in Civil Wars.
+
+  Political Geography, 30(3):143{152.
+
+Small, D. S., Ten Have, T. R., and Rosenbaum, P. R. (2008). Randomization Inference
+  in a Group-Randomized Trial of Treatments for Depression. Journal of the American
+
+  Statistical Association, 103(481):271{279.
+
+Starr, H. and Most, B. A. (1983). Contagion and Border E▯ects on Contemporary African
+  Conict. Comparative Political Studies, 16(1):92{117.
+
+Van Acker, F. (2005). Where Did All the Land Go? Enclosure and Social Struggle in Kivu
+
+  (D.R.Congo). Review of African Political Economy, 32(103):79{98.
+
+Van der Windt, P. (2013). From Crowdsourcing to Crowdseeding: The Cutting Edge
+  of Empowerment?      In Livingston, S. and Walter-Drop, G., editors, Bits and Atoms:
+
+  Information and Communication Technology in Areas of Limited Statehood, chapter 10,
+  pages 144{156. Oxford University Press, New York City.
+
+Verwimp, P., Justino, P., and Bruck, T. (2009). The Analysis of Conict: A Micro-Level
+
+  Perspective. Journal of Peace Research, 46(3):307{314.
+
+
+
+
+                                           32
+Vlassenroot, K. and Huggins, C. (2005). Land, Migration and Conict in Eastern DRC.
+  From the Ground Up: Land Rights, Conict and Peace in Sub-Saharan Africa, pages
+  115{194.
+
+
+Weidmann, N. B., Rod, J. K., and Cederman, L.-E. (2010). Representing Ethnic Groups
+  in Space: A New Dataset. Journal of Peace Research, 47(4):491{499.
+
+Weidmann, N. B. and Ward, M. D. (2010). Predicting Conict in Space and Time. Journal
+  of Conict Resolution, 54(6):883{901.
+
+
+Zeitzo▯, T. (2011). Using Social Media to Measure Conict Dynamics: An Application to
+  the 2008-2009 Gaza Conict. Journal of Conict Resolution, 55(6):938{969.
+
+Zhukov, Y. M. and Stewart, B. M. (2012). Choosing Your Neighbors: Networks of Di▯usion
+
+  in International Relations. International Studies Quarterly, 527(2):271{287.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                           33
+6   Online Appendix: Messages by Reporter Position
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                               34
+Code     Event                                                                    Chief    Woman      Elec.    ▯(C-W)      ▯(C-E)     ▯(W-E)
+
+ 10      PRESENCE OF MILITARY FORCES                                               0.02      0.02      0.02       0           0           0
+ 11      Presence of MONUSCO                                                       1.04      0.41      0.10      0.63        0.93        0.3
+
+ 12      Presence of FARDC                                                         0.93      0.74      0.37      0.18        0.56       0.38
+ 13      Presence of other armed groups                                            0.10      0.02      0.09      0.08        0.01      -0.07*
+ 20      ATTACKS (use of violence by an external group)                            0.01      0.01      0.01      0.01        0.01         0
+
+ 21      Attacks on village by MONUSCO                                             0.01      0.03      0.01      -0.03        0         0.03
+ 22      Attacks on village by FARDC                                               0.09      0.06      0.17      0.03       -0.07       -0.11
+
+ 23      Attacks on village by rebel group                                         0.08      0.11      0.05      -0.04       0.03       0.06*
+ 24      Attacks on the village by unknown group                                   0.02      0.04      0.05      -0.02      -0.03       -0.01
+ 30      DEATHS RELATED TO ARMED COMBAT                                            0.06      0.01      0.03      0.06        0.03       -0.02
+
+ 31      Civilian deaths (man)                                                     0.27      0.13      0.13      0.15        0.14         0
+ 32      Civilian deaths (woman)                                                   0.27      0.11      0.14      0.16        0.13       -0.03
+
+ 33      Civilian deaths (child)                                                   0.15      0.05      0.09      0.1         0.06       -0.04
+ 34      MONUSCO deaths                                                            0.01      0.01      0.01       0          0.01       0.01
+ 35      FARDC deaths                                                              0.10      0.05      0.06      0.05        0.04       -0.02
+
+ 36      Other rebel group deaths                                                  0.01      0.01      0.01      0.01         0         -0.01
+ 40      LOCAL VIOLENCE AND PROPERTY LOSS                                          0.01      0.01      0.03       0         -0.02       -0.02
+
+ 41      Rioting                                                                   0.15      0.09      0.18      0.06       -0.03       -0.09
+ 42      Looting/property damage                                                   0.34      0.39      0.64      -0.05       -0.3       -0.25
+ 43      Violence between villagers                                                0.14      0.03      0.06     0.12*        0.09       -0.03
+
+ 44      Violence between villagers due to a land conict                          0.10      0.03      0.59     0.07*       -0.49       -0.56
+ 45      Domestic violence                                                         0.05      0.03      0.05      0.02         0         -0.02
+
+ 46      Ethnic violence                                                           0.00      0.01      0.02      -0.01      -0.02       -0.01
+ 47      Forced labor by FARDC                                                     0.12      0.16      0.06      -0.04       0.06        0.1
+ 48      Forced labor by other army groups                                         0.02      0.06      0.02      -0.04        0         0.04
+
+ 50      DISPLACEMENT                                                              0.00      0.01      0.00      -0.01        0         0.01
+ 51      Kidnapping by men in uniform                                              0.20      0.19      0.13      0.01       0.07*       0.06
+
+ 52      Kidnapping by rebel group                                                 0.14      0.05      0.06      0.1         0.09       -0.01
+ 53      Arrival of Refugees or IDPs                                               0.07      0.11      0.01      -0.04     0.05**        0.1
+ 54      Departure of villagers as IDPs                                            0.11      0.09      0.01      0.03        0.1        0.07
+
+ 55      Disappearances                                                            0.03      0.00      0.01     0.03*        0.02       -0.01
+ 56      Villagers were forced to move                                             0.03      0.02      0.01      0.02        0.03       0.01
+
+ 57      Villagers decided themselves to move                                      0.02      0.00      0.00      0.02        0.02         0
+ 60      HEALTH                                                                    0.03      0.03      0.04       0         -0.01       -0.01
+
+ 61      New outbreak of disease                                                   0.63      0.58      0.40      0.05        0.23       0.18
+ 62      Civilian death due to disease                                             0.82      0.95      0.90      -0.13      -0.08       0.05
+ 63      Civilian death due to natural causes                                      0.08      0.15      0.19      -0.06      -0.11       -0.04
+
+ 64      Sexual violence against women                                             0.08      0.08      0.13       0         -0.05       -0.05
+ 65      Sexual violence against men                                               0.01      0.01      0.28      0.01       -0.27       -0.28
+
+ 70      NATURAL DISASTERS                                                         0.07      0.05      0.07      0.03         0         -0.02
+ 71      Flooding/heavy rain                                                       0.35      0.14      0.23     0.21*        0.12       -0.09
+ 72      Large forest or village ▯re                                               0.18      0.22      0.26      -0.04      -0.07       -0.03
+
+ 73      Earthquake                                                                0.11      0.05      0.07      0.07        0.04       -0.02
+ 74      Drought                                                                   0.07      0.08      0.06      -0.01        0         0.02
+
+ 75      Crop failure/plague                                                       0.70      0.63      0.81      0.07       -0.12       -0.18
+ 80      DEVELOPMENT ACTIVITIES/ NGOs                                              0.34      0.13      0.37     0.21*       -0.03       -0.24
+ 81      Complaint against NGO                                                     0.09      0.08      0.07      0.01        0.02       0.01
+
+ 85      Construction, reparation or rehabilitation of a school or health center   0.07      0.02      0.03     0.05*        0.04       -0.02
+ 86      Construction, reparation or rehabilitation of a church or mosque          0.07      0.04      0.01      0.03       0.05*       0.03
+
+ 87      Other construction, reparation or rehabilitation                          0.39      0.14      0.06      0.26        0.33      0.08**
+ 88      Organization of security patrols                                          0.04      0.04      0.02       0          0.02       0.02
+ 89      Work to improve agricultural productivity                                 0.20      0.11      0.05      0.09       0.15*       0.06
+
+ 90      SOCIAL                                                                    0.04      0.01      0.03      0.03        0.01       -0.02
+ 91      Funeral                                                                   0.28      0.26      0.17      0.02        0.11       0.09
+
+ 92      Wedding/Other celebrations                                                0.25      0.19      0.11      0.07      0.14**       0.08
+ 93      Visit or meeting organized by national or provincial authorities          0.08      0.02      0.05      0.05        0.03       -0.02
+ 94      Visit or meeting organized by territoire authorities                      0.01      0.02      0.02      -0.01      -0.01         0
+
+ 95      Visit or or meeting organized by the che▯erie or locality authorities     0.09      0.09      0.02       0        0.07**       0.07*
+ 96      Visit or meeting organized by the representative of a political party     0.17      0.09      0.05      0.09       0.12*       0.03
+
+ 97      Visit or meeting organized by the King                                    0.12      0.03      0.05      0.09        0.08       -0.01
+  0      Nothing to report                                                         0.34      0.34      0.44       0          -0.1       -0.1
+ 82      Practice message                                                          0.17      0.09      0.22      0.08       -0.05       -0.13
+
+ 98      Unclassi▯able issue (followed by text)                                    0.99      0.45      0.49     0.54**       0.49       -0.05
+ 99      Security Alert                                                            0.14      0.20      0.13      -0.06       0.01       0.07
+
+         Total                                                                    11.71      8.34      9.05      3.37        2.66       -0.71
+
+
+
+      Table 4:      Voix des Kivus Messages by Reporter Position. Based on a total of 519 reporter position-months. For
+
+      reasons of space standard errors are omitted, but signi▯cances are indicated by asterisks: one, two or three asterisks
+
+      indicate, respectively, signi▯cance levels at the 90%, 95% and 99%. For the comparison tests we cluster the errors at
+
+      the village level.
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                       35

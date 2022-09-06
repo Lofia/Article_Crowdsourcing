@@ -1,0 +1,917 @@
+                                                       Global mapping of infectious disease
+
+
+                                                                      1,2                       1                    1                   2,3
+                                                       Simon I. Hay , Katherine E. Battle , David M. Pigott , David L. Smith ,
+                                                                             1               1                        4                5
+                                                       Catherine L. Moyes , Samir Bhatt , John S. Brownstein , Nigel Collier ,
+                                                                          1                    2                           1
+                                                       Monica F. Myers , Dylan B. George and Peter W. Gething
+                                                       1
+                                                       2Spatial Ecology and Epidemiology Group, Department of Zoology, University of Oxford, Oxford, UK
+rstb.royalsocietypublishing.org                         Fogarty International Center, National Institutes of Health, Bethesda, MD, USA
+                                                       3Department of Epidemiology and Malaria Research Institute, Johns Hopkins Bloomberg School of Public Health,
+                                                       Baltimore, MD, USA
+                                                       4Department of Pediatrics, Harvard Medical School and Children’s Hospital Informatics Program,
+
+
+                                                       5oston Children’s Hospital, Boston, MA, USA
+                                                        National Institute of Informatics, Research Organization of Information and Systems, Tokyo, Japan
+Review
+                                                         The primary aim of this review was to evaluate the state of knowledge of
+Cite this article: Hay SI, Battle KE, Pigott DM,         the geographical distribution of all infectious diseases of clinical significance
+
+Smith DL, Moyes CL, Bhatt S, Brownstein JS,              to humans. A systematic review was conducted to enumerate cartographic
+Collier N, Myers MF, George DB, Gething PW.              progress, with respect to the data available for mapping and the methods
+                                                         currently applied. The results helped define the minimum information
+2013 Global mapping of infectious disease.               requirements for mapping infectious disease occurrence, and a quantitative
+Phil Trans R Soc B 368: 20120250.
+                                                         framework forassessing the mapping opportunities forall infectious diseases.
+http://dx.doi.org/10.1098/rstb.2012.0250                 This revealed that of355infectious diseasesidentified,174(49%)have astrong
+                                                         rationale for mapping and of these only 7 (4%) had been comprehensively
+                                                         mapped. A variety of ambitions, such as the quantification of the global
+One contribution of 18 to a Discussion Meeting
+Issue ‘Next-generation molecular and                     burden of infectious disease, international biosurveillance, assessing the like-
+                                                         lihood of infectious disease outbreaks and exploring the propensity for
+evolutionary epidemiology of infectious                  infectious disease evolution and emergence, are limited by these omissions.
+disease’.                                                An overview of the factors hindering progress in disease cartography is pro-
+
+                                                         vided. It is argued that rapid improvement in the landscape of infectious
+Subject Areas:                                           diseases mapping can be made by embracing non-conventional data sources,
+                                                         automation of geo-positioning and mapping procedures enabled by machine
+health and disease and epidemiology,                     learning and information technology, respectively, in addition to harnessing
+bioinformatics, computational biology, ecology
+                                                         labour of the volunteer ‘cognitive surplus’ through crowdsourcing.
+
+Keywords:
+
+surveillance, biosurveillance, cartography,
+public health, atlas, crowdsourcing
+                                                       1. Introduction
+                                                       The primary goal of this review is to establish the minimum set of information
+Author for correspondence:                             that is needed on the epidemiology of an infectious disease, to make an
+
+Simon I. Hay                                           informed decision on the most appropriate techniques for mapping its global
+e-mail: simon.hay@zoo.ox.ac.uk                         distribution. The assessment is intended to be applicable to all infectious dis-
+                                                       eases of clinical significance in humans, but makes no attempt to prioritize
+                                                       the case for mapping among the diseases considered.
+
+                                                           More than 1400 species of infectious agents have been reported to cause
+                                                       disease in humans [1–3]. These include pathogens for some 347 diseases of sus-
+                                                       tained clinical importance, for which it is commercially viable to compile
+                                                       information relevant to their diagnosis, epidemiology and therapy, as a
+
+                                                       decision-support tool for clinicians [4,5]. Logistical constraints required a
+                                                       focus in this review on these clinically important diseases. Among these there
+                                                       are 110 diseases that pose a threat to non-immune travellers [4]. Sixty-two of
+                                                       these clinically significant diseases can be prevented by vaccination; 19 usually
+
+                                                       as routine childhood immunizations [4,6,7].
+                                                           There are a variety of reasons for wanting to map the geographical distri-
+                                                       bution of an infectious disease. Mapping is a primary goal in spatial
+Electronic supplementary material is available         epidemiology [8–16]. Maps of disease distribution and intensity allow an
+at http://dx.doi.org/10.1098/rstb.2012.0250 or
+                                                       immediate visualization of the extent and magnitude of the public health
+via http://rstb.royalsocietypublishing.org.
+
+                                                        &   2013 The Authors. Published by the Royal Society under the terms of the Creative Commons Attribution
+                                                        License http://creativecommons.org/licenses/by/3.0/, which permits unrestricted use, provided the original
+
+                                                        author and source are credited.
+problem. When based on empirical evidence, maps can sup-            arising from a systematic review of all diseases of clinical
+                                                                                                                                     2
+port carefully weighted assessments by decision makers on           significance [4].                                                 rstb.royalsocietypublishing.org
+the advantages and disadvantages of alternative courses of              In this review, we also consider the minimum information
+action [17–19]. These may range from helping plan national          requirements for disease mapping. When considering carto-
+
+scale intervention strategies [20,21] to advice for individuals     graphic options for diseases of clinical importance, the first
+on whether to vaccinate and/or provide prophylaxis before           question is: do we know the life cycle of the pathogen, its vec-
+travel [6,22]. These maps can also document a baseline              tors, reservoirs, hosts and routes of transmission? This
+
+from which intervention success or failure can be monitored.        sounds trivial, but for many pathogens there is still consider-
+    In addition, as modes of data gathering evolve and              able uncertainty around the life history. Second, do we have
+improve (for example, through enhanced electronic surveil-          information about the spatial and temporal patterns of the
+
+lance   [17]  and   Internet-based   health  reporting   [23],      disease? Third, do we understand the dynamic processes of
+including HealthMap/ProMED [24,25], BioCaster [26,27]               transmission that determine the patterns we observe in
+and Argus [28,29]) and techniques develop to exploit these          space and time? This level of detail will usually indicate
+
+data (for example, semi-automated rapid mapping), these             some intimate epidemiological knowledge of covariates
+geographical distributions (often referred to in this literature    (temperature, rainfall, land use patterns, etc.), that can help
+as baseline disease risk assessments) can also provide a            in understanding the spatial and temporal distribution of a
+
+‘normal’ against which real-time outbreak alerts can be             disease. Progression along this gradient of questions reflects
+assessed for international biosurveillance [30–32].                 increased basic epidemiological understanding and, there-
+    Furthermore, as the portfolio of infectious disease distri-     fore, an increased ability to map the disease. Fourth, it is
+
+bution maps expands and their fidelity improves, the                important to know what quantity and quality of data are
+public health community will be better able to evaluate the         available for mapping. It is self-evident that more high qual-
+factors that predispose a time and place to the origin              ity contemporary data leads to more robust maps. Many
+
+[33,34], and emergence of infectious disease outbreaks              obstacles exist that can make the relevant data scarce, how-
+[3,35–42]. Unfortunately, contemporary inferences about             ever. For example, health-related data may be closely
+the fundamental ecology of infectious diseases (such as             protected by governments and other institutions or these
+
+decreased species richness [43] and increased range size            data may simply be scattered so widely in the formal litera-
+[44] with latitude and their potential for spread [45,46]) are      ture that their systematic assembly is a significant logistical
+crude spatially because they rely on data not systematically        challenge. Fifth, it is also important to know whether pre-
+
+collected for this purpose and aggregated to the national           vious credible mapping efforts have been conducted. This
+level [4]. Ultimately, this improved basic understanding            will help answer questions one through four and, broadly
+will help mitigate the processes that drive the diversity of        speaking, the longer the history of robust mapping activities,
+infectious disease threats with which we contend [47].              the increased likelihood of reliable mapping outcomes.
+
+    There is, therefore, a clear need to perform baseline risk          The ability to map a disease stems largely from the type
+assessments for routine public health, improve biosurveillance      of data that are available for mapping [10,15]. The accuracy
+and provide better long-term preparedness by improving              of maps is then largely determined by the abundance, spatial
+
+fundamental epidemiological understanding [31].                     representativeness and heterogeneity of those data [59]. Point
+    An understanding of the public health benefit of the            data types used in disease mapping are generally geo-
+mapping of infectious disease is not new [48–50] and selected       referenced occurrence or prevalence records. Occurrence
+
+oldexamples for malariainclude thesereferences[51–55]. His-         data simply record an observation of a disease at a given
+torical disease cartography usually suffered at least one of the    location and time, and are characteristic of the data provided
+following problems. First, authors very rarely documented           routinely by HealthMap/ProMED [24,25], BioCaster [26,27]
+
+the evidence-base that was used to make the map. Second,            and Argus [28,29]. The other commonly recorded point
+when mapping was implemented before the advent of geo-              data are infection prevalence surveys, which not only locate
+graphical information systems, significant errors arose simply      a disease in time and space, but also measure the infected
+
+as afunction of cartographic skill. These errors were magnified     fraction of the sampled local population and thus, enable
+enormously when working at global scales. Third, no assess-         the standard quantification of the ‘abundance’ of a disease.
+ment of the fidelity of the map or how this precision might         This is often referred to as its endemicity [60]. An accurate
+
+vary spatially across the map extent was ever given. These          global representation of the contemporary endemicity of a
+limitations constrained significantly the public health utility     disease is a key achievement for infectious disease mapping,
+of the maps and are to a greater or lesser extent resolved in       because it affords a rich diversity of operationally important
+
+many of the contemporary mapping efforts reviewed here.             public health inferences: for example, clinical burden [61,62]
+    Today, there are a range of different geographical distri-      and basic reproductive number estimation [18,63] to inform
+butions or baseline ‘risk’ maps available [56], which have          national elimination feasibility assessment [20,64].
+
+been derived for a variety of purposes, by a wide community             A wide range of approaches have been developed for
+of public health cartographers using a diverse toolbox of map-      empirical modelling of species and disease distributions,
+ping methods [8–16]. Moreover, the maps use a variety of            given data on point observations of occurrence [65], with
+
+disease-related metrics (occurrence, incidence, prevalence),        the objective of identifying the fundamental niche of the
+andan even widerarrayof covariatesto informthe predictions          target organism [66,67]. Of the plethora available, the boosted
+[8,57,58]. This complexity means that global comparisons            regression trees (BRT) method [68,69] is selected by the
+
+between maps of different diseases are extremely difficult          authors as a default for occurrence mapping. A schematic
+and wider synthesis remains elusive. In part, this review           overview of the occurrence mapping process is provided in
+aims to help audit and navigate this diversity and the sup-         figure 1. This selection was based on a number of factors:
+
+plemental information provides an extensive bibliography            first, in a review of 16 species modelling methods, BRT was
+                                                                                                                                          3
+                                                                                                                                          rstb.royalsocietypublishing.org
+                     (a)                                              (b)
+
+
+
+
+
+
+
+
+
+                     (c)                                              (d)
+
+
+
+
+
+
+
+
+
+                     (e)
+
+
+
+
+
+
+Figure 1. A schematic overview of a niche/occurrence mapping process (for example boosted regression trees (BRT)) that uses pseudo-absence data guided by
+expert opinion. Consensus based definitive extent layers of infectious disease occurrence at the national level (a) are combined with accurately geo-positioned
+
+occurrence (presence) locations (b) to generate pseudo-absence data (c). The presence (b) and pseudo-absence data (c) are then used in the BRT analyses, alongside
+a suite of environmental covariates (d) to predict the probability of occurrence of the target disease (e).
+
+
+
+one of the top performing methods evaluated using the area             disease mapping in §4. Those we have favoured here are
+
+under the receiver operating characteristic curve (AUC) and            proved methods that can be applied now.
+correlation statistics [16,70]; second, the method is flexible            In summary, the objective of this review is to formalize
+in being able to accommodate different types of predictor              the questions outlined in §1, in order to define rules for
+
+variables (e.g. continuous or categorical data); third, it is          advocating specific cartographic techniques for a baseline
+easy to understand, implement and uses reliable, well docu-            risk assessment for each disease of clinical importance, and
+mented and freely available R code [71]; and fourth, the               then to assess to what level this mapping potential has
+
+resulting maps are simple to interpret and include a ranked            been realized. A substantial literature review has been
+list of environmental predictors. The authors also have exten-         conducted to collate the data required to make those carto-
+sive experience with this technique after a global scale project       graphic suggestions evidence-based and is provided as
+to map the distribution of the anophelines of public health            electronic supplementary material.
+
+importance [72–76]. These references provide a detailed stat-
+istical explanation and examples of how BRT was applied to
+species distribution mapping.
+                                                                       2. Material and methods
+    Model-based geostatistics (MBG) [77,78] has recently
+been more widely applied in infectious disease mapping                 (a) Selection of infectious diseases of
+[17,79–83] and is the technique of choice where data allow.
+                                                                           clinical importance
+There are several reasons for this. First, MBG deals explicitly        A total of 347 infectious diseases of clinical importance were
+with the spatial (and with extension temporal) autocorrelation         selected for review based on the GIDEON database, accessed
+of disease data; this is still widely ignored in occurrence
+                                                                       November 2010. GIDEON is an infectious disease information
+mapping. Second, MBG models can be configured to offer a               and diagnostic resource available online through subscription
+much more robust parameterization of factors that can affect           that derives its content from a range of sources including formal
+disease endemicity (such as age of the individuals sampled,            peer-reviewed journals and informal sources such as Ministry of
+                                                                       Health reports [4,5]. This list was then revised to 355 diseases
+the diagnostic technique used, the influence of covariates
+etc.). Third, by fitting the models using Bayesian inference,          based on further re-definitions and decoupling of some groups.
+outputs can be presented to show the full uncertainty of               These diseases were placed into one of 11 classifications based on
+the prediction in all parts of the predicted maps. The main            transmission type: animal contact, blood/body fluid contact,
+                                                                       direct contact, endogenous, food/water-borne, respiratory, sexual
+impediments to its wider use are the lack of bespoke software          contact, soil contact, unknown, vector-borne and water contact.
+with which to implement the models and its relatively large
+computational burden.                                                     Revisions were as follows: mucosal and cutaneous leishma-
+                                                                       niasis were re-classified as cutaneous/mucosal leishmaniasis,
+    We assume that advances with respect to occurrence                 Old World and New World; the spotted fevers were also divided
+mapping or MBG techniques may modify our guidance                      into New and Old World to better differentiate between the var-
+with regard to mapping techniques and elaborate on some                ious species of bacteria and ticks that spread the disease in
+
+of the generic improvements that may be made in infectious             different parts of the world; malaria was split into Plasmodium
+                                                                                                                                                            4
+            diseases of
+              clinical   N    Y spatial variation      understand ecologyY       high volume     Y      occurrence only  N        prevalence                 rstb.royalsocietypublishing.org
+            significance         in occurrence                                   disease data
+              N=355
+
+
+                                                                                   N
+
+
+
+                                                                     N           high volume
+                                                                                 reservoir data
+                                   N                       N                                                Y   Y
+
+
+
+                                                                                      geographic limits of disease extent
+
+
+
+
+                                                         Option 2: map           Option 3: map          Option 4: niche        Option 5: model
+                                   Option 1:               observed            maximum potential          mapping              based geostatistics
+                                  do not map              occurrence                range                 (e.g. BRT)               (MBG)
+                                   n = 181                  n = 64                  n = 32                 n = 68                  n = 10
+
+
+
+Figure 2. A schematic of the disease classification process. The classification system results in diseases being categorized into one of five options: (1) do not map; (2)
+
+map observed occurrence; (3) map maximum potential range of reservoir or vectors; (4) niche/occurrence mapping with BRT and (5) MGB-based endemicity maps.
+
+
+
+
+falciparum, Plasmodium vivax, Plasmodium ovale and Plasmodium                   replacing ‘[disease name],’ if applicable. This procedure was also
+
+malariae, because variation in geographical range and epidemio-                 performed in ISI-Web of Knowledge (http://isiwebofknowledge.
+logical patterns of these pathogenic species would be masked if                 com) in the ‘title/keywords/abstract’ field. These searches often
+
+considered together; AIDS was removed and was combined                          produced few or no results and the entire search process would
+with HIV; conjunctivitis-inclusion was similarly removed, and                   be conducted again using Google Scholar (http://scholar.google.
+
+incorporated into trachoma; the umbrella term ‘adenovirus                       co.uk). Data regarding R    0values and the reservoir species when
+infection’ was divided into acute febrile respiratory disease                   relevant were abstracted from references obtained, and if multiple
+
+(adenoviral), adenoviral haemorrhagic conjunctivitis, keratocon-                R 0stimates were reported among sources for a single disease, the
+junctivitis (adenoviral) and adenovirus infection; similarly,                   range of estimateswas recorded. The range forall R esti0ateswas
+
+enterovirus infection was divided into enterovirus haemorrhagic                 assumed to start from 0.
+conjunctivitis and enterovirus infection; human herpesvirus 6
+
+was renamed Roseola; sandfly fever was added because of its                     (iii) Thumbnail maps
+possible impact on travellers; and avian influenza virus serotype
+                                                                                To visualize the approximate endemic regions of a disease,
+H5N1 was added because of its epidemic potential.                               simple maps were constructed from the distribution data pro-
+
+                                                                                vided by GIDEON. A list of 275 global countries and
+                                                                                territories were coded as 1 for endemic and 0 for non-endemic
+(b) Data assembly
+                                                                                for each listed disease. The database was then imported into
+(i) Natural history                                                             ArcGIS 10 (ESRI 2010) and displayed as global maps at the
+
+Data were collected on the natural history of each infectious                   national level.
+agent. Information on the genus and species, disease reservoir,
+vector species (if applicable), mode of transmission, incubation
+                                                                                (iv) Occurrence data availability and quality
+period, vaccine (where relevant) and geographical distribution
+was obtained using GIDEON. Taxonomic classifications were                       To determine the relative amount of information available for the
+                                                                                various infectious diseases, a search was done using only the dis-
+supplemented by the Tree of Life Project (http://tolweb.org).
+Further evidence regarding geographical distribution and vac-                   ease name as the text term in PubMed on 4 November 2011 and
+                                                                                using the species name in GenBank on 1 March 2012 (for selected
+cine development was found in the American Public Health                        diseases). Data on the number of feeds for each disease from the
+Association’s Control of Communicable Disease Manual [7].
+                                                                                start of data collection were received from HealthMap and
+                                                                                ProMED on 23 November 2011 and from BioCaster on 24 Febru-
+
+(ii) Transmission dynamics                                                      ary 2012. Because only data from manual searches of PubMed
+                                                                                has, to our knowledge, been used in mapping, we base our ana-
+The basic reproduction number (R ) was u0ed to quantify the
+transmission potential of the various aetiological agents. The                  lyses on PubMed figures only, but provide the potential data
+                                                                                from the other sources in the electronic supplementary material.
+R 0s defined as the average number of secondary infections pro-
+duced when a single-infected individual is introduced into a                    These may improve the prospects for mapping of many of the
+                                                                                diseases once the utility of these information sources has been
+fully susceptible population [84–87]. A literature search was con-
+ducted to obtain R va0ues in humans and reservoirs of zoonotic                  confirmed by experiment.
+
+diseases. The search was carried out in PubMed (http://www.
+pubmed.gov) using the terms ‘[disease name]’ and ‘reproduction
+                                                                                (c) Decision rules devised to categorize mapping
+number’ in the ‘all fields’ search box in September 2011. The
+search was then repeated replacing ‘reproduction number’ with                        options
+
+‘reproduction ratio’, ‘reproduction rate’, ‘reproductive number’,               Decision rules were created for disease mapping options, shown
+‘reproductive ratio’ and ‘reproductive rate.’ That search pattern               schematically in figure 2. The Option 1, do not map, classification
+was reiterated with ‘[Genus species]’ or ‘[diseases synonym]’                   was used for those conditions which are known to occur
+worldwide, and hence do not show sustained spatial variation in         and all references regarding the spatial temporal distribution of a 5
+occurrence. The diseases within this category range from sexu-          disease, vector or reservoir were checked to determine the par-
+                                                                                                                                             rstb.royalsocietypublishing.org
+ally transmitted diseases such as Chlamydia, viral agents such          ameter mapped (for example, occurrence, prevalence, incidence,
+as Epstein–Barr Virus or rhinoviruses causing the common                or risk) and in what geographical region.
+cold and endogenous diseases (infections caused by previously               In order to allow for both relative and quantitative assess-
+
+dormant or inapparent pathogens, often from the typical com-            ment of each map, we devised a metascore, which evaluated
+mensal microbial flora of humans—such as urinary tract                  three criteria: data quality, geographical scope and the mapping
+infections caused by Escherichia coli or brain abscesses by Staphy-     technique used.
+
+lococcus aureus). The incidence of these diseases may show                  Data quality (out of nine) was scored in three ways. (i) Con-
+enormous spatial variation. These differences are linked often          temporariness, where three points were awarded if data less than
+to variation in human or human-related factors, however, and            10 years old was used, two points for the use of data greater than
+
+are best mapped using techniques associated with the cartogra-          or equal to 10 years to less than 20 years old, and one point for
+phy of non-infectious disease [88]. More traditional surveillance       data greater than 20 years old. If no age could be identified, no
+within this cosmopolitan distribution, therefore, may have a            points were given. For papers reporting a range of dates, the
+
+public health rationale and this is explored on a case by case          score was based on the most recent, with the exception of
+basis in the electronic supplementary material. For most of             databases that provide country-specific estimates that were sur-
+these conditions, it would be useful to apply a simple mask             veyed across different time periods. In that case, an additional
+
+of human population density to give a more realistic picture of         half point (2.5) was given. (ii) Diagnostic accuracy, where three
+where the disease is truly observed globally. Option 2, map the         points were awarded for the use of data diagnosed by genotype
+
+observed occurrence, would apply to diseases that have few data         or PCR, or in the case of vector maps, where advanced modelling
+available and limited information regarding the disease ecology.        techniques had been used on a large number of occurrence
+A cut-off of fewer than 25 PubMed hits per endemic country was          points. Two points were given to those studies that had used hos-
+
+applied to designate a paucity of data for any operationally sig-       pital or national health surveys or confirmed case reports; an
+nificant disease. For example, Mayaro virus has 90 search results       additional half a point was gained if serological or immunologi-
+on PubMed for 11 potentially endemic countries and, therefore,          cal data had been used. Vectors maps received two points if
+
+only about eight results per country. There has also not been a         simple interpolation techniques had been used on occurrence
+definitive reservoir host identified for Mayaro, which would be         data. One point was awarded if cited literature had been used.
+needed for the following option. Option 3, map the maximum              One point was also given for unpublished health organization
+
+potential range, is appropriate for a disease that also has fewer       data collected as part of routine health management information
+than 25 PubMed results per country, but information is available        systems (HMIS) or presumptive diagnosis, with a half point
+regarding reservoir or vector species that would place bound-           given to non-specific numerical data. The use of expert opinion
+
+aries on the potential disease distribution, as is the case with        in drawing vector maps was awarded one point. If the data
+African tick bite fever with its known vector distribution. Map-        came from an unknown source, or was not listed in the article,
+ping of the disease using ecological niche modelling, Option 4,         no points were awarded. (iii) Geo-positional accuracy, where
+
+would implement BRT technology on observed occurrence data.             three points were awarded for the use of data coupled with
+Adequate information regarding occurrence of disease (greater           GPS coordinates, two points if survey coordinates could be
+than 25 PubMed hits per country) is needed to use this strategy.        derived from supporting maps, or data was provided to admin-
+
+This information would be usefully supplemented with infor-             istrative level 1; an additional half a point was earned if
+mation on where the disease is not found, obtained through              administrative level 2 was used, or towns and villages were
+systematic searches or derived by expert opinion maps. If the           specified. One point was gained if approximate coordinates of
+
+authors were aware of systematic searches of occurrence data            unknown provenance or country level data was present. Expert
+that were significantly richer than the PubMed hits, these were         opinion ranges obtained from cited literature received half a
+documented and the mapping option re-evaluated accordingly.             point. If no geo-positional data was associated with the map,
+
+Option 5, the implementation of MBG to mapping, is reserved for         no points were awarded.
+diseases that have more than 25 results per country of systemati-           The geographical scope was scored out of 100. The GIDEON
+cally recorded prevalence data. This strategy uses MBG for the          endemic country lists for each disease were converted into
+
+creation of complete endemicity maps with detailed uncertainty          national populations at risk using the UN population data
+metrics. The mapping option to be used is dependent on the              from 2010 [89]. Each map was assessed for how many countries
+
+amount and nature of the disease data available, implying that          were included (rounded up to the national level, to match the
+diseases currently classified for one option would be eligible          resolution of GIDEON), and population covered was calculated
+for a higher grade in the future as further data become available.      and expressed as a percentage (out of 100%) of the GIDEON
+
+                                                                        endemic total.
+                                                                            The mapping technique used (mapping option used/theor-
+                                                                        etically best mapping option) was calculated using the criteria
+(d) Scoring the quality of existing mapping of the
+                                                                        outlined above, each map was evaluated for the mapping
+     geographical distribution of disease                               option used (for example, if BRT modelling techniques had
+It was also of critical interest to obtain information regarding        been used, the map was to Option 4 standard), and was related
+
+the extent to which the diseases had been previously mapped.            to the potential mapping option that could be used, based upon
+A search was again conducted in PubMed using the text terms             the amount and quality of data present for that disease. For
+‘[disease name/synonym]’ and ‘map’ as well as ‘[disease name/           instance, if a map of Lassa fever (which is an Option 4 disease
+
+synonym]’ and ‘epidemiology,’ selecting for reviews in October          owing to there being more than 25 PubMed hits per country)
+2011. If an excess of results were returned (more than 1000), this      only uses occurrence points (Option 2 standard), a score of 2/4
+was further narrowed using the search terms ‘distribution’ or           would be achieved.
+
+‘global.’ For diseases transmitted by a specific vector, the search         The metascore was then calculated as the product of these
+was repeated using the text terms ‘[vector species name]’ and           figures ([Quality]/9  [Scope]  [Option Used]/[Option Poten-
+‘map.’ The same process was repeated for prominent reservoir            tial]) resulting in a maximum of 100. Scores of greater than or
+
+species. The search was also performed using ISI-Web of Knowl-          equal to 75 per cent were deemed to have evaluated the global
+edge. Irrelevant references were removed from the search output,        distribution of the specific disease to a satisfactory standard.
+Table 1. The number of clinically important infectious diseases and the subsetr the map is of the disease, vector or host reservoir;        6
+
+of those with a rationale for mapping by transmission category (see §2).geographical scope; data quality score; mapping option               rstb.royalsocietypublishing.org
+                                                                        used; metascore; citation.
+                                                                            The option for future mapping (figure 2) was determined
+                      clinically             diseases with              using the PubMed hits returned and the number of endemic
+                      signiﬁcant             rationale for
+                      diseases               mapping                    countries per diseases (see the electronic supplementary
+  classiﬁcation       (n 5 355)              (n 5 174)                  material). A total of 181/355 were classified as Option 1
+                                                                        (do not map); 64 were classified as Option 2 (map observed
+                                                                        occurrence); 32 were classified as Option 3 (map maximum
+  animal contact      20                     9
+  blood/body          14                     5                          potential range); 68 were classified as Option 4 (map using
+                                                                        BRT) and 10 were classified as Option 5 (map using MBG).
+    ﬂuid contact                                                            There are trends within the diseases that have a strong
+  direct contact      23                     7
+                                                                        rationale for mapping. Unsurprisingly, endogenous diseases
+  endogenousa         35                     0                          exhibit little sustained spatial variation in occurrence,
+                                                                        whereas those transmission categories that are inherently
+  food/water-         82                     36                         linked to some feature of the environment, or other factor
+    borne
+                                                                        that varies on a global scale, such as vector-borne disease,
+  respiratory         39                     9                          water contact and soil contact tend to show greater variation.
+  sexual contact      11                     2                          The remaining transmission types have just under half of
+
+  soil contact        21                     14                         the diseases showing differing global patterns of distribution.
+                                                                        Similar trends are also apparent when we consider the occur-
+  unknown             11                     4                          rence of agents of disease—nearly two-thirds of diseases
+  vector-borne        88                     80                         caused by parasites show tendency to vary over a spatial
+
+  water contact       11                     8                          scale, as do 61 per cent of all viruses; on the other hand,
+aEndogenous infections are those caused by previously inapparent or dormantre is evidence for spatially variable distributions in only
+                                                                        28 per cent of bacteria. Clearly, these sets of results are
+pathogens arising from the typical commensal microbial flora of humans.
+                                                                        inherently linked; of the 61 viral diseases that would benefit
+                                                                        from having mapped distributions, 41 are vector-borne and
+                                                                        a further eight are soil contact; of those bacterial species
+                                                                        that are not endemic worldwide, about two-thirds are
+3. Results
+                                                                        vector-borne. Such a trend is not so apparent when consider-
+The electronic supplementary material provides full details             ing parasitic diseases and their routes of transmission (many
+of all the epidemiological and mapping evidence collated                are food/water-borne). This could be due to their require-
+
+and scored and the decision rules applied. The electronic sup-          ments for external development, and thus potentially
+plementary material includes a summary page on each of the              environmentally determined life cycles.
+355 diseases with details of the natural history, transmission,             Of the 174 diseases with strong rationale for mapping,
+quantity of data available, quality of data from previously             only seven had maps that scored higher or equal to 75 per
+
+published maps and recommendations for future mapping                   cent on the metascore. These were coltiviruses (Old World),
+endeavours. The information included on natural history                 dengue, Lassa fever, Mayaro, monkey pox, P. falciparum
+was the ICD-10 code, transmission classification (table 1),             and P. vivax; all vector-borne diseases. Figure 3a shows
+
+type of pathogen (agent), taxonomic details, mode of trans-             radial plots of all the 174 diseases with a rationale for map-
+mission, reservoir species (host organism that is a source of           ping, as well as separate plots by agent (figure 3b–e). The
+infection or potential reinfection of humans) and incubation            white line represents the highest scoring metascore for each
+period.                                                                 disease; the black space above each individual line equates
+
+    The epidemiological characteristics highlighted include             to the information deficit present.
+the vaccine availability, and estimates of the basic reproduc-
+tion number (R ) i0 human and reservoir populations,
+
+where applicable. A number of diseases (126) were con-                  4. Discussion
+sidered to have an R va0ue of less than 1 because they are
+primarily zoonotic diseases. Citations were provided to sup-            We have collated a significant amount of information on 355
+port that transmission occurs mainly in animals. The R                  diseases of clinical importance and have made evidence-
+                                                               0
+estimates ranged from point source outbreaks of diarrhoeal              based suggestions on the appropriate cartographic approaches
+diseases or less than 1 for zoonoses to 100 for P. vivax malaria        to use in mapping each disease. These have been summarized
+and Ross River virus and 1000 for P. falciparum malaria. Esti-          in the results and are elaborated for each disease in the elec-
+mates were not obtained for many of the reservoir species,              tronic supplementary material. In the following sections, we
+
+but for those that were found, the range was from 1.06 for              review some of the common omissions in existing maps and
+Old World mucocutaneous leishmaniasis in dogs to 28 for                 look to novel data sources, new techniques and information
+West Nile fever virus in birds.                                         technology developments that may change the future land-
+
+    Occurrence details included information on the number               scape of infectious disease mapping.
+of PubMed and GenBank hits, relevant reports from Health-                   This review has provided the opportunity to make some
+Map, ProMED and BioCaster feeds, and the approximate                    preliminary observations on some of the common omissions
+number of endemic countries. A table of previously pub-                 in infectious disease mapping that might be considered when
+
+lished maps was included incorporating information on                   embarking on new cartographies. They are as follows.
+                                                                                                                                         7
+            (a)    (                                b)                                 (c)
+                                                                                                                                         rstb.royalsocietypublishing.org
+
+
+
+
+
+
+
+
+
+
+
+
+
+          (d)    (                               e)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 3. Radial plots for all diseases with a rationale for mapping, ordered clockwise, by metascore (white line). A white line from the centre to the edge of
+the circle would show a perfect metascore. (a) Reflects all diseases (n ¼ 174 of 355), (b) viral diseases (n ¼ 62 of 101), (c) parasitic diseases (n ¼ 61 of 96),
+(d) bacterial diseases (n ¼ 36 of 128), and (e) comprises fungal (n ¼ 9 of 17), protoctistan (n ¼ 2 of 2) and diseases of unknown pathogen (n ¼ 4 of 10).
+Note that there was one algal disease, which did not have a rationale for mapping and is not shown in this diagram.
+
+
+
+
+(a) Other relevant maps                                               (c) Human population distribution
+
+The most consistent omission is the lack of additional                There is a systematic deficit in the use of human population
+information that can provide significant epidemiological              distribution maps [92,93], both as a mapping covariate and
+insight—often referred to as ‘expert opinion’. These definitive       for determining the population at risk of infection or the
+extent data can be an ad hoc collection for each disease that         reservoir of infection. Some effort may also be invested in
+
+may include information on biological and biogeographic               incorporating the latest human population surfaces into the
+limits (often as range maps), as well as, further distribution        information suite. The diseases for which human population
+or occurrence data on intermediate and reservoir hosts.               distribution may help refine risk assessments, including both
+There are several occurrence mapping methods that can use             those with a rationale for mapping and those ubiquitous
+
+this information, such as weighted forms of BRT that have             clinically important diseases for which the recommendation
+been trialled extensively with respect to the anophelines             was not to map, have been highlighted (see the electronic
+[72–75] (figure 1). They do this by overcoming the biogeo-            supplementary material).
+
+graphic and taxonomic ignorance of all occurrence mapping
+techniques that assume the globally realized niche approxi-
+mates the fundamental niche. The careful use of definitive            (d) Refining of environmental covariates
+extent data would substantially reduce the degree to which            Most cartographic applications use environmental covariates
+                                                                      crudely without any adjustment to the epidemiology of the
+inferences are required.                                              diseases concerned. Where detailed information and exper-
+
+                                                                      iments on the environmental responses of a disease have
+                                                                      been conducted it has proved valuable to combine this with
+                                                                      the covariate. An example would be the way that temperature
+(b) Formalizing expert opinion                                        data have been used not only to map the environmental
+Further investigation is also advised on using the Cooke
+method to help determine the importance ascribed to the               limits of P. falciparum and P. vivax globally [94], but have
+                                                                      also been transformed into indexes of transmission suit-
+expert opinion [90,91]. Essentially these methods allow a             ability. These indexes were more strongly selected for by
+simple way to gauge the accuracy of an expert source by test-         the model than untransformed covariates in endemicity map-
+ing their knowledge on a set of subject related questions to
+which the answers are well known. For a cartographic pro-             ping. The diseases to which such advances may be relevant
+                                                                      are indicated (see the electronic supplementary material).
+blem set, this could be very easily formalized by rating
+answers for a related disease we know the distribution of
+extremely well. It may be possible to link this with BRT              (e) Public health interventions
+
+and formalize the weights that are ascribed to other relevant         It is still rare for geographically specific intelligence on public
+epidemiological information.                                          health interventions to be used in the mapping of diseases.
+Table 2. The cartographically relevant holdings of the National Center for Biotechnology Information PubMed and GenBank systems. The searches were 8
+conducted on 4 November 2011 and 1 March 2012, respectively.
+                                                                                                                                                   rstb.royalsocietypublishing.org
+
+  system                                                                             PubMed                                  GenBank
+
+
+  start year                                                                         1946 [98]                               1982 [99]
+  frequency of updates                                                               daily [98]                              Daily [100]
+
+  number of species catalogued                                                       .250000 [100]                           .250 000 [100]
+  approximate number of entries                                                      21 million [101]                        340 million [100]
+
+  number of clinically relevant diseases for which data are available                168                                     155
+  occurrence point sources for mapping                                               526564                                  672 327
+
+
+
+Table 3. Geo-positioned occurrence data archived by the HealthMap and BioCaster online disease outbreak reporting systems. HealthMap uses automated text
+processing to classify and position alerts that are then conﬁrmed by a human analyst [25]. BioCaster has automated text processing to classify and position
+
+alerts processed through a multilingual ontology [26]. The totals were assembled using data provided for HealthMap on 23 November 2011 and BioCaster on 24
+February 2012.
+
+
+  system                                  HealthMap                                             BioCaster
+
+  start year                              2006                                                  2006
+
+  approximate posts per day               300 [24]                                              100 [29]
+  number of languages                     10 (J. S. Brownstein 2012, personal communication)    11 [102]
+
+  number of diseases tagged               245 (J. S. Brownstein 2011, personal communication)   230 (N. Collier 2012, personal communication)
+  number of clinically relevant           84 of 245                                             99 of 230 (N. Collier 2012, personal
+
+    diseases for which data are                                                                    communication)
+    available
+
+  total occurrence points                 337 105 (J. S. Brownstein 2011, personal              189 361 (N. Collier 2012, personal
+
+                                            communication)                                         communication)
+  occurrence point sources for mapping    66 284 (J. S. Brownstein 2011, personal               140 038 (N. Collier 2012, personal
+
+                                            communication)                                         communication)
+
+
+Such information could be used in the same way as other                        Finally, there is a revolution occurring in both the volume
+
+‘expert opinion’ data sources by BRT. Where human interven-                and public availability of data about the health and wellbeing
+tions have significantly affected the distribution of a disease,           of individualsandpopulationsthroughvarious formsof social
+for example vaccine coverage in a population [95–97], this                 media [103]; most notably Twitter (twitter.com). This is an
+has been identified. We have sought to identify those diseases             online social media site that allows users to post ‘Tweets’;
+
+for which this information may be relevant but have not                    messages less than or equal to 140 characters which
+searched systematically for the availability of relevant                   are freely available to all. It took 3 years to reach the first
+public health information.                                                 billion Tweets, but by March 2011, it took only a week to
+    There are many potential novel data sources that may be                reach one billion posts and 140 million Tweets are now
+
+used for global infectious disease mapping. The resources                  posted daily with an increasing numberof them automatically
+described below have never been used systematically to                     geo-positioned.This wealth of accurately geo-positioned infor-
+address the paucity in occurrence data across the range of infec-          mation has already begun to be harvested for public health
+                                                                           purposes. Twitter feeds surrounding the 2009 H1N1 flu out-
+tious diseases reviewed. Substantial progress will be made
+from exploiting the geospatial information in the formal litera-           break were analysed and found to predict outbreaks one to
+ture (e.g. PubMed, www.ncbi.nlm.nih.gov/pubmed) and in                     two weeks in advance of traditional surveillance [104,105].
+genetic and protein sequence databases (e.g. GenBank, www.                 Tweets can also be analysed to identify a broader range
+
+ncbi.nlm.nih.gov/genbank). The potential information avail-                of health-related terms such as symptoms, syndromes and
+able has been identified for each disease in the electronic                treatments to illuminate geographical patterns in syndrome
+supplementary material and is further summarized in table 2.               surveillance [106].
+    Significant prospects for the rapid acquisition of occur-                  Our optimism about the future use of social media is
+
+rence data are also clearly possible from online outbreak                  tempered by the realization that the main contemporary
+alert resources (i.e. HealthMap/ProMED [24,25], BioCaster                  issue in disease mapping, of dealing with the lack of relevant
+[26,27] and Argus [28,29] records). The potential information              data, will subside, and that our new challenges will be infor-
+available has been identified for each disease in the electronic           matics, developing systems and processes to take on the
+
+supplementary material and is further summarized in table 3                big data challenges of the future. This is discussed in the
+for those systems where data can be freely shared.                         following section.
+    There are also many novel techniques that may be used to                     with reference to a gold-standard reference set of externally                 9
+improve the prospects of global infectious disease mapping,                      validated results.                                                            rstb.royalsocietypublishing.org
+notably automation through machine learning and harnes-                               In conclusion, this systematic review has shown that we
+
+sing the cognitive surplus. In the defined schema (figure 2),                    have an astonishingly poor knowledge of the global distri-
+it is more logistically and technically difficult (and thus                      bution of the vast majority of infectious diseases of clinical
+expensive) to map diseases from Option 1 (do not map)                            importance. Less than 5 per cent of clinically important infec-
+
+through to Option 5 (map endemicity with MBG). It is also                        tious diseases have been mapped reliably. This presents clear
+more expensive to deal with conditions for which data retrie-                    obstacles to advances in determining the global burden of
+val is a significant logistical obstacle. This will be directly                  these conditions, our ability to differentiate outbreaks of con-
+
+proportional to the number of PubMed and other (see earlier)                     cern in international biosurveillance, and our ability to
+data source hits identified.                                                     understand the geographical determinants of disease emer-
+    The HealthMap and BioCaster systems have pioneered                           gence, past, present and future. We have shown that
+
+machine learning algorithms that automatically classify rel-                     contemporary solutions exist to enable us to use new data
+evant reports, identify the infectious disease of interest and                   and new technology to rapidly improve the cartography of
+determine the geographical location of the outbreak. Scaling                     a wide range of clinically important pathogens. Few concep-
+
+these to cope with this potential data deluge is a non-trivial                   tual barriers exist to making rapid progress and to ‘seeing
+but largelytechnical problem.Ideally, theresultsofthis process                   further’ into the relatively unknown landscape of infectious
+
+shouldbeauditedandverifiedbysubjectmatterexpertsbutthis                          disease mapping.
+is non-scalable, time consuming and prohibitively expensive.
+    As an alternative, developments in social computing have                     The catalyst for this review was a National Institute for Mathematical
+                                                                                 and Biological Synthesis (NIMBioS) and the US Department of
+led to increased interest in using large numbers of non-experts                  Defense hosted meeting on infectious disease modelling (23–25 Jan-
+as a cheaper and scalable method for data filtering: the                         uary 2011, Knoxville, TN, USA). NIMBioS also provided K.E.B. with
+so-called crowdsourcing or distributed cognition [107,108].                      resources to conduct the literature review. S.I.H. is financially sup-
+                                                                                 ported by a Senior Research Fellowship from the Wellcome Trust
+Currentlyestablished waysto crowdsource exist (i)framing fil-                    (no. 095066) which also supports P.W.G., K.E.B. and D.M.P.; S.I.H.,
+tering tasks as fun online games, incentivizing users to filter                  D.L.S. and D.B.G. also acknowledge support from the RAPIDD pro-
+data for free [109] and (ii) posting the task online and seeking
+                                                                                 gramme of the Science & Technology Directorate, Department of
+non-experts using a pay-per-example setting as pioneered by                      Homeland Security, and the Fogarty International Center, National
+the Amazon Mechanical Turk system [110,111]. The central                         Institutes of Health (http://www.fic.nih.gov). This work also forms
+idea isthat, ifquestions canbe structured ina simpleand intui-                   part of the output of the Malaria Atlas Project (MAP, http://www.
+                                                                                 map.ox.ac.uk), principally financially supported by the Wellcome
+tive way, and presented to a large number of individuals, the                    Trust, UK (http://www.wellcome.ac.uk). The funders had no role
+central tendency of responses is likely to provide an accurate                   in study design, data collection and analysis, decision to publish,
+answer. Crowdsourcing is particularly appealing in the con-                      or preparation of the manuscript. Thanks are extended to Dr Kevin
+
+text of filtering social media disease reports because of the                    Hanson and Prof. Louis Gross for insightful comments, to the
+non-expert nature of key components of the task, such as                         Global Infectious Diseases and Epidemiology Network (GIDEON)
+                                                                                 for permission to reproduce their data within the 355 maps of the
+geo-positioning. Crowdsourcing is not, of course, a panacea                      supplementary material. Finally, we are grateful to the editors
+for data filtering. The reliability of contributors must be                      Dr Oliver Pybus, Prof. Christophe Fraser and Prof. Andrew Rambaut
+quantitatively assessed and iteratively adjusted for, again                      for inviting us to participate in the scientific discussion meeting.
+
+
+
+
+References
+
+
+1.   Cleaveland S, Laurenson MK, Taylor LH. 2001          infectious diseases. Clin. Infect. Dis. 40, 123–126.Nat. Rev. Microbiol. 1, 231–237. (doi:10.1038/
+     Diseases of humans and their domestic mammals:       (doi:10.1086/426549)                                nrmicro776)
+
+     pathogen characteristics, host range and the risk of C.D.C. 2009 CDC Health information for internationalHay SI, Graham AJ, Rogers DJ. (eds) 2006 Global
+     emergence. Phil. Trans. R. Soc. Lond. B 356,         travel 2010. Atlanta, GA: Centers for Disease Controlapping of infectious diseases: methods, examples
+     991–999. (doi:10.1098/rstb.2001.0889)                and Prevention.                                     and emerging applications. In Advances in
+
+2.   Taylor LH, Latham SM, Woolhouse ME. 2001 Risk   7.   Heymann DL. 2008 Control of communicable            parasitology, vol. 62. London, UK: Academic Press.
+     factors for human disease emergence. Phil.           diseases manual, 19th edn. Washington, DC:      13. Hay SI, Snow RW. 2006 The malaria atlas project:
+     Trans. R. Soc. Lond. B 356, 983–989. (doi:10.1098/   American Public Health Association.                 developing global maps of malaria risk. PLoS Med.
+
+     rstb.2001.0888)                                 8.   Hay SI. 2000 An overview of remote sensing and      3, e473. (doi:10.1371/journal.pmed.0030473)
+3.   Woolhouse ME, Gowtage-Sequeria S. 2005 Host          geodesy for epidemiology and public health      14. Riley S. 2007 Large-scale spatial-transmission
+     range and emerging and reemerging pathogens.         application. Adv. Parasitol. 47, 1–35. (doi:10.1016/models of infectious disease. Science 316,
+
+     Emerg. Infect. Dis. 11, 1842–1847. (doi:10.3201/     S0065-308X(00)47005-3)                              1298–1301. (doi:10.1126/science.1134695)
+     eid1112.050997)                                 9.   Rogers DJ, Randolph SE, Snow RW, Hay SI. 2002   15. Pfeiffer DU, Robinson TP, Stevenson M, Stevens KB,
+4.   Global Infectious Diseases and Epidemiology Network  Satellite imagery in the study and forecast of      Rogers DJ, Clements ACA. 2008 Spatial analysis in
+
+     (GIDEON). 2011 The world’s premier global infectious malaria. Nature 415, 710–715. (doi:10.1038/         epidemiology. Oxford, UK: Oxford University Press.
+     diseases database. Los Angeles, CA: GIDEON           415710a)                                        16. Stevens KB, Pfeiffer DU. 2011 Spatial modelling of
+
+     Informatics, Inc. See http://web.gideononline.com/. Cromley EK, McLafferty SL. 2002 GIS and              disease using data- and knowledge-driven
+     web/epidemiology.                                    public health. New York, NY: The Guildford          approaches. Spat. Spatio-temporal Epidemiol. 2,
+5.   Edberg SC. 2005 Global infectious diseases and       Press.                                              125–133. (doi:10.1016/j.sste.2011.07.007)
+
+     epidemiology network (GIDEON): a world wide     11. Rogers DJ, Randolph SE. 2003 Studying the global 17. Hay SI et al. 2009 A world malaria map:
+     web-based program for diagnosis and informatics in   distribution of infectious diseases using GIS and RS.lasmodium falciparum endemicity in 2007. PLoS
+      Med. 6, e1000048. (doi:10.1371/journal.pmed.                 scientific specialties. Lancet Infect. Dis. 12,         51. Hehir P. 1927 Malaria in India. London, UK: Oxford
+                                                                                                                                                                                         10
+      1000048)                                                     222–230. (doi:10.1016/S1473-3099(11)70313-9)                  University Press.                                        rstb.royalsocietypublishing.org
+18. Gething PW, Patil AP, Smith DL, Guerra CA, Elyazar        33. Dobson AP, Carper ER. 1996 Infectious diseases and       52. May JM. 1951 Map of the world distribution of
+      IR, Johnston GL, Tatem AJ, Hay SI. 2011 A new                human population history. Bioscience 46, 115–126.             malaria vectors. Geogr. Rev. 41, 638–639.
+
+      world malaria map: Plasmodium falciparum                     (doi:10.2307/1312814)                                         (doi:10.2307/210709)
+      endemicity in 2010. Malar. J. 10, 378. (doi:10.1186/    34. Wolfe ND, Dunavan CP, Diamond J. 2007 Origins of         53. Macdonald G. 1957 Local features of malaria. In The
+      1475-2875-10-378)                                            major human infectious diseases. Nature 447,                  epidemiology and control of malaria. pp. 63–99.
+
+19. Gething PW et al. 2012 A long neglected world                  279–283. (doi:10.1038/nature05775)                            London, UK: Oxford University Press.
+      malaria map: Plasmodium vivax endemicity in 2010.       35. Morens DM, Folkers GK, Fauci AS. 2004 The challenge      54. Pampana E. 1969 A textbook of malaria eradication,
+      Public Libr. Sci. Negl. Trop. Dis. 6, e1814.                 of emerging and re-emerging infectious diseases.              2nd edn. London, UK: Oxford University Press.
+
+20. Tatem A, Smith D, Gething P, Kabaria C, Snow R,                Nature 430, 242–249. (doi:10.1038/nature02759)          55. Lysenko A, Semashko I. 1968 In Geography of
+      Hay S. 2010 Ranking elimination feasibility among       36. Wolfe ND, Daszak P, Kilpatrick AM, Burke DS. 2005              malaria: a medical-geographical study of an ancient
+      malaria-endemic countries. Lancet 376,                       Bushmeat hunting, deforestation, and prediction of            desease (ed. AW Lebedew). Moscow, Russia:
+
+      1579–1591. (doi:10.1016/S0140-6736(10)61301-3)               zoonotic disease emergence. Emerg. Infect. Dis. 11,           Academy of Sciences, USSR.
+21. Project Global Health Group at Malaria Atlas. 2011             1822–1827. (doi:10.3201/eid1112.040789)                 56. Wertheim HFL, Horby P, Woodall JP. 2012 Atlas of
+      Atlas of Malaria Eliminating Countries, 2011.           37. GayerM,LegrosD,FormentyP,ConnoyllMA.2007                       human infectious diseases. Oxford, UK: Wiley-
+
+      San Francisco, CA: The Global Health Group, Global           Conflict and emerging infectious diseasesE.merg. Infect.      Blackwell.
+      Health Sciences, University of California.                   Dis.13, 1625–1631. (doi:10.3201/eid1311.061093)         57. Hay SI, Tatem AJ, Graham AJ, Goetz SJ, Rogers DJ.
+22. WHO. 2010 International travel and health: situation      38. Jones KE, Patel NG, Levy MA, Storeygard A, Balk D,             2006 Global environmental data for mapping
+
+      as on 1 January 2010. Geneva, Switzerland: World             Gittleman JL, Daszak P. 2008 Global trends in                 infectious disease distribution. Adv. Parasitol. 62,
+      Health Organization.                                         emerging infectious diseases. Nature 451,                     37–77. (doi:10.1016/S0065-308X(05)62002-7)
+23. Fefferman NH, Naumova EN. 2009 Innovation in                   990–993. (doi:10.1038/nature06536)                      58. Scharlemann JPW, Benz D, Hay SI, Purse BV, Tatem
+
+      observation:avisionforearlyoutbreakdetectionEm. erg.    39. Randolph SE, Rogers DJ. 2010 The arrival,                      AJ, Wint GRW, Rogers DJ. 2008 Global data for
+      Health Threats J.3, e6. (doi:10.3134/ehtj.10.006)            establishment and spread of exotic diseases:                  ecology and epidemiology: a novel algorithm for
+24. Brownstein JS, Freifeld CC, Reis BY, Mandl KD. 2008            patterns and predictions. Nat. Rev. Microbiol. 8,             temporal Fourier processing MODIS data.
+
+      Surveillance sans frontieres: internet-based                 361–371. (doi:10.1038/nrmicro2336)                            PLoS ONE 3, e1408. (doi:10.1371/journal.pone.
+      emerging infectious disease intelligence and the        40. Woolhouse M. 2011 How to make predictions about                0001408)
+      HealthMap project. PLoS Med. 5, e151. (doi:10.               future infectious disease risks. Phil. Trans. R. Soc. B 59. Patil AP, Gething PW, Piel FB, Hay SI. 2011 Bayesian
+
+      1371/journal.pmed.0050151)                                   366, 2045–2054. (doi:10.1098/rstb.2010.0387)                  geostatistics in health cartography: the perspective
+25. Freifeld CC, Mandl KD, Reis BY, Brownstein JS. 2008       41. Fisher MC, Henk DA, Briggs CJ, Brownstein JS,                  of malaria. Trends Parasitol. 27, 245–252. (doi:10.
+      HealthMap: global infectious disease monitoring              Madoff LC, McCraw SL, Gurr SJ. 2012 Emerging                  1016/j.pt.2011.01.003)
+      through automated classification and visualization           fungal threats to animal, plant and ecosystem           60. Metselaar D, Van Thiel PH. 1959 Classification of
+
+      of Internet media reports. J. Am. Med. Inform.               health. Nature 484, 186–194. (doi:10.1038/                    malaria. Trop. Geogr. Med. 11, 157–161.
+      Assoc. 15, 150–157. (doi:10.1197/jamia.M2544)                nature10947)                                            61. Gething PW, Kirui VC, Alegana VA, Okiro EA, Noor
+26. Collier N et al. 2008 BioCaster: detecting public         42. Cliff AD, Smallman-Raynor MR, Haggett P, Stroup                AM, Snow RW. 2010 Estimating the number of
+
+      health rumors with a Web-based text mining                   DF, Thacker SB. 2009 Emergence and re-emergence.              paediatric fevers associated with malaria infection
+      system. Bioinformatics 24, 2940–2941. (doi:10.               Infectious diseases. A geographical analysis. Oxford,         presenting to Africa’s public health sector in 2007.
+      1093/bioinformatics/btn534)                                  UK: Oxford University Press.                                  PLoS Med. 7, e1000301. (doi:10.1371/journal.
+
+27. Collier N, Goodwin RM, McCrae J, Doan S, Kawazoe          43. Guernier V, Hochberg ME, Guegan JF. 2004 Ecology               pmed.1000301)
+      A, Conway M, Kawtrakul A, Takeuchi K, Dien D.                drives the worldwide distribution of human              62. Hay SI, Okiro EA, Gething PW, Patil AP, Tatem AJ,
+      2010 An ontology-driven system for detecting                 diseases. PLoS Biol. 2, e141. (doi:10.1371/journal.           Guerra CA, Snow RW. 2010 Estimating the global
+
+      global health events. In Proc. 23rd Int. Conf. on            pbio.0020141)                                                 clinical burden of Plasmodium falciparum malaria in
+      Computational Linguistics, Beijing, China. Association  44. Guernier V, Guegan JF. 2009 May Rapoport’s rule                2007. PLoS Med. 7, e1000290. (doi:10.1371/journal.
+      for Computational Linguistics.                               apply to human associated pathogens? EcoHealth 6,             pmed.1000290)
+
+28. Torii M, Yin L, Nguyen T, Mazumdar CT, Liu H,                  509–521. (doi:10.1007/s10393-010-0290-5)                63. Smith DL, Drakeley CJ, Chiyaka C, Hay SI. 2010 A
+      Hartley DM, Nelson NP. 2011 An exploratory study        45. Smith KF, Guegan J-F. 2010 Changing geograpahic                quantitative analysis of transmission efficiency
+      of a text classification framework for Internet-based        distributions of human pathogens. Annu. Rev. Ecol.            versus intensity for malaria. Nat. Commun. 1, 108.
+
+      surveillance of emerging epidemics. Int. J. Med. Inf.        Syst. 41, 231–250. (doi:10.1146/annurev-ecolsys-              (doi:10.1038/ncomms1107)
+      80, 56–66. (doi:10.1016/j.ijmedinf.2010.10.015)              102209-144634)                                          64. Smith DL, Cohen JM, Moonen B, Tatem AJ, Sabot
+29. Hartley DM et al. 2010 The landscape of                   46. Smith KF, Sax DF, Gaines SD, Guernier V, Guegan JF.            OJ, Ali A, Mugheiry SM. 2011 Infectious disease.
+
+      international event-based biosurveillance. Emerg.            2007 Globalization of human infectious disease.               Solving the Sisyphean problem of malaria in
+      Health Threats J. 3, e3. (doi:10.3134/ehtj.10.003)           Ecology 88, 1903–1910. (doi:10.1890/06-1052.1)                Zanzibar. Science 332, 1384–1385. (doi:10.1126/
+30. Doherr MG, Audige L. 2001 Monitoring and                  47. Keesing F et al. 2010 Impacts of biodiversity on the           science.1201398)
+
+      surveillance for rare health-related events: a review        emergence and transmission of infectious diseases.      65. Rogers DJ. 2006 Models for vectors and vector-
+      from the veterinary perspective. Phil. Trans. R.             Nature 468, 647–652. (doi:10.1038/nature09575)                borne diseases. Adv. Parasitol. 62, 1–35. (doi:10.
+      Soc. Lond. B 356, 1097–1106. (doi:10.1098/rstb.         48. Hirsch A. 1883 Handbook of geographical and                    1016/S0065-308X(05)62001-5)
+
+      2001.0898)                                                   historical pathology. Ann Arbour, MI: New               66. Hutchinson GE. 1957 Concluding remarks. Cold
+31. Blazes DL, Russell KL. 2011 Joining forces: civilians          Sydenham Society.                                             Spring Harb. Symp. Quant. Biol. 22, 415–427.
+      and the military must cooperate on global disease       49. Cliff A, Haggett P, Smallman-Raynor M. 2004 World              (doi:10.1101/SQB.1957.022.01.039)
+
+      control.Nature 477, 395–396. (doi:10.1038/                   atlas of epidemic diseases. London, UK: Arnold          67. Southwood TRE. 1977 Habitat, templet for
+      477395a)                                                     Publishers.                                                   ecological strategies? Presidential address to British
+32. Khan K et al. 2012 Infectious disease surveillance        50. Koch T. 2011 Disease maps: epidemics on the                    Ecological Society, 5 January 1977. J. Anim. Ecol. 46,
+
+      and modelling across geographic frontiers and                ground. Chicago, IL: University of Chicago Press.             337–365. (doi:10.2307/3817)
+68. Elith J, Leathwick JR, Hastie T. 2008 A working                 Parasitology 136, 1695–1705. (doi:10.1017/                    burden of meningococcal disease. Vaccine 29,
+                                                                                                                                                                                          11
+      guide to boosted regression trees. J. Anim. Ecol. 77,         S003118200900599X)                                            3363–3371. (doi:10.1016/j.vaccine.2011.02.058)            rstb.royalsocietypublishing.org
+      802–813. (doi:10.1111/j.1365-2656.2008.01390.x)         82. Magalhaes RJ, Clements AC, Patil AP, Gething PW,           97. Minor PD. 2012 The polio-eradication programme
+69. De’ath G. 2007 Boosted trees for ecological                     Brooker S. 2011 The applications of model-based               and issues of the end game. J. Gen. Virol. 93,
+
+      modeling and prediction. Ecology 88, 243–251.                 geostatistics in helminth epidemiology and control.           457–474. (doi:10.1099/vir.0.036988-0)
+      (doi:10.1890/0012-9658(2007)88[243:BTFEMA]                    Adv. Parasitol. 74, 267–296. (doi:10.1016/B978-0-        98. MEDLINE. 2011 Fact Sheet. Bethesda, MA: U.S.
+      2.0.CO;2)                                                     12-385897-9.00005-7)                                          National Library of Medicine (NLM). (http://www.
+
+70. Elith J et al. 2006 Novel methods improve prediction      83. Raso G et al. 2012 Mapping malaria risk among                   nlm.nih.gov/pubs/factsheets/medline.html)
+      of species’ distributions from occurrence data.               children in Cote d’Ivoire using Bayesian geo-            99. Bilofsky HS, Burks C. 1988 The GenBank genetic
+      Ecography 29, 129–151. (doi:10.1111/j.2006.                   statistical models. Malar. J. 11, 160. (doi:10.1186/          sequence data bank. Nucleic Acids Res. 16,
+
+      0906-7590.04596.x)                                            1475-2875-11-160)                                             1861–1863. (doi:10.1093/nar/16.5.1861)
+71. R Development Core Team. 2008 R: a language and           84. Anderson RM, May RM. 1979 Population biology of            100. Benson DA, Karsch-Mizrachi I, Clark K, Lipman DJ,
+      environment for statistical computing. Vienna,                infectious diseases: part I. Nature 280, 361–367.             Ostell J, Sayers EW. 2012 GenBank. Nucleic Acids
+
+      Austria: R Foundation for Statistical Computing               (doi:10.1038/280361a0)                                        Res. 40, D48–D53. (doi:10.1093/nar/gkr1202)
+      (http://www.R-project.org).                             85. May RM, Anderson RM. 1979 Population biology of            101. PubMed. 2011 PubMed help. Bethesda, MA:
+72. Hay SI et al. 2010 Developing global maps of the                infectious diseases: part II. Nature 280, 455–461.            National Center for Biotechnology Information.
+
+      dominant Anopheles vectors of human malaria.                  (doi:10.1038/280455a0)                                        (http://www.ncbi.nlm.nih.gov/books/NBK3827)
+      PLoS Med. 7, e1000209. (doi:10.1371/journal.pmed.       86. Anderson RM, May RM. 1991 Infectious diseases of           102. Lyon A, Nunn M, Grossel G, Burgman M. 2011
+      1000209)                                                      humans: dynamics and control. Oxford, UK: Oxford              Comparison of web-based biosecurity intelligence
+
+73. Sinka ME et al. 2011 The dominant Anopheles                     University Press.                                             systems: BioCaster, EpiSPIDER and HealthMap.
+      vectors of human malaria in the Asia-Pacific region:    87. May RM, Gupta S, McLean AR. 2001 Infectious                     Transboundary Emerg. Dis. (doi:10.1111/j.1865-
+      occurrence data, distribution maps and bionomic               disease dynamics: what characterizes a successful             1682.2011.01258.x)
+
+      precis. Parasite Vectors 4, 89. (doi:10.1186/1756-            invader? Phil. Trans. R. Soc. Lond. B 356, 901–910.      103. Salathe M et al. 2012 Digital epidemiology. PLoS
+      3305-4-89)                                                    (doi:10.1098/rstb.2001.0866)                                  Comput. Biol. 8, e1002616. (doi:10.1371/journal.
+74. Sinka ME et al. 2010 The dominant Anopheles               88. Hutt MSR, Burkitt DP. 1986 The geography of non-                pcbi.1002616)
+
+      vectors of human malaria in Africa, Europe and the            infectious diseasefrd,UK:OxfordUnvierstyiPress.          104. Signorini A, Segre AM, Polgreen PM. 2011 The use
+      Middle East: occurrence data, distribution maps and     89. UNPD. 2010 World population prospects: the 2010                 of Twitter to track levels of disease activity and
+      bionomic precis. Parasite Vectors 3, 117. (doi:10.            revision population database. New York, NY: United            public concern in the US during the influenza A
+
+      1186/1756-3305-3-117)                                         Nations Population Division (U.N.P.D.) See http://            H1N1 pandemic. PLoS ONE 6, e19467. (doi:10.1371/
+75. Sinka ME et al. 2010 The dominant Anopheles                     esa.un.org/unpp/.                                             journal.pone.0019467)
+      vectors of human malaria in the Americas:               90. Aspinall W. 2010 A route to more tractable expert          105. Chew C, Eysenbach G. 2010 Pandemics in the age of
+      occurrence data, distribution maps and bionomic               advice. Nature 463, 294–295. (doi:10.1038/                    Twitter: content analysis of Tweets during the 2009
+
+      precis. Parasite Vectors 3, 72. (doi:10.1186/1756-            463294a)                                                      H1N1 outbreak. PLoS ONE 5, e14118. (doi:10.1371/
+      3305-3-72)                                              91. Cooke RM. 1991 Experts in uncertainty. Opinion and              journal.pone.0014118)
+76. Sinka ME et al. 2012 A global map of dominant                   subjective probability in science. New York, NY:         106. Paul MJ, Dredze M. 2011 A model for mining public
+
+      malaria vectors. Parasite Vectors 5, 69. (doi:10.1186/        Oxford University Press.                                      health topics from Twitter. Technical report. Johns
+      1756-3305-5-69)                                         92. Balk D, Deichmann U, Yetman G, Pozzi F, Hay S,                  Hopkins University, Baltimore, MD.
+77. Diggle PJ, Ribeiro PJ. 2007 In Model-based                      Nelson A. 2006 Determining global population             107. Howe J. 2006 The rise of crowdsourcing. Wired 14,
+
+      geostatistics. (eds P Bickel, P Diggle, S Fienberg, U         distribution: methods, applications and data. Adv.            1–5.
+      Gather, I Olkin, S Zeger). New York, NY: Springer.            Parasitol. 62, 119–156. (doi:10.1016/S0065-              108. Shirky C. 2010 Cognitive surplus. Creativity and
+78. Diggle PJ, Tawn JA, Moyeed RA. 1998 Model-based                 308X(05)62004-0)                                              generosity in a connected age. London, UK: Penguin
+
+      geostatistics. J. Roy. Stat. Soc. C Appl. 47, 299–326.  93. Linard C, Tatem AJ. 2012 Large-scale spatial                    Books.
+      (doi:10.1111/1467-9876.00113)                                 population databases in infectious disease research.     109. von Ahn L, Kedia M, Blum M. 2006 Verbosity: a
+79. Clements ACA, Moyeed R, Brooker S. 2006 Bayesian                Int. J. Health Geogr. 11, 7. (doi:10.1186/1476-               game for collecting common-sense facts. In ACM
+
+      geostatistical prediction of the intensity of infection       072X-11-7)                                                    Conf. on Human Factors in Computing Systems. April
+      with Schistosoma mansoni in East Africa.                94. Gething PW, Van Boeckel T, Smith DL, Guerra CA,                 24–27, 2006 Montreal Canada. Pittsburgh, PA:
+      Parasitology 133, 711–719. (doi:10.1017/                      Patil AP, Snow RW, Hay SI. 2011 Modelling the                 Computer Science Department, Carnegie Mellon
+
+      S0031182006001181)                                            global constraints of temperature on transmission of          University.
+80. Diggle PJ et al. 2007 Spatial modelling and the                 Plasmodium falciparum and P. vivax. Parasite             110. Sheng VS, Provost F, Panagiotis Ipeirotis G. 2008 Get
+      prediction of Loa loa risk: decision making under             Vectors 4, 92. (doi:10.1186/1756-3305-4-92)                   another label? Improving data quality and data
+
+      uncertainty. Ann. Trop. Med. Parasitol. 101,            95. Hall R, Jolley D. 2011 International measles                    mining using multiple, noisy labelers. New York, NY:
+      499–509. (doi:10.1179/136485907X229121)                       incidence and immunization coverage. J. Infect. Dis.          ACM Digital Library.
+81. Vounatsou P, Raso G, Tanner M, N’Goran EK,                      204, S158–S163. (doi:10.1093/infdis/jir124)              111. Kittur A, Chi EH, Suh B. 2008 Crowdsourcing user
+
+      Utzinger J. 2009 Bayesian geostatistical modelling      96. Harrison LH et al. 2011 The Global Meningococcal                studies with Mechanical Turk . New York, NY: ACM
+      for mapping schistosomiasis transmission.                     Initiative: recommendations for reducing the global           Digital Library.

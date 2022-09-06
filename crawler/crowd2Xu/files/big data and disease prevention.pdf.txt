@@ -1,0 +1,667 @@
+ REVIEW
+
+
+
+                                                                      BIG DATA
+
+
+
+                                                                      AND DISEASE
+
+
+
+                                                                      PREVENTION:
+
+                                                                      From Quantiﬁed Self to Quantiﬁed
+
+                                                                      Communities
+
+
+
+                                                                      Meredith A. Barrett,  1,2* Olivier Humblet,  1,*
+                                                                                        3                      1
+                                                                      Robert A. Hiatt, and Nancy E. Adler
+
+
+
+
+
+
+
+
+
+
+
+Abstract
+
+
+Big data is often discussed in the context of improving medical care, but it also has a less appreciated but equally
+important role to play in preventing disease. Big data can facilitate action on the modiﬁable risk factors that
+contribute to a large fraction of the chronic disease burden, such as physical activity, diet, tobacco use, and
+
+exposure to pollution. It can do so by facilitating the discovery of risk factors for disease at population, subpop-
+ulation, and individual levels, and by improving the effectiveness of interventions to help people achieve healthier
+
+behaviors in healthier environments. In this article, we describe new sources of big data in population health,
+explore their applications, and present two case studies illustrating how big data can be leveraged for prevention.
+
+We also discuss the many implementation obstacles that must be overcome before this vision can become a reality.
+
+                                                              Discussions of how the accumulation of new digital infor-
+Introduction
+                                                              mation—commonly referred to as big data—will affect
+The United States faces major health challenges.              health have primarily revolved around the potential impact
+Despite spending more on healthcare per person than does      on healthcare,,8and on discoveries at the molecular level
+any other nation, the United States scores poorly on key      for the treatment of disease. Less attention has been paid to
+               1
+health indicatorsUp to half of all deaths can be attributed tohow big data could contribute to more effective disease
+behavioral factors such as tobacco, diet, physical activity, al-evention, speciﬁcally by facilitating action on the pre-
+cohol and drug use, as well as the physical and social envi-  ventable risk factors that contr ibute to a large fraction of the
+ronment.2,3Preventable chronic diseases are now the most      chronic disease burden. We see this action as necessary on
+
+common causes of premature death. Currently, 10% of           both individual and community scales. Momentum has
+Americans rate their health as fair or poor, and 36% of adultsbeen growing around the concept of the quantiﬁed self, in
+are considered obese. Over the next 20 years, Americans are   which individuals deploy sensors and monitoring devices to
+projected to suffer from as many as 8.5 million new cases of  measure and improve their own health and behavior. This
+
+diabetes, 7.3 million cases of heart disease and stroke, and  concept can be expanded and aggregated to a population
+over 660,000 cases of cancer, potentially costing up to $66   level, leading to quantiﬁed communities that measure the
+billion per year. New approaches to research and interven-    health and activities of their population and institutions,
+tions aimed at the preventable causes of these diseases will behereby improving collective health with a data-driven
+                                                      6                10
+needed to reduce the disease burden and the resulting cost.   approach.
+
+1                         3
+2Center for Health and Community and Department of Epidemiology and Biostatistics, University of California–San Francisco, San Francisco, California.
+ School of Public Health, Berkeley, University of California–Berkeley, Berkeley, California.
+*These authors contributed equally to this work.
+
+                                                                      BIG DATA SEPTEMBER 2013DOI: 10.1089/big.2013.0027
+168BD
+                                                                                                               REVIEW
+
+
+                                                                                                                Barrett et al.
+
+
+
+In this article we explore two ways in which big data can facil-   due to lengthy data collection and dissemination cycles.
+itate efforts to prevent disease: ﬁrst, by increasing the capacity Among large, longitudinal studies, participant attrition is
+understand the behavioral, social, and environmental determi-      often high and data collection can be expensive, making long-
+                                                                                          14,15
+nants of health in populations; and second, by enabling disease    term follow-up difﬁcult.    Big data can play a key role in
+prevention efforts to be betteratrgeted towards the subpopula-     both research and intervention activities and accelerate
+tions for which they will be most effective, an effort which we    progress in disease prevention and population health.
+
+call precision prevention. Thisapproach builds upon the 2011
+National Research Council report advocating for precision          The technological underpinning of health-focused big data is
+medicine,9 which would create and analyze massive databases        the use of sensors and smartphones to track various aspects of
+
+linking electronic health records (EHRs) to molecular data in      health and health behaviors. People are increasingly inter-
+order to accelerate research on mechanisms of disease and in-      ested in tracking their health through mobile health sensors
+dividualization of medical treatments.                                                    and applications, and have the req-
+
+We believe this framework would be                                                        uisite technology experience to do
+enriched by expanding the focus to                                                        so.16According to a Pew report on
+include disease prevention, and in-   ‘‘HERE WE EXAMINE HOW BIG                           the social life of health information,
+
+corporating data about key behav-     DATA CAN SATISFY THE NEED                           27% of internet users age 18 and
+ioral, social, and environmental risk  FOR MORE DIVERSE, RICHLY                           older track their own health data
+factors for disease in populations.                                                       online, with 15% having tracked
+                                      CONTEXTUAL, AND REAL-TIME
+                                                                                          their weight, diet, or exercise routine
+To that end, we describe new sour-           DATA COLLECTION IN                           and 17% having tracked any other
+ces of big data in population health,       POPULATION HEALTH.’’                          health indicators online.17Another
+
+including new technologies that al-                                                       Pew report found that 29% of
+low data collection on a much larger                                                      American adults who download apps
+and faster scale than was previously possible. Two case studies    to their smartphones have downloaded an app that helps
+                                                                                                     18
+describe how big data could be leveraged to impact health by       them track or manage their health.
+increasing physical activity as well as improving asthma
+outcomes. We close by reviewing obstacles that remain before       The number of mobile health application users is growing
+
+big data can be harnessed to achieve precision prevention.         rapidly 19d is expected to reach 247 million users by the end
+Here we examine how big data can satisfy the need for more         of 2012.  Disparities in smartphone and technology access
+diverse, richly contextual, and real-time data collection in       are important to address, however, when considering their
+
+population health.                                                 utility in health data collection and intervention. The most
+                                                                   recent Pew report found that 91% of all adults in the United
+                                                                   States own a cell phone, with 56% owning a smartphone.   20
+What Is Big Data?
+                                                                   When segmented by race, 53% of whites, 60% of Hispanics,
+Big data—the term describing the accumulation of new data          and 64% of African American adults own smartphones.
+from sources such as online personal activity, commercial          While only 43% of those earning less than $30,000 a year own
+
+transactions, and sensor networks—is characterized 11,12gh-        a smartphone, ownership increases to 77% when considering
+volume, high-variety, and high-velocity information.   The         those under age 30 in this income group.
+collection, analysis and application of big data related to
+
+health is a component of a growing ﬁeld that has been re-          Responding to this interest, the market for personal sensors,
+ferred to by multiple terms, including e-health, m-health,         health applications and their combination has rapidly ex-
+digital health, health information technology, health 2.0, e-      panded. As smartphones have become widespread—and, for
+                                                    13                                                21
+medicine, and many other terms in the last few years.              some, indispensable—in modern life,   they can serve as im-
+                                                                   portant passive and manual data collection devices. Projections
+Leveraging Big Data to Prevent Disease                             estimate that 50 billion devices will connect to the internet in
+
+                                                                   the next 10 years, g22erating 40-fold the current amount of
+Disease prevention requires two steps. Research ﬁrst identiﬁes     global personal data.  Passive data collection through the
+modiﬁable risk factors for disease (e.g., diet, exercise, smok-    phone’s own accelerometer and other sensors make data col-
+
+ing, alcohol consumption, and environmental pollution).            lection automatic and effortless. The velocity, variety, and
+These insights then lead to interventions to ameliorate these      volume of these new big data sources make them particularly
+risk factors and improve health. Public health is the discipline   relevant to both health research and interventions.
+
+most engaged in deliberate disease prevention. However,
+traditional public health data is not high volume, high va-        Research to identify modiﬁable risk factors
+riety, or high velocity. In fact, many aspects of public health    for disease
+could be considered data-poor, due to modest study sample          Identifying modiﬁable risk factors for disease requires data-
+
+sizes, a lack of geographically linked data, and temporal lags     sets that include information about health outcomes as well
+
+
+MARY ANN LIEBERT, INC.VOL. 1  NO. 3 SEPTEMBER 2013  BIG DATA
+                                                                                                                 BD169
+LEVERAGING BIG DATA FOR DISEASE PREVENTION
+Barrett et al.
+
+
+
+
+as about potential risk factors. Correlations between risk         put, storage, interoperability, analysis, and prediction, and
+factors and disease can be identiﬁed by applying analytics on      future requirements could encompass more social and be-
+these datasets. One could ask why we need big data since this      havioral domains.23
+
+process already occurs in standard epidemiologic studies. We
+see two primary ways in which big data can uniquely accel-         In addition to EHRs, data on disease outcomes can also be
+erate and enrich the discovery of new risk factors for disease.    collected from sensors and health apps. Examples include
+
+                                                                   Asthmapolis, which tracks a patient’s use of both rescue and
+First, massive datasets allow not only population-level ana-       controller asthma medications with an inhaler sensor, and
+lyses, but also subpopulation- and personal-level analyses.        Glooko, which monitors blood glucose levels in diabetics.
+Such datasets enable the discovery of personalized risk fac-       While sensors are not currently available for all health out-
+
+tors, which take into account the various additional variables     comes, when available, they provide more detailed and timely
+that might confer susceptibility or resistance to a given risk     information than is found in a typical EHR and avoids the
+factor. Identifying personalized risk factors holds the promise    inherent error in self-reported measures.
+
+of giving people more effective information about how to
+prevent disease, and doing so in a way that is more com-           A ﬁnal source of population-level disease outcome data is
+pelling for them to act upon because it is targeted to them        crowdsourcing.24 For example, data on chronic diseases is
+
+speciﬁcally as opposed to the ‘‘average person.’’ For example,     collected through websites such as PatientsLikeMe and the
+a certain dietary nutrient may be beneﬁcial to some people         Health Tracking Network. Wiki-type web pages are also used
+but harmful to others, yielding an                                                        to manage and interpret data.     25
+
+average effect that is null. Only with                                                    Crowdsourced data is especially im-
+a sufﬁciently large dataset is there                                                      portant for monitoring the spread of
+adequate power to detect such sta-       ‘‘THE NUMBER OF MOBILE                           infectious diseases. Google Flu Trends
+
+tistical interactions, which will yielHEALTH APPLICATION USERS                            pioneered the analysis of daily inﬂu-
+nutritional advice that varies by        IS GROWING RAPIDLY AND                           enza-related online search queries,
+person.                                                                                   which has been applied to tracking
+                                           IS EXPECTED TO REACH                                                             26
+                                        247 MILLION USERS BY THE                          and predicting inﬂuenza outbreaks.
+Second, new passive sensors (e.g.,                                                        While in some cases this system has
+for physical activity or sleep) can                END OF 2012.’’                         been successful in predicting out-
+allow collection of richer, more de-                                                      breaks earlier than traditional sur-
+
+tailed data on potential risk factors                                                     veillance systems, in other cases the
+over longer periods of follow-up than is currently possible        predictions have been inappropriately high.7 Another pro-
+using standard epidemiologic questionnaires. This will also        gram, Flu Near You, collects weekly participant-reported ﬂu
+
+strengthen the capacity to extract new insights from this big      symptoms through a website and mobile application to map
+data.                                                              inﬂuenza across the United States in real time. HealthMap
+                                                                   collects, ﬁlters, and utilizes informal online data sources (e.g.,
+
+New technologies and data sources for big data in health           online news aggregators, eyewitness reports, expert-curated
+will enable the collection of information on health outcomes       discussions, and validated ofﬁcial reports) to analyze, map, and
+and risk factors—which has traditionally been collected            disseminate information about infectious disease outbreaks.
+
+via questionnaires—and aggregate these data in a rapid and         Informal health data on social networking sites such as Face-
+cost-effective manner. Input can come from electronic health       book and Twitter are currently being studied to assess disease
+records (EHRs), innovative primary data collection tools           spread in real time (e.g., Fount.in, Sickweather). Similar
+
+such as new sensors of patient disease symptoms, real-time         crowdsourcing techniques have been leveraged for crisis
+monitors of behavior, and secondary data sources such as lo-       mapping, in which eyewitness reports submitted via e-mail,
+cation-linked databases of environmental and neighborhood          text messages, or social media are plotted on interactive maps.
+characteristics, which we describe below.                          These data can help target areas for emergency services and
+
+                                                                   additional resources.
+  Data on disease outcomes.      Electronic health records
+contain a wealth of routinely collected medical information—         Data on behavioral risk factors for health.The initiation
+
+making them the single most comprehensive source of health         and maintenance of behavior change can be challenging, and
+data—and therefore are an essential part of any large database     even those interventions that succeed in experimental settings
+of disease outcome data. It has been estimated that 80% of         often do not scale well. The ﬁrst step to improving health
+
+the information in an EHR is unstructured data such as             behaviors is to monitor and measure them, and recent
+scanned images or text from physician’s notes, but im-             technological advances have provided many new ways of
+provements in data mining technology are making these data         doing this. Devices or smartphone apps can be used to
+
+increasingly accessible. Recent requirements for meaningful        monitor health behaviors such as physical activity29e.g. FitBit;
+use will require EHRs to become more effective for data in-        Jawbone Up, RunKeeper); diet (My Meal Mate) p      e;ls
+
+
+                                                                                                      BIG DATA  SEPTEMBER 2013
+170BD
+                                                                                                              REVIEW
+
+
+                                                                                                               Barrett et al.
+
+
+
+quali30 (e.g. Lark); and medication adherence (MyMedSche-         susceptibility or resistance to other risk factors. High
+dule).  These technologies enable the continuous recording of     throughput genetic information is becoming increasingly easy
+Observations of Daily Life,1 which allows a more detailed         and inexpensive to collect. For example, one personal genetics
+
+record of behaviors and their trends over time than can be        company, 23andMe, offers DNA analysis services to con-
+collected via questionnaires.                                     sumers, as well as the option to share their personal data with
+                                                                  23andMe’s research efforts. A research portal will share de-
+
+  Placing health within context: social and environmental de-     identiﬁed, aggregated health data with academic collabora-
+terminants of health. Growing understanding of the impor-         tors, which has the potential to create large databases for a
+tance of environmental determinants of health has raised          fraction of the cost of traditional research programs.
+
+interest in integrating environmental and neighborhood data
+into health studies. The social and physical environment pro-     Interventions to improve disease risk factors
+vides the context that can enable healthy behaviors or hinder     Once research has identiﬁed the appropriate risk factor tar-
+
+them. For example, obesity within a person’s social netw32k has   gets for a subpopulation or given person, the next step in the
+been shown to be a predictor of their own body mass index.        disease prevention process is to help that person achieve these
+The walkability of a neighbor-                                                             goals. In the past this might have
+
+hood can impact the amount33f                                                              meant a brief word of advice from
+exercise that residents get, and                                                           one’s physician at the annual
+access to supermarkets may affect       ‘‘WHILE SENSORS ARE NOT                            checkup to avoid smoking, exer-
+their ability to buy fresh fruits   CURRENTLY AVAILABLE FOR ALL
+              34                                                                           cise, and eat healthy foods. But
+and vegetables.  Furthermore, the       HEALTH OUTCOMES, WHEN                              big data offers the potential for
+physical  environment   (e.g.,air                                                          this important advice to reach
+quality, pollution, crime, noise,        AVAILABLE, THEY PROVIDE                           each person outside of the clinic
+                                       MORE DETAILED AND TIMELY
+public transportation access) has                                                          in a personalized manner, which
+direct impacts on health that need    INFORMATION THAN IS FOUND                            increases the likelihood of its im-
+to be better understood at both                                                            pact.
+                                     IN A TYPICAL EHR AND AVOIDS
+population and individual levels.         THE INHERENT ERROR IN
+                                                                                           Monitoring health behavior and
+A large amount of environmental       SELF-REPORTED MEASURES.’’                            providing real-time feedback on
+
+data is regularly collected in non-                                                        performance in comparison to
+health sectors, and could be an                                                            personalized  targets  can   help
+important input into health-related big data. A few relevant      people reach their behavior goals. Ideally, behavioral data
+
+examples of available data on the physical environment in-        should be passively collected in order to allow continuous,
+clude weather patterns, pollution levels, allergens, land use     long-term follow-up that does not require additional effort
+change, forest ﬁres, particulate matter, trafﬁc patterns, pesti-  from the patient. This information can also be connected to a
+cide applications, or water quality. Growing capacity for ambi-
+                                                                  research database, as described previously, thus completing a
+ent environmental sensing, citizen science and the use of drones  virtuous and rapid iterative data cycle from research to in-
+will expand access to remotely and passively captured environ-    tervention and back to research.
+mental surveillance data (e.g., CitiSense).7The social and
+
+economic environment can be quantiﬁed using spatially explicit    In addition to simple monitoring, a more sophisticated
+socioeconomic data, such as from the U.S. Census, American        program would include algorithms that provide personalized
+Community Survey, or publicly available crime data. And social    feedback to assist with behavior modiﬁcation at key moments
+
+connectedness can be assessed through online social networks.     of decision making (e.g., suggesting healthy recipes while the
+                                                                  patient is shopping; encouraging exercise at the end of the
+Geography provides a unifying framework to integrate all of       workday, or giving a personalized warning about location
+
+these disparat38data sources. Tools such as Global Positioning    based environmental triggers for asthma). The real-time ve-
+Systems (GPS)   and Geographic Information Systems (GIS)          locity sets this application of big data apart from traditional
+allow multiple layers of diverse types of data to be georefer-    public health uses of behavioral or health data.
+
+enced and layered, enabling a more complex and deﬁned
+assessment of the social and environmental drivers of
+health.9 The recent development of open source mapping            Case Study 1: Big Data
+
+and visualization products (e.g., Quantum GIS, Open-              and Physical Activity
+StreetMap, CartoDB, MapBox) is enabling the growth and
+application of this ﬁeld in new ways.                             Physical activity, an important behavioral risk factor for
+                                                                  chronic disease, is affected by many social and environmental
+                                                                         40
+  Ge9omics.   Genomics is an important risk factor for dis-       factors. Physical activity is most commonly assessed using
+ease, both as a direct cause of disease and as a marker of        questionnaires, which are of varying degrees of reliability and
+
+
+MARY ANN LIEBERT, INC.VOL. 1 NO. 3  SEPTEMBER 2013 BIG DATA
+                                                                                                               BD171
+LEVERAGING BIG DATA FOR DISEASE PREVENTION
+Barrett et al.
+
+
+
+        41
+validity, and are administered infrequently, constituting an        The Asthmapolis sensor, which snaps onto asthma metered-
+incomplete picture of the quantity and nature of the physical       dose inhalers, resolves many of these problems. It passively
+activity conducted. In contrast, new devices (e.g. Fitbit,          captures the time, location, and GPS coordinates of inhaler
+
+Jawbone Up, Nike FuelBand) and smartphone apps that have            use by communicating with a smartphone. The smartphone
+the potential to passively and continuously track physical ac-      application allows users to provide further contextual infor-
+tivity, constitute a novel source of big data for population        mation, such as symptoms, perceived triggers, activity at time
+
+health. If combined with health information from EHRs, these        of use, and whether the inhaler was used for prophylactic
+data could be used to conduct studies of how physical activity      purposes. These data are uploaded in real time to a remote
+affects health, as well as how physical activity is affected by the server and detailed analytics are then provided back to the
+social and environmental context. An important property of          patient, their provider, and caregivers. The data also clarify
+
+such studies is that the large study population would allow         relationships between controller medication adherence and
+discovery of subgroups (deﬁned perhaps by sociodemographic          asthma exacerbation events, creating a data feedback loop to
+factors or geography) in which the key associations differ.         improve adherence behavior. In initial studies of the use of
+
+Examples might include people with a certain metabolic pro-         the Asthmapolis sensor, participants experienced reduced
+ﬁle, for whom physical activity is especially beneﬁcial to health,  asthma symptoms and improved control and awareness over
+or a sociodemographic group for whom improving the phys-            a 4-month period. 45,46
+
+ical environment is insufﬁcient to spur increased physical ac-
+tivity because their social context is the key limiting factor.     Beyond individual use, the analysis of the de-identiﬁed, ag-
+This knowledge could be used to tailor population health in-        gregated data can be used for public health surveillance to
+
+terventions (i.e., precision prevention).                           identify local asthma hotspots across a region. When combined
+                                                                                            with contextual big data, such as
+Big data could also directly help                                                           environmental data sources, trafﬁc
+
+people improve their physical activ-      ‘‘GEOGRAPHY PROVIDES A                            data, or weather patterns, these spa-
+ity habits by enabling them to track                                                        tially explicit, real-time data enable
+and understand their own activity        UNIFYING FRAMEWORK TO                              more targeted temporal and spatial
+
+patterns, and support their efforts to    INTEGRATE ALL OF THESE                            analysis of environmental drivers of
+improve them on their own. One         DISPARATE DATA SOURCES.’’                            asthma, including methods such as
+example would be real-time re-                                                              small-area analyses.9,47,4This type
+minders to increase physical activity                                                       of information can enable cities and
+
+before the end of an unusually sedentary day to avoid missing       regions to address asthma burden, evaluate intervention sce-
+one’s daily activity target. Online social networks could fa-       narios, and prevent asthma with a data-driven approach. The
+cilitate population health interventions to increase physical       city of Louisville, Kentucky, has adopted this technology to
+                                                                                                        49
+activity by linking groups in order to increase motivation. In      address their elevated asthma burden.  Because the Asthma-
+addition to allowing novel data collection that leads to better     polis system enables both individual- and population-level
+research, big data can facilitate participant empowerment and       analyses, it achieves both quantiﬁed self and quantiﬁed com-
+
+behavior change.                                                    munity goals.
+
+
+                                                                    Concerns and Limitations
+Case Study 2: Big Data and Asthma
+                                                                    Obstacles exist for using big data in both research and in-
+Over 25 million Americans suffer from asthma, and the               tervention. Among the most important issues is privacy. For
+
+prevalence has been increas43g since the early 1980s across all     example, combining massive protected and personal datasets
+age, sex, and racial groups.  As one of the most common             (i.e., EHRs, health behaviors, etc.) raises serious logistical and
+chronic conditions in the United States, asthma accounted for       ethical challenges to maintaining privacy. As discussed in the
+over $56 billion in healthcare costs and lost productivity in       National Research Council (NRC) report on precision med-
+     44                                                                  9
+2007. Asthma is unique in that exacerbations can be triggered       icine, complex issues of consent, conﬁdentiality, patient
+by short-term variability in environmental exposures. Al-           access, and oversight will need to be addressed in order to
+though many indoor and outdoor triggers of acute asthma             combine such large quantities of individual data. The current
+
+exacerbations have been identiﬁed, few studies have been able       technical difﬁculty of combining data from different source
+to identify the ﬁne-scale spatial predictors of asthma exacer-      datasets poses challenges, such as with incompatible propri-
+bations. Public health research has relied upon data aggregated     etary EHRs. Because individuals change medical providers
+
+at the city, county, or even state level, and time lags between     frequently and therefore have health data scattered across
+data collection and availability lead to analyses on data that are  multiple EHR systems, EHR incompatibility will complicate
+1–2 years old. Moreover, individuals traditionally have had to      the effort to assemble long-term datasets of individuals’
+
+manually track their events and symptoms in asthma diaries,         health information. Similar difﬁculties will be encountered
+which led to incomplete data collection and recall error.           when combining environmental data that has been collected
+
+
+                                                                                                       BIG DATA  SEPTEMBER 2013
+172BD
+                                                                                                             REVIEW
+
+
+                                                                                                              Barrett et al.
+
+
+
+at different spatial scales, and behavioral data that has been   Adding urgency to this effort is the fact that the burden of
+collected on different temporal scales.                          such chronic conditions will be compounded by the large
+                                                                 aging population in the Unit ed States and the increasing
+                                                                                      1
+Additional unresolved challenges include the funding, ad-        cost of health care.   Together these provide signiﬁcant
+ministration, and accessibility of such a merged dataset of      incentive for accelerating progress in helping people
+detailed health, behavioral, and environmental data. The NRC     achieve improved health and well-being. Policies related to
+
+report suggested that a national database should be adminis-     federal health care reform are placing more responsibility
+tered by the U.S. government, but other governance models,       on healthcare providers to prevent disease, which add an
+such as a public/academic/private-sector consortium, are also    additional ﬁnancial incentive for this type of ambitious
+possible. The administering body will need to carefully curate   big data–based disease prevention effort.9 One healthcare
+
+both the data and the metadata, as the utility of the dataset wildelivery model currently being implemented is the af-
+decrease without knowledge of a                                                          fordable  care  organization,  in
+variable’s source and appropriate in-                                                    which healthcare providers receive
+
+terpretation, as well as set responsible   ‘‘MONITORING HEALTH                           capitated payments (i.e., a ﬁxed fee
+policies for data accessibility. In spite                                                per patient regardless of treatment
+of these logistical and ethical chal-   BEHAVIOR AND PROVIDING                           required) to provide medical care
+                                         REAL-TIME FEEDBACK ON                                                    53
+lenges, early examples of large-scale                                                    for a deﬁned population.    Under
+database linkages already exist and            PERFORMANCE IN                            this system, the ﬁnancial incentives
+can yield insights into which ap-                                                        would be aligned for healthcare
+                         14                     COMPARISON TO
+proaches are most feasible.          PERSONALIZED TARGETS CAN                            providers to prevent people from
+                                                                                         becoming sick. This will necessi-
+Beyond these challenges, discovering   HELP PEOPLE REACH THEIR                           tate discovery of new cost-effective
+
+personalized  disease  risk factors           BEHAVIOR GOALS.’’                          ways to prevent disease by inter-
+from such a massive dataset will be a                                                    vening on the determinants of
+signal detection challenge that tra-                                                     health, with the goal of improving
+                                                   13
+ditional analytic methods are ill equipped to achieve.The        health while reducing expenditures. As we have described
+statistical methods used will need to combine hypothesis-        in this article, big data can play a key role in meeting this
+driven research with agnostic methods to identify susceptible    challenge.
+subgroups. Compounding these analytic issues is a dearth of
+
+people possessing both the necessary substantive knowledge
+in health, as well as the big data training required to assemble,Acknowledgments
+curate, and analyze such a variety of data at this scaWe.
+                                                     52          M.A.B. and O.H. are Robert Wood Johnson Foundation
+anticipate a necessary trade-off between rigor and vigoras       Health & Society Scholars at the University of California–San
+the desire to quickly draw and apply novel insights from this    Francisco and University of California–Berkeley. The inspi-
+data conﬂicts with the need to analyze the data methodically
+                                                                 ration for this paper grew from conversations in a session on
+and apply the insights cautiously. This conﬂict may subside      big data at the Robert Wood Johnson Foundation Health and
+over time as these efforts mature and a better understanding     Society Scholars Annual Meeting in 2012; they thank the
+emerges of how to balance these competing priorities.
+                                                                 participants of that session. M.A.B. and O.H. thank the
+                                                                 program for its ﬁnancial support, and the faculty and scholars
+Finally, challenges exist in the development and validation of   for their intellectual support. In particular, they thank Paula
+technologies for passive, long-term monitoring of health
+                                                                 Braveman, Ralph Catalano, Ezequiel Galarce, George Kaplan,
+behaviors. This validation is easier for some behaviors (e.g.,   Matthew Killingsworth, Barbara Laraia, Wendy Berry Men-
+physical activity) than for others (e.g., diet). An additional   des, Leonard Syme, David Van Sickle, David Vlahov, and
+challenge for interventions includes optimizing the real-time
+algorithms that interact with users to support and encourage     Stephen Shortell for providing valuable input.
+
+healthier behaviors.
+                                                                 Author Disclosure Statement
+
+Conclusions
+                                                                 M.A.B. and O.H. are currently postdoctoral fellows employed
+Big data has a potentially critical role to play in preventing   by the University of California–San Francisco. They have
+disease. It can both allow the discovery of new, personalized    conducted research projects, unrelated to the present article,
+
+disease risk factors related to lifestyle or the environment, andusing data provided by Asthmapolis, Inc. Asthmapolis had no
+also help people to successfully modify their risk behaviors.    oversight over the research process or the ﬁndings of those
+By alleviating the increasing burden of behavior-related dis-    studies, and provided no compensation. Both M.A.B. and
+
+eases in the United States, big data could improve population    O.H. will accept full-time research positions with Asthma-
+health and reduce healthcare costs.                              polis after their fellowships end in September 2013.
+
+
+MARY ANN LIEBERT, INC.VOL. 1 NO. 3  SEPTEMBER 2013 BIG DATA
+                                                                                                              BD173
+LEVERAGING BIG DATA FOR DISEASE PREVENTION
+Barrett et al.
+
+
+
+
+References                                                       18. Purcell K. Half of adult cell phone owners have apps on
+                                                                     their phones. Washington, DC: Pew Research Center,
+ 1. National Research Council and Institute of Medicine.             2011.
+
+    U.S. Health in International Perspective: Shorter Lives,     19. eHealth. An Issue Brief on eHealth Tools and Diabetes
+    Poorer Health. Panel on Understanding Cross-National             Care for Socially Disadvantaged Populations. Wa-
+    Health Differences Among High-Income Countries.                  shington, DC: eHealth Initiative, 2012.
+
+    Washington, DC: The National Academies Press, 2013.          20. Smith A. Smartphone ownership: 2013 update. Wa-
+ 2. McGinnis J, Foege W. Actual causes of death in the               shington, DC: Pew Research Center, 2013.
+    United States. JAMA 1993; 270:2207–2212.                     21. The World Bank. Information and Communications for
+ 3. Mokdad A, Marks J, Stroup D, et al. Actual causes of             Development 2012: Maximizing Mobile. Washington,
+
+    death in the United States, 2000. JAMA 2004; 291:1238–           DC: World Bank, 2012.
+    1245.                                                        22. World Economic Forum. Personal Data: The Emergence
+ 4. National Center for Health Statistics. Health, United            of a New Asset Class. Geneva, Switzerland: World Eco-
+
+    States, 2011: With Special Feature on Socioeconomic              nomic Forum, 2011.
+    Status and Health. Hyattsville, MD: National Center for      23. Centers for Medicare and Medicaid Services. Meaningful
+    Health Statistics, 2012.                                         Use. Centers for Medicare and Medicaid Services, 2013.
+
+ 5. Wang YC, McPherson K, Marsh T, et al. Health and             24. Swan M. Crowdsourced health research studies: an im-
+    economic burden of the projected obesity trends in the           portant emerging complement to clinical trials in the
+    USA and the UK. Lancet 2011; 378:815–825.                        public health research ecosystem. J Med Internet Res
+
+ 6. Fineberg HV. The paradox of disease prevention: cele-            2012; 14:e46.
+    brated in principle, resisted in practice. JAMA 2013;        25. Waldrop M. Big data: Wikiomics. Nature 2008; 455:22.
+    310:85–90.                                                   26. Ginsberg J, Mohebbi MH, Patel RS, et al. Detecting in-
+
+ .Mi,hiM,wn,eli:te                                                   ﬂuenza epidemics using search engine query data. Nature
+    Next Frontier for Innovation, Competition, and Pro-              2008; 457:1012–1014.
+    ductivity. San Francisco, CA: McKinsey Global In-            27. Butler D. When Google got ﬂu wrong. Nature 2013;
+    stitute, 2011.
+                                                                     494:155–156.
+ 8. Chawla NV, Davis DA. Bringing big data to personalized       28. Rothman A. Toward a theory-based analysis of behav-
+    healthcare: A patient-centered framework. J Gen Intern           ioral maintenance. Health Psychol 2000; 19(Suppl 1):64–
+    Med 2013, June 25. [Epub ahead of print]                         69.
+
+ 9. National Research Council. Toward Precision Medicine:        29. Carter MC, Burley VJ, Nykjaer C, et al. Adherence to a
+    Building a Knowledge Network for Biomedical Research             smartphone application for weight loss compared to
+    and a New Taxonomy of Disease. Washington, DC:                   website and paper diary: Pilot randomized controlled
+
+    Committee on a Framework for Development a New                   trial. J Med Internet Res 2013; 15:e32.
+    Taxonomy of Disease, National Research Council, 2011.        30. Dayer L, Heldenbrand S, Anderson P, et al. Smartphone
+10. Dyson E. The quantiﬁed community. Project Syndicate.             medication adherence apps: Potential beneﬁts to patients
+
+    July 23, 2012.                                                   and providers. J Am Pharm Assoc 2013; 53:172–181.
+11. Nilsen W, Kumar S, Shar A, et al. Advancing the science      31. Robert Wood Johnson Foundation. Tracking and Sharing
+    of mHealth. J Health Commun 2012;17:5–10.                        observations from daily life could transform chronic care
+
+12. Laney D. 3D data management: Controlling data volume,            management. Project HealthDesign Blog, 2010. Available
+    velocity, and variety. META Group, 2001. Available online        online at http://www.rwjf.org/en/about-rwjf/newsroom/news
+    at blogs.gartner.com/doug-laney/ﬁles/2012/01/ad949-              room-content/2010/03/tracking-and-sharing-observations-
+
+    3D-Data-Management-Controlling-Data-Volume-Velocity-             from-daily-life-could-transfor.html
+    and-Variety.pdf                                              32. Christakis NA, Fowler JH. The spread of obesity in a large
+13. Kumar S, Nilsen W, Pavel M, et al. Mobile health: Re-            social network over 32 years. N Engl J Med 2007;
+    volutionizing health through transdisciplinary tesearch.         357:370–379.
+
+    Computer 2012; 46:28–35.                                     33. Cerin E, Lee KY, Barnett A, et al. Objectively-measured
+14. Jutte DP, Roos LL, Brownell MD. Administrative record            neighborhood environments and leisure-time physical
+    linkage as a tool for public health research. Annu Rev           activity in Chinese urban elders. Prev Med 2012; 56:
+
+    Public Health 2011; 32:91–108.                                   86–89.
+15. Kaplan GA. How big is big enough for epidemiology?           34. Robinson PL, Dominguez F, Teklehaimanot S, et al. Does
+    Epidemiology 2007;18:18–20.                                      distance decay modelling of supermarket accessibility
+
+16. HIMSS. A new prescription for chronic disease: Remote            predict fruit and vegetable intake by individuals in a large
+    monitoring devices. HIMSS Analytics and Qualcomm                 metropolitan area? J Health Care Poor Underserved
+    Life, 2012.                                                      2013; 24:172–185.
+
+17. Fox S. Social Life of Health Information. Washington,        35. Boulos MNK, Resch B, Crowley DN, et al. Crowdsour-
+    DC: Pew Research Center, 2011.                                   cing, citizen sensing and sensor web technologies for
+
+
+                                                                                                    BIG DATA SEPTEMBER 2013
+174BD
+                                                                                                                REVIEW
+
+
+                                                                                                                 Barrett et al.
+
+
+
+    public and environmental health surveillance and crisis            inhaler use for feedback to patients, physicians and
+    management: trends, OGC standards and application                  payers. Resp Drug Delivery Europe 2013; 1:119–130.
+    examples. Int J Health Geogr 2011; 10:67.                      46. Van Sickle D, Magzamen S, Truelove S, et al. Remote
+
+36. de Nazelle A, Seto E, Donaire-Gonzalez D, et al. Im-               monitoring of inhaled bronchodilator use and weekly
+    proving estimates of air pollution exposure through                feedback about asthma management: An open-group,
+    ubiquitous sensing technologies. Environ Poll 2013;                short-term pilot study of the impact on asthma control.
+
+    176:92–99.                                                         PloS One 2013; 8:e55335.
+37. Silvertown J. A new dawn for citizen science. Trends Ecol      47. MacDonald C. New technology helps doctors link a pa-
+    Evol 2009; 24:467–471.                                             tient’s location to illness and treatment. The Washington
+
+38. Kerr J, Duncan S, Schipperjin J. Using global positioning          Post, February 4, 2013.
+    systems in health research: A practical approach to data       48. Weiss KB, Wagener DK. Geographic variations in U.S.
+    collection and processing. Am J Prev Med 2011; 41:532–             asthma mortality: Small-area analyses of excess mortality,
+
+    540.                                                               1981–1985. Am J Epidemiol 1990; 132:107–115.
+39. Elliott P, Savitz DA. Design issues in small-area studies of   49. MacDonald C. Using big data to improve health: Geo-
+    environment and health. Environ Health Perspect 2008;              medicine combines pollution and health data to better
+
+    116:1098.                                                          inform patients, doctors and researchers. The Environ-
+40. Institute of Medicine. Accelerating Progress in Obesity            mental Magazine, November 1, 2012.
+    Prevention: Solving the Weight of the Nation. Wa-              50. Dumbill E, Liddy ED, Stanton J, et al. Educating the next
+
+    shington, DC: Institute of Medicine, 2012.                         generation of data scientists. Big Data 2013; 1:21–27.
+41. Helmerhorst HJ, Brage S, Warren J, et al. A systematic         51. Davenport TH, Patil D. Data scientist: The sexiest job of
+    review of reliability and objective criterion-related va-          the 21st century. Harv Bus Rev 2012; 90:70–77.
+
+    lidity of physical activity questionnaires. Int J Behav Nutr   52. Adler N, Bush NR, Pantell MS. Rigor, vigor, and the
+    Phys Act 2012; 9:1–55.                                             study of health disparities. Proc Natl Acad Sci 2012;
+42. Donaire-Gonzalez D, de Nazelle A, Seto E, et al. Com-              109(Suppl 2):17154–17159.
+
+    parison of physical activity measures using mobile             53. DeVore S, Champion RW. Driving population health
+    phone-based CalFit and actigraph. J Med Internet Res               through accountable care organizations. Health Aff 2011;
+    2013; 15:e111.                                                     30:41–50.
+
+43. Akinbami OJ, Moorman JE, Bailey C, et al. Trends in
+    Asthma Prevalence, Health Care Use, and Mortality in
+    the United States, 2001–2010. Washington, DC: U.S.             Corresponding author:
+                                                                   Address correspondence to:
+    Department of Health and Human Services, Centers for
+    Disease Control and Prevention, National Center for            Olivier Humblet
+    Health Statistics, 2012.                                       Center for Health and Community
+
+44. Barnett SBL, Nurmagambetov TA. Costs of asthma in the          University of California–San Francisco
+    United States: 2002–2007. J Allergy Clin Immunol 2011;         3333 California, Suite 465
+    127:145–152.                                                   San Francisco, CA, 94143
+
+45. Van Sickle D, Maenner M, Barrett M, et al. Monitoring
+    and improving compliance and asthma control: mapping           E-mail: HumbletO@chc.ucsf.edu
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MARY ANN LIEBERT, INC. VOL. 1 NO. 3  SEPTEMBER 2013 BIG DATA
+                                                                                                                 BD175

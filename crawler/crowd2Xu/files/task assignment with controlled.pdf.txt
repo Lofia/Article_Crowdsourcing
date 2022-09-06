@@ -1,0 +1,1126 @@
+   Task Assignment with Controlled and Autonomous
+
+                                 Agents
+
+
+                           Florian M. Biermann
+
+   International School of Economics at Tbilisi State University, Republic of Georgia
+
+                             Victor Naroditskiy
+
+         Electronics and Computer Science, University of Southampton, UK
+
+                             Tri-Dung Nguyen
+
+       Schools of Mathematics & Management, University of Southampton, UK
+
+                              Maria Polukarov
+
+         Electronics and Computer Science, University of Southampton, UK
+
+                                Alex Rogers
+
+         Electronics and Computer Science, University of Southampton, UK
+
+                            Nicholas R. Jennings
+
+         Electronics and Computer Science, University of Southampton, UK
+
+
+
+
+
+Abstract
+
+We analyse assignment problems in which not every agent is controlled by
+the central planner. The autonomous agents search for vacant tasks guided
+
+by their own preference orders over available tasks. The goal of the central
+planner is to maximise the total value of the assignment, taking into account
+the behaviour of the uncontrolled agents. Such optimisation problems arise
+
+in numerous real-world situations, ranging from organisational economics to
+\crowdsourcing" and disaster response. We show that the problem faced by
+
+
+    Email addresses: f.biermann@iset.ge (Florian M. Biermann),
+vn@ecs.soton.ac.uk (Victor Naroditskiy), T.D.Nguyen@soton.ac.uk (Tri-Dung
+Nguyen), mp3@ecs.soton.ac.uk (Maria Polukarov), acr@ecs.soton.ac.uk (Alex
+
+Rogers), nrj@ecs.soton.ac.uk (Nicholas R. Jennings)
+
+
+Preprint submitted to Mathematical Social Sciences             March 29, 2014
+the central planner can be transformed into a mixed integer bilevel optimisa-
+tion problem. Then we demonstrate how this program can be reduced to a
+disjoint bilinear program, which is much more manageable computationally.
+
+Keywords:    Assignment Problem, Stable Matching, Bilevel Optimization
+
+
+
+1. Introduction
+
+   Problems in economic theory are traditionally analysed in terms of sta-
+ble outcomes (equilibria) or e▯cient solutions (optima). In the former case,
+the problem is considered in the context of the interaction of rational, self-
+
+interested, autonomous agents; in the latter, the agents are assumed to follow
+the instructions of the central planner who aims to optimise some objective.
+Of course, in realistic economic systems autonomous agents are often placed
+
+together with those controlled by the central planner, like public and private
+sectors jointly tackling social problems or locating economic activities. Typ-
+ically, the autonomous agents will act to obtain their own individual goals,
+
+and the problem of the central planner is to coordinate the controlled agents
+so as to optimise the overall performance of the system, while taking into
+account the behaviour of self-motivated participants.
+   The present paper investigates a particular \semi-autonomous" scenario
+
+of this kind, namely assignment problems in which some of the players are
+autonomous and face private incentives to solve certain tasks. Instead of
+submitting to the planner’s will, these agents strive to obtain the task that
+
+rates most highly according to their own preference rankings.
+   The contribution of this paper is both conceptual and technical. On
+the conceptual level we introduce a model to handle sel▯sh behaviour in
+
+assignment scenarios. We call this variation of the assignment problem the
+Semi-Autonomous Assignment Problem (SAAP). When all agents are fully
+controlled by the CP, the SAAP turns into a classical assignment problem.
+
+   In our model, the autonomous agents, amended to the classical assign-
+ment problem, are assumed to have ordinal preferences over the available
+tasks. This arguably increases the robustness and applicability of our model.
+
+We neither require the central planner to form a belief about cardinal util-
+ity functions of the autonomous agents, nor do we assume the autonomous
+agents to be von Neumann-Morgenstern expected utility maximisers. Like-
+wise, adopting ordinal preferences allows us to directly utilise results from
+
+a branch of game theory, usually called matching theory, which originated
+
+
+                                      2
+with the seminal paper of Gale and Shapley (1962). From the start, matching
+theory evolved without drawing on the theory of expected utility.
+
+    Part of our technical contribution is to show that the optimal solution
+of an SAAP from the point of view of the central planner corresponds to a
+stable matching (Gale and Shapley, 1962) in a particular marriage market     1
+
+formed by autonomous agents and tasks. In this market, the preferences of
+the autonomous agents are their rankings over tasks, while the values of the
+\assignment matrix" determine the preferences of the tasks. By assigning
+
+the controlled agents, the central planner can block some tasks and in this
+way essentially determine the market in which the stable matching is formed.
+The seemingly strong assumption that the central planner moves ▯rst does
+
+not a▯ect the generality of our model. Making use of a result from matching
+literature, in Section 3 we argue that the outcome will be the same if the
+central planner does not move ▯rst. This is true as long as the central planner
+
+has the prerogative to assign his controlled agents to tasks even if they were
+already taken by autonomous agents (who in that case become unassigned
+again).
+
+    As we show, the optimisation problem faced by the central planner can
+be represented as a mixed integer bilevel optimisation problem|a hierarchi-
+
+cal program where the set of constraints contains a parametric optimisation
+problem. Solving bilevel programs is di▯cult in general, and known algo-
+rithms would deal with only extremely small problem instances. We then
+
+show how to reduce this bilevel program to a disjoint bilinear program, us-
+ing the special structure of the SAAP. A disjoint bilinear program is much
+more manageable computationally, as it only involves a single minimisation
+
+problem instead of a minimax problem.
+    The rest of the paper is organised as follows. Section 2 motivates our
+work by describing several real-life situations which resemble SAAPs. The
+
+model is then formally de▯ned in Section 3. In Section 4 we present our
+main results|the transformation of the SAAP to a mixed integer bilevel
+optimsiation problem and the reduction of that problem to a disjoint bilinear
+
+program. We conclude in Section 5 with directions for future work.
+
+
+   1Technically, a marriage market is a one-to-one two-sided matching problem.
+
+
+
+
+
+
+
+                                      3
+2. Real-world examples
+
+
+    Semi-autonomous assignment problems arise naturally in the context of
+location of economic activities. In Koopmans and Beckmann (1957), for ex-
+ample, the authors discuss the assignment problem in the context of choosing
+
+locations for industrial plants under the standard assumption that the central
+planner is responsible for choosing the location for all of the plants. However,
+
+in reality such tasks are typically divided between the public and the private
+sectors, where private businesses strive to maximise their own pro▯ts and the
+government is concerned with the overall welfare of the society. Note also
+
+that state institutions often have the priority over private entrepreneurs in
+making their choices, consistent with the assumptions of our model.
+
+    As another example, consider private-public partnerships (PPP), where
+the public party, which usually supervises the complete project, intends to
+advance some public goal. In contrast, the participating private parties are
+
+primarily interested in their own pro▯ts. This poses an obstacle for assigning
+tasks in a globally optimal way. Companies will try to avoid those tasks which
+
+are unpro▯table and di▯cult, trying instead to obtain subprojects promising
+high pro▯ts at low risk. A typical example is the provision of health care
+
+through hospitals and doctors, whi2h is facilitated through private-public
+partnerships in many countries. The payment agreements between the gov-
+ernment and the private partners usually do not reimburse a hospital or
+
+doctor for exactly those costs associated with a speci▯c patient. As a result,
+patients (= \tasks") yield di▯erent pro▯t opportunities. Although hospi-
+
+tals/doctors (= \agents") participating in a PPP are not formally entitled
+to pick the pro▯table patients and reject the others, there may be informal
+ways to deter unpro▯table patients. The model presented in this paper can
+
+help to design policies which take the sel▯sh behaviour of private contractors
+into account.
+
+    In the internet economy, many crowdsourcing systems (see, e.g., Benkler
+(2006), Brabham (2008), Howe (2008)) can be modelled as SAAPs. In a
+
+
+   2For an overview of private-public partnerships in the health sector, see Nikolic and
+
+Mai3isch (2006).
+    By entering \hospital turns away" or a similar phrase into an internet search engine,
+one gets plenty of media reports about exactly this issue. For example, UK dentists,
+working for the National Health Service, arguably behaved in such a way (see Templeton
+(2007)). Reports about hospitals being reluctant to examine patients with X-ray or brain
+scans may straightforwardly be interpreted as avoidance of unpro▯table tasks.
+
+
+                                        4
+crowdsourcing system, tasks which cannot satisfactorily be solved without
+
+human expertise are assigned to a group of more or less anonymous amateur
+problem solvers (the \crowd"). Yet companies making use of crowdsourcing
+do not have to totally rely on the crowd. For some of the tasks or even for all
+
+of them, they can engage professional problem solvers. These belong to their
+own personnel or a contractor’s personnel who cannot reject tasks assigned
+
+to them. In contrast, crowd members can freely choose which tasks to work
+on, and they are probably not indi▯erent between all tasks. Hence, the ▯rm
+has to ▯nd an optimal way of distributing its tasks between professional and
+
+amateur problem solvers.
+    Disaster response situations, providing prominent examples of crowd-
+sourcing, can also be analysed with our model. Consider a disaster relief
+
+situation where professional disaster responders coordinated by the govern-
+ment are assisted by local residents and disaster survivors. The government
+
+has neither the communication capabilities nor the authority to tell local
+participants what to do. However, local participants are very helpful and
+their e▯orts should not be ignored. Assuming the government can estimate
+
+the preferences of local participants (e.g., they visit sites in order of distance
+from their home), our work provides a more e▯ective way for the government
+
+to assign professional disaster responders.
+    Finally, autonomous task choice can even be observed in military organi-
+sations, which are famous for their strict adherence to the principle of obeying
+       4
+orders. If solving critical tasks is \prestigious" in some sense, there may be
+an incentive for military o▯cers to unilaterally go for those critical tasks,
+disregarding the assignment the central planner would prefer. In military
+
+history it regularly occurred that ambitious commanders tried to gain fame
+by acting more bravely or by taking greater risks than desired by the central
+
+command. An outstanding example is the celebrated Danish naval o▯cer
+
+
+   4Situations resembling SAAPs can be found not only within military organisations. The
+2011 war in Libya was fought by a coalition of NATO and loosely organised rebel troops, co-
+operating in their e▯orts to overthrow the regime of dictator Muammar Gadda▯. While the
+NATO forces were totally coordinated, it was arguably di▯cult to coordinate the actions
+
+of the rebels, who were untrained, unprofessional, and lacked command chains. Conse-
+quently, the NATO, as the central planner of the SAAP, had to anticipate the prospective
+actions of the rebels when making its decisions on air strikes. Information about the rebels’
+next steps was provided by so called liaison o▯cers (NATO representatives assigned to
+the rebel units).
+
+
+
+                                        5
+Peter Jansen Wessel (1691-1720), called Tordenskjold (Danish for \thunder
+shield"). He constantly strived for the most prestigious tasks in the Great
+Northern War (1700-1721), thereby notoriously disobeying orders. His con-
+
+frontation with the Swedish eet in the Battle of Dynekilen (1716) in which
+his 7 ships captured 31 Swedish ships and destroyed another 13, was not
+                                   6
+backed by orders of the admiralty. Wessel’s anarchistic conduct evoked con-
+siderable criticism in the Danish admiralty, eventually leading to a trial at a
+                                                                        7
+court-martial. Yet he was acquitted and even made an admiral later.        His
+disobedience yielded huge personal prestige, as can be seen from the fact that
+Wessel is praised in the national anthems of both Denmark and Norway (the
+
+country he originated from).
+
+
+3. The Model
+
+    Before formally de▯ning our model, we recall the de▯nition of a classical
+Assignment Problem (AP). An AP is de▯ned by a triple (A;T;v), where A is
+
+a set of agents, T is a set of tasks, and v is an evaluation function which maps
+A▯T into R [f+g. The problem is to ▯nd an assignment (or, matching) of
+
+agents to tasks for which the sum of the values of pairs matched is maximised.
+Formally, an assignment ▯ is a subset of A▯T such that no two distinct pairs
+in ▯ share a player or a task, that is:
+
+                        ^                  ^                  ^
+              (a;t);(^;t) 2 ▯ : (a;t)6= (^;t) ) a 6= ^ ^ t =6 t:
+
+The objective of the central planner is then given by
+                                    X
+                              max        v(a;t);
+                               ▯2▯
+                                   (a;t)2▯
+
+with ▯ being the set of all assignments which can be formed from the set
+A ▯ T.
+    We now generalise the AP model to what we call the Semi-Autonomous
+
+Assignment Problem (SAAP). An SAAP is de▯ned by a tuple
+
+                              (C [ F;T;v;▯ );F
+
+
+   5For an account of his deeds, see Chapter 1 (\A Knight Errant of the Seas") in Riis
+
+(2067).
+    \He could not go back and ask for permission, and one may shrewdly guess that he
+did not want to, for it would certainly have been refused." (Riis (2007), p. 10).
+   7Cf. Riis (2007), pp. 6 and 9.
+
+
+                                      6
+where C and F are two disjoint sets, and we set A := C [ F. As before,
+we refer to the elements of A as agents, while the members of C are termed
+
+coordinated (or, controlled), and the members of F are referred to as free
+(or, autonomous). The function v is de▯ned as before, and ▯          is a strict8
+                                                                   F
+preference pro▯le which contains for each free agent f 2 F a linear preference
+
+order ▯ fe▯ned over T. Given this, the central planner of an SAAP aims
+to ▯nd                                 X
+
+                               maSAAP       v(a;t);
+                              ▯2▯     (a;t)2▯
+
+where ▯  SAAP is the set of SAAP-feasible assignments de▯ned later. First we
+
+specify the behavior of the free agents.
+    We now specify a search process such that keeping to this process is a
+
+(weakly) dominant strategy for each free agent.
+    After the coordinated agents were assigned to tasks by the central planner,
+
+each free agent f approaches his most preferred task t := max    ▯f T. If f ▯nds
+
+t to be vacant, f takes over t. If f ▯nds that a coordinated player already
+occupies t, f proceeds to the task which is second according to the preferences
+              0                                                            0
+▯ f namely t := max     ▯f T n ftg. Again, f checks the availability of t and
+either takes it or continues with the subsequent item in its priority list. If
+
+there are no tasks left on f’s priority list which were not yet approached,
+f stays idle. If k ▯ 2 free agents f ;:1:;f apkroach the same task t, we
+
+assume that the agent best at performing the task, i.e.
+
+                            argmax            v(a;t)
+                                    a2ff1;::k;f g
+
+keeps to t, while the other free agents continue the search process. This
+is a realistic assumption for scenarios in which free players, though being
+
+uncoordinated, have an interest in a high-valued solution of the problem
+(like in the disaster response application outlined in Section 2). We make
+                                    0             0 9
+the restriction that v(a;t) 6= v(a ;t) if a 6= a .    With these assumptions,
+the central planner a▯ects the outcome of the search process because tasks
+
+assigned to the controlled agents are unavailable to the free agents.
+
+
+   8
+    The assumption of strict preferences is common in matching literature (e.g., see Chap-
+ter 2 in Roth and Sotomayor (1990)). In deriving our results, we make use of one of the
+standard results in matching theory (Corollary 2.14, p. 33, in Roth and Sotomayor (1990))
+
+whi9h holds only for strict preferences.
+    In the marriage market we de▯ne, this restriction will ensure that \preferences of
+tasks" are strict. This assumption is needed for our results (see also Footnote 8 above).
+
+
+                                        7
+    If the behavior of the free agents is modeled in this way, the search pro-
+cess coincides with the Deferred Acceptance Algorithm of Gale and Shapley
+(1962) with men proposing, where:
+
+
+    ▯ The free agents in F are the men and the tasks in T are the women.
+
+    ▯ The men’s preferences are given by ▯ .   F
+
+
+    ▯ The women’s preferences are given by the valuation function v, i.e. for
+      each t 2 T we have
+
+                                    0                  0
+                             f ▯ t , v(f;t) > v(f ;t):                       (3.1)
+
+
+    ▯ Some tasks are blocked, namely those that are occupied by controlled
+      agents.
+
+
+We call this procedure the Deferred Acceptance Algorithm with Blocked Tasks
+(DAB).
+
+
+    The Deferred Acceptance Algorithm of Gale and Shapley (1962) con-
+structs a stable matching in a marriage market. A marriage market is de-
+
+▯ned as a triple (M;W;▯), where M is the set of \men" and W is the set of
+\women". A preference pro▯le ▯ maps each m 2 M into a linear preference
+
+order de▯ned over W [ fmg, and each w 2 W into a linear preference order
+de▯ned over M [ fwg.    10;11
+    From the fact that the deferred acceptance algorithm is ▯nite and pro-
+
+duces a unique output (Gale and Shapley (1962)), it follows that the DAB
+search process is ▯nite and produces a unique output.
+
+    It is a dominant strategy equilibrium for each agent from the male side
+to reveal its preferences truthfully (see Theorem 5 in Roth (1982)). In our
+model, revealing preferences is done via the order in which tasks are ap-
+
+proached. Since our search process speci▯es that tasks are approached in the
+order given by agent’s preferences and since our search process coincides with
+
+the deferred acceptance algorithm, it means that straightforwardly following
+
+
+  10It is a common notation that the item m in the domain of a man’s preference order
+and the item w in the domain of a woman’s preference order stand for remaining single.
+  11
+    For a comprehensive discussion of marriage markets, see Roth and Sotomayor (1990),
+Chapter 2.
+
+
+                                        8
+their preferences is a dominant strategy for the agents, i.e. the free agents
+
+cannot improve their outcome by changing the order in which they approach
+tasks.
+
+   McVitie and Wilson (1971) modi▯ed the original algorithm of Gale and
+Shapley (1962) so as to let men propose to women in a random sequence (in
+
+Gale and Shapley (1962), the men propose simultaneously at each stage).
+They proved that the matching resulting from their algorithm is identical
+
+to the one generated by the standard deferred acceptance algorithm. This
+▯nding of McVitie and Wilson (1971) implies that the outcome of the DAB
+
+algorithm is not a▯ected by our assumption that the central planner assigns
+the coordinated agents ▯rst; in the DAB search process, the output matching
+
+would be the same even if the CP would assign the controlled agents when
+the free agents were already searching in the market. This is true as long
+
+as the coordinated agents could take away any task already occupied by a
+free agent, an assumption we consider reasonable for those applications we
+
+described in Section 2.
+   We de▯ne a coordinated assignment to be a matching ▯      C ▯ C ▯ T (no
+
+free player f is a member of any pair in ▯ C. We denote by (F;T;▯ )   F ▯ C a
+marriage market formed by free agents and those tasks which are not matched
+
+under ▯ C Formally,
+
+                 (F;T;▯)     = (F;T n ft j (c;t) 2 ▯ g;▯):              (3.2)
+                          ▯C                        C
+
+Here ▯ is a preference pro▯le which assigns to each t 2 T a linear order ▯  t
+according to (3.1) and to each free agent the order ▯ . Given this, the set
+                                                       f
+▯ SAAP consists of the following assignments:
+
+De▯nition 1. An assignment ▯ is SAAP-feasible for a semi-autonomous
+
+assignment problem (C [ F;T;v;▯ ) ifF▯ = ▯ [ ▯  F    C  and the matching ▯ F
+is the outcome of the DAB in the market (F;T;▯ )       .
+                                                  F ▯ C
+
+
+4. Solution
+
+   In this section, we ▯rst state the problem as a mathematical program. We
+
+then transform the program so that it becomes computationally manageable.
+Let binary variables xijndicate whether a controlled agent i 2 C is assigned
+
+to task j 2 T, i.e. if xij= 1, then i is assigned to j, and if xij = 0, then
+this is not the case. Likewise, variables yijindicated whether a free agent
+
+i is matched to task j. x and y are matrices with jCj rows and jFj rows,
+
+
+                                      9
+respectively. Both of them have jTj columns and their elements are either 0
+
+or 1.
+
+
+Theorem 1. The solution to the Semi-Autonomuous Assignment problem
+
+                         (C [ F;T;v;▯ F;
+
+
+coincides with the solution to the optimization problem
+
+                          X
+                max              vijij g(x);                 (4.1)
+                 x      (i;j)2(C▯T)
+                        X
+
+                  s:t:     xij 1   8i 2 C                    (4.2)
+                        j2T
+                        X
+                           xij 1   8j 2 T                    (4.3)
+
+                        i2A
+                        xij f0;1g  8(i;j) 2 (C ▯ T)          (4.4)
+
+
+where g(x) is the value of the allocation of free agents to the tasks not assigned
+to controlled agents by x, i.e.
+
+                       X
+       g(x) = min           vij ij                           (4.5)
+               y
+                    (i;j)2(F▯T)
+                    X
+              s:t:     yij 1   8i 2 F                        (4.6)
+                    j2T
+                    X           X
+                       y ▯ 1 ▯     x   8j 2 T                (4.7)
+                        ij          ij
+                    i2F         i2C
+                         X       X
+                    yij     yik     ylj 1   8(i;j) 2 (F ▯ T) (4.8)
+                         k▯ij    lj i
+
+                    yij f0;1g   8(i;j) 2 (F ▯ T)             (4.9)
+
+
+Proof. First of all, we show that the solution of the mathematical program
+above corresponds to a matching. Constraint (4.2) requires each controlled
+
+agent to be assigned at most one task and constraint (4.3) requires each task
+to be allocated to at most one controlled agent. Likewise, constraint (4.6)
+
+
+
+  1In the optimization problems we use thijinstead of v(i;j) to denote the
+value of the assignment of agent i to task j.
+
+
+
+                                10
+requires each free agent to be assigned at most one task and constraint (4.7)
+requires a controlled task to be allocated to no free agent if it is already
+
+occupied by a controlled agent, or to at most one free agent otherwise. Con-
+straints (4.4) and (4.9) ensure that all variablesijand y ijare binary.
+
+Next, we show that the matrix y determined in the solution of the program
+corresponds to the outcome of the DAB procedure when only those tasks
+
+are available which are not occupied by controlled agents. As mentioned,
+(4.7) ensures that no free agent is matched to a task assigned to a controlled
+
+agent. As we showed in Section 3, the DAB procedure converges to a stable
+matching in a marriage market (F;T;▯ )  F ▯ C (cf. (3.2) above). We now have
+
+to show that the matrix y in a solution of the program above corresponds (1)
+to a stable matching in the market (F;T;▯ ) F ▯C , where ▯Cis determined by
+the matrix x, and (2) that this stable matching corresponds to that stable
+
+matching chosen by the free agents in the DAB search process.
+For ensuring that y corresponds to a stable matching in the market
+
+(F;T;▯ )F ▯ C, we include the so called blocking pair constraint (4.8). This
+constraint is taken from Roth et al. (1993), who develop stable matching
+
+theory in a mathematical programming framework. If (4.8) is ful▯lled, there
+can be no blocking pairs.
+
+Finally, we have to show that the matching y derived from the solution of the
+above program is not just stable, but it is indeed the same stable matching
+
+as the one constructed through the DAB procedure. In DAB, free agents
+represent the proposing side, and the procedure converges to a stable match-
+ing that is optimal for the free agents: each free agent prefers this stable
+
+matching to any other stable matching (see Gale and Shapley (1962)). The
+optimal stable matching for the proposing side coincides with the worst sta-
+
+ble matching of the responding side (Roth and Sotomayor (1990), Theorem
+2.13 and Corollary 2.14, p. 33), which means that each task that is not oc-
+
+cupied by a controlled agent prefers any other stable matching in the market
+(F;T;▯ )F ▯   over the matching selected through DAB. Let t be a task which
+            C                                      ▯
+is not occupied by a controlled agent and let (t;f ) be the pair formed un-
+der the matching constructed through the DAB algorithm. Moreover, let
+
+B(t) ▯ T ▯ F be the set
+
+    B(t) := f(t;f) j (t;f) ▯ ▯;▯ is a stable matching in (F;T;▯ ) F ▯  g:
+                                                                      C
+
+By de▯nition of the \preferences" of the tasks (see (3.1) above) the fact that
+
+
+
+
+                                     11
+the constructed matching is the task-worst implies that
+                      ▯
+                   (t;f ) = argm(t;f)2B(t);f):
+
+Put di▯erently, tf F denotes the set of free agents that perform task t in some
+
+stable matching in the market (F;F ▯C, then, in the free-agent-optimal
+matching, task t is performed by the least-quali▯ed among these agents|
+
+argminf2Ftv(t;f).
+It follows that the objective function for the assignment of free agents, which
+
+corresponds to the matching chosen by the DAB algorithm in the market
+(F;T;▯ F ▯ , is given by (4.5).
+          C
+
+   The integrality constraint (4.9) can be relaxed as has been shown by
+Vande Vate (1989, Theorem 16), allowing to replace it with a nonnegativity
+
+constraint.
+   The SAAP can thus be fully speci▯ed as the following bilevel mixed in-
+
+teger linear program SAAP(2LMILP):
+
+              X              X
+    max             v x +          v y
+     x               ijij           ij ij
+           (i;j)2(C▯T)     (i;j)2(F▯T)
+           X
+     s:t:     x ij1   8i 2 C
+
+           j2T
+           X
+              x ij1   8j 2 T
+           i2C
+
+           xij f0;1g   8(i;j) 2 (C ▯ T)
+                          X
+           y solves min        vij ij
+                       (i;j)2(F▯T)
+                       X
+
+                          yij 1   8i 2 F
+                       j2T
+                       X          X
+                          yij 1 ▯    xij 8j 2 T
+
+                       i2F X      iXC
+
+                       yij     ik+    ylj 1   8(i;j) 2 (F ▯ T)
+                           k▯ij    l▯ji
+
+                       yij 0  8(i;j) 2 (F ▯ T)
+
+   Formally, we have a mixed integer bilevel optimisation problem|a hier-
+
+archical program in which the set of constraints contains a parametric opti-
+misation problem. Solving bilevel programs is di▯cult in general, let alone
+
+
+                               12
+solving one with binary variables, and applying known algorithms to the
+
+program at hand would yield solutions only for extremely small problem in-
+stances. The most popular method for solving bilevel programs is to replace
+
+the second level with a set of Karush-Kuhn-Tucker optimality conditions and
+then add these constraints to the ▯rst level to form a Mathematical Program
+with Equilibrium Constraints (MPEC) (Luo et al. (1996)). However, this in-
+
+troduces a set of complementary constraints that are di▯cult to deal with.       13
+In fact, solving a linear bilevel program in which all functions are linear is
+                                                               14
+already strongly NP-hard (Marcotte and Savard (2005)).            In our case, the
+upper level contains binary variables and hence the problem is even more
+
+di▯cult.
+For devising a way how to practically solve the SAAP problem, we will show
+
+that (SAAP(2LMILP)) is equivalent to a disjoint bilinear program, which
+is much more manageable computationally,       15 as stated in the following the-
+
+orem:
+
+Theorem 2. The SAAP bilevel mixed integer linear programming model
+
+(SAAP(2LMILP)) is equivalent to the following disjoint bilinear program
+
+
+  13The complementary constraints can then be transformed into a new set of constraints
+
+that involve integer variables using a Big-M method. Alternatively, nonlinear programming
+relaxation can be used to approximate these complementary constraints.
+  14Even checking local optimality in linear bilevel programming is NP-hard, cf. Marcotte
+and Savard (2005).
+  15Although solving bilinear programs is still NP-hard (Audet et al. (1999)), the mathe-
+
+matical programming formulation is in a much nicer form, i.e. we only have to deal with
+a single minimisation problem instead of a minimax problem. Notice that not all linear
+bilevel programs can be transformed into a bilinear problem. However, a disjoint bilinear
+program can be transformed into a linear bilevel program.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                        13
+SAAP(DBL):
+
+             X          X      X        X          X
+    max           vijij    ▯ i    ▯ j1 ▯   xij +        ij
+    x;▯;▯;
+            i2C;j2T      i2F    j2T     i2C      (i;j)2(F▯T)
+            X
+      s:t:     xij 1  8i 2 C
+            j2T
+            X
+               x ▯ 1  8j 2 T
+                ij
+            i2C
+
+            xij 0  8(i;jX 2 (C ▯XT)
+
+            ▯i+ ▯j+ ij    ik     lj vij  8(i;j) 2 (F ▯ T)
+                        k▯ij    lj i
+
+            ▯ ▯ 0;▯ ▯ 0; ▯ 0:
+
+
+   At a high level, the transformation of (SAAP(2LMILP)) into a bilin-
+ear program involves three steps. First, we replace the linear program on
+
+the second level with its dual. Since the primal was a minimisation prob-
+lem, the dual is a maximisation problem. Having maximisation in both ▯rst
+
+and second stages lets us combine the objectives and reduce the problem
+
+to a single-stage optimisation. The resulting problem belongs to the class
+of mixed integer non-convex quadratic programming problems and is still
+
+quite di▯cult to solve. We then exploit the special structure of the problem
+to note that the integrality constraints on x can be dropped obtaining a
+
+bilinear program. The details follow in the proof.
+
+Proof. Let ▯ , ▯ and be dual variables for constraints (4.6)-(4.8) for all
+          i  j     ij
+(i;j) 2 (F ▯ T). The dual problem is formulated as:
+
+
+           X      X      X            X
+     max      ▯ +    (1 ▯   x )▯ +
+     ▯;▯;     i             ij j           ij
+           i2F    j2T    i2C       (i;j)2(F▯T)
+                        X       X
+     s:t:  ▯i+ ▯j+ ij     ik     lj vij 8(i;j) 2 (F ▯ T)
+
+                        ki j    lj i
+           ▯ ▯ 0;▯ ▯ 0; ▯ 0:
+
+
+   Plugging the dual into the original problem and combining two max op-
+
+erators, we obtain the following problem:
+
+
+
+
+                              14
+             X           X      X        X          X
+    max           vijij     ▯i+    ▯j(1 ▯   xij +         ij
+    x;▯;▯; i2C;j2T      i2F    j2T      i2C      (i;j)2(F▯T)
+            X
+
+      s:t:     xij 1   8i 2 C
+            j2T
+            X
+               xij 1   8j 2 T
+
+            i2C
+            xij f0;1g  8(i;j) 2 (C ▯ T)
+                         X      X
+            ▯ + ▯ +  +      +      ▯ v   8(i;j) 2 (F ▯ T)
+             i   j   ij      ik      lj  ij
+                         ki j    lj i
+
+            ▯ ▯ 0;▯ ▯ 0; ▯ 0:
+
+
+The objPctive function contains linear terms on (x;▯;▯;) and a bilinear
+term ▯(          ▯jxij. Without this bilinear term, the problem will be
+         (i;j)2(C▯T)
+equivalent to two separate optimisation problems: an assignment problem
+and a (dual of a) stable matching problem. Due to the presence of the
+
+bilinear terms together with the integrality constijint on x , this problem
+belongs to the class of mixed integer non-convex quadratic programming
+
+problems and is quite di▯cult to solve. However, once we ▯x (▯;▯;), the
+
+objective function is linear on x. The problem becomes:
+                            X
+
+                    mxx          (vij ▯j)xij
+                           i2C;j2T
+                           X
+                     s:t:     xij 1   8i 2 C
+
+                            j
+                           X
+                              xij 1   8j 2 T
+                           i2C
+
+                           xij f0;1g
+
+                           16
+This is an assignment problemand hence the integrality constraint can
+be relaxed (see, for example, Bertsimas and Tsitsiklis (1997), Corollary 7.2).
+
+
+
+  1In the variant of the assignment problem stated here, the number of tasks may be
+di▯erent from the number of agents and tasks/agents may be left unassigned. One can
+
+convert this version to the standard assignment problem by adding dummy tasks/agents.
+
+
+
+                               15
+Thus, for every solution ▯;▯; (or equivalently, for every y) to the agent-
+optimal stable matching problem, there is an integer solution x that is opti-
+mal. In other words, there is always an integer solution x that is optimal, and
+we can drop the integrality constraints in SAAP. This leads to the disjoint
+
+bilevel program SAAP(DBL).
+
+   There is an extensive literature on bilinear programming. In particular, a
+simple greedy approach, such as ‘hill climbing’ (see, e.g., Russell and Norvig
+(2003)), may obtain high-quality solutions in little time. This is done by iter-
+
+atively solving an LP for optimal (▯;▯;) for each ▯xed x and then solving
+another LP for an optimal x by ▯xing the newly found (▯;▯;). This pro-
+cess is repeated until the optimal value does not improve. At that point we
+
+obtain a locally optimal solution. It is noted also that the disjoint constraint
+sets in the SAAP problem are quite nice. The constraints on x de▯ne an
+assignment polyhedron with known extreme points and the constraints on
+
+(▯;▯;) correspond to a dual feasible space of the stable matching problem.
+This means the LP problems can be solved very e▯ciently and the algorithm
+converges very fast to a local optimal solution. White (1992) converts a bi-
+
+linear program into a big LP whose constraints are generated sequentially
+through solving smaller LPs. This methods promises ▯nite convergence and
+can be used to solve SAAP(DBL) as the assignment problem and the sta-
+ble matching problem can be solved very e▯ciently. The bilinear program
+
+can also be reduced to a concave minimisation problem where an outer ap-
+proximation algorithm can be applied (Thieu (1988)). More recent advanced
+methods for solving disjoint bilinear programming can be found in Alarie
+
+et al. (2001) who apply cutting plane methods to produce global optimal
+solutions. Alarie et al. (2001) show that cutting plane methods can be used
+to solve disjoint bilinear programming problems with up to 500 variables in
+
+each disjoint set and with 100 constraints.
+
+5. Conclusions
+
+   Our work introduces assignment problems in which autonomous agents
+
+are placed together with those fully controlled by a central planner. The
+autonomous agents act to obtain their own individual goals. The central
+planner coordinates the controlled agents with the aim to optimise the over-
+all performance of the system, while taking into account the behaviour of
+
+the self-motivated participants. This scenario resembles many economic sit-
+uations, some of which were outlined in Section 2.
+
+
+                                     16
+    Clearly, the search process assumed for the free agents in SAAP is not the
+only reasonable model. Indeed, there are many other possibilities for how one
+could model the behaviour of the free agents. For example, many real-world
+
+scenarios could be better described with a stochastic search process. One
+might also consider search strategies taken from cognitive psychology, like
+the famous satis▯cing heuristic of Simon (1957) or the take-the-best heuristic
+
+of Gigerenzer and Goldstein (1996). It may be a worthwhile e▯ort to perform
+a similar analysis like the one presented in this paper, but with alternative
+behavioural assumptions for the free agents.
+
+    Despite of its various reasonable alternatives, we want to stress that the
+search process modelled in this article has some intriguing features. Firstly,
+it is quite natural to assume that the free agents check for free tasks accord-
+
+ing to some linear order. Secondly, the outcome assignment does not hinge
+on the assumption that controlled agents are assigned ▯rst. This follows
+from McVitie and Wilson (1971), as discussed in Section 3. Thirdly, in the
+
+deferred acceptance algorithm of Gale and Shapley (1962) there is no incen-
+tive for the proposing side, in our case the free agents, to misrepresent their
+preferences (cf. Dubins and Freedman (1981), Roth (1982)). In our context,
+
+this means that the free agents cannot improve their outcome by changing
+the order in which they approach tasks. So, even if free agents would have
+enough information and computing power to act strategically, it would not
+
+be worthwhile doing so. In contrast, alternative models of search behaviour
+would have to take care of strategic manipulations on the free agents’ parts.
+Admittedly, the latter two points make handling our model merely conve-
+
+nient, while they provide no support for the empirical validity of the DAB
+assumption.
+    Other modi▯cations to our model come to mind. It may be interesting
+
+to change the informational assumptions of the model. What if the produc-
+tivities of the autonomous workers for di▯erent tasks is private knowledge of
+that worker? 17  Would there be a way to make the free agents reveal their
+
+private information? Could they even be incentivised to pick the task which
+would be best from the central planner’s point of view? Designing a transfer
+scheme to achieve such goals would demand the free agents to be modelled
+
+with cardinal preferences. Arguably, this would reduce the robustness of
+the model, but it might lead to economically interesting dynamics similar to
+
+
+  17We thank Ulrich Pferschy for suggesting this modi▯cation.
+
+
+
+                                      17
+those which can be found in the famous labour market adjustment models
+of Crawford and Knoer (1981) and Kelso and Crawford (1982).
+   The idea of introducing autonomous agents in scenarios where the cen-
+tral planner normally has full control is not limited to assignment problems.
+
+Many other standard problems could be extended to include autonomous
+agents. Transportation or network ow with some transfers performed by
+autonomous agents, knapsack where autonomous agents are able to add their
+
+own items to the knapsack, and graph colouring with some nodes coloured
+by the agents are just a few examples.
+
+
+Alarie, S., Audet, C., Jaumard, B., Savard, G., 2001. Concavity cuts for
+  disjoint bilinear programming. Mathematical Programming 90, 373{398.
+
+Audet, C., Hansen, P., Jaumard, B., Savard, G., 1999. A symmetrical linear
+  maxmin approach to disjoint bilinear programming. Mathematical Pro-
+
+  gramming 85, 573{592.
+
+Benkler, Y., 2006. The Wealth of Networks: How Social Production Trans-
+  forms Markets and Freedom. Yale University Press.
+
+Bertsimas, D., Tsitsiklis, J., 1997.  Introduction to linear optimization.
+
+  Athena Scienti▯c Belmont, MA.
+
+Brabham, D.C., 2008. Crowdsourcing as a Model for Problem Solving. Con-
+  vergence 14, 75{90.
+
+Crawford, V.P., Knoer, E.M., 1981. Job Matching with Heterogeneous Firms
+
+  and Workers. Econometrica 49, 437{450.
+
+Dubins, L.E., Freedman, D.A., 1981. Machiavelli and the Gale-Shapley Al-
+  gorithm. American Mathematical Monthly 88, 485{494.
+
+
+Gale, D., Shapley, L.S., 1962. College Admissions and the Stability of Mar-
+  riage. American Mathematical Monthly 69, 9{15.
+
+Gigerenzer, G., Goldstein, D.G., 1996. Reasoning the Fast and Frugal Way:
+  Models of Bounded Rationality. Psychological Review 103, 650{669.
+
+
+Howe, J., 2008. Crowdsourcing: Why the Power of the Crowd is driving the
+  Future of Business. Crown Business.
+
+
+
+                                    18
+Kelso, A.S., Crawford, V.P., 1982. Job Matching, Coalition Formation, and
+  Gross Substitutes. Econometrica 50, 1483{1504.
+
+Koopmans, T.C., Beckmann, M., 1957. Assignment Problems and the Loca-
+  tion of Economic Activities. Econometrica 25, 53{76.
+
+
+Luo, Z., Pang, J., Ralph, D., 1996. Mathematical programs with equilibrium
+  constraints. Cambridge University Press.
+
+Marcotte, P., Savard, G., 2005. Bilevel programming: A combinatorial per-
+  spective. Graph theory and combinatorial optimization , 191{217.
+
+
+McVitie, D.G., Wilson, L.B., 1971. The Stable Marriage Problem. Commu-
+  nications of the ACM 14, 486{492.
+
+Nikolic, I.A., Maikisch, H., 2006.   Public-Private Partnerships and Col-
+  laboration in the Health Sector. HNP Discussion Paper (http://info.
+
+  worldbank.org/etools/docs/library/240103/PUBLIC 2.PDF). ~
+
+Riis, J.A., 2007. Hero Tales of the Far North. Echo Library.
+
+Roth, A., Rothblum, U., Vande Vate, J., 1993. Stable matchings, optimal
+
+  assignments, and linear programming. Math. Oper. Res. 18, 803{828.
+
+Roth, A.E., 1982. The Economics of Matching: Stability and Incentives.
+  Mathematics of Operations Research 7, 617{628.
+
+Roth, A.E., Sotomayor, M., 1990. Two-Sided Matching - A Study in Game
+
+  Theoretic Modeling and Analysis. Cambridge University Press.
+
+Russell, S., Norvig, P., 2003. Arti▯cial Intelligence: A Modern Approach.
+  2nd edition ed., Prentice-Hall, Englewood Cli▯s, NJ.
+
+Simon, H.A., 1957. Models of Man: Social and Rational. Wiley.
+
+
+Templeton, S.K., 2007. Dentists refuse to treat bad Teeth. The Sunday
+  Times .
+
+Thieu, T., 1988. A note on the solution of bilinear programming problems
+  by reduction to concave minimization. Mathematical Programming 41,
+
+  249{260.
+
+
+
+                                    19
+Vande Vate, J., 1989. Linear programming brings marital bliss. Operations
+  Research Letters 8, 147{153.
+
+White, D., 1992. A linear programming approach to solving bilinear pro-
+  grammes. Mathematical Programming 56, 45{50.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    20

@@ -1,0 +1,717 @@
+                                                    Journal of Biomedical Informatics 48 (2014) 66–72
+
+
+
+                                                     Contents lists available at ScienceDirect
+
+
+
+                                           Journal of Biomedical Informatics
+
+
+
+                                         journal homepage: www.else              vier.com/locate/yjbin
+
+
+
+
+
+
+
+Development of a clinician reputation metric to identify appropriate
+
+problem-medication pairs in a crowdsourced knowledge base
+
+
+                        a,⇑                      b                         a                         a                                 c
+Allison B. McCoy           , Adam Wright , Deevakar Rogith , Safa Fathiamini , Allison J. Ottenbacher ,
+Dean F. Sittig     a
+
+a
+bThe University of Texas School of Biomedical Informatics at Houston, 7000 Fannin St., Ste. 600, Houston, TX 70030, USA
+ Brigham and Women’s Hospital, Harvard Medical School, 1620 Tremont St., Boston, MA 02115, USA
+cThe University of Texas Medical School at Houston, 6410 Fannin St., Ste. 1100, Houston, TX 77030, USA
+
+
+
+article info                                   abstract
+
+
+Article history:                               Background: Correlation of data within electronic health records is necessary for implementation of
+Received 5 September 2013
+Accepted 29 November 2013                      various clinical decision support functions, including patient summarization. A key type of correlation
+                                               is linking medications to clinical problems; while some databases of problem-medication links are
+Available online 7 December 2013               available, they are not robust and depend on problems and medications being encoded in particular
+
+                                               terminologies. Crowdsourcing represents one approach to generating robust knowledge bases across a
+Keywords:                                      variety of terminologies, but more sophisticated approaches are necessary to improve accuracy and
+Electronic health records                      reduce manual data review requirements.
+Crowdsourcing
+Knowledge bases                                Objective: We sought to develop and evaluate a clinician reputation metric to facilitate the identiﬁcation
+Medical records                                of appropriate problem-medication pairs through crowdsourcing without requiring extensive manual
+                                               review.
+Problem-oriented
+                                               Approach:  We retrieved medications from our clinical data warehouse that had been prescribed and
+                                               manually linked to one or more problems by clinicians during e-prescribing between June 1, 2010 and
+
+                                               May 31, 2011. We identiﬁed measures likely to be associated with the percentage of accurate
+                                               problem-medication links made by clinicians. Using logistic regression, we created a metric for identify-
+                                               ing clinicians who had made greater than or equal to 95% appropriate links. We evaluated the accuracy of
+
+                                               the approach by comparing links made by those physicians identiﬁed as having appropriate links to a
+                                               previously manually validated subset of problem-medication pairs.
+                                               Results:Of 867 clinicians who asserted a total of 237,748 problem-medication links during the study per-
+
+                                               iod, 125 had a reputation metric that predicted the percentage of appropriate links greater than or equal
+                                               to 95%. These clinicians asserted a total of 2464 linked problem-medication pairs (983 distinct pairs).
+                                               Compared to a previously validated set of problem-medication pairs, the reputation metric achieved a
+
+                                               speciﬁcity of 99.5% and marginally improved the sensitivity of previously described knowledge bases.
+                                               Conclusion: A reputation metric may be a valuable measure for identifying high quality clinician-entered,
+
+                                               crowdsourced data.
+                                                                                                              Ó 2013 Elsevier Inc. All rights reserved.
+
+
+
+
+1. Introduction                                                              and can lead to inefﬁciencies in patient care      [1–4]. Methods for
+
+                                                                             summarizing patient information are required to better organize
+   Electronic health records (EHRs) contain vast amounts of data of          patient data, which can lead to more effective medical decision
+
+many    types,  including   medications,    laboratory   test  results,      making. Developing such summaries requires knowledge about
+problems, allergies, notes, visits, and health maintenance items.            the relationships between the EHR elements          [5–7]. Many prior
+
+The volume of information is often overwhelming to clinicians                research efforts have described methods for generating this knowl-
+                                                                             edge using standard terminologies [8–10], association-rule mining
+
+                                                                             [11–14], and literature mining [15–17], although each has disad-
+ ⇑ Corresponding author. Present address: Department of Biostatistics and Biovantages with respect to generalizability, accuracy, and complete-
+formatics, Tulane University School of Public Health and Tropical Medicine, 1440
+                                                                             ness. Crowdsourcing represents a new approach for generating
+Canal St., Ste. 2001, New Orleans, LA 70112, USA.                            knowledge about relationships between clinical data types that
+   E-mail addresses: amccoy1@tulane.edu (A.B. McCoy), awright5@partners.org
+(A. Wright), deevakar.rogith@uth.tmc.edu (D. Rogith), safa.fathiamini@uth.tmc.edus advantage of required manual linking by clinicians of these
+(S. Fathiamini), allison.ottenbacher@nih.gov (A.J. Ottenbacher), dean.f.sittitypes, such as medications and problems, during e-ordering that
+
+tmc.edu (D.F. Sittig).
+
+1532-0464/$ - see front matter Ó 2013 Elsevier Inc. All rights reserved.
+http://dx.doi.org/10.1016/j.jbi.2013.11.010
+                                            A.B. McCoy et al./Journal of Biomedical Informatics 48 (2014) 66–72                             67
+
+
+overcomes many limitations of traditional approaches     [18]. Initial    select an incorrect problem for linking due to poor usability, miss-
+attempts utilizing this approach showed promise, but there was            ing problem list entries, or carelessness. As a result, some metrics
+room for improvement in determining the accuracy of the clinical          for evaluating the accuracy of the input for inclusion in a ﬁnal
+
+knowledge [18]. To more accurately classify links, we explored the        knowledge base are required. Initial attempts to identify appropri-
+inclusion of a clinician reputation metric, hypothesizing that such a     ate problem-medication links obtained through crowdsourcing ap-
+
+metric would correlate with the percentage of links made by the           proaches utilized link frequency (i.e., the number of times a
+clinician that were appropriate.                                          problem and medication were manually linked by a provider)
+
+                                                                          and link ratio (i.e., the number of times a co-occurring problem
+                                                                          and medication were manually linked by a provider)       [18]. How-
+2. Background
+                                                                          ever, these measures did not adequately determine the accuracy
+                                                                          of all problem-medication pairs, indicating a need for additional
+2.1. Clinical summarization
+                                                                          metrics for evaluating crowdsourced data.
+
+   At present, most EHRs present clinical data to providers
+                                                                          2.4. Reputation metrics
+organized by data type or date [5]. With increasing EHR implemen-
+tations and growing amounts of patient data, such presentations
+                                                                             One method for determining data accuracy utilizes reputation
+can hinder point-of-care information retrieval and decision mak-
+ing, leading to clinician dissatisfaction, poor adoption, and substan-    metrics for evaluating user-generated content, such as e-com-
+dard patient care     [1–5]. Problem-oriented EHRs, or clinical           merce transactions [26], product reviews [27], and e-news or for-
+
+summaries, which organize patient data by relevant clinical prob-         um comments [28]. Several metrics for evaluating user-generated
+lems, make up one approach to overcoming these challenges, but            content have been reported. One approach evaluated feedback on
+
+few EHRs have effectively implemented such capabilities        [6,7].     content when a gold standard is not available, generating a reputa-
+One potential cause of low implementation is the limited availabil-       tion metric by comparing an individual’s response to others’
+
+ity of computable knowledge about the relationships between data          responses and disseminating ratings to encourage honest, appro-
+elements that is required to develop these summaries.                     priate responses [29]. A later approach expanded these methods,
+
+                                                                          exploring various approaches for identifying true ratings from an
+                                                                          aggregated data set [30]. Similarly, an evaluation of product re-
+2.2. Problem-medication knowledge bases
+                                                                          views from Amazon.com showed that reviews with a high propor-
+                                                                          tion of helpful votes had a higher impact on sales than those with a
+   Knowledge bases composed of problem-medication pairs are an
+important component of clinical summarization. They can also be           low proportion of helpful votes, demonstrating that user-gener-
+                                                                          ated content is frequently trusted by other users of a system   [31].
+utilized within EHRs in a variety of other ways, in addition to sum-
+marization, such as improving medication reconciliation by group-            More recently, reputation metrics have been applied to evaluat-
+                                                                          ing individuals who contribute to crowdsourced knowledge. One
+ing together all medications used to treat a particular condition,
+facilitating order entry by enabling order by indication, and             group of researchers described reputation and expertise as charac-
+                                                                          teristics of a worker’s proﬁle in a taxonomy of quality control in
+improving the speciﬁcity of clinical decision support by enabling
+different medication dose ranges based on patient condition. How-         crowdsourcing [32]. In related work, the same authors developed
+                                                                          a model for reputation management in crowdsourcing systems;
+ever, current procedures for constructing such knowledge bases
+have signiﬁcant limitations. The use of standard terminologies or         however, like the metrics most frequently described in e-com-
+                                                                          merce settings, the model requires evaluation of workers by other
+commercially available resources comprises one method, though
+development of such resources is difﬁcult and expensive, often            workers [33]. Another approach used a consensus ratio for evaluat-
+                                                                          ing the accuracy of user-submitted map routes, measuring the ra-
+requiring substantial maintenance    [8–10]. Data mining methods
+are also common but can be hard to execute and may be biased              tio of agreements and disagreements between users; however, no
+                                                                          evaluation of the metric was reported [34]. We hypothesized that
+to only include common links [11–13]. Given the drawbacks of
+these existing methods, new approaches to developing problem-             these methods could be adapted to evaluate and identify appropri-
+                                                                          ate problem-medication pairs, where clinicians are the users and
+medication knowledge bases are necessary.
+                                                                          problem-medication pairs are the user-generated content.
+                                                                             In this study, we developed and validated a clinician reputation
+2.3. Crowdsourcing
+                                                                          metric to evaluate the accuracy of links between medications and
+                                                                          problems asserted by clinicians in an EHR during e-prescribing. We
+   Crowdsourcing is deﬁned as outsourcing a task to a group or
+community of people [19,20]. This method has been used in vari-           hypothesized that the computed reputation metric for a clinician
+                                                                          would positively correlate with the appropriateness of the prob-
+ous settings to generate large knowledge bases, such as encyclope-
+dias [21]; drug discovery resources       [22]; disease treatment,        lem-medication pairs that he or she had linked.
+
+symptom, progression, and outcome data       [23,24]; and SNOMED-
+CT subsets [25]. In recent work, we have applied the crowdsourc-          3. Methods
+
+ing methodology to create a problem-medication knowledge base,
+which can facilitate the generation of clinical summaries and drive       3.1. Study setting
+
+clinical decision support [18]. Fig. 1 depicts an example EHR screen
+through which clinicians e-prescribe medications (e.g., Aricept 5            We conducted the study at a large, multi-specialty, ambulatory
+
+MG Oral Tablet) and manually link the medication to the patient’s         academic practice that provides medical care for adults, adoles-
+indicating problem (e.g., Alzheimer’s Disease). In our crowdsourc-        cents, and children throughout the Houston community. Clinicians
+
+ing research application, clinician EHR users represent the commu-        utilized Allscripts Enterprise Electronic Health Record (v11.1.7;
+nity, and generating problem-medication pairs for inclusion in the        Chicago, IL) to maintain patient notes and problem lists, order
+
+knowledge base represents the task.                                       and view results of laboratory tests, and prescribe medications. Cli-
+   Crowdsourcing relies on user input, and the quality of the             nicians are required to manually link medications to an indication
+
+resulting knowledge depends on correct data collected from the            within the patient’s clinical problem list for all medications or-
+users. In our problem-medication pair application, clinicians may         dered through e-prescribing ( Fig. 1). However, medications listed
+68                                             A.B. McCoy et al./Journal of Biomedical Informatics 48 (2014) 66–72
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  Fig. 1. Example screen showing problem manually linked to medication during e-prescribing.
+
+
+
+in the EHR not added through e-prescribing do not require selec-               clinician link ratio. We computed the values of each for all clini-
+
+tion of an indicated problem.                                                  cians in the clinical data warehouse.
+   Fig. 2 depicts an overview of the methods for developing the
+
+reputation metric. We ﬁrst retrieved medications from our clinical             3.2.1. Clinician link sharedness
+
+data warehouse that had been prescribed and linked to one or                      We ﬁrst explored the variable most similar to that utilized in
+more problems by clinicians between June 1, 2010 and May 31,                   previous reputation metrics, where responses shared by other
+
+2011. We excluded problem entries with an ICD-9 V code (e.g.,                  users were most likely to be appropriate [29,30]. We calculated cli-
+V70.0 – Normal Routine History and Physical), as these concepts
+                                                                               nician link sharedness as the proportion of links asserted by a given
+are for supplementary classiﬁcation of factors and are not clinical            clinician that were also asserted by another clinician. For example,
+problems, though they are frequently added to the problem list
+                                                                               a clinician who had linked 100 distinct problem-medication pairs,
+for billing purposes.                                                          80 of which were also linked by one or more other clinicians,
+
+                                                                               would have a clinician link sharedness value of 80%.
+                                                                                  Clinician link sharedness, S x is represented in Eq. (1), where L ix
+3.2. Development of a reputation metric
+                                                                               the set of all links made by clinician x and L isx’he set of all links
+                                                                               made by clinicians other than clinician x:
+   Our prior analysis suggested that the clinician linking of medi-
+
+cations to problems is not always done accurately        [18]. We found             jLx\ L x0
+many situations where clinicians did not link a medication to a                Sx¼                                                                   ð1Þ
+                                                                                       jx j
+problem or linked medications to an unrelated problem. Further,
+the accuracy of linking differed among clinicians. As such, we
+
+sought to develop a reputation metric that would identify those                3.2.2. Clinician total distinct links
+clinicians who are likely to make accurate links. To develop the                  We also hypothesized that clinicians who had asserted more
+
+reputation metric, we included variables based on previous com-                links, and therefore had more experience linking medications and
+putational reputation metric literature and experience with real-              problems within the EHR, were likely to make more appropriate
+
+world determinations of clinician reputation that were likely to               links compared to clinicians who had asserted very few links. We
+predict whether links asserted by a clinician were appropriate.                calculated clinician total distinct links as the number of unique
+
+Based on our prior research and reputation metrics developed in                problem-medication pairs linked by a given clinician. Clinician to-
+
+other domains, we explored three contributors to the reputation                tal distinct links, x , is represented in Eq. (2), where D xs the set of
+metric: clinician link sharedness, clinician total distinct links, and         distinct problem-medication pairs linked by clinician       x.
+                                               A.B. McCoy et al./Journal of Biomedical Informatics 48 (2014) 66–72                                      69
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                           Fig. 2. Flowchart of methods for developing and evaluating the crowdsourcing approach and reputation metric.
+
+
+T ¼j D j         ð                                                      2Þ
+ x      x                                                                       metformin to diabetes for both patients, the link ratio would be
+                                                                                100%. The clinician link ratio would simply be the average of the
+
+                                                                                link ratios for all problem-medication pairs linked by the clinician;
+3.2.3. Clinician link ratio                                                     a clinician with two problem-medication pairs linked with link
+   Our prior crowdsourcing study found that the ‘‘link ratio’’, the
+                                                                                ratios of 50% and 100% would be 75%.
+proportion of patients receiving a particular medication and with
+a particular problem for which a link between the medication
+
+and problem has been manually asserted, was a predictor of accu-
+                                                                                3.3. Determination of clinician link appropriateness
+rate linking [18]. As such, we developed a similar metric at the
+clinician level which we called the clinician link ratio. We calcu-
+                                                                                   Because it was not possible to review all links made by clini-
+lated the clinician link ratio for a given clinician by averaging, for          cians to determine the gold standard for appropriateness, we ran-
+each distinct problem-medication pair linked by the clinician, the
+                                                                                domly selected 60 clinicians who had asserted at least one link
+proportion of links asserted by the clinician for all scenarios in
+                                                                                during the study period to include in our analyses. We weighted
+which the clinician had the opportunity to link the problem and                 our selection to include more clinicians with higher percentage
+medication (i.e., the clinician prescribed the medication and the
+                                                                                of shared links, as these were most common; we included 10 clini-
+problem existed on the patient’s problem list).                                 cians with a percentage of shared links less than 25%, 10 clinicians
+   The clinician link ratio, R , is represented in Eq. (3), where L is
+                                x                                      x        with a percentage greater than or equal to 25% and less than 50%,
+the set of all links made by clinician x, D x is the set of distinct prob-
+                                                                                20 clinicians with a percentage greater than or equal to 50% and
+lem-medication pairs linked by clinician        x, and P  x is the set of       less than 75%, and 20 clinicians with a percentage greater than
+co-occurring patient problem and medication pairs which clinician
+                                                                                or equal to 75%. Two study investigators with medical training
+x had the opportunity to link (i.e., the union of the Cartesian prod-           (SF, DR) reviewed the 4488 distinct problem-medication pairs
+ucts of patients’ problem lists and prescribed medications across
+                                                                                linked by the 60 clinicians to determine whether it was appropri-
+all patients for whom a clinician had prescribed a medication).
+                                                                                ate (i.e., the medication was clinically relevant to use in the treat-
+      P      jp\x j                                                             ment or management of the problem). The reviewers ﬁrst
+        p2Dx jp\xj
+Rx¼                                                                    ð3Þ      evaluated a set of 100 overlapping pairs each and discussed any
+         jD x                                                                   disagreements to reach consensus. They then reviewed indepen-
+
+   Consider an example clinician who had two patients with a                    dently an additional 100 overlapping pairs to allow for evaluation
+
+medication order for metformin and diabetes on the problem list.                of inter-rater reliability using the kappa statistic, then each
+In this scenario, P xontains both pairs of metformin and diabetes.              reviewer evaluated half of the remaining pairs (2144 pairs each)
+
+If the clinician only linked the metformin to diabetes for one                  asserted by the selected clinicians.
+patient, the link ratio for the metformin-diabetes pair (         jp\x for         For further analyses, we created a binary outcome variable for
+                                                                  jp\x j
+p = metformin-diabetes) would be 50%; if the clinician linked                   each clinician, where clinicians having a link appropriateness
+70                                             A.B. McCoy et al./Journal of Biomedical Informatics 48 (2014) 66–72
+
+
+percentage greater than or equal to 95% (i.e., 95% of links asserted
+
+by clinicians were determined to be appropriate by the reviewers)
+had an appropriateness outcome of one, and clinicians having a
+
+link appropriateness percentage less than 95% had an appropriate-
+ness outcome of zero. We selected the threshold of 95% to remain
+
+consistent with our previous study [18].
+   To determine whether the three variables in the reputation
+
+metric were associated with clinician link appropriateness for the
+
+60 randomly selected clinicians, we ﬁrst assessed each component
+in separate univariable analyses using logistic regression with the
+
+binary clinician link appropriateness variable as the dependent
+variable. We then included the components found to have a            p-va-
+
+lue less than 0.25 in univariable analyses in exploratory multivar-
+iable logistic regression analyses. We tested for multi-collinearity
+                                                                                              Fig. 3. Distribution of clinician link sharedxess ( S ).
+to ensure that the three components were not highly correlated.
+
+For the components represented as proportions, we reported odds
+ratios for a 0.1 unit increase. We applied the resulting model to all
+
+867 clinicians to identify those predicted to have a binary appro-
+priateness outcome of one (i.e., a clinician link appropriateness
+
+percentage greater than or equal to 95%), selecting a probability
+cutoff that maximized speciﬁcity for the logistic regression model.
+
+All analyses were performed using SAS 9.2.
+
+
+
+3.4. Evaluation of the reputation metric
+
+
+   We included in our ﬁnal reputation metric knowledge base all
+
+pairs linked by clinicians predicted to have a binary appropriate-
+ness outcome of one (i.e., clinician link appropriateness percentage
+
+greater than or equal to 95%). To evaluate the accuracy of the
+                                                                                             Fig. 4. Distribution of clinician total distincx links ( T ).
+resulting reputation metric knowledge base, we repeated the eval-
+uation of our previously described crowdsourcing approach, where
+
+we compared links automatically generated by the knowledge base
+to manual links (i.e., problem-medication pairs linked by clinicians
+
+during e-prescribing) [18]. Brieﬂy, we reviewed all potential prob-
+lem-medication pairs for 100 randomly selected patients, then we
+
+determined the sensitivity and speciﬁcity of the knowledge base at
+identifying links between the pairs. We also combined the manual
+
+links, crowdsourcing, and reputation metric approaches by includ-
+
+ing the pair in the combined knowledge base if any single approach
+included the pair, and we compared the resulting measures.
+
+
+
+
+4. Results
+
+
+4.1. Reputation metric development
+                                                                                                 Fig. 5. Distribution of clinician link xatio ( R ).
+
+   We calculated the three reputation metric components for 867                    Clinician link sharedness ( S ),xclinician total distinct links ( T )x
+clinicians who had asserted a problem-medication link during the
+                                                                                and the clinician link ratio ( R x all achieved signiﬁcance ( p < 0.25)
+one-year study period. Combined, the clinicians asserted 237,748                in univariable analyses to be included in the multivariable analysis
+
+total links (40,680 distinct problem-medication pairs).         Figs. 3–5       (p = 0.009, p = 0.2, p = 0.04 respectively). In the multivariable logis-
+depict the distributions for clinician link sharedness ( S ), xlinician         tic regression analysis, clinician link sharedness ( S ), remained
+                                                                                                                                            x
+total distinct links ( x ), and the clinician link ratio ( x ) respectively     signiﬁcant (OR = 1.28, p = 0.013); clinician total distinct links ( T )  x
+for all clinicians.
+                                                                                and the clinician link ratio ( R )xwere not signiﬁcant (OR = 0.996,
+                                                                                p = 0.3; OR = 1.60, p = 0.097 respectively).
+
+4.2. Clinician link appropriateness                                                We selected a predicted probability threshold of 0.7 from the
+                                                                                logistic regression to achieve a model speciﬁcity of 94% for classi-
+
+   The subset of 60 randomly selected clinicians included in the lo-            fying the binary clinician link appropriateness outcome (i.e., the
+                                                                                clinician having greater than or equal to 95% appropriate links).
+gistic regression analysis asserted a total of 4878 links, including
+                                                                                The resulting function is represented in the following equation.
+4488 distinct problem-medication pairs. The reviewers agreed on
+appropriateness for 98% of the 100 overlapping pairs (kap-
+                                                                                                       1
+pa = 0.79). Of the 4488 distinct pairs that were evaluated, 4063                p ðxÞ¼        ▯ð▯5:52þ2:4xS ▯0:0x3T þ4:x9R Þ                           ð4Þ
+(90.6%) were appropriate (91.2% of total links). Of the 60 clinicians,                  1 þ e
+
+27 (45%) had a link appropriateness percentage greater than or                     We applied the resulting function from the logistic regression to
+equal to 95% and therefore had a binary appropriateness outcome                 the 867 total clinicians who had asserted a link during the study
+
+of one.                                                                         period; 125 met the threshold, having a predicted probability of
+                                               A.B. McCoy et al./Journal of Biomedical Informatics 48 (2014) 66–72                                     71
+
+
+clinician link appropriateness greater than 70%. Problem-medica-               Table 1
+                                                                               Comparison of reputation metric and crowdsourced knowledge bases to expert
+tion pairs linked by these clinicians totaled 2464 (983 distinct
+pairs). Fig. 6 depicts the distribution of predicted clinician link            problem-medication pair review.
+
+appropriateness.                                                                                     Expert review                             Total
+
+                                                                                                     Positive             Negative
+
+                                                                                  Reputation metric
+4.3. Reputation metric evaluation                                                 Positive           117                 48                   165
+                                                                                  Negative           609                 10,255               10,864
+
+   Finally, we evaluated the knowledge base of 983 identiﬁed pairs                Total              726                 10,303               11,029
+                                                                                                     Sensitivity          Speciﬁcity
+using an alternate set of 11,029 problem-medication pairs from                                       16.1%                99.5%
+100 randomly selected patients that were previously evaluated
+                                                                                  Reputation metric + manual links
+for appropriateness through manual review          [18]. Our previously           Positive           358                 87                   445
+developed crowdsourcing knowledge base had a sensitivity of
+                                                                                  Negative           368                 10,216               10,584
+56.2% and a speciﬁcity of 98.0%, and, when combined with manual                   Total              726                 10,303               11,029
+                                                                                                     Sensitivity          Speciﬁcity
+links made by clinicians during e-prescribing, had a sensitivity of
+65.8% and a speciﬁcity of 97.9% [18]. The reputation metric knowl-                                   49.3%                99.2%
+
+edge base alone had a sensitivity of 16.1% and a speciﬁcity of 99.5%,             Reputation metric + crowdsourcing
+and, when combined with manual links, had a sensitivity of 49.3%                  Positive           411                 214                  625
+                                                                                  Negative           315                 10,089               10,404
+and a speciﬁcity of 99.2%. When the reputation metric knowledge                   Total              726                 10,303               11,029
+base was combined with the crowdsourcing knowledge base, the
+                                                                                                     Sensitivity          Speciﬁcity
+sensitivity was 56.6% and the speciﬁcity was 97.9%, and when com-                                    56.6%                97.9%
+
+bined with both the manual linking and crowdsourcing knowledge                    Reputation metric + crowdsourcing + manual links
+base, the sensitivity was 66.3% and the speciﬁcity was 97.8%                      Positive           481                 231                  712
+
+(Table 1).                                                                        Negative           245                 10,072               10,317
+                                                                                  Total              726                 10,303               11,029
+                                                                                                     Sensitivity          Speciﬁcity
+                                                                                                     66.3%                97.8%
+
+5. Discussion
+
+                                                                               5.2. Comparison to other approaches
+5.1. Signiﬁcance
+
+                                                                                   This is the ﬁrst study, to our knowledge, to develop and evalu-
+   We expanded our previous crowdsourcing methodology, devel-
+                                                                               ate a reputation metric for generating knowledge bases of clinical
+oping and evaluating a novel reputation metric for identifying                 data. Prior studies have described alternate methods for develop-
+appropriately linked problem-medication pairs. The reputation
+                                                                               ing this knowledge, but each has disadvantages, as noted in our
+metric successfully facilitated identiﬁcation of appropriately linked
+                                                                               previous crowdsourcing work [18]. The reputation metric aims to
+problem-medication pairs, outperforming our previously described               overcome some of the disadvantages in the initial crowdsourcing
+crowdsourcing approach in speciﬁcity (99.5% compared to 98.0%)
+                                                                               work by improving the accuracy of pairs identiﬁed through the
+and, when combined with the previous approaches, marginally                    approach. Given the high speciﬁcity of the reputation metric, we
+improving the sensitivity (66.3% compared to 65.8%) and nearly
+                                                                               believe the approach is successful.
+maintaining speciﬁcity (97.8% compared to 97.9%). Approaches
+                                                                                   Our work is based on a number of prior studies that describe
+for  evaluating    knowledge     obtained    through    crowdsourcing          approaches similar to the reputation metric          [29–34]. However,
+approaches is important, as the data quality can be low if users
+                                                                               unlike the reputation metrics described previously, which require
+input inaccurate data. While our application of crowdsourcing                  some form of user feedback or voting on the input, our reputation
+depends on well-trained clinicians who are capable of correctly
+                                                                               metric can be computed without additional human effort. Further,
+linking clinical problems and prescribed medications, sociotechni-
+                                                                               these metrics have not all been evaluated for accuracy in identify-
+cal issues, such as a difﬁcult user interface, mismatched workﬂow,             ing high quality input, so it is difﬁcult to compare the approaches.
+or missing problem data, or inadequate training on the technology,
+
+may prevent correct input. Use of a reputation metric may reduce
+the need for extensive manual reviews, costly resources, or other              5.3. Limitations
+
+computational approaches to generating knowledge bases.
+                                                                                   Our study had some limitations. First, we selected a clinician
+
+                                                                               appropriateness percentage of 95% and a predictive speciﬁcity of
+
+                                                                               94%, so our methods were likely to incorrectly classify some links.
+                                                                               Because we erred in favor of speciﬁcity, our method had a low sen-
+
+                                                                               sitivity, and it will be necessary to combine these approaches with
+                                                                               other metrics to generate a complete and accurate knowledge base.
+
+                                                                               Further effort is necessary to identify methods for effectively
+
+                                                                               combining the approaches. Because of the extensive efforts re-
+                                                                               quired to manually determine the appropriateness of links, and
+
+                                                                               therefore the percentage of clinician link appropriateness, we had
+                                                                               a small sample size in developing our logistic regression model. Fi-
+
+                                                                               nally, because our study included only links generated by clinicians
+
+                                                                               at a single study site, although the methods can be adopted by
+                                                                               other institutions, our resulting knowledge base may not be gener-
+
+                                                                               alizable to other settings. Further studies that utilize sources con-
+                                                                               taining clinician links from multiple institutions are necessary to
+
+         Fig. 6. Distribution of predicted clinician link appropriateness.     create more generalizable knowledge bases.
+72                                                 A.B. McCoy et al./Journal of Biomedical Informatics 48 (2014) 66–72
+
+
+5.4. Future work                                                                      [10] McCoy AB, Wright A, Laxmisan A, Singh H, Sittig DF. A prototype knowledge
+                                                                                           base and SMART app to facilitate organization of patient medications by
+                                                                                           clinical problems. AMIA Annu Symp Proc 2011;2011:888–94 .
+    These ﬁndings have a number of implications for future
+                                                                                      [11] Wright A, Chen ES, Maloney FL. An automated technique for identifying
+research. As we have discussed previously, development of prob-                            associations between medications, laboratory results and problems. J Biomed
+                                                                                           Inform 2010;43(6):891–901 .
+lem-medication knowledge bases can help inform problem-ori-                           [12] Brown SH, Miller RA, Camp HN, Guise DA, Walker HK. Empirical derivation of
+ented summary screens, which may improve clinical care. The
+                                                                                           an electronic clinically useful problem statement system. Ann Intern Med
+crowdsourcing methodology, including the reputation metric for                             1999;131(2):117–26 .
+                                                                                      [13] Zeng Q, Cimino JJ, Zou KH. Providing concept-oriented views for clinical data
+analysis, which increases the accuracy of the resulting knowledge
+bases, can be used to generate knowledge bases for other data                              using a knowledge-based system: an evaluation. J Am Med Inform Assoc
+                                                                                           2002;9(3):294–305 .
+types that can be linked to problems, such as laboratory results                      [14] Wright A, McCoy A, Henkin S, Flaherty M, Sittig D. Validation of an association
+                                                                                           rule mining-based method to infer associations between medications and
+and procedures. Finally, the clinician reputation metric can be used
+to evaluate other forms of user input within EHRs, such as alert                           problems. Appl Clin Inform 2013;4(1):100–9 .
+                                                                                      [15] Chen ES, Hripcsak G, Xu H, Markatou M, Friedman C. Automated acquisition of
+overrides, helping informatics personnel to identify and improve                           disease drug knowledge from biomedical and clinical documents: an initial
+
+poorly performing clinical decision support.                                               study. J Am Med Inform Assoc 2008;15(1):87–98 .
+                                                                                      [16] Kilicoglu H, Fiszman M, Rodriguez A, Shin D, Ripple A, Rindﬂesch TC. Semantic
+                                                                                           MEDLINE: A web application for managing the results of PubMed searches;
+                                                                                           2008. p. 69–76.
+6. Conclusion
+                                                                                      [17] Duke JD, Friedlin J. ADESSA: a real-time decision support service for delivery of
+                                                                                           semantically coded adverse drug event data. AMIA Annu Symp Proc
+    The clinician reputation metric achieved a high speciﬁcity when                        2010;2010:177–81 .
+
+used to identify appropriate problem-medication pairs generated                       [18] McCoy AB, Wright A, Laxmisan A, Ottosen MJ, McCoy JA, Butten D, et al.
+                                                                                           Development and evaluation of a crowdsourcing methodology for knowledge
+through the crowdsourcing methodology. This metric may be a                                base construction: identifying relationships between clinical problems and
+valuable measure for evaluating clinician-entered EHR data.                                medications. J Am Med Inform Assoc 2012;19(5):713–8 .
+
+                                                                                      [19] Tapscott D. Wikinomics: how mass collaboration changes everything. New
+                                                                                           York: Portfolio; 2006 .
+Acknowledgments                                                                       [20] Howe J. The rise of crowdsourcing. Wired Magazine 2006;14(6):1–4 .
+
+                                                                                      [21] Giles   J.  Internet   encyclopaedias   go    head   to   head.    Nature
+                                                                                           2005;438(7070):900–1 .
+    This project was supported in part by a UTHealth Young Clinical                   [22] Ekins S, Williams AJ. Reaching out to collaborators: crowdsourcing for
+and Translational Sciences Investigator Award (KL2 TR 000370-                              pharmaceutical research. Pharm Res 2010;27(3):393–5 .
+
+06A1), Contract No. 10510592 for Patient-Centered Cognitive                           [23] Hughes S, Cohen D. Can online consumers contribute to drug knowledge? A
+                                                                                           mixed-methods comparison of consumer-generated and professionally
+Support under the Strategic Health IT Advanced Research Projects                           controlled psychotropic medication information on the internet. J Med
+Program (SHARP) from the Ofﬁce of the National Coordinator for
+                                                                                           Internet Res 2011;13(3) .
+Health Information Technology, and NCRR Grant 3UL1RR024148.                           [24] Brownstein CA, Brownstein JS, Williams 3rd DS, Wicks P, Heywood JA. The
+                                                                                           power of social networking in medicine. Nat Biotechnol 2009;27(10):888–90 .
+                                                                                      [25] Parry DT, Tsung-Chun Tsai. Crowdsourcing techniques to create a fuzzy subset
+
+References                                                                                 of SNOMED CT for semantic tagging of medical documents. 2010 IEEE
+                                                                                           International Conference on Fuzzy Systems (FUZZ). IEEE; 2010. p. 1–8.
+                                                                                      [26] Establishing a good eBay reputation: Buyer or Seller|eBay [Internet].http://
+ [1] Koppel R, Metlay JP, Cohen A, Abaluck B, Localio AR, Kimmel SE, et al. Role of
+     computerized physician order entry systems in facilitating medication errors.         www.ebay.com/gds/Establishing-a-good-eBay-reputation-Buyer-or-Seller/
+     JAMA 2005;293(10):1197–203 .                                                          10000000001338209/g.html > [cited 05.09.13].
+                                                                                      [27] Amazon.com     Help:   about    customer   ratings   [Internet].  <  http://
+ [2] Ash JS, Sittig DF, Poon EG, Guappone K, Campbell E, Dykstra RH. The extent and        www.amazon.com/gp/help/customer/display.html/
+     importance of unintended consequences related to computerized provider
+     order entry. J Am Med Inform Assoc 2007;14(4):415–23 .                                ref=hp_left_sib?ie=UTF8&nodeId=200791020 > [cited 05.09.13]
+ [3] Sittig DF, Singh H. Rights and responsibilities of users of electronic health    [28] FAQ – slashdot [Internet]. < http://slashdot.org/faq > [cited 05.09.13]
+                                                                                      [29] Miller N, Resnick P, Zeckhauser R. Eliciting informative feedback: the peer-
+     records. CMAJ 2012;184(13):1479–83 .
+ [4] Committee on Patient Safety and Health Information Technology, Institute of           prediction method. Manag Sci 2005;51(9):1359–73 .
+     Medicine. Health IT and Patient Safety: Building Safer Systems for Better Care.  [30] McGlohon M, Glance N, Reiter Z. Star quality: aggregating reviews to rank
+                                                                                           products and merchants 2010 .
+     The National Academies Press; 2012.                                              [31] Chen P-Y, Dhanasobhon S, Smith MD. All reviews are not created equal: the
+ [5] Laxmisan A, McCoy AB, Wright A, Sittig DF. Clinical summarization capabilities
+     of commercially-available and internally-developed electronic health records.         disaggregate impact of reviews and reviewers at amazon.com. SSRN eLibrary
+     Appl Clin Inform 2012;3(1):80–93 .                                                    [Internet]; 2008. < http://ssrn.com/abstract=918083 > [cited 29.09.11]
+                                                                                      [32] Allahbakhsh M, Benatallah B, Ignjatovic A, Motahari-Nezhad HR, Bertino E,
+ [6] Feblowitz JC, Wright A, Singh H, Samal L, Sittig DF. Summarization of clinical
+     information: a conceptual model. J Biomed Inform 2011;44(4):688–99 .                  Dustdar S. Quality control in crowdsourcing systems: issues and directions.
+ [7] Weed   LL.  Medical  records  that  guide  and   teach.  N  Engl  J  Med              IEEE Internet Comput 2013;17(2):76–81 .
+                                                                                      [33] Allahbakhsh M, Ignjatovic A, Benatallah B, Beheshti S-M-R, Foo N, Bertino E. An
+     1968;278(12):652–7 .                                                                  analytic approach to people evaluation in crowdsourcing systems [Internet].
+ [8] Carter JS, Brown SH, Erlbaum MS, Gregg W, Elkin PL, Speroff T, et al. Initializing
+     the VA medication reference terminology using UMLS metathesaurus co-                  Report No.: 1211.3200; November 2012. http://arxiv.org/abs/1211.3200 .
+     occurrences. Proc AMIA Symp 2002:116–20 .                                        [34] Stranders R, Ramchurn SD, Shi B, Jennings NR. CollabMap: augmenting maps
+                                                                                           using the wisdom of crowds. Human computation [Internet]. 2011. < http://
+ [9] Elkin PL, Carter JS, Nabar M, Tuttle M, Lincoln M, Brown SH. Drug knowledge
+     expressed as computable semantic triples. Stud Health Technol Inform                  www.aaai.org/ocs/index.php/WS/AAAIW11/paper/viewPDFInterstitial/3815/
+     2011;166:38–47 .                                                                      4247> [cited 30.07.13].

@@ -1,0 +1,421 @@
+LWW
+
+                                                                               Article
+
+
+Article                                                                        A Crowdsourcing Model for Creating
+
+                                                                               Preclinical Medical Education Study Tools
+Article                                                                        Hansen C. Bow, PhD, Jonathan R. Dattilo, Andrea M. Jonas, and
+
+                                                                               Christoph U. Lehmann, MD
+
+
+
+
+                                                                               Abstract
+
+                                                                               During their preclinical course work,           enable those students to share in the
+                                                                               medical students must memorize                  effort of generating concise, high-
+                                                                               and recall substantial amounts of               yield study materials. The authors used
+
+                                                                               information. Recent trends in medical           Google Drive and developed a simple
+                                                                               education emphasize collaboration               Java software program that enabled
+                                                                               through team-based learning. In the             students to simultaneously access and
+                                                                               technology world, the trend toward              edit sets of questions and answers in
+
+                                                                               collaboration has been characterized            the form of flashcards. Through this
+                                                                               by the crowdsourcing movement.                  crowdsourcing model, medical students
+                                                                               In 2011, the authors developed an               in the class of 2014 at the Johns Hopkins
+
+                                                                               innovative approach to team-based               University School of Medicine created a
+                                                                               learning that combined students’ use of         database of over 16,000 questions that
+                                                                               flashcards to master large volumes of           corresponded to the Genes to Society
+                                                                               content with a crowdsourcing model,             basic science curriculum. An analysis of
+
+                                                                               using a simple informatics system to            exam scores revealed that students in
+
+
+
+                                                                               T  hrough the preclinical medical               hospital-based, course work to build on
+                                                                               school curriculum, students build an            this basic science foundation and learn
+
+                                                                               essential knowledge base that will serve        the more intricate details of diagnosing
+                                                                               as the foundation for subsequent, more          and managing clinical disease. Building
+                                                                               advanced lessons in clinical decision           an adequate foundation in the basic
+                                                                               making. Students generally complete one
+                                                                                                                               sciences during the preclinical years
+                                                                               to two years of preclinical course work,        is paramount to success in medical
+                                                                               in which they learn the basic science of        school and patient care. However,
+                                                                               anatomy, physiology, and pathology.
+Article                                                                                                                        during preclinical course work, students
+                                                                               Students then transition to clinical, or        have only a limited time to learn new
+                                                                                                                               information, which they then must be
+                                                                                                                               able to recall both for exams during the
+                                                                               Dr. Bow is a third-year medical student, Johns
+                                                                               Hopkins University School of Medicine, Baltimore,ourse and when making diagnostic
+                                                                               Maryland.                                       decisions later in their careers.
+
+                                                                               Mr. Dattilo is a third-year medical student, Johns
+                                                                               Hopkins University School of Medicine, BaltimoreResearch has shown that students score
+                                                                               Maryland.                                       higher on exams when they actively
+                                                                               Ms. Jonas is a third-year medical student, Johnsengage with the content while studying.
+                                                                               Hopkins University School of Medicine, BaltimoreUsing flashcards to study, for example,
+                                                                               Maryland.
+Academic Medicine                                                                                                              not only is effective in facilitating
+                                                                               Dr. Lehmann is professor of pediatrics and      students’short-term recall 2–but also is
+                                                                               biomedical informatics, Vanderbilt University Scsuperior to other, more elaborate study
+xxx                                                                            of Medicine, Nashville, Tennessee.
+                                                                               The authors have informed the journal that they techniques, including concept mapping.
+June                                                                           agree that both Hansen C. Bow and Jonathan R.   Unlike computer-aided simulations,
+                                                                               Dattilo completed the intellectual and other worklashcards can be quickly and easily
+2013                                                                           typical of the first author.                                                 6
+00                                                                                                                             developed and disseminated.
+                                                                               Correspondence should be addressed to Dr.       reports have demonstrated the efficacy
+00                                                                             Lehmann, 2200 Children’s Way, 11111 Doctors’    of using flashcards specifically in medical
+                                                                               Office Tower, Nashville, TN 37232; e-mail:      education.1,7Medical students possess a
+                                                                               christoph.u.lehmann@Vanderbilt.Edu.
+88                                                                                                                             limited amount of time to master a large
+                                                                               Acad Med. 2013;88:766–770.                      amount of material and often employ
+6                                                                              First published online April 24, 2013           flashcards as a means of self-assessment,
+                                                                               doi: 10.1097/ACM.0b013e31828f86ef
+                                                                               Supplemental digital content for this article iswhich facilitates how they prioritize topic
+2013                                                                           available at http://links.lww.com/ACADMED/A125. areas during their study time.3
+
+1040-2446
+
+10.1097/ACM.0b013e31828f86ef                                                   766
+                                                                                                                                       Article
+
+
+iStockphoto, Threadless, and the                 that struck a balance between being too         sign in to view or modify documents,
+Goldcorp Challenge,   12it also holds            obvious and too esoteric.We wanted              additional buttons to change from view
+great potential for peer collaboration           these sets of questions and answers to          mode to edit mode, and layers of Web
+in educational contexts. Studies have            be available immediately (or at least           pages to reach one’s target document
+
+shown that crowdsourcing collaborations          within 24 hours of a lecture) so that the       (e.g., central document > neurology
+between a diverse group generate more            content of the lecture would be fresh in        > movement disorders > Parkinson
+complete and higher-quality ideas than           students’minds and so that the students         disease lecture versus central document
+collaborations between only the top-             who reviewed lectures daily could have          > Parkinson disease lecture).We reduced
+performing individuals in a field.12             the most recent information available.          concerns that students may adversely
+
+                                                 Furthermore, we wanted students who             alter the shared documents or that the
+The trend toward collaboration in                were interested in contributing and             documents may be lost by using the
+medical education, combined with                 editing the question and answer sets to be      revision history as a periodic backup
+the rise of user-friendly collaborative          confident that the system was reliable and      of previous versions and by returning
+
+software, such as Google Drive, prompted         up to date.                                     documents that were adversely altered to
+us to take an innovative approach to                                                             a previous version.
+team-based learning at the Johns Hopkins         We chose to use Google Drive as the
+University School of Medicine. Our               online forum for our question and               After accessing the central Google
+model differs from previous strategies           answer sets for several reasons: (1)            spreadsheet, students could choose
+
+in two ways. First, in contrast to past          Multiple people can simultaneously edit         to use the question and answer sets
+approaches to mastering large volumes            and view a document, spreadsheet, or            however they wanted. Some read them
+of material, which involved a hybrid of          PowerPoint, (2) it is user-friendly, and (3)    like a set of notes, whereas others desired
+note taking, outlines, and flashcards, we        just about all students are familiar with       more interaction, similar to a friend or
+
+redefined how students study preclinical         it.We created a publicly accessible and         classmate quizzing them.Although we
+material. Second, our work builds on the         modifiable central Google spreadsheet.          could have referred students in this latter
+principle of shared effort. In contrast to       We shared the Web address of this               group to Web sites such as StudyBlue   13
+previous models of distributing course           spreadsheet via e-mail with the entire          or Anki, 14which convert spreadsheets to
+notes, in which a single top performer           Johns Hopkins University School of              digital flashcards, we felt that these online
+
+distributed his or her notes to the entire       Medicine class of 2014 at the start of the      resources had several limitations: (1) They
+class, our model relies on a diverse group       project. Students could access the most         required Internet access, which may not
+of students with different strengths and         recent question and answer sets by going        be available at all locations where students
+weaknesses collectively creating a public        first to the central Google spreadsheet,        study, (2) they were relatively complicated
+
+resource. In this article, we describe our       in the same way that online readers of          to use, requiring registration, sign-in,
+crowdsourcing model for creating study           a newspaper could find the most recent          and multiple button clicks to get to the
+materials, emphasize its simplicity and          articles by going to the newspaper’s            intended selection, and (3) they did not
+user-friendly features, and discuss how          homepage. By using this model, we               present information in a clean and clutter-
+students in any educational discipline           avoided cluttering the inboxes of students      free interface. Furthermore, these online
+
+could implement a similar model.                 who were not interested in accessing the        resources could not easily create flashcards
+                                                 spreadsheet through e-mails when new            from PowerPoint slides, a medium some
+                                                 content was added.                              students preferred to the spreadsheets.
+Developing and Implementing                                                                      Unlike in a spreadsheet, students could
+a Crowdsourcing Model for
+Creating Study Materials                         This central Google spreadsheet                 embed an image in a PowerPoint slide,
+                                                 contained links to additional Google            which was an important capability when
+We initially envisioned a system in which        spreadsheets, which included the                creating questions for image-dense topics,
+collaboration between students could             question and answer sets for each lecture.      such as anatomy, histology, dermatology,
+occur unobtrusively in real time, instead        Similar to other online collaboration           and radiology.
+
+of through the exchange of periodic              platforms, such as Wikipedia, both the
+mass e-mails. Through our personal               central Google spreadsheet and the              Instead of referring students to outside
+experiences as medical students, we              spreadsheets of questions and answers           Web sites, we developed and freely
+recognized that one form of effective            could be modified by anyone with the            distributed a Java-based flashcard
+
+collaboration was getting together with          link. Thus, following the crowdsourcing         program that translates an Excel or
+classmates and friends to quiz each other        model, any student could add material,          PowerPoint file into a digital flashcard.
+on the course material.We believed that          correct answers, and build custom               More information about the software
+the addition of technology to this process       question sets to aid his or her classmates      itself is available on request from the
+could make it more efficient, effective,         in understanding the topics.We noticed          authors. For Excel files, the program
+
+and accessible.                                  that some students would write questions        recognizes the text in Column A of
+                                                 and answers in real time during a lecture;      Sheet 1 as the list of questions and the
+Because the GTS course examinations              other students in the lecture hall would        corresponding text in Column B as the
+were based solely on the material covered        then edit them instantaneously.                 list of answers. For PowerPoint files, the
+
+in course lectures, in January 2011 we                                                           program recognizes the title of the slide
+started by writing a set of about 20             We intentionally avoided barriers that we       as the answer and text and images in the
+questions and answers for each lecture.          felt would deter adoption of our system,        lower portion of the slide as the question.
+We chose to write questions about topics         including the requirement that students         We purposefully limited the program to
+
+
+
+Academic Medicine, Vol. 88, No. 6 / June 2013                                                                                            767
+Article
+
+
+a simple set of controls. Initially, only the    exam scores for both classes were very            retain material greater than or equal to
+question appears; by pressing the down           similar, with the class of 2013 performing        a 7 out of 10. Lastly, 87% of respondents
+arrow on the keyboard, users prompt              slightly better than the class of 2014.           rated their belief that the flashcards
+the answer to appear. To keep score and          However, after the introduction of our            improved their exam scores greater than
+
+identify topics for further study, the user      flashcard system, the exam scores for the         or equal to a 7 out of 10.
+indicates that his or her answer is wrong        class of 2014 were higher than those for
+by pressing the left arrow and is correct        2013 on all subsequent exams. Because             Several respondents also provided
+by pressing the right arrow. Pressing            of our desire to protect the anonymity            narrative comments regarding their
+
+backspace returns the user to questions          of the students, we did not collect               experiences:
+he or she has previously seen.After              demographics data; thus, we were unable
+cycling through all of the questions in a        to parse students into user versus nonuser           I also think a lot of the questions in the
+random order, the program then returns           groups for further analysis. Consequently,           flashcards are better questions (either
+                                                                                                      more focused on the main points or
+to the questions the user answered               although the trends we observed are                  require more application of concepts)
+incorrectly, again in a random order.            consistent with our hypothesis that                  than what ended up on our exam and that
+The program also notes the number of             the resources we provided positively                 faculty should look at the flashcards for
+times the user answers each question             influenced student performance, we                   ideas about how they should write their
+                                                                                                      questions.
+incorrectly by marking it in Column D of         cannot definitively claim causality.
+the spreadsheet.                                                                                      I used the flashcards when I had time
+                                                 Results of a student survey                          to study extra materials (outside of the
+                                                 In addition to our analysis of exam                  [lecture notes]) before exams.Overall,
+Impact of Our Crowdsourcing                      scores, we also administered a survey                I found them extremely helpful in
+Model                                                                                                 illustrating the main points of every
+                                                 in 2012 to the 120 medical students in               lecture.They have definitely helped me
+During the 13 months of their preclinical        the class of 2014. This survey explored              add a few points to my exam scores.
+course work, the 120 students in the             their personal experiences with both the
+class of 2014 created 16,150 questions           Google Drive and flashcard program                   I love the flashcards program and cards….
+total (an average of 135 questions per                                                                The way that I used them is I would copy
+                                                 (see Supplemental Digital Appendix 1,                the cards from a given lecture into an
+student). They wrote an average of               http://links.lww.com/ACADMED/A125).                  Excel file.Then I would review the lecture
+1,346 questions per organ system block           We obtained institutional review board               slides and correct,modify,and expand
+(range, 319–2,316) and 36 questions              approval for our survey.At the end of the            the cards provided as well as write new
+per lecture (range, 10–68). In addition                                                               questions of my own.I would then come
+                                                 GTS course, we invited students by e-mail            back and review all the cards in the day or
+to questions based directly on lectures,         to complete a Google survey. The survey
+they also created flashcard sets based           assessed the frequency of students’use               two leading up to the test.I thought this
+on the information in the required               of the flashcard system, their perception            system worked great for me.
+textbooks and on the material covered
+                                                 of its value, its similarity to actual exam       The last comment validates our belief
+on the United States Medical Licensing           questions, and their anticipated use of           that the design of the flashcard system
+Examination Step 1.                              the system in the future. The survey did
+                                                 not request personal information, such            made question and answer sets easily
+Results of an analysis of changes in             as name, gender, or age, to keep students’        accessible so that students were able to
+exam scores                                                                                        either modify them on the central Google
+                                                 responses confidential and to avoid               spreadsheet or download them and make
+We evaluated the effectiveness of our            deterring students from further use of the        their own additions and deletions.
+flashcard system by analyzing the                flashcard system.
+differences in exam scores between the
+
+class of 2013 and the class of 2014 at           We received 32 responses to our survey            Unique Features of Our
+the Johns Hopkins University School of           over the course of three days, resulting
+Medicine. The content and questions              in a 27% response rate. However, on               Crowdsourcing Model
+on exams do not change substantially             the basis of our estimation that about            Often, before tests, students get together
+
+between years, so a very similar test is         half of the students used the flashcard           to quiz and teach each other the course
+given at the end of each organ system            system, this response rate represents             materials.Although this method of
+block.15We hypothesized that our                 about 53% of perceived users.All of the           studying builds camaraderie, identifies
+flashcard system would have an impact            respondents used the flashcards to study.         students’weaknesses, and disseminates
+
+on overall student performance on exams.         Ninety-seven percent reported using the           knowledge, it also has several limitations:
+We estimated that one-third to one-half          question and answer sets at some point,           Groups with more than a few people are
+of the class of 2014 used our Google             and 75% reported still using them at the          less successful, students find it difficult to
+Drive and flashcard program system,              conclusion of the GTS course.                     agree on a time to meet, and, often, the
+based on the number of users accessing                                                             discussions stray from the subject matter.
+
+the documents in the days prior to exams.        Of the 32 respondents, 56% used Google            We believe that an online repository of
+                                                 Drive to study for more than half of the          questions and answers preserves many of
+We obtained exam score averages and              exams. The majority (56%) used it once            the benefits of classmates quizzing each
+standard deviations for the classes              a week. Seventy-four percent rated the            other while also overcoming several of the
+
+of 2013 and 2014 from the Office of              helpfulness of the flashcards to learn new        limitations. More specifically, the central
+Curriculum Development. Prior to the             material greater than or equal to a 7 out         Google spreadsheet and the question
+introduction of our flashcard system, the        of 10, and 90% rated their helpfulness to         and answer sets incorporated features
+
+
+
+768                                                                                               Academic Medicine, Vol. 88, No. 6 / June 2013
+                                                                                                                                      Article
+
+
+that we believe are crucial to its success:     chatting during a lecture so that students      successful it would be at other schools
+(1) It is easy to use, (2) anyone can make      can clarify misunderstandings as they           with different educational priorities.
+modifications, (3) users are anonymous,         happen. More broadly, course content            Second, we acknowledge that the students
+and (4) users can see modifications in          and lectures change each year. To keep the      who responded to our survey likely were
+
+real time.                                      spreadsheet relevant from one year to the       those who used our flashcard system,
+                                                next, all students are able to update the       affecting our ability to examine why
+First, from the beginning, we knew that         question and answer sets.                       students chose not to use it. Perhaps the
+user-friendliness would be an essential                                                         greatest limitation, however, is that we
+feature in a system that students widely        We believe that several features of our         did not objectively assess the changes in
+
+adopt. Many students bookmarked the             flashcard program facilitated its adoption      students’performance.We did not ask
+central Google spreadsheet and visited it       by a large number of students. First,           students to identify themselves either
+frequently, as they would the homepage          we chose to use Excel and PowerPoint            while using the flashcard system or
+of a newspaper online. Because no               because we knew that nearly all students        completing the survey, so we were unable
+
+sign-in is required, a single click from a      would be comfortable using these                to discern user versus nonuser differences
+student’s bookmarks menu is the only            programs. Because changes to questions          and to draw conclusions regarding
+step required to access the spreadsheet.        and answers can be made in Excel and            improvements in students’performance
+This easy access contrasts some schools’        PowerPoint, instead of through our              as a result of using our flashcard system.
+proprietary resources that require users        flashcard program, students had no              Although we acknowledge that asking
+
+to enter a username and password each           learning curve to overcome. Second, we          students to identify themselves could have
+time they access the Web site, even if it is    recognized that speed was important, so         eliminated this limitation, we chose not
+multiple times in one day.                      we intentionally designed our program           to do so because we believed that it also
+                                                so that users would need only single            would have deterred them from using
+
+Next, anyone who is able to access our          keyboard strokes (up, down, left, right,        the flashcard system and completing the
+resources also is able to modify them.          delete) to interact with the flashcards,        survey. Future studies of such models
+We were pleasantly surprised when               rather than on-screen buttons, which            should include both an examination
+several students created their own sets         require precision, thus reducing the speed      of how question and answer sets are
+of questions and answers and added              of use. Third, an Internet connection           modified or corrected over time and the
+
+links to them from the central Google           may not be available in all locations           development of a method to track how
+spreadsheet. Each had a different               where students study, such as on the            many students participate in this process
+emphasis; for example, a concise,“high-         subway, on an airplane, and around the          of refinement.
+yield”version included fewer questions,         home and school campus. Because our
+
+and another version included multiple-          program involves local copies of both the       One feature limiting the adoption of
+choice questions. Furthermore, other            software and the questions and answers,         our flashcard system at other medical
+students added to the spreadsheet links to      students can run the program without an         schools is the fact that someone (either
+glossaries that they had created. Similarly,    Internet connection, facilitating studying      a student or an administrator) must
+students provided commentary regarding          whenever and wherever students want.            create the central Google spreadsheet.
+
+whether they thought a question was of          Fourth, we aimed for a simple design in         In addition, medical schools may be
+high quality or had the wrong answer,           developing the program. The interface           uncomfortable with students sharing
+and they added links to additional              is not cluttered with fancy designs,            material based on their proprietary
+resources clarifying their point.               advertising, or company logos. It provides      curricula.Also, the community must
+
+                                                only the information students need.             continually edit the material so that it
+In addition, we believe that the ease                                                           remains relevant and concise. Finally,
+to make modifications substantially             Finally, we developed our model based           although we are fortunate at our
+increased their level of engagement.            on the premise that each student’s success      medical school that the atmosphere is
+The anonymity for students accessing,           is more valuable than the adoption of           one in which students collaborate to
+
+posting, and modifying the questions            the software, not on the principle of           contribute to the success of their peers
+and answers likely encouraged their             software market domination.We not               without jeopardizing their own success,
+critique and discussion of the resources        only permitted the use of other software        we recognize that other schools may
+in addition to their use of them.We also        to run the flashcards but also actively         have different approaches to student
+
+permitted students to download the              encouraged it by providing links to these       collaboration.
+spreadsheets so that they could make            resources.
+their own private additions, deletions,                                                         Our flashcard program itself also has
+and modifications.                                                                              several limitations. First, users must
+                                                Limitations to Our Crowdsourcing                exit the program to make changes to
+                                                Model
+Finally, whereas students in previous                                                           the questions and answers. In addition,
+classes shared static documents and             Despite our crowdsourcing model’s               they must make each change twice (once
+outlines, ours was the first attempt to         popularity and success, it and the              to the local copy saved with the Java
+build a“living”learning resource. Because       subsequent student survey have several          software and once to the online copy).
+
+changes and commentary can be seen in           limitations. First, we implemented the          Next, users must periodically download
+real time, and a substantial number of          flashcard system with a single medical          the most up-to-date questions and
+students use the spreadsheet during class,      school class at a single institution,           answers that reflect their classmates’
+we believe that it creates a forum for live     limiting our ability to extrapolate how         changes.
+
+
+
+Academic Medicine, Vol. 88, No. 6 / June 2013                                                                                          769
+Article
+
+
+In Conclusion                                      simplicity of the software we developed             3 Kornell N,Son LK.Learners’choices
+                                                   greatly affected the success of our model,             and beliefs about self-testing.Memory.
+Despite the limitations, our                                                                              2009;17:493–501.
+crowdsourcing model of developing                  and others interested in implementing               4 Larsen DP,Butler AC,Roediger HL 3rd.
+electronic, sharable flashcards in medical         a similar model should take advantage                  Test-enhanced learning in medical
+                                                   of the capabilities of the software with               education.Med Educ.2008;42:959–966.
+education is novel, and the results of             which students are familiar.                        5 Karpicke JD,Blunt JR.Retrieval practice
+our exam score comparison and student                                                                     produces more learning than elaborative
+survey show promise for its future.We                                                                     studying with concept mapping.Science.
+                                                   In conclusion, we created a novel                      2011;331:772–775.
+began by building an infrastructure                educational model that incorporates                 6 Lehmann HP,Lehmann CU,Freedman JA.
+that facilitated the use of question and
+answer sets as flashcards, and then we             recent collaboration trends in both                    The use of simulations in computer-aided
+                                                   medical education and technological                    learning over the World Wide Web. JAMA.
+developed foundational content based               advancement. Our question and answer                   1997;278:1788.
+on the curriculum of a first-year, basic                                                               7 Bottiroli S,Dunlosky J,Guerini K,
+science course. Students in the class of           sets and flashcard program could serve                 Cavallini E,Hertzog C.Does task
+                                                   as a model for collaborative learning in               affordance moderate age-related deficits
+2014 at the Johns Hopkins University               other educational systems that require                 in strategy production? Neuropsychol
+School of Medicine subsequently                    the assimilation of large amounts of                   Dev Cogn B Aging Neuropsychol Cogn.
+improved and modified this content to                                                                     2010;17:591–602.
+produce a continually evolving, high-              information.                                        8 Seidel CL,Richards BF.Application of team
+                                                                                                          learning in a medical physiology course.
+quality resource. Our flashcard system             Acknowledgments: The authors wish to thank the         Acad Med.2001;76:533–534.
+has the potential to decrease the amount           Johns Hopkins University School of Medicine         9 Thompson BM, SchneiderVF, Haidet P, et al.
+of test preparation each student must              Class of 2014 and course directors Henry Fessler,      Team-based learning at ten medical schools:
+                                                   MD,and Michael Borowitz,MD,for their                   Two years later. Med Educ. 2007;41:250–257.
+do by enabling students to share in the            participation and feedback in this study.          10 Howe J.The rise of crowdsourcing.Wired.
+effort of generating concise, high-yield
+study materials. In the future, we hope            Funding/Support: None.                                 June 2006;14.http://www.wired.com/
+                                                                                                          wired/archive/14.06/crowds.html.Accessed
+to focus our efforts on expanding the              Other disclosures: None.                               February 6,2013.
+compatibility of our flashcard system                                                                 11 Howe J. Crowdsourcing: A definition.
+with mobile devices.                               Ethical Approval: The Johns Hopkins University         Crowdsourcing. June 2, 2006. http://
+                                                                                                          crowdsourcing.typepad.com/cs/2006/06/
+                                                   institutional review board granted ethical             crowdsourcing_a.html. Accessed April
+Our crowdsourcing model for creating               approval for this study.                               2, 2013.
+educational material could be extended                                                                12 Brabham DC.Crowdsourcing as a model
+beyond the generation of question and                                                                     for problem solving.Convergence.
+                                                   References                                             2008;14:75–90.
+answer sets and flashcard programs for              1 Allen EB,Walls RT,Reilly FD.Effects of          13 StudyBlue. www.studyblue.com.Accessed
+use by medical students alone.Aside from               interactive instructional techniques in a Web-     February 6,2013.
+modifying slightly the technology that we              based peripheral nervous system component      14 Elmes D.Anki. http://ankisrs.net.Accessed
+                                                       for human anatomy.Med Teach.2008;30:               February 6,2013.
+developed, few barriers exist to expanding             40–47.                                         15 Bow H.Personal communication with
+our model to the collaborative generation
+of lecture summaries, clinical guidelines,          2 Cantillon P.Do not adjust your set: The             H.Fessler,M.Borowitz,Johns Hopkins
+                                                       benefits and challenges of test-enhanced           University School of Medicine Curriculum
+and annotated figures.We believe that the              learning.Med Educ.2008;42:954–956.                 Directors,February 2012.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+770                                                                                                  Academic Medicine, Vol. 88, No. 6 / June 2013

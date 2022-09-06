@@ -1,0 +1,823 @@
+Method Paper – Distance and Travel Time to Casualty
+
+
+Clinics in Norway Based on Crowdsourced Postcode
+
+Coordinates: A Comparison with Other Methods
+
+
+Guttorm Raknes *, Steinar Hunskaar             1,2
+
+1National Centre for Emergency Primary Health Care, Uni Health, Uni Research, Bergen, Norway, 2Department of Global Public Health and Primary Care, University of
+Bergen, Bergen, Norway
+
+
+
+    Abstract
+
+    We describe a method that uses crowdsourced postcode coordinates and Google maps to estimate average distance and
+    travel time for inhabitants of a municipality to a casualty clinic in Norway. The new method was compared with methods
+    based on population centroids, median distance and town hall location, and we used it to examine how distance affects the
+    utilisation of out-of-hours primary care services. At short distances our method showed good correlation with mean travel
+    time and distance. The utilisation of out-of-hours services correlated with postcode based distances similar to previous
+
+    research. The results show that our method is a reliable and useful tool for estimating average travel distances and travel
+    times.
+
+
+  Citation: Raknes G, Hunskaar S (2014) Method Paper – Distance and Travel Time to Casualty Clinics in Norway Based on Crowdsourced Postcode Coordinates: A
+  Comparison with Other Methods. PLoS ONE 9(2): e89287. doi:10.1371/journal.pone.0089287
+  Editor: Sergio Gomez, Universitat Rovira i Virgili, Spain
+
+  Received August 16, 2013; Accepted January 18, 2014; Published February 14, 2014
+  Copyright: ß 2014 Raknes, Hunskaar. This is an open-access article distributed under the terms of the Creative Commons Attribution License, which permits
+  unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
+
+  Funding: The authors have no support or funding to report.
+  Competing Interests: The authors have declared that no competing interests exist.
+
+  * E-mail: guttorm.raknes@uni.no
+
+
+
+Introduction                                                        complicated and expensive geographic information system (GIS)
+                                                                    software. In Norway, the alternative is to get estimates on
+  Travel distance is a major barrier to the utilisation of all kindspopulation centroids or mean distances and travel times from
+health services. We have previously shown that increasing distance
+                                                                    Statistics Norway, the official statistics bureau. This is an expensive
+from the population centroid to a casualty clinic is strongly       and time-consuming process.
+associated with decreasing contact and consultation rates in a        Crowdsourcing is an online, distributed problem-solving and
+Norwegian out-of-hours district. The association was almost
+                                                                    production model that involves outsourcing of tasks to a
+completely independent from important demographic and socio-        distributed group of people [3]. The contribution from thousands
+economic factors registered [1].                                    of voluntary people has been important for the development of
+  Often no data on the exact location of individual patients are
+                                                                    geographic information systems (GIS) and related online resources
+available. To examine the effect of geography on the utilisation of [4].
+health services, several methods have been used to estimate the       In this paper we describe the method and compare it with other
+average travel distance for the entire population of an area. It hasways of calculating distance and travel time to a casualty clinic
+previously been shown that estimates of distance to the nearest
+                                                                    when the exact address is unknown. We also apply our method to
+cancer centre from population centroid is superior to estimates     examine whether distances and travel times are associated with the
+based on geometric centroid and population polygon methods          utilisation of out-of-hours primary care services.
+when the exact addresses are unknown [2].
+
+  E.g. if a casualty clinic for a population of one municipality is Methods
+located in another municipality, the distance from the population
+centroid is fairly representative for the average travel distance. IEthics Statements
+
+municipalities hosting their own casualty clinic, however, the        The data used in this study are from three sources. Estimates on
+population centroid often almost coincides with the location of the mean distance, travel time and population centroids of the
+clinic. In these cases the distance between the population centroid municipality are not freely available, and can only be obtained
+
+and the casualty clinic is an underestimation of the travel distancefrom Statistics Norway for a fee. The postcode database is freely
+for the average inhabitant.                                         distributed under the terms of the Creative Commons Attribution
+  In order to get more representative measures on distance and      License 3.0 [5], and is open to all from its website [6]. This
+travel time at short distance between the casualty clinic and the
+                                                                    database does only contain data on post/ZIP-codes. The
+population centroid of a municipality, we have developed a          Watchtower project database is owned and managed by our
+method that uses postcode coordinates that have been determined     institution, the National Centre for Emergency Primary Health
+by crowdsourcing. The data are freely available for everyone, and   Care. The database is not publicly and freely available. These data
+
+since our method uses Google maps, there is no need for             are anonymised, patient identity is not recorded at any time.
+
+
+PLOS ONE | www.plosone.org                                       1                       February 2014 | Volume 9 | Issue 2 | e89287
+                                                                                               Distance Estimates Based on Crowdsourcing
+
+
+
+  Table 1. Quality of postcode based coordinates by a five             the ‘‘Watchtower project’’, a database of a Norwegian sentinel
+  point quality scale.                                                 network for monitoring emergency primary health care activity in
+                                                                       Norway. The database was established by the National Centre for
+
+                                                                       Emergency Primary Health Care in 2007. The Watchtowers are
+  Status (scale value)                              N                  seven out-of-hours districts that have been selected to be
+                                                                       representative for the entire primary health care emergency
+  A. Actual post office location                    1 633
+                                                                       service in Norway. The development and implementation of this
+  B. Coordinate corrected by head of project        1 383              database have been described in detail elsewhere [9].
+  C. Coordinate controlled by a volunteer contributo1 093
+
+  D. Coordinate corrected by a volunteer contributor685                Calculation of Postcode Based Travel Time and Distance
+                                                                         The travel distance and travel time between each postcode
+  E. Probably misplaced                             0
+                                                                       coordinate within the Watchtower municipalities and the casualty
+  doi:10.1371/journal.pone.0089287.t001                                clinic was calculated using Google maps [11]. This was then
+                                                                       multiplied by the number of inhabitants belonging to the postcode.
+
+  The Watchtower project is approved by the Regional Com-              The average distance to the casualty clinic was then calculated by
+mittee for Medical and Health Research Ethics and by the               dividing the sum of person-kilometres or person-minutes by total
+Norwegian Social Science Data Services, the Data Protection            number of inhabitants in the municipality. Instead of using GIS
+
+Official for Research.                                                 software to calculate distances and travel times, Google maps was
+                                                                       chosen primarily because it is freely available to all. It is also easy
+
+Crowdsourcing Process                                                  for people without knowledge of GIS to calculate distances and
+  In 2009 a joint weather service [7] owned by the Norwegian           travel times since the postcode database website has integrated
+Meteorological Institute and the Norwegian Broadcasting (NRK),         Google maps functionality.
+
+wanted to provide weather forecasts for each of the 4 585
+Norwegian postcodes. At that time, maps from Norway Post               Validation of the Method
+
+(Posten Norge) displaying the area covered by each postcode were         The postcode based distances to casualty clinics for each
+available. Based on these data coordinates for the geometric           municipality were compared with mean and median travel
+centroids could be calculated. In a sparsely populated country like    distances and travel times and distance from the population
+
+Norway, however, these coordinates are in many cases not               centroid of the municipality.
+representative for where people actually live.                           Mean distance and travel time of each municipality to the
+  To get more representative postcode coordinates, a crowdsour-        casualty clinic as calculated by Statistics Norway was considered
+
+cing project was launched in July 2009. Volunteers were recruited      the main basis of comparison for our method. Statistics Norway
+using NRKbeta, the technology website of the Norwegian                 used Excel to manually calculate mean and median distance and
+Broadcasting [8]. The head of the project, Erik Bolstad (EB),          travel time from all ‘‘address points’’ in the municipality, taking
+
+created a Google map with approximate locations of each                number of persons living at each address point into account. These
+postcode based on Norway Post’s downloadable postcode registry.        data were taken from Statistics Norway’s Address Points database
+Contributors were able to add more accurate coordinates directly       January 1st 2012. This not freely available database contains the
+
+by clicking in the map. Updated coordinates were received by           exact location of all addresses in Norway. Population centroids
+Google forms and transferred to a Google spreadsheet. EB               were calculated with the mean centre function in ArcInfo (ArcInfo,
+                                                                       ESRI, Redlands, CA). Distances and travel times from population
+checked all submitted coordinates before updating the project
+webpage. Before the project started 39% of postcodes were              centroids were estimated using OD cost Matrix in ArcInfo. These
+located. After two days, this increased to 74%. Within the first       estimates were commissioned from Statistics Norway for a fee. In
+
+month 4 590 feedbacks from approximately 600 persons were              addition, we made comparisons with distances and travel times
+submitted. The capacity of the registration system was then            between casualty clinic and the town halls of the municipalities,
+exceeded due to the large amount of information. EB then had to        calculated by use of Google maps.
+
+find the location of the remaining 600 postcodes. A five point scale     Comparisons of average absolute deviation from mean distance
+was used to assess the data quality of each location (Table 1). Since  as calculated by Statistics Norway for each method were
+the formal termination of the project, the project pages have been     performed between mono- and intermunicipal out-of-hours
+
+open for volunteers to improve the database further. The database      districts, and between municipalities hosting a casualty clinic or
+also contains data from Statistics Norway on the number of people      not.
+belonging to each postcode [6].
+
+                                                                       Postcode Based Distance and Utilisation of Out-of-hours
+Casualty Clinics                                                       Services
+
+  In Norway, casualty clinics (‘‘legevakt’’) are emergency primary       We used the postcode based distances to examine the
+care centres that handle all kinds of medical out-of-hours inquiries,  association between distance to casualty clinic and the utilisation
+including life-threatening incidents [9]. Some municipalities have
+                                                                       of out-of-hours services. One municipality (Austevoll) was exclud-
+their own casualty clinic (monomunicipal), but casualty clinics        ed from these analyses because the out-of-hours service uses more
+serving the population of two or more municipalities (intermuni-       than one casualty clinic. Similar analyses on population centroid
+
+cipal) are also common. Of the 203 out-of-hours districts in           based distances have previously been performed by our group in
+Norway in 2012, 84 were monomunicipal and 88 were                      the ten Watchtower municipalities comprising one specific out-of-
+intermunicipal. The remaining districts were partially monomu-         hours district. These ten municipalities were among the 17
+
+nicipal [10].                                                          municipalities that were examined in the present study [1].
+  We used the postcode database to estimate average travel               Utilisation was defined as rate of all first contacts with the
+distance to the casualty clinic for 18 municipalities participating in communication centre of the out-of-hours district and rates of
+
+
+
+PLOS ONE | www.plosone.org                                          2                       February 2014 | Volume 9 | Issue 2 | e89287
+                                                                                                         Distance Estimates Based on Crowdsourcing
+
+
+
+
+  Table 2. Baseline data, Watchtower municipalities, sequence by mean distance to casualty clinic.
+
+
+
+
+                                                               Part of                                   Primary
+
+                     Mean distance to           Hosting a      intermunicipal                            care doctors
+                     casualty clinic            casualty       out-of-hours            Population        per                 Population .80
+  Municipality       (kilometres)               clinic?        district?               2011              10 000 (2011)       years (2011, %)
+
+  ˚
+  Asnes              6.1                        Yes            Yes                     7 597             11.8                8.3
+
+  Arendal            6.3                        Yes            Yes                     42 229            5.6                 4.5
+
+  Alta               6.6                        Yes            No                      19 071            11.9                2.7
+
+  Nes                7.6                        Yes            No                      19 049            6.6                 4.0
+
+  Tromsø             8.8                        Yes            No                      68 239            10.4                2.7
+
+  Kvam               11.0                       Yes            No                      8 442             12.6                6.9
+
+  Froland            12.9                       No             Yes                     5 127             8.0                 3.5
+   ˚
+  Valer              15.5                       No             Yes                     3 882             11.7                7.3
+
+  Grimstad           20.8                       No             Yes                     20 823            9.4                 3.5
+  Grue               22.0                       No             Yes                     5 024             9.9                 8.3
+
+  Tvedestrand        27.1                       No             Yes                     5 969             13.3                5.5
+
+  Vegarshei          38.5                       No             Yes                     1 922             8.8                 5.9
+
+  Risør              47.5                       No             Yes                     6 871             9.6                 6.0
+
+  Gjerstad           53.0                       No             Yes                     2 497             2.4                 5.4
+
+  Amli               53.1                       No             Yes                     1 829             19.2                5.5
+
+  Nissedal           96.3                       No             Yes                     1 405             18.2                6.1
+
+  Fyresdal           131.0                      No             Yes                     1 351             13.5                6.2
+
+
+  doi:10.1371/journal.pone.0089287.t002
+
+
+
+face-to-face doctor consultations in each of the Watchtower                      The magnitude of difference from mean distance calculated by
+municipalities. Rates were calculated by dividing aggregated total            Statistics Norway was expressed as mean absolute error (MAE)
+
+number of contacts and consultations for each municipality in                 with 95% confidence intervals.
+
+each year from 2007 to 2011 by population January 1st the same                   Contact and face-to-face consultations rates are number of
+
+year.                                                                         events per year, which are assumed to be Poisson distributed. The
+                                                                              rates of our main outcomes were so high that a normal distribution
+
+Statistical Methods                                                           will fit the data well. Correlation coefficients, r, and constants and
+
+   IBM SPSS 20 and Excel 2010 software were used to analyse                   coefficients with 95% confidence intervals of exponential functions
+                                                                              (non-linear regression) were used to assess any association between
+data. The correlations between mean distance and travel time to
+casualty clinics and postcode based and other methods were                    distances from municipality (postcode based) to out-of-hours-
+
+examined using Pearson correlation coefficient. The correlation               centre and contact and consultation rates for the years 2007–2011
+                                                                              for each municipality. Exponential curve fit was chosen because
+analyses were repeated several times, including municipalities at
+different maximum distances and travel times. Short distances                 this was found to best describe the association between distance
+
+were defined as less than ten kilometres, and short travel times              and utilisation of out-of-hours services in a previous study [1].
+
+defined as less than 15 minutes.
+
+
+
+
+
+
+
+  Table 3. Comparison of different distance measures to casualty clinic.
+
+
+
+
+                                       Postcode                 Median                          Population centroid      Town hall
+  Distance (kilometres)      N
+
+                                       rr p      r prp     p
+
+  ,135                       18        0.999           ,0.001   0.999                  ,0.001   0.998          ,0.001    0.997             ,0.001
+
+  ,50                        14        0.999           ,0.001   0.993                  ,0.001   0.992          ,0.001    0.994             ,0.001
+
+  ,30                        12        0.996           ,0.001   0.974                  ,0.001   0.982          ,0.001    0.983             ,0.001
+
+  ,20                        9         0.986           ,0.001   0.875                  ,0.001   0.960          ,0.001    0.950             ,0.001
+
+  ,10                        6         0.868           0.025    0.704                  0.12     0.559          0.25      0.287             0.58
+
+
+  Correlation analysis of relationship between mean distance for inhabitants and other distance measures to casualty clinic. The analyses are performed for different
+  maximum distances. r=correlation coefficient.
+  doi:10.1371/journal.pone.0089287.t003
+
+
+
+
+PLOS ONE | www.plosone.org                                                 3                          February 2014 | Volume 9 | Issue 2 | e89287
+                                                                                                     Distance Estimates Based on Crowdsourcing
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 1. Correlation analysis of different distance measures at short distances by correlation coefficient, r, for the relationship
+
+between different average distance measures and mean travel time to casualty clinic. Analyses on municipalities with shorter travel times
+than indicated on the X-axis (N=3 to 11). Critical r curves corresponding to p=0.05. r-values between these curves are statistically non-significant.
+doi:10.1371/journal.pone.0089287.g001
+
+
+
+Results                                                                    significantly correlated with mean distances. Figure 1 shows the
+                                                                           superior correlation of the postcode based method at distances less
+   449 868 Watchtower contacts were registered from 2007
+                                                                           than 20 kilometres.
+through 2011. 2 457 contacts were excluded because information               For travel time to casualty clinic, as shown in Table 4 and
+
+about municipality was lacking. 135 770 contacts were excluded             Figure 2, there were strong and statistically significant correlations
+because the patient was a non-Norwegian citizen or was living in a         for all time measures at long travel times. At travel times less than
+
+municipality outside the Watchtowers out-of-hours districts. 311           15 minutes, none of the methods were significantly correlated with
+641 contacts were eligible for analysis, aggregated to 90                  mean travel time as calculated by Statistics Norway. At longer
+
+municipality-year observations.                                            travel times, the postcode based method showed a correlation to
+   Baseline demographic and socioeconomic data for the munic-
+                                                                           mean travel time similar to the other methods.
+ipalities are given in Table 2.                                              Three of the municipalities had very similar mean distances and
+
+   Table 3 and Figure 1 display correlation analyses of the                mean travel times that explain the abrupt change in critical r at 9.5
+relationship of distance to the casualty clinic from different             kilometres (Figure 1) and 11.5 minutes (Figure 2).
+
+population centres and mean distance as computed by Statistics               For municipalities not hosting a casualty clinic, there were no
+Norway. When analysing only municipalities with less than ten              statistically significant differences in MAE between the distance
+
+kilometres to a casualty clinic, only postcode based distances were        measures compared with mean travel distance calculated by
+
+
+
+  Table 4. Comparison of different travel time category measures to casualty clinic.
+
+
+
+                             Postcode                   Median                    Population centroid            Town hall
+  Time (minutes)       N
+                             r r pr p    r p    p
+
+
+  .120                 18    0.998            ,0.001    0.999           ,0.001    0.998                ,0.001    0.995             ,0.001
+  ,60                  16    0.994            ,0.001    0.996           ,0.001    0.992                ,0.001    0.987             ,0.001
+
+  ,45                  13    0.980            ,0.001    0.986           ,0.001    0.980                ,0.001    0.960             ,0.001
+
+  ,30                  11    0.911            0.004     0.939           0.002     0.937                0.002     0.916             0.004
+
+  ,15                  7     0.626            0.13      0.388           0.39      0.728                0.063     0.676             0.095
+
+
+  Correlation analysis of relationship between mean travel time for inhabitants and other travel time measures to casualty clinic. The analyses are performed for different
+  maximum travel times. r =correlation coefficient.
+  doi:10.1371/journal.pone.0089287.t004
+
+
+
+PLOS ONE | www.plosone.org                                              4                         February 2014 | Volume 9 | Issue 2 | e89287
+                                                                                                 Distance Estimates Based on Crowdsourcing
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 2. Correlation analysis of different travel time measures at short distances by correlation coefficients for the relationship
+between different travel time measures and mean travel time as calculated by Statistics Norway to casualty clinic. Analyses on
+municipalities with shorter distances than indicated on the X-axis (N=3 to 11). Critical r curves corresponding to p=0.05. r-values between these
+
+curves are statistically non-significant.
+doi:10.1371/journal.pone.0089287.g002
+
+
+Statistics Norway (Figure 3). For distances based on population         variance of deviation to mean distance was much higher for
+centroids and town halls, the deviation from mean distance was          median based distances (figure 3).
+
+more than twofold larger in the municipalities where a casualty           For median and postcode based distances, there was no
+clinic is located. No statistically significant differences were        difference in MAE between mono- and intermunicipal out-of-
+observed in deviation between hosting and non-hosting munici-           hours districts. For distances based on population centroid and
+
+palities in neither postcode nor median based distances, but the        town hall location, the deviation from mean distance was more
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 3. Mean absolute error (MAE) of distance measures in municipalities hosting a casualty clinic or not. Deviations (absolute) from
+
+mean distance to casualty clinic (kilometres) as calculated by Statistics Norway for the different distance measures. Error bars indicate 95% confidence
+intervals.
+doi:10.1371/journal.pone.0089287.g003
+
+
+
+PLOS ONE | www.plosone.org                                           5                        February 2014 | Volume 9 | Issue 2 | e89287
+                                                                                                  Distance Estimates Based on Crowdsourcing
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 4. Mean absolute error (MAE) of distance measures in intermunicipal and monomunicipal out-of-hours districts. Deviations
+(absolute) from mean distance to casualty clinic (kilometres) as calculated by Statistics Norway for the different measures. Error bars indicate 95%
+
+confidence intervals.
+doi:10.1371/journal.pone.0089287.g004
+
+
+than twofold higher in municipalities not taking part in an              main basis of comparison, which was mean distance and travel
+
+intermunicipal out-of-hours district (Figure 4).                         time based on address points. The method was at least as good as
+   As shown in Tables 5 and 6, there were no significant                 the other examined methods on both short and long distances. At
+
+differences in regression coefficients between different methods         distances shorter than 20 kilometres, the postcode based measure
+when analysing the association between distance and consultation         was superior to distances based on town hall location and
+
+and contact rates, but population centroid and town hall based           population centroid. In contrast to distance and travel time
+distances differed more from mean distance, although not                 measures based on town hall location and population centroid, the
+
+statistically significant.                                               postcode based method showed no difference between mono- and
+   Exponential regression showed that increasing (postcode based)        intermunicipal out-of-hours districts, or between municipalities
+
+distance was significantly associated with lower contact rate and to     hosting a casualty clinic or not. The association between postcode
+a larger extent face-to-face consultation rate (Figures 5 and 6).        based distance and contact and consultation rates in the 17
+                                                                         Watchtower municipalities was in accordance with our previous
+There was no difference between municipalities participating in
+intermunicipal or monomunicipal out-of-hours districts.                  analysis of the 10 municipalities comprising Arendal out-of-hours
+                                                                         district [1].
+
+                                                                            To calculate average travel distance and time from a
+Discussion
+                                                                         municipality based on postcodes with the method described in
+   We have described a method for estimating distance and travel         this study, a database containing coordinates and population
+time to a casualty clinic based on postcodes determined by
+                                                                         number for each postcode is necessary. The availability of such
+crowdsourcing. The method showed good correspondence to the              data is for most countries more limited than in Norway. There are
+
+
+
+  Table 5. Distance and contact rates, nonlinear regression.
+
+
+
+                           Change
+                           0 to 50 km (%)        Constant             Coefficient              95% CI for coefficient         R2
+
+  Postcode                 245.5                 464                  20.0121                  20.0133 to 20.0109             0.82
+
+  Mean                     245.0                 470                  20.0120                  20.0132 to 20.0107             0.81
+
+  Median                   245.0                 461                  20.0119                  20.0131 to 20.0107             0.81
+
+  Population centroid      244.2                 452                  20.0117                  20.0128 to 20.0105             0.82
+
+  Town hall                243.8                 444                  20.0115                  20.0126 to 20.0105             0.84
+
+  Relative change (%) in contact rates when moving 50 kilometres away from the casualty clinic for different distance measures. Constants and coefficients (with 95%
+  confidence interval (CI)) for exponential functions.
+  doi:10.1371/journal.pone.0089287.t005
+
+
+
+
+PLOS ONE | www.plosone.org                                            6                        February 2014 | Volume 9 | Issue 2 | e89287
+                                                                                                    Distance Estimates Based on Crowdsourcing
+
+
+
+
+  Table 6. Distance and consultation rates, nonlinear regression.
+
+
+
+
+                               Change
+                               0 to 50 km (%)     Constant             Coefficient              95% CI for coefficient         R2
+
+  Postcode                     258.8              277                  20.01774                 20.0187 to 20.0168             0.94
+
+  Mean                         258.3              283                  20.01751                 20.0185 to 20.0165             0.93
+
+  Median                       258.2              275                  20.01745                 20.0184 to 20.0165             0.93
+
+  Population centroid          257.4              267                  20.01706                 20.0179 to 20.0162             0.94
+
+  Town hall                    256.4              258                  20.01658                 20.0176 to 20.0156             0.93
+
+  Relative change (%) in consultation rates when moving 50 kilometres away from the casualty clinic for different distance measures. Constants and coefficients (with 95%
+  confidence interval (CI)) for exponential functions.
+
+  doi:10.1371/journal.pone.0089287.t006
+
+
+some on-line services in UK that provide coordinates of postcodes         thorough planning and coordination of the more than 600
+
+[12], [13], but to our knowledge information on the population of         contributors of the postcode project suggests that the database is
+each postcode is not readily available. Some commercial                   trustworthy.
+
+providers, like Deutsche Post in Germany provide data based on
+addresses. Another limitation is that we used Google maps to              Conclusion
+
+calculate road distances and travel times. The reliability of Google        The results show that distances and travel times for the
+Maps presumably varies from area to area because map data are
+                                                                          inhabitants of Norwegian municipalities to a casualty clinic can be
+acquired from different sources. Crowdsourcing projects with large        easily calculated with standard Internet tools from freely available
+
+numbers of contributors result in products that are complete,             postcode based coordinates determined by crowdsourcing. The
+accurate and up to date, but they are vulnerable to errors and            method described here proved valid at both long and short
+
+vandalism. Research on Wikipedia has shown that strict coordi-            distances, and is more reliable than distance estimates based on
+nation of the editing process is crucial for quality [14]. The            population centroid at short distances.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 5. Postcode based distance and consultation rate at the casualty clinic. Relationship between average postcode based distance
+
+(kilometres) from Watchtower municipalities to casualty clinic and consultation rate at the casualty clinic (per 1 000 inhabitants per year). Each point
+represents rate in one municipality for one year (2007–2011). Circles indicate monomunicipal and crosses intermunicipal out-of-hours districts.
+doi:10.1371/journal.pone.0089287.g005
+
+
+
+PLOS ONE | www.plosone.org                                             7                         February 2014 | Volume 9 | Issue 2 | e89287
+                                                                                                             Distance Estimates Based on Crowdsourcing
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 6. Postcode based travel time and consultation rate at the casualty clinic. Relationship between average postcode based travel
+
+time (minutes) from Watchtower municipalities to casualty clinic and consultation rate at the casualty clinic (per 1 000 inhabitants per year). Each
+point represents rate in one municipality for one year (2007–2011). Circles indicate monomunicipal and crosses intermunicipal out-of-hours districts.
+
+doi:10.1371/journal.pone.0089287.g006
+
+
+Acknowledgments                                                                  Author Contributions
+
+
+We would like to thank Erik Bolstad for all the effort he has put into the       Conceived and designed the experiments: GR SH. Performed the
+postcode project, Ole-Johan Eikeland for preparing the Watchtower data           experiments: GR. Analyzed the data: GR. Contributed reagents/
+                                             ˚                                   materials/analysis tools: GR SH. Wrote the paper: GR SH.
+files, Narve Sætre for technical assistance, Asta Hauka ˚s for proofreading
+the final manuscript, and the staff at the Watchtower casualty clinics for
+performing the registrations.
+
+
+
+References
+
+ 1. Raknes G, Hansen EH, Hunskaar S (2013) Distance and utilisation of out-of-    8. Bolstad E (2013) Dugnad pa˚ yr.no. Available : http://nrkbeta.no/2009/07/22/
+    hours services in a Norwegian urban/rural district. An ecological study. BMC     postnummer-dugna/.Accessed 5 June 2013.
+                                                                                  9. Hansen EH, Hunskaar S (2008) Development, implementation, and pilot study
+    Health Serv Res 13: 222. doi:10.1186/1472-6963-13-222.
+ 2. Berke EM, Shi X (2009) Computing travel time when the exact address is           of a sentinel network (‘‘The Watchtowers’’) for monitoring emergency primary
+    unknown: a comparison of point and polygon ZIP code approximation methods.       health care activity in Norway. BMC Health Serv Res 8: 62. doi: 10.1186/1472-
+    Int J Health Geogr 8: 23. doi: 10.1186/1476-072X-8-23.                           6963-8-62.
+                                                                                 10. Morken T, Zachariassen SM (2012) Legevaktorganisering i Norge. Rapport fra
+ 3. Brabham DC (2008) Crowdsourcing as a Model for Problem Solving: An
+    Introduction and Cases. Convergence: The International Journal of Research       Nasjonalt legevaktregister 2012. Rapport nr. 6–2012. [Organisation of the out-
+    into New Media Technologies 14: 75–90. doi: 10.1177/1354856507084420.            of-hours services in Norway 2012]. Bergen: National Centre for Emergency
+ 4. Boulos MNK, Resch B, Crowley DN, Breslin JG, Sohn G et al. (2011)                Primary Health Care, Uni Health, Uni Research. 9.
+                                                                                 11. Google (2013) Google Maps. Available : https://maps.google.com/. Accessed 5
+    Crowdsourcing, citizen sensing and sensor web technologies for public and        June 2013.
+    environmental health surveillance and crisis management: trends, OGC
+    standards and application examples. Int J Health Geogr 10: 67. doi: 10.1186/ 12. Foskett M (2008) Convert UK postcodes to longitude & latitude coordinates.
+    1476-072x-10-67.                                                                 Available : http://websemantics.co.uk/online_tools/postcode_to_coordinates_
+                                                                                     conversion_tool/. Accessed 5 June 2013.
+ 5. Bolstad E (2013) Norske postnummer med koordinatar. Available: http://www.   13. Mutton P (2010) UK Postcodes. Finding grid coordinates from area codes.
+    erikbolstad.no/geo/noreg/postnummer/. Accessed 5 June 2013.
+ 6. Creative Commons Attribution 3.0 (2013) Available: http://creativecommons.       Available : http://www.jibble.org/ukpostcodes/Accessed 5 June 2013.
+                                                                                 14. Kittur A, Kraut RE (2008) Harnessing the wisdom of crowds in wikipedia:
+    org/licenses/by/3.0/.8.Accessed 5 June 2013.                                     quality through coordination. In: Proceedings of the 2008 ACM conference on
+ 7. Bolstad E (2013) Yr.no. Available : http://www.yr.no/.Accessed 5 June 2013.      Computer supported cooperative work. New York, ACM. 37–46.
+
+
+
+
+
+
+
+
+
+
+
+
+PLOS ONE | www.plosone.org                                                    8                           February 2014 | Volume 9 | Issue 2 | e89287

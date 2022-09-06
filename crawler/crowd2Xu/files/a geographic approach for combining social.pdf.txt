@@ -1,0 +1,2456 @@
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+
+
+A Geographic Approach for Combining Social Media and
+
+Authoritative Data towards Identifying Useful Information for
+
+
+Disaster Management
+
+
+João Porto de Albuquerque    *1,, Benjamin Herfort , Alexander Brenning     2,3,, Alexander Zipf  2
+
+1
+ Department of Computer Syst ems/ICMC, University of São Paulo, São Carlos, Brazil
+
+2GI Science Group, Department of Geography, Heidelberg University, Germany
+
+3
+ Department of Geography and Environmental Management, University of Waterloo, Canada
+
+4Department of Geography, University o f Jena, Germany
+
+
+
+         In recent years, social media emerged as a potential resource to improve the
+
+         management of crisis situations such as disasters triggered by natural hazards.
+
+         Although there is a growing research body concerned with the analysis of the
+
+         usage of social media during disasters, most previous work has concentrated on
+
+         using social media as a standalone information source, whereas its combination
+
+         with other information sources holds a still underexplored potential. This paper
+
+         presents an approach to enhance the identification of relevant messages from
+
+         social media that relies upon the relations between georeferenced social media
+
+         messages as Volunteered Geographic Information , and geographic features of
+
+         flood phenomena as derived from authoritative data (sensor data, hydrological
+
+         data and digital elevation models ). We apply this approach to examine the micro-
+
+         blogging text messages of the Twitter platform (tweets) produced during the
+
+         River Elbe Flood of June 2013 in Germany. This is performed by means of a
+
+         statistical analysis aimed at identifying general spatial patterns in the occurrence
+
+         of flood-related tweets that may be associated with proximity to and severity of
+
+         flood events. The results show that messages near (up to 10 km) to severely
+
+         flooded areas have a much higher probability of being related to floods. In this
+
+         manner, we conclude that the geographic approach proposed here        provides a
+
+         reliable quantitative indicator of the usefulness of messages from social media by
+
+         leveraging existing knowledge about natural hazards such as floods, thus being
+
+         valuable for disaster management in both crisis response and preventive
+
+         monitoring.
+
+
+
+         Keywords: volunteered geographic information, social media, crisis, disaster,
+
+         emergency management, twitter, flood, Germany
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+
+1 Introduction
+
+        In different catastrophic events of the past few years – from Southern California
+
+wildfires in 2007 to the 2010 Haiti earthquake and typhoon Haiyan in the Philippines in
+
+2013 – social media have enabled the affected population to timely publicize an
+
+
+overwhelming amount of disaster-related information (Goodchild and Glennon 2010,
+
+Vieweg et al. 2010, Zook et al. 2010, Yates and Paquette 2011, Kaewkitipong et al.
+
+2012, Chatfield and Brajawidagda 2013).
+
+
+        Since disasters are generally characterized by high levels of information need
+
+and low levels of information availability (Shklovski et al. 2010), it seems intuitive to
+
+consider social media as an additional information source for coping with crises. Of
+
+
+particular interest here are social media messages that carry a geographic reference,
+
+which can be considered Volunteered Geographic Information (VGI) (Goodchild 2007,
+
+
+Sui and Goodchild 2011), since they can be used for composing a picture of what is
+
+happening in a specific place. The growing adoption of electronic devices equipped
+
+with GPS (e.g. smartphones and tablets) in the past few years has made an increasing
+
+
+the amount of geoinformation available in social media platforms and thereby
+
+transformed them into location-based social networks (Roick and Heuser 2013).
+
+However, due to the sheer volume, high velocity and varied structure of social media
+
+
+content, one significant challenge that arises in this context is how to deal with this ‘big
+
+data’ to separate the wheat from the chaff, i.e. how to pick up the relevant pieces of
+
+information out of the deluge of, mostly irrelevant, social media messages.
+
+
+        In the past few years, the problem of analyzing information produced via social
+
+media in the context of crises has been addressed by a growing body of literature (see
+
+
+Landwehr and Carley (2014) for a survey). Most of the research performed in this field
+
+approaches the problem of seeking to detect patterns and extract information by looking
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+
+exclusively at data from social media, i.e. using social media as a standalone
+
+information source. However, in many crises situations triggered by natural hazards,
+
+data from other information sources (e.g. in situ sensors, space-borne data from
+
+
+satellites, existing authoritative geographic data) are available which could profitably be
+
+leveraged upon in order to make the analysis of social media more effective.
+
+        Building upon this motivation and based our previous work (Herfort et al.
+
+
+2014a, 2014b), a geographic approach is proposed in this paper to leverage existing
+
+geographic knowledge related to natural hazards (such as floods) for the analysis of
+
+georeferenced social media messages (i.e. VGI). This paper complements and
+
+
+substantially extends our previous studies (Herfort et al. 2014a, 2014b) by adding: (a) a
+
+more comprehensive and general account of the proposed geographic approach for
+
+
+combining social media and authoritative data with the goal of identifying the most
+
+useful messages for disaster management; (b) an improved data basis of the case
+
+analyzed, which includes a more rigorous classification of messages of the Twitter
+
+
+platform during the 2013 floods of the river Elbe in Germany, as well as a more
+
+comprehensive dataset of in situ water level sensor measurements; (c) robust statistical
+
+methods based on a generalized additive model to provide compelling quantitative
+
+
+evidence of the association between the relevance of social media messages with
+
+proximity to and severity of flood events; (d) a discussion of the results in comparison
+
+to extant work on the subject.
+
+
+        The remainder of the paper is organized as follows. Section 2 provides the
+
+background for the current work by reviewing the extant research on the analysis of
+
+
+social media for disaster management. Section 3 explains our approach, whilst Section 4
+
+describes the case study to which the approach is applied together with the data sources
+
+used. Section 5 describes the methodology employed. Section 6 then presents the results
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+
+of this study, whereas Section 7 discusses the results and makes suggestions for future
+
+work. Section 8 casts some conclusions.
+
+
+
+2 Background: Social Media Analysis for Disaster Management
+
+        In the past few years, an increasing number of studies have examined the use of
+
+social media data for gaining knowledge about areas of human activity that are as
+
+
+diverse as detecting disease surveillance for detecting epidemic outbreaks (Gomide et
+
+al. 2011, Bernardo et al. 2013) and predicting the stock market (Bollen et al. 2011).
+
+        In the particular field of disaster management, a large part of existing research
+
+
+focused on the analysis of short messages of the Twitter platform, so-called tweets.
+
+Sakaki et al. (2010) and Crooks et al. (2013) investigated the use of Twitter for
+
+detecting and estimating the trajectory of earthquakes in real-time. De Longueville et al.
+
+
+(2010) proposed the use of VGI as a sensor for detecting forest fire hotspots, based on
+
+previous work that analyzed the application of Twitter as a source of spatiotemporal
+
+information for wildfire events in France. In contrast, Fuchs et al. (2013) showed that
+
+
+event detection based on peaks of Twitter activity did not work for the 2013 floods in
+
+Germany, and presented an analysis of spatiotemporal clusters. Bakillah et al. (2014)
+
+
+applied graph clustering to support the detection of geo-located communities in Twitter
+
+after the typhoon Haiyan in the Philippines. Furthermore, a number of studies are
+
+concerned about developing tools for visualizing social media data in order to enable
+
+
+make-sensing and location-based knowledge discovery (MacEachren et al. 2011,
+
+Terpstra and Vries 2012, Croitoru et al. 2013, Spinsanti and Ostermann 2013).
+
+        Another group of studies seek to identify useful information from social media
+
+
+that could be valuable for improving situation awareness (Yin et al. 2012), i.e. for
+
+improving “the perception of elements in the environment within a volume of time and
+
+space, the comprehension of their meaning, and the projection of their status in the near
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+
+future” (Endsley 1995). Vieweg et al. (2010) and Starbird et al. (2010) analyzed Twitter
+
+messages during the flooding of the Red River Valley in the US and Canada in 2009
+
+seeking to discern activity patterns and extract useful information. Acar and Muraki
+
+
+(2011) applied open-ended questionnaires to selected Twitter users and also analyzed
+
+the tweets sent in response to the Tohoku earthquake and the consequent tsunami in
+
+Japan, 2011. Starbird and Muzny (2012) resorted to machine learning to identify
+
+
+messages from Twitter users who were likely to be ‘on the ground’ during a crisis
+
+event. Imran et al. (2013) employed machine learning for successfully extracting
+
+structured information from unstructured, text-based Twitter messages and compared
+
+
+their results with manual classification based on crowdsourcing.
+
+        These previous analyses on social media usage in disasters identified a distinct
+
+
+role of users local to the event (or “on the ground”), who are more probable to generate
+
+useful information for improving situational awareness (Starbird et al. 2010, Vieweg et
+
+al. 2010, Acar and Muraki 2011, Bruns et al. 2012, Dugdale et al. 2012, Starbird and
+
+
+Muzny 2012, Imran et al. 2013). For instance, Acar and Muraki (2011) found that
+
+people in directly affected areas tend to tweet about their unsafe situation and survival
+
+related topics, while people in remote areas post messages about secondary effects (e.g.
+
+
+transportation) and for informing others that they are safe. As pointed out by Starbird &
+
+Muzny (2012, p. 2), “people who are on the ground are uniquely positioned to share
+
+information that may not yet be available elsewhere in the information space”. These
+
+
+works usually perform a binary classification of the messages into local/non-local, by
+
+resorting to a hand-analysis of the addresses provided in the user profiles (Starbird et al.
+
+
+2010, Vieweg et al. 2010, Acar and Muraki 2011) or using machine learning algorithms
+
+based on the content of messages to classify messages as “on the ground” (Starbird and
+
+Muzny 2012) or as coming from an “eyewitness” (Imran et al. 2013) that may provide
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+
+“first-hand” observations (Landwehr and Carley 2014). However, these studies do not
+
+provide compelling statistical evidence on the correlation between the
+
+semantics/usefulness of social media messages and their distance to areas affected by
+
+
+disasters.
+
+        As for quantitative spatiotemporal analyses, most of the existing work in the
+
+area has sought to make sense of social media data as a standalone source by analyzing
+
+
+aggregated patterns, e.g. by defining thresholds for the size of spatiotemporal clusters of
+
+messages that would serve as signals for crisis events of earthquakes (Sakaki et al.
+
+2010, Crooks et al. 2013), wildfires (De Longueville et al. 2010, Slavkovikj et al. 2014)
+
+
+or disease surveillance (Gomide et al. 2011, Bernardo et al. 2013). However, with such
+
+an approach the actual content of social media messages is largely ignored and with
+
+
+this, much of their potential to improve current knowledge about the unfolding situation
+
+is lost. Furthermore, although event detection is useful for sudden-onset crises for which
+
+there do not exist any other related data, in many concrete cases there are additional
+
+
+information sources available. As pointed out by Lazer et al. (2014), one should not see
+
+‘big data’ as a substitute for all existing data, but rather take the challenge of doing
+
+innovative analytics by using data from all traditional and new sources.
+
+
+        This is in line with a nascent research stream that uses VGI in combination with
+
+other geodata sources in the field of disaster management (Spinsanti and Ostermann
+
+2013, Triglav-Čekada and Radovan 2013, Schnebele et al. 2014, Tomaszewski et al.
+
+
+2014). Within this group, Spinsanti and Ostermann (2013) and Tomaszewski et al.
+
+(2013) are the only studies that we found to use external data about the geographic
+
+
+context to analyze social media data. Tomaszewski et al. (2014) present a work-in-
+
+progress aimed at retrieving authoritative data related to the contents of a message from
+
+Twitter for providing visual context, without further integrating the two datasets.
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+
+Spinsanti and Ostermann (2013) used external datasets to enrich social media, achieving
+
+good results in detecting spatiotemporal clusters of social media messages about forest
+
+fires. However, they do not use data streams from official sensors, but resort to more
+
+
+static information such as population density and ratio of forest cover. Furthermore,
+
+none of these studies was able to perform statistical analyses of the geographical
+
+relations between social media and authoritative data.
+
+
+
+3 Research Approach
+
+
+This paper addresses the problem of identifying useful information from VGI, in
+
+particular georeferenced social media, for improving situation awareness during
+
+
+emergencies. In contrast to most approaches reviewed in the previous section, which try
+
+to leverage VGI as a standalone information source, our approach explores external data
+
+
+sources to establish geographical relations between flood phenomena and social media
+
+messages. The basic idea of our approach follows from the observation that in practical
+
+settings there is usually some information available about the natural phenomena that
+
+
+trigger a disaster. Thus, we propose that the existing information basis could be
+
+exploited when seeking to identify relevant additional information contained in social
+
+media messages.
+
+
+
+        Floods, in particular, are phenomena which are closely spatially correlated to
+
+geographical features of water streams. Existing geographical information about
+
+affected river basins and watersheds can thus be profitably used in this context.
+
+
+Furthermore, in many practical cases additional information sources are available in
+
+(near) real time, such as in situ sensors of river gauging stations and/or airborne
+
+
+observations from satellites. This information can be used to determine the
+
+spatiotemporal characteristics of the flood phenomena being analyzed. Therefore, in the
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+
+case of floods, it makes less sense to use georeferenced social media to do event
+
+detection, as has been previously done for earthquakes (Sakaki et al. 2010, Crooks et al.
+
+2013).
+
+
+
+        Furthermore, spatiotemporal characteristics of the floods affect the
+
+spatiotemporal characteristics of VGI and social media messages. As previously
+
+mentioned, existing studies have shown that social media messages coming from people
+
+
+local to the events should contain more useful information (Acar and Muraki 2011,
+
+Bruns et al. 2012, Dugdale et al. 2012, Starbird and Muzny 2012, Imran et al. 2013,
+
+
+Landwehr and Carley 2014). Based on this, the hypothesis posed here is that social
+
+media messages which are closer to the flooded areas are more likely relevant and/or
+
+more strongly related to the unfolding event, thus being more useful for improving
+
+
+situation awareness. Our approach thus explores the relations between spatial
+
+information from social media messages and geographic information about flood
+
+phenomena both from hydrological data and official sensor data. The goal is to test our
+
+
+hypothesis that the proximity to and severity of observed flood phenomena can be a
+
+significant resource to identify useful messages with the goal of improving situation
+
+awareness, thus supporting disaster management.
+
+
+        (Figure 1) schematically depicts our approach, which is divided into three main
+
+components:
+
+1) Gathering information on flood phenomena, i.e. identifying flood-affected regions;
+
+
+2) Gathering information from social media, i.e. georeferenced Twitter messages;
+
+3) Analyzing the geographical relations between the information on flood phenomena
+
+
+(1) and social media messages (2) to assess the usefulness of social media messages.
+
+
+                              Figure 1. Research Approach.
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        In this manner, our approach seeks to leverage existing knowledge and data
+
+about the spatiotemporal characteristics of flood phenomena in order to improve the
+
+identification of useful information from georeferenced social media. It is thus
+
+
+consistent with the suggestion of Gao et al. (2011) that scientific data could be used to
+
+augment user-generated data so as to provide more detailed insights on information
+
+requirements and needs during a disaster.
+
+
+        In this paper, this approach is applied to analyze the use of Twitter during the
+
+River Elbe flood in 2013, as described in the next sections.
+
+
+
+4 Description of the case study and datasets
+
+
+This section provides a description of our case study followed by an explanation of the
+
+datasets we employed.
+
+
+
+4.1 River Elbe Flood
+
+
+In the period from 30 May to 3 June 2013 extreme heavy rain affected large parts of
+
+
+eastern and central Europe. According to the State Agency for Environment,
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+
+Agriculture and Geology of Saxony (Sächsisches Landesamt für Umwelt
+
+Landwirtschaft und Geologie 2013), the distribution of precipitation in the basin of the
+
+rivers Elbe and its tributaries Moldau and Saale reached values two to three times as
+
+
+high as the average month of June, which is equivalent to a centennial return period.
+
+The soil was already highly saturated at this time due to precipitations in May 2013.
+
+Therefore, the heavy rain rapidly resulted in surface runoff causing the severe flood
+
+
+situation.
+
+        Some gauging stations measured values that were never recorded before. For
+
+instance, at “Magdeburg-Strombrücke” the water level reached 7.46 m, which is more
+
+
+than 70 cm higher than the former maximum. Another characteristic of the flood was
+
+the huge stretch of the flood wave. The alert phase 4 (the highest in Germany) that was
+
+
+announced by the government lasted for 6 days along the rivers Elbe, Mulde, Elster and
+
+Neiße in Saxony and Saxony-Anhalt (Sächsisches Landesamt für Umwelt
+
+Landwirtschaft und Geologie 2013).
+
+
+
+4.2 Datasets
+
+
+Twitter Data
+
+
+The Twitter dataset contains of 60,524 geo-referenced short text messages (“tweets”)
+
+
+within the territory of Germany. Each message consists of up to 140 Unicode
+
+characters. Besides the text message, every tweet contains several metadata fields, such
+
+as a timestamp (UTC time) when the tweet was created, hashtags (i.e. keywords
+
+
+preceded by #), URLs, an integer unique ID of the tweet, and information about the user
+
+who posted the tweet. The geographic location of a tweet is described in the metadata
+
+
+field “coordinates”, which is also known as geotag. The inner coordinates array is
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+
+formatted as geoJSON.    1
+
+
+        Users can geo-reference messages in Twitter in different ways: either manually
+
+(e.g. by entering the name of a city in the field “location”) or automatically when a
+
+client application has access to the coordinates of a GPS receiver. Unfortunately, only a
+
+
+small fraction of tweets are currently georeferenced by users. A recent study found that
+
+the prevalence of geolocated tweets was only about 3%; however, city and state could
+
+
+be determined for 17% of user profiles using a simple text-matching approach, with a
+
+high agreement (88%) between GPS data and text-matching in the United States
+
+
+(Burton et al. 2012). Another study estimates that 11-13% of the tweets in Europe and
+
+1% in Germany are geolocated (Fuchs et al. 2013). While this may limit analyses based
+
+
+on the geolocation such as the current study, the absolute number of geotagged tweets is
+
+actually high, since the size of the overall data set tends to be large. Furthermore,
+
+
+availability of georeferenced social media messages can be expected to increase in the
+
+next years with the widespread adoption of GPS-enabled devices.
+
+
+        Twitter offers a number of Application Programming Interfaces (APIs), which
+
+can be used for automatically retrieving data. For this study, we used the Twitter
+
+
+streaming API, which provides access to a 1% sample of the real-time stream of total
+
+tweets sampled by taking every 100 tweet (Burton et al. 2012). The data was collected
+
+
+by querying the streaming API during the period from 08 June 2013 1:30 pm to 10 June
+
+2013 midnight for georeferenced tweets within a bounding box covering Germany.
+
+
+Afterwards we further filtered tweets by their location and excluded those outside the
+
+territory of Germany.
+
+
+
+
+
+
+
+1
+ https://dev.twitter.com/docs/platform -objects/tweets, accessed on August 15, 2014.
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+
+Authoritative data
+
+        As authoritative data about the flood phenomena, we gathered official water
+
+
+level data from 185 monitoring stations along the German federal waterways provided
+
+by the German Federal Waterways and Shipping Administration and the German
+
+
+Federal Institute for Hydrology. The water level measurements were provided in a 15-
+
+minute resolution for the whole period analyzed. Through the German online gauge
+
+                        2
+system “Pegel Online” , we acquired an additional dataset that includes information
+
+about the location of each measurement station, the average flood water level over a
+
+
+time period from 1 November 2000 to 31 October 2010, and the highest water level
+
+ever recorded.
+
+
+        Additionally, we used HydroSHEDS drainage direction information derived
+
+from elevation data of the Shuttle Radar Topography Mission (SRTM) at 3 arc-second
+
+resolution (Lehner et al. 2008). The data is already verified and is considered to be of
+
+
+adequate quality for our analysis in spite of its limited resolution.
+
+
+
+5 Methodology
+
+
+This section describes the detailed methodology used in this paper, by further
+
+elaborating the procedures used to apply the approach described in Sect. 3 and
+
+
+schematically depicted in (Figure 1). The next section explains the steps conducted in
+
+preparing the datasets employed (Sect. 5.1), followed in Sect. 5.2 by the description of
+
+
+the analytical procedures used.
+
+
+
+5.1 Data Preparation
+
+
+
+
+
+2
+ http://www.pegelonline.wsv.de , accessed on 15 October, 2013.
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+
+Characterizing the flood phenomenon
+
+        The first part of our data preparation (left-hand box in Fig. 1) consisted of
+
+defining the flood-affected regions based on the digital elevation model (for catchment
+
+
+areas) and on official data (river water levels). It is further described as follows.
+
+
+
+Identifying catchment areas
+
+
+        The delineation of small catchment areas is based on the HydroSHEDS drainage
+
+direction raster and was implemented using the ArcHydro toolset for ArcGIS. The
+
+workflow to calculate identify catchment areas with ArcGIS is depicted in (Figure 2)
+
+
+and described in detail by Zhang et al. (2010) and Merwade (2012). Starting with flow
+
+direction information we computed the flow accumulation. This information was then
+
+
+used to define a stream network. In this case study, grid cells are considered as drainage
+
+channels if 2,000 or more upstream cells drain into it. The drainage channels were
+
+exported as vector data. Finally, catchment areas were delineated using all river
+
+
+junctions, calculated from the drainage channel vector file. This procedure ensures that
+
+all cells within the same catchment drain into the same stream. As a result we obtained
+
+779 unique catchment polygons.
+
+
+
+                        Figure 2. Catchment Processing Workflow.
+
+
+
+
+
+
+
+
+
+
+Calculating the relative water level (flood severity) of catchments
+
+
+        In this step, we analyzed the water level data collected from 185 water level
+
+measurement stations along the German Federal waterways. To assess the local water
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+
+level at a given gauge station, we computed the difference between the daily maximum
+
+water level and the average flood water level for the time period from 1 November 2000
+
+to 31 October 2010. From now on, we refer to this difference as the ‘relative water
+
+
+level’ and use this as the variable for the measuring the severity of a flood. Thus,
+
+negative values indicate that the local water level at the gauge station was below an
+
+average flood water level. Therefore this station can be considered as not flood-affected.
+
+
+Conversely, positive values indicate that the gauging station was flood-affected. The use
+
+of a daily maximum is justified in this case since this was a slow onset flood and the
+
+Twitter dataset is sparse. However, for more dynamic scenarios such as flash floods, a
+
+
+higher temporal resolution could be used, e.g. by calculating maximum water levels
+
+hourly, or even in a finer timescale.
+
+
+        We thus combined geometric information on catchments and water levels as
+
+attribute values based on the location of the monitoring stations. The relative water level
+
+values were matched to the corresponding catchments. If more than one water level
+
+
+measurement station was found to be within one given catchment, we assigned their
+
+arithmetic mean to the catchment and classified it as flood-affected based on this value.
+
+
+
+
+Processing georeferenced tweets
+
+ The processing of tweets (right-hand box in Fig. 1) enclosed three steps (keyword-
+
+based filtering, content analysis and thematic coding) which are explained as follows.
+
+
+Keyword-based filtering
+
+        For identifying messages containing relevant information, we first filtered the
+
+
+Twitter messages that referred to the flooding event. This was accomplished by
+
+keyword filtering, which is common practice in the analysis of Twitter messages
+
+(Vieweg et al. 2010, Graham et al. 2012, Kongthon et al. 2012). Tweets containing the
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+
+German-language keywords “Hochwasser”, “Flut”, “Überschwemmung” (meaning
+
+
+“flood”) or the English word “flood”, regardless of capitalization, were retained.
+
+Keyword selection was based on the definition of the German dictionary “Duden” for
+
+the word “Hochwasser”. Furthermore, we included the additional words “Deich” (dike)
+
+
+and “Sandsack” (sandbag), which were found to be common in media reports.
+
+Hyperlinks contained in the tweets were not examined at this stage.
+
+
+
+
+Content analysis: assessment of text and hyperlinks
+
+
+        Tweets that did not contain the keywords defined above were marked as “off
+
+topic” without any further content examination. Messages containing the keywords
+
+
+were then scrutinized individually by three independent persons and classified into the
+
+following categories: (0) off topic (i.e. the message was not related to floods even
+
+
+though it contained one of the keywords), (1) on topic but not relevant, (2) on topic and
+
+relevant. An on-topic tweet was considered “relevant” if it contained information that
+
+
+may contribute to situation awareness. For example, tweets containing situational
+
+updates and other information that could be useful for other persons and/or emergency
+
+
+agencies were classified as “relevant.” After the independent classification by the three
+
+researchers, cases of disagreement were discussed individually to reach a consensus in
+
+
+each case.
+
+
+Table 1. Classification of tweets based on their relation to the floods.
+
+Classification+           Description+
+(0)+“off+topic”+          The+tweet+does+not+refer+to+the+flooding+event. +
+
+
+                          Example:+
+
+
+                          „I‘m+at+Hochwasserbehälter+der+Stadtwerke+Gießen+[pic]:+
+                          http://t.co/uegl13zx22“+(Tweet+44468) +
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+
+                            The+tweet+refers+to+the+flooding+event,+but+does+not+contain+relevant+
+                            information+
+(1)+„on+topic,+not+
+relevant“+
+                            Example:+
+
+
+
+                            „Ich+wünsche+den+#Hochwasser+betroffenen+weiterhin+alles+Gute,+
+                            und+trotz+alledem+allen+einen+schönen+#Sonntag“+(Tweet+18913) +
+                            („all+the+best+for+anyone+affected+by+the+flood,+despite+all+that+have+a+nice+
+
+                            Sunday.”)+
+                            The+tweet+refers+to+the+flooding+event+and+contains+relevant+information. +
+
+(2)+„on+topic,+
+relevant“+                  Examples:+
+
+
+                            „am+Deich+in+#Lostau+werden+noch+Leute+mit+Gummistiefeln+
+                            benötigt+#Hochwasser+#AltLostau+http://t.co/n0FEuapA3r“+(Tweet+
+
+                            2707)+
+                            („We+still+need+people+with+rubber+boots+at+the+Dike+in+Lostau.“) +
+
+
+                            „#hohnstorf+#elbe+#flut+#hochwasser+#2013+@+Hohnstorf+
+
+                            http://t.co/PrPWLBg29z“+(Tweet+26638) +
+
+
+
+         Tweet relevance was not only assessed based on its text content itself, but also
+
+
+following the hyperlinks (e.g. to pictures) contained in the text. For example, the text of
+
+
+the tweet in (Figure 3) does not contain any relevant information, but the referenced
+
+
+picture does, since it depicts the current situation corresponding to the timestamp and
+
+
+the geographic coordinate of the tweet. It was therefore classified as “relevant”.
+
+
+
+                             Figure 3. Example of an on-topic tweet.
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+
+Thematic coding of on-topic tweets (a bottom-up approach)
+
+        On-topic tweets were also coded considering their contents. The content-based
+
+
+classification of messages requires a well-defined set of categories, which heavily
+
+depends on the crisis context analyzed, i.e. it varies for each crisis phenomenon and
+
+
+event. We adopted the categories proposed by Imran et al. (2013) (“caution and
+
+advice”, “information source”, “donation”, “causalities and damages”, “unknown”) and
+
+Vieweg et al. (2010) (warning, preparatory activity, fire line/hazard location, flood
+
+
+level, weather, wind, visibility, road conditions, advice, evacuation information,
+
+volunteer information, animal management, and damage/injury reports). However,
+
+
+neither of the previous sets of categories was well suited for our case study, the River
+
+Elbe flood. We therefore used these previous classifications as a guideline and adapted
+
+them to derive a modified classification for this study.
+
+
+        We chose a bottom-up approach to classify tweets considering their thematic
+
+context. Three independent persons qualitatively coded all on-topic tweets by assigning
+
+
+any number of codes they felt necessary to express the thematic context of the
+
+messages. Following this, the labels were compared and merged. Both text and pictures
+
+
+of the Twitter messages were used for thematic coding.
+
+        As a result, we grouped on-topic tweets into seven thematic groups: (1)
+
+“volunteer actions”, (2) “media reports”, (3) “traffic conditions”, (4), “first hand
+
+
+observations”, (5) “official actions”, (6) “infrastructure damage”, (0) “other”. (Table 2)
+
+presents a detailed description of the thematic groups and their characteristics.
+
+
+
+
+
+
+
+
+Table 2. Thematic groups used for classifying tweets.
+Thematic+groups+         Description+
+(1)+“volunteer+actions”+ Tweets+referring+to+flood+combating+actions+by+volunteers+and+non c
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+
+to the published version for referencing.
+
+                             professionals.+This+category+correspo nds+to+the+category+„volunteer+
+                             information“+in+Vieweg+et+al.+(2010).+
+                             examples:+
+
+                             „In+#Lostau+am+Netto+sind+jetzt+ca.+200+Leute+am+Sandäcke+füllen+ c+vielen+
+                             Dank+#hochwasser+#altLostau+http://t.co/ktLxQngsYQ“+(Tweet+2625)+
+                             („About+200+people+filling+sandbags+near+the+Netto+(supermarket)+in+
+
+                             Lostau.+Thank+you!“)+
+                             „gegen+das+Hochwasser+kämpfen“+
+                             („combating+the+flood“)+
+
+(2)+„media+reports“+         Tweets+referring+to+media+reports. +
+                             examples:+
+
+                             „#Hochwasser+#Flutopfer+heute+Thema+bei+#güntherjauch+mit+
+                             #albertschwinghammer+aus+#fischerdorf+#deggendorf+@DasErste“+
+                             (Tweet+35072)+
+
+                             („Flood+and+floodvictims+are+todays+topics+on+Günther+Jauch’s+TV+show.“) +
+                             “jetzt+der+@MDR_SAN+live+vor+der+tür+mit+kristin+schwietzer.+#magdeburg+
+                             #hochwasser+#zollstraße+http://t.co/ljAgJkuLS1“ +
+
+                             („+MDR+SAN+radio+station+live+reports+presented+by+kristin+schwietzer”)+ +
+(3)+„traffic+conditions“+
+                             Tweets+referring+to+traffic+(road+and+rail)+disruptions.+This+category+
+
+                             corresponds+to+the+category+„road+conditions“+in+Vieweg+et+al.+
+                             (2010).+
+
+                             example:+
+                             „Neues+aus+dem+Zug+vom+Zug:+#ice644+soll+um+11.30+Uhr+Hannover+
+                             erreichen,+also+drei+Std.+später+als+geplant.+ #hochwasser“+(Tweet+43792)+
+
+                             („News+from+the+train.+Ice+644+will+arrive+in+Hannover+with+a+delay+of+
+                             three+hours+at+11.30+am.”)+
+
+                             “ICEcHopping+wg.+#hochwasser.+(@+Berlin+Ha uptbahnhof+w/+13+others)+
+                             http://t.co/UYV6wyOaGe”+
+                             (“+Changing+ICE+train+because+of+flood”)+
+
+(4)+„first+hand+
+observations"+
+                             Tweets+referring+directly+or+indirectly+to+water+level+
+                             measurements+or+the+expansion+of+flooded+areas.+This+category+
+                             corresponds+to+the+categories+„flood+level“+and+“hazard+location”+
+
+                             in+Vieweg+et+al.+(2010).+
+
+
+                             examples:+
+
+
+                             „7,24+Meter+an+Pegel+#strombrücke+#Magdeburg+#Hochwasser+
+
+                             100145Bjun13“+(Tweet+38630) +
+
+
+                             („water+level+at+„Magdeburg+Strombrücke“+reaches+7,24+meters) +
+
+
+                             „#hohnstorf+#elbe+#flut+#hochwasser+#2013+@+Hohnstorf+
+                             http://t.co/PrPWLBg29z“+(Tweet+26638) +
+
+                             „direkt+dazu:+heftig,+diese+ausmaÃŸe+"live"+zu+sehen.+das+ist+wirklich+
+                             negativ+beeindruckend.+#hochwasser“+
+                             („tough+to+see+the+extent+of+the+flood,+negatively+impressing“) +
+
+(5)+„official+actions“+      Tweets+referring+to+official+actions+by+professionals+like+police,+civil+
+                             protection+or+red+cross.+This+category+corresponds+to+the+category+
+                             „evacuation+information“+in+Vieweg+et+al.+ (2010).+
+
+                             example:+
+                             http://t.co/bSscH1Z0DI+#Einsatz+#Hochwasser+#Feuerwe hr+#Elbe+(Tweet+
+
+                             21921)+
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+
+to the published version for referencing.
+                           („flood+combating,+fire+brigade,+river+Elbe“) +
+
+                           „Nach+nem+#Mittelwächter+ein+neuer+Versuch+im+kleinsten+Ruhetag+der+
+                           Welt.+#Hochwasser+#Rettungswache+http://t.co/0YQcsJ9S3t“ +
+                           („next+try+during+rest+day.“)+
+(6)+„infrastructure+
+damage“+                   Tweets+referring+to+the+status+of+critical+infrastructures.+This+
+                           category+corresponds+to+the+category+„damage+reports“+in+Vieweg+
+
+                           et+al.+(2010)+and+„casualities+and+damage“+in+Imran+&+Elbassunoni+
+                           (2013).+
+                           example:+
+                           „strom+abgeschaltet+ohne+vorwarnung.+wo+blieb+d ie+information+
+
+                           @Ottostadt?+#magdeburg+#hochwasser+#zollstraße“+(Tweet+3698) +
+                           (“no+electicity+at+Magdeburg+Zollstraße.“)+
+(0)+„other“+               Tweets+not+referring+to+any+of+the+previous+categories.+This+category+
+                           corresponds+to+the+category+„unknown“+in+Imran+&+Elbas suoni+(2013).+
+
+
+
+Establishing the geographical relations between tweets and the flood phenomena
+
+
+The final part of our data preparation consisted of calculating the geographical relations
+
+
+based on both authoritative data and tweets (box in the center of Fig. 1). The proximity
+
+relationship for each tweet was calculated as the distance in meters between the location
+
+
+of the tweet and the nearest flood-affected catchment. Tweets that are located within the
+
+
+area of flood-affected catchments had the distance variable assigned with zero meters
+
+(“0 m”). The severity relationship, in turn, is defined as the relative water level of the
+
+
+catchment in which the tweet was located.
+
+
+
+
+
+5.2 Statistical Data Analysis
+
+
+The purpose of the statistical analysis of Twitter data was (1) to identify general spatial
+
+
+patterns in the occurrence of on-topic tweets that may be associated with distance to and
+
+
+relative water level of flood events, and (2) to further explore possible differences in
+
+spatial patterns among subtypes of on-topic tweets. Challenging aspects in this analysis
+
+
+relate to possible nonlinearities, the expected (statistical) interaction between relative
+
+
+water level and distance to flood, and spatial autocorrelation among observations.
+
+Interaction, in this context, refers to the possibility that, for example, on-topic tweets
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+
+cluster more strongly around catchments with extremely high water levels compared to
+
+catchments with lower water levels.
+
+
+We address these challenges by using generalized additive models (GAMs) in
+
+
+conjunction with a spatial bootstrap procedure to estimate spatial differences in on-topic
+
+tweet frequency. Only tweets located within a 100 km distance of flood-affected
+
+catchments were used (320 on-topic and 10% of the 27,410 available off-topic tweets).
+
+
+        GAMs are nonlinear, or partly nonlinear, extensions of GLMs, such as logistic
+
+regression, that replace the linear predictor terms with nonlinear (spline-type) smoothers
+
+
+of adjustable flexibility (Wood 2006). Examples of their application in geospatial
+
+modeling include landslide susceptibility modeling and spatial epidemiology (among
+
+others Vieira et al. (2008), Goetz et al. (2011)).
+
+
+        For the analysis of general pattern in the distribution of on-topic tweets we use
+
+GAMs with a logistic link function and two numeric predictors, relative water level (as
+
+defined above, in m) and the logarithm (base 10) of the Euclidean distance (in km) to
+
+
+the nearest flood-affected catchment. To avoid that the results are excessively
+
+influenced by extreme values, we trimmed relative water level at +/-1.0 m. To mitigate
+
+the coarse nature of the “0” distance corresponding to a location within a flood-affected
+
+
+catchment, all distances <10 km were assigned a value of 10 km prior to taking the
+
+logarithm.
+
+        We used the GAM implementation of Wood (2006) in the R package “mgcv”,
+
+
+which automatically adjusts the effective degrees of freedom of the spline smoothers
+
+using a generalized cross-validation procedure. The “bam” implementation for large
+
+
+data sets was chosen. Alternative GAMs were fitted that represent the two predictors as
+
+additive terms (two univariate thin plate splines) or as an interactive term (one bivariate
+
+thin plate spline smoother). Upper limits of 3 and 5 effective degrees of freedom were
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+
+used in the additive and interactive models, respectively, in order to avoid excessive
+
+oscillations in the resulting smoothers.
+
+        In addition to the visual summaries provided by the GAM, we used the GAMs to
+
+
+calculate odds ratios and relative risks associated with distance and water level. The
+
+odds, p/(1 – p), are a common way of re-expressing a probability p in the context of
+
+logistic models, and the ratio of odds corresponding to different levels of a predictor
+
+
+variable is a measure of its effect size. Similarly, the relative risk is the ratio of
+
+probabilities predicted by the GAM. In this study, odds ratios and relative risk were
+
+calculated for ≤10 km versus 30 km distance from flood-affected areas, and for a
+
+
+relative water level of +0.75 m versus -0.75 m while keeping the other predictor
+
+constant. In the case of the GAM with an interaction of distance and water level we
+
+
+calculated odds ratios and relative risk of one predictor at different levels of the other
+
+predictor.
+
+        Since the GAM does not provide parametric estimates of the sampling
+
+
+variability of odds ratio and relative risk, we applied a spatial block bootstrap to obtain
+
+percentile confidence intervals at the 95% level. The bootstrap is a resampling-based
+
+estimation procedure that simulates the natural sampling variability by drawing
+
+
+observations from the available data (Davison et al. 2003). Since observations close to
+
+each other may be autocorrelated, we resampled the observations at a spatially
+
+aggregated level (blocks) rather than individual tweets, similar to the procedure used by
+
+
+Brenning et al. (2014). We used 100 blocks defined by 100-means clustering of the
+
+spatial coordinates of tweets, drew 100 out of these 100 blocks randomly with
+
+
+replacement, and used this set as a training set for refitting the GAM. The entire sample
+
+was then used to obtain an estimate of the odds ratio and relative risk, and the procedure
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+
+was repeated 2500 times in order to obtain the resampling distribution of these
+
+parameters and derive their 95% percentile confidence intervals.
+
+        Spatial patterns of subtypes of on-topic tweets were furthermore explored using
+
+
+GAMs to model the probability that an on-topic tweet belongs to a specific subtype.
+
+This analysis was based on the sample of on-topic tweets within the 100 km buffer (N =
+
+320). On the one hand, one model was fitted to identify patterns of tweets identified as
+
+
+relevant (N = 169) versus not relevant in relation to distance to flood and relative water
+
+level. This addresses the question whether more relevant tweets are more strongly
+
+concentrated in proximity to flood-affected areas or in catchments with higher relative
+
+
+water levels. On the other hand, separate models were built to relate the occurrence of a
+
+specific thematic category to distance and water level. The expectation is that thematic
+
+
+classes that are more strongly related to local conditions (e.g., first-hand observations)
+
+are also more strongly concentrated near flood-affected areas and where relative water
+
+levels are higher. Three aggregated thematic classes were considered due to sample size
+
+
+limitations, and the “other” category was omitted: (1) “volunteer actions” (N = 67); (2)
+
+“media reports” and “traffic conditions” (N = 55); (3) “first hand observations”,
+
+“official actions”, “infrastructure damage” (N = 92). Due to the smaller sample size
+
+
+only GAMs without interaction term were considered, and only basic graphical and
+
+numeric summaries are provided for exploratory analysis of these patterns.
+
+
+
+6 Results
+
+
+The results of our study are presented in the following sections. The next section
+
+provides an exploratory description of the data collated, serving as a basis for the
+
+detailed analysis based on our research questions.
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+
+6.1 Data Description
+
+
+
+(Figure 4) shows flood-affected catchments and the relative water level of the flooding
+
+calculated from digital elevation data and water level data for the time period from 8 to
+
+
+10June 2013. Clearly visible is the shift of the flood peak from the upper reaches
+
+
+(southeast) on 8 June to the lower reaches (north) on 10 June. On 8June 2013 the
+
+
+catchments along the river Elbe in the federal state of Saxony were most affected, whilst
+
+
+the lower reaches of the river Elbe were not affected until 10 June 2013.
+
+
+
+Table 3. Relevance of Twitter messages.
+
+    period+        8–10+June+2013+         8+June+2013+           9+June+2013+           10+Jun+2013+
+
+       +             #+        %+          #+         %+          #+         %+          #+         %+
+
+
+   all+tweets+    60,524+    100.0+     14,286+     100.0+     23,093+     100.0+     23,145+     100.0+
+
+
+   off+topic+     60,154+     99.4+     14,221+      99.5+     22,908+      99.2+     23,025+      99.5+
+
+ on+topic,+not+    187+       0.3+        23+        0.2+        94+         0.4+       70+         0.3+
+
+
+   relevant+
+
+   on+topic,+      183+       0.3+        42+        0.3+        91+         0.4+       50+         0.2+
+
+
+   relevant+
+
+
+
+
+         Overall we examined 60,524 tweets within the territory of Germany from the
+
+
+June 8-10, 2013 period. Of these only 370 tweets could be labeled as “on topic” based
+
+
+on keyword filtering and manual classification of tweets, while more than 99% were
+
+
+classified as “off topic”. On topic tweets distribute nearly equal into relevant and not
+
+
+relevant tweets (Table 3).
+
+
+         In terms of their content about two-fifth of all on-topic tweets contained
+
+
+information referring to volunteer actions (19.2%) or first-hand observations (18.6%),
+
+whereas on topic tweets referring to traffic conditions, official actions or infrastructure
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+
+
+damage reach a much lower share (Table 4). About one third (32.4%) of the on topic
+
+tweets were classified as “other.”
+
+
+
+
+Table 4. Classification of Twitter messages based on content analysis.
+
+    period+         8–10+June+2013+         08+June+2013+         09+June+2013+          10+June+2013+
+
+                      #+         %+         #+         %+          #+         %+         #+          %+
+
+        +
+   all+tweets+      370$       100.0$       65$      100.0$      185$       100.0$      120$      100.0$
+
+
+   volunteer+
+
+    actions+         71$       19.2$        14$       21.5$       45$       24.3$        12$       10.0$
+
+
+ media+reports+      54$       14.6$        9$        13.8$       29$       15.7$        16$       13.3$
+
+
+     traffic+
+
+  conditions+        26$        7.0$        2$         3.1$        7$        3.8$        17$       14.2$
+
+
+   first+hand+
+
+
+ observations+       69$       18.6$        18$       27.7$       30$       16.2$        21$       17.5$
+
+official+actions+    21$        5.7$        3$         4.6$        7$        3.8$        11$        9.2$
+
+
+ infrastructure+
+
+    damage+
+                      9$        2.4$        3$         4.6$        5$        2.7$        1$         0.8$
+
+     other+         120$       32.4$        16$       24.6$       62$       33.5$        42$       35.0$
+
+
+          Figure 5 shows the density of tweets for each keyword classification. On-topic
+
+
+tweets show peaks in the regions of Magdeburg, Berlin and Halle. Overall, on-topic
+
+
+tweets appear only in a few parts of Germany. Off-topic tweets concentrate in densely
+
+
+populated regions, e.g. urban areas like Berlin, Hamburg, Munich and the Ruhr area.
+
+
+The tweets cover almost all of Germany, except for some regions in the federal states of
+
+
+Brandenburg and Mecklenburg-Hither Pomerania.
+
+
+
+Figure 4. Spatiotemporal distribution of flood-affected catchments based on official
+
+water level information.
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 5. Spatial distribution of flood-related and non-related tweets.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        A comparison of the spatial distributions of on-topic tweets and flood-affected
+
+catchments (see (Figure 4) and (Figure 5)) shows that a considerable portion
+
+
+corresponds to flood-affected catchments. To further examine this relationship we
+
+statistically analyzed the distance of all tweets to flood-affected catchments.
+
+
+
+
+6.2 Spatial Analysis
+
+        The spatial analysis of tweets using the GAM showed a strong association of on-
+
+
+topic tweets with distance to flood-affected catchments and relative water level (Table
+
+5; Fig. 6). On-topic tweets were 11.0 times (95% confidence interval: 2.5-35.6) as likely
+
+
+to occur near (≤10 km away from) flood-affected catchments with a high relative water
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+
+level (+0.75 m) than at 30 km from such catchments. At medium to low relative water
+
+levels (0 and -0.75 m), in contrast, there was no significant association with distance.
+
+
+
+
+
+
+Table 5. Odds ratios of the occurrence of on-topic tweets for distance and relative water
+
+level increments in the GAM without and with interaction.
+
+Model&                               Distance&                           Relative&Water&Level&
+
+                                 ≤10+km+vs.+30+km+                        +0.75+m+vs.+c0.75+m+
+
+
+GAM+without+                      13.1+[3.5c46.2]+                           5.5+[1.6c24.5]+
+
+interaction+
+
+
+GAM+with+           0.9+[0.1c4.1]+at+Relative+Water+Level+ c0.75+m+ 54.4+[5.4c1453]+at+Distance+≤10+
+
+interaction+         3.0+[0.6c12.5]+at+Relative+Water+Level+0+m +                 km+
+
+
+                   11.0+[2.5c35.6]+at+Relative+Water+Level ++0.75+m+4.3+[1.0c45.4]+at+Distance+30+km+
+
+                                                                    0.9+[0.2c8.4]+at+Distance+80+km+
+
+
+
+
+
+
+Figure 6. Transformation plots of the GAM without interactions showing the modeled
+
+relationship between the frequencies of on-topic tweets and (a) distance to flood and (b)
+
+relative water level. Values on the y axis are relative measures; see Table 5 for odds
+
+ratios as estimates of effect size.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         Even more pronounced – but also subject to greater uncertainty – was the
+
+
+association of on-topic tweets with relative water level when considering areas in close
+
+proximity to flood-affected catchments based on the GAM with interaction (Table 5;
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+
+Fig. 7). At distances ≤10 km, tweets near strongly affected catchments with a relative
+
+water level of +0.75 m were 54 times as likely to be on-topic as tweets in proximity to
+
+unaffected catchments with a relative water level of -0.75 m. While an association with
+
+
+relative water level was still marginally significant at 30 km distance to flood-affected
+
+areas, there was, not surprisingly, no association at greater distances.
+
+
+Figure 7. Transformation plot of the GAM with interaction between distance to flood
+
+and relative water level. Contour values are relative measures; see Table 5 for odds ratio
+
+estimates.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        Compared with general flood-related tweets there is perhaps a tendency for
+
+
+“relevant” on-topic tweets to be closer to flood-affected catchments (odds ratio 2.2 at
+
+≤10 km compared to 30 km distance), and in particular close to catchments with higher
+
+relative water level (odds ratio 2.9 for relative water level of +0.75 m versus -0.75 m).
+
+
+        Associations of thematic categories of on-topic tweets with flood distance and
+
+relative water level were comparatively weak and highly uncertain (Table 6). The
+
+
+thematic group of tweets related to first-hand observations, official actions and
+
+infrastructure damage appears to be somewhat more frequent at shorter distances and
+
+higher relative water levels compared to general flood-related tweets (odds ratios 1.6
+
+
+and 2.0, respectively), while tweets concerning media reports and traffic situation
+
+tended to be more weakly associated with distance and relative water levels (odds ratios
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+
+to the published version for referencing.
+
+0.6). Tweets related to volunteer actions appear to be less associated with distance and
+
+more strongly with relative water level compared to general flood-related tweets (odds
+
+
+ratios 0.4 and 4.0, respectively.
+
+
+
+Table 6. Odds ratios of the occurrence of subtypes of on-topic tweets for distance and
+
+severity increments according to GAMs without interaction term. This analysis is based
+
+on on-topic tweets only (N=320).
+
+Subtype&                                      Distance&                   Relative&Water&Level&
+
+                                         ≤10+km+vs.+30+km+                +0.75+m+vs.+c0.75+m+
+
+Volunteer+actions+(VA)+                         0.4+                              4.0+
+
+
+Media+and+traffic+situation+(MT) +              0.6+                              0.6+
+
+Firstchand+observations,+Official+              1.6+
+                                                                    2.0+
+actions,+Infrastructure+damage+
+
+
+(FOI)+
+
+
+
+7 Discussion
+
+
+This paper presents a geographical approach for identifying relevant georeferenced
+
+
+social messages based on authoritative data on flood phenomena. The goal was to
+
+
+investigate if this approach is able to identify the most useful messages for the purpose
+
+of extracting information that can be valuable for improving situation awareness in
+
+
+flood events.
+
+
+
+Figure 8. Spatial distribution of the frequency of on-topic tweets on 8, 9 and 10 June
+
+based on the GAM without interaction (top row) and with an interaction between
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+The statistical analysis of the tweets sent during the floods in Germany 2013 has
+
+
+confirmed the relevance of our approach. Tweets related to the flood (i.e. on topic) were
+
+11 times more likely to occur near (≤10 km away from) flood-affected areas, i.e. in
+
+
+catchments with a high relative water level (+0.75 m), than 30 km away from such
+
+areas. Furthermore, tweets near severely affected catchments with a relative water level
+
+of +0.75 m are 54 times more likely to be on-topic than tweets in proximity to
+
+
+unaffected catchments. In this manner, the hypothesis can be accepted that the
+
+geographical relations proximity and relative water level are both strong predictors of
+
+
+the usefulness of tweets in the analyzed case. Thus, by using the calculated values for
+
+the geographical relations proximity to and severity of floods for prioritizing social
+
+media messages, one can expect a significantly higher probability of identifying
+
+
+information that is useful for improving situational awareness in disaster management.
+
+        These findings are consistent with previous analyses on social media usage in
+
+
+disasters, which identified a distinct role of users local to the event (or “on the ground”),
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+
+who are more probable to generate useful information for improving situational
+
+awareness (Starbird et al. 2010, Vieweg et al. 2010, Acar and Muraki 2011, Starbird
+
+and Muzny 2012, Imran et al. 2013). However, these approaches analyze the contents of
+
+
+the messages, based on which they seek to classify messages/users as “local” or “on the
+
+ground”. The increasing amount of georeferenced social media messages that is
+
+becoming available in the last years enables us to work the other way round by taking a
+
+
+geographical approach: based on the relative location of social media messages, we can
+
+determine the most useful ones. In this way, we were able to do a more precise,
+
+quantitative assessment of the messages based on their calculated geographical relations
+
+
+with flooded areas (proximity and relative water level). These relations offer a much
+
+more fine-grained distinction than the binary classifications (local/non-local) previously
+
+
+used.
+
+        Another advantage of the geographical approach is that it enables a rigorous
+
+statistical data analysis by the use of a generalized additive model that is able to cope
+
+
+with possible nonlinearities and the expected interaction between relative water level of
+
+and distance to flood, as well as with spatial autocorrelation in social media data. As a
+
+result, this paper adds to previous research on spatial analysis of social media in
+
+
+disasters (Croitoru et al. 2013, Crooks et al. 2013, Fuchs et al. 2013) by presenting
+
+more rigorous evidence for a strong spatial association between locational proximity to
+
+floods and the usefulness of the messages for crisis management, and it transfers
+
+
+modeling approaches from the broader field of hazard modeling (Brenning et al., 2014)
+
+to the analysis of social media data.
+
+
+        However, these results should be considered within the scope and limitations of
+
+the present study. As for its external validity, this study must be replicated for different
+
+scenarios and hazards types to allow a wider generalization. Even though this work
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+
+examined a large and dense dataset, the messages related to floods consist of a small
+
+fraction (0.6%) of the total number of messages. This can be partially explained by the
+
+low ratio of tweets to Internet users in Germany (Stephens and Graham 2012), and
+
+
+possibly also to the unknown proportion of the overall tweet population that was
+
+available for this study. However, the small percentage of tweets that are related to the
+
+floods in Germany in 2013 was also observed in the study of Fuchs et al. (2013). This
+
+
+may have influenced also the weaker associations we found between the thematic
+
+categories of tweets and the geographical relations, since the number of messages in
+
+each category was relatively small. Furthermore, the bottom-up approach we used in the
+
+
+categorization has the advantage of yielding meaningful categories for the case at hand,
+
+but imposes limitations on the generalizability of our results to other cases and
+
+
+scenarios. Thematic categorization is indeed generally problematic in social media
+
+analysis, as it can be noticed from the lack of standards for categories in the existing
+
+work, in particular in the context of disaster management (Vieweg et al. 2010, Imran et
+
+
+al. 2013).
+
+        Additionally, during the manual scrutiny of the set of tweets obtained after the
+
+keyword-based filtering (see Sect. 5.1), we found out that in some cases the relevance of
+
+
+a message for improving situational awareness depends more on the picture itself than
+
+on its accompanying text, as is the case of Figure 3. A georeferenced picture of a
+
+flooded area can be a very useful piece of information during crisis response, since it is
+
+
+able to depict the current situation in a very granular way, and thus contribute to
+
+decision-making. For instance, a picture could contain information about whether a
+
+
+particular street, or even a specific part of the street, is usable or not for evacuation
+
+purposes.
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+
+        In the case of the tweet in Figure 3, the user additionally provided the hashtags
+
+“#hochwasser” and “flut” (flood) and that is why it was included after our initial
+
+filtering. Nevertheless, it may be the case that some messages of our dataset contain
+
+
+similar content but did not include any of the selected keywords and were thus
+
+classified as off topic. In this manner, owing to the manual screening of all “on topic
+
+tweets” we can be sure not to have any misclassified on topic messages (i.e. “false
+
+
+positives”), but we cannot rule out the existence of misclassified off topic tweets (i.e.
+
+“false negatives”). This is a common limitation of studies that work with text-based
+
+analysis of social media (e.g. De Longueville et al. 2009, MacEachren et al. 2011,
+
+
+Terpstra and Vries 2012, Fuchs et al. 2013, Spinsanti and Ostermann 2013), which
+
+could only be completely overcome either with a very costly manual verification of the
+
+
+whole dataset (alternatively, of significant random samples), or by developing a filter
+
+based on precise image-processing algorithms. Unfortunately, none of these alternatives
+
+were feasible in the present study due to time and resource constraints, but this is an
+
+
+interesting direction for future work.
+
+        Although this limitation may introduce a bias into the statistical results, it is
+
+unlikely that this would completely reserve the strong and significant statistical
+
+
+relationships that we observed between locational proximity/relative water level and
+
+usefulness of tweets. Furthermore, the difficulty in classifying pictures actually speaks
+
+in favor of the geographical approach as a whole, since the location-based identification
+
+
+of relevant messages we propose could be performed independently of the content of
+
+the social media messages, as opposed to other approaches based on natural language
+
+
+processing and machine learning (Starbird and Muzny 2012, Imran et al. 2013). Hence,
+
+future work can explore the application of the geographical approach to other social
+
+media platforms that are mainly based on photo and video sharing (e.g. Flickr,
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+
+Instagram). Furthermore, the location-based approach proposed here could be easily
+
+
+combined both with automated classification algorithms (e.g. being considered as
+
+weights for the classification of relevance) and with manual/crowdsourced examination
+
+
+(e.g. being used for ranking messages before human verification/processing), thus
+
+improving accuracy and efficiency of existing approaches. Therefore, this consists of an
+
+
+important avenue for future research endeavors.
+
+        In this manner, despite the limitations of this study, our findings imply that the
+
+
+geographical approach can serve as a basis for improving existing on-line monitoring
+
+systems. This could be accomplished by relying upon the quantitative indicators that we
+
+
+define for measuring the geographical relations proximity to and severity of floods, in
+
+order to automatically rate and prioritize incoming social media messages “on-the fly”.
+
+
+This approach may thereby offer a contribution for extending existing commercial tools
+
+(e.g. Geofeedia , Twitcident ) and research studies (MacEachren et al. 2011, Terpstra
+
+
+and Vries 2012, Croitoru et al. 2013, Spinsanti and Ostermann 2013) that aim for
+
+location-based knowledge discovery from social media. Most of these approaches
+
+
+(MacEachren et al. 2011, Terpstra and Vries 2012, Croitoru et al. 2013) provide
+
+
+visualizations exclusively based on inherent relations of social media data (e.g. semantic
+
+clustering or user network analyses), and could thus be improved by additionally
+
+
+resorting to external data sources for considering the geographical relations to disaster
+
+phenomena proposed here. Thus, our approach can offer a significant aid to the task of
+
+
+identifying useful messages both by emergency management professionals and the
+
+affected population of “everyday analysts” (Palen et al. 2010), who currently mostly
+
+
+
+
+3
+ http://www.geofedia.com, Acessed on 15 July 2014.
+
+4http://twitcident.com/, Acessed on 15 July 2014.
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+
+manually “follow” the flow of social media activity and strive to find useful
+
+information, as reported for instance by Latonero and Shklovski (2011).
+
+
+
+8 Conclusion
+
+        This paper seeks to make an additional contribution to the nascent research that
+
+combines social media data with geoinformation coming from other sources,
+
+
+particularly for the context of disaster management (Spinsanti and Ostermann 2013,
+
+Triglav-Čekada and Radovan 2013, Schnebele et al. 2014). Results show that the
+
+geographical approach proposed here for quantitatively assessing social media messages
+
+
+based on authoritative data, can be a viable and useful way to improve the identification
+
+of messages that contain useful information for managing disasters.
+
+        In this manner, the analysis of social media messages based on their
+
+
+geographical relations to the disaster phenomena is a relevant approach for coping with
+
+the characteristic noisiness/variability, volume and velocity of data stemming from
+
+social media. Existing geographical knowledge and authoritative data consist of
+
+
+valuable resources for spatially parsing ‘big’ social media data, by making it possible to
+
+efficiently order, and thereby ultimately reducing, the information space that must be
+
+
+searched for useful pieces of information. Future work should thus further develop this
+
+approach by considering other information sources (e.g. satellite or aerial images, land
+
+use data from authoritative sources or OpenStreetMap) and by deriving new
+
+
+geographical relations that better help us to explore the potential opened by social media
+
+by leveraging geographical knowledge.
+
+
+
+Acknowledgements
+
+        The authors would like to thank the German Federal Waterways and Shipping
+
+Administration and the German Federal Institute for Hydrology for providing the water
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+level data. João Porto de Albuquerque is grateful for FAPESP (grant no. 2012/18675-1),
+
+
+CAPES (grant no. 12065-13-7) and Heidelberg University (Excellence Initiative II /
+
+Action 7) for providing funding for his research stay and visiting professorship at
+
+Heidelberg University. Alexander Brenning is grateful to the Alexander von Humboldt
+
+
+Foundation for a research fellowship at Heidelberg University, which supported his
+
+contribution to this research. The authors are grateful to the anonymous reviewers for
+
+their helpful suggestions.
+
+
+
+
+
+References
+
+
+Acar, A. and Muraki, Y., 2011. Twitter for crisis communication: lessons learned from
+     Japan’s tsunami disaster. International Journal of Web Based Communities, 7 (3),
+     392–402.
+
+
+Bakillah, M., Li, R.-Y., and Liang, S.H.L., 2014. Geo-located community detection in
+     Twitter with enhanced fast-greedy optimization of modularity: the case study of
+     typhoon Haiyan. International Journal of Geographical Information Science, 1–
+     22.
+
+Bernardo, T.M., Rajic, A., Young, I., Robiadek, K., Pham, M.T., and Funk, J.A., 2013.
+
+     Scoping review on search queries and social media for disease surveillance: a
+     chronology of innovation. Journal of medical Internet research, 15 (7), e147.
+
+Bollen, J., Mao, H., and Zeng, X., 2011. Twitter mood predicts the stock market.
+     Journal of Computational Science, 2 (1), 1–8.
+
+
+Brenning, a., Schwinn, M., Ruiz-Páez, a. P., and Muenchow, J., 2014. Landslide
+     susceptibility near highways is increased by one order of magnitude in the Andes
+     of southern Ecuador, Loja province. Natural Hazards and Earth System Sciences
+     Discussions, 2 (3), 1945–1975.
+
+Bruns, A., Burgess, J., Crawford, K., and Shaw, F., 2012. # qldfloods and@ QPSMedia:
+
+     Crisis communication on Twitter in the 2011 south east Queensland floods.
+     Brisbane.
+
+Burton, S.H., Tanner, K.W., Giraud-Carrier, C.G., West, J.H., and Barnes, M.D., 2012.
+     “Right time, right place” health communication on Twitter: value and accuracy of
+     location information. Journal of medical Internet research, 14 (6), e156.
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+Chatfield, A.T. and Brajawidagda, U., 2013. Twitter Early Tsunami Warning System: A
+
+     Case Study in Indonesia’s Natural Disaster Management. In: System sciences
+     (HICSS), 2013 46th Hawaii international conference on System Sciences. 2050–
+     2060.
+
+Croitoru, A., Crooks, A., Radzikowski, J., and Stefanidis, A., 2013. Geosocial gauge: a
+     system prototype for knowledge discovery from social media. International
+
+     Journal of Geographical Information Science, 27 (12), 2483–2508.
+
+Crooks, A., Croitoru, A., Stefanidis, A., and Radzikowski, J., 2013. #Earthquake:
+     Twitter as a Distributed Sensor System. Transactions in GIS, 17 (1), 124–147.
+
+Davison, A.C., Hinkley, D. V., and Young, G.A., 2003. Recent developments in
+
+     bootstrap methodology. Statistical Science, 18 (2), 141–157.
+
+Dugdale, J., Van de Walle, B., and Koeppinghoff, C., 2012. Social media and SMS in
+     the haiti earthquake. In: 21st International Conference Companion on World Wide
+     Web. New York: ACM.
+
+
+Endsley, M.R., 1995. Toward a Theory of Situation Awareness in Dynamic Systems.
+     Human Factors: The Journal of the Human Factors and Ergonomics Society, 37
+     (1), 32–64.
+
+Fuchs, G., Andrienko, N., and Andrienko, G., 2013. Tracing the German centennial
+
+     flood in the stream of tweets: first lessons learned. In: Proceedings of the Second
+     ACM SIGSPATIAL International Workshop on Crowdsourced and Volunteered
+     Geographic Information. 31–38.
+
+Gao, H., Barbier, G., and Goolsby, R., 2011. Harnessing the Crowdsourcing Power of
+     Social Media for Disaster Relief. IEEE Intelligent Systems, 26 (3), 10–14.
+
+
+Goetz, J.N., Guthrie, R.H., and Brenning, A., 2011. Integrating physical and empirical
+     landslide susceptibility models using generalized additive models.
+     Geomorphology, 129 (3-4), 376–386.
+
+Gomide, J., Veloso, A., Meira, W., Almeida, V., Benevenuto, F., Ferraz, F., and
+
+     Teixeira, M., 2011. Dengue surveillance based on a computational model of spatio-
+     temporal locality of Twitter. In: Proceedings of the 3rd International Web Science
+     Conference on - WebSci ’11. New York, New York, USA: ACM Press, 1–8.
+
+Goodchild, M.F., 2007. Citizens as sensors: the world of volunteered geography.
+     GeoJournal, 69 (4), 211–221.
+
+
+Goodchild, M.F. and Glennon, J.A., 2010. Crowdsourcing geographic information for
+     disaster response: a research frontier. International Journal of Digital Earth, 3 (3),
+     231–241.
+
+Graham, M., Poorthuis, A., and Zook, M., 2012. Digital trails of the UK floods - how
+
+     well do tweets match observations? [online]. The Guardian Datablog. Available
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+     from: http://www.guardian.co.uk/news/datablog/2012/nov/28/data-shadows-
+
+     twitter-uk-floods-mapped [Accessed 20 Jun 2013].
+
+Herfort, B., Albuquerque, J.P. De, Schelhorn, S., and Zipf, A., 2014a. Exploring the
+     geographical relations between social media and flood phenomena to improve
+     situation awareness A study about the River Elbe Flood in June 2013. In: J. Huerta,
+     S. Schade, and C. Granell, eds. Connecting a Digital Europe Through Location
+
+     and Place. Heidelberg: Springer International Publishing, 55–71.
+
+Herfort, B., Albuquerque, J.P. de, Schelhorn, S., and Zipf, A., 2014b. Does the
+     spatiotemporal distribution of tweets match the spatiotemporal distribution of flood
+     phenomena#? A study about the River Elbe Flood in June 2013. In: S.R. Hiltz, M.S.
+     Pfaff, L. Plotnick, and P.C. Shih, eds. Proceedings of the 11th International
+
+     ISCRAM Conference. University Park, Pennsylvania, USA,: ISCRAM, 747–751.
+
+Imran, M., Elbassuoni, S.M., Castillo, C., Diaz, F., and Meier, P., 2013. Extracting
+     information nuggets from disaster-related messages in social media. In: Proc. of
+     ISCRAM, Baden-Baden, Germany.
+
+
+Kaewkitipong, L., Chen, C., and Ractham, P., 2012. Lessons Learned from the Use of
+     Social Media in Combating a Crisis: A Case Study of 2011 Thailand Flooding
+     Disaster. In: ICIS 2012 Proceedings. Atlanta, GA, USA: AIS.
+
+Kongthon, A., Haruechaiyasak, C., Pailai, J., and Kongyoung, S., 2012. The role of
+
+     Twitter during a natural disaster: Case study of 2011 Thai Flood. In: Technology
+     Management for Emerging Technologies (PICMET), 2012 Proceedings of
+     PICMET’12:. 2227–2232.
+
+Landwehr, P.M. and Carley, K.M., 2014. Social Media in Disaster Relief. In: W. Chu,
+     ed. Data Mining and Knowledge Discovery for Big Data, Vol. 1. Heidelberg:
+
+     Springer Berlin Heidelberg, 225–257.
+
+Latonero, M. and Shklovski, I., 2011. Emergency Management, Twitter, and Social
+     Media Evangelism. International Journal of Information Systems for Crisis
+     Response and Management, 3 (4), 1–16.
+
+
+Lazer, D., Kennedy, R., King, G., and Vespignani, A., 2014. Big data. The parable of
+     Google Flu: traps in big data analysis. Science (New York, N.Y.), 343 (6176),
+     1203–5.
+
+Lehner, B., Verdin, K., and Jarvis, A., 2008. New global hydrography derived from
+     spaceborne elevation data. EOS, Transactions American Geophysical Union, 89
+
+     (10).
+
+De Longueville, B., Annoni, A., Schade, S., Ostlaender, N., and Whitmore, C., 2010.
+     Digital Earth’s Nervous System for crisis events: real-time Sensor Web
+     Enablement of Volunteered Geographic Information. International Journal of
+     Digital Earth, 3 (3), 242–259.
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+De Longueville, B., Smith, R.S., and Luraschi, G., 2009. “OMG, from here, I can see
+
+     the flames!.” In: Proceedings of the 2009 International Workshop on Location
+     Based Social Networks - LBSN ’09. New York, New York, USA: ACM Press, 73.
+
+MacEachren, A.M., Robinson, A.C., Jaiswal, A., Pezanowski, S., Savelyev, A.,
+     Blanford, J., and Mitra, P., 2011. Geo Twitter Analytics: Applications in Crisis
+     Management. In: Proceedings, 25th International Cartographic Conference. Paris,
+
+     France., 1–8.
+
+Merwade, V., 2012. Watershed and Stream Network Delineation using ArcHydro
+     Tools, 1–22.
+
+Palen, L., Vieweg, S., and Anderson, K.M., 2010. Supporting “Everyday Analysts” in
+
+     Safety- and Time-Critical Situations. The Information Society, 27 (1), 52–62.
+
+Roick, O. and Heuser, S., 2013. Location Based Social Networks - Definition, Current
+     State of the Art and Research Agenda. Transactions in GIS, 17 (5), 763–784.
+
+
+Sächsisches Landesamt für Umwelt Landwirtschaft und Geologie, 2013.
+     Gewässerkundlicher Monatsbericht mit vorläufiger Auswertung des Hochwassers
+     Juni 2013.
+
+Sakaki, T., Okazaki, M., and Matsuo, Y., 2010. Earthquake shakes Twitter users: real-
+     time event detection by social sensors. In: Proceedings of the 19th international
+
+     conference on World wide web. 851–860.
+
+Schnebele, E., Cervone, G., and Waters, N., 2014. Road assessment after flood events
+     using non-authoritative data. Natural Hazards and Earth System Science, 14 (4),
+     1007–1015.
+
+
+Shklovski, I., Burke, M., Kiesler, S., and Kraut, R., 2010. Technology Adoption and
+     Use in the Aftermath of Hurricane Katrina in New Orleans. American Behavioral
+     Scientist, 53 (8), 1228–1246.
+
+Slavkovikj, V., Verstockt, S., Van Hoecke, S., and Van de Walle, R., 2014. Review of
+     wildfire detection using social media. Fire Safety Journal, 68, 109–118.
+
+
+Spinsanti, L. and Ostermann, F., 2013. Automated geographic context analysis for
+     volunteered information. Applied Geography, 43 (null), 36–44.
+
+Starbird, K. and Muzny, G., 2012. Learning from the Crowd#: Collaborative Filtering
+     Techniques for Identifying On-the-Ground Twitterers during Mass Disruptions. In:
+
+     L. Rothkrantz, J. Ristvej, and Z. Franco, eds. Proceedings of the 9th International
+     ISCRAM Conference – Vancouver, Canada, April 2012. 1–10.
+
+Starbird, K., Palen, L., Hughes, A.L., and Vieweg, S., 2010. Chatter on the red: what
+     hazards threat reveals about the social life of microblogged information. In:
+     Proceedings of the 2010 ACM conference on Computer supported cooperative
+
+     work. 241–250.
+This is an Accepted Manuscript of an article published in International Journal of Geographical
+Information Science, available online: http://dx.doi.org/10.1080/136 58816.2014.996567 . Please refer
+to the published version for referencing.
+Stephens, M. and Graham, M., 2012. A Geography of Twitter [online]. Available from:
+
+     http://www.oii.ox.ac.uk/vis/?id=4fe09570 [Accessed 15 Jul 2014].
+
+Sui, D. and Goodchild, M., 2011. The convergence of GIS and social media: challenges
+     for GIScience. International Journal of Geographical Information Science, 25
+     (11), 1737–1748.
+
+
+Terpstra, T. and Vries, A. de, 2012. Towards a realtime Twitter analysis during crises
+     for operational crisis management. In: Proceedings of ISCRAM 2012. 1–9.
+
+Tomaszewski, B., Dickens, K., Sawant, A.A., Ogireddy, P.K., Yu, Q., and Holden, E.,
+     2014. Visually Contextualizing Social Media within Spatial, Temporal and
+     Thematic Constraints for Disaster Situation Awareness. In: GeoVisual Analytics:
+
+     Workshop @GIScience 2014. 2–5.
+
+Triglav-Čekada, M. and Radovan, D., 2013. Using volunteered geographical
+     information to map the November 2012 floods in Slovenia. Natural Hazards and
+     Earth System Science, 13 (11), 2753–2762.
+
+
+Vieira, V.M., Webster, T.F., Weinberg, J.M., and Aschengrau, A., 2008. Spatial-
+     temporal analysis of breast cancer in upper Cape Cod, Massachusetts.
+     International journal of health geographics, 7, 46.
+
+Vieweg, S., Hughes, A., Starbird, K., and Palen, L., 2010. Microblogging during two
+
+     natural hazards events: what twitter may contribute to situational awareness. In:
+     Proceedings of the SIGCHI Conference on Human Factors in Computing Systems.
+
+Wood, S., 2006. Generalized additive models: an introduction with R. CRC press.
+
+Yates, D. and Paquette, S., 2011. Emergency knowledge management and social media
+
+     technologies: A case study of the 2010 Haitian earthquake. International Journal
+     of Information Management, 31 (1), 6–13.
+
+Yin, J., Lampert, A., Cameron, M., Robinson, B., and Power, R., 2012. Using Social
+     Media to Enhance Emergency Situation Awareness. IEEE Intelligent Systems, 27
+     (6), 52–59.
+
+
+Zhang, J., Li, Q., Gong, H., Li, X., Song, L., and Huang, J., 2010. Hydrologic
+     Information Extraction Based on Arc Hydro Tool and DEM. In: Challenges in
+     Environmental Science and Computer Engineering (CESCE), 2010 International
+     Conference on. 503–506.
+
+
+Zook, M., Graham, M., Shelton, T., and Gorman, S., 2010. Volunteered Geographic
+     Information and Crowdsourcing Disaster Relief: A Case Study of the Haitian
+     Earthquake. World Medical & Health Policy, 2 (2), 6–32.

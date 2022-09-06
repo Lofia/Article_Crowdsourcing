@@ -1,0 +1,993 @@
+                                                   Environmental Modelling & Software 37 (2012) 68e77
+
+
+
+                                               Contents lists available at SciVerse ScienceDirect
+
+
+
+                                       Environmental Modelling & Software
+
+
+
+                                       journal homepage: www.els             evier.com/locate/envsoft
+
+
+
+
+
+
+Putting humans in the loop: Social computing for Water Resources Management
+
+
+                 a                     a,*                          a                    b                  c
+P. Fraternali , A. Castelletti            , R. Soncini-Sessa , C. Vaca Ruiz , A.E. Rizzoli
+a
+ Dipartimento di Elettronica e Informazione, Politecnico di Milano, Piazza L. da Vinci, 32, I-20133 Milano, Italy
+bEscuela Superior Politecnica del e FIEC, Guayaquil, Ecuador
+cIstituto Dalle Molle di Studi sull ’Intelligenza Arti ﬁciale, USI/SUPSI, Galleria 2, CH-6928 Manno, Switzerland
+
+
+
+
+article info                                   abstract
+
+
+Article history:                               The advent of online services, social networks, crowdsourcing, and serious Web games has promoted the
+Received 3 October 2011                        emergence of a novel computation paradigm, where complex tasks are solved by exploiting the capacity
+Received in revised form
+28 February 2012                               of human beings and computer platforms in an integrated way. Water Resources Management systems
+                                               can take advantage of human and social computation in several ways: collecting and validating data,
+Accepted 7 March 2012                          complementing the analytic knowledge embodied in models with tacit knowledge from individuals and
+Available online 6 April 2012
+                                               communities, using human sensors to monitor the variation of conditions at aﬁne grain and in real time,
+                                               activating human networks to perform search tasks or actuate management actions. This exploratory
+Keywords:
+Human Computation                              paper overviews different forms of human and social computation and analyzes how they can be
+Games with a purpose                           exploited to enhance the effectiveness of ICT-based Water Resources Management.
+Crowdsourcing                                                                                                Ó 2012 Elsevier Ltd. All rights reserved.
+
+Water resources planning and management
+Social computation
+
+
+
+
+
+
+
+1. Introduction                                                                 A classical example is content processing for multimedia search
+                                                                             applications. In this domain, the goal is automatically classifying
+
+   In recent times, the Web has evolved from a publishing plat-              non-textual assets, audio, images, video, to enable information
+form, where the interaction of users was prevalently limited to the          retrieval and similarity search, for example,  ﬁnding songs similar to
+
+access of content created by others, to a collaborative and social           a tune whistled by the user or images with content resembling
+tool, where users are active members of one or more communities,             a given picture. Recognizing the meaning of aural and visual
+
+and meet online for sharing information and opinions, cooperating            content is one of the skills where humans outperform machines,
+in the execution of tasks, playing games, or simply spending time            matured in hundreds of thousands of years of evolution. It is now
+
+together.                                                                    commonly recognized that multimedia content analysis can bene        ﬁt
+   This phenomenon has prompted the emergence of a new                       from large-scale classi ﬁcation performed by humans; applications
+
+computation paradigm, called Human Computation (             von Ahn,        like Google Labeler and the system proposed by        Hu et al. (2009)
+2009), applied in business, entertainment and science, where the             submit images from a large collection to human users for
+
+interaction among users is harnessed to help in the cooperative              receiving feedback about their content and position, which can be
+solution of tasks. According to Quinn and Bederson (2011) , a system         integrated with machine-based feature extraction algorithms.
+
+belongs to the area of Human Computation when human collabo-                    Human Computation can also bene ﬁt the management of
+ration is facilitated by the computer system and not by the initiative       environmental resources, which are by de ﬁnition shared and
+
+of the participants. The common baseline of the approaches that              distributed and demand new approaches to their management,
+exploit humans in computing is the intelligent partition of func-            based on an increased consciousness of mankind’            s collective
+
+tionality between machines and human beings: networked                       responsibilities. Traditionally, the management of natural resources
+machines are used for task splitting, coordination, communication,           has been performed with a centralized approach, based on static
+
+and result collection; humans participate with their intuition and           policies (usually coded as laws and regulations), thus neglecting the
+decision-making power ( Parameswaran et al., 2010 ).                         intrinsically dynamic nature of both the systems and the manage-
+
+                                                                             ment processes ruling their evolution. Human Computation can
+
+ * Corresponding author. Tel.: þ39 (0) 2 2399 3584; fax: þ39 (0) 2 2399 3412.open up opportunities for a continuous involvement of stake-
+   E-mail   addresses:   andrea.castelletti@polimi.itcastelle@elet.polimi.it holders, in all phases: from the de ﬁnition of the objectives and of
+
+(A. Castelletti).                                                            the performance indicators, to the development of formal models
+
+1364-8152/$ e see front matter Ó 2012 Elsevier Ltd. All rights reserved.
+
+doi:10.1016/j.envsoft.2012.03.002
+                                           P. Fraternali et al. / Environmental Modelling & Software 37 (2012) 68e77                         69
+
+to characterize the system behaviour, down to the selection of the        ﬁnding is essential. The DARPA Network Challenge (     Pickard et al.,
+
+best and most appropriate management decisions.                           2010) is an example of the problem and of the techniques
+   In this paper, based on our previous experiences, we focus on          employed to face it. The challenge required teams to determine the
+
+the case of water management, in order to describe the areas of           coordinates of ten red weather balloons placed at unknown loca-
+intervention where Human Computation is likely to have a signi     ﬁ-     tions in the United States. The winning team employed a novel
+
+cant positive impact in the next few years. The paper is thus             recursive incentive mechanism that permitted them to locate all
+organized as follows. First, in Section 2, we summarize the main          balloons in under nine hours. Applications are also found in safety
+
+classes of Human Computation, describe the dimensions that                critical sectors ( Shah et al., 2011 ), like civil protection ( Hamilton
+characterize a Human Computation approach, and use this                   et al., 2011 ) and disease control ( Stothard et al., 2011 ).
+
+conceptual framework to categorize a number of Human Compu-                  Human sensors : this area of work leverages the pervasive
+tation applications reported in the literature. Section 3 introduces      diffusion of mobile terminals among the users, and, especially, the
+
+water management issues and problems and describes how to                 fact that more and more of these devices are equipped with sensors
+identify the relevant communities of resource users and involve           (Abdelzaher et al., 2007 ; Campbell et al., 2008 ). The focus is on the
+
+them in the planning and management loop; issues related to the           real-time collection of data, in order to realize time-critical decision
+elicitation and harmonization of collective knowledge are brie     ﬂy     support systems and emergency management. Early application
+
+discussed. Section 4 concludes the survey with a critical appraisal of    areas include pollution monitoring ( Dutta et al., 2009 ; Aulov and
+the issues that must be addressed to apply Human Computation              Halem, 2011 ), trafﬁc and road condition control ( Manasseh et al.,
+
+techniques effectively, in general and speci      ﬁcally to natural       2009; Bansal and Srivastava, 2011 ), and earthquake monitoring
+resource management.                                                      (Sakaki et al., 2010 ). Interestingly, human behavioural patterns in
+
+                                                                          the usage of mobile phones have been exploited to detect level of
+2. Classes of Human Computation                                           activity, so to examine the effects of the spreading of seasonal
+
+                                                                          diseases (Madan et al., 2010 ).
+   Human Computation can assume a variety of forms, according to             The applications of Human Computation can be classi     ﬁed under
+
+the scale at which humans are engaged, the tasks they are called to       a number of characteristic design dimensions.    Fig. 1 shows several
+solve, and the incentive mechanisms that are designed to foster           examples of such applications and correlates them with the general
+
+participation ( Quinn and Bederson, 2011 ). A number of principal         approach adopted to build them and with the most relevant
+approaches can be catalogued:                                             dimensions in their design.
+
+   Crowdsourcing : this approach focuses on the distributed assign-          The design dimensions for classifying Human Computation
+ment of work to an open community of executors ( Howe, 2006). A           applications are de ﬁned as follows:
+
+typical crowdsourcing application has a Web interface that can be            Humans involved : a technique may require only one individual at
+used by two kinds of people: work providers can enter in the system       a time (e.g., the reCaptcha system for OCR support ( von Ahn et al.,
+
+the speciﬁcation of a piece of work they need (e.g., collecting           2008)), a small group or a closed community of users (like the
+addresses of businesses, classifying products by category, geo-           players of a GWAP) or an     open community (like in work crowd-
+referencing location names, etc); work performers can enrol, declare      sourcing ( Howe, 2006 ), people mobilisation ( Pickard et al., 2010 ),
+
+their skills, and take up and perform a piece of work. The application    and distributed sensing applications ( Dutta et al., 2009 )).
+manages the work life cycle: performer assignment, time and price            Human faculty involved : a technique could leverage human
+
+negotiation, result submission and veri ﬁcation, and payment. In some     ability at different levels: perception and/or emotion, like in content
+cases, the application is also able to split complex tasks into micro-    appraisal and user interface usability assessment, where human
+
+tasks that can be assigned independently ( Huang et al., 2010), e.g.,     feedback is collected with techniques like physiological signal
+breaking a complex form into sub-forms thatcan be   ﬁlled by different    analysis and eye movement tracking to estimate the impact of
+
+workers. In addition to the web interface, some platforms offer           cont ent or of interface design ( Koelstra et al., 2010 ); judgement ,
+Application Programming Interfaces (APIs), whereby third parties can      when the discriminating power of users is exploited, like in user
+
+integrate the distributed work management functionality into their        studies, where people are requested to express comparative
+custom applications. Examples of crowdsourcing solutions are              judgements on alternative solutions ( Heer and Bostock, 2010 );
+
+Amazon Mechanical Turk and Microtask.com. Application areas are           social behaviour is central to those approaches where collective task
+themostvaried:speechtranscription,translation,form     ﬁlling,content     execution and inter-personal communication are prominent, like
+
+tagging, and user evaluation studies are a few examples.                  people mobilisation ( Pickard et al., 2010 ) and social business
+   Games with a Purpose (GWAPs): this line of work focuses on             process management, where communities of external stakeholders
+
+exploiting the billions of hours that people spend online playing         are involved in enterprise business processes (     Brambilla et al.,
+with computer games to solve complex problems that involve                2011).
+
+human intelligence ( von Ahn, 2006 ; Law and von Ahn, 2009 ). The            Activity Type : the unit of work allocated to humans can be of
+emphasis is on embedding a problem solving task into an enjoyable         different types; a game engages individuals or small groups in
+
+user experience, which can be conducted by individual users or by         a challenge, where the resolution of the problem is a collateral
+groups. Several game design paradigms have been studied (        Law      result (Chan et al., 2009 ); instead, a task is an explicit unit of work,
+
+and von Ahn, 2009 ) and the mechanics of users ’ involvement has          with well de ﬁned input/output and explicitly submitted to
+begun to be modelled formally ( Chan et al., 2009 ). GWAPs, and           a recipient; it can be atomic ( microtask (Huang et al., 2010 )) or
+
+more generally useful applications where the user solves percep-          composite ( process (Brambilla et al., 2011 )); an intermediate situ-
+tive or cognitive problems without knowing, address task such as          ation occurs in implicit task execution, where a user may perform
+
+adding descriptive tags and recognising objects in images, checking       a useful task without necessarily knowing (like, e.g., in reCaptcha-
+the output of Optical Character Recognition (OCR) for correctness,        enabled login forms ( von Ahn et al., 2008 )).
+
+helping protein folding and multiple sequence alignment algo-                Control: task de ﬁnition, assignment and progress can be
+rithms in molecular biology and comparative genomic research              controlled centrally, as is the case in work automation platforms
+
+(Cooper et al., 2010 ).                                                   like Amazon Mechanical Turk and in Social Business Process
+   Social Mobilisation : this approach addresses problems with time       Management, where people involvement is under the control of the
+
+constraints, where the efﬁ ciency of task spreading and of solution       workﬂow engine ( Brambilla et al., 2011 ); alternatively task
+70                                               P. Fraternali et al. / Environmental Modelling & Software 37 (2012) 68e77
+
+
+                                                                               Human Computation
+
+                                                                                   dimensions
+
+
+
+
+                                                   Human ability              Activity                                Motivation
+                          Humans involved             involved                 Type                   Control         mechanism          Time
+
+
+                                                                                                                                                   Non
+                                                                                                 Central Distributed                    Critical  critical
+
+                  Single   Small      Open                      Game    Atomic   Implicit Process
+                  actor    group   community                             Task     Task
+                                                                                                               Fun    Reward   Volunteering
+
+                                      Perception /           Social
+                                        emotion  Judgement  behavior
+
+                                                                                             Social
+                                        Sentiment                                           Business
+                                                       Crowdsourced                         Process
+                                     polarity analysis     City                           Management
+                     Accurate text                      maintenance
+                      translation                                             OCR correction
+
+                              Questions
+                                and                                                                                   Environment
+                              answers                            Image tagging                                        monitoring/
+                                                                                        Music                        Disease control
+                                          User studies                               classification
+             GUI / content                                                                              Fast Data
+              appraisal                                                                                 collection              Civil protection
+
+
+                                                                                                                                        Digital repositories
+                                                                                                                                          using citizens’
+                                                                                                                                          contributions
+
+                                                                       Games with a
+                                            Crowdsourcing                purpose                Human Sensors         Social mobilization
+
+
+
+                                                                               Human Computation
+                                                                                   approaches
+
+
+    Fig. 1. Dimensions of Human Computation Approaches. For readability, the edges illustrate only the most signiﬁcant relationships and not all the possible connections.
+
+
+
+
+
+
+activation may be managed in a distributed way, as in the DARPA                      acquaintances the most active and geographically well-positioned
+
+Network Challenge strategy ( Pickard et al., 2010 ), where a recursive               members to add to the team.
+incentive mechanism was used, which encouraged people to
+
+recruit effective workers so to improve their expected success rate                  3. Water Resources Management and Human Computation
+
+and reward. The selection of the most efﬁ cient strategy to solve
+
+a task can also be facilitated by Human Computation, as shown in                        Water Resources Systems (WRSs) provide a potentially inter-
+the case of harvesting renewable resources ( Brede and Vries, 2010 ).                esting application for the Human Computation paradigm, particu-
+
+    Motivation mechanism : users may engage in executing tasks for                   larly in the area of integrated planning and management.
+
+different reasons; purely for fun, like in GWAPs, for ethical reasons,                  A WRS is a complex system coupling natural and human factors,
+
+like in volunteer work; or for an economical reward. Recent studies                  where the water cycle and the human activities interact and co-
+have examined the correlation between incentives, task de             ﬁnition        evolve (Liu et al., 2007 ). The natural water system consists of the
+
+policiesandtheresultingqualityoftaskexecution( Huangetal.,2010).                     hydrological processes of precipitation, evaporation, evapotrans-
+
+    Time: Human Computation applications may have critical time                      piration, surface runoff, percolation and groundwater           ﬂow within
+
+requirements that make the execution of tasks and the propagation                    an appropriately de ﬁned spatial entity (e.g., a watershed bounded
+of actions or decisions along social links important. This is the case,
+                                                                                     river basin). The human activity system is composed of the people
+for example, of civil protection scenarios like the one simulated in                 living in that spatial entity (social system), the institutional and
+
+the DARPA Network Challenge ( Pickard et al., 2010 ). The design of                  normative framework governing the use of the water resource
+
+time-critical Human Computation applications can be addressed at                     (institutional system), and the infrastructures developed to store,
+
+the task and at the communication level. In the former case, the                     convey and distribute water for economic or social purposes
+amount of time allotted for the execution of the task is set explicitly,             (infrastructure system), such as domestic water supply, irrigation,
+
+so that potential performers can better self-evaluate their adequacy                 hydroelectric power, navigation,       ﬁsheries, recreation, and for the
+
+as problem solvers and not claim a task that they will not be able to                reduction of damages from ﬂooding, water pollution, and droughts.
+
+perform at the requested speed (this solution is adopted by most                     Decision-making is central to water management: infrastructures
+crowdsourcing applications). In the latter case, a suitable incentive                are designed, developed, and subsequently controlled by solving
+
+mechanism is de ﬁned that favours the rapid spread of information                    planning and management problems that require planning long
+
+among potential performers. As an example of this latter approach,                   term decisions and making short term actions coherent with such
+
+the winners of the DARPA Network Challenge adopted a reward                          decisions. The solution of any planning and/or management
+mechanism by which the user gained a prize not only if he spotted                    problem on a WRS encompasses a more or less formalised decision-
+
+one balloon personally, but also if a person recruited by him spotted                making procedure that goes through the following sequential steps
+
+one or in turn recruited a third person that directly or transitively                (Soncini-Sessa et al., 2003 ; Castelletti and Soncini-Sessa, 2006 ): i)
+
+contributed to the balloon identi ﬁcation. Such an incentive fostered                the problem is de ﬁned, the decision-maker(s) and the stakeholders
+
+the rapid creation of geographically distributed teams, because                      identiﬁed, and the overall purpose of the planning exercise is
+each user had a quanti ﬁable advantage at selecting from his                         clearly stated; ii) data are collected and used to set-up descriptive
+                                           P. Fraternali et al. / Environmental Modelling & Software 37 (2012) 68e77                          71
+
+and decision models; and      iii) models are employed to inform               engagement process is enabled, which better     ﬁts the recursive
+
+decision-maker(s) on alternative trade-offs and to guide the                   nature of the decision-making process.
+process towards a ﬁnal negotiated compromise solution.                     (2) Interest characterization . Stakeholder interests are investigated
+
+   A WRS revolves around a community of relevant, directly or                  and, possibly, each stakeholder node is further quali ﬁed by the
+indirectly involved individuals, which can be regarded as a physical           evaluation criterion adopted to judge whether a planning and/
+
+social network in which concrete human actors constitute the                   or management alternative meets his/her interests (      Soncini-
+nodes and their conscious or unconscious connections constitute                Sessa et al., 2007a ). Automatic pro ﬁling of user interests can
+
+links. Depending on the nature of the problem, actors can alter-               leverage existing techniques coming from recommender
+natively play the role of stakeholders or non-stakeholders, with one           systems and from the joint analysis of user-generated content
+
+or more nodes acting as decision-makers. Human Computation                     and social network links and interactions ( Mislove et al., 2010 ;
+techniques offer the potential of expanding the participation to the           Xie et al., 2010 ).
+
+planning and management decision-making well beyond the limits             (3) Stakeholder clustering and representative selection. The network
+of the individuals physically involved in the process, thanks to the           topology can be analysed with Social Network Analysis tech-
+
+capacity of engagement and communication power of online social                niques (Easley and Kleinberg, 2010 ) with the twofold purpose
+networks.                                                                      of recognising patterns and contexts of interaction between
+
+   More speci ﬁcally, Human Computation can be integrated in                   stakeholders and identifying clusters of stakeholders/nodes
+water resources planning and management at three different                     with shared interests, who can spontaneously form lobbies and
+
+levels: i) setting up a social network, for a better comprehension of          groups of interest (called sectors) ( Wen and Lin, 2010 ; Harper
+the underlying social system;    ii) putting humans in the loop, in            et al., 2007 ; Alsaleh et al., 2011 ). Within each sector, the
+
+order to exploit human potential as sensors, task solvers and co-              potential in ﬂuence over the process of the individual stake-
+decision makers; iii) eliciting collective knowledge ( Gruber, 2007 )          holders   can  be   studied  with   role  analysis  techniques
+
+on the WRS by exploiting situated and distributed knowledge and                (Benevenuto et al., 2009 ; Prell et al., 2008 ), which consider not
+expertise, i.e., the so-called social capital ( Cohen and Prusak, 2001 ).      only the formal position within an organisation but also social
+
+   Reaping the bene ﬁts of Human Computation in water planning                 links. Nodes that i) have distinct positions in the network thus
+and management also requires the development of new Informa-                   providing a minimal and non-redundant set of communication
+
+tion and Communication Technology (ICT) tools (the majority of                 paths within the community;       ii) belong to different stake-
+which have yet to be envisaged), to effectively embed humans into              holder categories; iii) are relatively well-connected to others
+
+the decision-making process.                                                   and tend to broker across different sub-networks can be
+                                                                               selected as the potentially most appropriate representatives of
+                                                                               their sectors.
+3.1. Setting-up the enlarged social network
+                                                                              A complementary technique for discovering hidden knowledge
+                                                                              about people and support clustering and representative selec-
+   The communities of interest around the management of
+a natural resource can be established by a top-down survey of the             tion is based on the use of games with a purpose (   Zhang et al.,
+institutional stakeholders and then enlarged to a broader audience            2009), whereby people can enrich the available knowledge
+
+of grass-root stakeholders by exploiting data available from online           about their acquaintances within an institutional community,
+social networks. When the communities are mapped into a digital               e.g., by tagging each other ’spro  ﬁles with labels that denote
+
+representation, social network analysis techniques (      Easley and          areas of expertise.
+Kleinberg, 2010 ) can be applied to mine knowledge useful for              (4) Social disambiguation of interests . The effective negotiation of
+
+improving the planning and management tasks. The process of                    conﬂicting stakeholders ’ objectives requires the establishment
+network formation and analysis can be conceptually divided in the              of evaluation criteria, possibly articulated into a hierarchy of
+
+sub-steps described next.                                                      sub-criteria re ﬂecting the multi-faceted nature of the interests
+                                                                               within the same sector or across sectors ( Soncini-Sessa et al.,
+
+(1) Network identi ﬁcation. The network population and connection              2007a). A typical problem that arises in this activity is the
+    topology can be initialised using traditional stakeholder iden-            disambiguation of semantics associated with cross-domain
+
+    tiﬁcation techniques ( Grimble and Wellard, 1997 ), based on               concepts. In order to ensure transparency and mutual under-
+    a top-down survey process relying on the information provided              standing across the various stakeholder groups, the meaning of
+
+    by key institutions, as well as using conventional Community               the different concepts represented in the criteria must be
+    Building methodologies ( Prell et al., 2009 ). Online social               clearly stated. For instance, a stakeholder group might be
+
+    network exploration can be exploited to extend the social                  interested in water quality for recreational purposes, while
+    system to the grass-root level, thus ensuring that the viewpoint           another one might also be interested in the same concept but
+
+    of non-organised, socially and politically disadvantaged indi-             with respect to the ecosystem health. While the criteria are
+    viduals and groups is considered. To this end, mobilisation                similar, the measured variables, their sampling rates, their
+
+    campaigns can be conducted on mainstream social platforms to               spatial distribution might be different. Such speci ﬁcations can
+    promote the explicit self-enrolment of grass-root stakeholders;            be expressed by referring to a shared knowledge base, such as
+
+    alternatively, online social network crawling techniques can be            an ontology ( Villa et al., 2009 ). Often a shared ontology
+    applied (Catanese et al., 2011 ; Ye et al., 2010 ) to identify             encompassing the set of involved domains is not available, and
+
+    potential interest-bearing subjects, e.g., with the help of                therefore collaborative ontology development (        Tudorache
+    focused crawling based on geographic attributes of users, on               et al., 2008 ) and ontology matching techniques ( Pariente
+
+    explicit group membership, on declaration of interests, etc. A             et al., 2011 ) could be exploited. In this area, Human Compu-
+    prominent effect of the use of online social networks is the               tation has been applied to design games with a purpose sup-
+
+    introduction of asynchronicity into the stakeholders identi    ﬁ-          porting the playful construction and alignment of ontologies
+    cation   process:  instead  of  the   traditional synchronous              (Siorpaes and Hepp, 2008 ; Thaler et al., 2011 ). Another appli-
+
+    approach based on initiatives like group meetings and round                cation of serious games is relevant to the set-up phase of multi-
+    tables performed at ﬁxed times in the planning and manage-                 stakeholder negotiation: role games ( Barreteau, 2003 ), tradi-
+
+    ment lifecycle, an asynchronous, open, and continuous                      tionally employed to support mutual understanding and
+72                                          P. Fraternali et al. / Environmental Modelling & Software 37 (2012) 68e77
+
+
+    concept sharing in restricted groups, can be extended even to           problem solving tasks to a broader set of performers, recruited both
+    a large base of stakeholders by exploiting online gaming                from the physical social network of stakeholders, non-stakeholders
+
+    architectures in conjunction with social network information            and decision-makers and from large-scale online communities
+    propagation capacity ( Cha et al., 2009 ).                              (Cooper et al., 2010 ; Hand, 2010 ). Socially gathered human expertise
+
+                                                                            can be exploited to support the identi ﬁcation of the system compo-
+                                                                            nent domains (e.g., the catchment areas), of their interactions
+3.2. Putting humans in the loop
+                                                                            (exploratorymodelling),andof themaincausalnetworkswithineach
+                                                                            domain. To this end, cooperative work tools, such as Wikis
+   When the network of stakeholders underlying the system is set-
+up, its members can be involved in the planning and management              (Cunningham and Leuf, 2001 ), questions and answers forums, and
+                                                                            large-scale argumentation support applications ( Iandoli et al., 2009 )
+directly, as executors of a variety of different activities.
+                                                                            can be used. Another use of human judgement for task solving is the
+                                                                            exploitation of tacit knowledge and traditional wisdom about the
+3.2.1. Human sensing
+   Data collection is a critical task since data qualityaffects, through    behaviour of the natural system as a complement to descriptive
+                                                                            models,e.g.,topredicttheeffectsofaspeci ﬁcactiononthevalueofan
+models and model-based evaluations, the reliability and robustness
+of the ﬁnal compromise alternative. The pervasive diffusion of              indicator. Expert-based models can replace mathematical models in
+
+mobileterminalsequippedwithsensorshasfosteredthediffusionof                 a convenient way whenever the knowledge about a social, environ-
+                                                                            mental or economic process is not suf ﬁciently formalised or data
+human-based, mobile sensor networks, which exploit users               ’
+mobility to collect data at low-cost and on a large scale (Abdelzaher       required for reliable model identi ﬁcation are not available, quite
+                                                                            a common situation when human decisions impact the hydro-
+et al., 2007 ). Human sensed observations are primarily used to
+gather physical data, e.g., air quality data in urban spaces (   Dutta      ecological systems ( Mouton et al., 2009 ). In traditional co-
+                                                                            evolutionary system modelling ( Rammel et al., 2007 ), expert knowl-
+et al., 2009 ), surveillance of invasive species ( Cacho et al., 2011 )
+and noise pollution ( Maisonneuve et al., 2009 ). Recently, experi-         edge is captured through the quanti ﬁcation of the empirical expert
+                                                                            judgement, using such techniques as Bayesian Belief Networks ( Varis
+ences have been reported in human sensing of water quality. The
+World Water Monitoring Day initiative,    1 coordinated by the Water        and Kuikka, 1997; Castelletti and Soncini-Sessa, 2007a,b ). The inte-
+                                                                            gration of expert empirical evaluations and computer-based mathe-
+Environment Federation (WEF) and the International Water Asso-
+ciation (IWA), uses online dissemination means to recruit students          matical models can then be addressed with imprecise-probability
+                                                                            models like Credal Networks (Antonucci and Zaffalon, 2008 ), which
+inwater quality monitoring worldwide; data are collected manually
+with water measurement kits and results are reported in an online           have been applied to fuse human judgement and sensor data for the
+                                                                            assessment of debris ﬂow hazard ( Salvetti et al., 2008).
+GIS. The organizers plan to expand participation to one million
+people by 2012. The work described in        Kim et al. (2011) makes
+                                                                            3.2.3. Co-deciding
+a more intensive use of ICT and mobile technology; a mobile and
+ﬁxed Internet application has been designed (called CreekWatch       2)         When stakeholders are given a co-deciding role (       Hare et al.,
+
+wherebypeoplecanpostdataaboutwatershedsrapidlyandwithout                    2003) or when multiple decision-makers are involved, as in
+                                                                            transnational contexts, the comparison and ranking of different
+other instrumentation than a standard mobile phone, like the
+amount of water, the rate of ﬂow, the presence of trash and pictures        alternative options and the subsequent negotiations among the
+                                                                            parties can take considerable advantage of Human Computation.
+of thewaterway.Theapplicationdesignhasfocusedbothontheuser
+interfaces, on the incentive mechanisms for engaging citizens, and          Most conventional approaches for group decision-making, like the
+                                                                            Nominal Group Technique ( Delbecq et al.,1975 ), the Delphi method
+on the utility of data for the scienti ﬁc community that consumes
+them. Social media have also been experimented for harvesting               (Turoff, 1970 ), and voting procedures, as well as advanced tech-
+                                                                            niques, like Pareto race negotiation ( Korhonen and Laakso, 1986 ),
+more heterogeneous and complex data, such as reporting on urban
+ﬂoodingeventsusinggeo-referencedtweetfunctionalities(         Liuetal.,     are intrinsically interactive, bottom-up, and structurally amenable
+                                                                            to be computed assisted ( Thiessen and Loucks, 1992 ). For example,
+2011). Here the authors leveraged a popular microblogging service,
+Twitter.com , to customise a smart-phone application for citizen            Pérez et al. (2010)    describe a mobile decision support system
+                                                                            supporting    dynamic group decision-making, which shows the
+event reporting. The system uses an existing professional controlled
+vocabulary (e.g., ‘basement ﬂooding’, ‘powerline down ’), which is          feasibility of implementing a global-scale asynchronous consensus
+                                                                            process with experts located in different places.
+particularly useful in emergency conditions to deliver timely
+response. Similar experiments of streaming human visual experi-
+
+enceintodatahavebeenconductedinThailandtomap             ﬂoodedareas
+and the associated damage.   3 Another relevant aspect is to integrate      3.3. Eliciting collective (global) knowledge
+
+human and arti ﬁcial sensors, in order to make information available
+                                                                                Even with the more sophisticated and prescriptive approaches
+for further processing. A notable effort in this direction has been         to supporting decision-making, the technical supervision by an
+realisedby Hilletal.(2011) withtheNCSAvirtualsensorsystem.This
+                                                                            analyst is always required to assist, step-by-step, the imple-
+softwaretoolprovidesafacilitatedprocesstobuildwrappersaround                mentation of the process. In traditional computer assisted decision-
+sensors, independently of their human or arti ﬁcial nature, exposing
+                                                                            making, support systems can only react to the analyst     ’s stimuli. In
+functions which can be integrated in web-based applications.                other words, mathematical and expert-based models are only able
+
+                                                                            to answer questions of the form “What’s the effect of action A (e.g.,
+3.2.2. Human judgement for task solving                                     building a new dam) on output       B (e.g., loss of arable land in the
+   In traditional WRS planning and management, problem solving                                                   4
+                                                                            downstream irrigation district)? ”.
+requires technical knowledge and is delegated to a small number of
+domain experts. Human Computation methods can help assign
+
+                                                                              4 The example is related to Aswan High Dam construction: the red-brick
+
+  1                                                                         construction industry, which consisted of hundreds of factories that used Nile
+   www.worldwatermonitoringday.org .                                        sediment deposits along the river, has been negatively affected by the presence of
+  2www.creekwatch.org .                                                     the dam. Deprived of sediment, they started using the older alluvium of otherwise
+  3http://de21.digitalasia.chubu.ac.jp/ ﬂoodmap.                            arable land taking out of production up to 120 sq km every year.
+                                           P. Fraternali et al. / Environmental Modelling & Software 37 (2012) 68e77                          73
+
+   This kind of question requires some ability by the analyst to           ‘tagging’ resources as users now tag photos, books and other items.
+
+anticipate a causal relationship between      A and B, and so the          Such ‘tagging’ does not bring any scientiﬁ c support to a given
+possible existence of some effects on    B. Thus analyst prediction        explanation per se, but allows the system analyst to identify the
+
+ability and expertise have a considerable potential effect on the          different viewpoints and discover the experts and the stakeholders
+ﬁnal decision (the topic has been extensively analysed in    ﬁnancial      who voiced their opinion on a speci ﬁc issue. This process enables
+
+studies, see, e.g., Lang et al. (2003) and references therein).            both expert ﬁnding and the mining of causal inferences. The
+   Human Computation could provide tools to complement the                 interactionwith this global intelligence will often induce recursions
+
+analyst skills and so democratise also this aspect of decision-            in the sequential decision-making process, including the re-
+making. Indeed, the above question could be formulated in two              qualiﬁcation   of  the  social  networks    where    former   non-
+
+steps by ﬁrst investigating on the existence of potential effects ofA,     stakeholder nodes might become stakeholder nodes. Therefore,
+“Is A impacting on any sector/indicator/variable? ”, and then, once B      each interaction with the collective knowledge base may trigger
+
+has been individuated, exploring the magnitude of this effect in           a new round of the Social Network Analysis.
+a quantitative way by invoking task solving functionalities
+
+(machine-based or human). Finding the proper answer to these               3.4. Human Computation vs the traditional approach
+meta-questions involves recognising similarities in different prob-
+
+lems and connections across different domains, while integrating              Although the Human Computation approaches presented so far
+insights from several sources.                                             have not been yet experimented in a real world water management
+
+   Research on the formalisation of knowledge on causal rela-              problem, in Table 1 we analyse the potential advantages it could
+tionships in systems has started to develop with the advent of             bring to a real decision-making process compared to the landline
+
+semantic networks ( Sowa,1991 ). Also early work by Forbus ( Forbus,       tools traditionally used in these kind of processes. As a reference we
+1981) showed how an explicit representation of the causal rela-            use the Participatory and Integrated Planning procedure described
+
+tionship in a physical process can help automated reasoning about          in Castelletti and Soncini-Sessa (2006)   and adopted to guide the
+it. This research also inspired the declarative, logic-based, approach     decision-making process in the long standing con   ﬂict between Italy
+
+to modelling, as described in Robertson et al. (1991) in the context       and Switzerland on the management of the transboundary Lake
+of modelling ecological processes. The main bene         ﬁt of these       Maggiore ( Soncini-Sessa et al., 2007b ). The procedure is reported in
+
+approaches to knowledge representation was the ability to separate         Fig. 2. We consider only those phases (grey boxes in the   ﬁgure) for
+the concern of the implementation of a model describing a process          which it does make sense to use Human Computation tools. The
+
+from its logical and abstract speci ﬁcation. This added transparency       procedure and its application to the Lake Maggiore problem are
+
+and enhanced the ability to share concepts and knowledge among             extensively described in the above mentioned references.
+researchers. The limit of this approach was the inability to share the
+
+knowledge across a large number of scientists, due to lack of              4. Open issues in Human Computation design
+a common infrastructure for sharing such artifacts.
+
+   A collective knowledge system ( Gruber, 2007 ), composed of                The application of Human Computation to water resources
+situated and distributed expertise, could be suitably exploited for        planning and management can produce solutions that are more
+
+solving these high level tasks by using a semantically-explicit            participative, more reactive to external stimuli from stakeholders,
+representation of the causal structure of a system. Such a repre-          and more effective at informing decision-makers and subsequently
+
+sentation can be formalised using ontologies, which are now                communicating decisions to the general public.
+a standard means for knowledge sharing across the internet, thanks            However, the design of Human Computation systems must take
+
+to such representations as OWL (Ontology Web Language) and RDF             into consideration a number of issues that arise when humans are
+(Resource Description Framework). Software tools for ontology              included in the loop ( Ipeirotis and Paritosh, 2011 ).
+                                                         5           6
+development are widely available too, such as Protégé     and NeOn            Human factors in computing and decision-making      : the human
+and speci ﬁc research is ongoing on collaborative ontology devel-          cognitive processes interplay with affective states and may exhibit
+
+opment (Braun et al., 2007 ). The use of ontologies has already            systematic and predictable bias, which, if overlooked, may threaten
+proven effective in large projects, where scientists from different        the validity of human-assigned tasks. Human factors in decision-
+
+disciplines have to harmonize their views on the data exchanged            making have been studied separately in neuroscience, behavioural
+across model interfaces ( Janssen et al., 2009, 2011 ). The work by        economics and cognitive psychology; recently, the interdisciplinary
+   ▯ ▯
+Nesic et al. (2011) , within the TaToo project, aims at the develop-       ﬁeld of neuroeconomics has addressed the integration of multiple
+ment of collaborative tools for creating and enriching semantically        techniques to examine decision-making by considering cognitive
+
+uniﬁed views of environmental information. Users provide anno-             and neural constraints, used in psychology and neuroscience, in the
+tations to environment-related resources published on the internet         construction of mathematical decision models, typical of economics
+
+such as models, datasets, observations, measurements, and so on.           (Sanfey, 2007 ). Anchoringand sequential effects (the dependencyof
+This will improve the relevance of search results, and create              responses on prior information) have been studied (e.g., the
+
+collective knowledge explicitly formalised and machine process-            ‘anchoring bias ’ studied by Tversky and Kahneman (1974) and well
+able, opening the way to effective human computing in the area of          known in the environmental decision-making literature) and miti-
+
+environmental, and particularly water, research.                           gation measures have been proposed that could be applied to
+   Thanks to ontologies, alternative views on causal relationships,        crowdsourcingandonlinejudgementelicitation(       Mozeretal.,2010 ).
+
+attributable to different domains and crafted by different experts,           Quality of human output and malicious behaviour : a major issue
+can be expressed in a common formalism, therefore helping the              in Human Computation design is measuring and improving the
+
+analysts in ﬁnding alternative explanations for the same phenom-           quality of human contributions, which requires estimating the
+enon. At the same time, systems such as TaToo allow experts and            quality of the task performer and combining different (and
+
+stakeholders to evaluate explanations and potential solutions, by          potentially con ﬂicting) results produced by different performers.
+                                                                           The simplest technique for quality improvement is, when possible
+
+                                                                           and sensible, submitting the same task to multiple performers and
+  5http://protege.stanford.edu/ .                                          take the majority response as the true outcome, thus assimilating
+  6
+   http://www.neon-project.org/ .                                          the quality measure to the probability that a response is correct
+74                                                   P. Fraternali et al. / Environmental Modelling & Software 37 (2012) 68e77
+
+
+
+
+
+Table 1
+
+Human Computation techniques vs traditional approaches in some of the phases (grey boxes in          Fig. 2) of the PIP decision-making procedure.
+
+  Phase                   Tasks                           Traditional Tools                       HC Tools                                 Advantages
+
+  0. Reconnaissance       A. System understanding         Survey, interview to experts            Cooperative work tools,                  Improved reliable knowledge
+                                                          and institutional stakeholders.         such as Wikis, questions and             about the system functioning.
+
+                                                                                                  answers forums, and large-scale
+                                                                                                  argumentation support applications.
+
+                          B. Stakeholders identi ﬁcation  Surveys, top-down engagement            Mobilisation campaigns on social         Deeper and larger involvement,
+
+                                                          by institutional stakeholders.          platforms, social net crawling and       down to the grass-root stakeholders;
+                                                                                                  community building methodologies.        self-enrolment is facilitated
+
+                                                                                                                                           through an asynchronous, open,
+                                                                                                                                           and continuous engagement
+
+                                                                                                                                           process better re ﬂecting the
+                                                                                                                                           recursive nature of the decision-
+                                                                                                                                           making process.
+
+
+                          C. Stakeholder clustering into  Meeting and direct interaction          Automatic pro ﬁling, social network      An enhanced reliable
+                          sectors and identi ﬁcation of   with involved stakeholders;             analysis, games with a purpose and       characterisation of stakeholders
+
+                          representative stakeholders     representative election (voting).       tagging.                                 and social connections.
+
+                          D. Data collection and          Traditional data collection             Human sensors and crowdsourcing.       An enhanced dense, robust, and
+                          validation                      campaign with traditional sensors.                                               possibly socially credible datacube.
+
+  1. Deﬁning Actions                                      Brain storming during workshops,        Semantic network and ontologies.       A creative and wide process is
+
+                                                          interview to experts and                                                         stimulated, involving also
+                                                          stakeholder representatives, and                                                 collective knowledge on the web;
+
+                                                          questionnaires.                                                                  a wider range of potentially
+                                                                                                                                           interesting actions can emerge.
+
+  2. Deﬁning Criteria                                     Knowledge elicitation during            Ontologies and games with a              Hierarchies of criteria and the
+
+     and Indicators                                       workshops and interviews with           purposes.                                associated indicators can be
+                                                          experts and stakeholder                                                          identiﬁed and validated across
+
+                                                          representatives.                                                                 a larger audience of stakeholders
+                                                                                                                                           and experts. Improved ability
+
+                                                                                                                                           of disambiguation of semantics
+                                                                                                                                           associated with cross-domain
+                                                                                                                                           concepts represented in the criteria.
+
+
+  3. Identifying          A. Identiﬁcation of system      Workshop and meeting with               Cooperative work tools, such as          An improved identi ﬁcation of the
+     Model                components and their            stakeholders representatives.           Wikis, questions and answers             system topology, particularly for
+                          interactions                                                            forums, and large-scale
+                                                                                                                                           the more peripheral and indirectly
+                                                                                                  argumentation support                    connected components.
+                                                                                                  applications.
+
+
+                          B. Identiﬁcation of the         When possible, collaborative            As above but at the level of the         Improved inference capability,
+                          causal network within           modelling based on one-to-one           experts only.                            particularly for the less
+                          each                            meetings with sector experts.                                                    unstructured and theoretically
+
+                          component                       More generally conducted by                                                      grounded   aspects, like those
+                                                          the analyst.                                                                     involving human enature interaction.
+
+
+                          C. Identiﬁcation of the         Mainly conducted by the                 As above.                                Improved model ﬁdelity and
+                          model for each                  analyst.                                                                         augmented characterisation
+                          component                                                                                                        capability of the coupled social
+
+                                                                                                                                           and natural processes through
+                                                                                                                                           the direct involvement of
+
+                                                                                                                                           stakeholders and both situated
+                                                                                                                                           or distributed experts in the
+
+                                                                                                                                           model building activities at
+                                                                                                                                           all stages.
+
+  6. Evaluation           Value function                  Interviews with stakeholder             Cooperative work tools, such as          An effective and reliable
+
+                          identiﬁcation                   representatives.                        Wikis, questions and answers             identiﬁcation of the value functions.
+                                                                                                  forums.
+
+  7. Negotiations                                         One or more plenary meetings            Games with a purposes in                 Negotiations can be extended to
+
+                                                          with stakeholder                        conjunction with social network          larger base of stakeholders thus
+                                                          representatives and                     information propagation capacity.        enabling a truly co-deciding
+
+                                                          decision-makers.                                                                 involvement. Moreover, an
+                                                                                                                                           improved, effective management
+                                                                                                                                           of the negotiation process that can
+
+                                                                                                                                           be conducted remotely and
+                                                                                                                                           asynchronously, thus avoiding
+
+                                                                                                                                           psychological and physical fatigue
+                                                                                                                                           (negotiation fatigue syndrome)
+
+                                                                                                                                           that often prevent an happy
+                                                                                                                                           ending for the process.
+                                             P. Fraternali et al. / Environmental Modelling & Software 37 (2012) 68e77                                75
+
+
+                                                                               trends in Human Computation, which are rede ﬁning the way in
+
+                                                                               which humans and machine cooperate to perform complex tasks.
+                                                                                  The fundamental idea is that planning and management ICT
+
+                                                                               systems acquire more ﬂexibility, if they can be built out of modular
+                                                                               models that can be orchestrated to achieve a precise, yet increas-
+
+                                                                               ingly agile, prediction. Human Computation can also contribute to
+                                                                               the management process, by encouraging participative negotia-
+
+                                                                               tions, thanks to consensus building tools and people mobilisation
+
+                                                                               for timely data collection and effect veri ﬁcation campaigns.
+                                                                               Crowdsourcing platforms, with their capacity of distributing work
+
+                                                                               to a large pool of performers, provide another valuable opportunity,
+                                                                               for delegating batches of work, like data analysis activities. Finally,
+
+                                                                               gaming with a purpose techniques could be an innovative option
+
+                                                                               for training stakeholders in the negotiation process and for
+                                                                               informing citizens about the way alternative decisions affect the
+
+                                                                               behaviour of the system and impact the community.
+                                                                                  Our future work will concentrate mostly on the implementation,
+
+                                                                               deployment and validation of some of the ideas proposed in this
+                                                                               paper. We plan to use them both in Ecuador and in the lake region
+
+                                                                               of Como, Italy, so to experiment Human Computation solutions in
+
+                                                                               very different social contexts, from rural areas to highly industri-
+                                                                               alised urban scenarios. This will give us the opportunity to test
+
+                                                                               different tasks formulation and incentive mechanisms for             ﬁne
+                                                                               tuning the participative tools to the expectations, cultural back-
+
+                                                                               ground, and local skills of the communities where the water
+
+                                                                               management system is embedded.
+
+
+                                                                               Acknowledgements
+
+
+                                                                                  This work is partially sponsored by the BPM4People project
+
+Fig. 2. The procedure for Participatory and Integrated Planning (Castelletti andwww.bpm4peole.org ), funded by the Capacities          e R esearch for
+Soncini-Sessa, 2006). The grey boxes are the phases analysed in Table 1.       SMEs Program of the Research Executive Agency of the European
+
+                                                                               Community. This work is partially sponsored by the TaToo project
+(Kuncheva et al., 2003 ). Reﬁned approaches rely on the estimation             (http://www.tatoo-eu.org ), funded by the European Community
+of user’s quality and combine the responses taking such estimation
+                                                                               Seventh Framework Programme (FP7/2007-2013) under Grant
+into account. As an extreme case, performers may intentionally                 Agreement Number 247983.
+
+cheat, producing incorrect results, which requires suitable tech-
+niques for detecting spammers (Ipeirotis et al., 2010 ), or they may
+                                                                               References
+simply be negligent, an attitude that can be detected by pre-task
+screening ( Downs et al., 2010 ).                                              Abdelzaher, T., Anokwa, Y., Boda, P., Burke, J., Estrin, D., Guibas, L., Kansal, A.,
+
+   Market Design : some Human Computation applications, e.g.,                     Madden, S., Reich, J., 2007. Mobiscopes for human spaces. IEEE Pervasive
+                                                                                  Computing 6, 20 e29.
+task crowdsourcing for data validation, can be regarded as a work              Alsaleh, S., Nayak, R., Xu, Y., Chen, L., 2011. Improving matching process in social
+market, where work sellers and buyers meet ( Ipeirotis and Paritosh,              network using implicit and explicit user information. In: Proceedings of the 13th
+                                                                                  Asia-PaciﬁcWebConferenceonWebTechnologiesandApplications,pp.313  e320.
+2011). As in any market, ef ﬁciency heavily depends on the recip-
+rocal trust between buyers and sellers, and can be hampered by                 Antonucci, A., Zaffalon, M., 2008. Decision-theoretic specation of credal
+                                                                                  networks: a uni ﬁed language for uncertain modeling with sets of Bayesian
+opportunistic or fraudulent behaviours. Trust and reputation                      networks. International Journal of Approximate Reasoning 49 (2)e361.
+systems used in e-commerce and recommender systems (              Jøsang       Aulov, O., Halem, M., 2011. Assimilation of Real-time Satellite and Human Sensor
+                                                                                  Networks for Modeling Natural Disasters. AGU Fall Meeting Abstracts.
+et al., 2007 ) apply to Human Computation too, but need to be
+                                                                               Bansal, N., Srivastava, B., 2011. On using crowd for meﬁc at aggregate level
+adapted to the speci ﬁcity of Human Computation environments.                     for emerging countries. In: Proceedings of the 8th International Workshop on
+   Ethical and legal aspects : Human Computation applications                     InformationIntegrationontheWeb:InConjunctionwithWWW2011,pp.5:1   e5:6.
+                                                                               Barreteau, O., 2003. The joint use of role-playing games and models regarding
+question the ethical and legal framework at the base of the human
+condition( Zittrain,2008 ).ManyapplicationsofHumanComputation                     negotiation processes: characterization of associations. Journal oﬁciali
+                                                                                  Societies and Social Simulation 6 (2).
+(e.g.,expert ﬁndingandtask-to-workermatching)requireprocessing                 Benevenuto, F., Rodrigues, T., Cha, M., Almeida, V.A.F., 2009. Characterizing user
+                                                                                  behavior in online social networks. In: Proceedings of the 9th ACM SIGCOMM
+user’s data, e.g., pro ﬁles and friendship links extracted from social            Conference on Internet Measurement Conference (IMC09), pp. e62.
+networks. These requirements may collide with the user        ’s expecta-
+                                                                               Brambilla, M., Fraternali, P., Vaca, C., 2011. BPMN and design patterns for engi-
+tion about data protection and privacy. Furthermore, the discon-                  neering social BPM solutions. In: Proceedings of the 4th International Work-
+nection of workers from employers implied by crowdsourcing is also                shop on BPM and Social Software (BPMS 2011).
+                                                                               Braun, S., Schmidt, A., Walter, A., Nagypal, G., Zacharias, V., 2007. Ontology
+changing the workplace relationships, with such potential conse-                  maturing: a collaborative web 2.0 approach to ontology engineering. In:
+quences as worker ’s alienation, incapacity of judgement about the
+                                                                                  Proceedings of the Workshop on Social and Collaborative Construction of
+moral valence of tasks, and overmonitoring by the commissioner.                   Structured Knowledge (CKC 2007) at the 16th International World Wide Web
+                                                                                  Conference (WWW2007).
+                                                                               Brede, M., Vries, H.D., 2010. Harvesting heterogeneous renewable resources:
+5. Conclusions and outlook                                                        uncoordinated, sel ﬁsh, team-, and community-oriented strategies. Environ-
+
+                                                                                  mental Modelling & Software 25 (1), 117 e128.
+                                                                               Cacho, O.J., Spring, D., Hester, S., Nally, R.M., 2011. Allocating surveillance effort in
+    In this paper we have discussed some of the ways in which                     the management of invasive species: a spatially-explicit model. Environmental
+Water Resources Management can take advantage of the emerging                     Modelling & Software 25 (4), 444 e454.
+76                                                   P. Fraternali et al. / Environmental Modelling & Software 37 (2012) 68e77
+
+
+Campbell, A.T., Eisenman, S.B., Lane, N.D., Miluzzo, E., Peterson, R.A., Lu, H.,                support: use of ontology in integrated assessment and modelling. Environ-
+    Zheng, X., Musolesi, M., Fodor, K., Ahn, G.-S., 2008. The rise of people-centric            mental Modelling & Software 24 (12), 1491 e1500.
+
+    sensing. IEEE Internet Computing 12 (4), 12 e21.                                        Janssen, S., Athanasiadis, I., Bezlepkina, I., Knapen, R., Li, H., Dominguez, I.,
+Castelletti, A., Soncini-Sessa, R., 2006. A procedural approach to strengthening                Rizzoli, A., van Ittersum, M., 2011. Linking models for assessing agricultural land
+    integration and participation in water resource planning. Environmental                     use change. Computers and Electronics in Agriculture 76 (2), 148   e160.
+
+    Modelling & Software 21 (10), 1455 e1470.                                               Jøsang, A., Ismail, R., Boyd, C., 2007. A survey of trust and reputation systems for
+Castelletti, A., Soncini-Sessa, R., 2007a. Bayesian networks in water resource model-           online service provision. Decision Support Systems 43 (2), 618   e644.
+    ling and management. Environmental Modelling & Software 22 (8),1073       e1074.        Kim, S., Robson, C., Zimmerman, T., Pierce, J., Haber, E.M., 2011. Creek watch: pairing
+Castelletti, A., Soncini-Sessa, R., 2007b. Coupling real-time control and socio-                usefulness and usability for successful citizen science. In: Proceedings of the
+
+    economic issues in participatory river basin planning. Environmental Model-                 29th International Conference on Human Factors in Computing Systems, New
+    ling & Software 22 (8), 1114 e1128.                                                         York, NY, 2125 e2134 pp.
+Catanese, S.A., De Meo, P., Ferrara, E., Fiumara, G., Provetti, A., 2011. Crawling          Koelstra,S.,Yazdani,A.,Soleymani,M.,Mühl,C.,Lee,J.-S.,Nijholt,A.,Pun,T.,Ebrahimi,T.,
+
+    facebook for social network analysis purposes. In: Proceedings of the Interna-              Patras,I.,2010.Singletrialclassi ﬁcationofEEGandperipheralphysiologicalsignals
+    tional Conference on Web Intelligence, Mining and Semantics. WIMS       ’11. ACM,           for recognition of emotions induced by music videos. In: Proceedings of the 2010
+    pp. 52:1e52:8.                                                                              International Conference on Brain Informatics, pp. 89 e100.
+
+Cha, M., Mislove, A., Gummadi, P.K., 2009. A measurement-driven analysis of                 Korhonen, P., Laakso, J., 1986. A visual interactive method for solving the multiple
+    information propagation in the ﬂickr social network. In: Proceedings of the 18th            criteria problems. European Journal of Operations Research 24 (2), 277    e287.
+    International Conference on World Wide Web, pp. 721      e730.                          Kuncheva, L.I., Whitaker, C.J., Shipp, C.A., 2003. Limits on the majority vote accuracy
+
+Chan, K.T., King, I., Yuen, M.-C., 2009. Mathematical Modeling of Social Games. In:             in classiﬁer fusion. Pattern Analysis & Applications 6 (1), 22 e31.
+    Computational Science and Engineering, 2009. CSE       ’09. International Confer-       Lang, M., Lins, K., Miller, D., 2003. ADRs, analysts, and accuracy: does cross listing in
+    ence On, vol. 4, pp. 1205 e1210.                                                            the United States improve a     ﬁrm’s information environment and increase
+
+Cohen, D., Prusak, L., 2001. In Good Company: How Social Capital Makes Organi-                  market value? Journal of Accounting Research 41 (2), 317    e345.
+    zations Work. Harvard Business School Press, Boston, MA.                                Law, E., von Ahn, L., 2009. Input-agreement: a new mechanism for collecting data
+Cooper, S., Khatib, F., Treuille, A., Barbero, J., Lee, J., Beenen, M., Leaver-Fay, A.,         using human computation games. In: Proceedings of the 27th International
+
+    Baker, D., Popovic, Z., 2010. Predicting protein structures with a multiplayer              Conference on Human Factors in Computing Systems, pp. 1197       e1206.
+    online game. Nature 466 (7307), 756 e760.                                               Liu, J., Dietz, T., Carpenter, S., Alberti, M., Folke, C., Moran, E., Pell, A., Deadman, P.,
+Cunningham, W., Leuf, B., 2001. The Wiki Way. In: Quick Collaboration on the Web.               Kratz, T., Lubchenco, J., Ostrom, E., Ouyang, Z., Provencher, W., Redman, C.,
+
+    Addison-Wesley, Boston, MA.                                                                 Schneider, S., Taylor, W., 2007. Complexity of coupled human and natural
+Delbecq, A., Ven de Ven, A., Gustafson, D., 1975. Group Techniques for Program                  systems. Science 317 (5844), 1513 e1516.
+    Planning. Foresman and Company, Glenview, IL.                                           Liu, Y., Piyawongwisal, P., Handa, S., Yu, L., Xu, Y., Samuel, A., 2011. Going beyond
+
+Downs, J.S., Holbrook, M.B., Sheng, S., Cranor, L.F., 2010. Are your participants               citizen data collection with mapster: a mobile þcloud citizen science experi-
+    gaming the system? Screening mechanical turk workers. In: Proceedings of the                ment. In: Proceedings of the IEEE Workshop on Computing for Citizen Science
+    28th International Conference on Human Factors in Computing Systems,                        (eScience 2001).
+
+    pp. 2399e2402.                                                                          Madan, A., Cebrián, M., Lazer, D., Pentland, A., 2010. Social sensing for epidemio-
+Dutta, P., Aoki, P.M., Kumar, N., Mainwaring, A., Myers, C., Willett, W., Woodruff, A.,         logical behavior change. In: Proceedings of the 12th ACM International
+    2009. Common sense: participatory urban sensing using a network of handheld                 Conference on Ubiquitous Computing, pp. 291 e300.
+
+    air quality monitors. In: Proceedings of the 7th ACM Conference on Embedded             Maisonneuv  e, N., Stevens, M., Niessen, M.E., Hanappe, P., Steels, L., 2009. Citizen
+    Networked Sensor Systems, pp. 349 e350.                                                     noise pollution monitoring. In: Proceedings of the 10th Annual International
+Easley, D., Kleinberg, J., 2010. Networks, Crowds, and Markets: Reasoning About                 Conference on Digital Government Research: Social Networks: Making
+
+    a Highly Connected World. Cambridge University Press, Cambridge, UK.                        Connections Between Citizens, Data and Government, pp. 96      e103.
+Forbus, K.D., 1981. Qualitative reasoning about physical processes. In: Proceedings         Manasseh,C.,Ahern, K., Sengupta, R.,2009. The connectedtraveler:usinglocationand
+    Seventh International Joint Conference on Arti ﬁcial Intelligence, pp. 326 e330.            personalization on mobile devices to improve transportation. In: Proceedings of
+
+Grimble, R., Wellard, K., 1997. Stakeholder methodologies in natural resource                   the 2nd International Workshop on Location and the Web (LOCWEB09), pp.1       e4.
+    management: a review of principles, contexts, experiences and opportunities.            Mislove, A., Viswanath, B., Gummadi, K.P., Druschel, P., 2010. You are who you
+    Agricultural Systems 55 (2), 173 e193.                                                      know: inferring user pro ﬁles in online social networks. In: Proceedings of the
+
+Gruber, T., 2007. Collective knowledge systems: where the social web meets the                  3rd ACM International Conference on Web Search and Data Mining (WSDM10),
+    semantic web. Web Semantics: Science, Services and Agents on the World Wide                 pp. 251e260.
+    Web 6 (1), 4 e13.                                                                       Mouton, A., De Baets, B., Goethals, P., 2009. Knowledge-based versus data-driven
+
+Hamilton, M., Salim, F., Cheng, E., Choy, S., 2011. Transafe: a crowdsourced mobile             fuzzy habitat suitability models for river management. Environmental Model-
+    platform for crime and safety perception management. ACM SIGCAS Computers                   ling & Software 24 (8), 982 e993.
+    and Society 41 (2), 32 e37.                                                             Mozer, M., Pashler, H., Wilder, M.H., Lindsey, R.A., Jones, M., Jones, M., 2010.
+Hand, E., 2010. Citizen science: people power. Nature 466, 685   e687.                          Improving human judgments by decontaminating sequential dependencies. In:
+
+Hare, M., Letcher, R., Jakeman, A., 2003. Participatory modelling in natural resource           Advances in Neural Information Processing Systems, pp. 1705     e1713.
+    management: a comparison of four case studies. Integrated Assessment 4 (2),             Nesic, S., Rizzoli, A., Athanasiadis, I., 2011. Towards a semantically uniﬁ ed envi-
+    62e72.                                                                                      ronmental information space. In: Proceedings of IFIP Advances in Information
+
+Harper, F.M., Sen, S., Frankowski, D., 2007. Supporting social recommendations with             and Communication Technology, pp. 407 e418.
+    activity-balanced clustering. In: Proceedings of the 2007 ACM Conference on             Parameswaran, A., Sarma, A.D., Garcia-Molina, H., Polyzotis, N., Widom, J., 2010.
+    Recommender Systems, New York, NY, 165 e168 pp.                                             Human-assisted Graph Search: It ’s Okay to Ask Questions. Technical Report,
+
+Heer, J., Bostock, M., 2010. Crowdsourcing graphical perception: using mechanical               Stanford University, Palo Alto, CA.
+    turk to assess visualization design. In: Proceedings of the 28th International          Pariente, T., Fuentes, J., Sanguino, M., Yurtsever, S., Avellino, G., Rizzoli, sic, S.,
+    ConferenceonHumanFactorsinComputingSystems,NewYork,NY,203                e212 pp.           2011. A model for semantic annotation of environmental resources: the tatoo
+
+Hill,D.J., Liu, Y., Marini, L., Kooper, R., Rodriguez, A., Futrelle, J., Minsker, B.S.,         semantic framework. In: Environmental Software Systems. Frameworks of
+    Myers, J., McLaren, T., 2011. A virtual sensor system for user-generated, real-             eEnvironment, vol. 359. Springer, Boston, MA, pp. 419   e427.
+    time environmental data products. Environmental Modelling & Software 26,                Pérez, I.J., Cabrerizo, F.J., Herrera-Viedma, E., 2010. A mobile decision support
+
+    1710e1724.                                                                                  system for dynamic group decision-making problems. IEEE Transactions on
+Howe, J., 2006. The rise of crowdsourcing. Wired 14 (6).                                        Systems, Man, and Cybernetics, Part A 40 (6), 1244 e1256.
+Hu, X., Stalnacke, M., Minde, T.B., Carlsson, R., Larsson, S., 2009. A mobile game to       Pickard, G., Rahwan, I., Pan, W., Cebrián, M., Crane, R., Madan, A., Pentland, A., 2010.
+
+    collect and improve position of images. In: Proceedings of the 3rd International            Time Critical Social Mobilization: The Darpa Network Challenge Winning
+    Conference on Next Generation Mobile Applications, Services and Technologies.               Strategy. CoRR abs/1008.3172.
+Huang, E., Zhang, H., Parkes, D.C., Gajos, K.Z., Chen, Y., 2010. Toward automatic task      Prell, C., Hubacek, K., Quinn, C., Reed, M., 2008. Who ’s in the network? When stake-
+
+    design: a progress report. In: Proceedings of the ACM SIGKDD Workshop on                    holdersinﬂuencedataanalysis.SystemicPracticeandActionResearch2,443         e458.
+    Human Computation, pp. 77 e85.                                                          Prell, C., Reed, M., Hubacek, K., 2009. Stakeholder analysis and social network
+Iandoli, L., Klein, M., Zollo, G., 2009. Enabling on-line deliberation and collective           analysis in natural resource management. Society and Natural Resources 22 (6),
+
+    decision-making through large-scale argumentation: a new approach to the                    501e518.
+    design of an internet-based mass collaboration platform. International Journal          Quinn, A.J., Bederson, B.B., 2011. Human computation: a survey and taxonomy of
+    of Decision Support System Technology 1 (1), 69 e92.                                        a growing ﬁeld. In: Proceedings of the 29th International Conference on Human
+
+Ipeirotis, P.G., Paritosh, P.K., 2011. Managing crowdsourced human computation:                 Factors in Computing Systems, pp. 1403 e1412.
+    a tutorial. In: Proceedings of the 20th International Conference Companion on           Rammel, C., Stagl, S., Wil ﬁng, H., 2007. Managing complex adaptive systems   e aco-
+    World Wide Web, pp. 287 e288.                                                               evolutionary perspective on natural resource management. Ecological Economics
+
+Ipeirotis, P.G., Provost, F., Wang, J., 2010. Quality management on amazon                      63 (1), 9e21.
+    mechanical turk. In: Proceedings of the ACM SIGKDD Workshop on Human                    Robertson, D., Bundy, A., Muetzelfeldt, R., Haggith, M., Uschold, M., 1991. Eco-Logic
+    Computation (KDD-HCOMP 2010), pp. 64 e67.                                                   e Logic-Based Approaches to Ecological Modeling. MIT Press, Cambridge, MA.
+
+Janssen, S., Ewert, F., Li, H., Athanasiadis, I., Wien, J., Thèrond, O., Knapen, M.,        Sakaki, T., Okazaki, M., Matsuo, Y., 2010. Earthquake shakes twitter users: real-time
+    Bezlepkina, I., Alkan-Olsson, J., Rizzoli, A., Belhouchette, H., Svensson, M., van          event detection by social sensors. In: Proceedings of the 19th International
+    Ittersum, M., 2009. De ﬁning assessment projects and scenarios for policy                   Conference on World Wide Web (WWW10), pp. 851          e860.
+                                                     P. Fraternali et al. / Environmental Modelling & Software 37 (2012) 68e77                                                   77
+
+
+Salvetti, A., Antonucci, A., Zaffalon, M., 7 e10 July 2008. Spatially distributed iden-      Tudorache, T., Fridman Noy, N., Tu, S., Musen, M., 2008. Supporting collaborative
+    tiﬁcation of debris ﬂow source areas by credal networks. In: Proceedings of the              ontology development in Protégé. In: Proceedings of the International Semantic
+
+    4th Biennial Meeting of the International Environmental Modelling & Software                 Web Conference, pp. 17 e32.
+    Society (iEMSs08). Barcelona, SP.                                                        Turoff, M., 1970. The design of a policy Delphi. Technological Forecasting and Social
+Sanfey, A.G., 2007. Social decision-making: insights from game theory and neuro-                 Change 2, 149 e171.
+
+    science. Science 318 (5850), 598 e602.                                                   Tversky, A., Kahneman, D.,1974. Judgment under uncertainty: heuristics and biases.
+Shah, S., Bao, F., Lu, C., Chen, I., 2011. Crowdsafe: crowd sourcing of crime incidents          Science 185, 1124 e1131.
+    and safe routing on mobile devices. In: Proceedings of the 19th ACM SIGSPA-              Varis, O., Kuikka, S., 1997. Bayesian approach to expert judgment elicitation with
+    TIAL International Conference on Advances in Geographic Information Systems.                 case studies on climatic change impact assessment on surface waters. Climatic
+
+    ACM, pp. 521 e524.                                                                           Change 37 (3), 539 e563.
+Siorpaes, K., Hepp, M., 2008. Games with a purpose for the semantic web. IEEE                Villa, F., Athanasiadis, I., Rizzoli, A., 2009. Modelling with knowledge: a review of
+    Intelligent Systems 23 (3), 50 e60.                                                          emerging semantic approaches to environmental modelling. Environmental
+
+Soncini-Sessa, R., Castelletti, A., Weber, E., 2003. A DSS for integrated planning and           Modelling & Software 24 (5), 577 e587.
+    management of water reservoir systems. Environmental Modelling & Software                von Ahn, L., 2006. Games with a purpose. Computer 39, 92      e94.
+    18 (5), 395 e404.                                                                        von Ahn, L., 2009. Human computation. In: CIVR.
+
+Soncini-Sessa, R., Castelletti, A., Weber, E., 2007a. Integrated and Participatory           von Ahn, L., Maurer, B., McMillen, C., Abraham, D., Blum, M., 2008. recaptcha:
+    Water Resources Management. Theory. Elsevier, Amsterdam, NL.                                 human-based character recognition via web security measures. Science 321
+Soncini-Sessa, R., Cellina, F., Pianosi, F., Weber, E., 2007b. Integrated and Partici-           (5895), 1465 e1468.
+
+    patory Water Resources Management. Practice. Elsevier, Amsterdam, NL.                    Wen, Z., Lin, C.-Y., 2010. On the quality of inferring interests from social neighbors.
+Sowa, J.F. (Ed.), 1991. Principles of Semantic Networks: Explorations in the Repre-              In: Proceedings of the 16th ACM SIGKDD International Conference on Knowl-
+    sentation of Knowledge. Morgan Kaufmann Publishers, San Mateo, CA.                           edge Discovery and Data Mining, pp. 373 e382.
+
+Stothard, J., Sousa-Figueiredo, J., Betson, M., Seto, E., Kabatereine, N., 2011. Inves-      Xie, X., Li, D., Xia, H., 2010. Towards ef ﬁcient content management in online social
+    tigating the spatial micro-epidemiology of diseases within a point-prevalence                communities e a study of user interest and context. In: Proceedings of 6th
+    sample: a ﬁeld applicable method for rapid mapping of households using                       International Conference on Advanced Information Management and Service,
+
+    low-cost gps-dataloggers. Transactions of the Royal Society of Tropical Medi-                pp. 199e204.
+    cine and Hygiene.                                                                        Ye, S., Lang, J., Wu, S.F., 2010. Crawling online social graphs. In: Proceedings of 12th
+Thaler, S., Simperl, E., Siorpaes, K., 2011. Spotthelink: playful alignment of ontol-            International Asia-Paci ﬁc Web Conference (APWeb), pp. 236 e242.
+
+    ogies. In: Proceedings of the 26th Symposium on Applied Computing (SAC        ’11),      Zhang, J., Dong, T., Mack, A., Wu, Y., 2009. Using tagging games to engage expertise
+    New York, NY, 1711 e1712 pp.                                                                 proﬁling in organizations. In: Proceedings of Engagement by Design, Workshop
+Thiessen, E., Loucks, D.,1992. Computer assisted negotiation of multiobjective water             at Conference on Human Factors in Computing Systems, CHI 2009. Boston, MA.
+
+    resources con ﬂicts. Journal of the American Water Resources Association 28 (1),         Zittrain, J., 2008. Ubiquitous human computing. Philosophical Transactions of the
+    163e177.                                                                                     Royal Society 366, 3813 e3821.
