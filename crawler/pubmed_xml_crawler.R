@@ -32,4 +32,31 @@ XMLdownload=function(x){
   download_xml(myurl,paste('pubmed/',x,'.xml',sep=''),quiet=FALSE)
   },error=function(e){cat("ERROR :",conditionMessage(e), "\n")})
 }
-sapply(id, XMLdownload)
+sapply(id,XMLdownload)
+
+
+# Medline
+library(xml2)
+setwd("C:/Users/Zixiang Xu/Desktop/GMU/JY Sun")
+id=read.table('pmid-crowdsourc-set.txt')
+pmc_medline_id=as.vector(id)$V1
+id=read.table('pmid-crowdsourc-set2.txt')
+pmc_pubmed_id=as.vector(id)$V1
+id=read.csv("identified_articles_from_Medline.csv")$PMID
+
+XMLdownload2=function(x){
+  tryCatch({
+    myurl=paste('https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/',x,'/unicode',sep='')
+    download_xml(myurl,paste('PMCOAS_Medline/',x,'.xml',sep=''),quiet=FALSE)
+  },error=function(e){cat("ERROR :",conditionMessage(e), "\n")})
+}
+sapply(pmc_medline_id,XMLdownload2)
+
+XMLdownload3=function(x){
+  tryCatch({
+    myurl=paste('https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/',x,'/unicode',sep='')
+    download_xml(myurl,paste('PMCOAS_all/',x,'.xml',sep=''),quiet=FALSE)
+  },error=function(e){cat("ERROR :",conditionMessage(e), "\n")})
+}
+sapply(pmc_pubmed_id,XMLdownload3)
+
