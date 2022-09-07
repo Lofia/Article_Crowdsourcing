@@ -18,7 +18,7 @@ Medline: A large dataset
 PubMed: A larger dataset containing Medline  
 PubMed Central: A part (about 60%) of PubMed where all the articles in it are freely available  
 PMC Open Access Subset & PMC Author Manuscript Collection: A part (about 80%) of PubMed Central where all the articles in it could be retrieved using certain API for text mining purpose    
-[alt text](https://github.com/Lofia/Article_Crowdsourcing/blob/main/crawler/relation_graph.png)
+![alt text](https://github.com/Lofia/Article_Crowdsourcing/blob/main/crawler/relation_graph.png)
 Therefore:  
 In PubMed, I searched for "crowdsourcing" in the recent five years (from 2017) with the restriction of "Medline" in PMC. And among them, 594 (about 80%) articles could be downloaded using BioC.  
 In PubMed, I searched for "crowdsourcing" in the recent five years (from 2017) in PMC. And among them, 1031 (about 80%) articles could be downloaded using BioC. ([link here](https://pubmed.ncbi.nlm.nih.gov/?term=crowdsourcing&filter=simsearch2.ffrft&filter=datesearch.y_5&sort=date&sort_order=asc))  
