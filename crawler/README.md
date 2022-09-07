@@ -7,13 +7,11 @@
 
 ---
 
-Used [**BioC API**](https://www.ncbi.nlm.nih.gov/research/bionlp/APIs/BioC-PMC/) (with [code](pubmed_xml_crawler.R)) to extract selected .xml files from PubMed Central Open Access database.
+Used [**BioC API**](https://www.ncbi.nlm.nih.gov/research/bionlp/APIs/BioC-PMC/) (with [code](pubmed_xml_crawler.R)) to extract selected .xml files from PubMed Central Open Access database.  
+(By using the BioC API, the downloaded articles are from PMC Open Access Subset and the PMC Author Manuscript Collection. Not all articles in PMC are available for text mining and other reuse.)
 
 ---
 <!-- ![alt text](https://github.com/Lofia/Article_Crowdsourcing/blob/main/crawler/Screenshot_medline.png) -->
-
-By using the BioC API, the downloaded articles are from PMC Open Access Subset and the PMC Author Manuscript Collection. Not all articles in PMC are available for text mining and other reuse.
-
 Medline: A large dataset  
 PubMed: A larger dataset containing Medline  
 PubMed Central: A part (about 60%) of PubMed where all the articles in it are freely available  
