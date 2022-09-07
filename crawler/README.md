@@ -11,4 +11,4 @@ Used [**BioC API**](https://www.ncbi.nlm.nih.gov/research/bionlp/APIs/BioC-PMC/)
 
 ---
 
-![alt text](https://github.com/Lofia/Article_Crowdsourcing/blob/main/crawler/Screenshot_medline.png)
+<!-- ![alt text](https://github.com/Lofia/Article_Crowdsourcing/blob/main/crawler/Screenshot_medline.png) -->
