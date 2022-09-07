@@ -20,6 +20,6 @@ PubMed Central: A part (about 60%) of PubMed where all the articles in it are fr
 PMC Open Access Subset: A part (about 80%) of PubMed Central where all the articles in it could be retrieved using certain API for text mining purpose    
 
 Therefore:  
-In PubMed, I searched for "crowdsouring" in the recent five years (from 2017) with the restriction of "Medline". And among them, 594 (about 80%) articles could be downloaded using BioC.  
-In PubMed, I searched for "crowdsouring" in the recent five years (from 2017). And among them, 1031 (about 80%) articles could be downloaded using BioC. ([link here](https://pubmed.ncbi.nlm.nih.gov/?term=crowdsourcing&filter=simsearch2.ffrft&filter=datesearch.y_5&sort=date&sort_order=asc))  
-However, in PubMed Central, I searched for "crowdsouring" in the recent five years (from 2017). And among them, 6025 (about 80%) articles could be downloaded using BioC. ([link here](https://www.ncbi.nlm.nih.gov/pmc/?term=crowdsourcing))
+In PubMed, I searched for "crowdsourcing" in the recent five years (from 2017) with the restriction of "Medline" in PMC. And among them, 594 (about 80%) articles could be downloaded using BioC.  
+In PubMed, I searched for "crowdsourcing" in the recent five years (from 2017) in PMC. And among them, 1031 (about 80%) articles could be downloaded using BioC. ([link here](https://pubmed.ncbi.nlm.nih.gov/?term=crowdsourcing&filter=simsearch2.ffrft&filter=datesearch.y_5&sort=date&sort_order=asc))  
+However, in PubMed Central, I searched for "crowdsourcing" in the recent five years (from 2017). And among them, 6025 (about 80%) articles could be downloaded using BioC. ([link here](https://www.ncbi.nlm.nih.gov/pmc/?term=crowdsourcing))
