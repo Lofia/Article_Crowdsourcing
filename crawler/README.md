@@ -10,5 +10,6 @@
 Used [**BioC API**](https://www.ncbi.nlm.nih.gov/research/bionlp/APIs/BioC-PMC/) (with [code](pubmed_xml_crawler.R)) to extract selected .xml files from PubMed Central Open Access database.
 
 ---
-
 <!-- ![alt text](https://github.com/Lofia/Article_Crowdsourcing/blob/main/crawler/Screenshot_medline.png) -->
+
+The downloaded articles are from PMC Open Access Subset and the PMC Author Manuscript Collection. Not all articles in PMC are available for text mining and other reuse.
