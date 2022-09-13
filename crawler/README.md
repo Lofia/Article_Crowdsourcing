@@ -15,9 +15,9 @@ Used [**BioC API**](https://www.ncbi.nlm.nih.gov/research/bionlp/APIs/BioC-PMC/)
 Medline: A large dataset  
 PubMed: A larger dataset containing Medline  
 PubMed Central: A part (about 60%) of PubMed where all the articles in it are freely available  
-PMC Open Access Subset & PMC Author Manuscript Collection: A part (about 80%) of PubMed Central where all the articles in it could be retrieved using certain API for text mining purpose    
+PMC OAS(Open Access Subset) & PMC AMC(Author Manuscript Collection): A part (about 80%) of PubMed Central where all the articles in it could be retrieved using certain API for text mining purpose    
 ![alt text](https://github.com/Lofia/Article_Crowdsourcing/blob/main/crawler/relation_graph.png)
 Therefore:  
-In PubMed, I searched for "crowdsourcing" in the recent five years (from 2017) with the restriction of "Medline". And among them, 594 (about 80%) articles [(PMCOAS+AMC_Medline(594).zip)](PMCOAS+AMC_Medline(594).zip) could be downloaded using BioC.  
-In PubMed, I searched for "crowdsourcing" in the recent five years (from 2017). And among them, 1031 (about 80%) articles [(PMCOAS+AMC_all(1031).zip)](PMCOAS+AMC_all(1031).zip) could be downloaded using BioC. ([link here](https://pubmed.ncbi.nlm.nih.gov/?term=crowdsourcing&filter=simsearch2.ffrft&filter=datesearch.y_5&sort=date&sort_order=asc))  
-*However, in PubMed Central, I searched for "crowdsourcing" in the recent five years (from 2017). And among them, 6025 (about 80%) articles could be downloaded using BioC. ([link here](https://www.ncbi.nlm.nih.gov/pmc/?term=crowdsourcing))*
+In PubMed, I searched for "crowdsourcing" in the recent five years (from 2017) within "Medline". And among them, 594 (about 80%) articles [(PMCOAS+AMC_Medline(594).zip)](PMCOAS+AMC_Medline(594).zip) could be downloaded using the code [Crowd_Epi_crawler.R](pubmed_xml_crawler.R).  
+In PubMed, I searched for "crowdsourcing" in the recent five years (from 2017). And among them, 1031 (about 80%) articles [(PMCOAS+AMC_all(1031).zip)](PMCOAS+AMC_all(1031).zip) could be downloaded using the code [Crowd_Epi_crawler.R](pubmed_xml_crawler.R). ([link here](https://pubmed.ncbi.nlm.nih.gov/?term=crowdsourcing&filter=simsearch2.ffrft&filter=datesearch.y_5&sort=date&sort_order=asc))  
+*However, in PubMed Central, I searched for "crowdsourcing" in the recent five years (from 2017). And among them, 6025 (about 80%) articles could be downloaded using the code [Crowd_Epi_crawler.R](pubmed_xml_crawler.R). ([link here](https://www.ncbi.nlm.nih.gov/pmc/?term=crowdsourcing))*
