@@ -7,17 +7,17 @@ Prepared a [link to potential cs co-workers](https://gmuedu-my.sharepoint.com/:w
 
 ---
 
-Wrote the code [Crowd_Epi_crawler.R](Crowd_Epi_crawler.R), using the [**BioC API**](https://www.ncbi.nlm.nih.gov/research/bionlp/APIs/BioC-PMC/), to extract selected .xml files from PubMed Central Open Access database.  
+Wrote the code [Crowd_Epi_crawler.R](Crowd_Epi_crawler.R), using the [BioC API](https://www.ncbi.nlm.nih.gov/research/bionlp/APIs/BioC-PMC/), to extract selected .xml files from PubMed Central Open Access database.  
 (By using the BioC API, the downloaded articles are from PMC Open Access Subset and the PMC Author Manuscript Collection. Not all articles in PMC are available for text mining and other reuse.)
 
 ---
 <!-- ![alt text](https://github.com/Lofia/Article_Crowdsourcing/blob/main/crawler/Screenshot_medline.png) -->
-Medline: A large dataset  
-PubMed: A larger dataset containing Medline  
-PubMed Central: A part (about 60%) of PubMed where all the articles in it are freely available  
-PMC OAS(Open Access Subset) & PMC AMC(Author Manuscript Collection): A part (about 80%) of PubMed Central where all the articles in it could be retrieved using certain API for text mining purpose    
+**Medline**: A large dataset  
+**PubMed**: A larger dataset containing Medline  
+**PMC**(PubMed Central): A part (about 60%) of PubMed where all the articles in it are freely available  
+**PMC OAS**(Open Access Subset) & **PMC AMC**(Author Manuscript Collection): A part (about 80%) of PubMed Central where all the articles in it could be retrieved using certain API for text mining purpose    
 ![alt text](https://github.com/Lofia/Article_Crowdsourcing/blob/main/crawler/relation_graph.png)
-Therefore:  
+As the above graph shows, the real available dataset for us is the yellow circled one (PMC OAS & AMC), where "Medline" is still the basic part. Therefore:  
 In PubMed, I searched for "crowdsourcing" in the recent five years (from 2017) within "Medline". And among them, 594 (about 80%) articles [(PMCOAS+AMC_Medline(594).zip)](PMCOAS+AMC_Medline(594).zip) could be downloaded using the code [Crowd_Epi_crawler.R](Crowd_Epi_crawler.R).  
 In PubMed, I searched for "crowdsourcing" in the recent five years (from 2017). And among them, 1031 (about 80%) articles [(PMCOAS+AMC_all(1031).zip)](PMCOAS+AMC_all(1031).zip) could be downloaded using the code [Crowd_Epi_crawler.R](Crowd_Epi_crawler.R). ([link here](https://pubmed.ncbi.nlm.nih.gov/?term=crowdsourcing&filter=simsearch2.ffrft&filter=datesearch.y_5&sort=date&sort_order=asc))  
 *However, in PubMed Central, I searched for "crowdsourcing" in the recent five years (from 2017). And among them, 6025 (about 80%) articles could be downloaded using the code [Crowd_Epi_crawler.R](Crowd_Epi_crawler.R). ([link here](https://www.ncbi.nlm.nih.gov/pmc/?term=crowdsourcing))*
