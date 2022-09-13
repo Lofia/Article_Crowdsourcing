@@ -7,7 +7,7 @@
 
 ---
 
-Used [**BioC API**](https://www.ncbi.nlm.nih.gov/research/bionlp/APIs/BioC-PMC/) (with [code](pubmed_xml_crawler.R)) to extract selected .xml files from PubMed Central Open Access database.  
+Wrote the code [Crowd_Epi_crawler.R](pubmed_xml_crawler.R), using the [**BioC API**](https://www.ncbi.nlm.nih.gov/research/bionlp/APIs/BioC-PMC/), to extract selected .xml files from PubMed Central Open Access database.  
 (By using the BioC API, the downloaded articles are from PMC Open Access Subset and the PMC Author Manuscript Collection. Not all articles in PMC are available for text mining and other reuse.)
 
 ---
