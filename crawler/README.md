@@ -21,3 +21,10 @@ As the above graph shows, the real available dataset for us is the yellow circle
 In PubMed, I searched for "crowdsourcing" in the recent five years (from 2017) within "Medline". And among them, 594 (about 80%) articles [(PMCOAS+AMC_Medline(594).zip)](PMCOAS+AMC_Medline(594).zip) could be downloaded using the code [Crowd_Epi_crawler.R](Crowd_Epi_crawler.R).  
 In PubMed, I searched for "crowdsourcing" in the recent five years (from 2017). And among them, 1031 (about 80%) articles [(PMCOAS+AMC_all(1031).zip)](PMCOAS+AMC_all(1031).zip) could be downloaded using the code [Crowd_Epi_crawler.R](Crowd_Epi_crawler.R). ([link here](https://pubmed.ncbi.nlm.nih.gov/?term=crowdsourcing&filter=simsearch2.ffrft&filter=datesearch.y_5&sort=date&sort_order=asc))  
 *However, in PubMed Central, I searched for "crowdsourcing" in the recent five years (from 2017). And among them, 6025 (about 80%) articles could be downloaded using the code [Crowd_Epi_crawler.R](Crowd_Epi_crawler.R). ([link here](https://www.ncbi.nlm.nih.gov/pmc/?term=crowdsourcing))*
+
+---
+
+Converted all the .xml files to .txt files straightly by changing their extensions. And we are able to run the "Dictionary Maker" java code (Gui.java) on all the converted text files.  
+Though there presents a samll problem that, since we are simply changing extensions, the converted .txt files are not very clean. For example:
+![alt text](https://github.com/Lofia/Article_Crowdsourcing/blob/main/crawler/Screenshot_java_prob.png)
+the word "Given" could not be detected since there is no space separating it at beginning.
