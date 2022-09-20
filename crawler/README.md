@@ -31,7 +31,7 @@ In PubMed, I searched for "crowdsourcing" in the recent five years (from 2017). 
 
 ---
 ### 9-14-2022
-Converted all the .xml files to .txt files straightly by changing their extensions. And we are able to run the "Dictionary Maker" java code (Gui.java) on all the converted text files.  
+Converted all the .xml files to .txt files straightly by changing their extensions. And we are able to run the "Dictionary Maker" java code (Gui.java) on all the converted text files. For example (New202009.csv)[New202009.csv].  
 Though there presents a samll problem that, since we are simply changing extensions, the converted .txt files are not very clean. For example:  
 <div align="center"><img src="https://github.com/Lofia/Article_Crowdsourcing/blob/main/crawler/Screenshot_java_prob.png"></div>
 the word "Given" could not be detected since there is no space separating it at beginning.
