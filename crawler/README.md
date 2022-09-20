@@ -4,7 +4,7 @@ Wrote the code [**Generate_article_list.R**](Generate_article_list.R) to generat
 
 ---
 ### 7-20-2022
-Prepared a [link to potential cs co-workers](https://gmuedu-my.sharepoint.com/:w:/g/personal/zxu27_gmu_edu/EaXsDAZUecdKpsOM8p5fVywBfUYG_nrvpDEFhynHqcWArA?e=8yTc4z)
+Prepared a [link to potential cs co-workers](https://gmuedu-my.sharepoint.com/:w:/g/personal/zxu27_gmu_edu/EaXsDAZUecdKpsOM8p5fVywBfUYG_nrvpDEFhynHqcWArA?e=8yTc4z).
 
 ---
 ### 8-24-2022
