@@ -38,4 +38,4 @@ the word "Given" could not be detected since there is no space separating it at 
 
 ---
 ### 9-21-2022
-Wrote the code [**convert_xml2txt.R**](convert_xml2txt.R) so that we can convert xml files to clean text documents without structure nodes. For example [28058518.txt](PMCOAS+AMC_Medline_txt/28058518.txt).
+Solved the problem of last time by writing the code [**convert_xml2txt.R**](convert_xml2txt.R). That is, we can now convert xml files to clean text documents without structure nodes. For example [28058518.txt](PMCOAS+AMC_Medline_txt/28058518.txt).
