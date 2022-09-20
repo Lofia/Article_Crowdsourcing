@@ -1,4 +1,4 @@
-Wrote the [code](learning_crawler_xml_etc.R), which is a simple re-work based on the illustration in the article:  
+Wrote the code [**Generate_article_list.R**](Generate_article_list.R) to generate the list of ids of our targeted articles, which is a re-work based on the illustration in the unfinished paper:  
 *"... We developed an extensible markup language (XML) crawler to retrieve targeted articles from Medline. It was guided by a rule-based configuration that identified articles by both their mesh term and the desired crawling depth. These rules performed an initial screening of the articles in order to best identify the appropriate documents for the final corpus. The crawler started the navigation by retrieving the MESH term “Crowdsourcing” using rentrez() from the XML library in R. This program harnesses NCBI's EUtils API for parsing databases such as GenBank and PubMed. Based on the matching mesh term, the crawler extracted the data based on the nested XML metadata from PubMed and Pubmed Central of PMID, Journal, Publication Date, Article Year, Article Title, and Author Name (First, Last). The extracted data were subsequently processed by plyr() from the R library and automatically compiled into a csv file. ..."*
 
 ---
@@ -7,7 +7,7 @@ Prepared a [link to potential cs co-workers](https://gmuedu-my.sharepoint.com/:w
 
 ---
 
-Wrote the code [Fetch_xml_files.R](Fetch_xml_files.R), using the [BioC API](https://www.ncbi.nlm.nih.gov/research/bionlp/APIs/BioC-PMC/), to extract selected .xml files from PubMed Central Open Access database.  
+Wrote the code [**Fetch_xml_files.R**](Fetch_xml_files.R), using the [BioC API](https://www.ncbi.nlm.nih.gov/research/bionlp/APIs/BioC-PMC/), to extract selected .xml files from PubMed Central Open Access database.  
 (By using the BioC API, the downloaded articles are from PMC Open Access Subset and the PMC Author Manuscript Collection. Not all articles in PMC are available for text mining and other reuse.)
 
 ---
@@ -32,3 +32,7 @@ Though there presents a samll problem that, since we are simply changing extensi
   
 </div>
 the word "Given" could not be detected since there is no space separating it at beginning.
+
+---
+#### 9-21-2022
+Wrote the code [**convert_xml2txt.R**](convert_xml2txt.R) so that we can convert xml files to clean text documents without structure nodes. For example [28058518.txt](PMCOAS+AMC_Medline_txt/28058518.txt).
