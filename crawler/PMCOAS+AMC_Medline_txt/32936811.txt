@@ -1,0 +1,537 @@
+Impact of COVID-19 epidemic curtailment strategies in selected Indian states: An analysis by reproduction number and doubling time with incidence modelling
+The Government of India in-network with the state governments has implemented the epidemic curtailment strategies inclusive of case-isolation, quarantine and lockdown in response to ongoing novel coronavirus (COVID-19) outbreak. In this manuscript, we attempt to estimate the impact of these steps across ten selected Indian states using crowd-sourced data. The trajectory of the outbreak was parameterized by the reproduction number (R0), doubling time, and growth rate. These parameters were estimated at two time-periods after the enforcement of the lockdown on 24th March 2020, i.e. 15 days into lockdown and 30 days into lockdown. The authors used a crowd sourced database which is available in the public domain. After preparing the data for analysis, R0 was estimated using maximum likelihood (ML) method which is based on the expectation minimum algorithm where the distribution probability of secondary cases is maximized using the serial interval discretization. The doubling time and growth rate were estimated by the natural log transformation of the exponential growth equation. The overall analysis shows decreasing trends in time-varying reproduction numbers (R(t)) and growth rate (with a few exceptions) and increasing trends in doubling time. The curtailment strategies employed by the Indian government seem to be effective in reducing the transmission parameters of the COVID-19 epidemic. The estimated R(t) are still above the threshold of 1, and the resultant absolute case numbers show an increase with time. Future curtailment and mitigation strategies thus may take into account these findings while formulating further course of action.
+Introduction
+The World Health Organization (WHO) declared the Novel Coronavirus Outbreak (COVID-19) as a pandemic on 11th March 2020, calling for immediate action to be taken on by all countries in terms of stepping up treatment, detection, and reduction of transmission. As of 26th April 2020, a total of 2.96 million confirmed cases with over 200 thousand deaths reported in 185 countries. The Ministry of Health and Family Welfare, Govt. of India reported over 20000 cases across 32 states/union territories with 872 deaths. Government of India initiated various non-pharmaceutical interventions which include social distancing measures like lockdown. The nationwide lockdown was enforced in India on 24th March 2020 resulting in restrictions on unnecessary travel, closure of schools, colleges, and the prohibition of mass gatherings. Despite an assumed uniform susceptibility of the Indian population to COVID-19, the trends till now are showing a variegated force of infection in different states. It is important to capture these regional and state-specific variations as they may offer crucial insights into the current mitigation strategies. The quantification of this variation may aid in planning future intervention strategies and be vital to understand the impact of the lockdown strategy adopted by the country to curtail the impact and flatten the peak of the COVID-19 epidemic. The scope of this manuscript is to estimate the time-varying reproduction number (R(t)) and doubling time before the commencement of lockdown, 15 days into the lockdown (early epidemic) and at day-30 of the lockdown to see the cumulative effect of curtailment strategies (inclusive of lockdown) in selected states. The ten states reporting the highest numbers of COVID-19 cases as on 23rd April 2020 were chosen for this analysis. The database used for the analysis is in open-domain at www.covid19india.org. R(t) and doubling time were chosen for their primary role in reflecting the force, consistency and continuity of an infectious disease which is critically important in COVID-19.
+Methodology
+Data source
+COVID-19 cases, deaths and recoveries in India are reported by state public health agencies to the Ministry of Health and Family Welfare (MoHFW), Government of India. The MoHFW releases the testing guidelines and amends them as per the epidemiological scenarios and expert opinion. The eligibility for testing includes patients presenting with suspected symptoms in hospitals, exposed healthcare workers as well as contacts identified through contact tracing. All the hospitals or outreach services notifies cases to district level public health authority which in turn compiles data and reports to state level public health authority. Daily report on number of cases, recoveries and deaths along with the line-list of cases are sent from states to MoHFW on a dedicated portal. State public health authorities simultaneously publishes daily bulletin of same reports.
+The data source used for this study is compiled from these state bulletins, official handles of state governments, and health ministries and maintained at www.covid19india.org. This crowd-sourced database and website is maintained by a group of volunteers who curate and verify the data coming from several sources mentioned above. It is validated, updated periodically and published into an application programming interface (API) and Google spreadsheet which is accessible at api.covid19india.org for the public. Apart from the patient-level data, the API includes district-level, state-level, and national-level datasets. We used the data from the line-listing of the cases reported as positive for COVID-19. The data was iteratively and progressively accessed through the database in coherence with creation and improvement in analysis code. The last access to the database was made on 1st May 2020. We truncated the data up to 23rd April 2020 for this study. This buffer period of 7 days offered some immunity against the possible delay to add the cases and our limitation to access the data in real-time.
+Data preparation
+The data were prepared for analysis in the following steps:
+Loading the *.json file containing the raw line-list data
+A data-frame is then created and variables of interest are selected
+All cases with travel history outside the country before the lockdown are coded as imported cases. These cases were removed from further analysis.
+All cases reported after 15 days of the lockdown (i.e. 9th April 2020) irrespective of their travel history are coded as local cases
+The imported cases are then coded in the following fashion:
+Data from the top 10 states with highest number of cases were subset.
+Respective incidence objects were created by adding number of local cases reported on each date based on the timeframes described below.
+We divided the timeline of the epidemic into three phases. The first phase was before lockdown i.e. 25th March 2020, the second phase was the early epidemic phase (15 days into the lockdown), and the third phase was till day-30 of the lockdown. However, the transmission parameters before lockdown were not estimated due to certain considerations described in the supporting information (S1 Table). The second phase (15 days into the lockdown) was considered as the baseline for estimation of the transmission parameters.
+Data analysis
+Statistical software R, version 3.6.2 was used to perform all statistical analysis and model development. We used the package “incidence” to model the incidence and estimate growth rate and doubling time, and package “R0” to estimate the time-varying reproduction number (R(t)) for different states. The growth rate and doubling time were estimated using the “fit()” function of the “incidence” package fits an exponential model to the incidence data in the form of: log(y) = r * t + b; where y is the incidence, t is the time (in days) and r is the growth rate while b is the intercept or origin. The doubling time is then estimated by dividing the natural logarithm of 2 with the growth rate of the epidemic i.e. doubling time (d) = log(2) / r. The package “projections” was used to simulate the epidemic outbreaks and project their respective trajectories based on the state-specific transmission parameters. Detailed description of the methods employed have been submitted in the supporting information. The computational work-flow of the analyses performed along with the R code has been submitted at www.protocols.io.
+Estimation of reproduction number
+The time-varying reproduction number (R(t)) was estimated by using the maximum likelihood (ML) method. This method presumes that all the secondary cases linked to the primary cases follow a Poisson process (event rate is constant), and the corresponding serial interval follows a multinomial distribution. This leads to a gradual trend towards zero secondary cases (as time progresses) arising from primary cases during a specific time-step. The gradient depends on the probability density function (PDF) of the serial interval. The “est R0.ML()” function in the “R0” package was used for the estimation of R(t). This runs an expectation maximum (EM) algorithm, which maximizes the distribution probability of primary and secondary cases with reference to time. This method assumes that infectee always develops symptoms only after infector; thus, the value of the serial interval will be positive.
+Serial interval
+For the probability density function (PDF), we could not obtain the generation time (time lag between the infection in the primary case and secondary cases) distribution directly with infector-infectee pairs due to the lack of data availability. Therefore, it was substituted with the serial interval distribution discretized on a 1-day time-step. This was created using the generation.time()" function in the "R0" package. For parametrization purposes, we chose a gamma distribution as it accommodates for the underlying changing number of events in the constant event rate (Poisson process). The distribution assumptions were aligned with the emerging literature as well as the observed plausible transmission dynamics. The mean and standard deviation for serial interval approximations was 4.4 days and 3 days, respectively. The shape (number of events in time step) and scale (the reciprocal of event rate) of the distribution were 2.15 and 2.04 respectively.
+Modelling incidence and projections
+Regression of log-incidence over time was used to model the cumulative-incidence. The package “projections” was used to simulate 1000 probable epidemic outbreak trajectories and plot the future daily cumulative incidence predictions based on probability mass function dependent branching process assuming it follows a Poisson distribution. This was done to curve-fit the robustness of R(t) and check it by plotting against new incidence. The reproduction numbers of the third phase (i.e. 30 days into lockdown) were used to model the incidence and predict the cumulative caseload for the selected states.
+Ethical issues
+Dataset used in this study was generated by using state bulletins or official handles of concerned states and does not contain any identifiers. The study did not involve an interview or questionnaire and did not require the patient’s consent and Ethics Committee approval.
+Results
+A total of 23,040 COVID-19 cases have been reported in India as of 23rd April 2020 of which 20,590 cases (89.4%) were seen in the selected 10 states. The proportion of imported cases was less than 2% in all the 10 states.
+Demographics
+Table 1 shows the demographics and key relevant statistics pertaining to COVID-19 epidemic of the chosen states (as of 23rd April 2020).
+Key relevant statistics pertaining to COVID-19 epidemic and demographics of the chosen states (as of 23rd April 2020).
+State Name	Population (in Million)#	Cases	Deaths	Recovered	CFR	Recovery Rate	Infection rate†	Tests performed†	Positivity Rate	 	Maharashtra	112.4	6427	282	840	4.39	13.07	57.18	794	7.21	 	Gujarat	60.4	2624	112	252	4.27	9.60	43.44	702	6.19	 	Delhi	16.8	2376	50	808	2.1	34.01	141.43	1819	7.77	 	Rajasthan	68.5	1964	28	451	1.43	22.96	28.67	1018	2.82	 	Madhya Pradesh	72.6	1687	93	203	5.51	12.03	23.24	338	6.87	 	Tamil Nadu	72.1	1683	20	752	1.19	44.68	23.34	915	2.55	 	Uttar Pradesh	199.8	1510	24	206	1.59	13.64	7.56	228	3.32	 	Telangana	35.2	970	25	252	2.58	25.98	27.56	425*	6.48*	 	Andhra Pradesh	49.5	893	27	141	3.02	15.79	18.04	970	1.86	 	West Bengal	91.3	456	15	79	3.29	17.32	4.99	88	5.71
+# According to Census 2011.
+† per million.
+*Testing data for 19th April 2020 was used.
+CFR–Case Fatality Rate.
+As shown in Fig 1, the composite plot where lines diagram represents the trends in cumulative number of cases with reference to time and the bars show the proportional increase in cases per day for a specific state on that specific day. The two vertical lines divide the whole interface into before lockdown, early epidemic (15 days into lockdown) and current time frame (30 days into lockdown).
+Composite plot of daily and cumulative incidence of COVID-19.
+The daily new cases (daily incidence) of the selected states are represented on the primary y-axis as columns. The lines on the secondary y-axis represent the total cumulative cases (cumulative incidence). The three vertical lines on the x-axis represent the three time-points considered for the study. The first vertical line represents the initiation of lockdown; the second vertical line represents the period of 15 days into lockdown, whereas the third vertical line represents 30 days into lockdown.
+Epidemiological parameters
+Table 2 shows the effective reproduction number (R(t)) at 15 days and 30 days into lockdown. The respective doubling time is also shown at these time points. The estimates in doubling time during the early epidemic in some states show a high degree of unreliability with wide confidence intervals. Doubling time also changed with the evolving outbreak. Increase in doubling time means a slow growth rate of an outbreak. Five states reported an increase in doubling time, and four states reported negligible change in doubling time. The state of Gujarat reported a decrease in doubling time which could mean that there is no slowdown of the outbreak. Seven of the ten selected states saw a reduction in reproduction number (R(t)) between the early epidemic phase and the current timeframe. The highest decrease in R(t) was seen in Andhra Pradesh (73%) followed by Delhi (43%) and Rajasthan (30%). Telangana and Tamil Nadu saw stable R(t) during this time period while Gujarat, on the other hand, saw an increase. The growth rates of 8 of 10 states showed a decline between the two time intervals. Uttar Pradesh did not show a decline in growth rate, whereas Gujarat showed an increase. Additional analysis is provided in the S1 Appendix along with the R Code.
+Estimates of the epidemiological parameters of the chosen states at different time-points of lockdown (LD) (as of 23rd April 2020).
+State	Reproduction Number	Doubling Time	Growth Rate	 	15 days of LD	30 days of LD	15 days of LD	30 days of LD	15 days of LD	30 days of LD	 	Maharashtra	1.93 [1.77–2.11]	1.54 [1.49–1.59]	4.91 [4.17–5.97]	5.2 [4.76–5.74]	0.14 [0.12–0.17]	0.13 [0.12–0.15]	 	Gujarat	1.72 [1.38–2.11]	2.05 [1.91–2.18]	10.08 [5.61–49.83]	4.79 [4.11–5.75]	0.07 [0.01–0.12]	0.14 [0.12–0.17]	 	Delhi	3.64 [3.08–4.26]	1.9 [1.77–2.04]	4.91 [4–6.35]	5.84 [5.02–6.96]	0.14 [0.11–0.17]	0.12 [0.1–0.14]	 	Rajasthan	2.19 [1.83–2.58]	1.44 [1.35–1.54]	5.78 [4.87–7.09]	5.98 [5.39–6.72]	0.12 [0.1–0.14]	0.12 [0.1–0.13]	 	Madhya Pradesh	2.14 [1.79–2.53]	1.94 [1.78–2.1]	4.06 [3.04–6.1]	6.61 [5.02–9.67]	0.17 [0.11–0.23]	0.10 [0.07–0.14]	 	Tamil Nadu	4.62 [3.83–5.51]	3.99 [3.31–4.77]	3.64 [2.94–4.78]	6.75 [5.31–9.25]	0.19 [0.15–0.24]	0.10 [0.07–0.13]	 	Uttar Pradesh	2.2 [1.82–2.62]	1.52 [1.41–1.64]	6.93 [5.3–10.04]	6.78 [5.9–7.98]	0.10 [0.07–0.13]	0.10 [0.09–0.12]	 	Telangana	2.55 [2.11–3.05]	2.41 [1.99–2.88]	4.9 [4.01–6.3]	8.07 [6.5–10.63]	0.14 [0.11–0.17]	0.09 [0.07–0.11]	 	Andhra Pradesh	5.72 [4.34–7.37]	1.37 [1.25–1.5]	3.76 [2.79–5.75]	6.13 [4.92–8.11]	0.18 [0.12–0.25]	0.11 [0.09–0.14]	 	West Bengal	2.05 [1.48–2.76]	1.56 [1.35–1.79]	5.38 [3.56–11.05]	7.03 [5.79–8.94]	0.13 [0.06–0.19]	0.10 [0.08–0.12]
+The numbers in the square brackets represent the 95% confidence intervals.
+Modelling incidence & future projections
+Amongst the 10-day projected cases, seven of the ten states had observed values within the predicted range. States of Rajasthan, Madhya Pradesh and Telangana observed lesser cases than predicted (S2 Table). A detailed description of the methods of projections is provided in the S2 Appendix.
+Discussion
+This study evaluates the impact of nationwide lockdown on COVID-19 cases in ten states of India. At the beginning of the outbreak, states reported high transmissibility and low doubling time. The nationwide lockdown was implemented from 24th March 2020. The time-varying reproduction number (R(t)) in several states has come down by the adopted curtailment strategies, including lockdown compared to what was estimated at the beginning of the epidemic. As the final epidemic size’s relation with R(t) is exponential and not linear, this reduction if sustained, may considerably decrease the total number of affected persons compared to initial estimates. However, two factors should be considered at this moment. Firstly, the R(t) needs to be further reduced in-order to flatten or change the trajectory of the epidemic curve, and the one may perceive the state-wise variations in its magnitude. Secondly, although the doubling time has increased in relative terms, the epidemic still follows an exponential trajectory, and the current daily incidence is much more as compared to the beginning of the epidemic. Our results are similar to the work done by Sam Abbott and colleagues, where they estimated the time-varying reproduction number of COVID-19 in select Indian states.
+There are several approaches for R(t) estimations like exponential growth (EG), sequential bayesian (SB), and time-dependent (TD) approach apart from the maximum likelihood (ML) approach used here. The SB method requires a prior distribution of gamma for calculating the posterior distribution. It is better suited for the initial stage of the epidemic (exponential phase), where there is no intervention like quarantine, isolation, vaccine etc. We faced an empirical issue while attempting this method due to the erratic trends incidence of cases in several states. (many zero-incidence days following a non-zero incidence day). Thus, for estimating the prior β/effective contact distribution, the reported initial cases occurring before the last zero-incidence day had to be removed. In some states where there was misreporting of cases during the early epidemic, this removal constituted a significant proportion of the cases resulting in an R(t) that was zero. In-depth literature review suggests that during the initial phase of an epidemic (functioning cut off for initial phase is sometimes also reported as the square root of the susceptible fraction) ML method produces comparable results to that of SB method with a capacity to accommodate these erratic trends by minimizing prior values. The EG method computes the R(t) using the Poisson regression for early exponential growth period of an epidemic. However, this method has been criticized for precipitating several biases and violating assumptions. There is an innate subjectivity component in the theoretical aspect of the exponential growth method despite the proposed goodness of fit statistic and deviance R square measures and potential under-reporting and asymptomatic cases in the context of COVID-19 may make matters worse. Moreover, as the purpose of this investigation was to measure the difference in initial 15 and later 15 days of lockdown, the R(t) estimated for the initial 15 days by the exponential method may be an overestimate because of better-fitting thus incorporating an inherent confounding. The TD method calculates the reproduction number by estimating the probability of transmission across all infector-infectee pairs (as in infection network) and then the estimation of the relative likelihood of each pair and its summation. Thus, it evades any assumptions of exponentiality which is an advantage over the EG method. The TD method is sometimes rated as the least biased method yet the R(t) calculated by this method seems to be volatile and sensitive as it may change very rapidly even within shorter periods owing to any super-spreading / under-declaring events. These fluctuations in R(t) estimated through TD method may become more evident in this case as the data is crowd-sourced.
+The results of this study should be interpreted with certain caveats apart from the inherent limitations of crowd-sourced nature of the data. The credibility of a crowd-sourced dataset may be viewed from the following perspectives: under-reporting, duplicated / redundant information, incomplete information, differential lag in reporting the cases, missing initial cases, the inclusion of imported cases as native cases, and partisan information. These may lead to overestimation or underestimation of reproduction numbers. However, as the cases in this particular instance (www.covid19india.org) are chiefly pulled from official government handles, the extent of discrepancy may remain the same in some dimensions irrespective of the nature of the data source. Secondly, the investigators also tried to minimize these discrepancies by rigorous data cleaning, removal of imported cases (as reported) as far as possible by triangulating with other sources and subsequent merging of the final dataset. The estimates might be influenced by certain effect modifiers and confounders like population density, climatic variations and violation of the assumption of random mixing. Conceptually, this phenomenon is dynamic and non-linear and hence should be read with caution. The estimated transmission parameters (including doubling time during early outbreak period) in some states show a wider confidence interval with higher uncertainty. One of the plausible reason behind this uncertainty may be that initially number of new cases follows the Poisson process where the approximate average time between events is known but the case to case timing varies significantly at the beginning of the epidemic.
+The overall picture suggests the initial success of Indian states to curtail the rise of the curve. However, as a whole, the time-varying reproduction numbers (at the time of last access to the database) were above the epidemic potential. Moreover, every estimation like this has an element of innate variation, grounded in epistemic uncertainties and assumptions of the model. With these caveats, this reduction can mainly be explained by the reduced number of contacts among people owing to movement restrictions. Studies on the impact of lockdown in other countries also reported a reduction in reproduction number, which translates into flattening of the curve and delaying of the peak. However, as mentioned earlier, the time-varying reproduction number (R(t)) estimations are dynamic and may change over age structure, time and nature of the intervention. R(t) is a measure of transmissibility or contagiousness at a given period, and its reduction should be interpreted with caution. This is indicative of the relative force of infection at a given time while the ‘absolute’ burden of infections also depend on the duration of infectiousness and progression of time from the first reported case by influencing the mixing probability of infected-infectee pair. This mixing probability is further influenced by population density, mobility patterns and the general population’s compliance with the non-pharmaceutical interventions (NPIs). When non-pharmaceutical interventions (NPIs) are enforced, there is a reduction in the number of potential contacts and thereby reducing the R(t). However, in a scenario where R(t) > 1, and the number of actively infected persons is high, cases will still rise as one person transmits the infection to one more person. Therefore, in the post-lockdown era, it might be a challenge to maintain this path, and this may be the period where the absolute burden of the infected persons will be high. Also, there has been a disproportionately higher burden of serious infections, including those requiring intensive-care among individuals more than 60 years of age as compared to younger adults. This, coupled with the higher prevalence of comorbid conditions (50%) in individuals over 60 years in India, may warrant a strategy tailored to this section of the population. This also suggests that in addition to the identification of infection, it is imperative to shift the focus on mortality prevention. Containment strategies like lockdown have given us the much-needed opportunity to delay the peak and flatten the epidemic-curve. The time bought should be utilized to intensify the surveillance among ‘at-risk’ individuals and buttress the health infrastructure, including hospital beds with oxygen availability and critical care beds with ventilators and telemedicine.
+At this juncture, an empirical question arises whether (despite showing the initial success) should the stringent lockdown be continued for a more extended period? Considering the undesired collateral effects of stringent restrictions on the economy and livelihoods of the general population; a nationwide lockdown may not be a feasible solution for a longer duration. Other NPIs (social distancing measures, wearing masks, legal enforcement to curtails the non-essential gatherings, etc.) should be enforced to compensate for the increased probability of random mixing. The decision on which NPI measure should be enforced should vary with the burden of active infections, emerging patterns of severity /mortality, and health system endurance and capacity to deal with such cases embedded in socio-economic and socio-cultural vulnerability.
+Another relevant observation in Indian COVID-19 context is that it does not look like an outbreak with similar intensity at the pan-country level. It seems to be a complex aggregation of several individual outbreaks occurring at different time points at different geographic locations. In principle, the magnitude of these outbreaks should be influenced by population density (outbreaks first started in areas where the population density is high), mobility patterns (higher number of cases were seen in places with better connectivity, i.e. international flights and domestic public transport systems) and the response of the healthcare system, all of which vary across different geographic locations. There is an urgent need for a real-time monitoring system that would take into consideration the disease burden (incidence and mortality), transmission parameters (reproduction number, doubling time and growth rate), existing health infrastructure (including bed capacity, human resources, etc.) and the vulnerability of other essential and frontline sectors. This dynamic monitoring environment could serve as a sensitive tool to detect changes in the epidemiological pathways of COVID-19 and therefore, may facilitate the decision-making process on the nature and extent of NPI enforcement. This statement becomes more pertinent with the findings of our study, where we witness varying trajectories across the ten selected Indian states in response to the nationwide lockdown. Thus, logically the NPI enforcement should be tailored and customized according to the transmission parameters of smaller geographical areas, and hence the proposed monitoring system may play a pivotal role in this regard.
+Conclusion
+The current study shows that the epidemic curtailment strategies and lockdown enforced by the Indian government have been effective in reducing the explored transmission parameters. However, the R(t) remains to be above 1. There is also a variation in the decrease of these transmission parameters across different Indian states. With the inevitability of ending a nationwide lockdown, the future mitigation measures may consider this information and develop tailored strategies as alert systems for the institution of NPIs at the state level or even the district level.
+Supporting information
+References
+An interactive web-based dashboard to track COVID-19 in real time
+Government of India. Ministry of Health & Family Welfare;. Available from: https://www.mohfw.gov.in/.
+Critical community size for COVID-19—a model based approach to provide a rationale behind the lockdown
+Prudent public health intervention strategies to control the coronavirus disease 2019 transmission in India: A mathematical model-based approach
+COVID-19 India Tracker—Latest Maps & Cases;. Available from: https://www.covid19india.org/.
+R Core Team. R: A Language and Environment for Statistical Computing; 2019. Available from: https://www.R-project.org/.
+Epidemic curves made easy using the R package incidence [version 1; referees: awaiting peer review]
+The R0 package: a toolbox to estimate reproduction numbers for epidemic outbreaks
+A likelihood-based method for real-time estimation of the serial interval and reproductive number of an epidemic.
+Estimating the serial interval of the novel coronavirus disease (COVID-19): A statistical analysis using the public data in Hong Kong from January 16 to February 15, 2020
+A simple approach to measure transmissibility and forecast incidence
+COVID-19: National and Subnational estimates for India
+Estimating the time-varying reproduction number of SARS-CoV-2 using national and subnational case counts
+Improved inference of time-varying reproduction numbers during infectious disease outbreaks
+Comparison of methods to estimate basic reproduction number (R0) of influenza, using Canada 2009 and 2017–18 A (H1N1) data
+A comparative analysis of statistical methods to estimate the reproduction number in emerging epidemics with implications for the current COVID-19 pandemic
+Comparative estimation of the reproduction number for pandemic influenza from daily case notification data
+Different epidemic curves for severe acute respiratory syndrome reveal similar impacts of control measures
+Practical considerations for measuring the effective reproductive number, Rt
+The positive impact of lockdown in Wuhan on containing the COVID-19 outbreak
+Only strict quarantine measures can curb the coronavirus disease (COVID-19) outbreak in Italy, 2020
+Estimating the impact of non-pharmaceutical interventions on documented infections with COVID-19: A cross-country analysis
+Interrupting transmission of COVID-19: lessons from containment efforts in Singapore
+Effective containment explains sub-exponential growth in confirmed cases of recent COVID-19 outbreak in Mainland China
+others. Commentary: What happens after the lockdown
+others. COVID-19 in India: Moving from containment to mitigation
+The epidemiological characteristics of an outbreak of 2019 novel coronavirus diseases (COVID-19) in China
+Intensive care management of coronavirus disease 2019 (COVID-19): challenges and recommendations
+Global telemedicine implementation and integration within health systems to fight the COVID-19 pandemic: a call to action
+What other countries can learn from Italy during the COVID-19 pandemic
+Resolve to Save Lives. (2020) STAYING-ALERT-Navigating-COVID-19-Risk-Toward-a-New-Normal_final.pdf. Retrieved August 17, 2020, from https://preventepidemics.org/wp-content/uploads/2020/05/STAYING-ALERT-Navigating-COVID-19-Risk-Toward-a-New-Normal_final.pdf
+10.1371/journal.pone.0239026.r001
+Decision Letter 0
+Tsuzuki
+Shinya
+This is an open access article distributed under the terms of the Creative Commons Attribution License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
+1 Jul 2020
+PONE-D-20-14797
+Impact of COVID-19 epidemic curtailment strategies in selected Indian states: an analysis by reproduction number and doubling time with incidence modelling
+PLOS ONE
+Dear Dr. Joshi,
+Thank you for submitting your manuscript to PLOS ONE. After careful consideration, we feel that it has merit but does not fully meet PLOS ONE’s publication criteria as it currently stands. Therefore, we invite you to submit a revised version of the manuscript that addresses the points raised during the review process.
+Please submit your revised manuscript by Aug 15 2020 11:59PM. If you will need more time than this to complete your revisions, please reply to this message or contact the journal office at plosone@plos.org. When you're ready to submit your revision, log on to https://www.editorialmanager.com/pone/ and select the 'Submissions Needing Revision' folder to locate your manuscript file.
+Please include the following items when submitting your revised manuscript:
+A rebuttal letter that responds to each point raised by the academic editor and reviewer(s). You should upload this letter as a separate file labeled 'Response to Reviewers'.
+A marked-up copy of your manuscript that highlights changes made to the original version. You should upload this as a separate file labeled 'Revised Manuscript with Track Changes'.
+An unmarked version of your revised paper without tracked changes. You should upload this as a separate file labeled 'Manuscript'.
+If you would like to make changes to your financial disclosure, please include your updated statement in your cover letter. Guidelines for resubmitting your figure files are available below the reviewer comments at the end of this letter.
+If applicable, we recommend that you deposit your laboratory protocols in protocols.io to enhance the reproducibility of your results. Protocols.io assigns your protocol its own identifier (DOI) so that it can be cited independently in the future. For instructions see: http://journals.plos.org/plosone/s/submission-guidelines#loc-laboratory-protocols
+We look forward to receiving your revised manuscript.
+Kind regards,
+Shinya Tsuzuki, MD, MSc
+Academic Editor
+PLOS ONE
+Journal Requirements:
+When submitting your revision, we need you to address these additional requirements.
+1. Please ensure that your manuscript meets PLOS ONE's style requirements, including those for file naming. The PLOS ONE style templates can be found at https://journals.plos.org/plosone/s/file?id=wjVg/PLOSOne_formatting_sample_main_body.pdf and https://journals.plos.org/plosone/s/file?id=ba62/PLOSOne_formatting_sample_title_authors_affiliations.pdf
+Additional Editor Comments (if provided):
+Basically I agree with the points both reviewers pointed out then they should be addressed before publication.
+[Note: HTML markup is below. Please do not edit.]
+Reviewers' comments:
+Reviewer's Responses to Questions
+Comments to the Author
+1. Is the manuscript technically sound, and do the data support the conclusions?
+The manuscript must describe a technically sound piece of scientific research with data that supports the conclusions. Experiments must have been conducted rigorously, with appropriate controls, replication, and sample sizes. The conclusions must be drawn appropriately based on the data presented.
+Reviewer #1: Yes
+Reviewer #2: Yes
+**********
+2. Has the statistical analysis been performed appropriately and rigorously?
+Reviewer #1: No
+Reviewer #2: Yes
+**********
+3. Have the authors made all data underlying the findings in their manuscript fully available?
+The PLOS Data policy requires authors to make all data underlying the findings described in their manuscript fully available without restriction, with rare exception (please refer to the Data Availability Statement in the manuscript PDF file). The data should be provided as part of the manuscript or its supporting information, or deposited to a public repository. For example, in addition to summary statistics, the data points behind means, medians and variance measures should be available. If there are restrictions on publicly sharing data—e.g. participant privacy or use of data from a third party—those must be specified.
+Reviewer #1: Yes
+Reviewer #2: No
+**********
+4. Is the manuscript presented in an intelligible fashion and written in standard English?
+PLOS ONE does not copyedit accepted manuscripts, so the language in submitted articles must be clear, correct, and unambiguous. Any typographical or grammatical errors should be corrected at revision, so please note any specific errors here.
+Reviewer #1: Yes
+Reviewer #2: Yes
+**********
+5. Review Comments to the Author
+Please use the space provided to explain your answers to the questions above. You may also include additional comments for the author, including concerns about dual publication, research ethics, or publication ethics. (Please upload your review as an attachment if it exceeds 20,000 characters)
+Reviewer #1: There are a number of small issues in the writing which should be cleared up before publication, but overall the paper is readable and reasonably constructed.
+The bigger issue is that relatively little information is given about the actual methodology, the benefits and drawbacks, alternatives, and general conclusions. Two R packages are used to fit epidemic models to a particular data source, but the methods employed in each are not really described in any detail. Some statements are extremely vague: "This method optimizes β and S0 from the sequence of binomial likelihood with the fundamental assumptions of conditional independence" - that's not enough information to describe the form of the likelihood, or the maximization scheme. The language describing the methods remains confusing into the discussion section ("yet the methods are robust in terms of conditional independence and MCMC methods used to tackle the Bayesian influence").
+The data itself is described as "crowd sourced", but this is not sufficiently descriptive. The data appears to be collected from official sources by volunteers - that's fine, but a discussion of the limitations of official figures is certainly important with COVID-19. Testing and ascertainment has changed throughout the course of the pandemic, but the potentially incomplete data are simply treated as known measures of incidence here.
+In general, the work does not seem unreasonable, but the methods descriptions are generally lacking and need to be improved and expanded. It's also not clear how impactful the findings as presented are - lock-downs have been widely studied in COVID-19, and the general consensus already shows that they've decreased transmission. More contextualization to the situation in Indian and specific implications of this work would improve the manuscript.
+Reviewer #2: The authors used an R package “R0” to estimate the reproduction number of COVID-19 in 10 states in India, 15 days and 30 days into the “lockdown” respectively, through a maximum likelihood method based on chain binomial models.
+The authors used an R package “projections” to simulate 1000 probable epidemic outbreak trajectories, based on probability mass function dependent branching process assuming it follows a Poisson distribution. Based on data as of April 23, 2020, the authors projected the cumulative incidence 10 days into the future (May 3, 2020).
+The authors demonstrate their command of advanced analytical skills through their analysis of the epidemiological data. However, there is room for improvement with regard to careful and clear explanations of concepts and codes therein.
+Major comments:
+Page 3: “The serial interval for COVID-19 … was used as time stamp for the estimation.” Could you please explain what do you mean by “time stamp” here?
+Can you please clarify if you are using serial interval as a proxy for generation time?
+Minor comments:
+Page 3: Title of Table 1. Please include: “as of 23rd April 2020” in the title of Table 1. Because a table needs to be standalone and without the date of data it will not be meaningful.
+Page 3: “We used the package incidence to model the incidence and estimate growth rate and doubling time and package R0 to estimate the reproduction number (R0) for different states. (7–9) The package projections was used to simulate the epidemic outbreaks and project their respective trajectories based on the state specific transmission parameters.(10)” Here the names of the R package, “incidence”, “R0” and “projections” should be in quotes. Otherwise, it is confusing to the readers.
+Page 4: “v-line”: change to “vertical lines”
+Page 4: Table 2: Is the range in square brackets, a range or a confidence intervals. Reproduction number for Tamil Nadu: why was it NA but with the range in square brackets?
+Page 5: Figure 1. Please provide more details in the legend of the figure. A figure should be standalone. The legend should explain that line graphs represent cumulative cases and bar charts represent new cases per day.
+Page 5: “baseline R0 (calculated at 15 days into lockdown) and effective R0 at 30 days into lockdown”: R0 is the symbol of the basic reproduction number, which is defined as the number of secondary cases caused by an index case in a totally susceptible population, without interventions or behavioral change. When India was in 15 days into lockdown or 30 days into lockdown, these assumptions no longer held. Therefore, the reproduction number 15 or 30 days into lockdown should be referred to as an effective reproduction number (Re), or a time-varying or time-dependent reproduction number (Rt). They are not R0 in these cases. Calling them “baseline R0” or “effective R0” are wrong. The comment here also applies to “effective R0” in the Discussion (e.g., Page 7, the 3rd line in the 1st paragraph in the Discussion; also in other places).
+Page 7: R_t as the symbol for effective reproduction numbers is introduced. So why would you not use it consistently across the entire paper?
+Page 7-8: The end of page 7: “to delay the peak flatten the epidemic-curve”: Please change to “to delay the peak and flatten the epidemic curve”.
+The following 2 medRxiv preprint manuscripts will be helpful to you in clarifying different concepts and the statistical methods that estimated them.
+Practical considerations for measuring the effective reproductive number, Rt
+doi: https://doi.org/10.1101/2020.06.18.20134858
+A comparative analysis of statistical methods to estimate the reproduction number in emerging epidemics with implications for the current COVID-19 pandemic
+doi: https://doi.org/10.1101/2020.05.13.20101121
+Finally, the authors may want to reconsider the flow of their Discussion section. I would recommend the following flow:
+Discussion paragraph #1: Highlights of the key results of the paper
+Discussion paragraph #2: Situating your manuscript in the body of recent literature of COVID-19 epidemiology, esp. other papers that estimate the R_t of COVID-19
+Discussion paragraph #3: Limitations of the paper
+Discussion paragraph #4: Conclusions
+Supplementary Appendix 1
+Some of the codes go beyond the margin and there are incomplete in the PDF file (these happen multiple times in multiple pages). Please amend.
+Section heading “Creating incidence objectes…”: “objectes” should be “objects”.
+Section “Serial Interval”: “The serial interval is ceated using…”: “ceated” should be “created”.
+Can we say that you are using the serial interval to approximate the generation time?
+Page 6:
+# Aggregate the timepoints after enforcment of lockdown
+plot_states_14 <- readRDS("transmission_params_14.rds")
+plot_states_30 <- readRDS("transmission_params_30.rds")
+Where does the “transmission_params_14.rds” and “transmission_params_30.rds” files come from? I cannot find it in the previous code chunks.
+Please make sure that you introduce them in the text and explain what they are.
+Supplementary Appendix 2
+“Under Loading Packages & .rds files” What are the RDS files here? You need to introduce to your readers what they are: “df_backup.rds”, “transmission_params_30.rds”, and “states_keep.rds”.
+To comply with PLOS ONE requirement to make the data underlying the findings in the manuscript fully available, have you considered also provide these RDS files as supplementary materials? Otherwise, even with your R codes, your analysis cannot be repeated by the readers.
+**********
+6. PLOS authors have the option to publish the peer review history of their article (what does this mean?). If published, this will include your full peer review and any attached files.
+If you choose “no”, your identity will remain anonymous but your review may still be made public.
+Do you want your identity to be public for this peer review? For information about this choice, including consent withdrawal, please see our Privacy Policy.
+Reviewer #1: No
+Reviewer #2: Yes: Isaac Chun-Hai Fung
+[NOTE: If reviewer comments were submitted as an attachment file, they will be attached to this email and accessible via the submission site. Please log into your account, locate the manuscript record, and check for the action link "View Attachments". If this link does not appear, there are no attachment files.]
+While revising your submission, please upload your figure files to the Preflight Analysis and Conversion Engine (PACE) digital diagnostic tool, https://pacev2.apexcovantage.com/. PACE helps ensure that figures meet PLOS requirements. To use PACE, you must first register as a user. Registration is free. Then, login and navigate to the UPLOAD tab, where you will find detailed instructions on how to use the tool. If you encounter any issues or have any questions when using PACE, please email PLOS at figures@plos.org. Please note that Supporting Information files do not need this step.
+10.1371/journal.pone.0239026.r002
+Author response to Decision Letter 0
+17 Jul 2020
+Response to Reviewers
+At the outset we would like to thank the editor and the reviewers for their valuable comments, it is indeed an honour to receive critique and suggestions from esteemed scholars like you. We are also grateful for giving us the motivation continue playing our little part in fighting the COVID-19 epidemic.
+Editor Comments:
+1. Please ensure that your manuscript meets PLOS ONE's style requirements, including those for file naming. The PLOS ONE style templates can be found at https://journals.plos.org/plosone/s/file?id=wjVg/PLOSOne_formatting_sample_main_body.pdf and https://journals.plos.org/plosone/s/file?id=ba62/PLOSOne_formatting_sample_title_authors_affiliations.pdf
+Response:
+The authors apologize for the errors in the submission of the manuscript. We have formatted and resubmitted the manuscript according to the PLOS ONE style template as suggested.
+Additional Editor Comments:
+Basically I agree with the points both reviewers pointed out then they should be addressed before publication.
+Response:
+We attempted to address all the issues raised by the editor and reviewers to the best of our abilities. We have performed a thorough literature review and rewritten the methods and discussion part, incorporating all the suggestions. We also described the R code and the accompanying files in greater detail, updated the Supplementary Appendix. We published the steps employed in the computational workflow of the analysis at protocols.io and uploaded data and other relevant files adhering to the PLOS One’s publication policy.
+Reviewer comments:
+Reviewer #1:
+There are a number of small issues in the writing which should be cleared up before publication, but overall the paper is readable and reasonably constructed.
+Response:
+We thank the Reviewer for their encouraging words. We have taken all your suggestions and rectified the manuscript. We hope we addressed the issues pointed adequately.
+Point 1:
+The bigger issue is that relatively little information is given about the actual methodology, the benefits and drawbacks, alternatives, and general conclusions. Two R packages are used to fit epidemic models to a particular data source, but the methods employed in each are not really described in any detail. Some statements are extremely vague: "This method optimizes β and S0 from the sequence of binomial likelihood with the fundamental assumptions of conditional independence" - that's not enough information to describe the form of the likelihood, or the maximization scheme. The language describing the methods remains confusing into the discussion section ("yet the methods are robust in terms of conditional independence and MCMC methods used to tackle the Bayesian influence").
+Response:
+The authors thank the Reviewer for his/her suggestions. We have rewritten the Methodology section in a more lucid language and also tried to explain the rationale behind our methodology. We also elaborated on the considerations and assumptions in greater detail and included the detailed descriptions of the elements of the R code in the Supplementary Appendix.
+The relevant part of the Methdology Section is given below:
+Estimation of Reproduction Number
+The time-varying reproductive number (R(t)) was estimated by using the maximum likelihood (ML) method. [13] This method presumes that all the secondary cases linked to the primary cases follow a Poisson process (event rate is constant) and the corresponding serial interval follows a multinomial distribution. This leads to a gradual trend towards zero secondary cases (with multitude of time steps) arising from primary cases during a specific time-step. The gradient of depends on the parameter distribution function (PDF) of the serial interval. The “est R0.ML()” function in the “R0” package. This runs an expectation maximum (EM) algorithm which maximises the distribution probability of primary and secondary cases in reference to time. This method assumes that infectee always develops symptoms only after infector thus the value of the serial interval will be positive.
+Serial Interval
+For the parameter distribution function (PDF), we could not obtain the generation time (time lag between the infection in primary case and secondary cases) distribution directly with infector-infectee pairs due to the lack of data availability. Therefore, it was substituted with the serial interval distribution discretized on a 1-day time step. This was created using the generation.time()” function in the “R0” package. For parametrisation purposes we chose a gamma distribution as it accommodates for the underlying changing number of events in the constant event rate (Poisson process). The distribution assumptions were aligned with the emerging literature as well as the observed plausible transmission dynamics. The mean and standard deviation for serial interval approximations were 4.4 days and 3 days respectively.[14] The shape (number of events in time step) and scale (the reciprocal of event rate) of the distribution were 2.15 and 2.04 respectively.
+Point 2:
+The data itself is described as "crowd sourced", but this is not sufficiently descriptive. The data appears to be collected from official sources by volunteers - that's fine, but a discussion of the limitations of official figures is certainly important with COVID-19. Testing and ascertainment has changed throughout the course of the pandemic, but the potentially incomplete data are simply treated as known measures of incidence here.
+Response:
+The authors agree with the Reviewer’s comment regarding the insufficient description of the data source.
+We have added the following text in the Methdology section and hope it describes the data source sufficiently and addresses the concerns raised:
+Data Source
+The data source is a crowd-sourced database maintained at www.covid19india.org. [6] The website is maintained by a group of volunteers who curate and verify the data coming from several sources. The data is compiled from the state bulletins, official handles of state governments, and health ministries. It is validated, updated periodically and published into an application programming interface (API) and Google spreadsheet which is accessible at api.covid19india.org for the public. Apart from the patient-level data, the API includes district-level, state-level, and national-level datasets. We used the data from the line-listing of the cases reported as positive for COVID-19. The data was iteratively and progressively accessed through the database in coherence with creation and improvement in analysis code. The last access to database was made on 1st May, 2020. We truncated the data up to 23th April 2020 for the purpose of this study. This buffer period of 7 days offered some immunity against the possible delay to add the cases and our limitation to access the data in real time.
+We also attempted to address the implications of testing, quality of the data on the estimation of these vital parameters in the Discussion section. The relevant portion of the manuscript is given below:
+The credibility of a crowd-sourced dataset may be viewed from the following probes: under-reporting, duplicated / redundant information, incomplete information, differential lag in reporting the cases, missing initial cases, the inclusion of imported cases as native cases, and partisan information. These all probes may lead to overestimation or underestimation of reproductive numbers. However, as the cases in this particular instance (www.covid19india.org) are chiefly pulled from official government handles, the extent of discrepancy may remain the same in some probes irrespective of the nature of the data source. Secondly, the investigators also tried to minimize these discrepancies by rigorous data cleaning, removal of imported cases (as reported) as far as possible by triangulating with other sources and subsequent merging of the final dataset. The estimates might be influenced by certain effect modifiers and confounders like population density, climatic variations and violation of assumption of random mixing. Conceptually, this phenomenon is dynamic and non-linear in nature and hence should be read with caution.
+Point 3:
+In general, the work does not seem unreasonable, but the methods descriptions are generally lacking and need to be improved and expanded. It's also not clear how impactful the findings as presented are - lock-downs have been widely studied in COVID-19, and the general consensus already shows that they've decreased transmission. More contextualization to the situation in Indian and specific implications of this work would improve the manuscript.
+Response:
+We thank the Reviewer for his/her encouraging words and suggestions for improving our manuscript. We have redrafted the Discussion section adding more context into the situation in India and the implications of our work. The relevant parts of the Discussion are provided below:
+The overall picture suggests the initial success of Indian states to curtail the rise of curve. This reduction can mainly be explained by reduced number of contacts among people owing to movement restrictions. Studies on the impact of lockdown in other countries also reported reduction in reproductive number which translates in to flattening of the curve and delaying of peak.[20-24] Yet as mentioned earlier, the time-varying reproduction number (R(t)) estimations are dynamic and may change over age structure, time and nature of intervention. Continuing nationwide lockdown will not be feasible in long term and restrictions have to be eased in phase wise manner. Therefore, in the post-lockdown era, it might be a challenge to maintain this path and this may be the period where the absolute burden of the infected persons will be high.[25, 26] Also, there has been disproportionately higher burden of serious infections including those requiring intensive-care among individuals more than 60 years of age as compared to younger adults.[27] This coupled with the higher prevalence of comorbid conditions (50%) in individuals over 60 years in India may warrant a strategy tailored to this section of population. [28] This also suggests that in addition to identification of infection, it is imperative to shift the focus on mortality prevention. Containment strategies like lockdown has given us the much-needed opportunity to delay the peak flatten the epidemic-curve. The time bought should be utilized to intensify the surveillance among `at-risk' individuals and buttress the health infrastructure including hospital beds with oxygen availability and critical care beds with ventilators and tele-medicine. [29-31]
+ 
+Reviewer #2:
+The authors used an R package “R0” to estimate the reproduction number of COVID-19 in 10 states in India, 15 days and 30 days into the “lockdown” respectively, through a maximum likelihood method based on chain binomial models.
+The authors used an R package “projections” to simulate 1000 probable epidemic outbreak trajectories, based on probability mass function dependent branching process assuming it follows a Poisson distribution. Based on data as of April 23, 2020, the authors projected the cumulative incidence 10 days into the future (May 3, 2020).
+The authors demonstrate their command of advanced analytical skills through their analysis of the epidemiological data. However, there is room for improvement with regard to careful and clear explanations of concepts and codes therein.
+Response:
+The authors would like to thank the Reviewer for his/her comments and suggestions in making our manuscript better. We tried to address all the issues raised and hope our responses are adequate.
+Point 1:
+Page 3: “The serial interval for COVID-19 … was used as time stamp for the estimation.” Could you please explain what do you mean by “time stamp” here?
+Can you please clarify if you are using serial interval as a proxy for generation time?
+Response:
+By “timestamp” we meant “time-step”. The authors apologize for the error in the text. We have used the serial interval as a proxy for generation time. We thank the Reviewer for pointing it out. We have rewritten the relevant part of the methodology as below:
+Serial Interval
+For the parameter distribution function (PDF), we could not obtain the generation time (time lag between the infection in primary case and secondary cases) distribution directly with infector-infectee pairs due to the lack of data availability. Therefore, it was substituted with the serial interval distribution discretized on a 1-day time step. This was created using the generation.time()” function in the “R0” package. For parametrisation purposes we chose a gamma distribution as it accommodates for the underlying changing number of events in the constant event rate (Poisson process). The distribution assumptions were aligned with the emerging literature as well as the observed plausible transmission dynamics. The mean and standard deviation for serial interval approximations were 4.4 days and 3 days respectively.[14] The shape (number of events in time step) and scale (the reciprocal of event rate) of the distribution were 2.15 and 2.04 respectively.
+Point 2:
+Page 3: Title of Table 1. Please include: “as of 23rd April 2020” in the title of Table 1. Because a table needs to be standalone and without the date of data it will not be meaningful.
+Response:
+The authors apologize for the typographical error and rectified it in the resubmitted Manuscript.
+Point 3:
+Page 3: “We used the package incidence to model the incidence and estimate growth rate and doubling time and package R0 to estimate the reproduction number (R0) for different states. (7–9) The package projections was used to simulate the epidemic outbreaks and project their respective trajectories based on the state specific transmission parameters.(10)” Here the names of the R package, “incidence”, “R0” and “projections” should be in quotes. Otherwise, it is confusing to the readers.
+Response:
+The authors apologize for the typographical error and rectified it in the resubmitted Manuscript.
+Point 4:
+Page 4: “v-line”: change to “vertical lines”
+Response:
+The authors apologize for the typographical error and rectified it in the resubmitted Manuscript.
+Point 5:
+Page 4: Table 2: Is the range in square brackets, a range or a confidence intervals. Reproduction number for Tamil Nadu: why was it NA but with the range in square brackets?
+Response:
+Table has been rectified now.
+Point 6:
+Page 5: Figure 1. Please provide more details in the legend of the figure. A figure should be standalone. The legend should explain that line graphs represent cumulative cases and bar charts represent new cases per day.
+Response:
+The authors for the typographical error and rectified it in the resubmitted Manuscript. We have added the legend separately for both daily incidence and cumulative incidence. The revised Figure is given below:
+Point 7:
+Page 5: “baseline R0 (calculated at 15 days into lockdown) and effective R0 at 30 days into lockdown”: R0 is the symbol of the basic reproduction number, which is defined as the number of secondary cases caused by an index case in a totally susceptible population, without interventions or behavioral change. When India was in 15 days into lockdown or 30 days into lockdown, these assumptions no longer held. Therefore, the reproduction number 15 or 30 days into lockdown should be referred to as an effective reproduction number (Re), or a time-varying or time-dependent reproduction number (Rt). They are not R0 in these cases. Calling them “baseline R0” or “effective R0” are wrong. The comment here also applies to “effective R0” in the Discussion (e.g., Page 7, the 3rd line in the 1st paragraph in the Discussion; also in other places).
+Response:
+Now we have used term R(t) (time-varying reproduction number) for 15 and 30 days into lockdown. Changes have been made throughout the manuscript.
+Point 8:
+Page 7: R_t as the symbol for effective reproduction numbers is introduced. So why would you not use it consistently across the entire paper?
+Response: Now, we have used term R(t) for effective reproduction number throughout the manuscript.
+Point 9:
+Page 7-8: The end of page 7: “to delay the peak flatten the epidemic-curve”: Please change to “to delay the peak and flatten the epidemic curve”.
+Response:
+The authors for the typographical error and rectified it in the resubmitted Manuscript.
+Point 10:
+The following 2 medRxiv preprint manuscripts will be helpful to you in clarifying different concepts and the statistical methods that estimated them.
+Practical considerations for measuring the effective reproductive number, Rt
+doi: https://doi.org/10.1101/2020.06.18.20134858
+A comparative analysis of statistical methods to estimate the reproduction number in emerging epidemics with implications for the current COVID-19 pandemic
+doi: https://doi.org/10.1101/2020.05.13.20101121
+Response:
+We are greatful to reviwers for suggesting these papers. These helped in revising the manuscript particularly with reference explanation of methods for estimation of reproduction numbers. We have cited these at appropriate sections in the manuscript.
+Point 11:
+Finally, the authors may want to reconsider the flow of their Discussion section. I would recommend the following flow:
+Discussion paragraph #1: Highlights of the key results of the paper
+Discussion paragraph #2: Situating your manuscript in the body of recent literature of COVID-19 epidemiology, esp. other papers that estimate the R_t of COVID-19
+Discussion paragraph #3: Limitations of the paper
+Discussion paragraph #4: Conclusions
+Response:
+The authors thank the Reviewer for his/her suggestions. We have taken your advice and redrafted the Discussion section. We included recent papers on Indian context estimating time-varying reproduction number (R(t)). We also addressed the issue of crowd-sourced data in the limitations section of the Discussion. We hope the corrections made are adequate and address the issues raised.
+Point 12:
+Supplementary Appendix 1
+Some of the codes go beyond the margin and there are incomplete in the PDF file (these happen multiple times in multiple pages). Please amend.
+Section heading “Creating incidence objectes…”: “objectes” should be “objects”.
+Section “Serial Interval”: “The serial interval is ceated using…”: “ceated” should be “created”.
+Can we say that you are using the serial interval to approximate the generation time?
+Response:
+We thank the Reviewer for his/her comments. We apologize for the typographical errors. We ensured that all the code stays within the margins of the PDF document. Regarding the Serial Interval being used as an approximation of Generation Time, we have mentioned the same in the Methodology section as suggested by the Reviewer. We have made the necessary corrections in the resubmitted manuscript and Supplementary Appendix.
+Point 13:
+Page 6:
+# Aggregate the timepoints after enforcment of lockdown
+plot_states_14 <- readRDS("transmission_params_14.rds")
+plot_states_30 <- readRDS("transmission_params_30.rds")
+Where does the “transmission_params_14.rds” and “transmission_params_30.rds” files come from? I cannot find it in the previous code chunks.
+Please make sure that you introduce them in the text and explain what they are.
+Response:
+The “transmission_params_14.rds” and “transmission_params_30.rds” are summary tables of transmission parameters of 15 days and 30 days into the epidemic. These objects were created in the R code provided in Supplementary Appendix 1. We apologize for not considering the issue raised by the Reviewer earlier. We realise our mistake and amended it. We have provided the concerned *.rds files, their description and the corresponding code at the data repository at protocols.io where we provided the description and computational workflow along with the necessary files (https://protocols.io/view/incidence-modelling-covid19-computational-workflow-bh8vj9w6). We also refined the R code chunks and explained them in greater detail in the updated Supplementary Appendix.
+Point 14:
+Supplementary Appendix 2
+“Under Loading Packages & .rds files” What are the RDS files here? You need to introduce to your readers what they are: “df_backup.rds”, “transmission_params_30.rds”, and “states_keep.rds”.
+To comply with PLOS ONE requirement to make the data underlying the findings in the manuscript fully available, have you considered also provide these RDS files as supplementary materials? Otherwise, even with your R codes, your analysis cannot be repeated by the readers.
+Response:
+The authors apologize for overlooking the issue raised. We have taken your suggestions and elaborated on the RDS files and the corresponding R code. We have also submitted all relevant files necessary for reproducibility at protocols.io (https://protocols.io/view/incidence-modelling-covid19-computational-workflow-bh8vj9w6)
+We have added the following text in the Supplementary Appendix 2:
+The df_new_05May.rds file contains line listing data till 5th May 2020. The variables are same as described in Supplementary Appendix 1. transmission_params_30.rds file contains the transmission parameters (time-varying reproduction number, doubling time, and growth rate) of the ten selected Indian states estimated after 30 days of lockdown. The states_keep.rds file contains the list of selected Indian states as mentioned in the manuscript and Supplementary Appendix 1.
+10.1371/journal.pone.0239026.r003
+Decision Letter 1
+Tsuzuki
+Shinya
+This is an open access article distributed under the terms of the Creative Commons Attribution License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
+11 Aug 2020
+PONE-D-20-14797R1
+Impact of COVID-19 epidemic curtailment strategies in selected Indian states: an analysis by reproduction number and doubling time with incidence modelling
+PLOS ONE
+Dear Dr. Joshi,
+Thank you for submitting your manuscript to PLOS ONE. After careful consideration, we feel that it has merit but does not fully meet PLOS ONE’s publication criteria as it currently stands. Therefore, we invite you to submit a revised version of the manuscript that addresses the points raised during the review process.
+==============================
+Both reviewer raised some minor concerns should be addressed before publication and I agree with their opinions then further minor revision would be desirable.
+==============================
+Please submit your revised manuscript by Sep 25 2020 11:59PM. If you will need more time than this to complete your revisions, please reply to this message or contact the journal office at plosone@plos.org. When you're ready to submit your revision, log on to https://www.editorialmanager.com/pone/ and select the 'Submissions Needing Revision' folder to locate your manuscript file.
+Please include the following items when submitting your revised manuscript:
+A rebuttal letter that responds to each point raised by the academic editor and reviewer(s). You should upload this letter as a separate file labeled 'Response to Reviewers'.
+A marked-up copy of your manuscript that highlights changes made to the original version. You should upload this as a separate file labeled 'Revised Manuscript with Track Changes'.
+An unmarked version of your revised paper without tracked changes. You should upload this as a separate file labeled 'Manuscript'.
+If you would like to make changes to your financial disclosure, please include your updated statement in your cover letter. Guidelines for resubmitting your figure files are available below the reviewer comments at the end of this letter.
+If applicable, we recommend that you deposit your laboratory protocols in protocols.io to enhance the reproducibility of your results. Protocols.io assigns your protocol its own identifier (DOI) so that it can be cited independently in the future. For instructions see: http://journals.plos.org/plosone/s/submission-guidelines#loc-laboratory-protocols
+We look forward to receiving your revised manuscript.
+Kind regards,
+Shinya Tsuzuki, MD, MSc
+Academic Editor
+PLOS ONE
+[Note: HTML markup is below. Please do not edit.]
+Reviewers' comments:
+Reviewer's Responses to Questions
+Comments to the Author
+1. If the authors have adequately addressed your comments raised in a previous round of review and you feel that this manuscript is now acceptable for publication, you may indicate that here to bypass the “Comments to the Author” section, enter your conflict of interest statement in the “Confidential to Editor” section, and submit your "Accept" recommendation.
+Reviewer #1: (No Response)
+Reviewer #3: All comments have been addressed
+**********
+2. Is the manuscript technically sound, and do the data support the conclusions?
+The manuscript must describe a technically sound piece of scientific research with data that supports the conclusions. Experiments must have been conducted rigorously, with appropriate controls, replication, and sample sizes. The conclusions must be drawn appropriately based on the data presented.
+Reviewer #1: Yes
+Reviewer #3: Partly
+**********
+3. Has the statistical analysis been performed appropriately and rigorously?
+Reviewer #1: Yes
+Reviewer #3: Yes
+**********
+4. Have the authors made all data underlying the findings in their manuscript fully available?
+The PLOS Data policy requires authors to make all data underlying the findings described in their manuscript fully available without restriction, with rare exception (please refer to the Data Availability Statement in the manuscript PDF file). The data should be provided as part of the manuscript or its supporting information, or deposited to a public repository. For example, in addition to summary statistics, the data points behind means, medians and variance measures should be available. If there are restrictions on publicly sharing data—e.g. participant privacy or use of data from a third party—those must be specified.
+Reviewer #1: Yes
+Reviewer #3: Yes
+**********
+5. Is the manuscript presented in an intelligible fashion and written in standard English?
+PLOS ONE does not copyedit accepted manuscripts, so the language in submitted articles must be clear, correct, and unambiguous. Any typographical or grammatical errors should be corrected at revision, so please note any specific errors here.
+Reviewer #1: Yes
+Reviewer #3: No
+**********
+6. Review Comments to the Author
+Please use the space provided to explain your answers to the questions above. You may also include additional comments for the author, including concerns about dual publication, research ethics, or publication ethics. (Please upload your review as an attachment if it exceeds 20,000 characters)
+Reviewer #1: In general, the authors have greatly improved this manuscript. There are a few locations where the language needs to be presented more cautiously, and a few issues with word usage. I greatly appreciated the improved discussion and conclusion section.
+1. Absract - While I appreciate the improved language around R(t), it leads to some issues. In the abstract, the authors state: "The chosen transmission
+parameters were: time-varying reproduction number (R(t)), doubling time and growth rate." R(t) isn't a single parameter, it's a vector which is estimated. I believe the authors, through the software employed, did indeed parameterize the epidemic through R0, doubling time, and growth rate. I also think this description is still too vague, since it doesn't tell the reader what kind of model (likelihood) is actually being used. This is clarified later in the manuscript, but could be mentioned here.
+2. Abstract - "The [estimated] time-varying reproductive numbers are still above the threshold of 1" - this kind of language should be included everywhere such estimates are presented. All estimates are subject to uncertainty, and are based on particular model assumptions.
+3. Data Analysis - include parenthetical citation for R (see: 'citation()')
+4. General comment - PDF does not generally stand for "parameter distribution function" anywhere that I'm aware of. It generally means "probability density function".
+5. Discussion - the new language about the data sources uses the word "probes" incorrectly. Words like "perspectives", or "dimensions" would be more appropriate.
+Reviewer #3: Thank you for addressing the reviewer comments and for the draft. While you have responded to the previous queries and suggestions, a few minor comments still remain:
+1. In the beginning of the results section, you state "23,040 COVID-19 cases have been reported in India as of 23rd April 2020 of which 20,590 cases (89.4%) were seen in the selected 10 states". It is still unclear though from the methods section how the data is reported at the state level and whether it is subject to reporting bias by state - therefore, it doesn't seem like the relevant comparison is the number of cases in the 10 highest incident states compared to the rest of India. Please clarify still in the methods section how the case data is collected and reported in India at the state level and what biases exist. Are these cases that get tested and reported at hospitals or local healthcare facilities? Therefore, is it safe to assume that limited healthcare access to such facilities would result in a gross underestimation of cases? Please expand on this in your discussion.
+2. Furthermore, please detail even more in the data section of the methods what time to event data was included in the data source (i.e. symptom onset, testing date, generation time, etc) to help explain that you chose distributions for serial interval or generation time not based on data. It appears that case data was used to model and forecast incidence through data fitting and to estimate Rt. This should be clear in the methods what the data was used for.
+3. For Figure 1, could you make the state colors in the bar plot showing incidence cases match the line color for each state showing cumulative cases.
+4. You show estimates for doubling time in the results, but still only mention the package/function used and not how it was estimated in the methods section.
+5. The "Epidemiologic Parameters" section of your results could benefit from reorganization. Try discussing the doubling time results all together. Furthermore, the following statement "This may be due to events following the Poisson process at the beginning of the epidemic where the approximate average time between events is known but the case to case timing varies significantly" belongs in the discussion.
+6. In the discussion, you don't quite address why the the lockdown resulted in a reduction in Rt but a continual rise in cases. Please expand on this. Given the objective of your paper, it also seems important to explicitly state that implementing a lockdown strategy at the beginning of the epidemic was critical but in the longterm for economic reasons may not be feasible, particularly given the density of the population and economic disparities in India. You make the following statement "Continuing a nationwide lockdown would not be feasible in the long term, and restrictions have to be eased in a phase-wise manner," but provide no references or further explanation for why it is not feasible and why restrictions should be phase-wise or examples. One of the most interesting/important aspects of understanding transmission in India is the population density and mobility patterns of the population - it would be helpful to expand on how your results apply to this or how future surveillance and studies should account for this. Why is knowing your results useful for future non-pharmaceutical interventions (NPIs) in India particularly when lockdown has historically shown the greatest reduction for this epidemic and the 1918 Flu and you're suggesting it's not feasible in India to maintain? Please edit your discussion/conclusion to address this.
+**********
+7. PLOS authors have the option to publish the peer review history of their article (what does this mean?). If published, this will include your full peer review and any attached files.
+If you choose “no”, your identity will remain anonymous but your review may still be made public.
+Do you want your identity to be public for this peer review? For information about this choice, including consent withdrawal, please see our Privacy Policy.
+Reviewer #1: No
+Reviewer #3: No
+[NOTE: If reviewer comments were submitted as an attachment file, they will be attached to this email and accessible via the submission site. Please log into your account, locate the manuscript record, and check for the action link "View Attachments". If this link does not appear, there are no attachment files.]
+While revising your submission, please upload your figure files to the Preflight Analysis and Conversion Engine (PACE) digital diagnostic tool, https://pacev2.apexcovantage.com/. PACE helps ensure that figures meet PLOS requirements. To use PACE, you must first register as a user. Registration is free. Then, login and navigate to the UPLOAD tab, where you will find detailed instructions on how to use the tool. If you encounter any issues or have any questions when using PACE, please email PLOS at figures@plos.org. Please note that Supporting Information files do not need this step.
+10.1371/journal.pone.0239026.r004
+Author response to Decision Letter 1
+21 Aug 2020
+Reviewer #1
+In general, the authors have greatly improved this manuscript. There are a few locations where the language needs to be presented more cautiously, and a few issues with word usage. I greatly appreciated the improved discussion and conclusion section.
+Response:
+We thank the reviewer for his/her guidance in improving this manuscript. Your encouraging words give us great motivation in our work. We tried to address all the concerns raised and updated the abstract. We hope the new additions provide better clarity to the reader.
+Point 1:
+Absract - While I appreciate the improved language around R(t), it leads to some issues. In the abstract, the authors state: "The chosen transmission parameters were: time-varying reproduction number (R(t)), doubling time and growth rate." R(t) isn't a single parameter, it's a vector which is estimated. I believe the authors, through the software employed, did indeed parameterize the epidemic through R0, doubling time, and growth rate. I also think this description is still too vague, since it doesn't tell the reader what kind of model (likelihood) is actually being used. This is clarified later in the manuscript, but could be mentioned here.
+Response:
+We thank the reviewer for his/her suggestions. We updated the abstract by adding the highlighted text relating to the issue raised in-order to provide better clarity.
+Abstract
+The Government of India in-network with the state governments has implemented the epidemic curtailment strategies inclusive of case-isolation, quarantine and lockdown in response to ongoing novel coronavirus (COVID-19) outbreak. In this manuscript, we attempt to estimate the impact of these steps across ten selected Indian states using crowd-sourced data. The trajectory of the outbreak was parameterized by the reproduction number (R0), doubling time, and growth rate. These parameters were estimated at two time-periods after the enforcement of the lockdown on 24th March 2020, i.e. 15 days into lockdown and 30 days into lockdown. The authors used a crowd sourced database which is available in the public domain. After preparing the data for analysis, R0 was estimated using maximum likelihood (ML) method which is based on the expectation minimum algorithm where the distribution probability of secondary cases is maximized using the serial interval discretization. The doubling time and growth rate were estimated by the natural log transformation of the exponential growth equation. The overall analysis shows decreasing trends in time-varying reproduction numbers (R(t)) and growth rate (with a few exceptions) and increasing trends in doubling time. The curtailment strategies employed by the Indian government seem to be effective in reducing the transmission parameters of the COVID-19 epidemic. The estimated R(t) are still above the threshold of 1, and the resultant absolute case numbers show an increase with time. Future curtailment and mitigation strategies thus may take into account these findings while formulating further course of action.
+Point 2:
+Abstract - "The [estimated] time-varying reproductive numbers are still above the threshold of 1" - this kind of language should be included everywhere such estimates are presented. All estimates are subject to uncertainty, and are based on particular model assumptions.
+Response:
+The authors thank the reviewer for pointing this out. We have addressed the issue and added the following text to the Discussion section:
+The estimated transmission parameters (including doubling time during early outbreak period) in some states show a wider confidence interval with higher uncertainty. One of the plausible reason behind this uncertainty may be that initially number of new cases follows the Poisson process where the approximate average time between events is known but the case to case timing varies significantly at the beginning of the epidemic.
+The overall picture suggests the initial success of Indian states to curtail the rise of the curve. However, as a whole, the time-varying reproduction numbers (at the time of last access to the database) were above the epidemic potential. Moreover, every estimation like this has an element of innate variation, grounded in epistemic uncertainties and assumptions of the model. With these caveats, this reduction can mainly be explained by the reduced number of contacts among people owing to movement restrictions.
+Point 3:
+Data Analysis - include parenthetical citation for R (see: 'citation()')
+Response:
+We thank the reviewer for his/her suggestion. We have added the citation for R at the end of the sentence (reference number 7) in the original manuscript. However, we agree with the reviewer and have included the citation at the appropriate place in the sentence.
+Point 4:
+General comment - PDF does not generally stand for "parameter distribution function" anywhere that I'm aware of. It generally means "probability density function".
+Response:
+We thank the reviewer for pointing out the error, we apologise for the mistake in the abbreviation. We made the necessary correction in the revised manuscript.
+Point 5:
+Discussion - the new language about the data sources uses the word "probes" incorrectly. Words like "perspectives", or "dimensions" would be more appropriate.
+Response:
+We agree with the reviewer regarding the improper use of the word ‘probes’ in the data source section. We agree with the reviewer that the words ‘perspective’ and ‘dimension’ would more appropriate in conveying the message in the sentence. We have taken the suggestion and revised the relevant section as follows:
+The credibility of a crowd-sourced dataset may be viewed from the following perspectives: under-reporting, duplicated / redundant information, incomplete information, differential lag in reporting the cases, missing initial cases, the inclusion of imported cases as native cases, and partisan information. These may lead to overestimation or underestimation of reproduction numbers. However, as the cases in this particular instance (www.covid19india.org) are chiefly pulled from official government handles, the extent of discrepancy may remain the same in some dimensions irrespective of the nature of the data source.
+========================================================
+Reviewer #3
+Thank you for addressing the reviewer comments and for the draft. While you have responded to the previous queries and suggestions, a few minor comments still remain:
+Response:
+The authors are grateful for all your suggestions and comments which helped in bettering the manuscript. We thank the reviewer for making it possible.
+Point 1a:
+In the beginning of the results section, you state "23,040 COVID-19 cases have been reported in India as of 23rd April 2020 of which 20,590 cases (89.4%) were seen in the selected 10 states". It is still unclear though from the methods section how the data is reported at the state level and whether it is subject to reporting bias by state - therefore, it doesn't seem like the relevant comparison is the number of cases in the 10 highest incident states compared to the rest of India. Please clarify still in the methods section how the case data is collected and reported in India at the state level and what biases exist.
+Response:
+The authors thank the reviewer for making this suggestion. We agree with the comment and addressed it by inserting a paragraph on the flow of reporting at the beginning of Data Source section of the Methodology. The relevant text added in the manuscript is provided below:
+Methodology Section:
+Data Source
+COVID-19 cases, deaths and recoveries in India are reported by state public health agencies to the Ministry of Health and Family Welfare (MoHFW), Government of India. The MoHFW releases the testing guidelines and amends them as per the epidemiological scenarios and expert opinion. The eligibility for testing includes patients presenting with suspected symptoms in hospitals, exposed healthcare workers as well as contacts identified through contact tracing. All the hospitals or outreach services notifies cases to district level public health authority which in turn compiles data and reports to state level public health authority. Daily report on number of cases, recoveries and deaths along with the line-list of cases are sent from states to MoHFW on a dedicated portal. State public health authorities simultaneously publishes daily bulletin of same reports.
+The data source used for this study is compiled from these state bulletins, official handles of state governments, and health ministries and maintained at www.covid19india.org. [6] This crowd-sourced database and website is maintained by a group of volunteers who curate and verify the data coming from several sources mentioned above.
+Point 1b:
+Are these cases that get tested and reported at hospitals or local healthcare facilities? Therefore, is it safe to assume that limited healthcare access to such facilities would result in a gross underestimation of cases? Please expand on this in your discussion.
+Response:
+The reported cases included, cases tested in hospital as well as those tested consequent to contact tracing. One of the significant bias arising due to the usage of reported cases is the delay in reporting between symptom onset, testing and the final diagnosis. The present manuscript pertains to the early outbreak period and therefore we assume that although likelihood of delays in reporting is present, its effect and quantum would be much less as compared to the peak. We have addressed this issue in limitations part of the discussion as-well.
+The relevant text added in the manuscript is provided below:
+Discussion Section:
+The results of this study should be interpreted with certain caveats apart from the inherent limitations of crowd-sourced nature of the data. The credibility of a crowd-sourced dataset may be viewed from the following perspectives: under-reporting, duplicated / redundant information, incomplete information, differential lag in reporting the cases, missing initial cases, the inclusion of imported cases as native cases, and partisan information. These may lead to overestimation or underestimation of reproduction numbers. However, as the cases in this particular instance (www.covid19india.org) are chiefly pulled from official government handles, the extent of discrepancy may remain the same in some dimensions irrespective of the nature of the data source. Secondly, the investigators also tried to minimize these discrepancies by rigorous data cleaning, removal of imported cases (as reported) as far as possible by triangulating with other sources and subsequent merging of the final dataset. The estimates might be influenced by certain effect modifiers and confounders like population density, climatic variations and violation of the assumption of random mixing. Conceptually, this phenomenon is dynamic and non-linear and hence should be read with caution.[20,23] The estimated transmission parameters (including doubling time during early outbreak period) in some states show a wider confidence interval with higher uncertainty. One of the plausible reason behind this uncertainty may be that initially number of new cases follows the Poisson process where the approximate average time between events is known but the case to case timing varies significantly at the beginning of the epidemic.
+Point 2:
+Furthermore, please detail even more in the data section of the methods what time to event data was included in the data source (i.e. symptom onset, testing date, generation time, etc) to help explain that you chose distributions for serial interval or generation time not based on data. It appears that case data was used to model and forecast incidence through data fitting and to estimate Rt. This should be clear in the methods what the data was used for.
+Response:
+The line-list in the database used by us didn’t have complete information on time of symptoms onset or laboratory testing date. We had to rely on the estimates of the serial interval reported in the literature as an approximation for the generation time. However, the database had information relating to the travel history of the individual. Based on this information, we labelled as case ‘imported’ (H/O of travel from COVID-19 affected country) or local. Thus, we created daily incidence objects for each state by selecting only ‘local’ cases for further analysis.
+We updated the Methodology to make this clearer.
+Data Preparation
+The data were prepared for analysis in the following steps:
+1. Loading the *.json file containing the raw line-list data
+2. A data-frame is then created and variables of interest are selected
+3. The imported cases are then coded in the following fashion:
+a. All cases with travel history outside the country before the lockdown are coded as imported cases. These cases were removed from further analysis.
+b. All cases reported after 15 days of the lockdown (i.e. 9th April 2020) irrespective of their travel history are coded as local cases
+4. Data from the top 10 states with highest number of cases were subset.
+Respective incidence objects were created by adding number of local cases reported on each date based on the timeframes described below.
+Serial Interval
+… we could not obtain the generation time (time lag between the infection in the primary case and secondary cases) distribution directly with infector-infectee pairs due to the lack of data availability. Therefore, it was substituted with the serial interval distribution discretized on a 1-day time-step. This was created using the generation.time()" function in the "R0" package. For parametrization purposes, we chose a gamma distribution as it accommodates for the underlying changing number of events in the constant event rate (Poisson process). The distribution assumptions were aligned with the emerging literature as well as the observed plausible transmission dynamics. The mean and standard deviation for serial interval approximations was 4.4 days and 3 days, respectively.[14]
+Point 3:
+For Figure 1, could you make the state colors in the bar plot showing incidence cases match the line color for each state showing cumulative cases.
+Response:
+We thank the reviewer for the suggestion. We have matched the colours of the daily incidence (bars) and cumulative incidence (lines) for each state and created a common legend at the bottom of the plot. The newly rendered plot is provided below:
+Point 4:
+You show estimates for doubling time in the results, but still only mention the package/function used and not how it was estimated in the methods section.
+Response:
+The authors agree with the comment made by the reviewer. We thank you for pointing out this lack of clarity regarding the method of estimation of doubling time. The fit() function of the incidence package fits an exponential model to the incidence data in the form of: log(y) = r * t + b
+Where; y is the incidence, t is the time (in days) and r is the growth rate while b is the intercept or origin. The doubling time is then estimated by dividing the natural logarithm of 2 with the growth rate of the epidemic i.e. doubling time (d) = log(2)/r.
+This explanation of the method of estimation of doubling time is also added in the methods section as suggested by the reviewers. The relevant section of the methods section is given below:
+The growth rate and doubling time were estimated using the "fit()” function of the "incidence” package fits an exponential model to the incidence data in the form of: log(y) = r * t + b ; where y is the incidence, t is the time (in days) and r is the growth rate while b is the intercept or origin. The doubling time is then estimated by dividing the natural logarithm of 2 with the growth rate of the epidemic i.e. doubling time (d) = log(2) / r.
+Point 5a:
+The "Epidemiologic Parameters" section of your results could benefit from reorganization. Try discussing the doubling time results all together. Furthermore, the following statement "This may be due to events following the Poisson process at the beginning of the epidemic where the approximate average time between events is known but the case to case timing varies significantly" belongs in the discussion.
+Response:
+We have updated the Epidemiological Parameters section incorporating your suggestions. We added the following text regarding the doubling time in the Epidemiological Parameters section:
+Doubling time also changed with the evolving outbreak. Increase in doubling time means a slow growth rate of an outbreak. Five states reported an increase in doubling time, and four states reported negligible change in doubling time. The state of Gujarat reported a decrease in doubling time which could mean that there is no slowdown of the outbreak.
+Point 5b:
+Furthermore, the following statement "This may be due to events following the Poisson process at the beginning of the epidemic where the approximate average time between events is known but the case to case timing varies significantly" belongs in the discussion.
+Response:
+We thank the reviewer for making this suggestion. We agree with you and added the following text in the Discussion section:
+The estimated transmission parameters (including doubling time during early outbreak period) in some states show a wider confidence interval with higher uncertainty. One of the plausible reason behind this uncertainty may be that initially number of new cases follows the Poisson process where the approximate average time between events is known but the case to case timing varies significantly at the beginning of the epidemic.
+Point 6a:
+In the discussion, you don't quite address why the the lockdown resulted in a reduction in Rt but a continual rise in cases. Please expand on this
+Response:
+We have modified discussion section to explain, why cases keep rising despite reduction in R(t) value. The relevant text has been provided below:
+R(t) is a measure of transmissibility or contagiousness at a given period, and its reduction should be interpreted with caution. This is indicative of the relative force of infection at a given time while the ‘absolute’ burden of infections also depend on the duration of infectiousness and progression of time from the first reported case by influencing the mixing probability of infected-infectee pair. This mixing probability is further influenced by population density, mobility patterns and the general population’s compliance with the non-pharmaceutical interventions (NPIs). When non-pharmaceutical interventions (NPIs) are enforced, there is a reduction in the number of potential contacts and thereby reducing the R(t). However, in a scenario where R(t) > 1, and the number of actively infected persons is high, cases will still rise as one person transmits the infection to one more person.
+Point 6b:
+Given the objective of your paper, it also seems important to explicitly state that implementing a lockdown strategy at the beginning of the epidemic was critical but in the longterm for economic reasons may not be feasible, particularly given the density of the population and economic disparities in India. You make the following statement "Continuing a nationwide lockdown would not be feasible in the long term, and restrictions have to be eased in a phase-wise manner," but provide no references or further explanation for why it is not feasible and why restrictions should be phase-wise or examples. One of the most interesting/important aspects of understanding transmission in India is the population density and mobility patterns of the population - it would be helpful to expand on how your results apply to this or how future surveillance and studies should account for this. Why is knowing your results useful for future non-pharmaceutical interventions (NPIs) in India particularly when lockdown has historically shown the greatest reduction for this epidemic and the 1918 Flu and you're suggesting it's not feasible in India to maintain? Please edit your discussion/conclusion to address this.
+Response:
+From our statement, "Continuing a nationwide lockdown would not be feasible in the long term, and restrictions have to be eased in a phase-wise manner," we meant continuing stringent lockdown where almost everything was at halt from transportation to industry will not be feasible in long term. Also, we meant lockdown at “national” level would not be feasible, considering the heterogeneity in disease spread and response at the state level. We are in agreement that NPIs in the form of social or physical distancing helps in reducing spread. Results of this study also highlight the important role of NPIs in reducing the spread. We have modified discussion to clarify this. We also took your suggestion and updated the references for better clarity. The relevant text of the Discussion Section is provided below:
+Therefore, in the post-lockdown era, it might be a challenge to maintain this path, and this may be the period where the absolute burden of the infected persons will be high.[29, 30] Also, there has been a disproportionately higher burden of serious infections, including those requiring intensive-care among individuals more than 60 years of age as compared to younger adults.[31] This, coupled with the higher prevalence of comorbid conditions (50%) in individuals over 60 years in India, may warrant a strategy tailored to this section of the population. [32] This also suggests that in addition to the identification of infection, it is imperative to shift the focus on mortality prevention. Containment strategies like lockdown have given us the much-needed opportunity to delay the peak and flatten the epidemic-curve. The time bought should be utilized to intensify the surveillance among ‘at-risk’ individuals and buttress the health infrastructure, including hospital beds with oxygen availability and critical care beds with ventilators and telemedicine. [33-35]
+At this juncture, an empirical question arises whether (despite showing the initial success) should the stringent lockdown be continued for a more extended period? Considering the undesired collateral effects of stringent restrictions on the economy and livelihoods of the general population; a nationwide lockdown may not be a feasible solution for a longer duration. Other NPIs (social distancing measures, wearing masks, legal enforcement to curtails the non-essential gatherings, etc.) should be enforced to compensate for the increased probability of random mixing. The decision on which NPI measure should be enforced should vary with the burden of active infections, emerging patterns of severity /mortality, and health system endurance and capacity to deal with such cases embedded in socio-economic and socio-cultural vulnerability.
+Another relevant observation in Indian COVID-19 context is that it does not look like an outbreak with similar intensity at the pan-country level. It seems to be a complex aggregation of several individual outbreaks occurring at different time points at different geographic locations. In principle, the magnitude of these outbreaks should be influenced by population density (outbreaks first started in areas where the population density is high), mobility patterns (higher number of cases were seen in places with better connectivity, i.e. international flights and domestic public transport systems) and the response of the healthcare system, all of which vary across different geographic locations. There is an urgent need for a real-time monitoring system that would take into consideration the disease burden (incidence and mortality), transmission parameters (reproduction number, doubling time and growth rate), existing health infrastructure (including bed capacity, human resources, etc.) and the vulnerability of other essential and frontline sectors.[36] This dynamic monitoring environment could serve as a sensitive tool to detect changes in the epidemiological pathways of COVID-19 and therefore, may facilitate the decision-making process on the nature and extent of NPI enforcement. This statement becomes more pertinent with the findings of our study, where we witness varying trajectories across the ten selected Indian states in response to the nationwide lockdown. Thus, logically the NPI enforcement should be tailored and customized according to the transmission parameters of smaller geographical areas, and hence the proposed monitoring system may play a pivotal role in this regard.
+10.1371/journal.pone.0239026.r005
+Decision Letter 2
+Tsuzuki
+Shinya
+This is an open access article distributed under the terms of the Creative Commons Attribution License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
+31 Aug 2020
+Impact of COVID-19 epidemic curtailment strategies in selected Indian states: an analysis by reproduction number and doubling time with incidence modelling
+PONE-D-20-14797R2
+Dear Dr. Joshi,
+We’re pleased to inform you that your manuscript has been judged scientifically suitable for publication and will be formally accepted for publication once it meets all outstanding technical requirements.
+Within one week, you’ll receive an e-mail detailing the required amendments. When these have been addressed, you’ll receive a formal acceptance letter and your manuscript will be scheduled for publication.
+An invoice for payment will follow shortly after the formal acceptance. To ensure an efficient process, please log into Editorial Manager at http://www.editorialmanager.com/pone/, click the 'Update My Information' link at the top of the page, and double check that your user information is up-to-date. If you have any billing related questions, please contact our Author Billing department directly at authorbilling@plos.org.
+If your institution or institutions have a press office, please notify them about your upcoming paper to help maximize its impact. If they’ll be preparing press materials, please inform our press team as soon as possible -- no later than 48 hours after receiving the formal acceptance. Your manuscript will remain under strict press embargo until 2 pm Eastern Time on the date of publication. For more information, please contact onepress@plos.org.
+Kind regards,
+Shinya Tsuzuki, MD, MSc
+Academic Editor
+PLOS ONE
+Additional Editor Comments (optional):
+Reviewers' comments:
+10.1371/journal.pone.0239026.r006
+Acceptance letter
+Tsuzuki
+Shinya
+This is an open access article distributed under the terms of the Creative Commons Attribution License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
+3 Sep 2020
+PONE-D-20-14797R2
+Impact of COVID-19 epidemic curtailment strategies in selected Indian states: an analysis by reproduction number and doubling time with incidence modelling
+Dear Dr. Joshi:
+I'm pleased to inform you that your manuscript has been deemed suitable for publication in PLOS ONE. Congratulations! Your manuscript is now with our production department.
+If your institution or institutions have a press office, please let them know about your upcoming paper now to help maximize its impact. If they'll be preparing press materials, please inform our press team within the next 48 hours. Your manuscript will remain under strict press embargo until 2 pm Eastern Time on the date of publication. For more information please contact onepress@plos.org.
+If we can help with anything else, please email us at plosone@plos.org.
+Thank you for submitting your work to PLOS ONE and supporting open access.
+Kind regards,
+PLOS ONE Editorial Office Staff
+on behalf of
+Dr. Shinya Tsuzuki
+Academic Editor
+PLOS ONE

@@ -1,0 +1,166 @@
+Timesias: A machine learning pipeline for predicting outcomes from time-series clinical records
+Summary
+The prediction of outcomes is a critical part of the clinical surveillance for hospitalized patients. Here, we present Timesias, a machine learning pipeline which predicts outcomes from real-time sequential clinical data. The strategy implemented in Timesias is the first-place solution in the crowd-sourcing DII (discover, innovate, impact) National Data Science Challenge involving more than 100,000 patients, achieving 0.85 as evaluated by AUROC (area under receiver operator characteristic curve) in predicting the early onset of sepsis status. Timesias is freely available via PyPI and GitHub.
+For complete details on the use and execution of this protocol, please refer to.
+Graphical abstract
+Highlights
+Timesisas can predict outcomes from time-series data with excellent performance
+The last few time points can contain adequate information for outcome predictions.
+Missing value patterns contain useful information for outcome predictions
+Timesias provides instant visualization of top features by AI interpretation methods
+The prediction of outcomes is a critical part of the clinical surveillance for hospitalized patients. Here, we present Timesias, a machine learning pipeline which predicts outcomes from real-time sequential clinical data. The strategy implemented in Timesias is the first-place solution in the crowd-sourcing DII National Data Science Challenge involving more than 100,000 patients, achieving 0.85 as evaluated by AUC in predicting the early onset of sepsis status. Timesias is freely available via PyPI and GitHub.
+Before you begin
+The application of digital systems in the clinical system stimulates an exponential growth of Electronic Health Records (EHR) in the last decade, enabling the potential secondary usage of such records to further improve the clinical practice. Outcome prediction from EHR is one of the most interesting topics in the field of clinical informatics and so far has attracted growing efforts in developing algorithms addressing this task. More specifically, predicting clinical outcomes from real-time sequential data from clinical surveillance is crucial for preventing sudden outburst of an emergency.
+A variety of machine learning models has been drawn in EHR clinical outcome prediction, including mathematical models, such as Linear and Logistic regression. Machine learning models such as SVM and Random Forest have also been used. Deep learning models, including Gated Recurrent Units (GRU), LSTM (Long Short-term Memory) Neural Network, CNN (Convolution Neural Network) and Attention Network have also been used to capture the longitudinal information in the time-series records. Recently, the light-weight gradient boosting machine, such as LightGBM, has become the top performer in dozens of Data Science challenges. The advantage of LightGBM against the other model is its significant speed in training on large datasets.
+One of the biggest challenges for employing EHR data is the unavoidable missing information in the sequential timely records. However, previous observations provided substantial support that the missing values can also convey informative data suggesting patients' health status. Therefore, besides the temporal changes in health status, the pattern of missing information may further assist the clinical outcome prediction and was taken advantage of by our feature design.
+Here we introduce Timesias, a LightGBM machine learning pipeline utilizing time-series EHR data to predict clinical outcomes. Our algorithm, which placed first in the 2019 DII National Data Science Challenge and then in the ongoing COVID-19 EHR DREAM Challenge, is highly versatile and can be easily accommodated to different time-series data inputs. Here we implemented Timesias as a user-friendly command line interface, allowing non-programmers to train predictive machine learning models for their own purpose. Meanwhile, Timesias also allows users to visualize the top ranked features selected by the machine learning models using SHAP analysis, improving interpretability of the black box models.
+Software prerequisites and data requirements
+Our model is installed and run under the Linux or Mac system. Before launching our program, pre-installed Python (>= v.3.6) and LightGBM (>=v.3.1.1) modules are required. You should also prepare your own timely EHR records with the clinical outcomes of interest. The example of prerequisites and input data format can be found from our GitHub repository: https://github.com/GuanLab/timesias.git.
+While this protocol can be applied to any time-series records, here we describe how to perform our pipeline on the randomly generated time series EHR data in predicting sepsis onset, a binary classification task. Timesias can also be used for multiclass classification or regression tasks.
+Key resources table
+REAGENT or RESOURCE	SOURCE	IDENTIFIER	 	Deposited data	 		 	example.gs.file	This paper (mock sepsis diagnosis for 100 patients)	N/A	 	./data/∗.psv	This paper (mock time series EHR for 100 patients)	N/A	 		 	Software and algorithms	 		 	Python (>=3.6)	Python Software Foundation, 2021: high-level programming language	https://www.python.org/downloads/release/python-365/	 	numpy (>=1.14.1)	Community project, 2021: array processing for numbers, strings, records, and objects	https://pypi.org/project/numpy/	 	scikit-learn (>=0.24.1)	Original by David Cournapeau as a Google Summer of Code Project 2021: a Python module for machine learning	https://pypi.org/project/scikit-learn/	 	lightgbm (>=3.1.1)	Microsoft Corporation, 2020: a gradient boosting framework	https://pypi.org/project/lightgbm/	 	shap (0.35.0)	Scott Lundberg, 2021: a unified approach to explain the output of any machine learning model.	https://pypi.org/project/shap/0.35.0/	 	bokeh (>=2.3.0)	Numfocus, 2021: an interactive visualization library for modern web browsers	https://docs.bokeh.org/en/latest/docs/first_steps/installation.html	 	Timesias	This paper	https://pypi.org/project/timesias/ or https://github.com/GuanLab/timesias
+Materials and equipment
+CRITICAL: The implementation of the model is light weight. However, the required memory usage in practice depends on the size of your own data.
+Alternatives: 1. Our model can work with fewer CPU cores and less RAM memory, although it may take longer time for a large dataset. 2. This model can also be run and tested on MacOS system (Version 10.15.7)
+Computation resources used in this study
+Operating system	Version	 	Ubuntu	18.04.2 (Bionic Beaver)
+CPU information	Parameter	 	RAM Memory	503GB	 	Total number of cores	40	 	Processor speed	2.40 GHz
+The program in this protocol was written in the Ubuntu Linux system using Python language (>=v.3.6). All experiments were carried out and evaluated under the Ubuntu system with the computational resources listed in Table 1.
+Step-by-step method details
+Download our package and install the prerequisites
+Timing: <5min
+pip install timesias
+Model installation from GitHub and the required dependencies
+or clone the whole package from our GitHub repository using the following command to your local directory using the following command (Figure 1):
+git clone https://github.com/GuanLab/timesias.git
+install the latest version of Timesias via pip:
+CRITICAL: check if all required dependencies listed in key resources table are correctly downloaded and installed. Originally, installing Timesias via pip will automatically check for and install the required dependencies. However, errors during installation could occur when installing on computational environments (Troubleshooting 1).
+Prepare data
+Timing: <10min
+first column: path of the time-series record files. the details of the time-series record files which will be detailed later.
+The second column: gold standard, or label for the time-series record files. In the example data, we use binary label 1/0 to indicate failure/survival, which is the status of sepsis onset of the patients.
+Example data format for gold standard file
+./Data/0.psv	0	 	./data/1.psv	1	 	...	…	 	./data/n.psv	0
+Gold standard file (for example: example.gs.file): a ‘,’ delimited table with two columns. Each row in the gold standard file represents a sample. The details of gold standard file are described below (Table 2):
+The first row, or the header: the clinical measurements (Features). The first header should be the time point, and from the second column to the end, the header should be the clinical measurements recorded at each time point.
+The first column, or the row names: the exact time points in ascending order.
+From the second column to the last, the values should be the observed values for each clinical measurement at the nth time point.
+Example data format for time-series record file
+Time point	Feature 1	Feature 2	… …	Feature 4	Feature 5	… …	 	1							 	2							 	………	 	N
+Record files (for example: ∗.psv): “|” delimited time series records. The record files should be corresponding to the first column in the gold standard file, which are the time-series records for each individual sample/patient. Each individual sample should have one record file. The record file should be in the following format (Table 3):
+Two types of data should be prepared for model training and prediction: 1) gold standard file, which contains the names of the record file from patients and the corresponding gold standard (clinical outcome of that patient). 2) time-series records files, which are “|” delimited time series records. The two types of data mentioned above should follow the following formats:
+CRITICAL: 1. Both types of datasets should follow the format described above. 2. Make sure that the first column in the gold standard file matches the file name of the records. Namely, the total number of rows in the gold standard file is always equal to the total number of records.
+It is worth noting that, for some time points, some features might be missing. Therefore, it is recommended that researchers fill the missing values as ‘NaN’ instead of leaving them blank. The demonstrated datasets can be found in our Timesias GitHub repository (https://github.com/GuanLab/timesias/tree/master/data).
+Train models, evaluate results, and visualize top features
+Timing: ∼0.5 h (depending on your data)
+To start training the LightGBM regression model, five-fold cross-validation and top feature analysis on your data, simply run the following command: timesias -g [GS_FILE_PATH] -t [LAST_N_RECORDS] -f [EXTRA_FEATURES] -e [EVA_METRICS] --shap
+-g [GS_FILE_PATH]: the path to the gold standard file (example.gs.file) you prepared in step 2.
+Note: The missing values contain critical information for outcome predictions. Here we introduce a specific feature construction method implemented in Timesias to preserve the missing value information (Figure3). First, for each feature in a certain time point, we add an additional value to annotate the binary status if it is missing or not (1/0). This will double the total number of features in the matrix. For example, if we use the last  time points of the record of  features, the original feature matrix would be an  matrix. After the missing value annotation step, the processed feature matrix will be . At the same time, the missing values in the original feature matrix will be replaced by an arbitrary constant, here we set it to ‘−3000’ as default. As we have designated a fixed length  for all timely records by using the argument -t [LAST_N_RECORDS], if the provided record (with  timepoints) is shorter than , we will fill the missing earliest timepoints of the original record with another arbitrary constant. Here we use ‘−5000’ as default. Otherwise, the record will be cropped to the last timepoints. The replacement values of the above missing information can also be changed according to your own data (Troubleshooting 2). The above are the feature preprocessing step, which generates a  matrix, from which extra features can be generated as described next.
+-t [LAST_N_RECORDS]: the last n records you want to use for prediction, default is 16.
+-f [EXTRA_FEATURES]: additional features you want to include for prediction. We provide four additional features to construct based on your original data: norm, std, missing portion and baseline.
+Note: These additional features will capture the temporal changes as well as the patterns of missing values in the timely records. The details of the extra features are described here:
+Overview of the feature construction process
+First, the missing information will be replaced by different replacement values (for missing feature values (gray), replace with −3000; for missing timepoints (green), replace with −5000). Then we compute four types of characteristics for each feature: ‘std’, ‘norm’, ‘missing portion’ and ‘baseline’. Then the final feature matrix will be generated by concatenating all generated features together.
+1) ‘norm’: normalized feature values. For each column  in the  matrix, we calculate the mean and standard deviation across all rows. The normed new feature value  will bewhere is value of the th timepoint in the  th column, is the mean for the  th column through the timeline;  is the standard deviation for the  th column through the timeline; : total number of time points; and  is the total number of features.
+2) ‘std’: as mentioned above, is the standard deviation () of each feature throughout the whole time-course:where  is the value of the th feature in the  th column; is mean for the  th feature through the timeline; and  is the total number of time points.
+3) ‘missing portion’: the percentage of missing points for each feature, which is calculated as:where  is the number of missing values of the  th feature.
+4) ‘baseline’: for each feature, we record the earliest time point for each feature to be collected and the corresponding feature value.
+-e [EVA_METRICS]: evaluation metrics you choose. Our program primarily provides five options: AUROC, AUPRC, C-index, Spearman’s r and Pearson’s r, which are used for different prediction tasks (binary/multiclass classification and regression). The details for the above metrics are described in Quantification and Statistical Analysis.
+--shap: an optional argument. If used, SHAP analysis will be carried out, using the trained model from five-fold cross-validation on the test set to visualize the top measurements and time points.
+The arguments are defined as follows:
+Note: Our program also provides an option to analyze the top features by SHAP analysis by using the --shap argument. If additional features were constructed from the original features, we group the corresponding values of the original feature to analyze its overall importance. According to the additivity of SHAP values, the grouped SHAP values of features and time points can be computed following the formula below:
+The workflow of the main program using a one-line command
+This includes model training, validation and SHAP analysis.
+Our package provides a one-line command to perform feature construction, model training and five-fold cross-validation at the same time, followed by the SHAP analysis with a visualization report of top contributing features (Figure 2).where X is all features of interests. For example, if we want to know the aggregated SHAP importance of the last 6th time point, can be all features from the last 6th timepoint. The top features (clinical measurements and timepoints) are visualized in bar graphs.
+CRITICAL: 1. To successfully run through the model training and cross-validation process, make sure the gold standard file path (-g) is correct (Troubleshooting 3). Also, check if the time-series records are correctly formatted. Problems with time-series records could lead to aborted programs (See Troubleshooting 4 and Troubleshooting 5). Additionally, we require all feature values in the time-series data to be numeric, and categorical features need to be encoded in advance (See Troubleshooting 6). 2. The default length of the last n records (-t) is 16. However, the choice of -t can affect the model performance, CPU occupancy and training time. We recommend different trials of -t for a proper choice (See Troubleshooting 7). 3. While the default settings of the hyperparameters of the LightGBM models are the same as the winning algorithm in the DII Data Science Challenge, we also encourage the users to adjust the model hyperparameters in respect to their own dataset (See Troubleshooting 8). 4. While the example only presents the prediction of binary outcomes, our model also can take continuous values as gold standards. However, suitable evaluation metrics should be selected per prediction task. For example, in the demonstrated binary classification task, AUROC and AUPRC were selected. For regression tasks, C-index, Pearson’s correlation or Spearman’s correlation can be used. The users can also use their own customized evaluation metrics on the prediction results by modifying the code in statistics.py (https://github.com/GuanLab/timesias/blob/master/src/statistics.py).
+Then the program will start training the prediction model using the arguments you specified. When model training is finished, the models will be automatically saved to ‘./model’, and the evaluation on the test set will be automatically performed. Also, if --shap is used, the program will start SHAP analysis after prediction performance evaluation.
+Expected outcomes
+The above command will generate the following results from your training data: Saved models: five models resulting from five-fold cross-validation will be saved in ./models/finalized_model.sav.∗ and can reload by the standard pickle module in Python. Evaluation results (e.g., AUROC and AUPRC) from five-fold cross validation, which will be saved in ‘./results/eva.tsv’.
+Results from SHAP analysis shows the top 50 measurements (upper panel) and time points (lower panel) for outcome prediction
+The top measurements and timepoints were ordered by the average of absolute shap values for all five models generated by five fold cross validations.
+if --shap is specified, results from SHAP analysis will be stored in the following files: ‘./results/shap_group_by_measurment.csv’: Feature importance of all measurements resulted from SHAP analysis using the five models in five-fold cross-validation; ‘./results/shap_group_by_timeslot.csv’: Feature importance of all time points resulted from SHAP analysis using the five models in five-fold cross-validation;‘./results/top_feature_report.html’: the top features (measurements and timepoints) visualized in bar graphs (Figure 4).
+Quantification and statistical analysis
+AUROC (Area under the Receiver Operating Characteristics curve): The ROC plots the false positive rate (FPR) versus the true positive rate (TPR), where:
+Timesias provide the following matrices to evaluate the model performance, which can be specified using -e argument:
+TP: True Positive; TN: True Negative; FP: False Positive; FN: False Negative.
+AUPRC (Area under the precision-recall curve): The PR curve plots precisions versus recall, where:
+Generally, an AUROC of 0.5 indicates random prediction (no signal) and 1 indicates perfect prediction.
+C-index (Harrell’s C-index, or Concordance index): It is the generalization of AUROC into censored data. C-index can be calculated using the following formula:
+The expected value of AUPRC is the proportion of true positive cases in the dataset.
+: prediction value, or predicted risk of disease of sample
+: gold standard, or survival time, of sample
+: an auxiliary variable indicating whether sampleis censored. if uncensored, is 1; else 0.
+Pearson’s r (Pearson’s correlation coefficient): which evaluates the linear correlation between the prediction value and gold standards:
+C-index = 0.5 represents random and 1 represents perfect prediction.
+: prediction value of sample
+: average of all prediction values
+: gold standard of sample
+Spearman’s r (Pearson’s correlation coefficient): which evaluates the ranked correlation between the prediction value and gold standards:
+: average of all gold standard valueswhere Pearson’s r = 0 represents random and 1 represents perfect predictions.
+: difference between the ranks of prediction and gold standard in sample
+: number of observationswhere Spearman’s r = 0 represents random and 1 represents perfect predictions.
+Among the above, AUROC and AUPRC can be used for binary classification problems, and C-index, Pearson’s r and Spearman’s r can be used for regression problems. The users can also implement other customized evaluation metrics.
+Limitations
+One possible limitation of Timesias is the memory usage. After filling all missing values, the feature matrices will increase to more than twice of the original input, depending on how many time points you decided to use (Figure 3). Additionally, when using the full set of features (norm, std, missing portion, baseline), the feature number will also increase. Therefore, when there are many samples (for example, in the DII National Data Science Challenge, the training data could be up to ∼100, 000 samples), the CPU memory could be a potential limitation of our method.
+Troubleshooting
+Problem 1
+Installation of Timesias fails due to uninstalled prerequisites (step 1).
+Potential solution
+Please install the required dependencies manually through the links we provided in key resources table, and then try installing Timesias again.
+Problem 2
+Prediction performance (AUROC) with different replacements for missing feature value and timepoints on the toy data
+MIssing feature replacement	Time point replacement	AUROC	AUPRC	 	−3000	−5000	0.6484	0.7699	 	−5000	−5000	0.6484	0.7699	 	−5000	−3000	0.6484	0.7699	 	−1000	−1000	0.6484	0.7699	 	−100	−100	0.6153	0.7267	 	100	100	0.5826	0.7490	 	3000	5000	0.6044	0.7626
+Different missing value replacement could affect the prediction performance. In our default setting, the missing feature values are replaced with −3000 and the missing timepoints are replaced with −5000. Difference replacement values may have a significant influence on the prediction accuracy (Table 4). (step 4)
+Potential solution
+Default missing value settings for missing record values (val_rep) and missing timepoints (t_rep)
+Use other replacement values for missing feature value replacement and missing time point replacement. To change missing value/timepoint replacement, in utils.py, assign val_rep/t_rep with other values you would like instead of −3000 and −5000 (Figure 5).
+Usually, the replacement values should be lower than the lowest feature value. Also, we recommend that val_rep and t_rep not be equal to retain more information in the dataset.
+Problem 3
+Screenshot of the terminal if the gold standard file path is wrong
+The program will check if the gold standard file exists. If not, the program will halt and print the following information in the terminal (Figure 6). (step 4)
+Potential solution
+Check if the gold standard file path (-g) is correct.
+Problem 4
+Screenshot of the terminal if the time-series file doesn’t exist
+If the program fails to read the time-series records, the terminal prints out the following assertion error (Figure 7). (step 4)
+It means the file path of the time series records are wrong (∗.psv file).
+Potential solution
+Check if the training record paths (first column) listed in the gold standard file are correct.
+Problem 5
+Screenshot of the terminal if the time-series file is empty
+If the time-series record file is empty, the following errors could be raised (Figure 8). (step 4)
+Potential solution
+Check the file in the training data, and exclude it from the training data if it is not available.
+Problem 6
+Screenshot of the terminal when there are categorical features in the time-series data
+Feature value error. We assume all feature values used for prediction should be numeric. However, if the feature value is a string, the following error could occur (Figure 9). (step 4)
+Potential solution
+If categorical features are used, you can encode them as numeric values before training with our program.
+Problem 7
+The relationship between the number of time point selected and time/CPU occupancy required
+While the default value of -t is 16, usually a larger -t could retain more information, while increasing CPU usage and training time correspondingly. We plot the memory (CPU) and time versus last n point using the deposited data (100 samples) (Figure 10). (step 4)
+Potential solution
+Choose a proper number for -t. We also encourage the users to try different -t and compare the performance/resource requirements for a most preferred choice.
+Problem 8
+Default parameter settings in the LightGBM model
+We also encourage the users to tune the hyperparameters of the LightGBM model for better performance. The default parameters for the LightGBM regression model are set as Figure 11 and default boosting round is set to 1000. However, the default setting may not be optimal for variable datasets. (step 4)
+Potential solution
+The model parameters in model.py can be modified. If the model overfits, choose smaller ‘num_leaves’ and ‘n_estimator’ and smaller boosting rounds. If the model underfits, choose larger ‘num_leaves’ and ‘n_estimator’ and larger boosting rounds. Larger ‘learning_rate’ could speed up the training process while a smaller ‘learning_rate’ with larger boosting rounds may help achieve better prediction accuracy.
+Resource availability
+Lead contact
+Further information and requests for resources and reagents should be directed to and will be fulfilled by the lead contact, Yuanfang Guan (gyuanfan@umich.edu).
+Materials availability
+This study did not generate new unique reagents.
+Data and code availability
+The code generated in this study is available at [https://github.com/GuanLab/timesias]. The mock dataset used for display in this paper is deposited to and available at [https://github.com/GuanLab/timesias/tree/master/data].
+References
+Random forests
+Interpretable deep models for ICU outcome prediction
+Assessment of the timeliness and robustness for predicting adult sepsis
+Long short-term memory
+Deep learning
+Learning hierarchical representations of electronic health records for clinical outcome prediction
+Predicting hospitalizations from electronic health record data
+Machine learning for clinical outcome prediction
+A new insight into missing data in intensive care unit patient profiles: observational study
+Deep EHR: a survey of recent advances in deep learning techniques for electronic health record (EHR) analysis

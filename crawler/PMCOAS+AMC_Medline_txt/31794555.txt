@@ -1,0 +1,533 @@
+User abnormal behavior recommendation via multilayer network
+With the growing popularity of online services such as online banking and online shopping, one of the essential research topics is how to build a privacy-preserving user abnormal behavior recommendation system. However, a machine-learning based system may present a dilemma. On one aspect, such system requires large volume of features to pre-train the model, but on another aspect, it is challenging to design usable features without looking to plaintext private data. In this paper, we propose an unorthodox approach involving graph analysis to resolve this dilemma and build a novel private-preserving recommendation system under a multilayer network framework. In experiments, we use a large, state-of-the-art dataset (containing more than 40,000 nodes and 43 million encrypted features) to evaluate the recommendation ability of our system on abnormal user behavior, yielding an overall precision rate of around 0.9, a recall rate of 1.0, and an F1-score of around 0.94. Also, we have also reported a linear time complexity for our system. Last, we deploy our system on the “Wenjuanxing” crowd-sourced system and “Amazon Mechanical Turk” for other users to evaluate in all aspects. The result shows that almost all feedbacks have achieved up to 85% satisfaction.
+Introduction
+With the recent growth of web activity such as online shopping and banking, it is becoming more and more necessary to detect abnormal user behavior on the web. For example, we can safeguard privacy for real users by distinguishing instances of identity theft.
+In general, given the popularity of a wide variety of online services, machine learning (ML) algorithms including Support Vector Machine (SVM), decision trees, and deep neural networks have been applied to help operators maintain user privacy (See for a review). Typically, after feeding enough features into a ML algorithm, a well-trained model can create an accurate portrait of the user, which can be used to protect users on the web. However, detecting abnormal user behavior can present a dilemma. For one, security operators must design accurate features that characterize user behavior. However, such features may require “peeking” at detailed user information such as Internet Protocol (IP) addresses, cookies, and locations, which generally violates user privacy agreements. In addition, standard ML models require a multitude of features to build a well-trained model, but it is difficult to work with or collect such large amounts of data. Insufficient amounts of data can lead to over-fitting in resultant models.
+Recently, supervised ML methods have been proposed that attempt to preserve user privacy. For example, some methods use only encrypted features (instead of plaintext/unencrypted features) to train the model, but this use of encrypted data increases computational complexity; others attempt to minimize the feature exposure possibility by decentralizing features over different distributed machines—but the host still has access to the whole set of features.
+In this paper, we use advanced graph theory embedding algorithms to address the above problems. That is, based on the relationships among different behaviors for each user, we construct a topological structure (a graph) which uniquely depicts the behavior patterns for each user. Hence, unlike ML algorithms which must first train a model, graph-based methods naturally capture dependencies among the various features to yield a topologically-based portrait of the user. In addition, we also use a multilayer network to depict behavior patterns of the user over time(“multilayer” represents different timestamps of the behavior patterns of a user on the web).
+In conclusion, by using multilayer network analysis algorithms, we here develop a privacy-preserving user abnormal behavior recommendation system. Below are five major contributions:
+Privacy preservation: As encrypted features are sufficient to construct a multilayer network, our system does not need access to unencrypted features and thus cannot leak information to host machines.
+Efficient feature use given limited features: Our system can work with only one feature to construct a multilayer network based on user timestamps, in contrast to ML based algorithms which generally are difficult to train given insufficient features. However, the more features provided to our system, the more complete the user portrait it can build, and the more accurate abnormal behavior recommendations it can provide.
+Unsupervised learning: As the multilayer network of a user captures user portraits automatically, we need no label information to train a model in the first place. Unsupervised network analysis algorithms such as community detection, sub-graph pattern matching, network embedding, and the like can also be applied to recommend abnormal behavior for the user automatically.
+Efficient performance: Since our algorithms are quite efficient (see Section 16), and the proposed system works for each user, it is efficient to recognize abnormal behavior(s) for each user in the real time.
+A Practical System: We have built a system that to visualize the results, demonstrate how to use the user’s devices and the encrypted features to build the multilayer network, and recommend the suspicious activities. The system is available at https://github.com/Liu-WeiYi/Private_Preserving_Outlier_Behavior_Detection.
+Related work
+Techniques based on ML and on graph analysis algorithms have been developed to detect abnormalities. Generally speaking, these papers focus on a single problem: given a set of features, how to construct a model which detects outliers in the dataset efficiently and accurately. In addition, to make input features more robust to non-linear noise, techniques such as denoising autoencoders, maximum correntropy autoencoders, robust deep autoencoders, and malware detection on deep neural networks have been proposed.
+However, as pointed out by Shmatikov et al., ML models remember too much. This property of ML algorithms may result in leaks of detailed information about the training dataset to malicious ML library providers. Hence, starting with Goldwasser et al., researchers have begun to take privacy preservation into account by discussing how to leverage encrypted features during training. Another way to prevent information leakage is to use distributed processing. For example, Shokri et al. proposed a distributed training technique based on selective stochastic gradient descent, Sunil et al. developed a novel attribute-wise noise addition scheme that preserves data privacy under guarantees of differential privacy, and Xie et al. proposed a privacy-preserving proximal gradient algorithm which asynchronously updates models of the learning tasks. See for a detailed review.
+Unlike typical solutions which focus on constructing a more accurate or more privacy-preserving model to depict the data and capture outliers, we propose an unorthodox approach that focuses only on a specific user. As pointed out in the survey, graph-based approaches to anomaly detection have four advantages: the inter-dependent nature of the data, a powerful representation, the relational nature of problem domains, and robust machinery. In the proposed approach, we also use graphs to capture user behavior. In addition, we introduce a multilayer network to capture user behavior across time. As a multilayer network is a set of layers where each layer represents a type of relationship among nodes, it is natural to leverage layers to represent the user behavior for the current timestamp (or group of timestamps).
+Generally speaking, there are two ways to extract useful information from the network: multilayer network community detection derived from pure topology analysis, and network embedding to find an appropriate vector space onto which to project nodes. For the former, many approaches use multilayer network community detection. Among these, multi-slice modularity-based methods have proved efficient and accurate in detecting non-overlapping communities in (weighted) multilayer networks (reviewed in). For the latter, by treating a stream of short random walks on a graph as a document, these methods project nodes onto a continuous vector space which serves as a social representative of the graph’s nodes. There continue to be approaches based on network embedding: see for a review. Liu et al. has proposed three methods—network aggregation, results aggregation, and layer co-analysis—for multilayer network scenarios. In this paper, we use layer co-analysis to project the multilayer network onto a vector space.
+Proposed recommendation system
+One possible use case
+We use the following example to describe our private-preserving user abnormal behavior recommendation system. Part of protecting online accounts is carefully preserving user privacy. That is, without violating user privacy (or using encrypted features instead), a privacy-preserving system must distinguish from the user behavior whether the account is currently being used by the real owner or an imposter. Fig 1 is an example.
+A use case example.
+A privacy-preserving system should distinguishes real users from imposters even though both are using the same login account, and forbids the imposter from accessing sensitive user data.
+Recommendation system architecture
+Fig 2 demonstrates the workflow of the proposed privacy-preserving abnormal user behavior recommendation system. In our system, there are four steps to recommend and visualize user’s anomaly:
+Multilayer network construction: This module captures user behavior across time (Alg. 1) and constructs a multilayer network based on these timeslot groups (Alg. 2), where each layer depicts the user behavior corresponding to a specific timeslot group. See Section for details.
+Multilayer network analysis: This module detects abnormal users by using unsupervised graph analysis algorithms from two aspects: weighted multilayer network community detection based on the pure topology-based analysis (Alg. 3), and state-of-the-art multilayer network embedding (Alg. 4). See Section 12 for details.
+Outlier recommendation: This module calculates node scores based on community and cluster results from the previous module (Alg. 5), and recommends nodes given the corresponding scores from small to large. See Section 10 for details.
+Visualization system: This module builds a visualization system. See Section 16 for details.
+Workflow for proposed system.
+Multilayer network construction
+Multilayer network
+A multilayer network MN = {G1, G2, …, Gl} is a combination of layers, where each layer Gl = (Vl, El) (Vl: node-set on layer l, El: edge-set on layer l) represents a particular type of relationship among nodes. In order to capture user behavior across time, nodes within the multilayer network can be devices belonging to a given user, the edge weights can be the similarity among different devices, and the layers can represent topological information among nodes with different timestamps (t1, t2, …).
+Example
+Consider Fig 3. For user A0001, user logs register related devices and record behavior in the current timeslot group, and the multilayer network shows device relationships based on the behavior logged for the various timestamps. Dashed edges across layers link the same devices across different timestamps. Thus, when creating the multilayer network based on user behavior over time, there are two important processes: determining the layers, and determining the edge weights between the devices for each layer.
+Multilayer network based on user behavior over time.
+Determining layers
+It is not practical to simply create a layer for each timestamp, as this would yield layers that contain redundant information. One way to solve this problem is to first group timestamps, and then create a layer corresponding to the current timestamp group. Alg. 1 shows the process by which timestamps are grouped based on the mean time interval (ΔT), where the input is All_Time_List = [t1, t2, …, tl] which contains all timestamps for the current user (l is the total number of timestamps for the current user) and the output is  which contains each timeslot group  (m is the total number of groups; m ≤ l).
+Algorithm 1: Mean ΔT Grouping
+Input: All_Time_List
+Output: Time_Groups
+1 Time_Groups = [];
+2 // 1. Calculate ΔT;
+3 Interval_T = [];
+4 for t1_idx ≤ len(All_Time_List) − 1 do
+5  t2_idx = t1_idx + 1;
+6  t1 = All_Time_List[t1_idx];
+7  t2 = All_Time_List[t2_idx];
+8  Interval_T.append(t2 − t1);
+9 end
+10 ΔT = mean(Interval_T);
+11 // 2. Group times by ΔT;
+12 for t1, t2 ∈ All_Time_List do
+13  for t2 − t1 ≤ ΔT then
+14   Time_Groups[−1].extend(t1, t2);
+15  end
+16  else
+17   Time_Groups.append(t1, t2);
+18  end
+19 end
+20 return Time_Groups
+Determining edge weights
+After obtaining Time_Grou −ps for the current user, the weights between the different devices in the current timeslot group W(d1, d2) ∈ [0, 1] are calculated using Eq 1. B(⋅) contains all the behavior features (such as scrambled IP address and encrypted queried keywords) of the current device in the current timeslot group.
+Alg. 2 details the construction of the multilayer network based on Time_Groups, where the inputs are Time_Groups and User_Logs and the output is a weighted multilayer network MN for the corresponding user. Note that Eq 1 requires at least one feature to calculate the similarity between two devices (Produces binary output if fed only one feature); however, the more features obtained for a device, the more closely the resulting weights approximate the similarities between the corresponding devices.
+Algorithm 2: Multilayer Network Construction
+Input: Time_Groups, User_Logs
+Output: MN
+1 Initialize a multilayer network MN;
+2 for  do
+3  Initialize a graph G in current timeslot group ;
+4  Extract device list D in  based on User_Logs;
+5  for d1, d2 ∈ D do
+6   weight = W(d1, d2);
+7   G.add_node(d1,d2);
+8   G.add_edge(d1,d2,weight);
+9  end
+10  MN.append(G);
+11 end
+12 return MN
+Multilayer network analysis
+Given a multilayer network, unsupervised graph analysis algorithms such as multilayer network embedding and multilayer network community detection can be applied to extract useful information from the multilayer network automatically.
+In this section, we discuss identifying abnormal nodes by analyzing network topology. To this end, we propose a basic assumption from the behavior analysis field: “Abnormal (markedly unusual) behavior is but a small fraction of all behavior of the current node —most user behavior is normal,” and we treat this as our baseline. With this assumption, identifying abnormal behavior for a user is equivalent to locating a small collection of nodes whose topologies are unlike the rest of the nodes in the corresponding multilayer network.
+Below, we leverage multilayer network embedding, a state-of-the-art ML embedded topology-based analysis method, as well as multilayer network community detection, a purely topology-based analysis method to group nodes in the multilayer network, to locate small groups of nodes which share similar behavior.
+Multilayer network community detection
+By optimizing the multislice-modularity Q (Eq 2), this method groups nodes into different communities. Here, lowercase letters (i, j ∈ N) represent nodes; uppercase letters (S, R ∈ L) represent layers; WijS is the weight between nodes i and j; WkiS is the total weight of node i, that is, the sum of all the weights between node i and its neighbors in layer S; 2μ = ∑jR kjR; WmS = ∑j WkjS; γS is the resolution parameter for layer S; CjSR indicates whether the node j exists in both layes S and R; giS indicates whether the group of nodes i exists in layer S; and δA,B is the identity function, where δ = 1 when A = B.
+Alg. 3 details the detection of communities in a multilayer network by maximizing Q, where the inputs are the multilayer network MN and the resolution parameter γ and the output is the community results Coms = [com1, com2, …] and com = [d1, d2, …]. neighbor(i, R) indicates the neighbors of node i in layer R.
+Algorithm 3: Weighted Multilayer Network Community Detection
+Input: MN
+Output: Coms
+1 Coms = [];
+2 stopFlag = False, Q = 0;
+3 while !stopFlag do
+4  StableComFlag = False;
+5  while !StableComFlag do
+6   MaxQ = Q;
+7   for i, R ∈ MN do
+8    Merge nodes i and j ∈ neighbor(i, R) into one Com by maximizing Q;
+9    Update MaxQ;
+10    if Coms becomes stable then
+11     Save Coms corresponding to MaxQ; Q = MaxQ;
+12     StableComFlag = True;
+13    end
+14   end
+15   Shrink each com ∈ Coms to one node, and update origin MN;
+16   // Stop when they are shrunk to one node;
+17   if len(Coms) ⩵ 1 then
+18    stopFlag = True;
+19   end
+20  end
+21 end
+22 return Coms
+Multilayer network embedding
+This method uses the hyper-parameters p, q, and r to enable a second-order random walk. Parameters p and q control the local and global biases of the sample random walk, and r controls the layer traversals during the random walk; that is, the random walk stays on the current layer l′ with probability r, and moves along the edge of another layer l with probability 1 − r. Eq 3 gives the random walk traversal probability P(ti = (xl, yl, l)|ti−1 = (zl′, xl′, l′)) among layers, where (zl′, xl′, l′) represents the first random walk from node zl′ to node xl′ in layer l′, and (xl, yl, l) represents the second random walk from node xl to node yl in layer l. Note that xl′ and xl is the same name node x exists in different layers.
+Here, analogous to p and q in node2vec, αpq(z, x, l) indicates the traversal probability in the same layer l, given in Eq 4.  is the shortest path between nodes z and x in layer l of the multilayer graph (where nodes z and x may be the same node).
+Alg. 4 details the identification of the projection function f that embeds the multilayer network into a vector space (Please see for detailed information on Alg. 4), where node2vecSGD corresponds to the running of stochastic gradient descent on minimizing negative node2vec log-likelihood with multilayer random walks taking the place of the standard node2vec walks.
+Algorithm 4: node2vec on Multilayer Network
+Input: MN,r, αpq,num_walks,walk_length
+1 Initialize walk_list to empty;
+2 for nw_iter from 1 to num_walks do
+3  Initialize current edge (i, j, l) ← (i0, j0, l0) uniformly at random;
+4  for wl_iter from 1 to walk_length do
+5   walk_list[nw_iter][wl_iter] ← i;
+6   With probability r, choose next_layer = l, otherwise choose next_layer = l′ uniformly at random for some layer l′ incident to j;
+7   Set current edge (i, j, l) ← (j, i′, next_layer) proportional to αpq(j, i′, next_layer) for some i′ incident to j through next_layer;
+8  end
+9 end
+10 f ← node2vecSGD(walk_list)
+Outlier recommendation
+Generally speaking, the community detection algorithm yields the subgroups of nodes that share similar behavior; thus the focus is on depicting relationships among nodes and their nearby nodes. The network embedding algorithm, in contrast, assigns nodes with coordinates on a vector space, making it suitable to apply a clustering algorithm (such as the K-means algorithm) on these nodes.
+Alg. 5 combines the results of community detection along with the clustering results in vector space, calculates the score on each node, and recommends nodes with smaller scores.
+Algorithm 5: Outlier Recommendation
+Input: MN, Coms, Coordinates
+Output: node_list
+1 ComScores = [];
+2 CoordinateScores = [];
+3 Clusters ← clustering Coordinates into len(Coms) clusters;
+4 foreach com ∈ Coms do
+5  score = ∑i,j∈com W(i, j);
+6  ComScores.append(score);
+7 end
+8 foreach cluster ∈ Clusters do
+9  score = ∑i,j∈cluster W(i, j);
+10  CoordinateScores.append(score);
+11 end
+12 foreach n ∈ fN do
+13  Calculate node_score from ComScores and CoordinateScores;
+14  node_list.append(node_score);
+15 end
+16 return node_list;
+Visualization system architecture
+Fig 4 illustrates the architecture of the visualization system, showing the different tasks for a specific user.
+User statistics extraction: This task extracts all information related to the user. That is, by analyzing the user logs for each timestamp, this task obtains all the nodes in the multilayer network, calculates the time intervals, and gets the related timeslot groups for the current user.
+Multilayer network visualization: This task constructs the multilayer network for the related user. Here, each color represents the same name node (linked by a dotted line across different layers) in the network (Take Fig 5 in Section 16 as an example).
+Abnormal behavior recommendation: If there is any abnormal nodes in the current multilayer network, this task recommends them. At the same time, it also shows the group score for devices (We group devices together if they share the same score), calculates the security score for the user, and provides a report for current suspicious activities. Here, the security score is defined as .
+Architecture of visualization system.
+Visualization system.
+Proposed privacy-preserving recommendation system for abnormal user behavior. System has two major parts: an overview (left), and individual behavior (right) along with device score groups, analysis results, and suggestions.
+Experiments
+We first describe the experimental settings (Section 16) and data sets (Section 16). Then we conduct a detailed evaluation of our proposed system from five aspects: in Section 16, we compare the advantages and disadvantages of the proposed system and the existing methods; in Section 16, by injecting abnormal devices, we evaluate the system performance in terms of precision rate, recall rate, and F1-score; in Section 16, from the view of the system operator, we present the time complexity for each proposed algorithm, and show the system response time based on the whole dataset; in Section 16, we demonstrate our private-preserving recommendation visualization system; and in Section 16, we present user study from “Wenjuanxing” crowd-source system and “Amazon Mechanical Turk”.
+Experimental settings
+To demonstrate the proposed privacy-preserving abnormal user behavior recommendation system, we implemented the proposed algorithms as a prototype system on an Ubuntu 16.04 LTS based workstation with an Intel Xeon E5-2630 v4 processor and 64GB of 2133MHz RAM. We used this workstation for evaluating our system security, recommendation accuracy, and system performance.
+Data sets
+In our experiments, we use the famously posted (2017.06.29) Tianchi dataset OneID (https://tianchi.aliyun.com/datalab/dataSet.htm?spm=5176.100073.888.2o7.40bc1022nJtK6m&id=20) to numerically evaluate the performance of the proposed system in Sections 16, 16 and 16. Table 1 shows some statistics for the OneID dataset.
+Evaluation dataset.
+Entire Users Information	 	Users	Devices	Encrypted Search keywords and IPs	 	453,029	926,578	43,786,036	 	Per User Information	 	Avg timeslot groups	Avg devices	Avg Encrypted search keywords and IPs	 	5.263	2.05	96.652
+Notes: Despite a large number of logs, there are on average too few encrypted features per user to train good models. We use Alg. 1 to group times from each user’s reach_time and data_time logs.
+This dataset provides the encrypted users’ wireless and PC browser logs for one week (2017.05.01–2017.05.07), with log information for 453,029 users, and 926,578 related devices. After cleaning the dataset, we found more than 40 million encrypted search keywords and scrambled IP addresses that can be used to depict user behavior. However, note that despite the large volume of encrypted features from the dataset, the average number of features for each user is limited, which complicates the training of user-specific models to capture corresponding behavior using ML-based algorithms.
+Method comparisons
+Here, we compare our proposed system with three types of state-of-the-art privacy-preserving algorithms: a) robust deep autoencoders, b) ML based algorithms (linear regression, logistic regression, decision trees, random forests, support vector machines, and multi-layer perceptrons), and c). asynchronous multi-task learning. Table 2 summarizes the features for each type of algorithm. The proposed method has the following benefits:
+Preserves privacy: As the construction of the multilayer network does not necessitate the use of feature details, the method naturally preserves user privacy at all times.
+Supports limited input features: The multilayer network in our proposed method can be constructed via only a few (encrypted) features; however, the more (encrypted) features, the more accurate the resultant network.
+Is unsupervised: Network embedding and community detection directly reveal subgroups with similar behavior in the multilayer network. Since in larger groups most nodes share similar behavior, it is reasonable to recommend those nodes in small groups as abnormally-behaving nodes.
+No need to train: By leveraging multilayer network analysis, we do not need first to train a model. In contrast, the proposed algorithm obtains the results cognitively; this saves time compared to ML-based algorithms.
+Analyzes different sources: As each layer in the multilayer network captures device behavior for the related timeslot group, different sources reveal the behavior of different devices of the specific user.
+Is noise-resistant: Multilayer network analysis enhances signal-noise separation during the analysis process; the proposed method inherits this advantage.
+Comparison with state-of-the-art algorithms.
+Related properties	Proposed method	Robust deep auto encoder	ML-based algorithms	Asynchronous MTL	 	1. Privacy-preserving	Embedded	Required	Embedded	Embedded	 	2. Volume of input features	Few	Large	Large	Large	 	3. Unsupervised	Yes	Yes	No	No	 	4. Training-free	Yes	No	No	No	 	5. Analyzes different sources	Yes	No	No	Yes	 	6. Noise-resistance	Not Effected	High	Not Effected	High
+Notes: ML = machine learning, MTL = multi-task learning
+Abnormal device detection
+We expect the proposed system to prove especially useful in scenarios where user logs reveal abnormal user behavior, for instance when the behavior of the current device is completely different from the behavior of the other devices.
+Since there is no ground truth per user, we inject synthetic suspicious device logs into normal logs for a user, construct the multilayer network based on these logs, and use precision rate, recall rate, and F1-score to evaluate the performance of the system. Here, for synthetic abnormal devices, the logged features such as encrypted search keyword and scrambled IP are totally different from other devices on the current timestamp; that is, the injected abnormal devices are isolated nodes in a layer.
+After randomly injecting synthetic abnormal device logs into normal logs for 1000 users, Table 3 shows the average precision rate, recall rate, and F1-score for the system in scenarios where one to three abnormal devices are injected, respectively.
+Abnormal device detection.
+Injected devices	Precision	Recall	F1-score	 	1	0.901	1.0	0.934	 	2	0.896	1.0	0.931	 	3	0.913	1.0	0.942
+Notes: The high precision rate demonstrates the proposed system’s high accuracy in distinguishing injected abnormal devices from other normal devices. The consistent, perfect recall rate shows that the system captures all injected abnormal devices.
+System efficiency evaluation
+Note that the proposed system is designed to maintain account security for a specific user, without violating user privacy. From the system operator’s point of view, this is equivalent to establishing a privacy-preserving system for each user. However, since each account is independent, it is easy for operators to use a distributed and parallel approach to speed up the setup of the proposed system.
+Here, we give a detailed description on time complexity analysis for all algorithms.
+The time complexity for constructing the proposed multilayer network for a user using Alg. 1 is O(T), where T is the total number of timestamps for the user.
+The time complexity of Alg. 2 is , where Dt is the total number of devices in the current timeslot group t.
+Secondly, the time complexity of Alg. 3 is O(n log n), where n is the number of nodes in the multilayer network corresponding to the user.
+The time complexity of Alg. 4 is the linear O(n), and that of Alg. 5 is the linear O(Com + Cluster + n), where Com and Cluster represent the number of communities and clusters respectively.
+In addition, we also evaluate the efficiency for the proposed system based on the OneID dataset. Table 4 shows the consuming times for multilayer network construction and recommendation, respectively.
+System efficiency.
+Min T(ms)	Avg T (ms)	Max T (ms)	 	Step 1 Construction	0.19	5.85	17.51	 	Step 2 Recommendation	0.61	2.23	4.45
+Notes: The overall time to system construction and recommendation steps is around 10ms; from the system operator’s point of view, this indicates the proposed system is fast enough for large-scale deployment.
+Visualization system
+Fig 5 shows the user interface for the proposed system. Here, we use the OneID dataset to introduce the system. By randomly selecting a user from the database, the Overview subsystem quickly builds the topology of all the devices associated with the user. Then the Individual subsystem quickly constructs a multilayer network composed of these devices, and based on the above algorithm, the subsystem automatically calculates the current user’s user security score, recommends the user’s abnormal device(s), and supplies the reason for its judgment.
+Here, we randomly choose one account (Abnormal_2) as an example to help readers understand how our system works: From the Overview subsystem, this visualization system shows the topological information for all devices related to the current user. Different colors here represent different users. In the individual subsystem, it automatically marks Device 22327 as abnormal node in the multilayer network. Below the multilayer network diagram, the system extracts the user statistics (with 4 devices and 33 time steps) related to the current node (Abnormal_2), after which the group information shows nodes with like scores (clustered into 16 groups), where Device 22327 is located in the first group with the smallest score (≃ 0). From the Overview subsystem, it is difficult to distinguish that these are abnormal devices. From the Individual subsystem, however, we scroll the multilayer network view horizontally to see why this device is abnormal. Here, we attach the re-scaled longer time window (up to 9 layers) upon the individual subsystem diagram, revealing that 22327 is not a major device for these timestamps. Hence, our system easily reasons that 22327 is an abnormal device for these timestamps, as users primarily use other devices at this time.
+User case study
+To further verify the ease of use of the proposed visualization system, we designed a user questionnaire to evaluate our system from the perspective of performance, accuracy, and reasoning precision. We gathered 127 samples from the “Wenjuanxing” crowd-source system (https://www.wjx.cn/) and 218 samples from “Amazon Mechanical Turk” (https://requester.mturk.com/).
+First, Table 5 provides details on the questionnaire. Here, we use Cronbach’s α coefficient to evaluate the reliability of our questionnaire. In general, Cronbach’s α coefficient is 0.832, larger than the minimum requirement (0.7), which gives us confidence that the designed questionnaire is reliable. Shown in Fig 6 is the average score for each question, where the horizontal axis represents the score from 0 to 1 and the vertical axis represents the nine questions. Overall, the result statistics show that almost all feedbacks have achieved top 15% satisfaction. Below we give a detailed analysis on each results:
+Overall system (Q1, Q2): The average score of the overall system is about 0.8, indicating that the proposed visualization system performs well in terms of ease of use and system performance;
+Overview subsystem (Q3, Q4): The overall score is greater than 0.9, demonstrating that the subsystem displays information about all devices associated with the current user;
+Individual subsystem (Q5–Q9): Other than question Q7, all scores indicate that the “Multilayer Network Construction,” “Devices Score Groups,” and “Analysis Results Reasoning” modules recommend the anomaly for the current user. For Q7, we believe this is due to insufficient domain knowledge in multilayer network analysis. In the future, we will improve the visualization method to better reflect abnormal behavior so as to enhance the overall system.
+Statistic results for user case study.
+System efficiency.
+No.	Question	Score	 	Q1	The overall response speed of the system	1–5*	 	Q2	The user-friendliness of the system	1–5*	 	Q3	Does “Overview system” show all the device information for the current user?	Yes/no**	 	Q4	Does “Overview system” show the topological behavior among all related devices?	Yes/no**	 	Q5	Does “Individual system” represent the device behavior within a certain timeslot group?	Yes/no**	 	Q6	Does “Individual system” capture the topological relationship within a certain timeslot group?	Yes/no**	 	Q7	Is it possible to clearly identify abnormal nodes in “Individual system”?	Yes/no**	 	Q8	Does “User security score” represent the security status for the related user?	Yes/no**	 	Q9	Does “Suspicious activity reports” identify abnormal devices convincingly enough?	1–5*
+Notes: Cronbach’s α coefficient is 0.837.
+*: 1–5 indicates users choose a score from 1 to 5, where 1 is the worst and 5 the best.
+**: For Yes/no questions, we use a score of 1 for yes and 0 for no when calculating the average score for related questions.
+Conclusion
+In this paper, we propose a privacy-preserving recommendation system under a multilayer network framework; the system automatically recommends abnormal user behavior without compromising the privacy of the corresponding user. In our system, the graph-based construction module and analysis module are what make recommendations work in practice: The former embeds user behavior across time as the topological features of a multilayer network, and the latter incorporates the analysis results from a pure topology-based method and the state-of-the-art multilayer network embedding method, and detects and recommends user abnormal behavior within the multilayer network, without pre-training a model in advance. Our experiments show that the system is accurate and efficient, with the F1-score greater than 0.93, and the overall system response time less than 22ms. In addition, from the system operator’s point of view, we find that our system is efficient enough to be deployed for each user in an online service. To prove this, we also conduct an experiment deploying the system for each user in the OneID dataset, which includes more than 40 thousand nodes and 43 million encrypted features. In addition, the user-case results from “Wenjuanxing” crowd-source system and “Amazon Mechanical Turk” show that our proposed practical system is highly friendly to user, with the overall feedbacks up to 85% satisfaction.
+References
+Security and privacy challenges in mobile cloud computing: Survey and way ahead
+A survey of data mining and machine learning methods for cyber security intrusion detection
+Ohno-Machado L, Wang S, Wang X, Iranmehr A, Jiang X. Privacy, Security, and Machine Learning for Mobile Health Applications; 2017.
+Bost R, Popa RA, Tu S, Goldwasser S. Machine Learning Classification over Encrypted Data. In: NDSS; 2015.
+Anderson B, McGrew D. Machine learning for encrypted malware traffic classification: accounting for noisy labels and non-stationarity. In: Proceedings of the 23rd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining. New York, NY, USA: ACM; 2017. p. 1723–1732.
+Hitaj B, Ateniese G, Perez-Cruz F. Deep Models Under the GAN: Information Leakage from Collaborative Deep Learning. arXiv preprint arXiv:170207464. 2017.
+Xie L, Baytas IM, Lin K, Zhou J. Privacy-Preserving Distributed Multi-Task Learning with Asynchronous Updates. In: Proceedings of the 23rd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining. ACM; 2017. p. 1195–1204.
+The structure and dynamics of multilayer networks
+Mathematical formulation of multilayer networks
+A survey on unsupervised outlier detection in high-dimensional numerical data
+Local outlier detection reconsidered: a generalized view on locality with applications to spatial, video, and network outlier detection
+Graph based anomaly detection and description: a survey
+Research on denoising sparse autoencoder
+Rifai S, Vincent P, Muller X, Glorot X, Bengio Y. Contractive auto-encoders: Explicit invariance during feature extraction. In: Proceedings of the 28th international conference on machine learning (ICML-11); 2011. p. 833–840.
+Qi Y, Wang Y, Zheng X, Wu Z. Robust feature learning by stacked autoencoder with maximum correntropy criterion. In: Acoustics, Speech and Signal Processing (ICASSP), 2014 IEEE International Conference on. IEEE; 2014. p. 6716–6720.
+Zhou C, Paffenroth RC. Anomaly Detection with Robust Deep Autoencoders. In: Proceedings of the 23rd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining. New York, NY, USA: ACM; 2017. p. 665–674.
+Wang Q, Guo W, Zhang K, Ororbia II AG, Xing X, Liu X, et al. Adversary Resistant Deep Neural Networks with an Application to Malware Detection. In: Proceedings of the 23rd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining. New York, NY, USA: ACM; 2017. p. 1145–1153.
+Song C, Ristenpart T, Shmatikov V. Machine Learning Models that Remember Too Much. arXiv preprint arXiv:170907886. 2017.
+Hacking smart machines with smarter ones: How to extract meaningful data from machine learning classifiers
+Fredrikson M, Jha S, Ristenpart T. Model inversion attacks that exploit confidence information and basic countermeasures. In: Proceedings of the 22nd ACM SIGSAC Conference on Computer and Communications Security. New York, NY, USA: ACM; 2015. p. 1322–1333.
+Fredrikson M, Lantz E, Jha S, Lin S, Page D, Ristenpart T. Privacy in pharmacogenetics: an end-to-end case study of personalized warfarin dosing. In: Proceedings of the 23rd USENIX conference on Security Symposium. USENIX Association; 2014. p. 17–32.
+Shokri R, Shmatikov V. Privacy-preserving deep learning. In: Proceedings of the 22nd ACM SIGSAC conference on computer and communications security. ACM; 2015. p. 1310–1321.
+Gupta SK, Rana S, Venkatesh S. Differentially private multi-task learning. In: Pacific-Asia Workshop on Intelligence and Security Informatics. Springer. Berlin, Germany: Springer; 2016. p. 101–113.
+Comparison of communities detection algorithms for multiplex
+Zhu G, Li K. A unified model for community detection of multiplex networks. In: International Conference on Web Information Systems Engineering. Springer. Berlin, Germany: Springer; 2014. p. 31–46.
+Community detection in multiplex networks: A seed-centric approach
+Community structure in time-dependent, multiscale, and multiplex networks
+Hu H, van Gennip Y, Hunter B, Bertozzi AL, Porter MA. Multislice modularity optimization in community detection and image segmentation. In: Data Mining Workshops (ICDMW), 2012 IEEE 12th International Conference on. IEEE. IEEE; 2012. p. 934–936.
+Amelio A, Tagarelli A. Revisiting Resolution and Inter-Layer Coupling Factors in Modularity for Multilayer Networks. arXiv preprint arXiv:170907253. 2017.
+Perozzi B, Al-Rfou R, Skiena S. Deepwalk: Online learning of social representations. In: Proceedings of the 20th ACM SIGKDD international conference on Knowledge discovery and data mining. New York, NY, USA: ACM; 2014. p. 701–710.
+Tang J, Qu M, Wang M, Zhang M, Yan J, Mei Q. Line: Large-scale information network embedding. In: Proceedings of the 24th International Conference on World Wide Web. ACM; 2015. p. 1067–1077.
+Dundar M, Kou Q, Zhang B, He Y, Rajwa B. Simplicity of kmeans versus deepness of deep learning: A case of unsupervised feature learning with limited data. In: Machine Learning and Applications (ICMLA), 2015 IEEE 14th International Conference on. IEEE; 2015. p. 883–888.
+Grover A, Leskovec J. node2vec: Scalable feature learning for networks. In: Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining. New York, NY, USA: ACM; 2016. p. 855–864.
+Zhang B, Choudhury S, Hasan MA, Ning X, Agarwal K, Purohit S, et al. Trust from the past: Bayesian Personalized Ranking based Link Prediction in Knowledge Graphs. In: SDM Workshop on Mining Networks and Graphs (MNG 2016); 2016.
+Zhang B, Hasan MA. Name Disambiguation in Anonymized Graphs using Network Embedding. In: The 26th ACM International Conference on Information and Knowledge Management (CIKM 2017); 2017.
+Chen S, Niu S, Akoglu L, Kovačević J, Faloutsos C. Fast, Warped Graph Embedding: Unifying Framework and One-Click Algorithm. arXiv preprint arXiv:170205764. 2017.
+Goyal P, Ferrara E. Graph Embedding Techniques, Applications, and Performance: A Survey. arXiv preprint arXiv:170502801. 2017.
+Liu W, Yeung S, Chen PY, Suzumura T, Chen L. Principled Multilayer Network Embedding. arXiv preprint arXiv:170903551. 2017.
+Community detection in temporal multilayer networks, with an application to correlation networks
+Resolution limit in community detection
+10.1371/journal.pone.0224684.r001
+Decision Letter 0
+Debiao
+He
+This is an open access article distributed under the terms of the Creative Commons Attribution License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
+4 Sep 2019
+PONE-D-19-18509
+Privacy-Preserving Recommendation of User Abnormal Behavior Under Multilayer Network
+PLOS ONE
+Dear Dr. song,
+Thank you for submitting your manuscript to PLOS ONE. After careful consideration, we feel that it has merit but does not fully meet PLOS ONE’s publication criteria as it currently stands. Therefore, we invite you to submit a revised version of the manuscript that addresses the points raised during the review process.
+We would appreciate receiving your revised manuscript by Oct 19 2019 11:59PM. When you are ready to submit your revision, log on to https://www.editorialmanager.com/pone/ and select the 'Submissions Needing Revision' folder to locate your manuscript file.
+If you would like to make changes to your financial disclosure, please include your updated statement in your cover letter.
+To enhance the reproducibility of your results, we recommend that if applicable you deposit your laboratory protocols in protocols.io, where a protocol can be assigned its own identifier (DOI) such that it can be cited independently in the future. For instructions see: http://journals.plos.org/plosone/s/submission-guidelines#loc-laboratory-protocols
+Please include the following items when submitting your revised manuscript:
+A rebuttal letter that responds to each point raised by the academic editor and reviewer(s). This letter should be uploaded as separate file and labeled 'Response to Reviewers'.
+A marked-up copy of your manuscript that highlights changes made to the original version. This file should be uploaded as separate file and labeled 'Revised Manuscript with Track Changes'.
+An unmarked version of your revised paper without tracked changes. This file should be uploaded as separate file and labeled 'Manuscript'.
+Please note while forming your response, if your article is accepted, you may have the opportunity to make the peer review history publicly available. The record will include editor decision letters (with reviews) and your responses to reviewer comments. If eligible, we will contact you to opt in or out.
+We look forward to receiving your revised manuscript.
+Kind regards,
+He Debiao
+Academic Editor
+PLOS ONE
+Journal Requirements:
+When submitting your revision, we need you to address these additional requirements.
+1. Please ensure that your manuscript meets PLOS ONE's style requirements, including those for file naming. The PLOS ONE style templates can be found at http://www.journals.plos.org/plosone/s/file?id=wjVg/PLOSOne_formatting_sample_main_body.pdf and http://www.journals.plos.org/plosone/s/file?id=ba62/PLOSOne_formatting_sample_title_authors_affiliations.pdf
+2. Thank you for stating the following in the Competing Interests section:
+'The authors have declared that no competing interests exist'
+We note that one or more of the authors are employed by a commercial company: JD Urban Computing Business Unit.
+Please provide an amended Funding Statement declaring this commercial affiliation, as well as a statement regarding the Role of Funders in your study. If the funding organization did not play a role in the study design, data collection and analysis, decision to publish, or preparation of the manuscript and only provided financial support in the form of authors' salaries and/or research materials, please review your statements relating to the author contributions, and ensure you have specifically and accurately indicated the role(s) that these authors had in your study. You can update author roles in the Author Contributions section of the online submission form.
+Please also include the following statement within your amended Funding Statement.
+“The funder provided support in the form of salaries for authors [insert relevant initials], but did not have any additional role in the study design, data collection and analysis, decision to publish, or preparation of the manuscript. The specific roles of these authors are articulated in the ‘author contributions’ section.”
+If your commercial affiliation did play a role in your study, please state and explain this role within your updated Funding Statement.
+2. Please also provide an updated Competing Interests Statement declaring this commercial affiliation along with any other relevant declarations relating to employment, consultancy, patents, products in development, or marketed products, etc. 
+Within your Competing Interests Statement, please confirm that this commercial affiliation does not alter your adherence to all PLOS ONE policies on sharing data and materials by including the following statement: "This does not alter our adherence to  PLOS ONE policies on sharing data and materials.” (as detailed online in our guide for authors http://journals.plos.org/plosone/s/competing-interests) . If this adherence statement is not accurate and  there are restrictions on sharing of data and/or materials, please state these. Please note that we cannot proceed with consideration of your article until this information has been declared.
+Please include both an updated Funding Statement and Competing Interests Statement in your cover letter. We will change the online submission form on your behalf.
+Please know it is PLOS ONE policy for corresponding authors to declare, on behalf of all authors, all potential competing interests for the purposes of transparency. PLOS defines a competing interest as anything that interferes with, or could reasonably be perceived as interfering with, the full and objective presentation, peer review, editorial decision-making, or publication of research or non-research articles submitted to one of the journals. Competing interests can be financial or non-financial, professional, or personal. Competing interests can arise in relationship to an organization or another person. Please follow this link to our website for more details on competing interests: http://journals.plos.org/plosone/s/competing-interests
+Additional Editor Comments (if provided):
+[Note: HTML markup is below. Please do not edit.]
+Reviewers' comments:
+Reviewer's Responses to Questions
+Comments to the Author
+1. Is the manuscript technically sound, and do the data support the conclusions?
+The manuscript must describe a technically sound piece of scientific research with data that supports the conclusions. Experiments must have been conducted rigorously, with appropriate controls, replication, and sample sizes. The conclusions must be drawn appropriately based on the data presented.
+Reviewer #1: Yes
+Reviewer #2: Yes
+**********
+2. Has the statistical analysis been performed appropriately and rigorously?
+Reviewer #1: Yes
+Reviewer #2: Yes
+**********
+3. Have the authors made all data underlying the findings in their manuscript fully available?
+The PLOS Data policy requires authors to make all data underlying the findings described in their manuscript fully available without restriction, with rare exception (please refer to the Data Availability Statement in the manuscript PDF file). The data should be provided as part of the manuscript or its supporting information, or deposited to a public repository. For example, in addition to summary statistics, the data points behind means, medians and variance measures should be available. If there are restrictions on publicly sharing data—e.g. participant privacy or use of data from a third party—those must be specified.
+Reviewer #1: Yes
+Reviewer #2: Yes
+**********
+4. Is the manuscript presented in an intelligible fashion and written in standard English?
+PLOS ONE does not copyedit accepted manuscripts, so the language in submitted articles must be clear, correct, and unambiguous. Any typographical or grammatical errors should be corrected at revision, so please note any specific errors here.
+Reviewer #1: Yes
+Reviewer #2: Yes
+**********
+5. Review Comments to the Author
+Please use the space provided to explain your answers to the questions above. You may also include additional comments for the author, including concerns about dual publication, research ethics, or publication ethics. (Please upload your review as an attachment if it exceeds 20,000 characters)
+Reviewer #1: I am particularly satisfied with content and structure of this article. It suggest that the author has taken enough time to prepare the manuscript. The few observations from me is highlighted in the article.
+Reviewer #2: The manuscript presents important information and deserves to be published in Plos One. Before publication, I suggest the following modifications:
+Page 1, line 6-7
+Change “machine learning algorithms” for “machine learning (ML) algorithms”
+Page 1, line 7
+Change “SVM” for “Support Vector Machine (SVM)”
+Page 1, line 9
+Change “machine learning algorithms” for “ML algorithms”
+Page 1, line 13
+Change “IP adresses” for “Internet Protocol (IP) addresses”
+Page 1, line 15
+Change “machine learning models” for “ML models”
+Page 2, line 18
+Change “machine learning methods” for “ML methods”
+Page 2, line 27
+Change “machine learning algorithms” for “ML algorithms”
+Page 2, line 30
+“…over time1.”
+Confirm in the Plos One standards if footnotes can be used.
+Page 2, line 39
+Change “machine learning” for “ML”
+Page 2, line 55
+“The system is available at https://github.com/StoneSongLucky/Private Preserving Outlier Behavior Detection”
+The link is unavailable.
+Page 2, line 56-62
+Delete: “The remainder of the paper is organized as follows. In Section 2, we discuss recent work on user abnormal behavior recommendation. Section 3 describes the whole proposed model, and describes network construction (Section 3.3), network analysis (Section 3.4), outlier recommendation (Section 3.5) and a visualization practical system (Section 3.6). In Section 4, we present a thorough evaluation of the proposed privacy-preserving recommendation system. Finally, we conclude and describe future work in Section 5.”
+Page 3, line 65
+Change “machine learning” for “ML”
+Page 3, line 71
+Change “machine learning (ML) models” for “ML models” - The abbreviation should appear the first time the word is cited in the manuscript (as per the previous changes I am suggesting).
+Page 10, line 262
+Change “machine learning-based algorithms” for “ML-based algorithms”
+Page 10, line 266
+Change “machine learning-based algorithms” for “ML-based algorithms”
+Page 11, line 283
+Change “machine learning-based algorithms” for “ML-based algorithms”
+**********
+6. PLOS authors have the option to publish the peer review history of their article (what does this mean?). If published, this will include your full peer review and any attached files.
+If you choose “no”, your identity will remain anonymous but your review may still be made public.
+Do you want your identity to be public for this peer review? For information about this choice, including consent withdrawal, please see our Privacy Policy.
+Reviewer #1: Yes: MKA Abdulrahman
+Reviewer #2: No
+[NOTE: If reviewer comments were submitted as an attachment file, they will be attached to this email and accessible via the submission site. Please log into your account, locate the manuscript record, and check for the action link "View Attachments". If this link does not appear, there are no attachment files to be viewed.]
+While revising your submission, please upload your figure files to the Preflight Analysis and Conversion Engine (PACE) digital diagnostic tool, https://pacev2.apexcovantage.com/. PACE helps ensure that figures meet PLOS requirements. To use PACE, you must first register as a user. Registration is free. Then, login and navigate to the UPLOAD tab, where you will find detailed instructions on how to use the tool. If you encounter any issues or have any questions when using PACE, please email us at figures@plos.org. Please note that Supporting Information files do not need this step.
+10.1371/journal.pone.0224684.r002
+Author response to Decision Letter 0
+8 Oct 2019
+Response to Reviewers and Editors' Comments
+& List of Changes in the Revised Paper
+Title: Privacy-Preserving Recommendation of User Abnormal Behavior Under Multilayer Network
+Authors: Chengyun Song, Weiyi Liu, Zhining Liu, Xiaoyang Liu
+-------------------------------------------------------------------------------------------------------
+The authors thank the reviewers and editors for their comments and suggestions. We have revised the paper following the comments and suggestions. Following is our response and also the list of changes that we have made in the revised version. The changes, including newly added parts, are in red font in the revised manuscript.
+Review Comments to Author:
+Reviewer 1:
+1. Reconcile the 15% and 85% satisfaction mentioned in the conclusion
+Response:
+Sorry to bring some mistakes and ambiguous here. We meant to say that according to our proposed practical system is highly friendly to uses, as we use “85% satisfaction” to point out there are a large amount of users that do accept our proposed system, and only “15%” of users which are NOT satisfied. To eliminate the ambiguous, we use “up to 85% satisfaction” in the abstract and conclusion
+2. Citation missing
+Response:
+In the paper, we define a simple and way (the percentages of abnormal nodes) to evaluate the security scores in multilayer network. So, there is no citation here.
+3. From the decision box " If True". The flow chart did not say anything about 'if false". Marking the suspicious node is not enough but creating a library of suspicious nodes to be verify for subsequent logins
+Response:
+For “If false”, the program will ignore the current user. We have updated this figure in the revised paper. And if the system has found a “suspicious” node, it will raise an alert to alarm the user, as the final decision should be made by user himself.
+4. Give the scenario of medium level noise in this method
+Response:
+Here we use “medium” as the opposite of “High”. In fact, due to the fact that our proposed method (privacy-preserving) and the ML-based algorithms needs all the information to learn the user behavior, these methods have possibilities to absorb noises information as well. Hence, we have replaced term “medium” as “Not Effected”.
+5. Cite standard that support this assertion
+Response:
+We have added the cite paper to support the assertion in the revised version.
+6. Reconcile with abstract
+Response:
+Sorry to bring ambiguous here. We have used “up to 85% satisfaction” in the abstract which is same to the conclusion.
+Reviewer 2:
+1. Page 1, line 6-7
+Change “machine learning algorithms” for “machine learning (ML) algorithms”
+Response:
+I have added the abbreviation in the revision (Page 1 line 6-7).
+2. Page 1, line 7
+Change “SVM” for “Support Vector Machine (SVM)”
+Response:
+I have added the abbreviation of “SVM” in the revision (Page 1 line 7).
+3. Page 1, line 9
+Change “machine learning algorithms” for “ML algorithms”
+Response:
+I have used the abbreviation in the revision (Page 1 line 9).
+4. Page 1, line 13
+Change “IP adresses” for “Internet Protocol (IP) addresses”
+Response:
+I have given the full name of IP in the revision (Page 1 line 14).
+5. Page 1, line 15
+Change “machine learning models” for “ML models”
+Response:
+I have used the abbreviation of “ML” in the revision (Page 2 line 15).
+6. Page 2, line 18
+Change “machine learning methods” for “ML methods”
+Response:
+I have used the abbreviation of “ML” in the revision (Page 12 line 18).
+7. Page 2, line 27
+Change “machine learning algorithms” for “ML algorithms”
+Response:
+I have used the abbreviation of “ML” in the revision (Page 2 line 27).
+8. Page 2, line 30
+“…over time1.” Confirm in the Plos One standards if footnotes can be used.
+Response:
+We have not found the standards about the footnotes. However, this standard is used in other journals. So I do no changes and keep the original format in the revision (Page 2 line 30).
+9. Page 2, line 39
+Change “machine learning” for “ML”
+Response:
+I have used the abbreviation of “ML” in the revision (Page 2 line 39).
+10. Page 2, line 55
+“The system is available at https://github.com/StoneSongLucky/Private Preserving Outlier Behavior Detection” The link is unavailable.
+Response:
+The correct links are
+https://github.com/StoneSongLucky/Private_Preserving_Outlier_Behavior_Detection
+and
+https://github.com/Liu-WeiYi/Private_Preserving_Outlier_Behavior_Detection
+The link in the paper is right and available.
+11. Page 2, line 56-62
+Delete: “The remainder of the paper is organized as follows. In Section 2, we discuss recent work on user abnormal behavior recommendation. Section 3 describes the whole proposed model, and describes network construction (Section 3.3), network analysis (Section 3.4), outlier recommendation (Section 3.5) and a visualization practical system (Section 3.6). In Section 4, we present a thorough evaluation of the proposed privacy-preserving recommendation system. Finally, we conclude and describe future work in Section 5.”
+Response:
+I have deleted those contents in the revision.
+12. Page 3, line 65
+Change “machine learning” for “ML”
+Response:
+I have used the abbreviation of “ML” to replace ‘machine learning’’ in the revision (Page 2 line 57).
+13. Page 3, line 71
+Change “machine learning (ML) models” for “ML models” - The abbreviation should appear the first time the word is cited in the manuscript (as per the previous changes I am suggesting).
+Response:
+I have revised those mistakes in the revision (Page 3 line 64).
+14. Page 10, line 262
+Change “machine learning-based algorithms” for “ML-based algorithms”
+Response:
+I have used the abbreviation of “ML” in the revision (Page 10 line 254).
+15. Page 10, line 266
+Change “machine learning-based algorithms” for “ML-based algorithms”
+Response:
+I have used the abbreviation of “ML” in the revision (Page 10 line 257).
+16. Page 11, line 283
+Change “machine learning-based algorithms” for “ML-based algorithms”
+Response:
+I have used the abbreviation of “ML” in the revision (Page 11 line 274).
+10.1371/journal.pone.0224684.r003
+Decision Letter 1
+Debiao
+He
+This is an open access article distributed under the terms of the Creative Commons Attribution License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
+21 Oct 2019
+Privacy-Preserving Recommendation of User Abnormal Behavior Under Multilayer Network
+PONE-D-19-18509R1
+Dear Dr. liu,
+We are pleased to inform you that your manuscript has been judged scientifically suitable for publication and will be formally accepted for publication once it complies with all outstanding technical requirements.
+Within one week, you will receive an e-mail containing information on the amendments required prior to publication. When all required modifications have been addressed, you will receive a formal acceptance letter and your manuscript will proceed to our production department and be scheduled for publication.
+Shortly after the formal acceptance letter is sent, an invoice for payment will follow. To ensure an efficient production and billing process, please log into Editorial Manager at https://www.editorialmanager.com/pone/, click the "Update My Information" link at the top of the page, and update your user information. If you have any billing related questions, please contact our Author Billing department directly at authorbilling@plos.org.
+If your institution or institutions have a press office, please notify them about your upcoming paper to enable them to help maximize its impact. If they will be preparing press materials for this manuscript, you must inform our press team as soon as possible and no later than 48 hours after receiving the formal acceptance. Your manuscript will remain under strict press embargo until 2 pm Eastern Time on the date of publication. For more information, please contact onepress@plos.org.
+With kind regards,
+He Debiao
+Academic Editor
+PLOS ONE
+Additional Editor Comments (optional):
+Reviewers' comments:
+Reviewer's Responses to Questions
+Comments to the Author
+1. If the authors have adequately addressed your comments raised in a previous round of review and you feel that this manuscript is now acceptable for publication, you may indicate that here to bypass the “Comments to the Author” section, enter your conflict of interest statement in the “Confidential to Editor” section, and submit your "Accept" recommendation.
+Reviewer #1: All comments have been addressed
+Reviewer #2: All comments have been addressed
+**********
+2. Is the manuscript technically sound, and do the data support the conclusions?
+The manuscript must describe a technically sound piece of scientific research with data that supports the conclusions. Experiments must have been conducted rigorously, with appropriate controls, replication, and sample sizes. The conclusions must be drawn appropriately based on the data presented.
+Reviewer #1: Yes
+Reviewer #2: Yes
+**********
+3. Has the statistical analysis been performed appropriately and rigorously?
+Reviewer #1: I Don't Know
+Reviewer #2: Yes
+**********
+4. Have the authors made all data underlying the findings in their manuscript fully available?
+The PLOS Data policy requires authors to make all data underlying the findings described in their manuscript fully available without restriction, with rare exception (please refer to the Data Availability Statement in the manuscript PDF file). The data should be provided as part of the manuscript or its supporting information, or deposited to a public repository. For example, in addition to summary statistics, the data points behind means, medians and variance measures should be available. If there are restrictions on publicly sharing data—e.g. participant privacy or use of data from a third party—those must be specified.
+Reviewer #1: Yes
+Reviewer #2: Yes
+**********
+5. Is the manuscript presented in an intelligible fashion and written in standard English?
+PLOS ONE does not copyedit accepted manuscripts, so the language in submitted articles must be clear, correct, and unambiguous. Any typographical or grammatical errors should be corrected at revision, so please note any specific errors here.
+Reviewer #1: Yes
+Reviewer #2: Yes
+**********
+6. Review Comments to the Author
+Please use the space provided to explain your answers to the questions above. You may also include additional comments for the author, including concerns about dual publication, research ethics, or publication ethics. (Please upload your review as an attachment if it exceeds 20,000 characters)
+Reviewer #1: Better in the current form since all questions and comment has been addressed. Also, to the best of my understanding comply with Plos One policy. From basic research writing and reporting, the paper has improved significantly. Assessment on the technical aspect is left for other reviewers and the editorial board.
+Reviewer #2: After the modifications, consider the appropriate manuscript for publication in Plos One in its current form.
+**********
+7. PLOS authors have the option to publish the peer review history of their article (what does this mean?). If published, this will include your full peer review and any attached files.
+If you choose “no”, your identity will remain anonymous but your review may still be made public.
+Do you want your identity to be public for this peer review? For information about this choice, including consent withdrawal, please see our Privacy Policy.
+Reviewer #1: Yes: MKA Abdulrahman
+Reviewer #2: No
+10.1371/journal.pone.0224684.r004
+Acceptance letter
+Debiao
+He
+This is an open access article distributed under the terms of the Creative Commons Attribution License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
+13 Nov 2019
+PONE-D-19-18509R1
+Privacy-Preserving Recommendation of User Abnormal Behavior Under Multilayer Network
+Dear Dr. Liu:
+I am pleased to inform you that your manuscript has been deemed suitable for publication in PLOS ONE. Congratulations! Your manuscript is now with our production department.
+If your institution or institutions have a press office, please notify them about your upcoming paper at this point, to enable them to help maximize its impact. If they will be preparing press materials for this manuscript, please inform our press team within the next 48 hours. Your manuscript will remain under strict press embargo until 2 pm Eastern Time on the date of publication. For more information please contact onepress@plos.org.
+For any other questions or concerns, please email plosone@plos.org.
+Thank you for submitting your work to PLOS ONE.
+With kind regards,
+PLOS ONE Editorial Office Staff
+on behalf of
+Dr. He Debiao
+Academic Editor
+PLOS ONE

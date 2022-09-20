@@ -1,0 +1,284 @@
+Remote analysis of sputum smears for mycobacterium tuberculosis quantification using digital crowdsourcing
+Worldwide, TB is one of the top 10 causes of death and the leading cause from a single infectious agent. Although the development and roll out of Xpert MTB/RIF has recently become a major breakthrough in the field of TB diagnosis, smear microscopy remains the most widely used method for TB diagnosis, especially in low- and middle-income countries. This research tests the feasibility of a crowdsourced approach to tuberculosis image analysis. In particular, we investigated whether anonymous volunteers with no prior experience would be able to count acid-fast bacilli in digitized images of sputum smears by playing an online game. Following this approach 1790 people identified the acid-fast bacilli present in 60 digitized images, the best overall performance was obtained with a specific number of combined analysis from different players and the performance was evaluated with the F1 score, sensitivity and positive predictive value, reaching values of 0.933, 0.968 and 0.91, respectively.
+Introduction
+Tuberculosis (TB) is a leading cause of morbidity and mortality worldwide. Although the development of Xpert MTB/RIF has recently become a major breakthrough, smear microscopy remains the most widely used method for TB diagnosis, especially in low- and middle-income countries. Given its low sensitivity, the World Health Organization (WHO) recommends that three sputum specimens should be examined for each TB presumptive case. Furthermore, in clinical practice, 100 high-power fields need to be examined in order to classify a smear as negative. Acid fast bacilli (AFB) smear reading requires a skilled microscopist and considering the lab workload associated with smear reading, a microscopist can only examine an average of 20–25 smears/day. In addition, smear reading is subject to human error and prone to considerable interobserver variability. Novel approaches, such as automated image analysis through convolutional neural networks, have recently shown promising results performing microscopy tasks as diagnosis of malaria in thick blood smears, tuberculosis in sputum samples, and intestinal parasite eggs in stool samples.
+Detecting acid fast bacilli in sputum smear samples is a challenge that has been addressed before. In 2008, M.G. Costa et al. published a method based on global adaptive threshold applied to Red and Green color channels of conventional microscopy images, obtaining a sensitivity of 76.7%. In 2018, Kant et al. developed a system based on convolutional neural networks that achieved a recall of 83.8% and a precision of 67.6%. The same year, R.O. Panicker et al. proposed a method that performs detection of tuberculosis bacilli by image binarization and subsequent classification of detected regions using a convolutional neural network obtaining a precision of 78.4%, a recall of 97.1% and a F1 score of 86.8%. To the best of our knowledge, this is the first crowdsourced approach to detect acid fast bacilli in sputum smears samples.
+Crowdsourcing methodologies leveraging the contributions of citizen scientists connected via the Internet have shown utility to solve biomedical challenges involving “big data” analysis that cannot be entirely automated. The “gamification” of crowdsourced tasks untaps a resource for scientific research such as biomedical image analysis. In this context, we aimed to evaluate the feasibility of a crowdsourced approach to sputum smear microscopy analysis for the diagnosis of tuberculosis.
+Materials and methods
+The gaming platform
+TuberSpot (www.tuberspot.org) is an online game for mobile and PC launched on the 24th of March 2015. TuberSpot players score points by identifying correctly M. tuberculosis bacilli in digitized sputum slide fields of view (FOVs) with Ziehl-Neelsen stain (Fig 1). Gamers play with several fields images (FOVs) during each game. A backend server shares out randomly the different FOVs to the players in real time.
+Screenshot of a “known sample” of TuberSpot game.
+In this sample the number of AFB is known, 36 in this case, and the players have to click in the places where bacilli are believed to be. This kind of samples are used to train the players.
+Once the game starts, the player sees a FOV on the screen and, within a limited time, has to click in the places where bacilli are believed to be present. Once all bacilli are found, players pass to the next level. We have digitally introduced one synthetic bacillus (fake) in each of the negative FOVs, which cannot be distinguished from a normal one, ensuring that enough time is spent in the FOV even if originally there were no bacillus in it and allowing the introduction of negative FOV in the game. At the beginning of the game, there is a short tutorial showing how a bacillus looks like.
+Dataset
+The game database consists of 60 digitized FOVs from anonymous samples: 20 images of fields without any bacilli, 20 images with 1–10 bacilli and 20 images with 10–40 bacilli. Digitized smears were provided by the Centro de Investigação em Saúde de Manhiça (Mozambique) and Hospital Clínico San Carlos (Spain). The 60 images come from all types of sputum smear examination reports (negative, scanty, +1, +2, +3). Digitalization of the samples was made with a smartphone (Sony Xperia Z2) attached to the microscope eyepiece by an adapter (Celestron Universal Digiscoping Adapter). A gold standard for each FOV has been determined by three different expert microscopists, reporting the position and number of bacilli.
+Crowdsoucing scheme
+Collective detection is defined as the number of bacillus found in a single FOV based on the combination of the gameplays from different players over the same FOV. In order to exploit the redundant information produced by multiple independent players over the same FOV, an algorithm was implemented considering that there is a bacillus in a certain area of the FOV if enough individual players in a larger group have clicked (“voted”) in that area of the same FOV. Taking into account that players do not click exactly on the same pixel of the image we applied a clustering strategy. Each point was clustered with the closest neighboring point if the distance between the two points was shorter than the typical size of a bacillus.
+To classify a point in the FOV as a bacillus a given number of players must agree: this number is denominated as Quorum (Q). Group sizes (GS) from 1 to 30 gameplays and quorums, from 1 to the maximum number of gameplays, were tested to maximize the performance in the whole test dataset.
+The performance of the collective detection algorithm has been evaluated for each quorum (Q) and each size of players groups (GS) with respect to the gold standard measuring: the positive predictive value (precision)(1), the sensitivity (recall or true positive rate (TPR)) (2), the F1 score (3) and the specificity (true negative rate TNR) (4). Collective detections with a given Quorum and Group Size were considered true positives (tp) if the positive cluster distance to a gold standard detection is shorter than the typical size of a bacilli. Accordingly, collective detections with distance greater than the typical bacilli size with respect to a reference bacillus are considered as false positives (fp). All the bacilli that were not collectively detected were considered as false negatives (fn). To calculate the true negatives (tn) we measured the number of equivalent bacilli in the area of the field of view were no bacilli were identified by the experts nor by the collective detections. To this end the area of a bacillus and its immediate surroundings (bacillus area) is used to divide the area of the FOV free of bacilli and collective detections.
+Where:
+tp = Bacillus detected by at least Q out of GS.
+fp = Point, that is not a bacillus, voted by Q out of GS.
+fn = Bacillus that it is not “voted” by Q out of GS.
+tn = Number of bacillus equivalent area in a FOV were bacilli are not present and not voted by Q out of GS.
+Additionally Cohen’s Kappa was computed to assess the agreement between the collective assessment and the reference gold standard.
+In Fig 2 there is an example of a field of view in which there are 18 bacilli (red mask), green and red crosses are points where the 20 players clicked on during the gameplay. In the first image, with Q = 2, 2 people out of 20 had to agree clicking in the same area in order to consider that area as a bacillus, with that metric the result would be 18 true positives and 3 false positives. In the second image, with Q = 20, taking into account that group size is 20, all the players of the group had to click on one area to consider it as a bacillus, the result for that experiment is 9 true positives and 9 false positives.
+Examples of two different experiments performed on the same field of view, left quorum Q = 2, right quorum Q = 20.
+Red crosses are clicks that belong to a cluster that have less clicks than the quorum number evaluated in the experiment. Green crosses are clicks that belong to a cluster bigger than the quorum number evaluated. Red circles correspond to confirmed locations of bacilli. TP- true positive, FN- false negative, FP -false positive.
+Experimental setup
+The images for this experiment were uploaded to the TuberSpot online platform in April of 2017 and the analysis was performed in February of 2018. During that period, 1790 players analyzed the digitized FOVs reaching a total of 14749 individual FOVs-analysis. The players were not given a specific number of FOV to analyze as a task to complete, every FOV they analysed was considered independently of the number of images they played. The performance of the collective detection was evaluated for group sizes from 1 to 30 gameplays considering a gameplay as a FOV analyzed by a single player. We have analyzed 160 random combinations of gameplays for each group size and each one of the 60 images. Based on that analysis, we have identified the minimum number of players that provide the highest F1 score over all our test dataset. The collective detection based on the optimal size of the groups of players has been evaluated with a confusion matrix with three relevant classes for diagnostic purposes of the FOV: no AFB (or a fake), between 1 and 10 AFB and more than 10 AFB.
+Results and discussion
+The best overall performance was obtained for a mean F1 score of 0.933, a sensitivity of 0.968, a positive predictive value of 0.916, specificity of 0.998 and a kappa statistic of 0.927 for the combination of 29 gameplays and quorum 18 in comparison to expert microscopists. A very competitive result considering a smaller group size is achieved for group size 8 and quorum 5, for this combination the F1 score is 0.917, with a sensitivity of 0.963, a positive predictive value of 0.893, specificity of 0.998 and a kappa statistic of 0.905 (Fig 3). According to the guideline for sputum examination for tuberculosis by direct microscopy in low income countries proposed by the IUATLD, there are three different classifications regarding the AFB counts per FOV: no AFB, 1–10 AFB and >10 AFB. Based on that classification per FOV and the quantity of FOV per smear sample with a specific classification, the severity of the disease is determined. In order to test our methodology following this guideline, we classified the FOV analyzed for the combination of 8 gameplays with quorum of 5 (Table 1).
+Mean F1 score and collective detection performance.
+Left. Mean F1 score over the whole image dataset depending on the size of the group of players and quorum. Each combination of group size and quorum was tested 160 times through random selection of gameplays of each image. Right. Mean and standard deviation of overall F1 score corresponding to the best quorum for each group size.
+Confusion matrix of the reference number of M. tuberculosis per image (rows) vs number of M. tuberculosis found by players (columns).
+Results shown in this matrix were achieved for a collective detection made by groups of 8 people with a quorum of 5.160 random groups of 8 players for each one of the FOVs. Numbers in the confusion matrix represent the percentage of the gameplays analyzed that were classified as a negative FOV (with zero bacillus), as a FOV with a fake bacillus, as a FOV with 1 to 10 bacilli or as a FOV with more than 10 bacilli.
+Collective Detection Vs. Gold standard	Negative	1–10 AFB	AFB>10	 	Negative	Fakes	 	Negative (with fake)	0.03%	93.54%	6.43%	0%	 	1–10 AFB	0.03%	99.63%	0.34%	 	AFB>10	0%	16.31%	83.69%
+This analysis shows that it is possible to identify and count M. tuberculosis AFB in digitized sputum smears based on the data produced by a number of non-expert on-line volunteers playing a video game over the same FOVs. Results from the collective detection with high accuracy for a group size of 29 players and a quorum of 18 against expert microscopists as gold standard, and a very competitive result for a smaller number of gameplays, group size 8 and quorum 5. According to the TB reporting IUATLD guideline it is necessary to count the AFB present on many FOVs in order to report the grade of infection of the patient. Therefore, further experiments with our system should be done to evaluate the performance following the entire diagnostic protocol for which specificity and sensitivity should be reported. Broadly, this research has defined the design criteria for a real-time remote analysis system for performing routine M. tuberculosis quantification that could be applied in endemic settings, characterized by a lack of expert microscopists.
+Current trends and recommendations for TB diagnostics are shifting from microscopy confirmation towards molecular methods such as Xpert, Turenat etc… However, according to the latest Global Tuberculosis Report by WHO rapid molecular tests were only used in 33% of the total people newly diagnosed in 2020 due to lack of accessibility. In this context, the proposed concept could still have potential in those settings where AFB is the main diagnostic tool in place and could overcome some of the limitations associated with AFB reading (mainly single operator dependent reading, lack of training of readers in many settings and time consumption in already overburdened lab technologists). As limitations, our solution could not be useful for TB diagnosis in vulnerable groups such as people living with HIV and children given the low sensitivity of sputum smear tests in these groups.
+On the other hand, in remote high burden settings, mobile phone and SMS-based technologies are emergent enabling tools to increase the rate of case detection by improving the efficacy of specimen collection and reporting results of acid-fast bacilli (AFB) microscopy, or to improve reporting and management for rapid diagnostic testing of HIV and malaria. Such system could be operationalized obtaining images from a mobile microscope system and the distribution of images through the internet via the mobile network, provided that there is connectivity which might not be the case in remote and rural environments. Moreover, it would be necessary to include a step to identify color blindness, or develop alternative representations for wider accessibility, as the analysis could be altered if this disease is considered.
+This concept has been piloted in relevant operational conditions including the acquisition of the data through a mobile phone adapted to a conventional microscope, data being sent to the game through the mobile phone data connection and receiving the assessment from the online game of the uploaded FOV after a given time. The system was tested during a specific campaign taking place within a few days at Centro de Investigação em Saúde de Manhiça (CISM) in Mozambique showing an assessment turnaround per case of 15–30 min after the image was uploaded into the game, with around 100 simultaneous players.
+This technological set up has the potential to be converted into a remote diagnosis platform connecting volunteer players, microscopists and specifically trained remote digital workers (micro-workers) that could get an incentive for their assessment generating flexible labor posts in a similar scheme to Amazon Mechanical Turk. Players would be rated on their level of expertise and their performance within the game. The representative FOVs (negative FOVs, FOV with big number of bacilli and FOV with a medium number of bacilli) of crowdsourced samples FOVs assessed by less experienced players would be sent to expert microscopists for diagnosis confirmation integrating the results of the crowdsourcing system.
+Another possible way to exploit the diagnostic utility of this technology would be to prioritize reading for human experts based on the sample classification performed by the players. The samples in which the players identified the highest number of bacilli would be sent first to expert microscopists to obtain a confirmation as soon as possible using the crowdsourcing system report and the collective detections on the images to facilitate the process. Following, the cases with less detected bacilli, and specially the challenging cases with few or no identified bacilli, would be sent to experts to obtain an additional detailed reading and confirmation.
+For both scenarios, specific studies would be necessary to assess the speed with which digital workers and players respond as well as the stability of the network that is required to ensure that diagnosis would arrive rapidly to remote areas. Certification of the system and the workflows should follow these studies before they could be integrated in the real clinical settings.
+Furthermore, there is a relevant potential of incorporating this type of strategies as an evaluation of External Quality Assurance schemes, validating the trainee’s performance in a more friendly way for a certain period of time, increasing, accordingly to the complexity of the images, the length of the training and the digital game levels. Although fluorescence microscopy has better accuracy, in the settings where this technology would be useful this technique is not widely available.
+Comparing the results obtained through this crowdsourced approach to the ones obtained with deep learning techniques, we believe crowdsourcing methodologies can provide added value to traditional image-based diagnostics. Additionally, as recently published for helminthiasis samples, this type of systems can produce expert level labelled data that can be used to train artificial intelligence systems and contribute to the definition of new digital diagnostic methodologies that combine artificial intelligence systems and human intelligence.
+Lastly, this approach might also be very relevant for educational purposes and a powerful tool for advocacy, especially among young people. This has been proven during the past years, more than 5000 children and young people in Spain have participated in workshops with videogames for global health.
+References
+Challenges and Progress with Diagnosing Pulmonary Tuberculosis in Low- and Middle-Income Countries
+Diagnostics for pulmonary tuberculosis
+Quinn JA, Nakasi R, Mugagga PK, Byanyima P, Lubega W, & Andama A. Deep convolutional neural networks for microscopy-based point of care diagnostics. In Machine Learning for Healthcare Conference 2016, pp. 271–281.
+Costa MG, Costa Filho CF, Sena JF, Salem J, & de Lima MO. Automatic identification of mycobacterium tuberculosis with conventional light microscopy. In Engineering in Medicine and Biology Society, Aug 2008. EMBS 2008. 30th Annual International Conference of the IEEE; pp. 382–385.
+Towards automated tuberculosis detection using deep learning
+Automatic detection of tuberculosis bacilli from microscopic sputum smear images using deep learning methods
+The power of crowds
+Gamers join real-life fight against malaria and tuberculosis
+Crowdsourcing malaria parasite quantification: an online game for analyzing images of infected thick blood smears
+Use of an innovative, affordable, and open-source short message service–based tool to monitor malaria in remote areas of Uganda
+Novel laboratory diagnostic tests for tuberculosis and their potential role in an integrated and tiered laboratory network
+Mobile phone-based microscopy, sensing, and diagnostics
+3D-Printed Portable Robotic Mobile Microscope for Remote Diagnosis of Global Health Diseases
+Lin L, Bermejo-Peláez D, Capellán-Martín D, Cuadrado D, Rodríguez C, García L, et al. (2021). Combining collective and artificial intelligence for global health diseases diagnosis using crowdsourced annotated medical images. 43rd Annual International Conference of the IEEE Engineering in Medicine and Biology Society (EMBC), pp. 3345–3348.
+Disease staging and prognosis in smokers using deep learning in chest computed tomography.
+Acquaintance to artificial neural networks and use of artificial intelligence as a diagnostic tool for tuberculosis: a review
+10.1371/journal.pone.0268494.r001
+Decision Letter 0
+Quinn
+Frederick
+This is an open access article distributed under the terms of the Creative Commons Attribution License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
+24 Feb 2021
+PONE-D-21-00739
+Remote analysis of Sputum Smears for Mycobacterium Tuberculosis Quantification using Digital Crowdsourcing
+PLOS ONE
+Dear Dr. Delgado,
+Thank you for submitting your manuscript to PLOS ONE. After careful consideration, we feel that it has merit but does not fully meet PLOS ONE’s publication criteria as it currently stands. Therefore, we invite you to submit a revised version of the manuscript that addresses the points raised during the review process.
+Please submit your revised manuscript. If you will need significantly more time to complete your revisions, please reply to this message or contact the journal office at plosone@plos.org. When you're ready to submit your revision, log on to https://www.editorialmanager.com/pone/ and select the 'Submissions Needing Revision' folder to locate your manuscript file.
+Please include the following items when submitting your revised manuscript:
+A rebuttal letter that responds to each point raised by the academic editor and reviewer(s). You should upload this letter as a separate file labeled 'Response to Reviewers'.
+A marked-up copy of your manuscript that highlights changes made to the original version. You should upload this as a separate file labeled 'Revised Manuscript with Track Changes'.
+An unmarked version of your revised paper without tracked changes. You should upload this as a separate file labeled 'Manuscript'.
+If you would like to make changes to your financial disclosure, please include your updated statement in your cover letter. Guidelines for resubmitting your figure files are available below the reviewer comments at the end of this letter.
+If applicable, we recommend that you deposit your laboratory protocols in protocols.io to enhance the reproducibility of your results. Protocols.io assigns your protocol its own identifier (DOI) so that it can be cited independently in the future. For instructions see: http://journals.plos.org/plosone/s/submission-guidelines#loc-laboratory-protocols
+We look forward to receiving your revised manuscript.
+Kind regards,
+Frederick Quinn
+Academic Editor
+PLOS ONE
+Journal Requirements:
+When submitting your revision, we need you to address these additional requirements.
+1. Please ensure that your manuscript meets PLOS ONE's style requirements, including those for file naming. The PLOS ONE style templates can be found at
+https://journals.plos.org/plosone/s/file?id=wjVg/PLOSOne_formatting_sample_main_body.pdf and
+https://journals.plos.org/plosone/s/file?id=ba62/PLOSOne_formatting_sample_title_authors_affiliations.pdf
+2.In your Data Availability statement, you have not specified where the minimal data set underlying the results described in your manuscript can be found. PLOS defines a study's minimal data set as the underlying data used to reach the conclusions drawn in the manuscript and any additional data required to replicate the reported study findings in their entirety. All PLOS journals require that the minimal data set be made fully available. For more information about our data policy, please see http://journals.plos.org/plosone/s/data-availability.
+Upon re-submitting your revised manuscript, please upload your study’s minimal underlying data set as either Supporting Information files or to a stable, public repository and include the relevant URLs, DOIs, or accession numbers within your revised cover letter. For a list of acceptable repositories, please see http://journals.plos.org/plosone/s/data-availability#loc-recommended-repositories. Any potentially identifying patient information must be fully anonymized.
+Important: If there are ethical or legal restrictions to sharing your data publicly, please explain these restrictions in detail. Please see our guidelines for more information on what we consider unacceptable restrictions to publicly sharing data: http://journals.plos.org/plosone/s/data-availability#loc-unacceptable-data-access-restrictions. Note that it is not acceptable for the authors to be the sole named individuals responsible for ensuring data access.
+We will update your Data Availability statement to reflect the information you provide in your cover letter.
+3.Thank you for stating the following in the Acknowledgments Section of your manuscript:
+"This research was partially funded by the project H2020-MSCA-RISE-2018 INNOVA4TB (EU), CDTI NEOTEC
+SNEO-20171197 and TEC2015-66978-R (MINECO/FEDER UE) from the Ministry of Science, Innovation and
+Universities."
+We note that you have provided funding information that is not currently declared in your Funding Statement. However, funding information should not appear in the Acknowledgments section or other areas of your manuscript. We will only publish funding information present in the Funding Statement section of the online submission form.
+Please remove any funding-related text from the manuscript and let us know how you would like to update your Funding Statement. Currently, your Funding Statement reads as follows:
+ "The author(s) received no specific funding for this work."
+Please include your amended statements within your cover letter; we will change the online submission form on your behalf.
+4.Thank you for stating the following in the Competing Interests section:
+"The authors have declared that no competing interests exist."
+We note that one or more of the authors are employed by a commercial company:Spotlab, Madrid
+a) Please provide an amended Funding Statement declaring this commercial affiliation, as well as a statement regarding the Role of Funders in your study. If the funding organization did not play a role in the study design, data collection and analysis, decision to publish, or preparation of the manuscript and only provided financial support in the form of authors' salaries and/or research materials, please review your statements relating to the author contributions, and ensure you have specifically and accurately indicated the role(s) that these authors had in your study. You can update author roles in the Author Contributions section of the online submission form.
+Please also include the following statement within your amended Funding Statement.
+“The funder provided support in the form of salaries for authors [insert relevant initials], but did not have any additional role in the study design, data collection and analysis, decision to publish, or preparation of the manuscript. The specific roles of these authors are articulated in the ‘author contributions’ section.”
+If your commercial affiliation did play a role in your study, please state and explain this role within your updated Funding Statement.
+b) Please also provide an updated Competing Interests Statement declaring this commercial affiliation along with any other relevant declarations relating to employment, consultancy, patents, products in development, or marketed products, etc.  
+Within your Competing Interests Statement, please confirm that this commercial affiliation does not alter your adherence to all PLOS ONE policies on sharing data and materials by including the following statement: "This does not alter our adherence to  PLOS ONE policies on sharing data and materials.” (as detailed online in our guide for authors http://journals.plos.org/plosone/s/competing-interests) . If this adherence statement is not accurate and  there are restrictions on sharing of data and/or materials, please state these. Please note that we cannot proceed with consideration of your article until this information has been declared.
+Please include both an updated Funding Statement and Competing Interests Statement in your cover letter. We will change the online submission form on your behalf.
+Please know it is PLOS ONE policy for corresponding authors to declare, on behalf of all authors, all potential competing interests for the purposes of transparency. PLOS defines a competing interest as anything that interferes with, or could reasonably be perceived as interfering with, the full and objective presentation, peer review, editorial decision-making, or publication of research or non-research articles submitted to one of the journals. Competing interests can be financial or non-financial, professional, or personal. Competing interests can arise in relationship to an organization or another person. Please follow this link to our website for more details on competing interests: http://journals.plos.org/plosone/s/competing-interests
+[Note: HTML markup is below. Please do not edit.]
+Reviewers' comments:
+Reviewer's Responses to Questions
+Comments to the Author
+1. Is the manuscript technically sound, and do the data support the conclusions?
+The manuscript must describe a technically sound piece of scientific research with data that supports the conclusions. Experiments must have been conducted rigorously, with appropriate controls, replication, and sample sizes. The conclusions must be drawn appropriately based on the data presented.
+Reviewer #1: Yes
+Reviewer #2: Partly
+Reviewer #3: No
+**********
+2. Has the statistical analysis been performed appropriately and rigorously?
+Reviewer #1: I Don't Know
+Reviewer #2: Yes
+Reviewer #3: No
+**********
+3. Have the authors made all data underlying the findings in their manuscript fully available?
+The PLOS Data policy requires authors to make all data underlying the findings described in their manuscript fully available without restriction, with rare exception (please refer to the Data Availability Statement in the manuscript PDF file). The data should be provided as part of the manuscript or its supporting information, or deposited to a public repository. For example, in addition to summary statistics, the data points behind means, medians and variance measures should be available. If there are restrictions on publicly sharing data—e.g. participant privacy or use of data from a third party—those must be specified.
+Reviewer #1: Yes
+Reviewer #2: No
+Reviewer #3: Yes
+**********
+4. Is the manuscript presented in an intelligible fashion and written in standard English?
+PLOS ONE does not copyedit accepted manuscripts, so the language in submitted articles must be clear, correct, and unambiguous. Any typographical or grammatical errors should be corrected at revision, so please note any specific errors here.
+Reviewer #1: Yes
+Reviewer #2: Yes
+Reviewer #3: No
+**********
+5. Review Comments to the Author
+Please use the space provided to explain your answers to the questions above. You may also include additional comments for the author, including concerns about dual publication, research ethics, or publication ethics. (Please upload your review as an attachment if it exceeds 20,000 characters)
+Reviewer #1: Authors analyze the feasibility of a crowdsourced approach to tuberculosis image analysis that presents interesting results.
+Although the crowdsourced approach nor the application in health problems are not new, the specific application is interesting and the obtained results suggest a possible use in tuberculosis diagnosis.
+It is convenient to enhance the quality of the images.
+The used methodology should be more descriptive.
+Reviewer #2: Major comments:
+The manuscript " Remote analysis of Sputum Smears for Mycobacterium Tuberculosis Quantification using Digital Crowdsourcing" reports the feasibility of a crowdsourced approach to sputum smear microscopic analysis for the diagnosis of tuberculosis. The authors investigated whether volunteers (game players) would be able to count acid-fast bacilli in digitized images of sputum smears with an online game. Against expert microscopists as gold standard, the F1 score, sensitivity and positive predictive of volunteers reached to 0.933, 0.968 and 0.916, respectively. In conclusion, the authors expected that their system, in which acid-fast bacilli (AFB) microscopic images obtained by a mobile phone were distributed through the mobile network, could be an effective tool as a remote diagnosis platform or an educational tool. They also believed that crowdsourced methodologies employed in this study could produce practical data for other diagnostic methods and development of artificial intelligence systems.
+Technically, providing AFB smear images obtained by mobile phone to expert healthcare professionals in remote area could be a useful tool for high burden areas without adequate medical systems. It is also very important to show the diagnostic ability of non-professional volunteers could be comparable using a crowdsourced approach with well verified criteria. As authors mentioned, this approach could product constructive data for developing not only human intelligence but artificial intelligence systems.
+As for TB diagnosis, methods processing thousands of AFB smear samples would not be practical. Basically, it is hard to obtain appropriate sputum sample, especially from children, extrapulmonary tuberculosis and disseminated TB. The latter two are often observed people living with HIV. Children and people living with HIV are the most vulnerable population to TB. Therefore, the World Health Organization calls for the development of a rapid and non-sputum tests capable of detecting TB at the point-of-care (POC), because sputum smear test has low diagnostic sensitivity in children, extrapulmonary TB, and people living with HIV.
+Developing a system for resource-limited area, which is operated by a crowdsourced concept via mobile phone network, has various utilities not only for image diagnostic purposes but other fields. However, for reasons mentioned above, developing a system for AFB smear diagnosis would not efficiently contribute to the incremental diagnostic yield of TB.
+Minor points
+tp= Bacillus detected by at least Q out of SG players.
+fp = Point, that is not a bacillus, voted by Q out of SG players.
+fn= Bacillus that it is not “voted” by Q out of SG players.
+No explanation for abbreviation “SG”. What is SG stand for?
+Reviewer #3: Microscopy will continue to play a key role in diagnosis and and treatment monitoring of tuberculosis. Efforts to improve performance are lauded such as the work that is being presented here. However, they are several concerns.
+Major
+1. The authors have only reported precision ( F1 score), sensitivity and PPV. Use of F1 score is limited in that it does not take into account true negative ( specificity). It is advisable to use either Mathews correlation or Kappa statistic when assessing binary classifiers. The specificity should also be reported.
+I would interested to see these analysis before making any decision on this submission
+2.It is not immediately clear how crowdsourced tasks would be used in clear setting. Does it mean that reading of smears could in future be done through crowd sourced reading (gamification?)
+Minor
+1. The manuscript does not flow well . The first paragraph of results and discussion seems to seems to fit better under methodology
+2. There are no line numbers which makes it difficult to pint out exact areas/ sentences where comment is directed
+**********
+6. PLOS authors have the option to publish the peer review history of their article (what does this mean?). If published, this will include your full peer review and any attached files.
+If you choose “no”, your identity will remain anonymous but your review may still be made public.
+Do you want your identity to be public for this peer review? For information about this choice, including consent withdrawal, please see our Privacy Policy.
+Reviewer #1: No
+Reviewer #2: No
+Reviewer #3: No
+[NOTE: If reviewer comments were submitted as an attachment file, they will be attached to this email and accessible via the submission site. Please log into your account, locate the manuscript record, and check for the action link "View Attachments". If this link does not appear, there are no attachment files.]
+While revising your submission, please upload your figure files to the Preflight Analysis and Conversion Engine (PACE) digital diagnostic tool, https://pacev2.apexcovantage.com/. PACE helps ensure that figures meet PLOS requirements. To use PACE, you must first register as a user. Registration is free. Then, login and navigate to the UPLOAD tab, where you will find detailed instructions on how to use the tool. If you encounter any issues or have any questions when using PACE, please email PLOS at figures@plos.org. Please note that Supporting Information files do not need this step.
+10.1371/journal.pone.0268494.r002
+Author response to Decision Letter 0
+1 Apr 2022
+Response to the reviewers
+Reviewer #1: Authors analyze the feasibility of a crowdsourced approach to tuberculosis image analysis that presents interesting results.
+Although the crowdsourced approach nor the application in health problems are not new, the specific application is interesting and the obtained results suggest a possible use in tuberculosis diagnosis.
+Thank you for your comment, indeed this technology demonstrates that through visual search of people without specific knowledge it is possible to detect acid-fast bacilli in sputum samples. In addition, as described in the article, another application of this technology would be the generation of samples for training expert systems to analyse the images automatically (page 7, lines 236-238).
+R1.1 It is convenient to enhance the quality of the images.
+We appreciate your suggestion; we have revised the images, and we now append higher quality ones (original TIFF format) which allow for easier reading/interpretation.
+R1.1 The used methodology should be more descriptive.
+Thank you for pointing this out. We agree we should improve the description of part of the methods of our study. Therefore, we have restructured the methodology and we have extended and clarified some points (Materials and Methods section, pages 2-4). In addition, we have included a paragraph explaining how the clustering strategy was implemented (page 3, lines 99-102).
+Reviewer #2: Major comments:
+R2.1 The manuscript "Remote analysis of Sputum Smears for Mycobacterium Tuberculosis Quantification using Digital Crowdsourcing" reports the feasibility of a crowdsourced approach to sputum smear microscopic analysis for the diagnosis of tuberculosis. The authors investigated whether volunteers (game players) would be able to count acid-fast bacilli in digitized images of sputum smears with an online game. Against expert microscopists as gold standard, the F1 score, sensitivity and positive predictive of volunteers reached to 0.933, 0.968 and 0.916, respectively. In conclusion, the authors expected that their system, in which acid-fast bacilli (AFB) microscopic images obtained by a mobile phone were distributed through the mobile network, could be an effective tool as a remote diagnosis platform or an educational tool. They also believed that crowdsourced methodologies employed in this study could produce practical data for other diagnostic methods and development of artificial intelligence systems.
+Technically, providing AFB smear images obtained by mobile phone to expert healthcare professionals in remote area could be a useful tool for high burden areas without adequate medical systems. It is also very important to show the diagnostic ability of non-professional volunteers could be comparable using a crowdsourced approach with well verified criteria. As authors mentioned, this approach could product constructive data for developing not only human intelligence but artificial intelligence systems.
+Thank you for your comment; we appreciate the time invested in reviewing our work. As you point out, we believe that this technology could be useful to support the diagnosis of tuberculosis or other diseases in places where access to a quality health system is limited. In addition, bearing in mind that medical imaging for training systems based on artificial intelligence is often limited, it could also provide added value for the sector.
+We agree with the reviewer that to make the comparison of the non-expert volunteers using a crowdsource approach should be based on verified criteria. Following this quality principle, in this work three experts annotated the images used as gold standard (page 3 lines 86-87). Furthermore, the strategy applied for clustering was that the distance between clicks should be less than or equal to the size of a bacillus, to ensure that both players were pointing to the same object in the image. Taking into account the strategy employed, we believe that the system is robust and could be used for the use cases described.
+R2.2 As for TB diagnosis, methods processing thousands of AFB smear samples would not be practical. Basically, it is hard to obtain appropriate sputum sample, especially from children, extrapulmonary tuberculosis and disseminated TB. The latter two are often observed people living with HIV. Children and people living with HIV are the most vulnerable population to TB. Therefore, the World Health Organization calls for the development of a rapid and non-sputum tests capable of detecting TB at the point-of-care (POC), because sputum smear test has low diagnostic sensitivity in children, extrapulmonary TB, and people living with HIV. Developing a system for resource-limited area, which is operated by a crowdsourced concept via mobile phone network, has various utilities not only for image diagnostic purposes but other fields. However, for reasons mentioned above, developing a system for AFB smear diagnosis would not efficiently contribute to the incremental diagnostic yield of TB.
+Thank you for your suggestion. We agree that a potential implementation of this tool could be contentious and would be deemed by some as “unnecessary” given that TB laboratory confirmation is shifting to molecular methods (Xpert, LPAs, Truenat (MolBIO), etcetera) as compared to classical microbiological methods.
+We also agree that there is a need for better tools for HIV associated TB ad pediatric TB. However, this study does not go against the development of the much-needed non-sputum rapid tests. However, as of today, a majority of patients with presumptive TB receive a smear microscopy exam as frontline test and the use of rapid molecular tests remains far too limited. In 2020, a WHO-recommended rapid molecular test was used as the initial diagnostic test for only 1.9 million (33%) of the 5.8 million people newly diagnosed with TB (Global Tuberculosis Report, 2021). If this situation remains for the years to come (as acknowledged by reviewer 3), we believe our proposed concept could still have potential in some of the settings where AFB is the main diagnostic tool in place. It is indeed an innovative solution that can overcome some of the limitations associated with AFB reading (mainly single operator dependent reading, lack of training of readers in many settings and time consumption in already overburdened lab technologists) in those places where they still use it because there are not enough resources or capacity for doing molecular testing.
+We agree with the reviewer that our concept would not contribute to the incremental diagnostic yield of TB, although we believe it would potentially have an impact on health system effectiveness.
+We have modified the discussion limitations section to include the previous comments (page 5-6 lines 188-196) including the limitation of the utility of these tools for vulnerable groups such as people living with HIV and children.
+Minor points
+tp= Bacillus detected by at least Q out of SG players.
+tp = Point, that is not a bacillus, voted by Q out of SG players.
+fn= Bacillus that it is not “voted” by Q out of SG players.
+No explanation for abbreviation “SG”. What is SG stand for?
+We apologize for the confusion; GS stands for group size, as described in line 104 (page 3). We have corrected the error in the new version of the article.
+Reviewer #3:
+Microscopy will continue to play a key role in diagnosis and treatment monitoring of tuberculosis. Efforts to improve performance are lauded such as the work that is being presented here. However, they are several concerns.
+Major
+R3.1. The authors have only reported precision ( F1 score), sensitivity and PPV. Use of F1 score is limited in that it does not take into account true negative (specificity). It is advisable to use either Mathews correlation or Kappa statistic when assessing binary classifiers. The specificity should also be reported.
+I would interested to see these analysis before making any decision on this submission
+We are grateful for the suggestion to include specificity as a measure of the performance of this technology. We agree that it provides more evidence of adequate performance; therefore, we have included it in the new version of the article.
+The calculation of true positive bacilli detections, false positives, false negatives and true negatives based on the collective detection is now more clearly explained in the methods section analysis (pages 3 and 4 lines 107 to 124). Specificity and Kappa are included in the statistical analysis of performance of the collective detections.
+In the results section specificity and kappa are now reported (page 4 lines 153-157). Very good agreement and high specificity is shown for the selected Quorum (Q=18) and Size Group (SG=29) as well as for Quorum (Q=5) and Group Size (GS=8).
+We have also added a comment in the discussion emphasizing that the specificity and sensitivity for the entire diagnostic protocol following the IUATLD guideline should be further investigated and reported (page 5, line 184).
+R3.2.It is not immediately clear how crowdsourced tasks would be used in clear setting. Does it mean that reading of smears could in future be done through crowd sourced reading (gamification?)
+We are grateful for your comment and have therefore expanded the part of the discussion to include possible workflows of how this methodology could be used to support TB diagnosis (page 6 lines 213-229). In brief, we agree that it is still unclear on the implementation hurdles of gamification solutions in high TB burden low income country settings. However, this is slightly beyond the scope of this pilot study. However, we envisage an implementation study as the next step where we could measure (beyond diagnostic performance indicators), all process and feasibility aspects that could provide valuable information for a potentially much broader use.
+Minor
+1. The manuscript does not flow well. The first paragraph of results and discussion seems to fit better under methodology
+We agree with this comment and we have incorporated your suggestion revising the structure of the methodology and moving specifically the first paragraph of the results to the methodology as experimental setup.
+Additionally the paper has been revised for English correctness.
+2. There are no line numbers which makes it difficult to pint out exact areas/ sentences where comment is directed.
+We apologize for not having incorporated the line numbers to facilitate the revision in the original version, we have incorporated them in the new uploaded version.
+10.1371/journal.pone.0268494.r003
+Decision Letter 1
+Quinn
+Frederick
+This is an open access article distributed under the terms of the Creative Commons Attribution License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
+3 May 2022
+Remote analysis of Sputum Smears for Mycobacterium Tuberculosis Quantification using Digital Crowdsourcing
+PONE-D-21-00739R1
+Dear Dr. Ledesma-Carbayo,
+We’re pleased to inform you that your manuscript has been judged scientifically suitable for publication and will be formally accepted for publication once it meets all outstanding technical requirements.
+Within one week, you’ll receive an e-mail detailing the required amendments. When these have been addressed, you’ll receive a formal acceptance letter and your manuscript will be scheduled for publication.
+An invoice for payment will follow shortly after the formal acceptance. To ensure an efficient process, please log into Editorial Manager at http://www.editorialmanager.com/pone/, click the 'Update My Information' link at the top of the page, and double check that your user information is up-to-date. If you have any billing related questions, please contact our Author Billing department directly at authorbilling@plos.org.
+If your institution or institutions have a press office, please notify them about your upcoming paper to help maximize its impact. If they’ll be preparing press materials, please inform our press team as soon as possible -- no later than 48 hours after receiving the formal acceptance. Your manuscript will remain under strict press embargo until 2 pm Eastern Time on the date of publication. For more information, please contact onepress@plos.org.
+Kind regards,
+Frederick Quinn
+Academic Editor
+PLOS ONE
+Additional Editor Comments (optional):
+Reviewers' comments:
+Reviewer's Responses to Questions
+Comments to the Author
+1. If the authors have adequately addressed your comments raised in a previous round of review and you feel that this manuscript is now acceptable for publication, you may indicate that here to bypass the “Comments to the Author” section, enter your conflict of interest statement in the “Confidential to Editor” section, and submit your "Accept" recommendation.
+Reviewer #1: All comments have been addressed
+**********
+2. Is the manuscript technically sound, and do the data support the conclusions?
+The manuscript must describe a technically sound piece of scientific research with data that supports the conclusions. Experiments must have been conducted rigorously, with appropriate controls, replication, and sample sizes. The conclusions must be drawn appropriately based on the data presented.
+Reviewer #1: Yes
+**********
+3. Has the statistical analysis been performed appropriately and rigorously?
+Reviewer #1: N/A
+**********
+4. Have the authors made all data underlying the findings in their manuscript fully available?
+The PLOS Data policy requires authors to make all data underlying the findings described in their manuscript fully available without restriction, with rare exception (please refer to the Data Availability Statement in the manuscript PDF file). The data should be provided as part of the manuscript or its supporting information, or deposited to a public repository. For example, in addition to summary statistics, the data points behind means, medians and variance measures should be available. If there are restrictions on publicly sharing data—e.g. participant privacy or use of data from a third party—those must be specified.
+Reviewer #1: No
+**********
+5. Is the manuscript presented in an intelligible fashion and written in standard English?
+PLOS ONE does not copyedit accepted manuscripts, so the language in submitted articles must be clear, correct, and unambiguous. Any typographical or grammatical errors should be corrected at revision, so please note any specific errors here.
+Reviewer #1: Yes
+**********
+6. Review Comments to the Author
+Please use the space provided to explain your answers to the questions above. You may also include additional comments for the author, including concerns about dual publication, research ethics, or publication ethics. (Please upload your review as an attachment if it exceeds 20,000 characters)
+Reviewer #1: It seems to me that authors have fulfilled the reviewers' comments. The paper can be published in its current form.
+**********
+7. PLOS authors have the option to publish the peer review history of their article (what does this mean?). If published, this will include your full peer review and any attached files.
+If you choose “no”, your identity will remain anonymous but your review may still be made public.
+Do you want your identity to be public for this peer review? For information about this choice, including consent withdrawal, please see our Privacy Policy.
+Reviewer #1: No
+10.1371/journal.pone.0268494.r004
+Acceptance letter
+Quinn
+Frederick
+This is an open access article distributed under the terms of the Creative Commons Attribution License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
+12 May 2022
+PONE-D-21-00739R1
+Remote analysis of Sputum Smears for Mycobacterium Tuberculosis Quantification using Digital Crowdsourcing
+Dear Dr. Ledesma-Carbayo:
+I'm pleased to inform you that your manuscript has been deemed suitable for publication in PLOS ONE. Congratulations! Your manuscript is now with our production department.
+If your institution or institutions have a press office, please let them know about your upcoming paper now to help maximize its impact. If they'll be preparing press materials, please inform our press team within the next 48 hours. Your manuscript will remain under strict press embargo until 2 pm Eastern Time on the date of publication. For more information please contact onepress@plos.org.
+If we can help with anything else, please email us at plosone@plos.org.
+Thank you for submitting your work to PLOS ONE and supporting open access.
+Kind regards,
+PLOS ONE Editorial Office Staff
+on behalf of
+Dr. Frederick Quinn
+Academic Editor
+PLOS ONE
