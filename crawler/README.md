@@ -39,3 +39,11 @@ the word "Given" could not be detected since there is no space separating it at 
 ---
 ### 9-21-2022
 Solved the problem of last time by writing the code [**convert_xml2txt.R**](convert_xml2txt.R). That is, we can now convert xml files to clean text documents without structure nodes. For example [28058518.txt](PMCOAS+AMC_Medline_txt/28058518.txt).
+
+---
+### 9-28-2022
+Read the article []().
+
+---
+### 10-5-2022
+More about [the relation of tensor mode-d prodect and Kronecker product](https://math.stackexchange.com/questions/1956155/n-mode-product-and-kronecker-product-relation).
