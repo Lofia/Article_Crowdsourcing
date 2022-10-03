@@ -42,7 +42,7 @@ Solved the problem of last time by writing the code [**convert_xml2txt.R**](conv
 
 ---
 ### 9-28-2022
-Read the article []().
+Read the article [Tensors in Modern Statistical Learning](https://scholar.google.com/scholar_url?url=https://web.ics.purdue.edu/~sun244/Tensor_survey.pdf&hl=en&sa=X&ei=7mc7Y4nPGKLGsQKWx5S4BA&scisig=AAGBfm0mejFf1szdALN-5Bq548yYMIX4SQ&oi=scholarr).
 
 ---
 ### 10-5-2022
