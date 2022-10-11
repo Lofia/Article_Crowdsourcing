@@ -37,15 +37,5 @@
 ## crowdsourcing for contests (solving certain problems)
 - MR3918557 MR3926868 MR4027210
 ---
-# Todos
-1. Add the commentary to these articles (e.g., XYZ, XYZ2) as shown in the examples below.  Example 1: Due to lack of standards, the quality of crowdsourced data varies, as noted in the commentary by XYZ. Example 2: Recent applications can be found in XYZ2 on ..... 
+# On going link: 
 
-2. Check the references he suggested. Ziyu yao suggested to focus on DBs who have public APIs or reuse existing datasets. Some useful resources to consider:
-- arXiv’s open API: https://arxiv.org/help/bulk_data (w/ Kaggle dataset etc.)
-- **Some medical domain DB APIs: https://www.ncbi.nlm.nih.gov/pmc/tools/textmining/**
-- Microsoft Academic Graph: https://www.microsoft.com/en-us/research/project/open-academic-graph/ (A well-known project but not sure if it is helpful to you)
- 
-Also some papers which have collected similar datasets and you may check whether their tools are open-source:
-- https://blender.cs.illinois.edu/paper/COVIDKG.pdf (another dataset, failed)
-- **https://aclanthology.org/2021.acl-srw.30.pdf** (might be useful for converting .xml files)
-- https://arxiv.org/pdf/2102.00176.pdf (might be useful for converting .json files)
