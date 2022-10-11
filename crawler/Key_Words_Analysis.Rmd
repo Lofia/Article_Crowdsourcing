@@ -1,0 +1,53 @@
+---
+title: "Keywords Analysis"
+author: "Zixiang Xu"
+output:
+  html_document:
+    number_sections: no
+    theme: united
+    toc: yes
+    toc_float: yes
+  html_notebook:
+    theme: united
+    toc: no
+    toc_float: yes
+  word_document:
+    toc: no
+  pdf_document:
+    toc: no
+---
+
+```{=html}
+<style type="text/css">
+    #header {
+        text-align: center;
+    }
+</style>
+```
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+knitr::opts_knit$set(root.dir = 'C:/Users/Zixiang Xu/Desktop/GMU/JY Sun')
+```
+
+### 1.Read the dictionary
+```{r}
+d=read.csv("crowd2Xu/Dictionary Maker/output/Crowdsourcing Updated.csv")
+md=as.matrix(d[,2:dim(d)[2]])
+head(md[,c(88,1:7)],50)
+```
+
+### 2.Find the total occourance time
+```{r}
+s=colSums(md)
+t(t(s))
+```
+
+### 3.Barplot
+```{r fig.height=20, fig.width=10}
+par(las=2,mar=c(5,7,4,1)+.1)
+barplot((sort(s[-length(s)],decreasing=FALSE)),horiz=TRUE,main="Keywords frequencies")
+```
+
+### 4.Bogus?
+```{r fig.height=20, fig.width=10}
+```
