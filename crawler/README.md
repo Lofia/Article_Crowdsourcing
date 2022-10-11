@@ -52,3 +52,6 @@ More about [the relation of tensor mode-d prodect and Kronecker product](https:/
 Key idea: In the model of 
 $$\mathscr{Y} = \mathscr{X} \times_1 A^{(1)} \times_2 A^{(2)} \ldots \times_N A^{(N)} \iff Y_{(n)} = A^{(n)}X_{(n)}(A^{(N)}\otimes \ldots \otimes A^{(n+1)} \otimes A^{(n-1)} \otimes \ldots \otimes A^{(1)})^T$$
 the column-index of an element in the matricized tensor $\mathscr{X}_{(n)}$ is the same as the row-index of the corresponding Kronecker products $(A^{(N)}\otimes \ldots \otimes A^{(n+1)} \otimes A^{(n-1)} \otimes \ldots \otimes A^{(1)})^T$.
+
+### 10-12-2022
+Wrote R Markdown code to do simple analysis for generated dictionary: [View it here](Key_Words_Analysis.md).
