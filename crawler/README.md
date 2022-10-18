@@ -56,3 +56,7 @@ the column-index of an element in the matricized tensor $\mathscr{X}_{(n)}$ is t
 ---
 ### 10-12-2022
 Wrote R Markdown code to do simple analysis for generated dictionary: [View it here](Key_Words_Analysis.md).
+
+---
+### 10-19-2022
+Updated the analysis code: [View it here](Key_Words_Analysis.md).
