@@ -30,142 +30,158 @@ output:
 ### 1.Read the dictionary
 
 ```r
-d=read.csv("crowd2Xu/Dictionary Maker/output/Crowdsourcing Updated.csv")
+d=read.csv("crowd2Xu/Dictionary Maker/output/CrowdEpi.csv")
 md=as.matrix(d[,2:dim(d)[2]])
 head(md[,c(88,1:7)],20)
 ```
 
 ```
 ##       numWord validated survey worker natural patientslikeme quality text
-##  [1,]    7330         0     11      0       0              0       0    0
-##  [2,]    5006         0     50      0       0              0       0    0
-##  [3,]    2963         0      7      0       0              0       0    0
-##  [4,]    2675         1      0      0       0              0       0    0
-##  [5,]    5111         1      1      0       0              0       0    0
-##  [6,]    4361         0      0      0       1              0       0    0
-##  [7,]    7291         0      0      0       0              0       0    0
-##  [8,]    5959         0      1      0       0              0       0    0
-##  [9,]    8628         0      0      0       0              0       1    0
-## [10,]    5832         0      1      0       0              0       0    0
-## [11,]   11592         0      7      0       0              0       0    0
-## [12,]    5756         0      6      0       1              0       0    0
-## [13,]    3934         0      0      0       0              0       0    0
-## [14,]    5926         0     20      0       0              0       0    0
-## [15,]    6934         0      1      0       0              0       0    0
-## [16,]    4987         0     11      0       0              0       0    0
-## [17,]    5061         1     10      0       0              0       0    0
-## [18,]    8963         1      0      0       0              0       2    0
-## [19,]    3147         1      1      0       0              0       0    0
-## [20,]    2854         1      0      0       0              0       0    0
+##  [1,]    5006         0     50      0       0              0       0    0
+##  [2,]    2675         1      0      0       0              0       0    0
+##  [3,]    5756         0      6      0       1              0       0    0
+##  [4,]    3934         0      0      0       0              0       0    0
+##  [5,]    8963         1      0      0       0              0       2    0
+##  [6,]    3147         1      1      0       0              0       0    0
+##  [7,]    5553         5      5      0       0              0       0    0
+##  [8,]    5759         0      2      0       0              0       0    0
+##  [9,]    4776         1      0      0       0              0       0    0
+## [10,]    4926         5     21      0       0              0       0    0
+## [11,]    4382         2      5      0       0              0       0    0
+## [12,]    3828         0      8      0       0              0       0    0
+## [13,]    5076         0      1      0       0              0       0    0
+## [14,]    8125         0      1      0       0              0       1    2
+## [15,]    9638         2     10      0       0              0       0    3
+## [16,]    4640         0     21      0       0              0       0    0
+## [17,]    4496         1      5      0       0              0       0    0
+## [18,]    4018         0      0      0       0              0       0    0
+## [19,]   13258         0     23      0       0              0       0    0
+## [20,]    4766         1      0      0       0              0       0    0
+```
+
+```r
+d2=read.csv("crowd2Xu/Dictionary Maker/output/Bogus.csv")
+md2=as.matrix(d2[,2:dim(d2)[2]])
+head(md2[,c(88,1:7)],20)
+```
+
+```
+##       numWord validated survey worker natural patientslikeme quality text
+##  [1,]    2963         0      7      0       0              0       0    0
+##  [2,]    4361         0      0      0       1              0       0    0
+##  [3,]    8628         0      0      0       0              0       1    0
+##  [4,]   11592         0      7      0       0              0       0    0
+##  [5,]    6508         0      0      0       0              0       0    0
+##  [6,]    4909         1      3      0       0              0       0    0
+##  [7,]   14758         3      4      0       2              0       1    1
+##  [8,]    5075         0      3      0       0              0       0    0
+##  [9,]    4150         0      0      0       0              0       0    0
+## [10,]    3703         0      0      0       0              0       0    0
+## [11,]    3417         0      0      0       0              0       0    0
+## [12,]    6769         0      1      0       0              0       0    0
+## [13,]    7720         2      1      0       0              0       0    0
+## [14,]    4569         0      1      0       0              0       0    0
+## [15,]    4592         0      2      0       0              0       0    0
+## [16,]   13335         0      1      0       1              0       0    0
+## [17,]    2900         0     11      0       0              0       0    0
+## [18,]    6405         0      0      0       0              0       0    0
+## [19,]    8588         3      1      0       0              2       0    0
+## [20,]   16659        14      4      0       0              0       0    0
 ```
 
 ### 2.Find the total occourance time
 
 ```r
 s=colSums(md)
-t(t(s))
+s2=colSums(md2)
+show=cbind(t(t(s)),t(t(s2)))
+colnames(show)=c('CrowdEpi','Bogus')
+(WF=show[(show[,1]>0)&(show[,2]>0),])
 ```
 
 ```
-##                     [,1]
-## validated            414
-## survey              3038
-## worker                12
-## natural              131
-## patientslikeme         7
-## quality              210
-## text                  77
-## recruitment          681
-## health              9522
-## user                   7
-## patient                0
-## trained               42
-## user.1                26
-## symptom              330
-## crowd.sourcing       172
-## participant           21
-## validate             238
-## data                  87
-## performance         2790
-## microtask             36
-## crowd.sourced        498
-## non.expert            97
-## player                 2
-## crowd                 22
-## knowledge              2
-## diagnosis            746
-## players               12
-## self.reported        421
-## patient.report         0
-## citizens               4
-## individuals           30
-## patient.reported      40
-## crowdsourcing       6104
-## screen               380
-## self                   1
-## experience          1074
-## extracted              3
-## individual            39
-## dictionary            69
-## X23andme               6
-## disease             2651
-## respondents           59
-## posts                  5
-## posts.1                1
-## virus                447
-## people                24
-## self.report          215
-## extraction           454
-## extraction.1         454
-## posted                 3
-## online                42
-## posted.1               3
-## online.1             176
-## crowd.source           9
-## diseases             779
-## medical             3430
-## users                 23
-## users.1               36
-## participants         153
-## annotate             130
-## posting                0
-## posting.1              1
-## citizen              850
-## crowdsource           90
-## turk                  20
-## image                123
-## reliability          726
-## query                269
-## diagnose              59
-## validation           956
-## combine                0
-## flu                  138
-## annotated            313
-## experienced          354
-## extracts               0
-## amazon               412
-## crowdsourced        2039
-## workers               47
-## gold                 290
-## recruit              229
-## train                 25
-## extracting             0
-## post                   4
-## post.1                 3
-## turkers                9
-## extract              307
-## extract.1              0
-## numWord          3741120
+##                  CrowdEpi   Bogus
+## validated             310     116
+## survey               2396     737
+## worker                  7       5
+## natural               103      29
+## patientslikeme          1       6
+## quality               114     102
+## text                   55      22
+## recruitment           550     116
+## health               9036     339
+## user                    4       3
+## trained                21      23
+## user.1                 18      11
+## symptom               289      42
+## crowd.sourcing         53     119
+## participant            14       7
+## validate              123     116
+## data                   46      44
+## performance          1388    1498
+## microtask              15      29
+## crowd.sourced         291     212
+## non.expert             63      32
+## crowd                  18       4
+## diagnosis             695      50
+## players                 8       4
+## self.reported         331      87
+## citizens                1       3
+## individuals            19      13
+## patient.reported       34       4
+## crowdsourcing        4075    2008
+## screen                207     157
+## experience            739     362
+## individual             22      17
+## dictionary             49      20
+## X23andme                2       4
+## disease              2458     204
+## respondents            53       6
+## posts                   2       3
+## virus                 419      30
+## people                 13      10
+## self.report           154      59
+## extraction            302     160
+## extraction.1          302     160
+## online                 35       8
+## posted.1                2       1
+## online.1              155      24
+## diseases              721      61
+## medical              3015     403
+## users                  16       7
+## users.1                21      15
+## participants          125      33
+## annotate               54      78
+## citizen               481     373
+## crowdsource            63      30
+## turk                   15       5
+## image                  76      49
+## reliability           389     311
+## query                 134     154
+## diagnose               49      10
+## validation            668     322
+## flu                   130       8
+## annotated             171     151
+## experienced           242     119
+## amazon                281     135
+## crowdsourced         1255     778
+## workers                21      27
+## gold                  179     111
+## recruit               152      73
+## train                  12      16
+## post.1                  1       1
+## turkers                 8       1
+## extract               134     178
+## numWord           2369845 1417653
 ```
 
-### 3.Barplot
+### 3. Taking log odds ratio and draw the barplot
+$$\text{Log Odds Ratio }=\log_2(\frac{\frac{\text{Number of occourance per term for CrowdEpi}}{\text{Number of total words for CrowdEpi}}}{\frac{\text{Number of occourance per term for Bogus}}{\text{Number of total words for Bogus}}})$$
 
 ```r
 par(las=2,mar=c(5,7,4,1)+.1)
-barplot((sort(s[-length(s)],decreasing=FALSE)[1:50]),horiz=TRUE,main="Keywords frequencies")
+LOR=log2(WF[,1][-length(WF)/2]/WF[,2][-length(WF)/2]*WF[,2][length(WF)/2]/WF[,1][length(WF)/2])
+barplot((sort(LOR,decreasing=FALSE)),horiz=TRUE,main="CrowdEpi v.s. Bogus")
 ```
 
 ![](Key_Words_Analysis_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
-
-### 4.Bogus?
-
