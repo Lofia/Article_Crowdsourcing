@@ -3,6 +3,7 @@ title: "Keywords Analysis"
 author: "Zixiang Xu"
 output:
   html_document:
+    keep_md: true
     number_sections: no
     theme: united
     toc: yes
@@ -29,25 +30,78 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 knitr::opts_knit$set(root.dir = 'C:/Users/Zixiang Xu/Desktop/GMU/JY Sun')
 ```
 
-### 1.Read the dictionary
+### 1. Read the dictionary
 ```{r}
-d=read.csv("crowd2Xu/Dictionary Maker/output/Crowdsourcing Updated.csv")
+d=read.csv("crowd2Xu/Dictionary Maker/output/CrowdEpi.csv")
 md=as.matrix(d[,2:dim(d)[2]])
-head(md[,c(88,1:7)],50)
+head(md[,c(88,1:7)],20)
+d2=read.csv("crowd2Xu/Dictionary Maker/output/Bogus.csv")
+md2=as.matrix(d2[,2:dim(d2)[2]])
+head(md2[,c(88,1:7)],20)
 ```
 
-### 2.Find the total occourance time
+### 2. Prepare the data
 ```{r}
 s=colSums(md)
-t(t(s))
+s2=colSums(md2)
+show=cbind(t(t(s)),t(t(s2)))
+colnames(show)=c('CrowdEpi','Control')
+#(WF=show[(show[,1]>0)&(show[,2]>0),])
+WF=show
+WF[WF==0]<-0.1
+WF
 ```
 
-### 3.Barplot
-```{r fig.height=20, fig.width=10}
+### 3. Analysis of Log Odds Ratio
+$$\text{Log Odds Ratio }=\log_2(\frac{\frac{\text{Number of occourance per term in CrowdEpi}}{\text{Number of occourance of all the terms in CrowdEpi - Number of occourance per term in CrowdEpi}}}{\frac{\text{Number of occourance per term in Control}}{\text{Number of occourance of all the terms in Control - Number of occourance per term in Control}}})$$
+```{r fig.height=25, fig.width=10}
+#$$\text{Log Odds Ratio }=\log_2(\frac{\frac{\text{Number of occourance per term for CrowdEpi}}{\text{Number of total words for CrowdEpi}}}{\frac{\text{Number of occourance per term for Bogus}}{\text{Number of total words for Bogus}}})$$
 par(las=2,mar=c(5,7,4,1)+.1)
-barplot((sort(s[-length(s)],decreasing=FALSE)),horiz=TRUE,main="Keywords frequencies")
+#LOR=log2(WF[,1][-length(WF)/2]/WF[,2][-length(WF)/2]*WF[,2][length(WF)/2]/WF[,1][length(WF)/2])
+WF2=WF[-length(WF)/2,]
+LOR=log2(WF2[,1]/WF2[,2]*(colSums(WF2)[2]-WF2[,2])/(colSums(WF2)[1]-WF2[,1]))
+barplot((sort(LOR,decreasing=FALSE)),horiz=TRUE,main="CrowdEpi v.s. Control")
 ```
 
-### 4.Bogus?
-```{r fig.height=20, fig.width=10}
+### 4. Conditional Mosaic (Standardized)
+```{r fig.height=15, fig.width=40}
+#mosaicplot(WF2)
+library(vcd)
+WFsd=cbind(WF2[,1]/colSums(WF2)[1],WF2[,2]/colSums(WF2)[2])
+colnames(WFsd)=c('CrowdEpi','Control')
+mosaicplot(WFsd,las=3,cex.axis=1)
 ```
+
+
+
+### 5. Correspondence Analysis
+```{r fig.height=10, fig.width=10}
+cc=function(x, printout=FALSE){
+ rsum=apply(x,1,sum)
+ csum=apply(x,2,sum)
+ n=sum(x)
+ rsum=matrix(rsum,ncol=1)
+ csum=matrix(csum,ncol=1)
+ ee=rsum %*% t(csum)/n
+ cc=(x-ee)/sqrt(ee)
+ d=svd(cc)
+ I=dim(x)[1]
+ J=dim(x)[2]
+ xs=sum((d$d^2))
+ pv=1-pchisq(xs,(I-1)*(J-1))
+ y=rbind(d$u,d$v)
+ plot(y[, 1], y[, 2], type = "n", xlab = "Correspondence Coord 1", ylab = "Correspondence Coord 2")
+ text(y[,1],y[,2],c(dimnames(x)[[1]],dimnames(x)[[2]]),col=c(rep(2,I),rep(3,J)),cex=0.75)
+ points(0,0)
+ intertia=sum((d$d[1:2]^2))/xs
+ if(printout) list(pvalue=pv,xsq=xs,inertia=intertia,rsum=rsum,csum=csum)
+}
+
+cc(WF2)
+```
+
+
+
+
+
+
