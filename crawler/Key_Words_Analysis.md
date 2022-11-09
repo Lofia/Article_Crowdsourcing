@@ -31,62 +31,134 @@ output:
 
 ```r
 d=read.csv("crowd2Xu/Dictionary Maker/output/CrowdEpi.csv")
-md=as.matrix(d[,2:dim(d)[2]])
-head(md[,c(88,1:7)],20)
+newd=data.frame(
+  Annotate=d$annotate+d$annotated,#;newd=subset(newd,select=-c(annotated))
+  #Combine=d$combine,0
+  Crowdsource=d$crowd+d$crowdsource+d$crowd.source+d$crowdsourced+d$crowd.sourced+d$crowdsourcing+d$crowd.sourcing+d$X23andme+d$patientslikeme+d$citizen+d$citizens+d$turk+d$amazon+d$microtask,
+  Data=d$data,
+  Diagnose=d$diagnose+d$diagnosis,
+  Dictionary=d$dictionary,
+  Disease=d$disease+d$diseases+d$flu+d$virus,
+  Experience=d$experience+d$experienced,
+  Extract=d$extract+d$extraction+d$extraction.1+d$extracted,
+  Gold=d$gold,
+  Health=d$health,
+  Image=d$image,
+  #Knowledge=d$knowledge,0
+  Medical=d$medical,
+  #Media=d$media
+  Natural=d$natural,
+  Non.Expert=d$non.expert,
+  Online=d$online+d$online.1,#+d$online.2
+  Performance=d$performance,
+  Person=d$user+d$user.1+d$users+d$users.1+d$player+d$players+d$individual+d$individuals+d$turkers+d$respondents+d$workers+d$participant+d$participants+d$people,
+  Post=d$post.1+d$posting.1+d$posts.1+d$post+d$posts,
+  Quality=d$quality,
+  Query=d$query,
+  Recruit=d$recruit+d$recruitment,
+  Reliability=d$reliability,
+  Screen=d$screen,
+  Self.report=d$self.report+d$self.reported+d$patient.reported,
+  Survey=d$survey,
+  Symptom=d$symptom,
+  Text=d$text,
+  Train=d$train+d$trained,
+  #d$tweet
+  Validate=d$validate+d$validated+d$validation,
+  Numword=d$numWord
+)
+md=as.matrix(newd)
+head(md[,c(30,1:7)],20)
 ```
 
 ```
-##       numWord validated survey worker natural patientslikeme quality text
-##  [1,]    5006         0     50      0       0              0       0    0
-##  [2,]    2675         1      0      0       0              0       0    0
-##  [3,]    5756         0      6      0       1              0       0    0
-##  [4,]    3934         0      0      0       0              0       0    0
-##  [5,]    8963         1      0      0       0              0       2    0
-##  [6,]    3147         1      1      0       0              0       0    0
-##  [7,]    5553         5      5      0       0              0       0    0
-##  [8,]    5759         0      2      0       0              0       0    0
-##  [9,]    4776         1      0      0       0              0       0    0
-## [10,]    4926         5     21      0       0              0       0    0
-## [11,]    4382         2      5      0       0              0       0    0
-## [12,]    3828         0      8      0       0              0       0    0
-## [13,]    5076         0      1      0       0              0       0    0
-## [14,]    8125         0      1      0       0              0       1    2
-## [15,]    9638         2     10      0       0              0       0    3
-## [16,]    4640         0     21      0       0              0       0    0
-## [17,]    4496         1      5      0       0              0       0    0
-## [18,]    4018         0      0      0       0              0       0    0
-## [19,]   13258         0     23      0       0              0       0    0
-## [20,]    4766         1      0      0       0              0       0    0
+##       Numword Annotate Crowdsource Data Diagnose Dictionary Disease Experience
+##  [1,]    5006        0           1    0        3          0       0          1
+##  [2,]    2675        0           4    0        0          0       0          1
+##  [3,]    5756        1         110    0        4          0       1          2
+##  [4,]    3934        0          13    0        0          0       2          1
+##  [5,]    8963        0           0    0        0          0       1          0
+##  [6,]    3147        0           8    0       11          0       4          1
+##  [7,]    5553        0           6    0        1          0      12          1
+##  [8,]    5759        0           2    0        0          0       2          1
+##  [9,]    4776        0           2    0        0          0      19          4
+## [10,]    4926        0          23    0        0          0       7          3
+## [11,]    4382        0           1    0        0          0       0          1
+## [12,]    3828        0          23    0        0          0       1          0
+## [13,]    5076        1           9    1        0          0      30          3
+## [14,]    8125        0         244    4        5          0       9          6
+## [15,]    9638        0          27    0        1          0      52          6
+## [16,]    4640        0          10    0       33          0       6          5
+## [17,]    4496        0           8    0        1          0      34          4
+## [18,]    4018        0          12    1        0          0      11          0
+## [19,]   13258        0          31    0        0          0       0          9
+## [20,]    4766        0          95    0        0          0       0          2
 ```
 
 ```r
 d2=read.csv("crowd2Xu/Dictionary Maker/output/Bogus.csv")
-md2=as.matrix(d2[,2:dim(d2)[2]])
-head(md2[,c(88,1:7)],20)
+newd2=data.frame(
+  Annotate=d2$annotate+d2$annotated,#;newd=subset(newd,select=-c(annotated))
+  #Combine=d2$combine,0
+  Crowdsource=d2$crowd+d2$crowdsource+d2$crowd.source+d2$crowdsourced+d2$crowd.sourced+d2$crowdsourcing+d2$crowd.sourcing+d2$X23andme+d2$patientslikeme+d2$citizen+d2$citizens+d2$turk+d2$amazon+d2$microtask,
+  Data=d2$data,
+  Diagnose=d2$diagnose+d2$diagnosis,
+  Dictionary=d2$dictionary,
+  Disease=d2$disease+d2$diseases+d2$flu+d2$virus,
+  Experience=d2$experience+d2$experienced,
+  Extract=d2$extract+d2$extraction+d2$extraction.1+d2$extracted,
+  Gold=d2$gold,
+  Health=d2$health,
+  Image=d2$image,
+  #Knowledge=d2$knowledge,0
+  Medical=d2$medical,
+  #Media=d2$media
+  Natural=d2$natural,
+  Non.Expert=d2$non.expert,
+  Online=d2$online+d2$online.1,#+d2$online.2
+  Performance=d2$performance,
+  Person=d2$user+d2$user.1+d2$users+d2$users.1+d2$player+d2$players+d2$individual+d2$individuals+d2$turkers+d2$respondents+d2$workers+d2$participant+d2$participants+d2$people,
+  Post=d2$post.1+d2$posting.1+d2$posts.1+d2$post+d2$posts,
+  Quality=d2$quality,
+  Query=d2$query,
+  Recruit=d2$recruit+d2$recruitment,
+  Reliability=d2$reliability,
+  Screen=d2$screen,
+  Self.report=d2$self.report+d2$self.reported+d2$patient.reported,
+  Survey=d2$survey,
+  Symptom=d2$symptom,
+  Text=d2$text,
+  Train=d2$train+d2$trained,
+  #d2$tweet
+  Validate=d2$validate+d2$validated+d2$validation,
+  Numword=d2$numWord
+)
+md2=as.matrix(newd2)
+head(md2[,c(30,1:7)],20)
 ```
 
 ```
-##       numWord validated survey worker natural patientslikeme quality text
-##  [1,]    2963         0      7      0       0              0       0    0
-##  [2,]    4361         0      0      0       1              0       0    0
-##  [3,]    8628         0      0      0       0              0       1    0
-##  [4,]   11592         0      7      0       0              0       0    0
-##  [5,]    6508         0      0      0       0              0       0    0
-##  [6,]    4909         1      3      0       0              0       0    0
-##  [7,]   14758         3      4      0       2              0       1    1
-##  [8,]    5075         0      3      0       0              0       0    0
-##  [9,]    4150         0      0      0       0              0       0    0
-## [10,]    3703         0      0      0       0              0       0    0
-## [11,]    3417         0      0      0       0              0       0    0
-## [12,]    6769         0      1      0       0              0       0    0
-## [13,]    7720         2      1      0       0              0       0    0
-## [14,]    4569         0      1      0       0              0       0    0
-## [15,]    4592         0      2      0       0              0       0    0
-## [16,]   13335         0      1      0       1              0       0    0
-## [17,]    2900         0     11      0       0              0       0    0
-## [18,]    6405         0      0      0       0              0       0    0
-## [19,]    8588         3      1      0       0              2       0    0
-## [20,]   16659        14      4      0       0              0       0    0
+##       Numword Annotate Crowdsource Data Diagnose Dictionary Disease Experience
+##  [1,]    2963        0           7    0        0          0       0          1
+##  [2,]    4361        0           4    0        0          1       0          1
+##  [3,]    8628        0          36    1        0          0      10          0
+##  [4,]   11592        0          32    0        0          0       0          0
+##  [5,]    6508        0           6    0        0          0       3          0
+##  [6,]    4909        0           2    0        0          0       0          3
+##  [7,]   14758        1          62    2        0          1       0          2
+##  [8,]    5075        0           2    0        0          0       1         15
+##  [9,]    4150        0          15    0        0          0       0          0
+## [10,]    3703       10          10    0        0          0       0          0
+## [11,]    3417        0           2    0        0          0       1          0
+## [12,]    6769        0           9    0        0          0       4          0
+## [13,]    7720        0           4    1        0          0       0          0
+## [14,]    4569        6          52    0        0          0       1          1
+## [15,]    4592        0          19    0        0          0       0          1
+## [16,]   13335        0           5    1        0          0       0          2
+## [17,]    2900        0           5    0        0          0       0          4
+## [18,]    6405        0           2    0        0          0       2          1
+## [19,]    8588        1          28    0        1          0      32          0
+## [20,]   16659        0           1    0        0          1       0          1
 ```
 
 ### 2. Prepare the data
@@ -94,104 +166,51 @@ head(md2[,c(88,1:7)],20)
 ```r
 s=colSums(md)
 s2=colSums(md2)
-show=cbind(t(t(s)),t(t(s2)))
-colnames(show)=c('CrowdEpi','Control')
-#(WF=show[(show[,1]>0)&(show[,2]>0),])
-WF=show
-WF[WF==0]<-0.1
+r=s[length(s)]/s2[length(s2)]
+s[s==0]=0.1*r
+s2[s2==0]=0.1
+WF=cbind(t(t(s)),t(t(s2)))
+colnames(WF)=c('CrowdEpi','Control')
+# WF_print=cbind(colnames(newd),
+#   formatC(as.numeric(WF[,1]),format="f",digits=2),
+#   formatC(as.numeric(WF[,2]),format="f",digits=2))
+# colnames(WF_print)=c('key_word','CrowdEpi','Control')
+# WF_print
 WF
 ```
 
 ```
-##                   CrowdEpi   Control
-## validated            310.0     116.0
-## survey              2396.0     737.0
-## worker                 7.0       5.0
-## natural              103.0      29.0
-## patientslikeme         1.0       6.0
-## quality              114.0     102.0
-## text                  55.0      22.0
-## recruitment          550.0     116.0
-## health              9036.0     339.0
-## user                   4.0       3.0
-## patient                0.1       0.1
-## trained               21.0      23.0
-## user.1                18.0      11.0
-## symptom              289.0      42.0
-## crowd.sourcing        53.0     119.0
-## participant           14.0       7.0
-## validate             123.0     116.0
-## data                  46.0      44.0
-## performance         1388.0    1498.0
-## microtask             15.0      29.0
-## crowd.sourced        291.0     212.0
-## non.expert            63.0      32.0
-## player                 2.0       0.1
-## crowd                 18.0       4.0
-## knowledge              2.0       0.1
-## diagnosis            695.0      50.0
-## players                8.0       4.0
-## self.reported        331.0      87.0
-## patient.report         0.1       0.1
-## citizens               1.0       3.0
-## individuals           19.0      13.0
-## patient.reported      34.0       4.0
-## crowdsourcing       4075.0    2008.0
-## screen               207.0     157.0
-## self                   0.1       0.1
-## experience           739.0     362.0
-## extracted              0.1       3.0
-## individual            22.0      17.0
-## dictionary            49.0      20.0
-## X23andme               2.0       4.0
-## disease             2458.0     204.0
-## respondents           53.0       6.0
-## posts                  2.0       3.0
-## posts.1                0.1       1.0
-## virus                419.0      30.0
-## people                13.0      10.0
-## self.report          154.0      59.0
-## extraction           302.0     160.0
-## extraction.1         302.0     160.0
-## posted                 3.0       0.1
-## online                35.0       8.0
-## posted.1               2.0       1.0
-## online.1             155.0      24.0
-## crowd.source           0.1       9.0
-## diseases             721.0      61.0
-## medical             3015.0     403.0
-## users                 16.0       7.0
-## users.1               21.0      15.0
-## participants         125.0      33.0
-## annotate              54.0      78.0
-## posting                0.1       0.1
-## posting.1              1.0       0.1
-## citizen              481.0     373.0
-## crowdsource           63.0      30.0
-## turk                  15.0       5.0
-## image                 76.0      49.0
-## reliability          389.0     311.0
-## query                134.0     154.0
-## diagnose              49.0      10.0
-## validation           668.0     322.0
-## combine                0.1       0.1
-## flu                  130.0       8.0
-## annotated            171.0     151.0
-## experienced          242.0     119.0
-## extracts               0.1       0.1
-## amazon               281.0     135.0
-## crowdsourced        1255.0     778.0
-## workers               21.0      27.0
-## gold                 179.0     111.0
-## recruit              152.0      73.0
-## train                 12.0      16.0
-## extracting             0.1       0.1
-## post                   4.0       0.1
-## post.1                 1.0       1.0
-## turkers                8.0       1.0
-## extract              134.0     178.0
-## extract.1              0.1       0.1
-## numWord          2369845.0 1417653.0
+##             CrowdEpi Control
+## Annotate         225     229
+## Crowdsource     6551    3715
+## Data              46      44
+## Diagnose         744      60
+## Dictionary        49      20
+## Disease         3728     303
+## Experience       981     481
+## Extract          738     501
+## Gold             179     111
+## Health          9036     339
+## Image             76      49
+## Medical         3015     403
+## Natural          103      29
+## Non.Expert        63      32
+## Online           190      32
+## Performance     1388    1498
+## Person           344     154
+## Post               8       5
+## Quality          114     102
+## Query            134     154
+## Recruit          702     189
+## Reliability      389     311
+## Screen           207     157
+## Self.report      519     150
+## Survey          2396     737
+## Symptom          289      42
+## Text              55      22
+## Train             33      39
+## Validate        1101     554
+## Numword      2369845 1417653
 ```
 
 ### 3. Analysis of Log Odds Ratio
@@ -251,8 +270,146 @@ cc(WF2)
 
 ![](Key_Words_Analysis_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
 
+### 6. Original data analysis
 
+```r
+d=read.csv("data-files/data/retagbogusarticles/training updated.csv")
+newd=data.frame(
+  Annotate=d$annotate+d$annotated,#;newd=subset(newd,select=-c(annotated))
+  #Combine=d$combine,0
+  Crowdsource=d$crowd+d$crowdsource+d$crowd.source+d$crowdsourced+d$crowd.sourced+d$crowdsourcing+d$crowd.sourcing+d$X23andme+d$patientslikeme+d$citizen+d$citizens+d$turk+d$amazon+d$microtask,
+  Data=d$data,
+  Diagnose=d$diagnose+d$diagnosis,
+  Dictionary=d$dictionary,
+  Disease=d$disease+d$diseases+d$flu+d$virus,
+  Experience=d$experience+d$experienced,
+  Extract=d$extract+d$extraction+d$extraction.1+d$extracted,
+  Gold=d$gold,
+  Health=d$health,
+  Image=d$image,
+  #Knowledge=d$knowledge,0
+  Medical=d$medical,
+  #Media=d$media
+  Natural=d$natural,
+  Non.Expert=d$non.expert,
+  Online=d$online+d$online.1,#+d$online.2
+  Performance=d$performance,
+  Person=d$user+d$user.1+d$users+d$users.1+d$player+d$players+d$individual+d$individuals+d$turkers+d$respondents+d$workers+d$participant+d$participants+d$people,
+  Post=d$post.1+d$posting.1+d$posts.1+d$post+d$posts,
+  Quality=d$quality,
+  Query=d$query,
+  Recruit=d$recruit+d$recruitment,
+  Reliability=d$reliability,
+  Screen=d$screen,
+  Self.report=d$self.report+d$self.reported+d$patient.reported,
+  Survey=d$survey,
+  Symptom=d$symptom,
+  Text=d$text,
+  Train=d$train+d$trained,
+  #d$tweet
+  Validate=d$validate+d$validated+d$validation,
+  Numword=d$numWord
+)
+md=as.matrix(newd)
+#head(md[,c(30,1:7)],20)
 
+s=colSums(md)
+r=s[length(s)]/s2[length(s2)]
+s[s==0]=0.1*r
+WF=cbind(t(t(s)),t(t(s2)))
+colnames(WF)=c('CrowdEpi','Control')
+# WF_print=cbind(colnames(newd),
+#   formatC(as.numeric(WF[,1]),format="f",digits=2),
+#   formatC(as.numeric(WF[,2]),format="f",digits=2))
+# colnames(WF_print)=c('key_word','CrowdEpi','Control')
+# WF_print
+WF
+```
 
+```
+##             CrowdEpi Control
+## Annotate          46     229
+## Crowdsource      946    3715
+## Data              46      44
+## Diagnose          74      60
+## Dictionary        20      20
+## Disease          445     303
+## Experience       146     481
+## Extract           99     501
+## Gold              58     111
+## Health          1913     339
+## Image             27      49
+## Medical          390     403
+## Natural           18      29
+## Non.Expert        13      32
+## Online            41      32
+## Performance      220    1498
+## Person            81     154
+## Post               6       5
+## Quality           14     102
+## Query             20     154
+## Recruit           48     189
+## Reliability       61     311
+## Screen            22     157
+## Self.report       50     150
+## Survey           272     737
+## Symptom            9      42
+## Text               6      22
+## Train             11      39
+## Validate         177     554
+## Numword       514048 1417653
+```
 
+#### Analysis of Log Odds Ratio
 
+```r
+#$$\text{Log Odds Ratio }=\log_2(\frac{\frac{\text{Number of occourance per term for CrowdEpi}}{\text{Number of total words for CrowdEpi}}}{\frac{\text{Number of occourance per term for Bogus}}{\text{Number of total words for Bogus}}})$$
+par(las=2,mar=c(5,7,4,1)+.1)
+#LOR=log2(WF[,1][-length(WF)/2]/WF[,2][-length(WF)/2]*WF[,2][length(WF)/2]/WF[,1][length(WF)/2])
+WF2=WF[-length(WF)/2,]
+LOR=log2(WF2[,1]/WF2[,2]*(colSums(WF2)[2]-WF2[,2])/(colSums(WF2)[1]-WF2[,1]))
+barplot((sort(LOR,decreasing=FALSE)),horiz=TRUE,main="CrowdEpi v.s. Control")
+```
+
+![](Key_Words_Analysis_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
+
+#### Conditional Mosaic (Standardized)
+
+```r
+#mosaicplot(WF2)
+library(vcd)
+WFsd=cbind(WF2[,1]/colSums(WF2)[1],WF2[,2]/colSums(WF2)[2])
+colnames(WFsd)=c('CrowdEpi','Control')
+mosaicplot(WFsd,las=3,cex.axis=1)
+```
+
+![](Key_Words_Analysis_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
+
+#### Correspondence Analysis
+
+```r
+cc=function(x, printout=FALSE){
+ rsum=apply(x,1,sum)
+ csum=apply(x,2,sum)
+ n=sum(x)
+ rsum=matrix(rsum,ncol=1)
+ csum=matrix(csum,ncol=1)
+ ee=rsum %*% t(csum)/n
+ cc=(x-ee)/sqrt(ee)
+ d=svd(cc)
+ I=dim(x)[1]
+ J=dim(x)[2]
+ xs=sum((d$d^2))
+ pv=1-pchisq(xs,(I-1)*(J-1))
+ y=rbind(d$u,d$v)
+ plot(y[, 1], y[, 2], type = "n", xlab = "Correspondence Coord 1", ylab = "Correspondence Coord 2")
+ text(y[,1],y[,2],c(dimnames(x)[[1]],dimnames(x)[[2]]),col=c(rep(2,I),rep(3,J)),cex=0.75)
+ points(0,0)
+ intertia=sum((d$d[1:2]^2))/xs
+ if(printout) list(pvalue=pv,xsq=xs,inertia=intertia,rsum=rsum,csum=csum)
+}
+
+cc(WF2)
+```
+
+![](Key_Words_Analysis_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
