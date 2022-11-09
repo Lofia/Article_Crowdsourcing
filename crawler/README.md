@@ -60,3 +60,14 @@ Wrote R Markdown code to do simple analysis for generated dictionary: [View it h
 ---
 ### 10-19-2022
 Updated the analysis code: [View it here](Key_Words_Analysis.md).
+
+---
+### 10-26-2022
+Skipped (Meeting together with Dr. Ziyu Yao)
+
+---
+### 11-2-2022
+Planned to re-analyze the old data to check our present process.
+---
+### 11-9-2022
+Updated the analysis code by combining similar words, and integrating with old data: [View it here](Key_Words_Analysis.md).
