@@ -79,4 +79,4 @@ Analyzed the possible differences between the 188 peer-reviewed articles and the
 In page 6, the paper [crowdsourcepaper_v12_KC_edits](crowdsourcepaper_v12_KC_edits.pdf) mentioned that  
 *"...For our training dataset, one-third (N=63) of the articles were selected from the final corpus to be manually annotated by 3 independent raters..."*  
 However, there seems to be only about half of the 68/63 articles are from the 188 peer-reviewed articles.  
-One possible reason of the 5 deleted articles (68\63) is that those five are neither epidemiology nor crowdsourcing.
+And one possible reason of the 5 deleted articles (68\63) is that those five are neither epidemiology nor crowdsourcing.
