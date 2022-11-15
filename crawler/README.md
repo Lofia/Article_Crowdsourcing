@@ -1,5 +1,5 @@
 
-# Table of Contents  ###[*generated with markdown-toc*](http://ecotrust-canada.github.io/markdown-toc/)
+# Table of Contents  ### [*generated with markdown-toc*](http://ecotrust-canada.github.io/markdown-toc/)
 
 - [7-13-2022](#7-13-2022)
 - [7-20-2022](#7-20-2022)
