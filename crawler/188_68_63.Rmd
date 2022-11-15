@@ -1,0 +1,62 @@
+---
+title: "Relationship of the 188/68/63 articles"
+author: "Zixiang Xu"
+output:
+  html_document:
+    keep_md: true
+    number_sections: no
+    theme: united
+    toc: yes
+    toc_float: yes
+  html_notebook:
+    theme: united
+    toc: no
+    toc_float: yes
+  word_document:
+    toc: no
+  pdf_document:
+    toc: no
+---
+
+```{=html}
+<style type="text/css">
+    #header {
+        text-align: center;
+    }
+</style>
+```
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+knitr::opts_knit$set(root.dir = 'C:/Users/Zixiang Xu/Desktop/GMU/JY Sun')
+```
+
+## 188
+```{r}
+files=list.files(path='data-files/files/',pattern='*.txt',full.names=FALSE)
+files188=gsub("\\..*","",files)
+```
+
+## 68
+```{r}
+d=read.csv("data-files/data/retagbogusarticles/training updated.csv")
+d2=d$filename
+files68=gsub("\\..*","",d2)
+```
+
+## 63
+```{r}
+u=read.csv("original_data.csv",sep=';')
+u2=u$filename
+files63=gsub("\\..*","",u2)
+```
+
+# Difference?
+```{r}
+#setdiff(files188,files68)
+intersect(files188,files68) # in 188 & 68
+setdiff(files68,intersect(files188,files68)) # in 68 \ 188
+#setdiff(files188,files63)
+setdiff(files68,files63)
+```
+
+Next: Find out where are those 68 \ 188 from, and check the 5 eliminated articles.
