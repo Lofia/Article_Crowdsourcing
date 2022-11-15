@@ -77,6 +77,6 @@ Updated the analysis code by combining similar words, and integrating with old d
 ### 11-15-2022
 Analyzed the possible differences between the 188 peer-reviewed articles and the 68/63 articles used to generate the keywords: [View it here](188_68_63.md).  
 In page 6, the paper [crowdsourcepaper_v12_KC_edits](crowdsourcepaper_v12_KC_edits.pdf) mentioned that  
-*For our training dataset, one-third (N=63) of the articles were selected from the final corpus to be manually annotated by 3 independent raters.*  
+*"...For our training dataset, one-third (N=63) of the articles were selected from the final corpus to be manually annotated by 3 independent raters..."*  
 However, there seems to be only about half of the 68/63 articles are from the 188 peer-reviewed articles.  
 One possible reason of the 5 deleted articles (68\63) is that those five are neither epidemiology nor crowdsourcing.
