@@ -16,7 +16,7 @@
 - [10-26-2022](#10-26-2022)
 - [11-2-2022](#11-2-2022)
 - [11-9-2022](#11-9-2022)
-- [11-15-2022](#11-15-2022)
+- [11-16-2022](#11-16-2022)
 
 
 ### 7-13-2022
@@ -93,7 +93,7 @@ Planned to re-analyze the old data to check our present process.
 Updated the analysis code by combining similar words, and integrating with old data: [View it here](Key_Words_Analysis.md).
 
 ---
-### 11-15-2022
+### 11-16-2022
 Analyzed the possible differences between the 188 peer-reviewed articles and the 68/63 articles used to generate the keywords: [View it here](188_68_63.md).  
 In page 6, the paper [crowdsourcepaper_v12_KC_edits](crowdsourcepaper_v12_KC_edits.pdf) mentioned that  
 *"...For our training dataset, one-third (N=63) of the articles were selected from the final corpus to be manually annotated by 3 independent raters..."*  
