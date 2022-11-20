@@ -273,7 +273,14 @@ cc(WF2)
 ### 6. Original data analysis
 
 ```r
-d=read.csv("data-files/data/retagbogusarticles/training updated.csv")
+files=list.files(path='data-files/files/',pattern='*.txt',full.names=FALSE)
+files188=gsub("\\..*","",files)
+un=read.csv("original_data.csv",sep=';')
+rownames(un)=gsub("\\..*","",un$filename)
+#un$filename=gsub("\\..*","",un$filename)
+index_CrowdEpi=intersect(files188,rownames(un))
+index_control=setdiff(rownames(un),index_CrowdEpi)
+d=un[index_CrowdEpi,]
 newd=data.frame(
   Annotate=d$annotate+d$annotated,#;newd=subset(newd,select=-c(annotated))
   #Combine=d$combine,0
@@ -283,7 +290,7 @@ newd=data.frame(
   Dictionary=d$dictionary,
   Disease=d$disease+d$diseases+d$flu+d$virus,
   Experience=d$experience+d$experienced,
-  Extract=d$extract+d$extraction+d$extraction.1+d$extracted,
+  Extract=d$extract+d$extraction+d$extraction.1,#+d$extracted-----
   Gold=d$gold,
   Health=d$health,
   Image=d$image,
@@ -292,10 +299,10 @@ newd=data.frame(
   #Media=d$media
   Natural=d$natural,
   Non.Expert=d$non.expert,
-  Online=d$online+d$online.1,#+d$online.2
+  #Online=d$online+d$online.1,#+d$online.2-----
   Performance=d$performance,
   Person=d$user+d$user.1+d$users+d$users.1+d$player+d$players+d$individual+d$individuals+d$turkers+d$respondents+d$workers+d$participant+d$participants+d$people,
-  Post=d$post.1+d$posting.1+d$posts.1+d$post+d$posts,
+  #Post=d$post.1+d$posting.1+d$posts.1+d$post+d$posts,-----
   Quality=d$quality,
   Query=d$query,
   Recruit=d$recruit+d$recruitment,
@@ -313,9 +320,50 @@ newd=data.frame(
 md=as.matrix(newd)
 #head(md[,c(30,1:7)],20)
 
+d2=un[index_control,]
+newd2=data.frame(
+  Annotate=d2$annotate+d2$annotated,#;newd=subset(newd,select=-c(annotated))
+  #Combine=d2$combine,0
+  Crowdsource=d2$crowd+d2$crowdsource+d2$crowd.source+d2$crowdsourced+d2$crowd.sourced+d2$crowdsourcing+d2$crowd.sourcing+d2$X23andme+d2$patientslikeme+d2$citizen+d2$citizens+d2$turk+d2$amazon+d2$microtask,
+  Data=d2$data,
+  Diagnose=d2$diagnose+d2$diagnosis,
+  Dictionary=d2$dictionary,
+  Disease=d2$disease+d2$diseases+d2$flu+d2$virus,
+  Experience=d2$experience+d2$experienced,
+  Extract=d2$extract+d2$extraction+d2$extraction.1,#+d2$extracted
+  Gold=d2$gold,
+  Health=d2$health,
+  Image=d2$image,
+  #Knowledge=d2$knowledge,0
+  Medical=d2$medical,
+  #Media=d2$media
+  Natural=d2$natural,
+  Non.Expert=d2$non.expert,
+  #Online=d2$online+d2$online.1,#+d2$online.2
+  Performance=d2$performance,
+  Person=d2$user+d2$user.1+d2$users+d2$users.1+d2$player+d2$players+d2$individual+d2$individuals+d2$turkers+d2$respondents+d2$workers+d2$participant+d2$participants+d2$people,
+  #Post=d2$post.1+d2$posting.1+d2$posts.1+d2$post+d2$posts,
+  Quality=d2$quality,
+  Query=d2$query,
+  Recruit=d2$recruit+d2$recruitment,
+  Reliability=d2$reliability,
+  Screen=d2$screen,
+  Self.report=d2$self.report+d2$self.reported+d2$patient.reported,
+  Survey=d2$survey,
+  Symptom=d2$symptom,
+  Text=d2$text,
+  Train=d2$train+d2$trained,
+  #d2$tweet
+  Validate=d2$validate+d2$validated+d2$validation,
+  Numword=d2$numWord
+)
+md2=as.matrix(newd2)
+
 s=colSums(md)
+s2=colSums(md2)
 r=s[length(s)]/s2[length(s2)]
 s[s==0]=0.1*r
+s2[s2==0]=0.1
 WF=cbind(t(t(s)),t(t(s2)))
 colnames(WF)=c('CrowdEpi','Control')
 # WF_print=cbind(colnames(newd),
@@ -328,36 +376,34 @@ WF
 
 ```
 ##             CrowdEpi Control
-## Annotate          46     229
-## Crowdsource      946    3715
-## Data              46      44
-## Diagnose          74      60
-## Dictionary        20      20
-## Disease          445     303
-## Experience       146     481
-## Extract           99     501
-## Gold              58     111
-## Health          1913     339
-## Image             27      49
-## Medical          390     403
-## Natural           18      29
-## Non.Expert        13      32
-## Online            41      32
-## Performance      220    1498
-## Person            81     154
-## Post               6       5
-## Quality           14     102
-## Query             20     154
-## Recruit           48     189
-## Reliability       61     311
-## Screen            22     157
-## Self.report       50     150
-## Survey           272     737
-## Symptom            9      42
-## Text               6      22
-## Train             11      39
-## Validate         177     554
-## Numword       514048 1417653
+## Annotate          16      29
+## Crowdsource      789     157
+## Data              10      36
+## Diagnose          33      41
+## Dictionary        15       5
+## Disease          241     198
+## Experience        64      78
+## Extract           48      50
+## Gold              52       6
+## Health           719    1153
+## Image             26       1
+## Medical          300      89
+## Natural           13       5
+## Non.Expert        11       2
+## Performance      113      87
+## Person            50      29
+## Quality           10       4
+## Query             14       6
+## Recruit           19      26
+## Reliability       26      31
+## Screen             9      13
+## Self.report       16      26
+## Survey           112     153
+## Symptom            4       5
+## Text               3       3
+## Train              5       6
+## Validate          97      80
+## Numword       238928  239763
 ```
 
 #### Analysis of Log Odds Ratio
