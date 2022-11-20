@@ -17,6 +17,7 @@
 - [11-2-2022](#11-2-2022)
 - [11-9-2022](#11-9-2022)
 - [11-16-2022](#11-16-2022)
+- [11-22-2022](#11-22-2022)
 
 ---
 ### 7-13-2022
@@ -103,4 +104,5 @@ And one possible reason of the 5 deleted articles (68\63) is that those five are
 ---
 ### 11-22-2022
 Since the 188 peer-reviewed articles are considered CrowdEpi, we could seperate the 63 articles into 2 groups (CrowdEpi vs Control): take the files in 188 and 63 as CrowdEpi while the files in 63\188 as Control. And the updated analysis and comparison is here: [View it here](Key_Words_Analysis.md).  
-Read the article related to Covid-19: [A multinational Delphi consensus to end the COVID-19 public health threat](https://www.nature.com/articles/s41586-022-05398-2).
+
+Meanwhile, read the article related to Covid-19: [A multinational Delphi consensus to end the COVID-19 public health threat](https://www.nature.com/articles/s41586-022-05398-2).
