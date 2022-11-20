@@ -99,3 +99,8 @@ In page 6, the paper [crowdsourcepaper_v12_KC_edits](crowdsourcepaper_v12_KC_edi
 *"...For our training dataset, one-third (N=63) of the articles were selected from the final corpus to be manually annotated by 3 independent raters..."*  
 However, there seems to be only about half of the 68/63 articles are from the 188 peer-reviewed articles.  
 And one possible reason of the 5 deleted articles (68\63) is that those five are neither epidemiology nor crowdsourcing.
+
+---
+### 11-22-2022
+Since the 188 peer-reviewed articles are considered CrowdEpi, we could seperate the 63 articles into 2 groups (CrowdEpi vs Control): take the files in 188 and 63 as CrowdEpi while the files in 63\188 as Control. And the updated analysis and comparison is here: [View it here](Key_Words_Analysis.md).  
+Read the article related to Covid-19: [A multinational Delphi consensus to end the COVID-19 public health threat](https://www.nature.com/articles/s41586-022-05398-2).
