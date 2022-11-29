@@ -5,8 +5,10 @@ output:
   html_document:
     keep_md: true
     number_sections: no
-    theme: united
-    toc: yes
+    theme:
+      version: 4
+      bootswatch: united
+    toc: no
     toc_float: yes
   html_notebook:
     theme: united
@@ -176,6 +178,7 @@ colnames(WF)=c('CrowdEpi','Control')
 #   formatC(as.numeric(WF[,2]),format="f",digits=2))
 # colnames(WF_print)=c('key_word','CrowdEpi','Control')
 # WF_print
+WF_new=WF #for the comparison of new and old data
 WF
 ```
 
@@ -371,6 +374,7 @@ colnames(WF)=c('CrowdEpi','Control')
 #   formatC(as.numeric(WF[,2]),format="f",digits=2))
 # colnames(WF_print)=c('key_word','CrowdEpi','Control')
 # WF_print
+WF_old=WF #for later analysis
 WF
 ```
 
@@ -459,3 +463,73 @@ cc(WF2)
 ```
 
 ![](Key_Words_Analysis_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
+
+### 7. Comparison between new and old datasets
+#### prepare data
+
+```r
+WF_old=WF_old[ !(rownames(WF_old) %in% 'Extract'),] #remove possibly different keywords
+WF_new=WF_new[ !(rownames(WF_new) %in% c('Extract','Online','Post')),]
+oldnew=cbind(WF_old,WF_new)
+oldcrowd=oldnew[1:26,1]/sum(oldnew[1:26,1])
+oldcontrol=oldnew[1:26,2]/sum(oldnew[1:26,2])
+newcrowd=oldnew[1:26,3]/sum(oldnew[1:26,3])
+newcontrol=oldnew[1:26,4]/sum(oldnew[1:26,4])
+```
+
+<!-- #### Concordance test -->
+<!-- ```{r} -->
+<!-- library(nopaco) -->
+<!-- concordance.test(cbind(oldcrowd,newcrowd)) -->
+<!-- ``` -->
+\newpage
+#### old CrowdEpi v.s. new CrowdEpi
+##### Chi-square goodness of fit test
+
+```r
+chisq.test(oldcrowd/newcrowd)
+```
+
+```
+## 
+## 	Chi-squared test for given probabilities
+## 
+## data:  oldcrowd/newcrowd
+## X-squared = 19.919, df = 25, p-value = 0.7511
+```
+
+##### Conditional Mosaic (Standardized)
+
+```r
+WFsd=cbind(oldcrowd,newcrowd)
+colnames(WFsd)=c('Old','New')
+mosaicplot(WFsd,las=3,cex.axis=1)
+```
+
+![](Key_Words_Analysis_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
+
+\newpage
+##### old Control v.s. new Control
+##### Chi-square goodness of fit test
+
+```r
+chisq.test(oldcontrol/newcontrol)
+```
+
+```
+## 
+## 	Chi-squared test for given probabilities
+## 
+## data:  oldcontrol/newcontrol
+## X-squared = 150.8, df = 25, p-value < 2.2e-16
+```
+
+##### Conditional Mosaic (Standardized)
+
+```r
+WFsd=cbind(oldcontrol,newcontrol)
+colnames(WFsd)=c('Old','New')
+mosaicplot(WFsd,las=3,cex.axis=1)
+```
+
+![](Key_Words_Analysis_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
