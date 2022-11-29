@@ -18,7 +18,7 @@
 - [11-9-2022](#11-9-2022)
 - [11-16-2022](#11-16-2022)
 - [11-22-2022](#11-22-2022)
-
+- [11-30-2022](#11-30-2022)
 ---
 ### 7-13-2022
 Wrote the code [**Generate_article_list.R**](Generate_article_list.R) to generate the list of ids of our targeted articles, which is a re-work based on the illustration in the unfinished paper:  
@@ -106,3 +106,7 @@ And one possible reason of the 5 deleted articles (68\63) is that those five are
 Since the 188 peer-reviewed articles are considered CrowdEpi, we could seperate the 63 articles into 2 groups (CrowdEpi vs Control): take the files in 188 and 63 as CrowdEpi while the files in 63\188 as Control. And the updated analysis and comparison is here: [View it here](Key_Words_Analysis.md).  
 
 Meanwhile, read the article related to Covid-19: [A multinational Delphi consensus to end the COVID-19 public health threat](https://www.nature.com/articles/s41586-022-05398-2).
+
+---
+### 11-30-2022
+Tested the difference bwtween the old dataset and new dataset: [View it here](old_new.pdf)
