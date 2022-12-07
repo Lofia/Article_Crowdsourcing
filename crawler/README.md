@@ -19,6 +19,8 @@
 - [11-16-2022](#11-16-2022)
 - [11-22-2022](#11-22-2022)
 - [11-30-2022](#11-30-2022)
+- [12-7-2022](#12-7-2022)
+
 ---
 ### 7-13-2022
 Wrote the code [**Generate_article_list.R**](Generate_article_list.R) to generate the list of ids of our targeted articles, which is a re-work based on the illustration in the unfinished paper:  
@@ -110,3 +112,10 @@ Meanwhile, read the article related to Covid-19: [A multinational Delphi consens
 ---
 ### 11-30-2022
 Tested the difference bwtween the old dataset and new dataset: [View it here](old_new.pdf).
+
+---
+### 12-7-2022
+wrote the following paragraphs, which is a simple description of our data analysis that could be put into the paper:  
+
+*"Comparing the old data (CrowdEpi v.s. Control) with the new data, we could see that the CrowdEpi datasets are relatively consistent. In contrast, the Control datasets seem very different - far more non-health articles are included in our new datasets. This may occur because the principle of selecting the Control articles is hard to define clearly, or the pandemic in recent years has changed the environment of published articles entirely. Using adaptive learning may be a good idea in future research.  
+Under this context, there are still interesting trends in nowadays' data. For example, CrowdEpi articles are now highly correlated with keywords like "Diagnose", "Disease", "Health", "Online" and "Symptom". This corresponds with the fact that Covid-19 has strongly impacted the field of epidemiology from 2019 till now."*
