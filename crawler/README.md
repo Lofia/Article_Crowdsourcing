@@ -119,3 +119,5 @@ wrote the following paragraphs, which is a simple description of our data analys
 
 *"Comparing the old data (CrowdEpi v.s. Control) with the new data, we could see that the CrowdEpi datasets are relatively consistent. In contrast, the Control datasets seem very different - far more non-health articles are included in our new datasets. This may occur because the principle of selecting the Control articles is hard to define clearly, or the pandemic in recent years has changed the environment of published articles entirely. Using adaptive learning may be a good idea in future research.  
 Under this context, there are still interesting trends in nowadays' data. For example, CrowdEpi articles are now highly correlated with keywords like "Diagnose", "Disease", "Health", "Online" and "Symptom". This corresponds with the fact that Covid-19 has strongly impacted the field of epidemiology from 2019 till now."*
+
+Comments: Describe the new and old data; Include the updated referneces; Decide where to submit
