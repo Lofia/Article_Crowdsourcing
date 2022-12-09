@@ -122,5 +122,5 @@ Under this context, there are still interesting trends in nowadays' data. For ex
 
 Comments: Describe the new and old data; Include the updated referneces; Decide where to submit
 
-Todo: 1) Proofread Crowdsourcing paper and add new references you have found -> Aim for submission Dec or Jan; 
+Todo: 1) Proofread Crowdsourcing paper and add new references you have found -> Aim for submission Dec or Jan;  
       2) Brodening knowledge: A) Tensor Regression; B) Genes-Bain-US;  C) Dr. Bidkhori's DL; D) Selection Bias-EP 
