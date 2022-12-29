@@ -127,3 +127,11 @@ Comments: Describe the new and old data; Include the updated referneces; Decide 
 ## Todos  
 1) Proofread Crowdsourcing paper and add new references you have found -> Aim for submission Dec or Jan;  
 2) Brodening knowledge: A) Tensor Regression; B) Genes-Bain-US;  C) Dr. Bidkhori's DL; D) Selection Bias-EP 
+
+---
+### 1-1-2023
+Added brief background of the new data for the previous description of our data analysis. The whole paragraph now looks like the following:  
+
+*"... Apart from the data collected before 2017, we also analyzed the data after 2017 (till now), which is separated into CrowdEpi and Control groups as well. We refer to them as 'old' and 'new' data correspondingly. The new articles are all retrieved from the PubMed Open Access dataset, where we used the same keyword as the old data to sort out our targets.  
+Comparing the old data (CrowdEpi v.s. Control) with the new data, we could see that the CrowdEpi datasets are relatively consistent. In contrast, the Control datasets seem very different - far more non-health articles are included in our new datasets. This may occur because the principle of selecting the Control articles is hard to define clearly, or the pandemic in recent years has changed the environment of published articles entirely. Using adaptive learning may be a good idea in future research.  
+Under this context, there are still interesting trends in nowadays' data. For example, CrowdEpi articles are now highly correlated with keywords like "Diagnose", "Disease", "Health", "Online" and "Symptom". This corresponds with the fact that Covid-19 has strongly impacted the field of epidemiology from 2019 till now."*
