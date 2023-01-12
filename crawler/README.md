@@ -21,6 +21,7 @@
 - [11-30-2022](#11-30-2022)
 - [12-7-2022](#12-7-2022)
 - [Todos](#Todos)
+- [1-12-2023](#1-12-2023)
 
 ---
 ### 7-13-2022
@@ -129,7 +130,7 @@ Comments: Describe the new and old data; Include the updated referneces; Decide 
 2) Brodening knowledge: A) Tensor Regression; B) Genes-Bain-US;  C) Dr. Bidkhori's DL; D) Selection Bias-EP 
 
 ---
-### 1-1-2023
+### 1-12-2023
 Added brief background of the new data for the previous description of our data analysis. The whole paragraph now looks like the following:  
 
 <script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/3197_RC01/embed_loader.js"></script> <script type="text/javascript"> trends.embed.renderExploreWidget("TIMESERIES", {"comparisonItem":[{"keyword":"Covid-19","geo":"US","time":"today 5-y"}],"category":0,"property":""}, {"exploreQuery":"date=today%205-y&geo=US&q=Covid-19","guestPath":"https://trends.google.com:443/trends/embed/"}); </script>
