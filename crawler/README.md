@@ -20,7 +20,7 @@
 - [11-22-2022](#11-22-2022)
 - [11-30-2022](#11-30-2022)
 - [12-7-2022](#12-7-2022)
-- [Winter Break Todos](#Winter Break Todos)
+- [Winter Break Todos](#Todos)
 - [1-12-2023](#1-12-2023)
 
 ---
@@ -125,7 +125,7 @@ Under this context, there are still interesting trends in nowadays' data. For ex
 Comments: Describe the new and old data; Include the updated referneces; Decide where to submit
 
 ---
-## Winter Break Todos  
+## Todos  
 1) Proofread Crowdsourcing paper and add new references you have found -> Aim for submission Dec or Jan;  
 2) Brodening knowledge: A) Tensor Regression; B) Genes-Bain-US;  C) Dr. Bidkhori's DL; D) Selection Bias-EP 
 
