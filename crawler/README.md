@@ -131,6 +131,7 @@ Comments: Describe the new and old data; Include the updated referneces; Decide 
 
 ---
 ### 1-12-2023
-Added brief background of the new data for the previous description of our data analysis. The whole paragraph now looks like the following:  
-
-<script type="text/javascript" src="https://ssl.gstatic.com/trends_nrtr/3197_RC01/embed_loader.js"></script> <script type="text/javascript"> trends.embed.renderExploreWidget("TIMESERIES", {"comparisonItem":[{"keyword":"Covid-19","geo":"US","time":"today 5-y"}],"category":0,"property":""}, {"exploreQuery":"date=today%205-y&geo=US&q=Covid-19","guestPath":"https://trends.google.com:443/trends/embed/"}); </script>
+Added brief background of the new data for the previous description of our data analysis. [qc_crowd2206101(1)](https://gmuedu-my.sharepoint.com/:w:/g/personal/zxu27_gmu_edu/ERD8-aftjoVFiaDvU5D3njoBel1PBR7_hDJddK0fsVLKkA?e=3MEwT9)  
+Went through the slides [GeneBrainUs](https://gmuedu-my.sharepoint.com/:b:/g/personal/zxu27_gmu_edu/EcCY3NLlQLlFv-UJ2zjWFtMBkt1eV75PPqcLQKfiqgyqVg?e=rcigXJ).  
+Went through the slides [Lifelong Learning](https://gmuedu-my.sharepoint.com/:p:/g/personal/zxu27_gmu_edu/EaFwR3vJrahCtZO7bhS_fOIBWja-IFteqNNqStTNvnW7DA?e=jQduPM) and the reference articles.  
+Currently reviewing [STAT 453 (Deep Learning) course slides](https://github.com/rasbt/stat453-deep-learning-ss20) and just read [an introduction to Graph Neural Network](https://heartbeat.comet.ml/introduction-to-graph-neural-networks-c5a9f4aa9e99).
