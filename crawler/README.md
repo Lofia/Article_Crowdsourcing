@@ -138,9 +138,11 @@ Reviewed [STAT 453 (Deep Learning) course slides](https://github.com/rasbt/stat4
 
 ---
 ### 1-18-2023
-Possible journal:  
+Possible journals:  
 [The Lancet Digital Health](https://www.thelancet.com/journals/landig/home)  
 [Journal of Global Health](https://jogh.org)  
-[The Lancet Digital Health](https://www.thelancet.com/journals/landig/home)  
-[The Lancet Digital Health](https://www.thelancet.com/journals/landig/home)  
-[The Lancet Digital Health](https://www.thelancet.com/journals/landig/home)  
+[The BMJ](https://www.bmj.com)  
+[Journal of Medical Internet Research](https://www.jmir.org)  
+[BMC (Biomedcentral)](https://www.biomedcentral.com/journals)  
+More journal in Health and Epidemiology: [A guide to Community Health and Epidemiology](https://dal.ca.libguides.com/c.php?g=257048&p=1716377).  
+More journal in Crowdsourcing: [What are the journals for Crowdsourcing?](https://www.quora.com/What-are-the-journals-for-Crowdsourcing)
