@@ -22,7 +22,8 @@
 - [12-7-2022](#12-7-2022)
 - [Winter Break Todos](#Todos)
 - [1-12-2023](#1-12-2023)
-
+- [1-18-2023](#1-18-2023)
+- 
 ---
 ### 7-13-2022
 Wrote the code [**Generate_article_list.R**](Generate_article_list.R) to generate the list of ids of our targeted articles, which is a re-work based on the illustration in the unfinished paper:  
