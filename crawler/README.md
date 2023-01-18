@@ -134,4 +134,13 @@ Comments: Describe the new and old data; Include the updated referneces; Decide 
 Added brief background of the new data for the previous description of our data analysis. [qc_crowd2206101(1)](https://gmuedu-my.sharepoint.com/:w:/g/personal/zxu27_gmu_edu/ERD8-aftjoVFiaDvU5D3njoBel1PBR7_hDJddK0fsVLKkA?e=3MEwT9)  
 Went through the slides [GeneBrainUs](https://gmuedu-my.sharepoint.com/:b:/g/personal/zxu27_gmu_edu/EcCY3NLlQLlFv-UJ2zjWFtMBkt1eV75PPqcLQKfiqgyqVg?e=rcigXJ).  
 Went through the slides [Lifelong Learning](https://gmuedu-my.sharepoint.com/:p:/g/personal/zxu27_gmu_edu/EaFwR3vJrahCtZO7bhS_fOIBWja-IFteqNNqStTNvnW7DA?e=jQduPM) and the reference articles.  
-Currently reviewing [STAT 453 (Deep Learning) course slides](https://github.com/rasbt/stat453-deep-learning-ss20) and just read [an introduction to Graph Neural Network](https://heartbeat.comet.ml/introduction-to-graph-neural-networks-c5a9f4aa9e99).
+Reviewed [STAT 453 (Deep Learning) course slides](https://github.com/rasbt/stat453-deep-learning-ss20) and [an introduction to Graph Neural Network](https://heartbeat.comet.ml/introduction-to-graph-neural-networks-c5a9f4aa9e99).
+
+---
+### 1-18-2023
+Possible journal:  
+[The Lancet Digital Health](https://www.thelancet.com/journals/landig/home)  
+[Journal of Global Health](https://jogh.org)  
+[The Lancet Digital Health](https://www.thelancet.com/journals/landig/home)  
+[The Lancet Digital Health](https://www.thelancet.com/journals/landig/home)  
+[The Lancet Digital Health](https://www.thelancet.com/journals/landig/home)  
