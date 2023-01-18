@@ -144,6 +144,6 @@ Possible journals:
 [Journal of Global Health](https://jogh.org)  
 [The BMJ](https://www.bmj.com)  
 [Journal of Medical Internet Research](https://www.jmir.org)  
-[BMC (Biomedcentral)](https://www.biomedcentral.com/journals)  
-More journal in Health and Epidemiology: [A guide to Community Health and Epidemiology](https://dal.ca.libguides.com/c.php?g=257048&p=1716377).  
-More journal in Crowdsourcing: [What are the journals for Crowdsourcing?](https://www.quora.com/What-are-the-journals-for-Crowdsourcing)
+[BMC (Biomedcentral)](https://www.biomedcentral.com)  
+More journals in Health and Epidemiology: [A guide to Community Health and Epidemiology](https://dal.ca.libguides.com/c.php?g=257048&p=1716377).  
+More journals in Crowdsourcing: [What are the journals for Crowdsourcing?](https://www.quora.com/What-are-the-journals-for-Crowdsourcing)
