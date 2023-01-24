@@ -23,6 +23,7 @@
 - [Winter Break Todos](#Todos)
 - [1-12-2023](#1-12-2023)
 - [1-18-2023](#1-18-2023)
+- [1-25-2023](#1-25-2023)
 
 ---
 ### 7-13-2022
@@ -147,3 +148,9 @@ Possible journals:
 [BMC (Biomedcentral)](https://www.biomedcentral.com)  
 More journals in Health and Epidemiology: [A guide to Community Health and Epidemiology](https://dal.ca.libguides.com/c.php?g=257048&p=1716377).  
 More journals in Crowdsourcing: [What are the journals for Crowdsourcing?](https://www.quora.com/What-are-the-journals-for-Crowdsourcing)
+
+---
+### 1-25-2023
+*Why linear mixed model?*
+Modelling random effects in Neural Networks:
+[LMMNN](https://github.com/gsimchoni/lmmnn)
