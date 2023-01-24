@@ -151,7 +151,7 @@ More journals in Crowdsourcing: [What are the journals for Crowdsourcing?](https
 
 ---
 ### 1-25-2023
-*Why linear mixed model?*  
+*Why linear mixed model? / More about below contents*  
 Modelling random effects in Neural Networks:  
 [Linear Mixed Model Neural Networks (LMMNN)](https://github.com/gsimchoni/lmmnn)  
 [Mixed Effects Neural Networks (MeNets)](https://openaccess.thecvf.com/content_CVPR_2019/papers/Xiong_Mixed_Effects_Neural_Networks_MeNets_With_Applications_to_Gaze_Estimation_CVPR_2019_paper.pdf)  
