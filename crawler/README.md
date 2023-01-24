@@ -140,7 +140,7 @@ Reviewed [STAT 453 (Deep Learning) course slides](https://github.com/rasbt/stat4
 
 ---
 ### 1-18-2023
-Possible journals:  
+Possible journals for publishing qc-crowdsouricng:  
 [The Lancet Digital Health](https://www.thelancet.com/journals/landig/home)  
 [Journal of Global Health](https://jogh.org)  
 [The BMJ](https://www.bmj.com)  
