@@ -24,6 +24,8 @@
 - [1-12-2023](#1-12-2023)
 - [1-18-2023](#1-18-2023)
 - [1-25-2023](#1-25-2023)
+- [2-1-2023](#2-1-2023)
+- [2-8-2023](#2-8-2023)
 
 ---
 ### 7-13-2022
@@ -153,6 +155,15 @@ More journals in Crowdsourcing: [What are the journals for Crowdsourcing?](https
 ### 1-25-2023
 *[Introduction](https://stats.oarc.ucla.edu/other/mult-pkg/introduction-to-linear-mixed-models/#:~:text=Linear%20mixed%20models%20are%20an,or%20patients%20from%20within%20doctors.) to linear mixed model*  
 Modelling random effects in Neural Networks:  
-[Linear Mixed Model Neural Networks (LMMNN)](https://github.com/gsimchoni/lmmnn)  
-[Mixed Effects Neural Networks (MeNets)](https://openaccess.thecvf.com/content_CVPR_2019/papers/Xiong_Mixed_Effects_Neural_Networks_MeNets_With_Applications_to_Gaze_Estimation_CVPR_2019_paper.pdf)  
+- [Linear Mixed Model Neural Networks (LMMNN)](https://github.com/gsimchoni/lmmnn)  
+- [Mixed Effects Neural Networks (MeNets)](https://openaccess.thecvf.com/content_CVPR_2019/papers/Xiong_Mixed_Effects_Neural_Networks_MeNets_With_Applications_to_Gaze_Estimation_CVPR_2019_paper.pdf)  
 [Deep Generalized Linear Mixed Model (DeepGLMM)](https://github.com/VBayesLab/deepGLM)  
+
+---
+### 2-1-2023
+Tried the [R packages](https://cran.r-project.org/web/views/MachineLearning.html).  
+Browsed the overviews on Neural Networks:
+
+
+---
+### 2-8-2023
