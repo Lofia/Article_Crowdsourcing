@@ -157,12 +157,15 @@ More journals in Crowdsourcing: [What are the journals for Crowdsourcing?](https
 Modelling random effects in Neural Networks:  
 - [Linear Mixed Model Neural Networks (LMMNN)](https://github.com/gsimchoni/lmmnn)  
 - [Mixed Effects Neural Networks (MeNets)](https://openaccess.thecvf.com/content_CVPR_2019/papers/Xiong_Mixed_Effects_Neural_Networks_MeNets_With_Applications_to_Gaze_Estimation_CVPR_2019_paper.pdf)  
-[Deep Generalized Linear Mixed Model (DeepGLMM)](https://github.com/VBayesLab/deepGLM)  
+- [Deep Generalized Linear Mixed Model (DeepGLMM)](https://github.com/VBayesLab/deepGLM)  
 
 ---
 ### 2-1-2023
 Tried the [R packages](https://cran.r-project.org/web/views/MachineLearning.html).  
-Browsed the overviews on Neural Networks:
+Browsed the overviews on Neural Networks:  
+- Jianqin Fan's [A selective overview of deep learning](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8300482/) (more focused on theoretical results).
+- [Review of deep learning: concepts, CNN architectures, challenges, applications, future directions](https://journalofbigdata.springeropen.com/articles/10.1186/s40537-021-00444-8) (more details, especially about CNN).
+- [A Survey on Deep Learning: Algorithms, Techniques, and Applications](https://dl.acm.org/doi/10.1145/3234150) (more comprehensive, more about various applications).
 
 
 ---
