@@ -161,12 +161,12 @@ Modelling random effects in Neural Networks:
 
 ---
 ### 2-1-2023
-Tried the [R packages](https://cran.r-project.org/web/views/MachineLearning.html).  
+Tried the [R packages](https://cran.r-project.org/web/views/MachineLearning.html) for neural networks.  
 Browsed the overviews on Neural Networks:  
 - Jianqin Fan's [A selective overview of deep learning](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8300482/) (more focused on theoretical results).
 - [Review of deep learning: concepts, CNN architectures, challenges, applications, future directions](https://journalofbigdata.springeropen.com/articles/10.1186/s40537-021-00444-8) (more details, especially about CNN).
 - [A Survey on Deep Learning: Algorithms, Techniques, and Applications](https://dl.acm.org/doi/10.1145/3234150) (more comprehensive, more about various applications).
 
-
 ---
 ### 2-8-2023
+Still reading the Selection-Bias paper. Borrowed the [Order Restricted Statistical Inference](https://onlinelibrary.wiley.com/doi/10.1002/jae.3950060111) last weekend, and currently studying the first chaper.
