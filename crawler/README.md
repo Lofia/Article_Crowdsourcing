@@ -175,5 +175,6 @@ Reading the Selection-Bias paper. Borrowed the [Order Restricted Statistical Inf
 ---
 ### 2-16-2023
 Still reading the Selection-Bias paper.  
-Geometry visualization of condition (3) 
+Geometry visualization of condition (3):
+maximize f(x) subject to g(x)=0
 <div align="center"><img src="https://github.com/Lofia/Article_Crowdsourcing/blob/main/crawler/image.png" width="700"></div>
