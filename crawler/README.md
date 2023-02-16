@@ -26,6 +26,7 @@
 - [1-25-2023](#1-25-2023)
 - [2-1-2023](#2-1-2023)
 - [2-8-2023](#2-8-2023)
+- [2-16-2023](#2-16-2023)
 
 ---
 ### 7-13-2022
@@ -169,4 +170,9 @@ Browsed the overviews on Neural Networks:
 
 ---
 ### 2-8-2023
-Still reading the Selection-Bias paper. Borrowed the [Order Restricted Statistical Inference](https://onlinelibrary.wiley.com/doi/10.1002/jae.3950060111) last weekend, and currently studying the first chaper.
+Reading the Selection-Bias paper. Borrowed the [Order Restricted Statistical Inference](https://onlinelibrary.wiley.com/doi/10.1002/jae.3950060111) last weekend, and currently studying the first chaper.
+
+---
+### 2-16-2023
+Still reading the Selection-Bias paper.  
+Geometry visualization of condition (3) 
