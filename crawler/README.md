@@ -27,6 +27,8 @@
 - [2-1-2023](#2-1-2023)
 - [2-8-2023](#2-8-2023)
 - [2-16-2023](#2-16-2023)
+- [2-23-2023](#2-23-2023)
+- [3-2-2023](#3-2-2023)
 
 ---
 ### 7-13-2022
@@ -178,3 +180,12 @@ Still reading the Selection-Bias paper.
 Geometry visualization of condition (3):  
 $f(x)$ is maximized at $x_0$ subject to $x\in A$, where $A$ is a convex set $\Leftrightarrow$ $\nabla f(x_0)\cdot (x-x_0)\leq 0$ for any $x\in A$
 <div align="center"><img src="https://github.com/Lofia/Article_Crowdsourcing/blob/main/crawler/image.png" width="700"></div>
+
+---
+### 2-23-2023
+Finished reading the Selection-Bias paper.
+
+---
+### 3-2-2023
+Wrote a simulation draft for the selection-bias paper.
+
