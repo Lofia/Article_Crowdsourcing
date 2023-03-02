@@ -190,5 +190,6 @@ Finished reading the Selection-Bias paper.
 Wrote a simulation draft for the selection-bias paper.  
 
 Lifelong learning materials:  
-- [PowerPoint Slides](https://gmuedu-my.sharepoint.com/:p:/g/personal/zxu27_gmu_edu/EaFwR3vJrahCtZO7bhS_fOIBWja-IFteqNNqStTNvnW7DA?e=jQduPM) with its reference articles [](),
-- 
+- [PowerPoint Slides](https://gmuedu-my.sharepoint.com/:p:/g/personal/zxu27_gmu_edu/EaFwR3vJrahCtZO7bhS_fOIBWja-IFteqNNqStTNvnW7DA?e=jQduPM) with its reference articles [Le2021](lifelong/Le2021.pdf), [Le2022](lifelong/Le2022.pdf), [Yoon2017](lifelong/Yoon2017.pdf), [kirkpatrick2017](lifelong/kirkpatrick2017.pdf).
+- [Three_scenarios](lifelong/Three_scenarios.pdf)
+- [survey](lifelong/survey.pdf)
