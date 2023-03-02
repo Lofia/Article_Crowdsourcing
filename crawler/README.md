@@ -187,5 +187,8 @@ Finished reading the Selection-Bias paper.
 
 ---
 ### 3-2-2023
-Wrote a simulation draft for the selection-bias paper.
+Wrote a simulation draft for the selection-bias paper.  
 
+Lifelong learning materials:  
+- [PowerPoint Slides](https://gmuedu-my.sharepoint.com/:p:/g/personal/zxu27_gmu_edu/EaFwR3vJrahCtZO7bhS_fOIBWja-IFteqNNqStTNvnW7DA?e=jQduPM) with its reference articles [](),
+- 
