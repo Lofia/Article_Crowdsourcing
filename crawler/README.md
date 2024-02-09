@@ -193,3 +193,7 @@ Lifelong learning materials:
 - [PowerPoint Slides](https://gmuedu-my.sharepoint.com/:p:/g/personal/zxu27_gmu_edu/EaFwR3vJrahCtZO7bhS_fOIBWja-IFteqNNqStTNvnW7DA?e=jQduPM) with its reference articles [Le2021](lifelong/Le2021.pdf), [Le2022](lifelong/Le2022.pdf), [Yoon2017](lifelong/Yoon2017.pdf), [kirkpatrick2017](lifelong/kirkpatrick2017.pdf).
 - [Three_scenarios](lifelong/Three_scenarios.pdf)
 - [survey](lifelong/survey.pdf)
+
+---
+### Later
+[CLICK HERE] (https://gmuedu-my.sharepoint.com/personal/zxu27_gmu_edu/_layouts/15/Doc.aspx?sourcedoc={b5d74feb-aa64-44be-a2ef-e09500de3908}&action=edit&wd=target%28Meetings.one%7C0717d8fc-7fd9-1e41-868b-ce6a7cc58755%2F%29&wdorigin=717)
