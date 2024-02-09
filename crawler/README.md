@@ -29,7 +29,7 @@
 - [2-16-2023](#2-16-2023)
 - [2-23-2023](#2-23-2023)
 - [3-2-2023](#3-2-2023)
-
+- [Current Process](#Later)
 ---
 ### 7-13-2022
 Wrote the code [**Generate_article_list.R**](Generate_article_list.R) to generate the list of ids of our targeted articles, which is a re-work based on the illustration in the unfinished paper:  
@@ -196,4 +196,4 @@ Lifelong learning materials:
 
 ---
 ### Later
-[CLICK HERE] (https://gmuedu-my.sharepoint.com/personal/zxu27_gmu_edu/_layouts/15/Doc.aspx?sourcedoc={b5d74feb-aa64-44be-a2ef-e09500de3908}&action=edit&wd=target%28Meetings.one%7C0717d8fc-7fd9-1e41-868b-ce6a7cc58755%2F%29&wdorigin=717)
+[CLICK HERE](https://gmuedu-my.sharepoint.com/personal/zxu27_gmu_edu/_layouts/15/Doc.aspx?sourcedoc={b5d74feb-aa64-44be-a2ef-e09500de3908}&action=edit&wd=target%28Meetings.one%7C0717d8fc-7fd9-1e41-868b-ce6a7cc58755%2F%29&wdorigin=717)
